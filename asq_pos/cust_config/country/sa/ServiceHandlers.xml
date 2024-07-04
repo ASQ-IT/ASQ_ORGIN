@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Services xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../../../../config-objects/schema/ServiceHandlers.xsd">
+
+  <Service name="ZATCA_CERT_REST">
+    <Parameters dtype="Map">
+      <TargetUri dtype="String">${asq.zatca.certificate.registration.uri}</TargetUri>
+      <ConnectTimeout dtype="Integer">${asq.zatca.certificate.registration.connection.timeout}</ConnectTimeout>
+    </Parameters>
+  </Service>
+  
+  <Service name="STC_REST">
+    <Parameters dtype="Map">
+      <TargetUri dtype="String">${asq.stc.otp.redeem.earn.uri}</TargetUri>
+      <ConnectTimeout dtype="Integer">${asq.stc.otp.redeem.earn.connection.timeout}</ConnectTimeout>
+    </Parameters>
+  </Service>
+  
+  <Service name="TAMARA_REST">
+    <Parameters dtype="Map">
+      <TargetUri dtype="String">${asq.zatca.certificate.registration.uri}</TargetUri>
+      <ConnectTimeout dtype="Integer">${asq.zatca.certificate.registration.connection.timeout}</ConnectTimeout>
+    </Parameters>
+  </Service>
+  
+  <Service name="TABBY_REST">
+    <Parameters dtype="Map">
+      <TargetUri dtype="String">${asq.zatca.certificate.registration.uri}</TargetUri>
+      <ConnectTimeout dtype="Integer">${asq.zatca.certificate.registration.connection.timeout}</ConnectTimeout>
+    </Parameters>
+  </Service>
+  
+  <Service name="NEQATY_REST">
+    <Parameters dtype="Map">
+      <TargetUri dtype="String">${asq.zatca.certificate.registration.uri}</TargetUri>
+      <ConnectTimeout dtype="Integer">${asq.zatca.certificate.registration.connection.timeout}</ConnectTimeout>
+    </Parameters>
+  </Service>
+  
+  <Service name="MOKAFAT_REST">
+    <Parameters dtype="Map">
+      <TargetUri dtype="String">${asq.zatca.certificate.registration.uri}</TargetUri>
+      <ConnectTimeout dtype="Integer">${asq.zatca.certificate.registration.connection.timeout}</ConnectTimeout>
+    </Parameters>
+  </Service>
+  
+  <Service name="GOTAGIFT_REST">
+    <Parameters dtype="Map">
+      <TargetUri dtype="String">${asq.zatca.certificate.registration.uri}</TargetUri>
+      <ConnectTimeout dtype="Integer">${asq.zatca.certificate.registration.connection.timeout}</ConnectTimeout>
+    </Parameters>
+  </Service>
+  
+</Services>

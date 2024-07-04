@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xmlns:util="http://www.springframework.org/schema/util"
+  xsi:schemaLocation="
+        http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util.xsd"
+  profile="xstore">
+  
+  <bean id="asqZatcaService" class="dtv.pos.temporarystore.service.AsqZatcaCertRegistrationServiceHandler" parent="AbstractZatcaRestServiceBean">
+    <property name="servicePath" value="tempstore" />
+    <property name="servicePath" value="tempstore" />
+    <property name="servicePath" value="tempstore" />
+    <property name="servicePath" value="tempstore" />
+  </bean> 
+  
+  <bean id="asqSTCService" class="asq.pos.loyality.stc.tender.service.AsqSTCloyalityServiceHandler" parent="AbstractSTCRestServiceBean">
+    <property name="serviceOTPPath" value="/api/v1/redemption/otp" />
+    <property name="serviceRedeemPath" value="/api/v1/redemption/redeem" />
+    <property name="serviceRedeemReversePath" value="/api/v1/redemption/reverse" />
+    <property name="serviceEarnPath" value="/api/v1/earn/reward" />
+	<property name="secertToken" value="addad" />
+	<property name="authorization" value="addad" />
+  </bean> 
+  
+</beans>
+  
