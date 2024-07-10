@@ -20,4 +20,8 @@ public interface IAsqSubmitZatcaCertServiceRequest extends IServiceRequest {
 	public String getCsr();
 	
 	public void setCsr(String csr);
+	
+	public String getCompliance_request_id();
+
+	public void setCompliance_request_id(String compliance_request_id);
 }

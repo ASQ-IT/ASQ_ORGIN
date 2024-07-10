@@ -1,18 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <OpChainSet xmlns="http://micros.com/xstore/config/opchain">
 
- 	<OpChain name="ZATCA_CERTIFICATE_GENERATION">
-    <PromptOp key="ZATCA_CERTIFICATE_GENERATION"/>
-     <OpChainRoute chainKey="CAPTURE_OTP" />
-  	<!-- <Op class="asq.pos.zatca.cert.generation.op.AsqZatcaComplianceCertRegistrationOp" /> -->
-  	
-  	<Op class="asq.pos.zatca.certificate.generation.otp.ASQZATCACertGenerationPromptOTPOp"/>
-  	
+<!--STC Service Starts-->
+ 	<OpChain name="STC_SERVICE">
+	  	<Op class="asq.pos.loyality.stc.tender.op.AsqSTCTenderOp"/>
     </OpChain>
-    
-  <!--  <OpChain name = "ZATCA_ON_BOARDING">
-    <Op class="asq.pos.zatca.certificate.generation.service.AsqZatcaComplianceCertificateOnboardingOp"/>
-    <Op class="asq.pos.zatca.certificate.generation.service.AsqZatcaComplianceCSIDGeneratorOp"/>
-    </OpChain>-->
-  
+<!--STC Service Ends-->  
 </OpChainSet>

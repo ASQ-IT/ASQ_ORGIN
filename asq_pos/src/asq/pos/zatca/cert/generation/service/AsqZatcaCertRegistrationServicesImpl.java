@@ -32,19 +32,18 @@ public class AsqZatcaCertRegistrationServicesImpl implements IAsqZatcaCertRegist
 		}
 	}
 
-	@Override
-	public IServiceResponse submitInvoiceForRegistration(
-			IAsqSubmitZatcaCertServiceRequest paramAsqISubmitZatcaCertServiceRequest) throws ServiceException {
-		try {
-			IServiceHandler<IAsqSubmitZatcaCertServiceRequest, IServiceResponse> serviceHandler = _serviceHandlerFactory.getServiceHandler(ZATCA_CERT_GEN_INVOICE_SRV);
-			IServiceResponse response = serviceHandler.handleService(paramAsqISubmitZatcaCertServiceRequest,ZATCA_CERT_GEN_INVOICE_SRV);
-			return response;
-		} catch (ServiceException ex) {
-			throw ex;
-		} catch (Exception ex) {
-			throw new ServiceException(ex);
-		}
-	}
+	/*
+	 * @Override public IServiceResponse submitInvoiceForRegistration(
+	 * IAsqSubmitZatcaCertServiceRequest paramAsqISubmitZatcaCertServiceRequest)
+	 * throws ServiceException { try {
+	 * IServiceHandler<IAsqSubmitZatcaCertServiceRequest, IServiceResponse>
+	 * serviceHandler =
+	 * _serviceHandlerFactory.getServiceHandler(ZATCA_CERT_GEN_INVOICE_SRV);
+	 * IServiceResponse response =
+	 * serviceHandler.handleService(paramAsqISubmitZatcaCertServiceRequest,
+	 * ZATCA_CERT_GEN_INVOICE_SRV); return response; } catch (ServiceException ex) {
+	 * throw ex; } catch (Exception ex) { throw new ServiceException(ex); } }
+	 */
 
 	@Override
 	public IServiceResponse submitCSIDSForRegistration(
@@ -59,5 +58,7 @@ public class AsqZatcaCertRegistrationServicesImpl implements IAsqZatcaCertRegist
 			throw new ServiceException(ex);
 		}
 	}
+
+
 
 }

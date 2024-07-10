@@ -16,6 +16,7 @@ public class AsqSubmitZatcaCertServiceRequest extends ServiceRequest implements 
 	
 	private String csr;
 	private String otp;
+	private String compliance_request_id;
 	
 	private String requestJSON;
 	
@@ -41,6 +42,14 @@ public class AsqSubmitZatcaCertServiceRequest extends ServiceRequest implements 
 
 	public void setCsr(String csr) {
 		this.csr = csr;
+	}
+	
+	public String getCompliance_request_id() {
+		return compliance_request_id;
+	}
+
+	public void setCompliance_request_id(String compliance_request_id) {
+		this.compliance_request_id = compliance_request_id;
 	}
 
 }

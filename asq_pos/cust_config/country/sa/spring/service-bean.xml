@@ -7,6 +7,7 @@
   profile="xstore">
   
   <bean id="asqZatcaHelper" class="asq.pos.zatca.cert.generation.AsqZatcaHelper"/>
+  <bean id="asqZatcaInvoiceGenerationHelper" class="asq.pos.zatca.invoice.generation.op.AsqZatcaInvoiceGenerationHelper"/>
   
   <bean id="asqZatcaCertRegistrationServices" class="asq.pos.zatca.cert.generation.service.AsqZatcaCertRegistrationServicesImpl" primary="true"/>     
   

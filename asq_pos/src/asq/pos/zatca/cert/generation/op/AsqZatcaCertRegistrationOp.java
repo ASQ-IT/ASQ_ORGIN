@@ -1,5 +1,6 @@
 package asq.pos.zatca.cert.generation.op;
 
+import dtv.pos.common.OpChainKey;
 import dtv.pos.framework.action.type.XstDataActionKey;
 import dtv.pos.framework.op.AbstractFormOp;
 import dtv.pos.iframework.action.IXstActionKey;
@@ -9,6 +10,9 @@ import dtv.pos.iframework.event.IXstEvent;
 import dtv.pos.iframework.op.IOpResponse;
 
 import java.io.File;
+import java.io.IOException;
+import java.net.URISyntaxException;
+import java.util.Properties;
 
 import javax.inject.Inject;
 import javax.inject.Provider;
@@ -17,8 +21,11 @@ import asq.pos.AsqValueKeys;
 import asq.pos.zatca.cert.generation.AsqZatcaHelper;
 import asq.pos.zatca.cert.generation.service.AsqSubmitZatcaCertServiceRequest;
 import asq.pos.zatca.cert.generation.service.AsqSubmitZatcaCertServiceResponse;
+import asq.pos.zatca.cert.generation.service.AsqSubmitZatcaProdCertServiceRequest;
 import asq.pos.zatca.cert.generation.service.IAsqSubmitZatcaCertServiceRequest;
 import asq.pos.zatca.cert.generation.service.IAsqZatcaCertRegistrationServices;
+import asq.pos.zatca.integration.data.ProductionRequest;
+import asq.pos.zatca.integration.zatca.util.CSIDUtil;
 import asq.pos.zatca.integration.zatca.util.POSUtil;
 
 import org.apache.logging.log4j.LogManager;
@@ -62,13 +69,21 @@ public class AsqZatcaCertRegistrationOp extends AbstractFormOp<AsqZatcaCertRegis
 				setScopedValue(AsqValueKeys.ZATCA_OTP, otp);
 				
 				if(asqZatcaHelper.getCertOnBoarding(otp)) {
-					asqSubmitZatcaCertServiceResponse = generateCCSID(otp);
+					asqSubmitZatcaCertServiceResponse = generateCCSID(otp);//compliance
+					//files should be manually placed//	invoice should be located at one place		
+					
+					//generateinvoice//read sample invoice //.json/read first file and call generate invoice
+					//after generating the compliance JKS certificate flow will return here.
+					
+				//	asqSubmitZatcaCertServiceResponse = generatePCSID();
+				//	asqZatcaHelper.getProdCertOnBoarding();// Generates production CSID
 				}
 			}
 		} catch (Exception ex) {
 			ex.printStackTrace();
 		}
-		return HELPER.completeResponse();
+		//return HELPER.completeResponse();
+		 return this.HELPER.getCompleteStackChainResponse(OpChainKey.valueOf("ASQ_ZATCA_INVOICE_GENERATION"));
 	}
 
 	@Override
@@ -83,10 +98,52 @@ public class AsqZatcaCertRegistrationOp extends AbstractFormOp<AsqZatcaCertRegis
 			asqSubmitZatcaCertServiceRequest.setOtp(otp);
 			asqSubmitZatcaCertServiceRequest.setCsr(POSUtil.encodeFileToBase64(asqZatcaHelper.getZatcaCISRFile()));
 			response = (AsqSubmitZatcaCertServiceResponse) zatcaService.get().submitCertForRegistration(asqSubmitZatcaCertServiceRequest);
+			
+			if(response!= null) {
+				try {
+					asqZatcaHelper.mapRequiredValuesToPropertiesFile(response);
+					if(null!=response.getBinarySecurityToken()) {
+						asqZatcaHelper.generateCSIDFile(response.getBinarySecurityToken());//Certificate Created
+					    asqZatcaHelper.getJKSCert(otp);//Making it as JKS
+					}
+					else {
+						System.out.println("csid.properties file does not contain Binary Security Token");
+					}
+				} catch (IOException e) {
+					e.printStackTrace();
+				} catch (URISyntaxException e) {
+					e.printStackTrace();
+				}
+			}
 		} catch (Exception ex) {
 			ex.printStackTrace();
 		}
 		return response;
 	}
 	
+	public AsqSubmitZatcaCertServiceResponse generatePCSID() {
+
+		Properties csidProperties = AsqZatcaHelper.getCSIDProperties();
+		AsqSubmitZatcaCertServiceResponse response = new AsqSubmitZatcaCertServiceResponse();
+		if ("true".equalsIgnoreCase(csidProperties.getProperty("isComplianceCheck"))) {
+			// ZATCA Req
+			IAsqSubmitZatcaCertServiceRequest productionRequest = new AsqSubmitZatcaCertServiceRequest();
+			productionRequest.setCompliance_request_id(csidProperties.getProperty("complianceRequestID"));
+			response = (AsqSubmitZatcaCertServiceResponse) zatcaService.get().submitCSIDSForRegistration(productionRequest);
+			if(response!= null) {
+				try {
+					asqZatcaHelper.mapRequiredValuesToPropertiesFile(response);
+					try {
+						asqZatcaHelper.generateCSIDFile(response.getBinarySecurityToken());
+					} catch (IOException e) {
+						e.printStackTrace();
+					}
+				}  catch (URISyntaxException e) {
+					e.printStackTrace();
+				}
+			}
+		}
+		return response;
+
+	}
 }
