@@ -1,5 +1,22 @@
 package asq.pos.zatca.cert.generation.op;
 
+import java.io.IOException;
+import java.net.URISyntaxException;
+import java.util.Properties;
+
+import javax.inject.Inject;
+import javax.inject.Provider;
+
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
+import asq.pos.common.AsqValueKeys;
+import asq.pos.zatca.cert.generation.AsqZatcaHelper;
+import asq.pos.zatca.cert.generation.service.AsqSubmitZatcaCertServiceRequest;
+import asq.pos.zatca.cert.generation.service.AsqSubmitZatcaCertServiceResponse;
+import asq.pos.zatca.cert.generation.service.IAsqSubmitZatcaCertServiceRequest;
+import asq.pos.zatca.cert.generation.service.IAsqZatcaCertRegistrationServices;
+import asq.pos.zatca.integration.zatca.util.POSUtil;
 import dtv.pos.common.OpChainKey;
 import dtv.pos.framework.action.type.XstDataActionKey;
 import dtv.pos.framework.op.AbstractFormOp;
@@ -8,28 +25,6 @@ import dtv.pos.iframework.action.IXstDataAction;
 import dtv.pos.iframework.action.IXstDataActionKey;
 import dtv.pos.iframework.event.IXstEvent;
 import dtv.pos.iframework.op.IOpResponse;
-
-import java.io.File;
-import java.io.IOException;
-import java.net.URISyntaxException;
-import java.util.Properties;
-
-import javax.inject.Inject;
-import javax.inject.Provider;
-
-import asq.pos.AsqValueKeys;
-import asq.pos.zatca.cert.generation.AsqZatcaHelper;
-import asq.pos.zatca.cert.generation.service.AsqSubmitZatcaCertServiceRequest;
-import asq.pos.zatca.cert.generation.service.AsqSubmitZatcaCertServiceResponse;
-import asq.pos.zatca.cert.generation.service.AsqSubmitZatcaProdCertServiceRequest;
-import asq.pos.zatca.cert.generation.service.IAsqSubmitZatcaCertServiceRequest;
-import asq.pos.zatca.cert.generation.service.IAsqZatcaCertRegistrationServices;
-import asq.pos.zatca.integration.data.ProductionRequest;
-import asq.pos.zatca.integration.zatca.util.CSIDUtil;
-import asq.pos.zatca.integration.zatca.util.POSUtil;
-
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 
 public class AsqZatcaCertRegistrationOp extends AbstractFormOp<AsqZatcaCertRegistrationEditModel> {
 	
@@ -144,6 +139,5 @@ public class AsqZatcaCertRegistrationOp extends AbstractFormOp<AsqZatcaCertRegis
 			}
 		}
 		return response;
-
 	}
 }
