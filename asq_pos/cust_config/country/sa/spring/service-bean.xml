@@ -6,20 +6,69 @@
         http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util.xsd"
   profile="xstore">
   
-  <bean id="asqZatcaService" class="dtv.pos.temporarystore.service.AsqZatcaCertRegistrationServiceHandler" parent="AbstractZatcaRestServiceBean">
-    <property name="servicePath" value="tempstore" />
-    <property name="servicePath" value="tempstore" />
-    <property name="servicePath" value="tempstore" />
-    <property name="servicePath" value="tempstore" />
+  <bean id="asqZatcaHelper" class="asq.pos.zatca.cert.generation.AsqZatcaHelper"/>
+  
+  <bean id="asqZatcaCertRegistrationServices" class="asq.pos.zatca.cert.generation.service.AsqZatcaCertRegistrationServicesImpl" primary="true"/>     
+  
+  <bean abstract="true" id="AbstractZatcaRestServiceBean">
+    <property name="serviceId" value="ZATCA_CERT_REST" />
+    <property name="exceptionHandler" ref="standardJaxRsExceptionHandler" />
+    <property name="serviceConfigHelper" ref="serviceConfigHelper" />
+    <!-- <property name="extensionProviders">
+      <list value-type="java.lang.Object">
+        <bean class="dtv.servicex.impl.GzipReaderInterceptor" />
+        should only be present if using cloud
+        <bean class="dtv.servicex.impl.AuthorizationFilter" />
+        
+      </list>
+    </property>
+    <property name="gzip" value="true" /> -->
+    <property name="logEntity" value="false" />
+    <property name="oAuth2" value="false" />
+    <property name="username" value="${xcenter.db.user}" />
+    <property name="password" value="${xcenter.db.pwd}" />
+  </bean> 
+  
+  
+  <bean id="ZATCA_CERT_GEN_SRV" class="asq.pos.zatca.cert.generation.service.AsqZatcaCertRegistrationServiceHandler" parent="AbstractZatcaRestServiceBean">
+    <property name="servicePath" value="/compliance" />
+  </bean> 
+  
+  <bean id="ZATCA_CERT_GEN_INVOICE_SRV" class="asq.pos.zatca.cert.generation.service.AsqZatcaCertRegistrationServiceHandler" parent="AbstractZatcaRestServiceBean">
+    <property name="servicePath" value="/compliance/invoices" />
+    <lookup-method/>
+  </bean> 
+  
+  <bean id="ZATCA_CERT_CSIDS_SRV" class="asq.pos.zatca.cert.generation.service.AsqZatcaCertRegistrationServiceHandler" parent="AbstractZatcaRestServiceBean">
+    <property name="servicePath" value="/production/csids" />
+  </bean> 
+  
+  <bean abstract="true" id="AbstractSTCRestServiceBean">
+    <property name="serviceId" value="STC_REST" />
+    <property name="exceptionHandler" ref="standardJaxRsExceptionHandler" />
+    <property name="serviceConfigHelper" ref="serviceConfigHelper" />
+    <!-- <property name="extensionProviders">
+      <list value-type="java.lang.Object">
+        <bean class="dtv.servicex.impl.GzipReaderInterceptor" />
+        should only be present if using cloud
+        <bean class="dtv.servicex.impl.AuthorizationFilter" />
+        
+      </list>
+    </property>
+    <property name="gzip" value="true" /> -->
+    <property name="logEntity" value="false" />
+    <property name="oAuth2" value="false" />
+    <property name="username" value="${xcenter.db.user}" />
+    <property name="password" value="${xcenter.db.pwd}" />
   </bean> 
   
   <bean id="asqSTCService" class="asq.pos.loyality.stc.tender.service.AsqSTCloyalityServiceHandler" parent="AbstractSTCRestServiceBean">
-    <property name="serviceOTPPath" value="/api/v1/redemption/otp" />
+    <!-- <property name="serviceOTPPath" value="/api/v1/redemption/otp" />
     <property name="serviceRedeemPath" value="/api/v1/redemption/redeem" />
     <property name="serviceRedeemReversePath" value="/api/v1/redemption/reverse" />
-    <property name="serviceEarnPath" value="/api/v1/earn/reward" />
-	<property name="secertToken" value="addad" />
-	<property name="authorization" value="addad" />
+    <property name="serviceEarnPath" value="/api/v1/earn/reward" /> -->
+<!-- 	<property name="secretToken" value="addad" />
+	<property name="authorization" value="addad" /> -->
   </bean> 
   
 </beans>

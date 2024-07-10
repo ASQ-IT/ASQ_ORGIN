@@ -1,4 +1,21 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <MenuSet xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="MenuConfig.xsd" xmlns="http://micros.com/xstore/config/menu">
 
+<MenuItem name="TILL::TILL_MAINTENANCE" actionRef="TILL::TILL_MAINTENANCE" displayType="LIST" text="_tillMaintenanceButtonMenuText" category="Admin" keywords="back_office" sticky="true">
+    <MenuOption ref="TILL::ATTACH_CASHDRAWER_TILL" />
+    <MenuOption ref="TILL::ATTACH_OTHER_TILL" />
+    <MenuOption ref="TILL::CASH_PICKUP" />
+    <MenuOption ref="TILL::CASH_TRANSFER" />
+    <MenuOption ref="TILL::TILL_COUNT" />
+    <MenuOption ref="TILL::END_COUNT_OTHER_TILL" />
+    <SubMenu ref="COUNTRYPACK::FISCAL_OPTIONS" actionRef="COUNTRYPACK::FISCAL_OPTIONS" text="_countrypack.common.menu.FiscalOptions" category="Admin" keywords="back_office" />
+    <MenuOption ref="TILL::TRANSFER_TILLS" />
+    <MenuOption ref="TILL::MID_DAY_DEPOSIT" />
+    <MenuOption ref="TILL::RECONCILE_TILL" />
+    <MenuOption ref="TILL::REMOVE_CASHDRAWER_TILL" />
+    <MenuOption ref="TILL::REMOVE_OTHER_TILL" />
+    <MenuOption ref="TILL::REMOVE_TILL_FROM_WORKSTATION" />
+    <MenuOption ref="TILL::TILL_AUDIT" /> 
+    <MenuOption ref="TILL::ZATCA_CERTIFICATE_GENERATION" />   
+  </MenuItem>
 </MenuSet>

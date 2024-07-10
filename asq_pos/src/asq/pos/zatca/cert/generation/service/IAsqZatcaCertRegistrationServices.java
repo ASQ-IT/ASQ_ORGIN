@@ -8,4 +8,8 @@ public interface IAsqZatcaCertRegistrationServices extends IService {
 	
 	IServiceResponse submitCertForRegistration(IAsqSubmitZatcaCertServiceRequest paramAsqISubmitZatcaCertServiceRequest)throws ServiceException;
 
+	IServiceResponse submitInvoiceForRegistration(IAsqSubmitZatcaCertServiceRequest paramAsqISubmitZatcaCertServiceRequest)throws ServiceException;
+
+	IServiceResponse submitCSIDSForRegistration(IAsqSubmitZatcaCertServiceRequest paramAsqISubmitZatcaCertServiceRequest)throws ServiceException;
+
 }

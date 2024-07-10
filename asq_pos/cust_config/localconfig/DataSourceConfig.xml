@@ -13,7 +13,7 @@
   </DataSource>
 
   <DataSource NetworkScope="WAN" name="Xcenter">
-    <Enabled dtype="Boolean">true</Enabled>
+    <Enabled dtype="Boolean">false</Enabled>
     <Strategy dtype="String">servletPersistenceStrategy</Strategy>
     <Property key="ConnectionURL" value="https://asqxcenter:8004"/>
     <Property key="GetObjectByIdPath" value="/xcenter/dtx/GetById"/>
@@ -84,7 +84,7 @@
   </DataSource>
 
   <DataSource HighAvailability="true" NetworkScope="LAN" name="Local">
-    <Enabled dtype="Boolean">true</Enabled>
+    <Enabled dtype="Boolean">false</Enabled>
     <Strategy dtype="String">jdbcPersistenceStrategy</Strategy>
     <Property key="ConnectionFactoryClassName" value="${dtv.datasource.connectionfactory}"/>
     <Property key="ConnectionUserName" value="${local.db.user}"/>

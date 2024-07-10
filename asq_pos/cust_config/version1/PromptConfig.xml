@@ -1,4 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <PromptSet xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="PromptConfig.xsd" xmlns="http://micros.com/xstore/config/prompt">
 
+<Prompt name="ZATCA_CERTIFICATE_GENERATION" type="NotifyYesNo" title="_zATCACertificateGenerationPromptTitle" message="_zATCACertificateGenerationPromptYesOrNo" >
+	<Action ref="YES"/>
+    <Action ref="NO" />
+</Prompt>
+
+<Prompt name="CAPTURE_OTP" type="Text" title="_newPasswordTitle" message="_promptmsgEnterNewPassword">
+    <DataField ref="OTP" />
+    <IconGroup icon="_imagePromptLoginPwd" />
+    <!-- <FingerprintEnabled dtype="Boolean">true</FingerprintEnabled>
+    <InputPurpose dtype="String">new-password</InputPurpose>-->
+  </Prompt>
+
 </PromptSet>

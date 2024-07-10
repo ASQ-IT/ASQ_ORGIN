@@ -10,44 +10,8 @@
         http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd
         http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util.xsd">
         
-  <bean abstract="true" id="AbstractZatcaRestServiceBean">
-    <property name="serviceId" value="ZATCA_CERT_REST" />
-    <property name="exceptionHandler" ref="standardJaxRsExceptionHandler" />
-    <property name="serviceConfigHelper" ref="serviceConfigHelper" />
-    <!-- <property name="extensionProviders">
-      <list value-type="java.lang.Object">
-        <bean class="dtv.servicex.impl.GzipReaderInterceptor" />
-        should only be present if using cloud
-        <bean class="dtv.servicex.impl.AuthorizationFilter" />
-        
-      </list>
-    </property>
-    <property name="gzip" value="true" /> -->
-    <property name="logEntity" value="false" />
-    <property name="oAuth2" value="false" />
-    <property name="username" value="${xcenter.db.user}" />
-    <property name="password" value="${xcenter.db.pwd}" />
-  </bean> 
   
-  <bean id="asqZatcaCertRegistrationServices" class="asq.pos.zatca.cert.generation.service.AsqZatcaCertRegistrationServices" scope="maybeTrainingMode" primary="true"/>     
-     
-     
-  <bean abstract="true" id="AbstractSTCRestServiceBean">
-    <property name="serviceId" value="STC_REST" />
-    <property name="exceptionHandler" ref="standardJaxRsExceptionHandler" />
-    <property name="serviceConfigHelper" ref="serviceConfigHelper" />
-    <!-- <property name="extensionProviders">
-      <list value-type="java.lang.Object">
-        <bean class="dtv.servicex.impl.GzipReaderInterceptor" />
-        should only be present if using cloud
-        <bean class="dtv.servicex.impl.AuthorizationFilter" />
-        
-      </list>
-    </property>
-    <property name="gzip" value="true" /> -->
-    <property name="logEntity" value="false" />
-    <property name="oAuth2" value="false" />
-    <property name="username" value="${xcenter.db.user}" />
-    <property name="password" value="${xcenter.db.pwd}" />
-  </bean>      
+  
+ 
+       
 </beans>
