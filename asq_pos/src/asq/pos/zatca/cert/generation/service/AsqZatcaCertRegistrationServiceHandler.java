@@ -22,20 +22,19 @@ public class AsqZatcaCertRegistrationServiceHandler extends AbstractJaxRsHandler
 	@Override
 	public IServiceResponse handleService(AsqSubmitZatcaCertServiceRequest argServiceRequest,
 			ServiceType<AsqSubmitZatcaCertServiceRequest, IServiceResponse> argServiceType) {
-
 		Response rawResponse = null;
 		Builder requestBuilder = null;
 		Properties csidProperties = AsqZatcaHelper.getCSIDProperties();
 		try {
 			try {
 				if(argServiceRequest.getOtp()!=null) {
-				String otp = argServiceRequest.getOtp();
-				 requestBuilder = this.getBaseWebTarget().request().header("Content-Type", "application/json")
-					        .header(AsqZatcaIntegrationConstants.ZATCA_OTP,otp)
-					        .header("Accept-Version", "V2");
-				argServiceRequest.setOtp(null);
-				rawResponse = requestBuilder.post(Entity.json(asqZatcaHelper.convertTojson(argServiceRequest)));
-				checkForExceptions(rawResponse);
+					String otp = argServiceRequest.getOtp();
+					 requestBuilder = this.getBaseWebTarget().request().header("Content-Type", "application/json")
+						        .header(AsqZatcaIntegrationConstants.ZATCA_OTP,otp)
+						        .header("Accept-Version", "V2");
+					argServiceRequest.setOtp(null);
+					rawResponse = requestBuilder.post(Entity.json(asqZatcaHelper.convertTojson(argServiceRequest)));
+					checkForExceptions(rawResponse);
 				}
 				else if(argServiceRequest.getCompliance_request_id()!=null) {
 					String authStr = csidProperties.getProperty("binarySecurityToken") + ":" + csidProperties.getProperty("secret");
@@ -43,8 +42,7 @@ public class AsqZatcaCertRegistrationServiceHandler extends AbstractJaxRsHandler
 					requestBuilder = this.getBaseWebTarget().request().header("Content-Type", "application/json")
 							.header(AsqZatcaIntegrationConstants.Authorization, AsqZatcaIntegrationConstants.Basic+encodedString)
 			                .header("Accept-Version", "V2");
-				rawResponse = requestBuilder.post(Entity.json(asqZatcaHelper.convertTojson(argServiceRequest)));
-					
+					rawResponse = requestBuilder.post(Entity.json(asqZatcaHelper.convertTojson(argServiceRequest)));
 					checkForExceptions(rawResponse);
 				}
 			} catch (Exception ex) {
@@ -54,20 +52,16 @@ public class AsqZatcaCertRegistrationServiceHandler extends AbstractJaxRsHandler
 			}
 			return handleResponse(rawResponse);
 		} finally {
-			
 			if (rawResponse != null)
 				rawResponse.close();
 		}
-		
 	}
 	
 	private String encodeToString(byte[] bytes) {
-		// TODO Auto-generated method stub
 		return null;
 	}
 
 	private IServiceResponse  handleResponse(Response argRawResponse) {
-
 		if(argRawResponse.getStatus()==200){    
 			return   (IServiceResponse) asqZatcaHelper.convertJSONToPojo(argRawResponse.readEntity(String.class),AsqSubmitZatcaCertServiceResponse.class);
 		}

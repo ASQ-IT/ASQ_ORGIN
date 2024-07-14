@@ -54,6 +54,7 @@ public class AsqZatcaCertRegistrationOp extends AbstractFormOp<AsqZatcaCertRegis
 		return super.handleInitialState();
 	}
 
+	@Override
 	protected IOpResponse handleDataAction(IXstDataAction argAction) {
 		AsqSubmitZatcaCertServiceResponse asqSubmitZatcaCertServiceResponse;
 		try {
@@ -75,10 +76,10 @@ public class AsqZatcaCertRegistrationOp extends AbstractFormOp<AsqZatcaCertRegis
 				}
 			}
 		} catch (Exception ex) {
-			ex.printStackTrace();
+			LOG.error("Recieve error in the generating zatca certificate",ex);
 		}
-		//return HELPER.completeResponse();
-		 return this.HELPER.getCompleteStackChainResponse(OpChainKey.valueOf("ASQ_ZATCA_INVOICE_GENERATION"));
+	//	return HELPER.completeResponse();
+		return this.HELPER.getCompleteStackChainResponse(OpChainKey.valueOf("ASQ_ZATCA_INVOICE_GENERATION"));
 	}
 
 	@Override
@@ -116,7 +117,7 @@ public class AsqZatcaCertRegistrationOp extends AbstractFormOp<AsqZatcaCertRegis
 		return response;
 	}
 	
-	public AsqSubmitZatcaCertServiceResponse generatePCSID() {
+	public AsqSubmitZatcaCertServiceResponse generatePCSID() throws IOException {
 
 		Properties csidProperties = AsqZatcaHelper.getCSIDProperties();
 		AsqSubmitZatcaCertServiceResponse response = new AsqSubmitZatcaCertServiceResponse();

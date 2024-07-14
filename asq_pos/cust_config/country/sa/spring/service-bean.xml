@@ -8,7 +8,6 @@
   
   <bean id="asqZatcaHelper" class="asq.pos.zatca.cert.generation.AsqZatcaHelper"/>
   <bean id="asqZatcaInvoiceGenerationHelper" class="asq.pos.zatca.invoice.generation.op.AsqZatcaInvoiceGenerationHelper"/>
-  
   <bean id="asqZatcaCertRegistrationServices" class="asq.pos.zatca.cert.generation.service.AsqZatcaCertRegistrationServicesImpl" primary="true"/>     
   
   <bean abstract="true" id="AbstractZatcaRestServiceBean">
@@ -37,7 +36,6 @@
   
   <bean id="ZATCA_CERT_GEN_INVOICE_SRV" class="asq.pos.zatca.cert.generation.service.AsqZatcaCertRegistrationServiceHandler" parent="AbstractZatcaRestServiceBean">
     <property name="servicePath" value="/compliance/invoices" />
-    <lookup-method/>
   </bean> 
   
   <bean id="ZATCA_CERT_CSIDS_SRV" class="asq.pos.zatca.cert.generation.service.AsqZatcaCertRegistrationServiceHandler" parent="AbstractZatcaRestServiceBean">
@@ -63,7 +61,7 @@
     <property name="password" value="${xcenter.db.pwd}" />
   </bean> 
   
-  <bean id="asqSTCService" class="asq.pos.loyality.stc.tender.service.AsqSTCloyalityServiceHandler" parent="AbstractSTCRestServiceBean">
+  <bean id="ASQ_STC_TENDER_SERVICE" class="asq.pos.loyalty.stc.tender.service.AsqSTCloyaltyServiceHandler" parent="AbstractSTCRestServiceBean">
     <!-- <property name="serviceOTPPath" value="/api/v1/redemption/otp" />
     <property name="serviceRedeemPath" value="/api/v1/redemption/redeem" />
     <property name="serviceRedeemReversePath" value="/api/v1/redemption/reverse" />
