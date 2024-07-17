@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<SequenceSet xmlns:dtv="http://www.datavantagecorp.com/config" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="SequenceConfig.xsd">
+    
+  <Sequence name="ASQ_ZATCA_SEQ" ref="_COMMON_">
+    <SequenceType dtype="String">NUMERIC</SequenceType>
+    <FileName dtype="String">asqzatca.seq</FileName>
+    <SequencePart partType="NEXT_NUMBER" padLength="9">
+      <InitialValue dtype="Long">1</InitialValue>
+      <MaximumValue dtype="EncodedLong">9999999</MaximumValue>
+      <ValueIncrement dtype="Integer">1</ValueIncrement>
+    </SequencePart>
+  </Sequence>
+
+</SequenceSet>

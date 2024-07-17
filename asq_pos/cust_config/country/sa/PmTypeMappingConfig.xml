@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<PmTypeMappingSet xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="PmTypeMappingConfig.xsd" xmlns="http://micros.com/xstore/config/pmtypemap">
+
+<PmTypeMapping ObjectId="AsqZatcaInvoiceHash" PmType="TRANSACTION"/>
+  
+</PmTypeMappingSet>

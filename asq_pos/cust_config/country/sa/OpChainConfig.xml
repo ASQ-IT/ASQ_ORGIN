@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<OpChainSet xmlns="http://micros.com/xstore/config/opchain">
+
+	<!-- ASQ Zatca Integration Starts -->
+ 	<OpChain name="ZATCA_CERTIFICATE_GENERATION">
+	    <PromptOp key="ZATCA_CERTIFICATE_GENERATION"/>
+	    <OpChainRoute chainKey="CAPTURE_OTP" />
+	  	<Op class="asq.pos.zatca.cert.generation.op.AsqZatcaCertRegistrationOp" longRunning="true"/>
+    </OpChain>
+    
+    <OpChain name="ASQ_ZATCA_INVOICE_GENERATION">
+   		<Op class= "asq.pos.zatca.invoice.generation.op.AsqZatcaInvoiceGenerationOp"/>
+    </OpChain>
+    <!-- ASQ Zatca Integration Ends -->
+    
+   <!--STC Service Starts-->
+ 	<OpChain name="STC_OTP">
+	  	<Op class="asq.pos.loyalty.stc.tender.op.AsqSTCTenderOp"/>
+    </OpChain>
+   <!--STC Service Ends--> 
+   
+   <OpChain name="SALE_ITEM_AFTER_LOOKUP">
+    <OpChainRoute chainKey="VALIDATE_ITEM_AVAILABILITY_FOR_SALE" />
+    <OpChainRoute chainKey="VALIDATE_EXT_TAX_INTEGRATION" />
+    <OpChainRoute chainKey="VALIDATE_CASHIER_AGE" />
+    <ValidationOp class="dtv.pos.register.ValidateSellingGroupOp" validationsBean="sellingIdGroupRules" />
+    <Op class="dtv.pos.register.CreateSaleLineItemOp" />
+    <Op class="dtv.pos.register.sale.CheckStyleLookupOp">
+      <Parameter name="SaleItemType" value="SALE" />
+    </Op>
+    <OpChainRoute chainKey="VALIDATE_ITEM_AVAILABILITY" />
+    <OpChainRoute chainKey="SALE_ITEM_AFTER_LOOKUP.start" />
+    <PromptOp class="dtv.pos.hardware.scale.op.WeighItemOp" validationsBean="itemWeightRules" />
+    <PromptOp class="asq.pos.register.sale.ASQPromptForItemWeightOp" validationsBean="itemWeightRules" />
+    <ValidationOp class="dtv.pos.item.barcode.ValidateItemWeightBarcodeOp" validationsBean="itemWeightRules" />
+    <OpChainRoute chainKey="VALIDATE_MINIMUM_AGE_FOR_ITEM" />
+   <!-- this is for India specific country pack  -->
+    <OpChainRoute chainKey="MRP_ITEM_PRICE" condition="dtv.pos.register.IsMrpPriceTypeEnabled" />
+		<!-- <Op class="dtv.pos.register.sale.RouteSaleItemOp" /> -->
+    <OpChainRoute>
+      <!-- @todo add routing to more chains as more types of items are converted, see RouteSaleItemOp
+           Warrantries and house account payments still need to be handled. -->
+      <Choice chainKey="SALE_ITEM_FINISH" condition="dtv.pos.register.IsPhysicalItem" />
+      <Choice chainKey="SALE_VOUCHER_START">
+        <Condition class="dtv.pos.register.IsNonPhysicalItem">
+          <Parameter name="ItemType" value="VOUCHER" />
+        </Condition>
+      </Choice>
+      <Choice chainKey="CREDIT_PAYMENT">
+        <Condition class="dtv.pos.register.IsNonPhysicalItem">
+          <Parameter name="ItemType" value="CREDIT_PAYMENT" />
+        </Condition>
+      </Choice>
+      <Choice chainKey="SALE_WARRANTY">
+        <Condition class="dtv.pos.register.IsNonPhysicalItem">
+          <Parameter name="ItemType" value="WARRANTY" />
+        </Condition>
+      </Choice>
+      <Choice chainKey="SALE_WARRANTY_GIFT">
+        <Condition class="dtv.pos.register.IsNonPhysicalItem">
+          <Parameter name="ItemType" value="WARRANTY_GIFT" />
+        </Condition>
+      </Choice>
+      <Choice chainKey="SALE_WARRANTY_RENEW">
+        <Condition class="dtv.pos.register.IsNonPhysicalItem">
+          <Parameter name="ItemType" value="WARRANTY_RENEWAL" />
+        </Condition>
+      </Choice>
+      <Choice chainKey="SALE_NON_PHYSICAL_FINISH" condition="dtv.pos.register.IsNonPhysicalItem" />
+    </OpChainRoute>
+    <OpChainRoute chainKey="CHECK_TRANSACTION_AMOUNT_LIMIT_SCO" />
+    <OpChainRoute chainKey="SALE_ITEM_AFTER_LOOKUP.finish" />
+    <Op class="dtv.pos.framework.op.PersistTranInProcessOp" />
+  </OpChain>
+  
+</OpChainSet>

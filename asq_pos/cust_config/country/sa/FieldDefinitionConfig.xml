@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<FieldSet xmlns="http://micros.com/xstore/config/form/field" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="FormFieldConfig.xsd">
+ 
+ 
+  <!-- ASQ Zatca Integration Starts -->
+   <Field name="captureOTP" type="Text" resource="captureOTP" dataFieldRef="OTP"/>
+   <Field name="captureOTPLabel" type="Label" text="_promptmsgEnterOTP" />
+   <!-- ASQ Zatca Integration Ends -->
+   
+   <!-- ASQ STC Integration Starts -->
+   <Field name="stcOTP" type="Text" resource="stcOTP" dataFieldRef="OTP"/>
+   <Field name="stcOTPLabel" type="Label" text="_promptmsgEnterOTP" />
+   <!-- ASQ STC Integration Ends -->
+   
+  </FieldSet>
+  

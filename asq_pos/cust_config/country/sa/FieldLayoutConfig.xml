@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<FieldLayoutSet xmlns="http://micros.com/xstore/config/form/fieldlayout" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="FieldLayoutConfig.xsd">
+   
+   <!-- ASQ Zatca Integration Starts -->
+   <FieldLayout name="captureOTPLayout" type="SimpleLayout">
+    <Row>
+      <Column start="0" width="100" fieldRef="captureOTP" required="true" labeledBy="captureOTPLabel" verticalAlignment="Center"/>
+    </Row>
+   </FieldLayout>
+   <!-- ASQ Zatca Integration Ends -->
+   
+   <!-- ASQ STC Integration Starts -->
+   <FieldLayout name="stcOTPLayout" type="SimpleLayout">
+    <Row>
+      <Column start="0" width="100" fieldRef="stcOTP" required="true" labeledBy="stcOTPLabel" verticalAlignment="Center"/>
+    </Row>
+   </FieldLayout>
+   <!-- ASQ STC Integration Ends -->
+   
+</FieldLayoutSet>
