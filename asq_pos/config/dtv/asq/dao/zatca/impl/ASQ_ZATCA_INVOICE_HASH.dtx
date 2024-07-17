@@ -1,0 +1,12 @@
+<DAOMapping xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../../../../../../data2/config/dtv/res/config/xmlschema/dtx.xsd">
+	<DAO name="AsqZatcaInvoiceHash" package="dtv.asq.dao.zatca" table="ASQ_ZATCA_INVOICE_HASH">
+		 <!--Primary Key =============================-->
+		 <field name="organizationId" column="organization_id" type="Long" key="true"/>
+		 <field name="icv" column="ICV" type="Long" key="true"/>
+		 <!--Row modification info ===================-->
+		 <field name="invoiceHash" column="INVOICE_HASH" type="String" export="false"/>
+		 <field name="invoiceId" column="INVOICE_ID" type="String" export="false"/>
+		 <field name="invoiceDate" column="INVOICE_DATE" type="Date" export="false"/>
+		 <!--Fields ==================================-->
+	</DAO>
+</DAOMapping>

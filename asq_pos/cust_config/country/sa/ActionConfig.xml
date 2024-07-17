@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ActionSet xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://micros.com/xstore/config/action" xsi:noNamespaceSchemaLocation="ActionConfig.xsd">
+    
+    <!-- ASQ Zatca Integration Starts -->
+    <Action name="TILL::ZATCA_CERTIFICATE_GENERATION" category="Back Office" keywords="back_office_only" text="_zATCACertificateGeneration" 
+    chainKey="ZATCA_CERTIFICATE_GENERATION" privilege="TILL_MANAGEMENT">
+    	<IconGroup icon="_imageMenuTillManagement" />
+  	</Action>
+  	
+    <Action name="TILL::CAPTURE_OTP" category="Anywhere" keywords="login" text="_menutextChangeEmpPwd" chainKey="CAPTURE_OTP">
+    	<IconGroup icon="_imageMenuTillManagement" />
+    </Action>
+  	<!-- ASQ Zatca Integration Ends -->
+  	
+  	 <!-- ASQ STC Integration Starts -->
+  	 <Action name="SALE::TENDER_STC" category="Register" keywords="sale_tender" text="_menuTextSTC" chainKey="STC_OTP">
+    <IconGroup icon="_imageTenderCash" rollIcon="_imageTenderCashRoll" pressIcon="_imageTenderCashPress" disabledIcon="_imageTenderCashDisabled" />
+    <VisibilityRule class="dtv.pos.shared.visibilityrules.TenderEnabledCheck" >
+      <Parameter name="tender" value="LOCAL_CURRENCY" />
+    </VisibilityRule>
+    <VisibilityRule class="dtv.pos.shared.visibilityrules.EffectiveTenderAccCheck" >
+      <Parameter name="tender" value="LOCAL_CURRENCY" />
+    </VisibilityRule>
+    <VisibilityRule class="dtv.pos.shared.visibilityrules.AvailableLayawayTenderAccCheck" >
+      <Parameter name="tender" value="LOCAL_CURRENCY" />
+    </VisibilityRule>
+    <VisibilityRule class="dtv.pos.register.sale.AmountDueVisibilityRule" />
+  </Action>
+  
+  	<!-- ASQ STC Integration Ends -->
+  	
+  	
+</ActionSet>
