@@ -17,8 +17,8 @@
   
   <Service name="TAMARA_REST">
     <Parameters dtype="Map">
-      <TargetUri dtype="String">${asq.zatca.certificate.registration.uri}</TargetUri>
-      <ConnectTimeout dtype="Integer">${asq.zatca.certificate.registration.connection.timeout}</ConnectTimeout>
+      <TargetUri dtype="String">${asq.bnpl.tender.tamara.uri}</TargetUri>
+      <ConnectTimeout dtype="Integer">${asq.bnpl.tender.tamara.uri.timeout}</ConnectTimeout>
     </Parameters>
   </Service>
   

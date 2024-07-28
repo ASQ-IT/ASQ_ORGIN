@@ -7,8 +7,12 @@
   profile="xstore">
   
   <bean id="asqZatcaHelper" class="asq.pos.zatca.cert.generation.AsqZatcaHelper"/>
+  <bean id="asqStcHelper" class="asq.pos.loyalty.stc.tender.AsqStcHelper"/>
+  <bean id="asqZatcaDatabaseHelper" class="asq.pos.zatca.database.helper.AsqZatcaDatabaseHelper"/>
   <bean id="asqZatcaInvoiceGenerationHelper" class="asq.pos.zatca.invoice.generation.op.AsqZatcaInvoiceGenerationHelper"/>
   <bean id="asqZatcaCertRegistrationServices" class="asq.pos.zatca.cert.generation.service.AsqZatcaCertRegistrationServicesImpl" primary="true"/>     
+  <bean id="asqSTCLoyalityTenderService" class="asq.pos.loyalty.stc.tender.service.AsqSTCTenderServiceImpl"/>
+  
   
   <bean abstract="true" id="AbstractZatcaRestServiceBean">
     <property name="serviceId" value="ZATCA_CERT_REST" />
@@ -61,13 +65,32 @@
     <property name="password" value="${xcenter.db.pwd}" />
   </bean> 
   
-  <bean id="ASQ_STC_TENDER_SERVICE" class="asq.pos.loyalty.stc.tender.service.AsqSTCloyaltyServiceHandler" parent="AbstractSTCRestServiceBean">
+  <bean id="ASQ_STC_TENDER_REDEEM_SERVICE" class="asq.pos.loyalty.stc.tender.service.AsqSTCloyaltyServiceHandler" parent="AbstractSTCRestServiceBean">
+    <property name="servicePath" value="/api/v1/redemption/redeem" />
     <!-- <property name="serviceOTPPath" value="/api/v1/redemption/otp" />
     <property name="serviceRedeemPath" value="/api/v1/redemption/redeem" />
     <property name="serviceRedeemReversePath" value="/api/v1/redemption/reverse" />
     <property name="serviceEarnPath" value="/api/v1/earn/reward" /> -->
-<!-- 	<property name="secretToken" value="addad" />
+	<!--<property name="secretToken" value="addad" />
 	<property name="authorization" value="addad" /> -->
+  </bean> 
+  
+  <bean id="ASQ_STC_TENDER_TRIGGER_OTP_SERVICE" class="asq.pos.loyalty.stc.tender.service.AsqSTCloyaltyServiceHandler" parent="AbstractSTCRestServiceBean">
+    <property name="servicePath" value="/api/v1/redemption/otp" />
+  </bean> 
+  
+  <bean abstract="true" id="AbstractBnplTamaraRestServiceBean">
+    <property name="serviceId" value="TAMARA_REST" />
+    <property name="exceptionHandler" ref="standardJaxRsExceptionHandler" />
+    <property name="serviceConfigHelper" ref="serviceConfigHelper" />
+    <property name="logEntity" value="false" />
+    <property name="oAuth2" value="false" />
+    <property name="username" value="${asq.bnpl.tender.tamara.username}" />
+    <property name="password" value="${asq.bnpl.tender.tamara.password}" />
+  </bean> 
+  
+  <bean id="BNPL_TAMARA_SRV" class="asq.pos.bnpl.tamara.tender.service.AsqBnplTamaraServiceHandler" parent="AbstractBnplTamaraRestServiceBean">
+    <property name="servicePath" value="" />
   </bean> 
   
 </beans>

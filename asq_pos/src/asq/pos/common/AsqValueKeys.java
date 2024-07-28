@@ -11,4 +11,8 @@ public final class AsqValueKeys {
 
 	public static final ValueKey<HashMap<String, BigDecimal>> ASQ_TOLA_WEIGHT = new ValueKey(HashMap.class, "ASQ_TOLA_WEIGHT");
 
+	public static final ValueKey<String> ASQ_STC_MOBILE = new ValueKey<String>(String.class, "ASQ_STC_MOBILE");
+
+	public static final ValueKey<String> STC_OTP = new ValueKey(String.class, "STC_OTP");
+
 }

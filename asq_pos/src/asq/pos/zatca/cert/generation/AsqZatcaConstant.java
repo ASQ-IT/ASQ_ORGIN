@@ -1,8 +1,10 @@
 package asq.pos.zatca.cert.generation;
 
-import dtv.util.Base64;
-
 public interface AsqZatcaConstant {
+
+	String ZATCA_CERT_GEN_SRV = "ZATCA_CERT_GEN_SRV";
+	String ZATCA_CERT_GEN_INVOICE_SRV = "ZATCA_CERT_GEN_INVOICE_SRV";
+	String ZATCA_CERT_CSIDS_SRV = "ZATCA_CERT_CSIDS_SRV";
 
 	String uniCodeChartoFind = "\\\\u";
 	String uniCodeChartoReplace = "\\u";
@@ -10,7 +12,7 @@ public interface AsqZatcaConstant {
 	String backSlashChartoReplace = "\"";
 
 	String certificateFilePath = System.getProperty("asq.pos.invoice.certificateFilePath");
-	String keySecret = new String(Base64.byteArrayToBase64(System.getProperty("asq.pos.invoice.keySecret").getBytes()));
+	String keySecret = System.getProperty("asq.pos.invoice.keySecret");
 	String keyAlg = System.getProperty("asq.pos.invoice.keyAlg");
 	String sigAlg = System.getProperty("asq.pos.invoice.sigAlg");
 	String commonDateFormat = System.getProperty("asq.pos.invoice.dateFormat");

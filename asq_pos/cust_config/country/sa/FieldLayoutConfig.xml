@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <FieldLayoutSet xmlns="http://micros.com/xstore/config/form/fieldlayout" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="FieldLayoutConfig.xsd">
    
-   <!-- ASQ Zatca Integration Starts -->
+   <!-- ASQ Capture OTP Starts -->
    <FieldLayout name="captureOTPLayout" type="SimpleLayout">
-    <Row>
-      <Column start="0" width="100" fieldRef="captureOTP" required="true" labeledBy="captureOTPLabel" verticalAlignment="Center"/>
-    </Row>
+    	<Row>
+      		<Column start="0" width="100" fieldRef="captureOTP" required="true" labeledBy="captureOTPLabel" verticalAlignment="Center"/>
+    	</Row>
    </FieldLayout>
-   <!-- ASQ Zatca Integration Ends -->
+   <!-- ASQ Capture OTP Ends -->
    
    <!-- ASQ STC Integration Starts -->
    <FieldLayout name="stcOTPLayout" type="SimpleLayout">
@@ -16,5 +16,13 @@
     </Row>
    </FieldLayout>
    <!-- ASQ STC Integration Ends -->
+   
+   <!-- ASQ Capture Customer Mobile Number Starts -->
+   <FieldLayout name="ASQ_MOBILE_NUMBER_LAYOUT" type="SimpleLayout">
+	   	<Row>
+	      	<Column start="0" width="100" fieldRef="custMobileNumber" required="true" labeledBy="custMobileNumberLabel" verticalAlignment="Center"/>
+	   	</Row>
+   </FieldLayout>
+   <!-- ASQ Capture Customer Mobile Number Ends -->
    
 </FieldLayoutSet>

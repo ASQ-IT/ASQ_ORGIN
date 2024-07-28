@@ -8,6 +8,8 @@ public interface IAsqSTCLoyaltyTenderService extends IService {
 	
 	IServiceResponse submitOTPRequest(IAsqSTCLoyaltyServiceRequest paramAsqSTCLoyalityRequest)throws ServiceException;
 
+	IServiceResponse triggerOTPRequest(IAsqSTCLoyaltyServiceRequest paramAsqSTCLoyalityRequest)throws ServiceException;
+	
 	/*
 	 * IServiceResponse submitRedeemRequest(AsqSTCLoyaltyServiceRequest
 	 * paramAsqSTCLoyalityRequest)throws ServiceException;

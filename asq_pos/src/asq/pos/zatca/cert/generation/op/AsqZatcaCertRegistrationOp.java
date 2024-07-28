@@ -2,7 +2,6 @@ package asq.pos.zatca.cert.generation.op;
 
 import java.io.IOException;
 import java.net.URISyntaxException;
-import java.util.Properties;
 
 import javax.inject.Inject;
 import javax.inject.Provider;
@@ -10,46 +9,56 @@ import javax.inject.Provider;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+import com.oracle.shaded.fasterxml.jackson.core.JsonProcessingException;
+import com.oracle.shaded.fasterxml.jackson.databind.JsonMappingException;
+
 import asq.pos.common.AsqValueKeys;
+import asq.pos.zatca.cert.generation.AsqZatcaErrorDesc;
 import asq.pos.zatca.cert.generation.AsqZatcaHelper;
 import asq.pos.zatca.cert.generation.service.AsqSubmitZatcaCertServiceRequest;
 import asq.pos.zatca.cert.generation.service.AsqSubmitZatcaCertServiceResponse;
 import asq.pos.zatca.cert.generation.service.IAsqSubmitZatcaCertServiceRequest;
 import asq.pos.zatca.cert.generation.service.IAsqZatcaCertRegistrationServices;
 import asq.pos.zatca.integration.zatca.util.POSUtil;
-import dtv.pos.common.OpChainKey;
+import dtv.i18n.IFormattable;
 import dtv.pos.framework.action.type.XstDataActionKey;
 import dtv.pos.framework.op.AbstractFormOp;
 import dtv.pos.iframework.action.IXstActionKey;
 import dtv.pos.iframework.action.IXstDataAction;
-import dtv.pos.iframework.action.IXstDataActionKey;
 import dtv.pos.iframework.event.IXstEvent;
 import dtv.pos.iframework.op.IOpResponse;
 
 public class AsqZatcaCertRegistrationOp extends AbstractFormOp<AsqZatcaCertRegistrationEditModel> {
-	
+
 	private static final Logger LOG = LogManager.getLogger(AsqZatcaCertRegistrationOp.class);
-	
+
 	@Inject
 	private AsqZatcaHelper asqZatcaHelper;
-	
+
 	@Inject
 	protected Provider<IAsqZatcaCertRegistrationServices> zatcaService;
 
-	public static final IXstDataActionKey ACCEPT = XstDataActionKey.valueOf("ACCEPT");
-
+	@Override
 	protected String getFormKey() {
-		return "CAPTURE_OTP";
+		return "ASQ_CAPTURE_OTP";
 	}
 
+	@Override
+	protected AsqZatcaCertRegistrationEditModel createModel() {
+		return new AsqZatcaCertRegistrationEditModel();
+	}
+
+	@Override
 	protected IOpResponse handleBeforeDataAction(IXstEvent argAction) {
 		return super.handleBeforeDataAction(argAction);
 	}
 
+	@Override
 	protected IOpResponse handleFormResponse(IXstEvent argEvent) {
-		return this.HELPER.completeResponse();
+		return HELPER.completeResponse();
 	}
 
+	@Override
 	protected IOpResponse handleInitialState() {
 		return super.handleInitialState();
 	}
@@ -59,86 +68,64 @@ public class AsqZatcaCertRegistrationOp extends AbstractFormOp<AsqZatcaCertRegis
 		AsqSubmitZatcaCertServiceResponse asqSubmitZatcaCertServiceResponse;
 		try {
 			IXstActionKey actionKey = argAction.getActionKey();
-			if (actionKey == ACCEPT) {
-				AsqZatcaCertRegistrationEditModel model = (AsqZatcaCertRegistrationEditModel) getModel();
-				String otp = model.getCaptureOTP();
-				setScopedValue(AsqValueKeys.ZATCA_OTP, otp);
-				
-				if(asqZatcaHelper.getCertOnBoarding(otp)) {
-					asqSubmitZatcaCertServiceResponse = generateCCSID(otp);//compliance
-					//files should be manually placed//	invoice should be located at one place		
-					
-					//generateinvoice//read sample invoice //.json/read first file and call generate invoice
-					//after generating the compliance JKS certificate flow will return here.
-					
-				//	asqSubmitZatcaCertServiceResponse = generatePCSID();
-				//	asqZatcaHelper.getProdCertOnBoarding();// Generates production CSID
+			if (actionKey == XstDataActionKey.ACCEPT) {
+				LOG.debug("Process of registering the till to Zataca Starts");
+				AsqZatcaCertRegistrationEditModel model = getModel();
+				setScopedValue(AsqValueKeys.ZATCA_OTP, model.getCaptureOTP());
+				if (asqZatcaHelper.getCertOnBoarding(model.getCaptureOTP())) {
+					asqSubmitZatcaCertServiceResponse = generateCCSID(model.getCaptureOTP());// compliance
+					if (asqSubmitZatcaCertServiceResponse.getErrors() == null) {
+						asqZatcaHelper.mapRequiredValuesToPropertiesFile(asqSubmitZatcaCertServiceResponse);
+						asqZatcaHelper.generateCSIDFile(asqSubmitZatcaCertServiceResponse.getBinarySecurityToken());// Certificate Created
+						asqZatcaHelper.getJKSCert();// Making it as JKS
+					} else {
+						LOG.error("Response from Zatca have error or Null");
+						return handleServiceError(asqSubmitZatcaCertServiceResponse);
+					}
 				}
 			}
 		} catch (Exception ex) {
-			LOG.error("Recieve error in the generating zatca certificate",ex);
+			LOG.error("Recieve error in the generating zatca certificate", ex);
+			return HELPER.getPromptResponse("ASQ_ZATCA_REGISTOR_ERROR");
 		}
-	//	return HELPER.completeResponse();
-		return this.HELPER.getCompleteStackChainResponse(OpChainKey.valueOf("ASQ_ZATCA_INVOICE_GENERATION"));
+		return HELPER.completeResponse();
 	}
 
-	@Override
-	protected AsqZatcaCertRegistrationEditModel createModel() {
-		return new AsqZatcaCertRegistrationEditModel();
+	public IOpResponse handleServiceError(AsqSubmitZatcaCertServiceResponse asqServiceResponse) throws JsonMappingException, JsonProcessingException {
+		IFormattable[] args = new IFormattable[2];
+		if (null == asqServiceResponse) {
+			args[1] = _formattables.getSimpleFormattable("Service has null response");
+		} else {
+			AsqZatcaErrorDesc error = asqServiceResponse.getErrors();
+			args[0] = _formattables.getSimpleFormattable(error.getCode());
+			args[1] = _formattables.getSimpleFormattable(error.getMessage());
+		}
+		return HELPER.getPromptResponse("ASQ_ZATCA_REGISTOR_ERROR", args);
 	}
 
-	public AsqSubmitZatcaCertServiceResponse generateCCSID(String otp) {
-		AsqSubmitZatcaCertServiceResponse response = new AsqSubmitZatcaCertServiceResponse();
-		try {
-			IAsqSubmitZatcaCertServiceRequest asqSubmitZatcaCertServiceRequest = new AsqSubmitZatcaCertServiceRequest();
-			asqSubmitZatcaCertServiceRequest.setOtp(otp);
-			asqSubmitZatcaCertServiceRequest.setCsr(POSUtil.encodeFileToBase64(asqZatcaHelper.getZatcaCISRFile()));
-			response = (AsqSubmitZatcaCertServiceResponse) zatcaService.get().submitCertForRegistration(asqSubmitZatcaCertServiceRequest);
-			
-			if(response!= null) {
-				try {
-					asqZatcaHelper.mapRequiredValuesToPropertiesFile(response);
-					if(null!=response.getBinarySecurityToken()) {
-						asqZatcaHelper.generateCSIDFile(response.getBinarySecurityToken());//Certificate Created
-					    asqZatcaHelper.getJKSCert(otp);//Making it as JKS
-					}
-					else {
-						System.out.println("csid.properties file does not contain Binary Security Token");
-					}
-				} catch (IOException e) {
-					e.printStackTrace();
-				} catch (URISyntaxException e) {
-					e.printStackTrace();
-				}
-			}
-		} catch (Exception ex) {
-			ex.printStackTrace();
-		}
-		return response;
+	public AsqSubmitZatcaCertServiceResponse generateCCSID(String otp) throws URISyntaxException, IOException {
+		IAsqSubmitZatcaCertServiceRequest asqSubmitZatcaCertServiceRequest = new AsqSubmitZatcaCertServiceRequest();
+		asqSubmitZatcaCertServiceRequest.setOtp(otp);
+		asqSubmitZatcaCertServiceRequest.setCsr(POSUtil.encodeFileToBase64(asqZatcaHelper.getZatcaCISRFile()));
+		return (AsqSubmitZatcaCertServiceResponse) zatcaService.get().submitCertForRegistration(asqSubmitZatcaCertServiceRequest);
 	}
-	
-	public AsqSubmitZatcaCertServiceResponse generatePCSID() throws IOException {
 
-		Properties csidProperties = AsqZatcaHelper.getCSIDProperties();
-		AsqSubmitZatcaCertServiceResponse response = new AsqSubmitZatcaCertServiceResponse();
-		if ("true".equalsIgnoreCase(csidProperties.getProperty("isComplianceCheck"))) {
-			// ZATCA Req
-			IAsqSubmitZatcaCertServiceRequest productionRequest = new AsqSubmitZatcaCertServiceRequest();
-			productionRequest.setCompliance_request_id(csidProperties.getProperty("complianceRequestID"));
-			response = (AsqSubmitZatcaCertServiceResponse) zatcaService.get().submitCSIDSForRegistration(productionRequest);
-			if(response!= null) {
-				try {
-					asqZatcaHelper.mapRequiredValuesToPropertiesFile(response);
-					try {
-						asqZatcaHelper.generateCSIDFile(response.getBinarySecurityToken());
-					} catch (IOException e) {
-						e.printStackTrace();
-					}
-				}  catch (URISyntaxException e) {
-					e.printStackTrace();
-				}
-			}
-		}
-		return response;
-	}
+	/*
+	 * public AsqSubmitZatcaCertServiceResponse generatePCSID() throws IOException {
+	 * 
+	 * Properties csidProperties = AsqZatcaHelper.getCSIDProperties();
+	 * AsqSubmitZatcaCertServiceResponse response = new
+	 * AsqSubmitZatcaCertServiceResponse(); if
+	 * ("true".equalsIgnoreCase(csidProperties.getProperty("isComplianceCheck"))) {
+	 * // ZATCA Req IAsqSubmitZatcaCertServiceRequest productionRequest = new
+	 * AsqSubmitZatcaCertServiceRequest();
+	 * productionRequest.setCompliance_request_id(csidProperties.getProperty(
+	 * "complianceRequestID")); response = (AsqSubmitZatcaCertServiceResponse)
+	 * zatcaService.get().submitCSIDSForRegistration(productionRequest); if
+	 * (response != null) { try {
+	 * asqZatcaHelper.mapRequiredValuesToPropertiesFile(response); try {
+	 * asqZatcaHelper.generateCSIDFile(response.getBinarySecurityToken()); } catch
+	 * (IOException e) { e.printStackTrace(); } } catch (URISyntaxException e) {
+	 * e.printStackTrace(); } } } return response; }
+	 */
 }

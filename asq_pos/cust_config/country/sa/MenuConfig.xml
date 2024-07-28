@@ -1,56 +1,47 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <MenuSet xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="MenuConfig.xsd" xmlns="http://micros.com/xstore/config/menu">
-
-<MenuItem name="TILL::TILL_MAINTENANCE" actionRef="TILL::TILL_MAINTENANCE" displayType="LIST" text="_tillMaintenanceButtonMenuText" category="Admin" keywords="back_office" sticky="true">
-    <MenuOption ref="TILL::ATTACH_CASHDRAWER_TILL" />
-    <MenuOption ref="TILL::ATTACH_OTHER_TILL" />
-    <MenuOption ref="TILL::CASH_PICKUP" />
-    <MenuOption ref="TILL::CASH_TRANSFER" />
-    <MenuOption ref="TILL::TILL_COUNT" />
-    <MenuOption ref="TILL::END_COUNT_OTHER_TILL" />
-    <SubMenu ref="COUNTRYPACK::FISCAL_OPTIONS" actionRef="COUNTRYPACK::FISCAL_OPTIONS" text="_countrypack.common.menu.FiscalOptions" category="Admin" keywords="back_office" />
-    <MenuOption ref="TILL::TRANSFER_TILLS" />
-    <MenuOption ref="TILL::MID_DAY_DEPOSIT" />
-    <MenuOption ref="TILL::RECONCILE_TILL" />
-    <MenuOption ref="TILL::REMOVE_CASHDRAWER_TILL" />
-    <MenuOption ref="TILL::REMOVE_OTHER_TILL" />
-    <MenuOption ref="TILL::REMOVE_TILL_FROM_WORKSTATION" />
-    <MenuOption ref="TILL::TILL_AUDIT" /> 
-    
-    <!-- ASQ Zatca Integration Starts -->
-    <MenuOption ref="TILL::ZATCA_CERTIFICATE_GENERATION" />   
-    <!-- ASQ Zatca Integration Ends -->
-</MenuItem>
+	<MenuItem name="ADMIN::HARDWARE_MANAGEMENT" actionRef="ADMIN::HARDWARE_MANAGEMENT" keywords="back_office">
+	    <MenuOption ref="ADMIN::HARDWARE_DEVICE_EDIT" />
+	    <MenuOptions ref="?HARDWARE_MANAGEMENT::STANDARD_OPTIONS?" /> 
+	    <MenuOption ref="ADMIN::DISPLAY_LAST_LOGGED_IN_USERS" />
+	    <MenuOption ref="ADMIN::REINIT_HARDWARE" />
+	    <MenuOption ref="ADMIN::RESTORE_HARDWARE_DEVICE" />
+	    <!-- ASQ Zatca Integration Starts -->
+	    <MenuOption ref="ADMIN::ZATCA_CERTIFICATE_GENERATION" />   
+	    <!-- ASQ Zatca Integration Ends -->
+  	</MenuItem>
  
     <MenuItem name="SALE::TENDER_OPTIONS" text="_menuSaleTender" displayType="LIST" category="Tender" keywords="sale_tender" style="TILED_MENU">
-    <MenuOption ref="SALE::TENDER_LOCAL_CURRENCY" />
-    
-    <!-- STC Zatca Integration Starts -->
-    <MenuOption ref="SALE::TENDER_STC" />
-     <!-- STC Zatca Integration Ends -->
-    <MenuOption ref="SALE::TENDER_CREDIT_CARD" />
-    <MenuOption ref="SALE::TENDER_EWALLET" />
-    <MenuOption ref="SALE::TENDER_PAYMENT_BY_LINK" />
-    <MenuOption ref="SALE::TENDER_PAYMENT_BY_LINK_CNP" />
-    <MenuOption ref="SALE::TENDER_CUSTOMER_NOT_PRESENT_CREDIT_CARD" />
-    <MenuOption ref="SALE::TENDER_CUSTOMER_SAVED_PAYMENT_CARD" />
-    <MenuOption ref="SALE::TENDER_MANUAL_CREDIT" />
-    <MenuOption ref="SALE::TENDER_MANUAL_DEBIT" />
-    <MenuOption ref="SALE::TENDER_CHECK" />
-    <MenuOption ref="SALE::TENDER_GIFT_CARD" />
-    <MenuOption ref="SALE::TENDER_GIFT_CERTIFICATE" />
-    <MenuOption ref="SALE::TENDER_MALL_CERTIFICATE" />
-    <MenuOption ref="SALE::TENDER_STORE_CREDIT" />
-    <MenuOption ref="SALE::TENDER_STORE_CREDIT_CARD" />
-    <MenuOption ref="SALE::TENDER_TRAVELERS_CHECK" />
-    <MenuOption ref="SALE::TENDER_FOREIGN_CURRENCY" />
-    <MenuOption ref="SALE::TENDER_MISCELLANEOUS" />
-    <MenuOption ref="SALE::TENDER_HOUSE_ACCOUNT" />
-    <MenuOption ref="SALE::TENDER_COUPON" />
-    <MenuOption ref="SALE::TENDER_ROOM_CHARGE" />
-    <MenuOption ref="SALE::VOID_TENDER" />
-    <MenuOption ref="SALE::CHANGE_TENDER_AMOUNT" />
-    <MenuOption ref="RETAIL::CHECK_SALE_COMPLETE" />
+	    <MenuOption ref="SALE::TENDER_LOCAL_CURRENCY" />
+	    <!-- STC Integration Starts -->
+	    <MenuOption ref="SALE::TENDER_STC" />
+	    <!-- STC Integration Ends -->
+	    <!-- STC Integration Starts -->
+	    <MenuOption ref="SALE::TENDER_TAMARA" />
+	    <!-- STC Integration Ends -->
+	    <MenuOption ref="SALE::TENDER_CREDIT_CARD" />
+	    <MenuOption ref="SALE::TENDER_EWALLET" />
+	    <MenuOption ref="SALE::TENDER_PAYMENT_BY_LINK" />
+	    <MenuOption ref="SALE::TENDER_PAYMENT_BY_LINK_CNP" />
+	    <MenuOption ref="SALE::TENDER_CUSTOMER_NOT_PRESENT_CREDIT_CARD" />
+	    <MenuOption ref="SALE::TENDER_CUSTOMER_SAVED_PAYMENT_CARD" />
+	    <MenuOption ref="SALE::TENDER_MANUAL_CREDIT" />
+	    <MenuOption ref="SALE::TENDER_MANUAL_DEBIT" />
+	    <MenuOption ref="SALE::TENDER_CHECK" />
+	    <MenuOption ref="SALE::TENDER_GIFT_CARD" />
+	    <MenuOption ref="SALE::TENDER_GIFT_CERTIFICATE" />
+	    <MenuOption ref="SALE::TENDER_MALL_CERTIFICATE" />
+	    <MenuOption ref="SALE::TENDER_STORE_CREDIT" />
+	    <MenuOption ref="SALE::TENDER_STORE_CREDIT_CARD" />
+	    <MenuOption ref="SALE::TENDER_TRAVELERS_CHECK" />
+	    <MenuOption ref="SALE::TENDER_FOREIGN_CURRENCY" />
+	    <MenuOption ref="SALE::TENDER_MISCELLANEOUS" />
+	    <MenuOption ref="SALE::TENDER_HOUSE_ACCOUNT" />
+	    <MenuOption ref="SALE::TENDER_COUPON" />
+	    <MenuOption ref="SALE::TENDER_ROOM_CHARGE" />
+	    <MenuOption ref="SALE::VOID_TENDER" />
+	    <MenuOption ref="SALE::CHANGE_TENDER_AMOUNT" />
+	    <MenuOption ref="RETAIL::CHECK_SALE_COMPLETE" />
   </MenuItem>
     
 </MenuSet>

@@ -3,9 +3,9 @@
 
 	<!-- ASQ Zatca Integration Starts -->
  	<OpChain name="ZATCA_CERTIFICATE_GENERATION">
-	    <PromptOp key="ZATCA_CERTIFICATE_GENERATION"/>
-	    <OpChainRoute chainKey="CAPTURE_OTP" />
-	  	<Op class="asq.pos.zatca.cert.generation.op.AsqZatcaCertRegistrationOp" longRunning="true"/>
+	    <!-- <PromptOp key="ZATCA_CERTIFICATE_GENERATION"/>
+	  	<Op class="asq.pos.zatca.cert.generation.op.AsqZatcaCertRegistrationOp" longRunning="true"/> -->
+	  	<OpChainRoute chainKey="ASQ_ZATCA_INVOICE_GENERATION" />
     </OpChain>
     
     <OpChain name="ASQ_ZATCA_INVOICE_GENERATION">
@@ -14,7 +14,10 @@
     <!-- ASQ Zatca Integration Ends -->
     
    <!--STC Service Starts-->
- 	<OpChain name="STC_OTP">
+   <OpChain name="ASQ_STC_MOBILE">
+	  	<Op class="asq.pos.loyalty.stc.tender.op.AsqSTCMobileNumberOp"/>
+    </OpChain>
+ 	<OpChain name="ASQ_STC_OTP">
 	  	<Op class="asq.pos.loyalty.stc.tender.op.AsqSTCTenderOp"/>
     </OpChain>
    <!--STC Service Ends--> 
@@ -72,5 +75,11 @@
     <OpChainRoute chainKey="SALE_ITEM_AFTER_LOOKUP.finish" />
     <Op class="dtv.pos.framework.op.PersistTranInProcessOp" />
   </OpChain>
+  
+   <!--BNPL TAMARA Service Starts-->
+ 	<OpChain name="ASQ_TENDER_TAMARA">
+	  	<Op class="asq.pos.bnpl.tabby.tender.op.AsqBnplTamaraTenderOp"/>
+    </OpChain>
+   <!--BNPL TAMARA Service Ends-->
   
 </OpChainSet>
