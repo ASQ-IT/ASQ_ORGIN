@@ -14,6 +14,7 @@ import org.apache.logging.log4j.Logger;
 import asq.pos.zatca.cert.generation.AsqZatcaConstant;
 import asq.pos.zatca.cert.generation.AsqZatcaErrorDesc;
 import asq.pos.zatca.cert.generation.AsqZatcaHelper;
+import asq.pos.zatca.cert.generation.AsqZatcaIntegrationConstants;
 import dtv.service.req.IServiceResponse;
 import dtv.servicex.ServiceType;
 import dtv.servicex.impl.AbstractJaxRsHandler;
@@ -53,7 +54,7 @@ public class AsqZatcaCertRegistrationServiceHandler extends AbstractJaxRsHandler
 			checkForExceptions(rawResponse);
 			return asqZatcaHelper.convertJSONToPojo(rawResponse.readEntity(String.class), AsqSubmitZatcaCertServiceResponse.class);
 		} catch (Exception ex) {
-			LOG.error("We have reieved exception in calling of webservice ", rawResponse);
+			LOG.error("We have reieved exception in calling of webservice ", ex);
 			if (null != rawResponse.getStatusInfo()) {
 				AsqSubmitZatcaCertServiceResponse arg = new AsqSubmitZatcaCertServiceResponse();
 				AsqZatcaErrorDesc errDesc = new AsqZatcaErrorDesc();

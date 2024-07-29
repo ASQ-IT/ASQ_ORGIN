@@ -9,6 +9,8 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.StringWriter;
 import java.net.URISyntaxException;
+import java.nio.file.Files;
+import java.nio.file.Path;
 import java.util.Base64;
 import java.util.Properties;
 
@@ -36,27 +38,22 @@ public class AsqZatcaHelper {
 
 	private static final Logger LOG = LogManager.getLogger(AsqZatcaHelper.class);
 
-	public static String generateInvoiceXML(InvoiceType in) throws JAXBException {
+	public static void main(String abv[]) throws IOException {
+		AsqZatcaHelper hel = new AsqZatcaHelper();
+		String requestXmlString = Files.readString(Path.of("D:\\ASQ\\ASQ_DEV\\Zatca\\readJSON.json"));
+		hel.convertJSONToPojo(requestXmlString, AsqSubmitZatcaCertServiceResponse.class);
+	}
 
+	public static String generateInvoiceXML(InvoiceType in) throws JAXBException {
 		JAXBContext jaxbContext = JAXBContext.newInstance(InvoiceType.class);
 		Marshaller jaxbMarshaller = jaxbContext.createMarshaller();
-
 		jaxbMarshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true);
-		// jaxbMarshaller.setProperty("com.sun.xml.internal.bind.namespacePrefixMapper",
-		// new NamespaceMapper());
-
-		// ASQ commented for compiling
-		// jaxbMarshaller.setProperty("com.sun.xml.bind.marshaller.NamespacePrefixMapper",
-		// new NamespaceMapper());
 
 		JAXBElement<InvoiceType> jaxbElement = new JAXBElement<InvoiceType>(new QName("urn:oasis:names:specification:ubl:schema:xsd:Invoice-2", "Invoice"), InvoiceType.class, in);
-
 		StringWriter sw = new StringWriter();
 		jaxbMarshaller.marshal(jaxbElement, sw);
 
-		String xmlString = sw.toString();
-
-		return xmlString;
+		return sw.toString();
 	}
 
 	public <T> T getZatcaOjectFactory(Class<T> argObjectType) {
@@ -91,18 +88,11 @@ public class AsqZatcaHelper {
 		return t;
 	}
 
-	public String convertTojson(Object argObj) {
-		String result = null;
-		try {
-			ObjectMapper objMapper = new ObjectMapper();
-			objMapper.configure(MapperFeature.ACCEPT_CASE_INSENSITIVE_PROPERTIES, true);
-			objMapper.configure(DeserializationFeature.ACCEPT_EMPTY_STRING_AS_NULL_OBJECT, true);
-			result = objMapper.writeValueAsString(argObj);
-
-		} catch (Exception ex) {
-			// _logger.error("Exception caught in converting object to json:", ex);
-		}
-		return result;
+	public String convertTojson(Object argObj) throws JsonProcessingException {
+		ObjectMapper objMapper = new ObjectMapper();
+		objMapper.configure(MapperFeature.ACCEPT_CASE_INSENSITIVE_PROPERTIES, true);
+		objMapper.configure(DeserializationFeature.ACCEPT_EMPTY_STRING_AS_NULL_OBJECT, true);
+		return objMapper.writeValueAsString(argObj);
 	}
 
 	/**

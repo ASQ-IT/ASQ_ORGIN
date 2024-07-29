@@ -372,6 +372,8 @@
     <Logger name="dtv.util.net.cxnmaint" level="info"/>
     <Logger name="dtv.pos.common.ExtensionStoreConnectivityCheck" level="info"/>
     <Logger name="dtv.data2.replication.dtximpl" level="info"/>
+    
+    <Logger name="asq.pos" level="debug"/>
 
     <Root level="info">
       <AppenderRef ref="XSTORE.file" />

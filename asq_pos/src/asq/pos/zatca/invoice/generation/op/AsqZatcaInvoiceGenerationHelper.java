@@ -1,6 +1,7 @@
 package asq.pos.zatca.invoice.generation.op;
 
 import java.io.File;
+import java.io.FilenameFilter;
 import java.io.IOException;
 import java.math.BigDecimal;
 import java.math.BigInteger;
@@ -50,6 +51,7 @@ import org.xml.sax.SAXException;
 import asq.pos.zatca.cert.generation.AsqZatcaConstant;
 import asq.pos.zatca.cert.generation.AsqZatcaHelper;
 import asq.pos.zatca.cert.generation.service.AsqSubmitZatcaCertServiceRequest;
+import asq.pos.zatca.cert.generation.service.AsqSubmitZatcaCertServiceResponse;
 import asq.pos.zatca.database.helper.AsqZatcaDatabaseHelper;
 import asq.pos.zatca.database.helper.AsqZatcaInvoiceHashQueryResult;
 import asq.pos.zatca.invoice.generation.utils.ASQException;
@@ -237,7 +239,7 @@ public class AsqZatcaInvoiceGenerationHelper {
 	 * @throws Exception
 	 * @throws ASQException
 	 */
-	public String generateSampleRegInvoice(InvoiceType invoiceData, String invoiceXmlString) throws ASQException, Exception {
+	public AsqSubmitZatcaCertServiceResponse generateSampleRegInvoice(InvoiceType invoiceData, String invoiceXmlString) throws ASQException, Exception {
 		logger.info("*******InvoiceRequest Unicode Value After Converting to Object :" + invoiceData.getSellerSupplierParty());
 
 		AdditionalDocumentReference addDocQR = new AdditionalDocumentReference("QR", StringUtils.EMPTY, StringUtils.EMPTY);
@@ -310,7 +312,7 @@ public class AsqZatcaInvoiceGenerationHelper {
 		oi.setUuid(xmlUUID);
 		oi.setInvoice(base64.encodeToString(invoiceXML.getBytes()));
 		SmartHubUtil.writeInvoiceJSON(invoiceData.getID().getValue(), invoiceIssueDate, invoiceIssueTime, oi);
-		return "Sucesss";
+		return new AsqSubmitZatcaCertServiceResponse();
 	}
 
 	public String generate(InvoiceType invoiceData)
@@ -1247,7 +1249,7 @@ public class AsqZatcaInvoiceGenerationHelper {
 		// invoiceData.getIrn();
 		String xmlIrnValue = invoiceData.getID().getValue();
 
-		AsqZatcaInvoiceHashModel model = asqZatcaDatabaseHelper.saveInvoiceHashFromDB(xmlIrnValue, xmlUUID, hashedXML);
+		AsqZatcaInvoiceHashModel model = asqZatcaDatabaseHelper.saveInvoiceHashFromDB(xmlIrnValue, xmlUUID, hashedXML, signingTime.toXMLFormat());
 
 		signatureData.setICV((int) model.getIcv());
 		signatureData.setSignatureValue(signedHashAsBytes);
@@ -1672,6 +1674,13 @@ public class AsqZatcaInvoiceGenerationHelper {
 		return signaturePropertyHashingString;
 	}
 
+	/**
+	 * This method converts the sample invoice XML to InvoiceType object
+	 * 
+	 * @param argSampleInvoice
+	 * @return
+	 * @throws JAXBException
+	 */
 	public InvoiceType getInvoiceOject(File argSampleInvoice) throws JAXBException {
 		JAXBContext jaxbContext = JAXBContext.newInstance(new oasis.names.specification.ubl.schema.xsd.invoice_2.ObjectFactory().getClass().getPackage().getName() + ":"
 				+ new oasis.names.specification.ubl.schema.xsd.commonsignaturecomponents_2.ObjectFactory().getClass().getPackage().getName() + ":"
@@ -1681,4 +1690,23 @@ public class AsqZatcaInvoiceGenerationHelper {
 		return obj.getValue();
 	}
 
+	/**
+	 * This method help in having the file from a location with filtered file types
+	 * 
+	 * @param argLocation
+	 * @param argFileFilters
+	 * @return
+	 */
+	public File[] getFilesFromLocation(String argLocation, String argFileFilters) {
+		File signedInvoiceFolder = new File(argLocation);
+		return signedInvoiceFolder.listFiles(new FilenameFilter() {
+			@Override
+			public boolean accept(File dir, String name) {
+				if (name.endsWith(argFileFilters)) {
+					return true;
+				}
+				return false;
+			}
+		});
+	}
 }
