@@ -25,10 +25,6 @@ import dtv.pos.iframework.event.IXstEvent;
 import dtv.pos.iframework.op.IOpResponse;
 import oasis.names.specification.ubl.schema.xsd.invoice_2.InvoiceType;
 
-/**
- * @author RA20221457
- *
- */
 public class AsqZatcaInvoiceGenerationOp extends Operation {
 
 	private static final Logger logger = LogManager.getLogger(AsqZatcaInvoiceGenerationOp.class);
@@ -57,6 +53,9 @@ public class AsqZatcaInvoiceGenerationOp extends Operation {
 						AsqSubmitZatcaCertServiceResponse result = asqZatcaInvoiceGenerationHelper.generateSampleRegInvoice(invoice, invoiceXmlString);
 						if (result.getErrors() == null) {
 							logger.debug("WE are able to create the Zatca required invoice JSON request from smaple Invoice");
+							IFormattable[] args = new IFormattable[2];
+							args[0] = _formattables.getSimpleFormattable("Signed sample Invoice XML");
+							HELPER.getPromptResponse("ASQ_ZATCA_NOTIFIY", args);
 						} else {
 							return handleServiceError(result);
 						}
