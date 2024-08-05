@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<ContextSet xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="ContextConfig.xsd" xmlns="http://micros.com/xstore/config/context">
+  <!-- ASQ Zatca Integration Starts -->
+  <Context name="CAPTURE_OTP_MENU">
+    <ParentContext>TEXT_PROMPT_ONLY_EMPTY_MENU</ParentContext>
+    <HelpKey>_helpMsgSaleTender</HelpKey>
+  </Context>
+  <!-- ASQ Zatca Integration Ends -->   
+  
+  
+  <Context name="STC_OTP_MENU">
+    <ParentContext>TEXT_PROMPT_ONLY_EMPTY_MENU</ParentContext>
+    <HelpKey>_helpMsgSaleTender</HelpKey>
+  </Context>    
+ </ContextSet>

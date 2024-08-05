@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<PromptSet xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="PromptConfig.xsd" xmlns="http://micros.com/xstore/config/prompt">
+	
+	<!-- ASQ Zatca Integration Starts -->
+	<Prompt name="ZATCA_CERTIFICATE_GENERATION" type="NotifyYesNo" title="_zATCACertificateGenerationPromptTitle" message="_zATCACertificateGenerationPromptYesOrNo" >
+		<Action ref="YES"/>
+	    <Action ref="NO" />
+	</Prompt>
+	
+	<Prompt name="ASQ_ZATCA_REGISTOR_ERROR" type="NotifyCancel" title="_zatacaError" message="_zatcaRegistrationError">
+	    <Action ref="CANCEL_BACK" />
+    </Prompt>
+    
+    <Prompt name="ASQ_ZATCA_NOTIFIY" type="NotifyCancel" title="_zatacaError" message="_zatcaRegistrationError">
+	    <Action ref="CANCEL_BACK" />
+    </Prompt>
+    
+    <Prompt name="ASQ_ZATCA_NOTIFIY" type="NotifyPassive" title="_zatacaNotify" message="_zatacaNotifyMessage">
+    	<ActionDisplayType dtype="String">POPUP</ActionDisplayType>
+    	<Action ref="ACCEPT_ENTER" />  
+    </Prompt>
+	<!-- ASQ Zatca Integration Ends -->
+	
+	<!-- ASQ STC Integration Starts -->
+	<Prompt name="STC_OTP" type="Text" title="_newPasswordTitle" message="_promptmsgEnterNewPassword">
+	    <DataField ref="OTP" />
+	    <IconGroup icon="_imagePromptLoginPwd" />
+	    <!-- <FingerprintEnabled dtype="Boolean">true</FingerprintEnabled>
+	    <InputPurpose dtype="String">new-password</InputPurpose>-->
+	</Prompt>
+	
+	<Prompt name="ASQ_CONFIRM_CUSTOMER_MOBILE_NUMBER_PROMPT" type="Notify" title="_asqConfirmCustomerMobileNumber" message="_asqConfirmCustomerMobileNumberMessage`" >
+    <Action ref="NO_BACK"/>
+    <Action ref="YES_ENTER" text="_confirmTitle"/>
+  </Prompt>
+  
+  <Prompt name="LEV_ENTER_REDEMPTION_AMOUNT" type="Text" title="_levLoyaltyCustomerPointsTitle" message="_levLoyaltyCustomerPointsMessage">
+	<DataField ref="Money" />
+    <Action ref="ACCEPT_ENTER" />
+    <Action ref="CANCEL_BACK" />
+  </Prompt>
+	<!-- ASQ STC Integration Ends -->
+	
+	<!-- ASQ TOLA Work Starts -->
+    <Prompt name="ASQ_TOLA_QTY_SOH_ERROR" type="NotifyCancel" title="_weight" message="_tolaItemQtyValidationError">
+	    <IconGroup icon="_imagePromptItemWeight" />
+	    <Action ref="CANCEL_BACK" />
+    </Prompt>
+   
+    <Prompt name="ASQ_TOLA_WEIGHT_RANGE_ERROR" type="NotifyCancel" title="_weight" message="_tolaItemRangeValidationError" >
+   		<IconGroup icon="_imagePromptItemWeight" />
+	    <Action ref="CANCEL_BACK" />
+    </Prompt>
+    <!-- ASQ TOLA Work Ends -->
+	
+</PromptSet>

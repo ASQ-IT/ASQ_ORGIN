@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<QuerySet xmlns="http://micros.com/xstore/config/query" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://micros.com/xstore/config/query ../../../../../../config-objects/schema/QueryConfig.xsd">
+ <Queries>
+ <Query name="ASQ_SELECT_ZATCA_INVOICE_HASH" pmType="TRANSACTION" >
+	<QueryHandler>dtv.data2.access.query.SqlQueryHandler</QueryHandler>
+	<ResultClass>asq.pos.zatca.database.helper.AsqZatcaInvoiceHashQueryResult</ResultClass>
+	<ResultField name="Icv" type="Long" />
+	<ResultField name="InvoiceId" type="String" />
+	<ResultField name="InvoiceDate" type="Date" />
+	<ResultField name="InvoiceHash" type="String" />
+	<SQL>
+		<Statement><![CDATA[SELECT
+   								 hashinvoice.icv,
+								 hashinvoice.invoice_id,
+    							 hashinvoice.invoice_date,
+		                         hashinvoice.invoice_hash
+							FROM
+							(SELECT MAX(icv)icv
+							 FROM ASQ_ZATCA_INVOICE_HASH    
+							WHERE   
+								organization_id = ? )MAXHICV,
+								ASQ_ZATCA_INVOICE_HASH hashinvoice 
+							WHERE   
+							hashinvoice.icv = MAXHICV.ICV]]>
+		</Statement>
+		<Parameter name="argOrganizationId"/>
+	</SQL>
+</Query>
+
+ </Queries>
+ </QuerySet>
