@@ -50,20 +50,22 @@ public class AsqSTCloyaltyServiceHandler extends AbstractJaxRsHandler<IAsqSTCLoy
 			HttpRequest httpRequest = builder.build();
 
 			rawResponse = httpClient.send(httpRequest, HttpResponse.BodyHandlers.ofString());
-			checkForExceptions(rawResponse);
+			// checkForExceptions(rawResponse);
 			return asqStcHelper.convertJSONToPojo(rawResponse.body(), AsqSTCLoyaltyServiceResponse.class);
 		} catch (Exception ex) {
 			logger.error("WE have recieved a exception in STC we service call ", ex);
+			AsqSTCLoyaltyServiceResponse arg = new AsqSTCLoyaltyServiceResponse();
+			AsqSTCServiceResponseError errDesc = new AsqSTCServiceResponseError();
 			if (200 != rawResponse.statusCode()) {
-				AsqSTCLoyaltyServiceResponse arg = new AsqSTCLoyaltyServiceResponse();
-				AsqSTCServiceResponseError errDesc = new AsqSTCServiceResponseError();
 				errDesc.setCode(String.valueOf(rawResponse.statusCode()));
 				errDesc.setDescription(rawResponse.toString());
-				arg.setErrors(new AsqSTCServiceResponseError[] { errDesc });
-				return arg;
+			} else {
+				errDesc.setCode(String.valueOf(ex.hashCode()));
+				errDesc.setDescription(ex.getMessage());
 			}
+			arg.setErrors(new AsqSTCServiceResponseError[] { errDesc });
+			return arg;
 		}
-		return null;
 	}
 
 	public IServiceResponse callWebBased(IAsqSTCLoyaltyServiceRequest argServiceRequest, ServiceType<IAsqSTCLoyaltyServiceRequest, IServiceResponse> argServiceType) {

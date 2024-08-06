@@ -4,10 +4,12 @@ import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.util.Arrays;
 
 import javax.inject.Inject;
 import javax.inject.Provider;
 
+import org.apache.commons.io.comparator.NameFileComparator;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -15,11 +17,13 @@ import com.oracle.shaded.fasterxml.jackson.core.JsonProcessingException;
 import com.oracle.shaded.fasterxml.jackson.databind.JsonMappingException;
 import com.oracle.shaded.fasterxml.jackson.databind.ObjectMapper;
 
+import asq.pos.zatca.cert.generation.AsqZatcaConstant;
 import asq.pos.zatca.cert.generation.AsqZatcaErrorDesc;
 import asq.pos.zatca.cert.generation.service.AsqSubmitZatcaCertServiceRequest;
 import asq.pos.zatca.cert.generation.service.AsqSubmitZatcaCertServiceResponse;
 import asq.pos.zatca.cert.generation.service.IAsqZatcaCertRegistrationServices;
 import dtv.i18n.IFormattable;
+import dtv.pos.framework.action.XstDataAction;
 import dtv.pos.framework.op.Operation;
 import dtv.pos.iframework.event.IXstEvent;
 import dtv.pos.iframework.op.IOpResponse;
@@ -36,11 +40,24 @@ public class AsqZatcaInvoiceGenerationOp extends Operation {
 	protected Provider<IAsqZatcaCertRegistrationServices> zatcaService;
 
 	@Override
+	public boolean isOperationApplicable() {
+		return !isComplete();
+	}
+
+	@Override
 	public IOpResponse handleOpExec(IXstEvent paramIXstEvent) {
 		try {
+			if (null != paramIXstEvent && paramIXstEvent instanceof XstDataAction) {
+				XstDataAction ata = (XstDataAction) paramIXstEvent;
+				if ("CERT_INVOICE".equalsIgnoreCase(ata.getActionKey().toString())) {
+					return HELPER.completeCurrentChainResponse();
+				}
+			}
 			logger.debug(" Reading Sample XML File ");
 			File[] listOfFiles = asqZatcaInvoiceGenerationHelper.getFilesFromLocation(System.getProperty("asq.zatca.certificate.work.dir.invoice"), ".xml");
 			if (listOfFiles.length > 0) {
+				setOpState(AsqZatcaConstant.PROCESSING);
+				Arrays.sort(listOfFiles, NameFileComparator.NAME_COMPARATOR);
 				removeExistingSubmiitedInvoiceFile();
 				for (File sampleInvoice : listOfFiles) {
 					logger.debug("Reading the Sample Invoice Name : " + sampleInvoice.getName());
@@ -53,29 +70,27 @@ public class AsqZatcaInvoiceGenerationOp extends Operation {
 						AsqSubmitZatcaCertServiceResponse result = asqZatcaInvoiceGenerationHelper.generateSampleRegInvoice(invoice, invoiceXmlString);
 						if (result.getErrors() == null) {
 							logger.debug("WE are able to create the Zatca required invoice JSON request from smaple Invoice");
-							IFormattable[] args = new IFormattable[2];
-							args[0] = _formattables.getSimpleFormattable("Signed sample Invoice XML");
-							HELPER.getPromptResponse("ASQ_ZATCA_NOTIFIY", args);
 						} else {
 							return handleServiceError(result);
 						}
 					}
 				}
-				logger.debug("Success fully created the invoice json for three Zataca request");
+				logger.debug("Successfully created the invoice json for three Zataca request");
+
 				// submitting generated XML for approval
 				submittGenZatcaInvoices();
 			} else {
 				logger.error("Their are no file to read in sample Invoices directory");
 			}
 		} catch (Exception exception) {
-			logger.error("We have recieved  :" + exception);
+			logger.error("We have recieved in submiiting the invoices :" + exception);
 			IFormattable[] args = new IFormattable[2];
 			args[0] = _formattables.getSimpleFormattable("System Error");
 			args[1] = _formattables.getSimpleFormattable(exception.getLocalizedMessage());
 			return HELPER.getPromptResponse("ASQ_ZATCA_REGISTOR_ERROR", args);
 
 		}
-		return HELPER.completeResponse();
+		return HELPER.getCompletePromptResponse("ASQ_ZATCA_INVOICE_NOTIFIY");
 	}
 
 	public IOpResponse handleServiceError(AsqSubmitZatcaCertServiceResponse asqServiceResponse) throws JsonMappingException, JsonProcessingException {
@@ -140,7 +155,7 @@ public class AsqZatcaInvoiceGenerationOp extends Operation {
 	 * @throws JsonMappingException
 	 * @throws JsonProcessingException
 	 */
-	private static AsqSubmitZatcaCertServiceRequest zatcaInvoiceRequestMapper(String zatcaRequest) throws JsonMappingException, JsonProcessingException {
+	private AsqSubmitZatcaCertServiceRequest zatcaInvoiceRequestMapper(String zatcaRequest) throws JsonMappingException, JsonProcessingException {
 		ObjectMapper mapper = new ObjectMapper();
 		return mapper.readValue(zatcaRequest, AsqSubmitZatcaCertServiceRequest.class);
 	}

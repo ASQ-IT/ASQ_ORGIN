@@ -1,5 +1,8 @@
 package asq.pos.zatca.cert.generation;
 
+import dtv.pos.framework.op.OpState;
+import dtv.pos.iframework.op.IOpState;
+
 public interface AsqZatcaConstant {
 
 	String ZATCA_CERT_GEN_SRV = "ZATCA_CERT_GEN_SRV";
@@ -28,4 +31,8 @@ public interface AsqZatcaConstant {
 	String SignatureWithNamespace = System.getProperty("asq.pos.invoice.SignatureWithNamespace");
 	String QualifyingPropertiesTag = System.getProperty("asq.pos.invoice.QualifyingPropertiesTag");
 	String QualifyingPropertiesWithNamespace = System.getProperty("asq.pos.invoice.QualifyingPropertiesWithNamespace");
+
+	IOpState PROCESSING = new OpState("PROCESSING");
+	IOpState COMPLETE = new OpState("COMPLETE");
+
 }

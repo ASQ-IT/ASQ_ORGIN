@@ -12,7 +12,7 @@ import dtv.pos.framework.form.BasicEditModel;
 public class AsqZatcaCertRegistrationEditModel extends BasicEditModel {
 	public static final String CAPTURE_OTP_FIELD = "captureOTP";
 
-	private String _captureOTP;
+	private String captureOTP;
 
 	public AsqZatcaCertRegistrationEditModel() {
 		super(FF.getTranslatable("_captureOTPTitle"), FF.getTranslatable("_captureOTPDescription"));
@@ -21,10 +21,10 @@ public class AsqZatcaCertRegistrationEditModel extends BasicEditModel {
 	}
 
 	public String getCaptureOTP() {
-		return this._captureOTP;
+		return this.captureOTP;
 	}
 
 	public void setCaptureOTP(String argCaptureOTP) {
-		this._captureOTP = argCaptureOTP;
+		this.captureOTP = argCaptureOTP;
 	}
 }

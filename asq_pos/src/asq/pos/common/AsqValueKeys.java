@@ -15,4 +15,7 @@ public final class AsqValueKeys {
 
 	public static final ValueKey<String> STC_OTP = new ValueKey(String.class, "STC_OTP");
 
+	public static final ValueKey<String> ASQ_ZATCA_CERT_GEN = new ValueKey(String.class, "FALSE");
+
+	public static final ValueKey<String> ASQ_ZATCA_SAMPLE_INVOICE_REG = new ValueKey(String.class, "FALSE");
 }

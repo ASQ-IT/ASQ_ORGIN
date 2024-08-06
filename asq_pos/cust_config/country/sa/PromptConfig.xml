@@ -11,13 +11,19 @@
 	    <Action ref="CANCEL_BACK" />
     </Prompt>
     
-    <Prompt name="ASQ_ZATCA_NOTIFIY" type="NotifyCancel" title="_zatacaError" message="_zatcaRegistrationError">
-	    <Action ref="CANCEL_BACK" />
+    <Prompt name="ASQ_ZATCA_CERT_NOTIFIY" type="NotifyPassive" title="_zatacaNotify" message="_zatacaCertNotifyMessage">
+    	<ActionDisplayType dtype="String">POPUP</ActionDisplayType>
+    	<Action dataKey="CERT_COMPLETE" text="_continue" keyStroke="Enter" />
     </Prompt>
     
-    <Prompt name="ASQ_ZATCA_NOTIFIY" type="NotifyPassive" title="_zatacaNotify" message="_zatacaNotifyMessage">
+    <Prompt name="ASQ_ZATCA_INVOICE_NOTIFIY" type="NotifyPassive" title="_zatacaNotify" message="_zatacaInvoiceNotifyMessage">
     	<ActionDisplayType dtype="String">POPUP</ActionDisplayType>
-    	<Action ref="ACCEPT_ENTER" />  
+    	<Action dataKey="CERT_INVOICE" text="_continue" keyStroke="Enter" />
+    </Prompt>
+    
+    <Prompt name="ASQ_ZATCA_PROD_CERT_NOTIFIY" type="NotifyPassive" title="_zatacaNotify" message="_zatacaProdCertNotifyMessage">
+    	<ActionDisplayType dtype="String">POPUP</ActionDisplayType>
+    	<Action dataKey="CERT_PROD_COMPLETE" text="_continue" keyStroke="Enter" />  
     </Prompt>
 	<!-- ASQ Zatca Integration Ends -->
 	

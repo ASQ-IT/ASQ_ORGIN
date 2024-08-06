@@ -1,0 +1,65 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+<style type="text/css">body{font-family:arial;}.date-generated{text-size-adjust:80%;color:rgb(211, 211, 211)}
+.dtx-fields,.relationship-list{background-color:rgb(243, 243, 243);
+  border-color:rgb(211, 211, 211);
+  border-style:solid;
+  border-width:1px;
+  padding-top:10px;
+  padding-bottom:10px;
+}
+.pk-field{list-style-image:url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAL5JREFUeNpi/P//PwMy6OidCKJUQUwgdoEK7wHiCiC+XVGcj6KehQETqAPxCSAWQBILAmInILYA4pvIipmwGNAG1bwdiKWgeDtUrA1dMTYDYM5OBuLnUJwMFXMjxgBs4D8uCWwG7IHSc4BYAoilgXguVGwXumJsgVgNDTAvqPNh4ANUjqALbkBDex2S2Dqo2A1iXMAAjapgJL8HkxIGJAG6GfAOiJ9ik2Ah0gBBKKa+F4h1ASO5BtwnZDJAgAEAQiohwr66nQUAAAAASUVORK5CYII=)}
+.non-pk-field{list-style:none}
+.dtx-field-comment{font-style:italic;color:rgb(150, 150, 150)}
+.db-entity{font-family:monospace;}
+</style>
+<title>DTX metadata</title></head>
+<body>
+<div id="AsqZatcaInvoiceHash">
+<h1>AsqZatcaInvoiceHash</h1>
+<ul><li><h2>Table: <span class="db-entity">ASQ_ZATCA_INVOICE_HASH</span></h2></li>
+<li><h2>Fields:</h2>
+<ul class="dtx-fields">
+<li class="pk-field">OrganizationId (<span class="db-entity">organization_id</span>) - LONG</li>
+<li class="pk-field">Icv (<span class="db-entity">ICV</span>) - LONG</li>
+<li class="non-pk-field">InvoiceHash (<span class="db-entity">INVOICE_HASH</span>) - STRING</li>
+<li class="non-pk-field">InvoiceId (<span class="db-entity">INVOICE_ID</span>) - STRING</li>
+<li class="non-pk-field">InvoiceDate (<span class="db-entity">INVOICE_DATE</span>) - DATE</li>
+<li class="non-pk-field">CreateUserId (<span class="db-entity">create_user_id</span>) - STRING(256)<div class="dtx-field-comment">The ID of the user who created the record.</div></li>
+<li class="non-pk-field">CreateDate (<span class="db-entity">create_date</span>) - DATE<div class="dtx-field-comment">The date and time the record was created.</div></li>
+<li class="non-pk-field">UpdateUserId (<span class="db-entity">update_user_id</span>) - STRING(256)<div class="dtx-field-comment">The ID of the user who last updated the record.</div></li>
+<li class="non-pk-field">UpdateDate (<span class="db-entity">update_date</span>) - DATE<div class="dtx-field-comment">The date and the record was last updated.</div></li>
+</ul>
+</li>
+<li><h2>Relationships:</h2>
+<ul class="relationship-list">
+<li>Properties - <a href="#AsqZatcaInvoiceHashProperty">AsqZatcaInvoiceHashProperty</a></li>
+</ul>
+</li>
+</ul>
+</div>
+<div id="AsqZatcaInvoiceHashProperty">
+<h1>AsqZatcaInvoiceHashProperty</h1>
+<ul><li><h2>Table: <span class="db-entity">ASQ_ZATCA_INVOICE_HASH_p</span></h2></li>
+<li><h2>Fields:</h2>
+<ul class="dtx-fields">
+<li class="pk-field">OrganizationId (<span class="db-entity">organization_id</span>) - LONG</li>
+<li class="pk-field">Icv (<span class="db-entity">ICV</span>) - LONG</li>
+<li class="pk-field">PropertyCode (<span class="db-entity">property_code</span>) - STRING(30)<div class="dtx-field-comment">The name of the property.</div></li>
+<li class="non-pk-field">Type (<span class="db-entity">type</span>) - STRING(10)<div class="dtx-field-comment">The type of property. Valid values are 'STRING', 'DATE', 'BIGDECIMAL', and 'BOOLEAN'.</div></li>
+<li class="non-pk-field">StringValue (<span class="db-entity">string_value</span>) - STRING(4000)<div class="dtx-field-comment">The value of the property if 'type' is 'STRING'.</div></li>
+<li class="non-pk-field">DateValue (<span class="db-entity">date_value</span>) - DATE<div class="dtx-field-comment">The value of the property if 'type' is 'DATE'.</div></li>
+<li class="non-pk-field">DecimalValue (<span class="db-entity">decimal_value</span>) - DECIMAL(17)<div class="dtx-field-comment">The value of the property if 'type' is 'BIGDECIMAL' or 'BOOLEAN'. For 'BOOLEAN' type, the value should be 0 or 1.</div></li>
+<li class="non-pk-field">CreateUserId (<span class="db-entity">create_user_id</span>) - STRING(256)<div class="dtx-field-comment">The ID of the user who created the record.</div></li>
+<li class="non-pk-field">CreateDate (<span class="db-entity">create_date</span>) - DATE<div class="dtx-field-comment">The date and time the record was created.</div></li>
+<li class="non-pk-field">UpdateUserId (<span class="db-entity">update_user_id</span>) - STRING(256)<div class="dtx-field-comment">The ID of the user who last updated the record.</div></li>
+<li class="non-pk-field">UpdateDate (<span class="db-entity">update_date</span>) - DATE<div class="dtx-field-comment">The date and the record was last updated.</div></li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="date-generated">Generated: 2024-07-13T12:19:39.768Z</div>
+</body>
+</html>

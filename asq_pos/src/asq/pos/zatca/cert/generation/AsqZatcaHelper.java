@@ -38,13 +38,13 @@ public class AsqZatcaHelper {
 
 	private static final Logger LOG = LogManager.getLogger(AsqZatcaHelper.class);
 
-	public static void main(String abv[]) throws IOException {
+	public void main(String abv[]) throws IOException {
 		AsqZatcaHelper hel = new AsqZatcaHelper();
 		String requestXmlString = Files.readString(Path.of("D:\\ASQ\\ASQ_DEV\\Zatca\\readJSON.json"));
 		hel.convertJSONToPojo(requestXmlString, AsqSubmitZatcaCertServiceResponse.class);
 	}
 
-	public static String generateInvoiceXML(InvoiceType in) throws JAXBException {
+	public String generateInvoiceXML(InvoiceType in) throws JAXBException {
 		JAXBContext jaxbContext = JAXBContext.newInstance(InvoiceType.class);
 		Marshaller jaxbMarshaller = jaxbContext.createMarshaller();
 		jaxbMarshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true);
@@ -122,7 +122,7 @@ public class AsqZatcaHelper {
 	 * @return
 	 * @throws IOException
 	 */
-	public boolean getCertOnBoarding(String otp) throws IOException {
+	public boolean getCertOnBoarding() throws IOException {
 		LOG.debug("We have start the process of creating the .csr file");
 		String path = System.getProperty("asq.zatca.certificate.work.dir");
 
@@ -161,25 +161,23 @@ public class AsqZatcaHelper {
 		return null;
 	}
 
-	public static <T> T convertToJavaBean(String json, Class<T> c) {
-		T t = null;
-		try {
-			ObjectMapper objectMapper = new ObjectMapper();
-			t = objectMapper.readValue(json, c);
-		} catch (Exception ex) {
-			// _logger.error("Exception caught in while converting json To JavaBean :", ex);
-		}
-
-		return t;
+	public <T> T convertToJavaBean(String json, Class<T> c) throws JsonMappingException, JsonProcessingException {
+		ObjectMapper objectMapper = new ObjectMapper();
+		return objectMapper.readValue(json, c);
 	}
 
+	/**
+	 * This method reads and write the prop in the location
+	 * 
+	 * @param asqSubmitZatcaCertServiceResponse
+	 * @throws URISyntaxException
+	 * @throws IOException
+	 */
 	public void mapRequiredValuesToPropertiesFile(AsqSubmitZatcaCertServiceResponse asqSubmitZatcaCertServiceResponse) throws URISyntaxException, IOException {
-
 		Properties csidProperties = getCSIDProperties();
 		// Need to handle file creation and file not available checks
 		if (null != asqSubmitZatcaCertServiceResponse) {
 			FileOutputStream out = new FileOutputStream(System.getProperty("asq.zatca.certificate.work.dir").concat("csid.properties"));
-			// file.createNewFile();
 			csidProperties.setProperty("isCSIDGenerated", String.valueOf(true));
 			csidProperties.setProperty("onboardingType", "CCSID");
 			csidProperties.setProperty("complianceRequestID", asqSubmitZatcaCertServiceResponse.getRequestID());
@@ -191,29 +189,15 @@ public class AsqZatcaHelper {
 		}
 	}
 
-	public static Properties getCSIDProperties() {
+	public Properties getCSIDProperties() throws IOException {
 		Properties prop = new Properties();
-		try {
-			// Determine where the input file is; assuming it's in the same directory as the
-			// jar
-			String fileName = (System.getProperty("asq.zatca.certificate.work.dir").concat("csid.properties"));
-			// String inputFilePath = getBasePath(fileName);
-			System.out.println();
-			// String inputFilePath = fileName;
-			FileInputStream inStream = new FileInputStream(new File(fileName));
-
-			prop.load(inStream);
-			// load a properties file from class path, inside static method
-			// prop.load(SmartHubUtil.class.getClassLoader().getResourceAsStream("app.properties"));
-		} catch (IOException ex) {
-			ex.printStackTrace();
-		} /*
-			 * catch (URISyntaxException e) { e.printStackTrace(); }
-			 */
+		String fileName = (System.getProperty("asq.zatca.certificate.work.dir").concat("csid.properties"));
+		FileInputStream inStream = new FileInputStream(new File(fileName));
+		prop.load(inStream);
 		return prop;
 	}
 
-	public static String getBasePath(String path) throws URISyntaxException {
+	public String getBasePath(String path) throws URISyntaxException {
 		File jarFile = new File(POSUtil.class.getProtectionDomain().getCodeSource().getLocation().toURI().getPath());
 		return jarFile.getParent() + File.separator + path;
 	}
@@ -241,45 +225,43 @@ public class AsqZatcaHelper {
 	}
 
 	public void generateCSIDFile(String binaryToken) throws IOException {
-
 		String csidCertificateFilePath = (System.getProperty("asq.zatca.certificate.work.dir").concat(System.getProperty("asq.zatca.certificate.csidFileName")));
 		File csidFile = new File(csidCertificateFilePath);
 		if (!csidFile.exists()) {
 			csidFile.createNewFile();
 		}
-		// String decodedValue=new String(Base64.decodeBase64(binaryToken));
-
 		String decodedValue = new String(Base64.getDecoder().decode(binaryToken), "UTF-8");
 		String certificate = "-----BEGIN CERTIFICATE-----\n" + decodedValue + "\n-----END CERTIFICATE-----";
 		FileWriter writer = new FileWriter(csidCertificateFilePath);
 		writer.write(certificate);
 		writer.close();
-
 	}
 
 	public boolean getProdCertOnBoarding() {
-		try {
-			String path = System.getProperty("asq.zatca.certificate.work.dir");
+		String path = System.getProperty("asq.zatca.certificate.work.dir");
+		// Converting cert to p12 file.
+		String command = "openssl pkcs12 -export -in " + path + "asq_pos_csid.cer -inkey " + path + "PrivateKey.pem -name pos_csr -out " + path + "cert-and-key.p12 -password pass:27934968";
+		CommandPrompt.runCommand(command);
 
-			// Converting cert to p12 file.
-			String command = "openssl pkcs12 -export -in " + path + "asq_pos_csid.cer -inkey " + path + "PrivateKey.pem -name pos_csr -out " + path + "cert-and-key.p12 -password pass:27934968";
-			CommandPrompt.runCommand(command);
+		// Creating empty JKS file if its not already available
+		// Read the attributes from cnf file
+		command = "keytool -genkey -alias pos_csr -keyalg EC -keysize 256 -sigalg SHA256withECDSA  -dname CN=atg.altayer.com,OU=RiyadBranch,O=NibrasAlArabiaCompanyLimited,L=Riyadh,ST=Riyadh,C=SA -validity 365 -storetype JKS  -keypass 27934968 -keystore resources/pos_csr.jks -storepass 27934968";
+		CommandPrompt.runCommand(command);
 
-			// Creating empty JKS file if its not already available
-			// Read the attributes from cnf file
-			command = "keytool -genkey -alias pos_csr -keyalg EC -keysize 256 -sigalg SHA256withECDSA  -dname CN=atg.altayer.com,OU=RiyadBranch,O=NibrasAlArabiaCompanyLimited,L=Riyadh,ST=Riyadh,C=SA -validity 365 -storetype JKS  -keypass 27934968 -keystore resources/pos_csr.jks -storepass 27934968";
-			CommandPrompt.runCommand(command);
+		// Deleting the cert from JKS if its already exist
+		command = "keytool -delete -alias pos_csr -keystore resources/pos_csr.jks -storepass 27934968";
+		CommandPrompt.runCommand(command);
 
-			// Deleting the cert from JKS if its already exist
-			command = "keytool -delete -alias pos_csr -keystore resources/pos_csr.jks -storepass 27934968";
-			CommandPrompt.runCommand(command);
-
-			// Adding newly generated cert to the JKS
-			command = "keytool -v -importkeystore -srckeystore resources/cert-and-key.p12 -srcstoretype PKCS12 -srcstorepass 27934968 -destkeystore resources/pos_csr.jks -deststoretype JKS -storepass 27934968";
-			CommandPrompt.runCommand(command);
-		} catch (Exception e) {
-			return false;
-		}
+		// Adding newly generated cert to the JKS
+		command = "keytool -v -importkeystore -srckeystore resources/cert-and-key.p12 -srcstoretype PKCS12 -srcstorepass 27934968 -destkeystore resources/pos_csr.jks -deststoretype JKS -storepass 27934968";
+		CommandPrompt.runCommand(command);
 		return true;
+	}
+
+	public String getZatcaAuthToken() throws IOException {
+		Properties csidProperties = getCSIDProperties();
+		StringBuilder zatcaAuthToken = new StringBuilder(csidProperties.getProperty("binarySecurityToken"));
+		zatcaAuthToken.append(":").append(csidProperties.getProperty("secret"));
+		return AsqZatcaIntegrationConstants.Basic + Base64.getEncoder().encodeToString(zatcaAuthToken.toString().getBytes());
 	}
 }

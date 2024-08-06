@@ -1,5 +1,6 @@
 package asq.pos.zatca.cert.generation.service;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.oracle.shaded.fasterxml.jackson.annotation.JsonInclude;
 
 import dtv.servicex.impl.req.ServiceRequest;
@@ -12,7 +13,10 @@ import dtv.servicex.impl.req.ServiceRequest;
 public class AsqSubmitZatcaCertServiceRequest extends ServiceRequest implements IAsqSubmitZatcaCertServiceRequest {
 
 	private String csr;
+
+	@JsonIgnore
 	private String otp;
+
 	private String compliance_request_id;
 	private String invoiceHash;
 	private String uuid;
