@@ -1639,7 +1639,7 @@ public class AsqZatcaInvoiceGenerationHelper {
 	 * @return invoiceXML
 	 */
 
-	private String generateFinalXML(InvoiceType in, String argQRCode, SignatureData signatureData) throws NoSuchAlgorithmException, IOException, JAXBException {
+	public String generateFinalXML(InvoiceType in, String argQRCode, SignatureData signatureData) throws NoSuchAlgorithmException, IOException, JAXBException {
 		String invoiceXML = SmartHubUtil.generateCompleteSignedInvoiceXML(in);
 		logger.info("Before Invoice Generated: " + invoiceXML);
 		invoiceXML = invoiceXML.replace(AsqZatcaConstant.UBLDocumentSignaturesTag, AsqZatcaConstant.UBLDocumentSignaturesWithNamespace);

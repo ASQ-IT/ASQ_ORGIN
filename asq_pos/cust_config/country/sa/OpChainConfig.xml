@@ -21,6 +21,10 @@
    			<Parameter name="LongRunningMessage" value="Please wait.." />
 	  	</Op>
     </OpChain>
+    
+    <OpChain name="SALE_COMPLETE_FINISH.pre">
+    	<Op class= "asq.pos.register.sale.zatca.AsqZatcaSaleQrCodeGenerationOp" />
+    </OpChain>
     <!-- ASQ Zatca Integration Ends -->
     
    <!--STC Service Starts-->
@@ -91,5 +95,8 @@
 	  	<Op class="asq.pos.bnpl.tabby.tender.op.AsqBnplTamaraTenderOp"/>
     </OpChain>
    <!--BNPL TAMARA Service Ends-->
+   
+   
+
   
 </OpChainSet>
