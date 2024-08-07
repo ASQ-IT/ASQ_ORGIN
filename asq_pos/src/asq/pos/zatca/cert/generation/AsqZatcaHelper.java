@@ -12,6 +12,7 @@ import java.net.URISyntaxException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.Base64;
+import java.util.Date;
 import java.util.Properties;
 
 import javax.xml.bind.JAXBContext;
@@ -263,5 +264,11 @@ public class AsqZatcaHelper {
 		StringBuilder zatcaAuthToken = new StringBuilder(csidProperties.getProperty("binarySecurityToken"));
 		zatcaAuthToken.append(":").append(csidProperties.getProperty("secret"));
 		return AsqZatcaIntegrationConstants.Basic + Base64.getEncoder().encodeToString(zatcaAuthToken.toString().getBytes());
+	}
+
+	public String getIssueTime(Date argCreatedate) {
+
+		return null;
+
 	}
 }
