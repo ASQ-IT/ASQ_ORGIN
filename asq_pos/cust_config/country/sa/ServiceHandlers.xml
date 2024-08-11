@@ -15,7 +15,7 @@
     </Parameters>
   </Service>
   
-  <Service name="STC_REST">
+  <Service name="ASQ_STC_REST">
     <Parameters dtype="Map">
       <TargetUri dtype="String">${asq.stc.otp.redeem.earn.uri}</TargetUri>
       <ConnectTimeout dtype="Integer">${asq.stc.otp.redeem.earn.connection.timeout}</ConnectTimeout>

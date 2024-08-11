@@ -21,7 +21,8 @@ public class AsqBnplTamaraServiceHandler extends AbstractJaxRsHandler<AsqSubmitB
 	public IServiceResponse handleService(AsqSubmitBnplTamraServiceRequest argServiceRequest, ServiceType<AsqSubmitBnplTamraServiceRequest, IServiceResponse> argServiceType) {
 		Response rawResponse = null;
 		try {
-			Builder requestBuilder = this.getBaseWebTarget().request().header("Content-Type", "application/json").header(AsqZatcaIntegrationConstants.ZATCA_OTP, "").header("Accept-Version", "V2");
+			Builder requestBuilder = this.getBaseWebTarget().request().header("Content-Type", "application/json")
+					.header(AsqZatcaIntegrationConstants.Authorization, System.getProperty("asq.bnpl.tender.tamara.token")).header("Accept-Version", "V2");
 			rawResponse = requestBuilder.post(Entity.json(asqZatcaHelper.convertTojson(argServiceRequest)));
 			checkForExceptions(rawResponse);
 		} catch (Exception ex) {

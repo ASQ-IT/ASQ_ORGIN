@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <QuerySet xmlns="http://micros.com/xstore/config/query" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://micros.com/xstore/config/query ../../../../../../config-objects/schema/QueryConfig.xsd">
  	<Queries>
+ <!-- ASQ ZATCA Integration query to save invoice hash and xml in customized table-->
 		 <Query name="ASQ_SELECT_ZATCA_INVOICE_HASH" pmType="TRANSACTION" >
 			<QueryHandler>dtv.data2.access.query.SqlQueryHandler</QueryHandler>
 			<ResultClass>asq.pos.zatca.database.helper.AsqZatcaInvoiceHashQueryResult</ResultClass>

@@ -17,7 +17,7 @@ public class AsqBnplTamaraEditModel extends BasicEditModel {
 	}
 
 	public AsqBnplTamaraEditModel() {
-		super(FF.getTranslatable("_captureCustMobileNumberTitle"), FF.getTranslatable("_captureCustMobileNumberDescription"));
+		super(FF.getTranslatable("_asqCaptureMobileNumberTitle"), FF.getTranslatable("_asqCaptureMobileNumberDescription"));
 		addField(ASQ_MOBILE_NUMBER_FIELD, String.class);
 		initializeFieldState();
 	}

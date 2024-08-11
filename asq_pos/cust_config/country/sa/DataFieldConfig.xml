@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <DataFields xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="DataFieldConfig.xsd" xmlns="http://micros.com/xstore/config/datafield">
+  <!-- ASQ Service Integrations -->
   <DataField name="ASQ_OTP" editFormat="Numeric">
     <Parameter name="maximumIntegerDigits" value="6" />
   </DataField>

@@ -13,7 +13,7 @@
   	<!-- ASQ Zatca Integration Ends -->
   	
   	 <!-- ASQ STC Integration Starts -->
-  	 <Action name="SALE::TENDER_STC" category="Register" keywords="sale_tender" text="_menuTextSTC" chainKey="ASQ_STC_MOBILE">
+	<Action name="SALE::ASQ_TENDER_STC" category="Register" keywords="sale_tender" text="_menuTextSTC" chainKey="ASQ_STC_MOBILE">
     <IconGroup icon="_imageTenderCash" rollIcon="_imageTenderCashRoll" pressIcon="_imageTenderCashPress" disabledIcon="_imageTenderCashDisabled" />
     <VisibilityRule class="dtv.pos.shared.visibilityrules.TenderEnabledCheck" >
       <Parameter name="tender" value="LOCAL_CURRENCY" />
@@ -28,7 +28,7 @@
   </Action>
   	 <!-- ASQ STC Integration Ends -->
   	 
-  	 <!-- ASQ STC Integration Starts -->
+	<!-- ASQ Tamara Integration Starts -->
   	 <Action name="SALE::TENDER_TAMARA" category="Register" keywords="sale_tender" text="_menuTextTamara" chainKey="ASQ_TENDER_TAMARA">
     	<IconGroup icon="_imageTenderCash" rollIcon="_imageTenderCashRoll" pressIcon="_imageTenderCashPress" disabledIcon="_imageTenderCashDisabled" />
     	<VisibilityRule class="dtv.pos.shared.visibilityrules.TenderEnabledCheck" >
@@ -42,7 +42,7 @@
 	    </VisibilityRule>
 	    <VisibilityRule class="dtv.pos.register.sale.AmountDueVisibilityRule" />
   	 </Action>
-  	 <!-- ASQ STC Integration Ends -->
+	<!-- ASQ Tamara Integration Ends -->
   	
   	
 </ActionSet>

@@ -4,14 +4,25 @@ import dtv.servicex.impl.req.ServiceRequest;
 
 public class AsqSTCLoyaltyServiceRequest extends ServiceRequest implements IAsqSTCLoyaltyServiceRequest{
 	
-	long Msisdn;
+	/**
+	 * This class has all request attribute POJO's
+	 */
+	
+	long   Msisdn;
 	String BranchId;
 	String TerminalId;
 	String RequestDate;
 	Integer PIN;
 	Integer Amount;
 	String transactionId;
+	String globalId;
 	
+	public String getGlobalId() {
+		return globalId;
+	}
+	public void setGlobalId(String globalId) {
+		this.globalId = globalId;
+	}
 	public String getTransactionId() {
 		return transactionId;
 	}
@@ -54,9 +65,4 @@ public class AsqSTCLoyaltyServiceRequest extends ServiceRequest implements IAsqS
 	public void setAmount(Integer amount) {
 		Amount = amount;
 	}
-	
-	
-	
-	
-	
 }

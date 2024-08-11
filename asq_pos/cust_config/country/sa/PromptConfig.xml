@@ -7,6 +7,12 @@
 	    <Action ref="NO" />
 	</Prompt>
 	
+	<Prompt name="CAPTURE_OTP" type="Text" title="_newPasswordTitle" message="_promptmsgEnterNewPassword">
+		<DataField ref="OTP" />
+		<IconGroup icon="_imagePromptLoginPwd" />
+		<!-- <FingerprintEnabled dtype="Boolean">true</FingerprintEnabled>
+	    <InputPurpose dtype="String">new-password</InputPurpose>-->
+	</Prompt>
 	<Prompt name="ASQ_ZATCA_REGISTOR_ERROR" type="NotifyCancel" title="_zatacaError" message="_zatcaRegistrationError">
 	    <Action ref="CANCEL_BACK" />
     </Prompt>
@@ -27,25 +33,101 @@
     </Prompt>
 	<!-- ASQ Zatca Integration Ends -->
 	
-	<!-- ASQ STC Integration Starts -->
-	<Prompt name="STC_OTP" type="Text" title="_newPasswordTitle" message="_promptmsgEnterNewPassword">
-	    <DataField ref="OTP" />
-	    <IconGroup icon="_imagePromptLoginPwd" />
-	    <!-- <FingerprintEnabled dtype="Boolean">true</FingerprintEnabled>
-	    <InputPurpose dtype="String">new-password</InputPurpose>-->
-	</Prompt>
+	<!-- ASQ STC Integration Error Promots Starts -->
 	
-	<Prompt name="ASQ_CONFIRM_CUSTOMER_MOBILE_NUMBER_PROMPT" type="Notify" title="_asqConfirmCustomerMobileNumber" message="_asqConfirmCustomerMobileNumberMessage`" >
-    <Action ref="NO_BACK"/>
-    <Action ref="YES_ENTER" text="_confirmTitle"/>
-  </Prompt>
-  
-  <Prompt name="LEV_ENTER_REDEMPTION_AMOUNT" type="Text" title="_levLoyaltyCustomerPointsTitle" message="_levLoyaltyCustomerPointsMessage">
-	<DataField ref="Money" />
-    <Action ref="ACCEPT_ENTER" />
-    <Action ref="CANCEL_BACK" />
-  </Prompt>
+	<Prompt name="ASQ_STC_OTP" type="Text" title="_asqSTCOTPScreen" message="_asqSTCPromptToCaptureOTPMessage">
+		<DataField ref="ASQ_OTP" />
+	</Prompt>
+	<Prompt name="ASQ_STC_CUSTOMER_UNAVAILABLE" type="NotifyYesNo" title="_asqSTCCustomerNotFoundError" message="_asqSTCCustomerNotFoundMessage">
+		<Action ref="YES" text="_asqAddNew"/>
+		<Action ref="NO" text="_asqContinue"/>
+	</Prompt>
+	<Prompt name="ASQ_STC_INVALID_MOBILE_ERROR" type="Notify" title="_asqStcMobileNumberErrorTitle" message="_asqPromptmsgInvalidMobileNumber">
+		<Action ref="CANCEL_BACK" />
+	</Prompt>
+	<Prompt name="ASQ_STC_WRONG_MOBILE_ERROR" type="Notify" title="_asqStcMobileNumberErrorTitle" message="_asqPromptmsgWrongMobileNumberError">
+		<Action ref="CANCEL_BACK" />
+	</Prompt>
+	<Prompt name="ASQ_STC_NOTALLOWED_MOBILE_ERROR" type="Notify" title="_asqStcMobileNumberErrorTitle" message="_asqPromptmsgLandlineNumberNotAllowedError">
+		<Action ref="CANCEL_BACK" />
+	</Prompt>
+	<Prompt name="ASQ_STC_NON_STC_CUST_ERROR" type="Text" Notify="_asqStcMobileNumberErrorTitle" message="_asqPromptmsgNonSTCCustomerError">
+		<Action ref="CANCEL_BACK" />
+	</Prompt>
+	<Prompt name="ASQ_STC_REDEMTION_NOTALLOWED_ERROR" type="Notify" title="_asqStcRedemptionErrorTitle" message="_asqPromptmsgRedemptionNotAllowedError">
+		<Action ref="CANCEL_BACK" />
+	</Prompt>
+	<Prompt name="ASQ_STC_PIN_INVALID_ERROR" type="Notify" title="_asqStcOTPErrorTitle" message="_asqPromptmsgPINInvalidError">
+		<Action ref="CANCEL_BACK" />
+	</Prompt>
+	<Prompt name="ASQ_STC_AMOUNT_INVALID_ERROR" type="Notify" title="_asqStcAmountErrorTitle" message="_asqPromptmsgAmountInvalidError">
+		<Action ref="CANCEL_BACK" />
+	</Prompt>
+	<Prompt name="ASQ_STC_REDEMPTION_EXCEEDED_ERROR" type="Notify" title="_asqStcAmountErrorTitle" message="_asqPromptmsgRedemptionExceededError">
+		<Action ref="CANCEL_BACK" />
+	</Prompt>
+	<Prompt name="ASQ_STC_INSUFFICIENT_BALANCE_ERROR" type="Notify" title="_asqStcAmountErrorTitle" message="_asqPromptmsgInsufficientBalanceError">
+		<Action ref="CANCEL_BACK" />
+	</Prompt>
+	<Prompt name="ASQ_STC_OTP_USED_ERROR" type="Notify" title="_asqStcOTPErrorTitle" message="_asqPromptmsgOTPAlreadyUsedError">
+		<Action ref="CANCEL_BACK" />
+	</Prompt>
+	<Prompt name="ASQ_STC_OTP_EXPIRED_ERROR" type="Notify" title="_asqStcOTPErrorTitle" message="_asqPromptmsgOTPExpiredError">
+		<Action ref="CANCEL_BACK" />
+	</Prompt>
+	<Prompt name="ASQ_STC_OTP_ATTEMPT_ERROR" type="Notify" title="_asqStcOTPErrorTitle" message="_asqPromptmsgOTPAttemptExceededError">
+		<Action ref="CANCEL_BACK" />
+	</Prompt>
+	<Prompt name="ASQ_STC_REFREQDATE_INVALID_ERROR" type="Notify" title="_asqStcErrorTitle" message="_asqPromptmsgRefRequestDateInvalidError">
+		<Action ref="CANCEL_BACK" />
+	</Prompt>
+	<Prompt name="ASQ_STC_REDEMPTION_NOTFOUND_ERROR" type="Notify" title="_asqStcRedemptionErrorTitle" message="_asqPromptmsgRedemptionNotFoundError">
+		<Action ref="CANCEL_BACK" />
+	</Prompt>
+	<Prompt name="ASQ_STC_REDEMPTION_REVERESED_ERROR" type="Notify" title="_asqStcRedemptionErrorTitle" message="_asqPromptmsgRedemptionReveresedError">
+		<Action ref="CANCEL_BACK" />
+	</Prompt>
+	<Prompt name="ASQ_STC_TECHNICAL_ERROR" type="Notify" title="_asqStcErrorTitle" message="_asqpromptmsgTechnicalError">
+		<Action ref="CANCEL_BACK" />
+	</Prompt>
+	<Prompt name="ASQ_STC_NOT_QITAF_SUBSCRIBER_ERROR" type="Notify" title="_asqStcQitafSubscriberErrorTitle" message="_asqPromptmsgNotQitafSubscriberError">
+		<Action ref="CANCEL_BACK" />
+	</Prompt>
+	<Prompt name="ASQ_STC_REWARD_NOTALLOWED_ERROR" type="Notify" title="_asqStcRewardErrorTitle" message="_asqPromptmsgRewardNotAllowedError">
+		<Action ref="CANCEL_BACK" />
+	</Prompt>
+	<Prompt name="ASQ_STC_REWARD_ALREADY_SUCCEEDED_ERROR" type="Notify" title="_asqStcRewardErrorTitle" message="_promptmsgRewardAlreadySucceededError">
+		<Action ref="CANCEL_BACK" />
+	</Prompt>
+	<Prompt name="ASQ_STC_AMOUNT_ERROR" type="Notify" title="_asqStcAmountErrorTitle" message="_asqPromptmsgAmountError">
+	<Action ref="CANCEL_BACK" />
+	</Prompt>
+	<Prompt name="ASQ_STC_AMOUNT_LESS_ERROR" type="Notify" title="_asqStcAmountErrorTitle" message="_asqPromptmsgAmountLessError">
+		<Action ref="CANCEL_BACK" />
+	</Prompt>
+	<Prompt name="ASQ_STC_AMOUNT_EXCEEDED_ERROR" type="Notify" title="_asqStcAmountErrorTitle" message="_asqPromptmsgMaxRewardAmountExceededError">
+		<Action ref="CANCEL_BACK" />
+	</Prompt>
+	<Prompt name="ASQ_STC_REFUND_PERIOD_ERROR" type="Notify" title="_asqStcRefundErrorTitle" message="_promptmsgRefundPeriodError">
+		<Action ref="CANCEL_BACK" />
+	</Prompt>
+	<Prompt name="ASQ_STC_REWARD_UPDATE_ERROR" type="Notify" title="_asqStcRewardErrorTitle" message="_asqPromptmsgRewardUpdateError">
+		<Action ref="CANCEL_BACK" />
+	</Prompt>
+	<Prompt name="ASQ_STC_REWARD_CANCEL_ERROR" type="Notify" title="_asqStcRewardErrorTitle" message="_asqPromptmsgRewardCancelledError">
+		<Action ref="CANCEL_BACK" />
+	</Prompt>
+	<Prompt name="ASQ_STC_REWARD_REVERSAL_ERROR" type="Notify" title="_asqStcRewardErrorTitle" message="_asqPromptmsgRewardReversalError">
+		<Action ref="CANCEL_BACK" />
+	</Prompt>
+	<Prompt name="ASQ_STC_REWARD_AMOUNT_GREATER_ERROR" type="Notify" title="_asqStcRewardErrorTitle" message="_asqPromptmsgRewardAmountGreaterError">
+		<Action ref="CANCEL_BACK" />
+	</Prompt>
+	<Prompt name="ASQ_STC_REWARD_AMOUNT_GREATER_2_ERROR" type="Notify" title="_asqStcRewardErrorTitle" message="_asqPromptmsgRewardAmountGreaterError2">
+		<Action ref="CANCEL_BACK" />
+	</Prompt>
 	<!-- ASQ STC Integration Ends -->
+
 	
 	<!-- ASQ TOLA Work Starts -->
     <Prompt name="ASQ_TOLA_QTY_SOH_ERROR" type="NotifyCancel" title="_weight" message="_tolaItemQtyValidationError">

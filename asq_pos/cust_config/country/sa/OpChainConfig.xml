@@ -25,16 +25,42 @@
     <OpChain name="SALE_COMPLETE_FINISH.pre">
     	<Op class= "asq.pos.register.sale.zatca.AsqZatcaSaleQrCodeGenerationOp" />
     </OpChain>
-    <!-- ASQ Zatca Integration Ends -->
-    
-   <!--STC Service Starts-->
-   <OpChain name="ASQ_STC_MOBILE">
-	  	<Op class="asq.pos.loyalty.stc.tender.op.AsqSTCMobileNumberOp"/>
-    </OpChain>
- 	<OpChain name="ASQ_STC_OTP">
-	  	<Op class="asq.pos.loyalty.stc.tender.op.AsqSTCTenderOp"/>
-    </OpChain>
-   <!--STC Service Ends--> 
+	<!-- ASQ Zatca Integration Ends -->
+	
+	<!--ASQ STC Integratin Service Starts-->
+	<OpChain name="ASQ_STC_MOBILE">
+		<Op class="asq.pos.loyalty.stc.tender.op.AsqSTCMobileNumberOp" longRunning="true" />
+	</OpChain>
+	<OpChain name="ASQ_STC_OTP">
+		<Op class="asq.pos.loyalty.stc.tender.op.AsqSTCTenderOp" longRunning="true" />
+	</OpChain>
+
+	<OpChain name="ASQ_TENDER_STC" signal="TransactionModified" contextKey="SALE_TENDER_EMPTY_MENU_OPTION">
+		<Op class="dtv.pos.tender.CreateTenderLineItemOp">
+			<Parameter name="TenderStatus" value="Tender" />
+			<Parameter name="TenderId" value="STC" />
+		</Op>
+		<PromptOp class="dtv.pos.tender.PromptCustAsscRequiredForTenderOp" />
+		<Op class="dtv.pos.tender.check.PromptIdentityVerificationOp" />
+		<PromptOp class="dtv.pos.tender.PromptTenderAmtOp" validationsBean="tenderAmountRules" />
+		<Op class="dtv.pos.tender.AddTenderToSaleTranOp" />
+		<Op class="dtv.pos.tender.rounding.UpdateTransactionRoundedAmountOp" />
+		<OpChainRoute chainKey="CHECK_SALE_COMPLETE" chainType="START" />
+	</OpChain>
+	<OpChain name="SALE_TENDER" contextKey="SALE_TENDER" rollbackChainKey="ROLLBACK_TENDER_PROMPT" rollbackLevel="50">
+		<OpChainRoute chainKey="SALE_TENDER.invoice.pre" />
+		<OpChainRoute chainKey="SALE_TENDER.voucher.pre" />
+		<Op class="dtv.pos.register.itemmessages.DisplayInstructionsOp">
+			<Parameter name="FILENAME" value="_instructionalTenderMsg" />
+		</Op>
+		<Op class="dtv.pos.hardware.op.SubtotalCustomerDisplayOp" />
+		<!--ASQ STC Integration Earn points - Starts-->
+		<Op class="asq.pos.loyalty.stc.earn.op.AsqSTCEarnPointsOp" />
+		<Op class="dtv.pos.register.PromptTenderMenuOp">
+			<Parameter name="MenuKey" value="SALE::TENDER_OPTIONS" />
+		</Op>
+	</OpChain>
+	<!--ASQ STC Integratin Service Ends-->
    
    <OpChain name="SALE_ITEM_AFTER_LOOKUP">
     <OpChainRoute chainKey="VALIDATE_ITEM_AVAILABILITY_FOR_SALE" />

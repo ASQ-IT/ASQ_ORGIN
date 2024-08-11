@@ -6,6 +6,9 @@ import dtv.service.req.IServiceResponse;
 
 public interface IAsqBnplTamaraServices extends IService {
 
-	public IServiceResponse submitPaymentlinkToCustomer(IAsqSubmitBnplTamraServiceRequest argRequest) throws ServiceException;
+	public IServiceResponse createInStoreCheckoutSession(IAsqSubmitBnplTamraServiceRequest argRequest) throws ServiceException;
+	public IServiceResponse getOrderDetails(IAsqSubmitBnplTamraServiceRequest argRequest) throws ServiceException;
+	public IServiceResponse simplifiedRefunds(IAsqSubmitBnplTamraServiceRequest argRequest) throws ServiceException;
+	public IServiceResponse cancelSession(IAsqSubmitBnplTamraServiceRequest argRequest) throws ServiceException;
 
 }

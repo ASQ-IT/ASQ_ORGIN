@@ -3,6 +3,10 @@ package asq.pos.loyalty.stc.tender.service;
 import com.oracle.shaded.fasterxml.jackson.annotation.JsonProperty;
 
 public class AsqSTCServiceResponseError {
+	
+	/**
+	 * This class has all error attributes POJO's
+	 */
 
 	@JsonProperty("code")
 	private String code;
