@@ -1,5 +1,5 @@
 // Copyright (c) 2024, Oracle and/or its affiliates. All rights reserved.
-// Generated using dtv.data2.access.impl.daogen.DefaultModelGenerator 2024-07-13T15:19:37
+// Generated using dtv.data2.access.impl.daogen.DefaultModelGenerator 2024-08-11T15:27:53
 // CHECKSTYLE:OFF
 package dtv.asq.dao.zatca.impl;
 

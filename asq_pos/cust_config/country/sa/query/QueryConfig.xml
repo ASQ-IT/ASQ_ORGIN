@@ -1,31 +1,85 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <QuerySet xmlns="http://micros.com/xstore/config/query" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://micros.com/xstore/config/query ../../../../../../config-objects/schema/QueryConfig.xsd">
- <Queries>
- <Query name="ASQ_SELECT_ZATCA_INVOICE_HASH" pmType="TRANSACTION" >
-	<QueryHandler>dtv.data2.access.query.SqlQueryHandler</QueryHandler>
-	<ResultClass>asq.pos.zatca.database.helper.AsqZatcaInvoiceHashQueryResult</ResultClass>
-	<ResultField name="Icv" type="Long" />
-	<ResultField name="InvoiceId" type="String" />
-	<ResultField name="InvoiceDate" type="Date" />
-	<ResultField name="InvoiceHash" type="String" />
-	<SQL>
-		<Statement><![CDATA[SELECT
-   								 hashinvoice.icv,
-								 hashinvoice.invoice_id,
-    							 hashinvoice.invoice_date,
-		                         hashinvoice.invoice_hash
-							FROM
-							(SELECT MAX(icv)icv
-							 FROM ASQ_ZATCA_INVOICE_HASH    
-							WHERE   
-								organization_id = ? )MAXHICV,
-								ASQ_ZATCA_INVOICE_HASH hashinvoice 
-							WHERE   
-							hashinvoice.icv = MAXHICV.ICV]]>
-		</Statement>
-		<Parameter name="argOrganizationId"/>
-	</SQL>
-</Query>
-
- </Queries>
+ 	<Queries>
+		 <Query name="ASQ_SELECT_ZATCA_INVOICE_HASH" pmType="TRANSACTION" >
+			<QueryHandler>dtv.data2.access.query.SqlQueryHandler</QueryHandler>
+			<ResultClass>asq.pos.zatca.database.helper.AsqZatcaInvoiceHashQueryResult</ResultClass>
+			<ResultField name="Icv" type="Long" />
+			<ResultField name="InvoiceId" type="String" />
+			<ResultField name="InvoiceDate" type="Date" />
+			<ResultField name="InvoiceHash" type="String" />
+			<SQL>
+				<Statement><![CDATA[SELECT
+		   								 hashinvoice.icv,
+										 hashinvoice.invoice_id,
+		    							 hashinvoice.invoice_date,
+				                         hashinvoice.invoice_hash
+									FROM
+									(SELECT MAX(icv)icv
+									 FROM ASQ_ZATCA_INVOICE_HASH    
+									WHERE   
+										organization_id = ? )MAXHICV,
+										ASQ_ZATCA_INVOICE_HASH hashinvoice 
+									WHERE   
+									hashinvoice.icv = MAXHICV.ICV]]>
+				</Statement>
+				<Parameter name="argOrganizationId"/>
+			</SQL>
+		</Query>
+	
+		<Query name="ASQ_ZATCA_INVOICES" pmType="TRANSACTION" >
+			<QueryHandler>dtv.data2.access.query.SqlQueryHandler</QueryHandler>
+			<ResultClass>asq.pos.zatca.database.helper.AsqZatcaInvoicesQueryResult</ResultClass>
+			<ResultField name="ORGANIZATION_ID" type="Long" />
+			<ResultField name="INVOICE_ID" type="String" />
+			<ResultField name="BUSINESS_DATE" type="Date" />
+			<ResultField name="TRANS_SEQ" type="String" />
+			<ResultField name="WKSTN_ID" type="String" />
+			<ResultField name="STATUS" type="String" />
+			<ResultField name="INVOICE_QRCODE" type="byte[]" />
+			<ResultField name="JSON_INVOICE" type="byte[]" />
+			<ResultField name="CREATE_DATE" type="Date" />
+			<ResultField name="CREATE_USER_ID" type="String" />
+			<ResultField name="UPDATE_USER_ID" type="String" />
+			<ResultField name="UPDATE_DATE" type="Date" />
+			<SQL>
+				<Statement>
+				<![CDATA[
+					SELECT zatcaInvoice.ORGANIZATION_ID, zatcaInvoice.INVOICE_ID, zatcaInvoice.BUSINESS_DATE,zatcaInvoice.TRANS_SEQ, zatcaInvoice.WKSTN_ID,
+					zatcaInvoice.STATUS, zatcaInvoice.INVOICE_QRCODE, zatcaInvoice.JSON_INVOICE,zatcaInvoice.CREATE_DATE, 
+					zatcaInvoice.CREATE_USER_ID, zatcaInvoice.UPDATE_USER_ID, zatcaInvoice.UPDATE_DATE, invoiceHash.INVOICE_HASH
+		   			FROM ASQ_ZATCA_INVOICE_STAGING zatcaInvoice join ASQ_ZATCA_INVOICE_HASH invoiceHash 
+	            	ON zatcaInvoice.INVOICE_ID = invoiceHash.INVOICE_ID
+	            	AND zatcaInvoice.ORGANIZATION_ID = invoiceHash.ORGANIZATION_ID
+	            	where zatcaInvoice.STATUS ='NEW'
+		   		]]>
+				</Statement>
+			</SQL>
+		</Query>
+		
+		
+	   <Query name="ASQ_ZATCA_INVOICES_UPDATE" pmType="TRANSACTION">
+	        <QueryHandler>dtv.data2.access.query.SqlQueryHandler</QueryHandler>
+			<SQL>
+				<Statement>
+				<![CDATA[
+					update ASQ_ZATCA_INVOICE_STAGING zatcaInvoice 
+					set zatcaInvoice.STATUS = ? 
+					WHERE 
+					zatcaInvoice.ORGANIZATION_ID = ? 
+					AND zatcaInvoice.INVOICE_ID = ? 
+					AND zatcaInvoice.BUSINESS_DATE = ? 
+					AND	zatcaInvoice.TRANS_SEQ = ? 
+					AND zatcaInvoice.WKSTN_ID = ? 
+					]]>
+				</Statement>
+				<Parameter name="argZatcaStatus" />
+				<Parameter name="argOrganizationId"/>
+				<Parameter name="argOrgInvoiceid"/>
+				<Parameter name="argOrgbusinessDate"/>
+				<Parameter name="argOrgtransSeq"/>
+				<Parameter name="argOrgWkstnId"/>
+			</SQL>
+		</Query>
+ 	</Queries>
  </QuerySet>

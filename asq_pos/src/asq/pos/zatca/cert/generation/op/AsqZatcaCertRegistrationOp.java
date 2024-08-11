@@ -13,7 +13,6 @@ import com.oracle.shaded.fasterxml.jackson.core.JsonProcessingException;
 import com.oracle.shaded.fasterxml.jackson.databind.JsonMappingException;
 
 import asq.pos.common.AsqValueKeys;
-import asq.pos.zatca.cert.generation.AsqZatcaConstant;
 import asq.pos.zatca.cert.generation.AsqZatcaErrorDesc;
 import asq.pos.zatca.cert.generation.AsqZatcaHelper;
 import asq.pos.zatca.cert.generation.service.AsqSubmitZatcaCertServiceRequest;
@@ -46,7 +45,7 @@ public class AsqZatcaCertRegistrationOp extends AbstractFormOp<AsqZatcaCertRegis
 
 	@Override
 	public boolean isOperationApplicable() {
-		return (AsqZatcaConstant.COMPLETE != getOpState());
+		return !isComplete();
 	}
 
 	@Override
@@ -92,7 +91,6 @@ public class AsqZatcaCertRegistrationOp extends AbstractFormOp<AsqZatcaCertRegis
 						asqZatcaHelper.mapRequiredValuesToPropertiesFile(asqSubmitZatcaCertServiceResponse);
 						asqZatcaHelper.generateCSIDFile(asqSubmitZatcaCertServiceResponse.getBinarySecurityToken());// Certificate Created
 						asqZatcaHelper.getJKSCert();// Making it as JKS
-						setOpState(AsqZatcaConstant.COMPLETE);
 					} else {
 						LOG.error("Response from Zatca have error or Null");
 						return handleServiceError(asqSubmitZatcaCertServiceResponse);

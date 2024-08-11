@@ -1,6 +1,6 @@
 package asq.pos.zatca.cert.generation.service;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.oracle.shaded.fasterxml.jackson.annotation.JsonIgnore;
 import com.oracle.shaded.fasterxml.jackson.annotation.JsonInclude;
 
 import dtv.servicex.impl.req.ServiceRequest;

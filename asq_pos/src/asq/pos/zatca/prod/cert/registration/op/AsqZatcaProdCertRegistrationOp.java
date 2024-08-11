@@ -9,7 +9,6 @@ import javax.inject.Provider;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import asq.pos.zatca.cert.generation.AsqZatcaConstant;
 import asq.pos.zatca.cert.generation.AsqZatcaHelper;
 import asq.pos.zatca.cert.generation.service.AsqSubmitZatcaCertServiceRequest;
 import asq.pos.zatca.cert.generation.service.AsqSubmitZatcaCertServiceResponse;
@@ -39,7 +38,6 @@ public class AsqZatcaProdCertRegistrationOp extends Operation {
 	public IOpResponse handleOpExec(IXstEvent arg0) {
 		try {
 			logger.debug("We have started the process of getting the production certificate ");
-			setOpState(AsqZatcaConstant.PROCESSING);
 			AsqSubmitZatcaCertServiceResponse response = generateProductionCertPCSID();
 			if (response != null) {
 				asqZatcaHelper.mapRequiredValuesToPropertiesFile(response);

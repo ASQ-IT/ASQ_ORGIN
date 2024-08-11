@@ -3,5 +3,6 @@
   xsi:noNamespaceSchemaLocation="PmTypeMappingConfig.xsd" xmlns="http://micros.com/xstore/config/pmtypemap">
 
 <PmTypeMapping ObjectId="AsqZatcaInvoiceHash" PmType="TRANSACTION"/>
+<PmTypeMapping ObjectId="AsqZatcaInvoiceStaging" PmType="TRANSACTION"/>
   
 </PmTypeMappingSet>

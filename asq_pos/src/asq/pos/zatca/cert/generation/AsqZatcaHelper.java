@@ -33,6 +33,7 @@ import com.oracle.shaded.fasterxml.jackson.databind.ObjectMapper;
 import asq.pos.zatca.cert.generation.service.AsqSubmitZatcaCertServiceResponse;
 import asq.pos.zatca.integration.data.CommandPrompt;
 import asq.pos.zatca.integration.zatca.util.POSUtil;
+import dtv.xst.dao.trn.IPosTransaction;
 import oasis.names.specification.ubl.schema.xsd.invoice_2.InvoiceType;
 
 public class AsqZatcaHelper {
@@ -266,9 +267,19 @@ public class AsqZatcaHelper {
 		return AsqZatcaIntegrationConstants.Basic + Base64.getEncoder().encodeToString(zatcaAuthToken.toString().getBytes());
 	}
 
-	public String getIssueTime(Date argCreatedate) {
+	public String getIssueDate(Date argCreateDate) {
+		StringBuilder builder = new StringBuilder().append(argCreateDate.getYear()).append("-").append(argCreateDate.getMonth()).append("-").append(argCreateDate.getDay());
+		return builder.toString();
+	}
 
-		return null;
+	public String getIssueTime(Date argCreateDate) {
+		StringBuilder builder = new StringBuilder().append(argCreateDate.getHours()).append(":").append(argCreateDate.getMinutes()).append(":").append(argCreateDate.getSeconds());
+		return builder.toString();
+	}
 
+	public String getTransactionUIID(IPosTransaction argSaleTrans) {
+		StringBuilder builder = new StringBuilder(String.valueOf(argSaleTrans.getBusinessDate().getTime())).append(argSaleTrans.getRetailLocationId()).append(argSaleTrans.getWorkstationId())
+				.append(argSaleTrans.getTransactionSequence());
+		return builder.toString();
 	}
 }

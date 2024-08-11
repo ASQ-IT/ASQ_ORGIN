@@ -60,6 +60,56 @@
 </li>
 </ul>
 </div>
-<div class="date-generated">Generated: 2024-07-13T12:19:39.768Z</div>
+<div id="AsqZatcaInvoiceStaging">
+<h1>AsqZatcaInvoiceStaging</h1>
+<ul><li><h2>Table: <span class="db-entity">ASQ_ZATCA_INVOICE_STAGING</span></h2></li>
+<li><h2>Fields:</h2>
+<ul class="dtx-fields">
+<li class="pk-field">OrganizationId (<span class="db-entity">organization_id</span>) - LONG</li>
+<li class="pk-field">InvoiceId (<span class="db-entity">INVOICE_ID</span>) - STRING</li>
+<li class="pk-field">BusinessDate (<span class="db-entity">BUSINESS_DATE</span>) - DATE</li>
+<li class="pk-field">TransactionSeq (<span class="db-entity">TRANS_SEQ</span>) - LONG</li>
+<li class="pk-field">WorkStationId (<span class="db-entity">wkstn_id</span>) - LONG</li>
+<li class="non-pk-field">Status (<span class="db-entity">Status</span>) - STRING</li>
+<li class="non-pk-field">SubmittedJSON (<span class="db-entity">JSON_INVOICE</span>) - OBJECT</li>
+<li class="non-pk-field">InvoiceQrCode (<span class="db-entity">INVOICE_QRCODE</span>) - OBJECT</li>
+<li class="non-pk-field">InvoiceUUID (<span class="db-entity">INVOICE_UIID</span>) - STRING</li>
+<li class="non-pk-field">CreateUserId (<span class="db-entity">create_user_id</span>) - STRING(256)<div class="dtx-field-comment">The ID of the user who created the record.</div></li>
+<li class="non-pk-field">CreateDate (<span class="db-entity">create_date</span>) - DATE<div class="dtx-field-comment">The date and time the record was created.</div></li>
+<li class="non-pk-field">UpdateUserId (<span class="db-entity">update_user_id</span>) - STRING(256)<div class="dtx-field-comment">The ID of the user who last updated the record.</div></li>
+<li class="non-pk-field">UpdateDate (<span class="db-entity">update_date</span>) - DATE<div class="dtx-field-comment">The date and the record was last updated.</div></li>
+</ul>
+</li>
+<li><h2>Relationships:</h2>
+<ul class="relationship-list">
+<li>Properties - <a href="#AsqZatcaInvoiceStagingProperty">AsqZatcaInvoiceStagingProperty</a></li>
+</ul>
+</li>
+</ul>
+</div>
+<div id="AsqZatcaInvoiceStagingProperty">
+<h1>AsqZatcaInvoiceStagingProperty</h1>
+<ul><li><h2>Table: <span class="db-entity">ASQ_ZATCA_INVOICE_STAGING_p</span></h2></li>
+<li><h2>Fields:</h2>
+<ul class="dtx-fields">
+<li class="pk-field">OrganizationId (<span class="db-entity">organization_id</span>) - LONG</li>
+<li class="pk-field">InvoiceId (<span class="db-entity">INVOICE_ID</span>) - STRING</li>
+<li class="pk-field">BusinessDate (<span class="db-entity">BUSINESS_DATE</span>) - DATE</li>
+<li class="pk-field">TransactionSeq (<span class="db-entity">TRANS_SEQ</span>) - LONG</li>
+<li class="pk-field">WorkStationId (<span class="db-entity">wkstn_id</span>) - LONG</li>
+<li class="pk-field">PropertyCode (<span class="db-entity">property_code</span>) - STRING(30)<div class="dtx-field-comment">The name of the property.</div></li>
+<li class="non-pk-field">Type (<span class="db-entity">type</span>) - STRING(10)<div class="dtx-field-comment">The type of property. Valid values are 'STRING', 'DATE', 'BIGDECIMAL', and 'BOOLEAN'.</div></li>
+<li class="non-pk-field">StringValue (<span class="db-entity">string_value</span>) - STRING(4000)<div class="dtx-field-comment">The value of the property if 'type' is 'STRING'.</div></li>
+<li class="non-pk-field">DateValue (<span class="db-entity">date_value</span>) - DATE<div class="dtx-field-comment">The value of the property if 'type' is 'DATE'.</div></li>
+<li class="non-pk-field">DecimalValue (<span class="db-entity">decimal_value</span>) - DECIMAL(17)<div class="dtx-field-comment">The value of the property if 'type' is 'BIGDECIMAL' or 'BOOLEAN'. For 'BOOLEAN' type, the value should be 0 or 1.</div></li>
+<li class="non-pk-field">CreateUserId (<span class="db-entity">create_user_id</span>) - STRING(256)<div class="dtx-field-comment">The ID of the user who created the record.</div></li>
+<li class="non-pk-field">CreateDate (<span class="db-entity">create_date</span>) - DATE<div class="dtx-field-comment">The date and time the record was created.</div></li>
+<li class="non-pk-field">UpdateUserId (<span class="db-entity">update_user_id</span>) - STRING(256)<div class="dtx-field-comment">The ID of the user who last updated the record.</div></li>
+<li class="non-pk-field">UpdateDate (<span class="db-entity">update_date</span>) - DATE<div class="dtx-field-comment">The date and the record was last updated.</div></li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="date-generated">Generated: 2024-08-11T12:28:02.293Z</div>
 </body>
 </html>

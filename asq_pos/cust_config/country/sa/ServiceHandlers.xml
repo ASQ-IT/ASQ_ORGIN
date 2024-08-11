@@ -8,6 +8,13 @@
     </Parameters>
   </Service>
   
+  <Service name="ZATCA_OIC_REST">
+    <Parameters dtype="Map">
+      <TargetUri dtype="String">${asq.zatca.oic.invoice.uri}</TargetUri>
+      <ConnectTimeout dtype="Integer">${asq.zatca.oic.invoice.uri.connection.timeout}</ConnectTimeout>
+    </Parameters>
+  </Service>
+  
   <Service name="STC_REST">
     <Parameters dtype="Map">
       <TargetUri dtype="String">${asq.stc.otp.redeem.earn.uri}</TargetUri>

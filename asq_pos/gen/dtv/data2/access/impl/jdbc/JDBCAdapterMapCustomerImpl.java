@@ -1,5 +1,5 @@
 // Copyright (c) 2024, Oracle and/or its affiliates. All rights reserved.
-// Generated using dtv.data2.access.impl.daogen.GenerateJDBCMappingOverride 2024-07-13T15:19:37
+// Generated using dtv.data2.access.impl.daogen.GenerateJDBCMappingOverride 2024-08-11T15:27:53
 // CHECKSTYLE:OFF
 package dtv.data2.access.impl.jdbc;
 
@@ -32,6 +32,16 @@ public class JDBCAdapterMapCustomerImpl extends dtv.data2.access.impl.jdbc.JDBCA
     generator = new AbstractInstanceGenerator<IJDBCTableAdapter>() {
       @Override
       protected Class<? extends IJDBCTableAdapter> getType() {
+        return dtv.asq.dao.zatca.invoice.staging.impl.AsqZatcaInvoiceStagingDBA.class;
+      }
+    };
+    addAdapter("dtv.asq.dao.zatca.invoice.staging.AsqZatcaInvoiceStagingId", generator);
+    addAdapter("dtv.asq.dao.zatca.invoice.staging.impl.AsqZatcaInvoiceStagingDAO", generator);
+    addAdapter("dtv.asq.dao.zatca.invoice.staging.IAsqZatcaInvoiceStaging", generator);
+    addAdapter("AsqZatcaInvoiceStaging", generator);
+    generator = new AbstractInstanceGenerator<IJDBCTableAdapter>() {
+      @Override
+      protected Class<? extends IJDBCTableAdapter> getType() {
         return dtv.asq.dao.zatca.impl.AsqZatcaInvoiceHashPropertyDBA.class;
       }
     };
@@ -39,6 +49,16 @@ public class JDBCAdapterMapCustomerImpl extends dtv.data2.access.impl.jdbc.JDBCA
     addAdapter("dtv.asq.dao.zatca.impl.AsqZatcaInvoiceHashPropertyDAO", generator);
     addAdapter("dtv.asq.dao.zatca.IAsqZatcaInvoiceHashProperty", generator);
     addAdapter("AsqZatcaInvoiceHashProperty", generator);
+    generator = new AbstractInstanceGenerator<IJDBCTableAdapter>() {
+      @Override
+      protected Class<? extends IJDBCTableAdapter> getType() {
+        return dtv.asq.dao.zatca.invoice.staging.impl.AsqZatcaInvoiceStagingPropertyDBA.class;
+      }
+    };
+    addAdapter("dtv.asq.dao.zatca.invoice.staging.AsqZatcaInvoiceStagingPropertyId", generator);
+    addAdapter("dtv.asq.dao.zatca.invoice.staging.impl.AsqZatcaInvoiceStagingPropertyDAO", generator);
+    addAdapter("dtv.asq.dao.zatca.invoice.staging.IAsqZatcaInvoiceStagingProperty", generator);
+    addAdapter("AsqZatcaInvoiceStagingProperty", generator);
 
 
     // populate the relationship adapter map
@@ -46,6 +66,12 @@ public class JDBCAdapterMapCustomerImpl extends dtv.data2.access.impl.jdbc.JDBCA
       @Override
       protected Class<? extends IJDBCRelationshipAdapter> getType() {
         return dtv.asq.dao.zatca.impl.AsqZatcaInvoiceHashPropertiesRelationshipDBA.class;
+      }
+    });
+    addRelationshipAdapter("dtv.asq.dao.zatca.invoice.staging.impl.AsqZatcaInvoiceStagingDAO-Properties", new AbstractInstanceGenerator<IJDBCRelationshipAdapter>() {
+      @Override
+      protected Class<? extends IJDBCRelationshipAdapter> getType() {
+        return dtv.asq.dao.zatca.invoice.staging.impl.AsqZatcaInvoiceStagingPropertiesRelationshipDBA.class;
       }
     });
   }

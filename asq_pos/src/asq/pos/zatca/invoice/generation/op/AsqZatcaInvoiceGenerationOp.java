@@ -17,7 +17,6 @@ import com.oracle.shaded.fasterxml.jackson.core.JsonProcessingException;
 import com.oracle.shaded.fasterxml.jackson.databind.JsonMappingException;
 import com.oracle.shaded.fasterxml.jackson.databind.ObjectMapper;
 
-import asq.pos.zatca.cert.generation.AsqZatcaConstant;
 import asq.pos.zatca.cert.generation.AsqZatcaErrorDesc;
 import asq.pos.zatca.cert.generation.service.AsqSubmitZatcaCertServiceRequest;
 import asq.pos.zatca.cert.generation.service.AsqSubmitZatcaCertServiceResponse;
@@ -56,7 +55,6 @@ public class AsqZatcaInvoiceGenerationOp extends Operation {
 			logger.debug(" Reading Sample XML File ");
 			File[] listOfFiles = asqZatcaInvoiceGenerationHelper.getFilesFromLocation(System.getProperty("asq.zatca.certificate.work.dir.invoice"), ".xml");
 			if (listOfFiles.length > 0) {
-				setOpState(AsqZatcaConstant.PROCESSING);
 				Arrays.sort(listOfFiles, NameFileComparator.NAME_COMPARATOR);
 				removeExistingSubmiitedInvoiceFile();
 				for (File sampleInvoice : listOfFiles) {

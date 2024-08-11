@@ -8,7 +8,7 @@ import javax.ws.rs.core.Response;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import asq.pos.zatca.cert.generation.AsqZatcaConstant;
+import asq.pos.zatca.AsqZatcaConstant;
 import asq.pos.zatca.cert.generation.AsqZatcaErrorDesc;
 import asq.pos.zatca.cert.generation.AsqZatcaHelper;
 import asq.pos.zatca.cert.generation.AsqZatcaIntegrationConstants;

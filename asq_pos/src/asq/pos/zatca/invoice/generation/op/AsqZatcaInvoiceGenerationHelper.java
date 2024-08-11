@@ -48,7 +48,7 @@ import org.w3._2000._09.xmldsig_.DigestMethodType;
 import org.w3._2000._09.xmldsig_.X509IssuerSerialType;
 import org.xml.sax.SAXException;
 
-import asq.pos.zatca.cert.generation.AsqZatcaConstant;
+import asq.pos.zatca.AsqZatcaConstant;
 import asq.pos.zatca.cert.generation.AsqZatcaHelper;
 import asq.pos.zatca.cert.generation.service.AsqSubmitZatcaCertServiceRequest;
 import asq.pos.zatca.cert.generation.service.AsqSubmitZatcaCertServiceResponse;
@@ -66,7 +66,12 @@ import asq.pos.zatca.invoice.models.SignatureData;
 import asq.pos.zatca.invoice.models.TaxSubtotal;
 import asq.pos.zatca.invoice.models.TaxTotal;
 import dtv.asq.dao.zatca.impl.AsqZatcaInvoiceHashModel;
+import dtv.pos.customer.ICustomerHelper;
 import dtv.util.StringUtils;
+import dtv.xst.dao.crm.IParty;
+import dtv.xst.dao.crm.IPartyLocaleInformation;
+import dtv.xst.dao.loc.IRetailLocation;
+import dtv.xst.dao.trl.IRetailTransactionLineItem;
 import oasis.names.specification.ubl.schema.xsd.commonaggregatecomponents_2.AddressType;
 import oasis.names.specification.ubl.schema.xsd.commonaggregatecomponents_2.AllowanceChargeType;
 import oasis.names.specification.ubl.schema.xsd.commonaggregatecomponents_2.AttachmentType;
@@ -156,6 +161,9 @@ public class AsqZatcaInvoiceGenerationHelper {
 	@Inject
 	private AsqZatcaDatabaseHelper asqZatcaDatabaseHelper;
 
+	@Inject
+	ICustomerHelper customerHelper;
+
 	private static final Logger logger = LogManager.getLogger(AsqZatcaInvoiceGenerationHelper.class);
 	final String QR = "QR";
 	final String EmptyString = "";
@@ -163,7 +171,6 @@ public class AsqZatcaInvoiceGenerationHelper {
 	String invoiceOutboundFolder = "";
 	private String transactionDateTime;
 	private String uuid;
-	SignatureData signatureData;
 
 	/**
 	 * Removing and replacing the Unicode and backslash character from the input
@@ -264,11 +271,14 @@ public class AsqZatcaInvoiceGenerationHelper {
 		// vatTotal
 		String vatTotal = String.valueOf(invoiceData.getTaxTotal().get(0).getTaxAmount().getValue());
 
-		signatureData = new SignatureData();
+		// invoiceData.getIrn();
+		String xmlIrnValue = invoiceData.getID().getValue();
+
+		SignatureData signatureData = new SignatureData();
 
 		logger.debug(" ---------------------------Generate QR Starts---------------------- ");
 		HashQRData data = getHashAndQR(sellerName, sellerVATRegNumber, invoiceIssueTime, invoiceIssueDate, payableAmount, vatTotal, invoiceXmlString, AsqZatcaConstant.keySecret,
-				AsqZatcaConstant.keyAlg, invoiceData, addDocQR, xmlUUID);
+				AsqZatcaConstant.keyAlg, addDocQR, xmlUUID, xmlIrnValue, signatureData);
 
 		if (data.isCertificateExpired()) {
 			logger.error("*******Certificate Expired************");
@@ -338,7 +348,6 @@ public class AsqZatcaInvoiceGenerationHelper {
 
 		logger.info(" ---------------------------Generate QR Begin---------------------- ");
 		// Declaring a new signature to populate the object
-		signatureData = new SignatureData();
 
 		return SmartHubUtil.generateResponse(null);
 	}
@@ -405,101 +414,93 @@ public class AsqZatcaInvoiceGenerationHelper {
 	}
 
 	/**
+	 * In this method we setup the store address and it zatca information
 	 * 
-	 * @param ids
-	 * @param schemaTypes
-	 * @param streetName
-	 * @param additionalStreetName
-	 * @param buildingNumber
-	 * @param plotIdentification
-	 * @param citySubdivision
-	 * @param city
-	 * @param postalZone
-	 * @param countrySubentity
-	 * @param identificationCode
-	 * @param companyIds
-	 * @param taxSchemeIds
+	 * @param IRetailLocation
 	 * @param cbc
 	 * @param cac
-	 * @param companyRegistrationNames
 	 * @return
 	 */
-	public PartyType setPartyType(String[] ids, String[] schemaTypes, String streetName, String additionalStreetName, String buildingNumber, String plotIdentification, String citySubdivision,
-			String city, String postalZone, String countrySubentity, String identificationCode, String[] companyIds, String[] taxSchemeIds,
-			oasis.names.specification.ubl.schema.xsd.commonbasiccomponents_2.ObjectFactory cbc, oasis.names.specification.ubl.schema.xsd.commonaggregatecomponents_2.ObjectFactory cac,
-			String... companyRegistrationNames) {
+	public PartyType setPartyType(IRetailLocation loc, oasis.names.specification.ubl.schema.xsd.commonbasiccomponents_2.ObjectFactory cbc,
+			oasis.names.specification.ubl.schema.xsd.commonaggregatecomponents_2.ObjectFactory cac) {
+
 		PartyType partyType = cac.createPartyType();
 
-		for (int i = 0; i < ids.length; i++) {
-			PartyIdentificationType partyIdentificationType = cac.createPartyIdentificationType();
-			String id = ids[i];
-			String schemaType = schemaTypes[i];
-			IDType idType = cbc.createIDType();
-			idType.setSchemeID(schemaType);
-			idType.setValue(id);
-			partyIdentificationType.setID(idType);
-			partyType.getPartyIdentification().add(partyIdentificationType);
-		}
+		// setting store party PartyIdentification
+		PartyIdentificationType partyIdentificationType = cac.createPartyIdentificationType();
+		IDType idType = cbc.createIDType();
+		idType.setSchemeID("CRN");
+		idType.setValue("1010270035");
+		partyIdentificationType.setID(idType);
+		partyType.getPartyIdentification().add(partyIdentificationType);
 
+		// setting the store address
 		AddressType addressType = cac.createAddressType();
 		StreetNameType streetNameType = cbc.createStreetNameType();
-		streetNameType.setValue(streetName);
+		streetNameType.setValue(loc.getAddress1());
+		addressType.setStreetName(streetNameType);
 
-		if (!additionalStreetName.equalsIgnoreCase(EmptyString)) {
-			AdditionalStreetNameType additionalStreetNameType = cbc.createAdditionalStreetNameType();
-			additionalStreetNameType.setValue(additionalStreetName);
-		}
+		/*
+		 * if (loc.getAddress2() != null) { AdditionalStreetNameType
+		 * additionalStreetNameType = cbc.createAdditionalStreetNameType();
+		 * additionalStreetNameType.setValue(loc.getAddress2()); }
+		 */
 
 		BuildingNumberType buildingNumberType = cbc.createBuildingNumberType();
-		buildingNumberType.setValue(buildingNumber);
+		buildingNumberType.setValue(loc.getAddress2());
+		addressType.setBuildingNumber(buildingNumberType);
+
 		PlotIdentificationType plotIdentificationType = cbc.createPlotIdentificationType();
-		plotIdentificationType.setValue(plotIdentification);
+		plotIdentificationType.setValue(loc.getAddress3());
+		addressType.setPlotIdentification(plotIdentificationType);
+
 		CitySubdivisionNameType citySubdivisionName = cbc.createCitySubdivisionNameType();
-		citySubdivisionName.setValue(citySubdivision);
+		citySubdivisionName.setValue(loc.getAddress4());
+		addressType.setCitySubdivisionName(citySubdivisionName);
+
 		CityNameType cityNameType = cbc.createCityNameType();
-		cityNameType.setValue(city);
+		cityNameType.setValue(loc.getCity());
+		addressType.setCityName(cityNameType);
+
 		PostalZoneType postalZoneType = cbc.createPostalZoneType();
-		postalZoneType.setValue(postalZone);
+		postalZoneType.setValue(loc.getPostalCode());
+		addressType.setPostalZone(postalZoneType);
+
 		CountrySubentityType countrySubentityType = cbc.createCountrySubentityType();
-		countrySubentityType.setValue(countrySubentity);
+		countrySubentityType.setValue(loc.getDistrict());
+		addressType.setCountrySubentity(countrySubentityType);
 
 		CountryType countryType = cac.createCountryType();
 		IdentificationCodeType identificationCodeType = cbc.createIdentificationCodeType();
-		identificationCodeType.setValue(identificationCode);
+		identificationCodeType.setValue(loc.getCountry());
 		countryType.setIdentificationCode(identificationCodeType);
-
-		addressType.setStreetName(streetNameType);
-		addressType.setBuildingNumber(buildingNumberType);
-		addressType.setPlotIdentification(plotIdentificationType);
-		addressType.setCitySubdivisionName(citySubdivisionName);
-		addressType.setCityName(cityNameType);
-		addressType.setPostalZone(postalZoneType);
-		addressType.setCountrySubentity(countrySubentityType);
 		addressType.setCountry(countryType);
+
 		partyType.setPostalAddress(addressType);
 
-		for (int i = 0; i < companyIds.length; i++) {
-			String companyId = companyIds[i];
-			String taxSchemeId = taxSchemeIds[i];
-			PartyTaxSchemeType partyTaxSchemeType = cac.createPartyTaxSchemeType();
-			CompanyIDType companyIDType = cbc.createCompanyIDType();
-			companyIDType.setValue(companyId);
-			TaxSchemeType taxSchemeType = cac.createTaxSchemeType();
-			IDType taxIdType = cbc.createIDType();
-			taxIdType.setValue(taxSchemeId);
-			taxSchemeType.setID(taxIdType);
-			partyTaxSchemeType.setCompanyID(companyIDType);
-			partyTaxSchemeType.setTaxScheme(taxSchemeType);
-			partyType.getPartyTaxScheme().add(partyTaxSchemeType);
-		}
+		// setting PartyTaxSchemeType starts
+		PartyTaxSchemeType partyTaxSchemeType = cac.createPartyTaxSchemeType();
 
-		for (String companyRegistrationName : companyRegistrationNames) {
-			PartyLegalEntityType partyLegalEntityType = cac.createPartyLegalEntityType();
-			RegistrationNameType registrationNameType = cbc.createRegistrationNameType();
-			registrationNameType.setValue(companyRegistrationName);
-			partyLegalEntityType.setRegistrationName(registrationNameType);
-			partyType.getPartyLegalEntity().add(partyLegalEntityType);
-		}
+		CompanyIDType companyIDType = cbc.createCompanyIDType();
+		companyIDType.setValue("300099496800003");
+		partyTaxSchemeType.setCompanyID(companyIDType);
+
+		TaxSchemeType taxSchemeType = cac.createTaxSchemeType();
+		IDType taxIdType = cbc.createIDType();
+		taxIdType.setValue("VAT");
+		taxSchemeType.setID(taxIdType);
+		partyTaxSchemeType.setTaxScheme(taxSchemeType);
+
+		partyType.getPartyTaxScheme().add(partyTaxSchemeType);
+		// setting PartyTaxSchemeType ends
+
+		// Setting Zatca Customer Reg Name
+		PartyLegalEntityType partyLegalEntityType = cac.createPartyLegalEntityType();
+		RegistrationNameType registrationNameType = cbc.createRegistrationNameType();
+		registrationNameType.setValue("");
+		partyLegalEntityType.setRegistrationName(registrationNameType);
+		partyType.getPartyLegalEntity().add(partyLegalEntityType);
+
 		return partyType;
 	}
 
@@ -523,103 +524,96 @@ public class AsqZatcaInvoiceGenerationHelper {
 	 * @param cac
 	 * @return
 	 */
-	public PartyType setCustomerShippingAddress(String id, String schemaType, String streetName, String additionalStreetName, String buildingNumber, String plotIdentification, String citySubdivision,
-			String city, String postalZone, String district, String state, String countryCode, String taxScheme, String buyerName,
-			oasis.names.specification.ubl.schema.xsd.commonbasiccomponents_2.ObjectFactory cbc, oasis.names.specification.ubl.schema.xsd.commonaggregatecomponents_2.ObjectFactory cac) {
+	public PartyType setCustomerShippingAddress(IParty party, oasis.names.specification.ubl.schema.xsd.commonbasiccomponents_2.ObjectFactory cbc,
+			oasis.names.specification.ubl.schema.xsd.commonaggregatecomponents_2.ObjectFactory cac) {
 
 		PartyType partyType = cac.createPartyType();
 
 		PartyIdentificationType partyIdentificationType = cac.createPartyIdentificationType();
 		IDType idType = cbc.createIDType();
-		if (null != schemaType && !schemaType.isEmpty()) {
-			idType.setSchemeID(schemaType);
-		}
-		if (null != id && !id.isEmpty()) {
-			idType.setValue(id);
-			partyIdentificationType.setID(idType);
-			partyType.getPartyIdentification().add(partyIdentificationType);
-		}
+		idType.setSchemeID("CRN");
+		idType.setValue(party.getCustomerId());
+		partyIdentificationType.setID(idType);
+		partyType.getPartyIdentification().add(partyIdentificationType);
 
+		IPartyLocaleInformation custAddress = party.getLocaleInformation().get(0);
 		AddressType addressType = cac.createAddressType();
 
-		if (null != streetName && !streetName.isEmpty()) {
+		if (null != custAddress.getAddress1()) {
 			StreetNameType streetNameType = cbc.createStreetNameType();
-			streetNameType.setValue(streetName);
+			streetNameType.setValue(custAddress.getAddress1());
 			addressType.setStreetName(streetNameType);
 		}
-
-		if (null != additionalStreetName && !additionalStreetName.isEmpty()) {
+		if (null != custAddress.getAddress2()) {
 			AdditionalStreetNameType additionalStreetNameType = cbc.createAdditionalStreetNameType();
-			additionalStreetNameType.setValue(additionalStreetName);
+			additionalStreetNameType.setValue(custAddress.getAddress2());
 			addressType.setAdditionalStreetName(additionalStreetNameType);
 		}
 
-		if (null != buildingNumber && !buildingNumber.isEmpty()) {
+		if (null != custAddress.getApartment()) {
 			BuildingNumberType buildingNumberType = cbc.createBuildingNumberType();
-			buildingNumberType.setValue(buildingNumber);
+			buildingNumberType.setValue(custAddress.getApartment());
 			addressType.setBuildingNumber(buildingNumberType);
 		}
 
-		if (null != plotIdentification && !plotIdentification.isEmpty()) {
+		if (null != custAddress.getAddress3()) {
 			PlotIdentificationType plotIdentificationType = cbc.createPlotIdentificationType();
-			plotIdentificationType.setValue(plotIdentification);
+			plotIdentificationType.setValue(custAddress.getAddress3());
 			addressType.setPlotIdentification(plotIdentificationType);
 		}
 
-		if (null != citySubdivision && !citySubdivision.isEmpty()) {
+		if (null != custAddress.getCity()) {
 			CitySubdivisionNameType citySubdivisionName = cbc.createCitySubdivisionNameType();
-			citySubdivisionName.setValue(citySubdivision);
+			citySubdivisionName.setValue(custAddress.getCity());
 			addressType.setCitySubdivisionName(citySubdivisionName);
 		}
 
-		if (null != city && !city.isEmpty()) {
+		if (null != custAddress.getCity()) {
 			CityNameType cityNameType = cbc.createCityNameType();
-			cityNameType.setValue(city);
+			cityNameType.setValue(custAddress.getCity());
 			addressType.setCityName(cityNameType);
 		}
 
-		if (null != postalZone && !postalZone.isEmpty()) {
+		if (null != custAddress.getPostalCode()) {
 			PostalZoneType postalZoneType = cbc.createPostalZoneType();
-			postalZoneType.setValue(postalZone);
+			postalZoneType.setValue(custAddress.getPostalCode());
 			addressType.setPostalZone(postalZoneType);
 		}
 
-		if (null != district && !district.isEmpty()) {
+		if (null != custAddress.getState()) {
 			DistrictType districtType = cbc.createDistrictType();
-			districtType.setValue(district);
+			districtType.setValue(custAddress.getState());
 			addressType.setDistrict(districtType);
 		}
 
-		if (null != state && !state.isEmpty()) {
+		if (null != custAddress.getState()) {
 			CountrySubentityType countrySubentityType = cbc.createCountrySubentityType();
-			countrySubentityType.setValue(state);
+			countrySubentityType.setValue(custAddress.getState());
 			addressType.setCountrySubentity(countrySubentityType);
 		}
 
-		if (null != countryCode && !countryCode.isEmpty()) {
+		if (null != custAddress.getCountry()) {
 			CountryType countryType = cac.createCountryType();
 			IdentificationCodeType identificationCodeType = cbc.createIdentificationCodeType();
-			identificationCodeType.setValue(countryCode);
+			identificationCodeType.setValue(custAddress.getCountry());
 			countryType.setIdentificationCode(identificationCodeType);
 			addressType.setCountry(countryType);
 		}
 
-		if (null != taxScheme && !taxScheme.isEmpty()) {
-			PartyTaxSchemeType partyTaxSchemeType = cac.createPartyTaxSchemeType();
-			TaxSchemeType taxSchemeType = cac.createTaxSchemeType();
-			IDType taxIdType = cbc.createIDType();
-			taxIdType.setValue(taxScheme);
-			taxSchemeType.setID(taxIdType);
-			partyTaxSchemeType.setTaxScheme(taxSchemeType);
-			partyType.getPartyTaxScheme().add(partyTaxSchemeType);
-		}
+		PartyTaxSchemeType partyTaxSchemeType = cac.createPartyTaxSchemeType();
+		TaxSchemeType taxSchemeType = cac.createTaxSchemeType();
+		IDType taxIdType = cbc.createIDType();
+		taxIdType.setValue("VAT");
+		taxSchemeType.setID(taxIdType);
+		partyTaxSchemeType.setTaxScheme(taxSchemeType);
+		partyType.getPartyTaxScheme().add(partyTaxSchemeType);
 
 		partyType.setPostalAddress(addressType);
 
-		if (null != buyerName && !buyerName.isEmpty()) {
+		if (null != party.getFirstName()) {
 			PartyLegalEntityType partyLegalEntityType = cac.createPartyLegalEntityType();
 			RegistrationNameType registrationName = cbc.createRegistrationNameType();
-			registrationName.setValue(buyerName);
+			registrationName.setValue(party.getFirstName());
 			partyLegalEntityType.setRegistrationName(registrationName);
 			partyType.getPartyLegalEntity().add(partyLegalEntityType);
 		}
@@ -1060,7 +1054,7 @@ public class AsqZatcaInvoiceGenerationHelper {
 	 * @param cac
 	 * @return
 	 */
-	public InvoiceLineType setInvoiceLineType(LineItems lineItem, List<AllowanceChargeType> listAllowanceChargeType, oasis.names.specification.ubl.schema.xsd.commonbasiccomponents_2.ObjectFactory cbc,
+	public InvoiceLineType setInvoiceLineType(IRetailTransactionLineItem lineItem, oasis.names.specification.ubl.schema.xsd.commonbasiccomponents_2.ObjectFactory cbc,
 			oasis.names.specification.ubl.schema.xsd.commonaggregatecomponents_2.ObjectFactory cac) {
 
 		InvoiceLineType invoiceLineType = cac.createInvoiceLineType();
@@ -1068,35 +1062,44 @@ public class AsqZatcaInvoiceGenerationHelper {
 		LineExtensionAmountType lineExtensionAmountType = cbc.createLineExtensionAmountType();
 
 		IDType invoiceLineTypeID = cbc.createIDType();
-		invoiceLineTypeID.setValue(lineItem.getInvoiceLineID());
-		invoicedQuantityType.setUnitCode(lineItem.getInvoicedQuantityUnitCode());
-		invoicedQuantityType.setValue(new BigDecimal(lineItem.getInvoiceLineInvoicedQuantity()));
-		lineExtensionAmountType.setCurrencyID(lineItem.getInvoiceLineExtensionAmountCurrencyID());
-		lineExtensionAmountType.setValue(new BigDecimal(lineItem.getInvoiceLineLineExtensionAmount()));
+		// invoiceLineTypeID.setValue(lineItem.getInvoiceLineID());
+		// invoicedQuantityType.setUnitCode(lineItem.getInvoicedQuantityUnitCode());
+		// invoicedQuantityType.setValue(new
+		// BigDecimal(lineItem.getInvoiceLineInvoicedQuantity()));
+		lineExtensionAmountType.setCurrencyID(lineItem.getCurrencyId());
+		// lineExtensionAmountType.setValue(new
+		// BigDecimal(lineItem.getInvoiceLineLineExtensionAmount()));
 
 		invoiceLineType.setID(invoiceLineTypeID);
 		invoiceLineType.setInvoicedQuantity(invoicedQuantityType);
 		invoiceLineType.setLineExtensionAmount(lineExtensionAmountType);
 
-		mapAllowanceCharges(invoiceLineType, lineItem, cbc, cac);
+		// mapAllowanceCharges(invoiceLineType, lineItem, cbc, cac);
 
-		if (null != lineItem.getInvoiceLineTaxAmountCurrencyID() && null != lineItem.getInvoiceLineTaxAmount() && null != lineItem.getInvoiceLineRoundingAmount()) {
-			invoiceLineType.getTaxTotal().add(setTaxTotalType(lineItem.getInvoiceLineTaxAmountCurrencyID(), new BigDecimal(lineItem.getInvoiceLineTaxAmount()),
-					new BigDecimal(lineItem.getInvoiceLineRoundingAmount()), null, cbc, cac));
-		}
-
-		invoiceLineType.setItem(setItemType(lineItem.getItemClassifiedTaxCategoryID(), lineItem.getItemName(), new BigDecimal(lineItem.getItemClassifiedTaxCategoryPercent()),
-				setTaxSchemeType(lineItem.getItemClassifiedTaxCategoryTaxSchemeID(), EmptyString, EmptyString, cbc, cac), cbc, cac));
-
-		invoiceLineType.setPrice(setPriceType(lineItem.getItemPriceAmountCurrencyID(), new BigDecimal(lineItem.getItemPriceAmount()), listAllowanceChargeType, cbc, cac));
-
-		if (null != lineItem.getNotes() && lineItem.getNotes().length > 0) {
-			for (String note : lineItem.getNotes()) {
-				NoteType noteType = cbc.createNoteType();
-				noteType.setValue(note);
-				invoiceLineType.getNote().add(noteType);
-			}
-		}
+		/*
+		 * if (null != lineItem.getInvoiceLineTaxAmountCurrencyID() && null !=
+		 * lineItem.getInvoiceLineTaxAmount() && null !=
+		 * lineItem.getInvoiceLineRoundingAmount()) {
+		 * invoiceLineType.getTaxTotal().add(setTaxTotalType(lineItem.
+		 * getInvoiceLineTaxAmountCurrencyID(), new
+		 * BigDecimal(lineItem.getInvoiceLineTaxAmount()), new
+		 * BigDecimal(lineItem.getInvoiceLineRoundingAmount()), null, cbc, cac)); }
+		 * 
+		 * invoiceLineType.setItem(setItemType(lineItem.getItemClassifiedTaxCategoryID()
+		 * , lineItem.getItemName(), new
+		 * BigDecimal(lineItem.getItemClassifiedTaxCategoryPercent()),
+		 * setTaxSchemeType(lineItem.getItemClassifiedTaxCategoryTaxSchemeID(),
+		 * EmptyString, EmptyString, cbc, cac), cbc, cac));
+		 * 
+		 * invoiceLineType.setPrice(setPriceType(lineItem.getItemPriceAmountCurrencyID()
+		 * , new BigDecimal(lineItem.getItemPriceAmount()), listAllowanceChargeType,
+		 * cbc, cac));
+		 * 
+		 * if (null != lineItem.getNotes() && lineItem.getNotes().length > 0) { for
+		 * (String note : lineItem.getNotes()) { NoteType noteType =
+		 * cbc.createNoteType(); noteType.setValue(note);
+		 * invoiceLineType.getNote().add(noteType); } }
+		 */
 		return invoiceLineType;
 	}
 
@@ -1216,7 +1219,7 @@ public class AsqZatcaInvoiceGenerationHelper {
 	 * @throws Exception
 	 */
 	public HashQRData getHashAndQR(String sellerName, String vatNumber, String invoiceIssueTimeStamp, String invoiceIssueDate, String invoiceTotal, String vatTotal, String xmlData, String keySecret,
-			String keyAlias, InvoiceType invoiceData, AdditionalDocumentReference addDocQR, String xmlUUID) throws ASQException, Exception {
+			String keyAlias, AdditionalDocumentReference addDocQR, String xmlUUID, String xmlIrnValue, SignatureData signatureData) throws ASQException, Exception {
 
 		Base64 base64 = new Base64();
 		String xml = SmartHubUtil.removeNewlineAndWhiteSpaces(xmlData);
@@ -1246,12 +1249,10 @@ public class AsqZatcaInvoiceGenerationHelper {
 		addDocQR.setEmbeddedDocumentBinaryObject(qrCode);
 
 		// saving the hash value in the database
-		// invoiceData.getIrn();
-		String xmlIrnValue = invoiceData.getID().getValue();
 
-		AsqZatcaInvoiceHashModel model = asqZatcaDatabaseHelper.saveInvoiceHashFromDB(xmlIrnValue, xmlUUID, hashedXML, signingTime.toXMLFormat());
+		AsqZatcaInvoiceHashModel model = asqZatcaDatabaseHelper.saveInvoiceHash(xmlIrnValue, xmlUUID, hashedXML, signingTime.toXMLFormat());
 
-		signatureData.setICV((int) model.getIcv());
+		signatureData.setICV(Long.valueOf(model.getIcv()).intValue());
 		signatureData.setSignatureValue(signedHashAsBytes);
 		signatureData.setDigestValueInvoiceSignedData(hashedXML.getBytes());
 		signatureData.setX509Certificate(csidCertificate);
@@ -1444,17 +1445,36 @@ public class AsqZatcaInvoiceGenerationHelper {
 
 		// setting Supplier
 		SupplierPartyType supplierPartyType = cac.createSupplierPartyType();
-		supplierPartyType.setParty(setPartyType(new String[] { invoiceData.getSupplierPartyIdentificationID() }, new String[] { invoiceData.getSupplierPartyIdentificationschemeID() },
-				invoiceData.getSellerAddressStreet(), invoiceData.getSellerAddressAdditinalStreet(), invoiceData.getSellerBuildingNumber(), invoiceData.getSellerPlotIdentification(),
-				invoiceData.getSellerCitySubdivisionName(), invoiceData.getSellerCity(), invoiceData.getSellerPostalCode(), invoiceData.getSelletCountrySubentity(), invoiceData.getSellerCountryCode(),
-				new String[] { invoiceData.getSellerVATRegNumber() }, new String[] { "VAT" }, cbc, cac, invoiceData.getSellerName()));
+		/*
+		 * supplierPartyType.setParty(setPartyType(new String[] {
+		 * invoiceData.getSupplierPartyIdentificationID() }, new String[] {
+		 * invoiceData.getSupplierPartyIdentificationschemeID() },
+		 * invoiceData.getSellerAddressStreet(),
+		 * invoiceData.getSellerAddressAdditinalStreet(),
+		 * invoiceData.getSellerBuildingNumber(),
+		 * invoiceData.getSellerPlotIdentification(),
+		 * invoiceData.getSellerCitySubdivisionName(), invoiceData.getSellerCity(),
+		 * invoiceData.getSellerPostalCode(), invoiceData.getSelletCountrySubentity(),
+		 * invoiceData.getSellerCountryCode(), new String[] {
+		 * invoiceData.getSellerVATRegNumber() }, new String[] { "VAT" }, cbc, cac,
+		 * invoiceData.getSellerName()));
+		 */
 
 		// Setting Supplier
 		CustomerPartyType customerPartyType = cac.createCustomerPartyType();
-		customerPartyType.setParty(setCustomerShippingAddress(invoiceData.getBuyerPartyIdentificationID(), invoiceData.getBuyerPartyIdentificationschemeID(), invoiceData.getBuyerAddressStreet(),
-				invoiceData.getBuyerAddressAdditionalStreet(), invoiceData.getBuyerBuildingNumber(), invoiceData.getBuyerPlotIdentification(), invoiceData.getBuyerCitySubdivisionName(),
-				invoiceData.getBuyerCity(), invoiceData.getBuyerPostalCode(), invoiceData.getBuyerDistrict(), invoiceData.getBuyerState(), invoiceData.getBuyerCountryCode(),
-				invoiceData.getBuyerTaxScheme(), invoiceData.getBuyerName(), cbc, cac));
+		/*
+		 * customerPartyType.setParty(setCustomerShippingAddress(invoiceData.
+		 * getBuyerPartyIdentificationID(),
+		 * invoiceData.getBuyerPartyIdentificationschemeID(),
+		 * invoiceData.getBuyerAddressStreet(),
+		 * invoiceData.getBuyerAddressAdditionalStreet(),
+		 * invoiceData.getBuyerBuildingNumber(),
+		 * invoiceData.getBuyerPlotIdentification(),
+		 * invoiceData.getBuyerCitySubdivisionName(), invoiceData.getBuyerCity(),
+		 * invoiceData.getBuyerPostalCode(), invoiceData.getBuyerDistrict(),
+		 * invoiceData.getBuyerState(), invoiceData.getBuyerCountryCode(),
+		 * invoiceData.getBuyerTaxScheme(), invoiceData.getBuyerName(), cbc, cac));
+		 */
 		mapBuyerPhoneNumber(customerPartyType, invoiceData.getBuyerPhoneNumber(), cbc, cac);
 
 		// setting Date
@@ -1541,7 +1561,8 @@ public class AsqZatcaInvoiceGenerationHelper {
 							itemAllowanceCharge.getItemMultiplierFactorNummeric(), cbc, cac));
 				}
 			}
-			in.getInvoiceLine().add(setInvoiceLineType(lineItem, listAllowanceChargeType, cbc, cac));
+			// in.getInvoiceLine().add(setInvoiceLineType(lineItem, listAllowanceChargeType,
+			// cbc, cac));
 		}
 		if (null != invoiceData.getOriginalInvoiceNumbers() && !invoiceData.getOriginalInvoiceNumbers().isEmpty()) {
 			in.getBillingReference().add(setBillingReference(invoiceData.getOriginalInvoiceNumbers()));
@@ -1559,7 +1580,7 @@ public class AsqZatcaInvoiceGenerationHelper {
 	 * @return
 	 */
 
-	private void mapBuyerPhoneNumber(CustomerPartyType customerPartyType, String buyerPhoneNumber, oasis.names.specification.ubl.schema.xsd.commonbasiccomponents_2.ObjectFactory cbc,
+	public void mapBuyerPhoneNumber(CustomerPartyType customerPartyType, String buyerPhoneNumber, oasis.names.specification.ubl.schema.xsd.commonbasiccomponents_2.ObjectFactory cbc,
 			oasis.names.specification.ubl.schema.xsd.commonaggregatecomponents_2.ObjectFactory cac) {
 		if (null != buyerPhoneNumber && !buyerPhoneNumber.isEmpty()) {
 			ContactType buyerContact = cac.createContactType();
@@ -1579,7 +1600,7 @@ public class AsqZatcaInvoiceGenerationHelper {
 	 * @return
 	 */
 
-	private TaxTotalType mapTotalTaxAmoutTag(String totalTaxValue, String currencyId, oasis.names.specification.ubl.schema.xsd.commonbasiccomponents_2.ObjectFactory cbc,
+	public TaxTotalType mapTotalTaxAmoutTag(String totalTaxValue, String currencyId, oasis.names.specification.ubl.schema.xsd.commonbasiccomponents_2.ObjectFactory cbc,
 			oasis.names.specification.ubl.schema.xsd.commonaggregatecomponents_2.ObjectFactory cac) {
 		TaxTotalType taxTotalType = cac.createTaxTotalType();
 		TaxAmountType taxAmountType = cbc.createTaxAmountType();
@@ -1597,7 +1618,7 @@ public class AsqZatcaInvoiceGenerationHelper {
 	 * @return
 	 */
 
-	private List<TaxSubtotalType> mapTaxSubtotal(List<TaxSubtotal> taxSubTotals, oasis.names.specification.ubl.schema.xsd.commonbasiccomponents_2.ObjectFactory cbc,
+	public List<TaxSubtotalType> mapTaxSubtotal(List<TaxSubtotal> taxSubTotals, oasis.names.specification.ubl.schema.xsd.commonbasiccomponents_2.ObjectFactory cbc,
 			oasis.names.specification.ubl.schema.xsd.commonaggregatecomponents_2.ObjectFactory cac) {
 		List<TaxSubtotalType> taxSubtotalTypes = new ArrayList<>();
 		for (TaxSubtotal taxSubTotal : taxSubTotals) {
@@ -1616,7 +1637,7 @@ public class AsqZatcaInvoiceGenerationHelper {
 	 * @param originalInvoiceNumbers
 	 * @return
 	 */
-	private BillingReferenceType setBillingReference(String originalInvoiceNumbers) {
+	public BillingReferenceType setBillingReference(String originalInvoiceNumbers) {
 		oasis.names.specification.ubl.schema.xsd.commonaggregatecomponents_2.ObjectFactory cac = new oasis.names.specification.ubl.schema.xsd.commonaggregatecomponents_2.ObjectFactory();
 
 		BillingReferenceType billingReferenceType = cac.createBillingReferenceType();

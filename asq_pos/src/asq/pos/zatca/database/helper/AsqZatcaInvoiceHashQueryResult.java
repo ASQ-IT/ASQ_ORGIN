@@ -12,17 +12,17 @@ import dtv.data2.access.IObjectId;
  * @author RA20221457
  *
  */
-public class AsqZatcaInvoiceHashQueryResult extends AbstractQueryResult  {
+public class AsqZatcaInvoiceHashQueryResult extends AbstractQueryResult {
 
 	private static final long serialVersionUID = 1L;
-	
-	  private Long icv;
-	  private String invoice_Id;
-	  private Date invoice_Date;
-	  private Long organization_Id;
-	  private String invoice_Hash;
-	
-	  public Long getIcv() {
+
+	private Long icv;
+	private String invoice_Id;
+	private Date invoice_Date;
+	private Long organization_Id;
+	private String invoice_Hash;
+
+	public Long getIcv() {
 		return icv;
 	}
 
@@ -63,16 +63,13 @@ public class AsqZatcaInvoiceHashQueryResult extends AbstractQueryResult  {
 	}
 
 	@Override
-	  public String toString() {
-	    return "AsqZatcaInvoiceHashQueryResult [icv=" + icv + ", invoice_Id="
-	        + invoice_Id + ", invoice_Date=" + invoice_Date + ", organization_Id="
-	        + organization_Id + ", invoice_Hash=" + invoice_Hash 
-	        + "]";
-	  }
-	 
+	public String toString() {
+		return "AsqZatcaInvoiceHashQueryResult [icv=" + icv + ", invoice_Id=" + invoice_Id + ", invoice_Date=" + invoice_Date + ", organization_Id=" + organization_Id + ", invoice_Hash="
+				+ invoice_Hash + "]";
+	}
+
 	@Override
 	protected IObjectId getObjectIdImpl() {
-		
 		return null;
 	}
 
