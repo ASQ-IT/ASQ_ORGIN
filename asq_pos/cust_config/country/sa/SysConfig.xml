@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<SysConfig xmlns="http://micros.com/xstore/config/settings">
+   
+    <Setting name="STCCustomerEarnPoints---AddSTCPointsToCustomerOnTender">true</Setting>
+    <Setting name="STCCustomerEarnPoints---PointsCalculation">100</Setting>
+    
+</SysConfig>
