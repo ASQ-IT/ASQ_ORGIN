@@ -11,8 +11,11 @@
   <bean id="asqZatcaDatabaseHelper" class="asq.pos.zatca.database.helper.AsqZatcaDatabaseHelper"/>
   <bean id="asqZatcaInvoiceGenerationHelper" class="asq.pos.zatca.invoice.generation.op.AsqZatcaInvoiceGenerationHelper"/>
   <bean id="asqZatcaCertRegistrationServices" class="asq.pos.zatca.cert.generation.service.AsqZatcaCertRegistrationServicesImpl" primary="true"/>     
+  <bean id="asqZatcaToOICServices" class="asq.pos.zatca.invoice.submition.worker.service.AsqZatcaInvoiceSubmittToOICServiceImpl"/>
+  
   <bean id="asqBnplTamaraServices" class=" asq.pos.bnpl.tamara.tender.service.AsqBnplTamaraServicesImpl"/>
   <bean id="asqSTCLoyalityTenderService" class="asq.pos.loyalty.stc.tender.service.AsqSTCTenderServiceImpl"/>
+  <bean id="asqNeqatyLoyalityTenderService" class="asq.pos.loyalty.neqaty.tender.AsqNeqatyServiceImpl"/>
   
   
   <bean abstract="true" id="AbstractZatcaRestServiceBean">
@@ -26,7 +29,7 @@
   </bean> 
   
   <bean abstract="true" id="AbstractZatcaOICRestServiceBean">
-    <property name="serviceId" value="ZATCA_OIC_REST" />
+    <property name="serviceId" value="ZATCA_OIC_SRV" />
     <property name="exceptionHandler" ref="standardJaxRsExceptionHandler" />
     <property name="serviceConfigHelper" ref="serviceConfigHelper" />
     <property name="logEntity" value="false" />
@@ -101,5 +104,35 @@
     <property name="servicePath" value="/checkout/in-store-session" />
   </bean>
   
+  
+  <!-- Neqaty work Starts -->
+  <bean id="asqNeqatyJaxWsHandlerResolver" parent="wsLoggingHandlerResolver">
+    <property name="handlers">
+      <list value-type="java.xml.ws.handler.Handler" merge="true">
+        <bean class="oracle.retail.avs.qas.soap.impl.QASAuthHandler">
+          <property name="authTokenName" value="AUTH-TOKEN" />
+          <property name="authToken" value="#{systemProperties['asq.neqaty.auth.token']}" />
+        </bean>
+      </list>
+    </property>
+  </bean>
+  
+  <bean id="asqNeqatyJaxWsServicePort" parent="standardJaxWsServicePort">
+    <property name="serviceId" value="NEQATY_SRV" />
+    <property name="serviceInterface" value="asq.pos.loyalty.neqaty.gen.NeqatyWSAPIPortType" />
+    <property name="namespaceUri" value="urn:margento" />
+    <property name="serviceName" value="NeqatyWSAPI" />
+    <property name="portName" value="NeqatyWSAPI" />
+    <property name="handlerResolver" ref="asqNeqatyJaxWsHandlerResolver" />
+    <property name="standardBasicAuth" value="false" />
+    <!--  property name="lookupServiceOnStartup" value="true" / -->
+  </bean>
+  
+  <bean id="ASQ_NEQATY_SRV" class="asq.pos.loyalty.neqaty.tender.AsqNeqatyServiceHandler">
+    <property name="serviceId" value="NEQATY_SRV" />
+    <property name="servicePort" ref="asqNeqatyJaxWsServicePort" />
+    <!-- <property name="exceptionHandler" ref="qasExceptionHandler" />-->
+  </bean>
+  <!-- Neqaty work Starts --> 
 </beans>
   

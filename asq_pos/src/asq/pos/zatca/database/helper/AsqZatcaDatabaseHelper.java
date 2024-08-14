@@ -1,6 +1,3 @@
-/**
- * 
- */
 package asq.pos.zatca.database.helper;
 
 import java.util.Date;

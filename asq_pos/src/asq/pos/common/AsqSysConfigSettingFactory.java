@@ -1,12 +1,10 @@
-/**
- * 
- */
 package asq.pos.common;
 
-import dtv.pos.common.SysConfigSettingFactory;
 import com.micros.xstore.config.ISingleElementConfigMgr;
 import com.micros.xstore.config.settings.SettingType;
 import com.micros.xstore.config.settings.SysConfig;
+
+import dtv.pos.common.SysConfigSettingFactory;
 
 /**
  * @author RA20221457

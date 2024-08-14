@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans profile="xstore" xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:mvc="http://www.springframework.org/schema/mvc" xmlns:context="http://www.springframework.org/schema/context" xmlns:util="http://www.springframework.org/schema/util"
+  xsi:schemaLocation="
+        http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc.xsd
+        http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd
+        http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util.xsd"
+  default-init-method="init">
+  
+  <bean id="startupWorkers" parent="workerList">
+    <property name="workers">
+      <list>
+        <ref bean="createPasswordStorageFileWorker" />
+        <ref bean="initDatabaseHardwareTypesWorker" />
+        <ref bean="startHardwareWorker" />
+        <ref bean="startEftLilnkCustDisplayWorker" />
+        <ref bean="initBarcodeTranslatorWorker" />
+        <ref bean="logVersionStatusInformationWorker" />
+        <ref bean="logFreeSpaceWarningWorker" />
+        <ref bean="logConfigVersionInformationWorker" />
+        <ref bean="initPromoteOfflineWorker" />
+        <ref bean="checkForOrphanedTransWorkerByCurrentWorkstation" />
+        <ref bean="healSessionTendersWorker" />
+        <ref bean="startRegisterStatusWorker" />
+        <ref bean="startDeviceRegistrationWorker" />
+        <ref bean="startSAFQueuesWorker" />
+        <ref bean="initializeOrderProcessWorker" />
+        <ref bean="startFiscalPrinterStatusWorker" />
+        <ref bean="startOrderCustomerNoShowWorker" />
+        <ref bean="startOrderSameDayDeliveryWorker" />
+        <ref bean="syncSiocsOAuthScopeWorker" />
+        <ref bean="syncRdsOAuthScopeWorker" />
+        <ref bean="asqSubmittZatcaInvoiceToOIC" />
+      </list>
+    </property>
+  </bean>
+  
+  <bean id="asqSubmittZatcaInvoiceToOICWorker" parent="silentWorker">
+    <property name="delegate">
+      <bean class="asq.pos.zatca.invoice.submition.worker.AsqSubmittZatcaInvoiceToOICWorker">
+      </bean>
+    </property>
+  </bean>
+  
+  <bean id="asqSubmittZatcaInvoiceToOIC" class="dtv.pos.common.ScheduledTaskWorker" scope="prototype">
+    <property name="uniqueId" value="XSTORE-OIC-WORKER" />
+    <property name="daemon" value="true" />
+    <property name="initialDelaySeconds" value="30" />
+    <property name="periodSeconds" value= "60" />
+    <property name="workers">
+      <list>
+        <ref bean="asqSubmittZatcaInvoiceToOICWorker" />
+      </list>
+    </property>
+  </bean>
+
+</beans>

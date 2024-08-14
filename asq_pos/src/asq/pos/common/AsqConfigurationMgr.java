@@ -1,20 +1,14 @@
-/**
- * 
- */
 package asq.pos.common;
 
 import dtv.pos.common.ConfigurationMgr;
 
 /**
+ * This class extends Xstore Standard Configuration Manager to check the
+ * customer availability parameter and Value for calculating the points for Earn
+ * API to customer
+ * 
  * @author RA20221457
- *
  */
-
-/**
- * This class extends Xstore Standard Configuration Manager to check the customer availability parameter and
- * Value for calculating the points for Earn API to customer
- */
-
 public class AsqConfigurationMgr extends ConfigurationMgr {
 
 	private static AsqSysConfigSettingFactory _settingsFactory;
@@ -24,10 +18,8 @@ public class AsqConfigurationMgr extends ConfigurationMgr {
 	 * 
 	 * @return true/false
 	 */
-
 	public static boolean getSTCCustomerAvailable() {
-		String value = _settingsFactory
-				.getString(new String[] { "STCCustomerEarnPoints---AddSTCPointsToCustomerOnTender" });
+		String value = _settingsFactory.getString(new String[] { "STCCustomerEarnPoints---AddSTCPointsToCustomerOnTender" });
 		if (value != null && value.equalsIgnoreCase("true")) {
 			return true;
 		}
@@ -43,7 +35,6 @@ public class AsqConfigurationMgr extends ConfigurationMgr {
 	 * 
 	 * @return value for calculation
 	 */
-
 	public static int getSTCPointsCalculation() {
 		return _settingsFactory.getInt(new String[] { "STCCustomerEarnPoints---PointsCalculation" });
 	}

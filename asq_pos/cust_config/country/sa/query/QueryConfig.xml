@@ -43,13 +43,16 @@
 			<ResultField name="CREATE_USER_ID" type="String" />
 			<ResultField name="UPDATE_USER_ID" type="String" />
 			<ResultField name="UPDATE_DATE" type="Date" />
+			<ResultField name="INVOICE_HASH" type="String" />
+			<ResultField name="INVOICE_UUID" type="String" />
 			<SQL>
 				<Statement>
 				<![CDATA[
 					SELECT zatcaInvoice.ORGANIZATION_ID, zatcaInvoice.INVOICE_ID, zatcaInvoice.BUSINESS_DATE,zatcaInvoice.TRANS_SEQ, zatcaInvoice.WKSTN_ID,
 					zatcaInvoice.STATUS, zatcaInvoice.INVOICE_QRCODE, zatcaInvoice.JSON_INVOICE,zatcaInvoice.CREATE_DATE, 
-					zatcaInvoice.CREATE_USER_ID, zatcaInvoice.UPDATE_USER_ID, zatcaInvoice.UPDATE_DATE, invoiceHash.INVOICE_HASH
-		   			FROM ASQ_ZATCA_INVOICE_STAGING zatcaInvoice join ASQ_ZATCA_INVOICE_HASH invoiceHash 
+					zatcaInvoice.CREATE_USER_ID, zatcaInvoice.UPDATE_USER_ID, zatcaInvoice.UPDATE_DATE, invoiceHash.INVOICE_HASH,zatcaInvoice.INVOICE_UUID
+		   			FROM ASQ_ZATCA_INVOICE_STAGING zatcaInvoice 
+		   			join ASQ_ZATCA_INVOICE_HASH invoiceHash 
 	            	ON zatcaInvoice.INVOICE_ID = invoiceHash.INVOICE_ID
 	            	AND zatcaInvoice.ORGANIZATION_ID = invoiceHash.ORGANIZATION_ID
 	            	where zatcaInvoice.STATUS ='NEW'
@@ -59,7 +62,7 @@
 		</Query>
 		
 		
-	   <Query name="ASQ_ZATCA_INVOICES_UPDATE" pmType="TRANSACTION">
+		<Query name = "ASQ_ZATCA_INVOICES_UPDATE" pmType ="TRANSACTION" >
 	        <QueryHandler>dtv.data2.access.query.SqlQueryHandler</QueryHandler>
 			<SQL>
 				<Statement>

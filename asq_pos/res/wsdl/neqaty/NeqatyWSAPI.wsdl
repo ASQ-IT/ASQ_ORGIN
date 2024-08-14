@@ -1,0 +1,217 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definitions name="NeqatyWSAPI"
+ targetNamespace="urn:margento"
+ xmlns:tns="urn:margento"
+ xmlns:SOAP-ENV="http://schemas.xmlsoap.org/soap/envelope/"
+ xmlns:SOAP-ENC="http://schemas.xmlsoap.org/soap/encoding/"
+ xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+ xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+ xmlns:NeqatyWSAPI="urn:margento"
+ xmlns:SOAP="http://schemas.xmlsoap.org/wsdl/soap/"
+ xmlns:HTTP="http://schemas.xmlsoap.org/wsdl/http/"
+ xmlns:MIME="http://schemas.xmlsoap.org/wsdl/mime/"
+ xmlns:DIME="http://schemas.xmlsoap.org/ws/2002/04/dime/wsdl/"
+ xmlns:WSDL="http://schemas.xmlsoap.org/wsdl/"
+ xmlns="http://schemas.xmlsoap.org/wsdl/">
+
+<types>
+
+ <schema targetNamespace="urn:margento"
+  xmlns:SOAP-ENV="http://schemas.xmlsoap.org/soap/envelope/"
+  xmlns:SOAP-ENC="http://schemas.xmlsoap.org/soap/encoding/"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+  xmlns:NeqatyWSAPI="urn:margento"
+  xmlns="http://www.w3.org/2001/XMLSchema"
+  elementFormDefault="unqualified"
+  attributeFormDefault="unqualified">
+  <import namespace="http://schemas.xmlsoap.org/soap/encoding/"/>
+  <complexType name="NeqatyWSAPI-redeemOption"><!-- NeqatyWSAPI_redeemOption -->
+
+   <sequence>
+     <element name="redeemPoints" type="xsd:double" minOccurs="1" maxOccurs="1"/><!-- NeqatyWSAPI_redeemOption::redeemPoints -->
+     <element name="redeemAmount" type="xsd:double" minOccurs="1" maxOccurs="1"/><!-- NeqatyWSAPI_redeemOption::redeemAmount -->
+     <element name="redeemCode" type="xsd:int" minOccurs="1" maxOccurs="1"/><!-- NeqatyWSAPI_redeemOption::redeemCode -->
+   </sequence>
+  </complexType>
+  <complexType name="NeqatyWSAPI-optionsData"><!-- NeqatyWSAPI_optionsData -->
+
+   <sequence>
+     <element name="pointsBalance" type="xsd:double" minOccurs="1" maxOccurs="1"/><!-- NeqatyWSAPI_optionsData::pointsBalance -->
+     <element name="tier" type="xsd:int" minOccurs="1" maxOccurs="1"/><!-- NeqatyWSAPI_optionsData::tier -->
+     <element name="redeemOptions" type="NeqatyWSAPI:NeqatyWSAPI-redeemOption" minOccurs="0" maxOccurs="unbounded"/><!-- NeqatyWSAPI_optionsData::__sizeredeemOptions -->
+   </sequence>
+  </complexType>
+  <complexType name="authorizeRequest"><!-- NeqatyWSAPI__authorizeRequest -->
+
+   <sequence>
+     <element name="authenticationKey" type="xsd:string" minOccurs="0" maxOccurs="1" nillable="true"/><!-- NeqatyWSAPI__authorizeRequest::authenticationKey -->
+     <element name="tid" type="xsd:int" minOccurs="0" maxOccurs="1" nillable="true"/><!-- NeqatyWSAPI__authorizeRequest::tid -->
+     <element name="token" type="xsd:int" minOccurs="1" maxOccurs="1"/><!-- NeqatyWSAPI__authorizeRequest::token -->
+     <element name="operationType" type="xsd:string" minOccurs="0" maxOccurs="1" nillable="true"/><!-- NeqatyWSAPI__authorizeRequest::operationType -->
+     <element name="msisdn" type="xsd:string" minOccurs="0" maxOccurs="1" nillable="true"/><!-- NeqatyWSAPI__authorizeRequest::msisdn -->
+     <element name="amount" type="xsd:double" minOccurs="1" maxOccurs="1"/><!-- NeqatyWSAPI__authorizeRequest::amount -->
+     <element name="redeemPoints" type="xsd:double" minOccurs="1" maxOccurs="1"/><!-- NeqatyWSAPI__authorizeRequest::redeemPoints -->
+     <element name="redeemCode" type="xsd:int" minOccurs="1" maxOccurs="1"/><!-- NeqatyWSAPI__authorizeRequest::redeemCode -->
+     <element name="transactionReference" type="xsd:string" minOccurs="0" maxOccurs="1" nillable="true"/><!-- NeqatyWSAPI__authorizeRequest::transactionReference -->
+   </sequence>
+  </complexType>
+  <complexType name="confirmRequest"><!-- NeqatyWSAPI__confirmRequest -->
+
+   <sequence>
+     <element name="authenticationKey" type="xsd:string" minOccurs="0" maxOccurs="1" nillable="true"/><!-- NeqatyWSAPI__confirmRequest::authenticationKey -->
+     <element name="tid" type="xsd:int" minOccurs="0" maxOccurs="1" nillable="true"/><!-- NeqatyWSAPI__confirmRequest::tid -->
+     <element name="msisdn" type="xsd:string" minOccurs="0" maxOccurs="1" nillable="true"/><!-- NeqatyWSAPI__confirmRequest::msisdn -->
+     <element name="transactionReference" type="xsd:string" minOccurs="0" maxOccurs="1" nillable="true"/><!-- NeqatyWSAPI__confirmRequest::transactionReference -->
+     <element name="oneTimePassword" type="xsd:string" minOccurs="0" maxOccurs="1" nillable="true"/><!-- NeqatyWSAPI__confirmRequest::oneTimePassword -->
+   </sequence>
+  </complexType>
+  <complexType name="abortRequest"><!-- NeqatyWSAPI__abortRequest -->
+
+   <sequence>
+     <element name="authenticationKey" type="xsd:string" minOccurs="0" maxOccurs="1" nillable="true"/><!-- NeqatyWSAPI__abortRequest::authenticationKey -->
+     <element name="tid" type="xsd:int" minOccurs="0" maxOccurs="1" nillable="true"/><!-- NeqatyWSAPI__abortRequest::tid -->
+     <element name="msisdn" type="xsd:string" minOccurs="0" maxOccurs="1" nillable="true"/><!-- NeqatyWSAPI__abortRequest::msisdn -->
+     <element name="transactionReference" type="xsd:string" minOccurs="0" maxOccurs="1" nillable="true"/><!-- NeqatyWSAPI__abortRequest::transactionReference -->
+   </sequence>
+  </complexType>
+  <!-- operation request element -->
+  <element name="authorize">
+   <complexType>
+    <sequence>
+     <element name="req" type="NeqatyWSAPI:authorizeRequest" minOccurs="0" maxOccurs="1" nillable="true"/><!-- NeqatyWSAPI__authorize::req -->
+    </sequence>
+   </complexType>
+  </element>
+  <!-- operation response element -->
+  <element name="authorizeResponse">
+   <complexType>
+    <sequence>
+     <element name="resultCode" type="xsd:int" minOccurs="1" maxOccurs="1"/><!-- NeqatyWSAPI__authorizeResponse::resultCode -->
+     <element name="resultDescription" type="xsd:string" minOccurs="0" maxOccurs="1" nillable="true"/><!-- NeqatyWSAPI__authorizeResponse::resultDescription -->
+     <element name="token" type="xsd:int" minOccurs="1" maxOccurs="1"/><!-- NeqatyWSAPI__authorizeResponse::token -->
+     <element name="transactionReference" type="xsd:string" minOccurs="0" maxOccurs="1" nillable="true"/><!-- NeqatyWSAPI__authorizeResponse::transactionReference -->
+     <element name="optionsData" type="NeqatyWSAPI:NeqatyWSAPI-optionsData" minOccurs="0" maxOccurs="1" nillable="true"/><!-- NeqatyWSAPI__authorizeResponse::optionsData -->
+    </sequence>
+   </complexType>
+  </element>
+  <!-- operation request element -->
+  <element name="confirm">
+   <complexType>
+    <sequence>
+     <element name="req" type="NeqatyWSAPI:confirmRequest" minOccurs="0" maxOccurs="1" nillable="true"/><!-- NeqatyWSAPI__confirm::req -->
+    </sequence>
+   </complexType>
+  </element>
+  <!-- operation response element -->
+  <element name="confirmResponse">
+   <complexType>
+    <sequence>
+     <element name="resultCode" type="xsd:int" minOccurs="1" maxOccurs="1"/><!-- NeqatyWSAPI__confirmResponse::resultCode -->
+     <element name="resultDescription" type="xsd:string" minOccurs="0" maxOccurs="1" nillable="true"/><!-- NeqatyWSAPI__confirmResponse::resultDescription -->
+     <element name="optionsData" type="NeqatyWSAPI:NeqatyWSAPI-optionsData" minOccurs="0" maxOccurs="1" nillable="true"/><!-- NeqatyWSAPI__confirmResponse::optionsData -->
+    </sequence>
+   </complexType>
+  </element>
+  <!-- operation request element -->
+  <element name="abort">
+   <complexType>
+    <sequence>
+     <element name="req" type="NeqatyWSAPI:abortRequest" minOccurs="0" maxOccurs="1" nillable="true"/><!-- NeqatyWSAPI__abort::req -->
+    </sequence>
+   </complexType>
+  </element>
+  <!-- operation response element -->
+  <element name="abortResponse">
+   <complexType>
+    <sequence>
+     <element name="resultCode" type="xsd:int" minOccurs="1" maxOccurs="1"/><!-- NeqatyWSAPI__abortResponse::resultCode -->
+     <element name="resultDescription" type="xsd:string" minOccurs="0" maxOccurs="1" nillable="true"/><!-- NeqatyWSAPI__abortResponse::resultDescription -->
+    </sequence>
+   </complexType>
+  </element>
+ </schema>
+
+</types>
+
+<message name="authorize">
+ <part name="Body" element="NeqatyWSAPI:authorize"/><!-- NeqatyWSAPI__authorize::NeqatyWSAPI__authorize -->
+</message>
+
+<message name="authorizeResponse">
+ <part name="Body" element="NeqatyWSAPI:authorizeResponse"/><!-- NeqatyWSAPI__authorize::resp -->
+</message>
+
+<message name="confirm">
+ <part name="Body" element="NeqatyWSAPI:confirm"/><!-- NeqatyWSAPI__confirm::NeqatyWSAPI__confirm -->
+</message>
+
+<message name="confirmResponse">
+ <part name="Body" element="NeqatyWSAPI:confirmResponse"/><!-- NeqatyWSAPI__confirm::resp -->
+</message>
+
+<message name="abort">
+ <part name="Body" element="NeqatyWSAPI:abort"/><!-- NeqatyWSAPI__abort::NeqatyWSAPI__abort -->
+</message>
+
+<message name="abortResponse">
+ <part name="Body" element="NeqatyWSAPI:abortResponse"/><!-- NeqatyWSAPI__abort::resp -->
+</message>
+
+<portType name="NeqatyWSAPIPortType">
+ <operation name="authorize">
+  <documentation>Service definition of function NeqatyWSAPI__authorize</documentation>
+  <input message="tns:authorize"/>
+  <output message="tns:authorizeResponse"/>
+ </operation>
+ <operation name="confirm">
+  <documentation>Service definition of function NeqatyWSAPI__confirm</documentation>
+  <input message="tns:confirm"/>
+  <output message="tns:confirmResponse"/>
+ </operation>
+ <operation name="abort">
+  <documentation>Service definition of function NeqatyWSAPI__abort</documentation>
+  <input message="tns:abort"/>
+  <output message="tns:abortResponse"/>
+ </operation>
+</portType>
+
+<binding name="NeqatyWSAPI" type="tns:NeqatyWSAPIPortType">
+ <SOAP:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+ <operation name="authorize">
+  <SOAP:operation soapAction=""/>
+  <input>
+     <SOAP:body parts="Body" use="literal"/>
+  </input>
+  <output>
+     <SOAP:body parts="Body" use="literal"/>
+  </output>
+ </operation>
+ <operation name="confirm">
+  <SOAP:operation soapAction=""/>
+  <input>
+     <SOAP:body parts="Body" use="literal"/>
+  </input>
+  <output>
+     <SOAP:body parts="Body" use="literal"/>
+  </output>
+ </operation>
+ <operation name="abort">
+  <SOAP:operation soapAction=""/>
+  <input>
+     <SOAP:body parts="Body" use="literal"/>
+  </input>
+  <output>
+     <SOAP:body parts="Body" use="literal"/>
+  </output>
+ </operation>
+</binding>
+
+<service name="NeqatyWSAPI">
+ <documentation>Mobily NeqatyWSAPI</documentation>
+ <port name="NeqatyWSAPI" binding="tns:NeqatyWSAPI">
+  <SOAP:address location="https://evd-test.mobily.com.sa:7080/neqatyws/ws"/>
+ </port>
+</service>
+
+</definitions>

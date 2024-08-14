@@ -43,6 +43,22 @@
 	    <VisibilityRule class="dtv.pos.register.sale.AmountDueVisibilityRule" />
   	 </Action>
 	<!-- ASQ Tamara Integration Ends -->
+	
+	<!-- ASQ Neqaty Integration Starts -->
+  	 <Action name="SALE::TENDER_NEQATY" category="Register" keywords="sale_tender" text="_menuTextNeqaty" chainKey="ASQ_TENDER_NEQATY">
+    	<IconGroup icon="_imageTenderCash" rollIcon="_imageTenderCashRoll" pressIcon="_imageTenderCashPress" disabledIcon="_imageTenderCashDisabled" />
+    	<VisibilityRule class="dtv.pos.shared.visibilityrules.TenderEnabledCheck" >
+      		<Parameter name="tender" value="LOCAL_CURRENCY" />
+    	</VisibilityRule>
+	    <VisibilityRule class="dtv.pos.shared.visibilityrules.EffectiveTenderAccCheck" >
+	      	<Parameter name="tender" value="LOCAL_CURRENCY" />
+	    </VisibilityRule>
+	    <VisibilityRule class="dtv.pos.shared.visibilityrules.AvailableLayawayTenderAccCheck" >
+	      	<Parameter name="tender" value="LOCAL_CURRENCY" />
+	    </VisibilityRule>
+	    <VisibilityRule class="dtv.pos.register.sale.AmountDueVisibilityRule" />
+  	 </Action>
+	<!-- ASQ Neqaty Integration Ends -->
   	
   	
 </ActionSet>

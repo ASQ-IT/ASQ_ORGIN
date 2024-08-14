@@ -127,7 +127,6 @@
 		<Action ref="CANCEL_BACK" />
 	</Prompt>
 	<!-- ASQ STC Integration Ends -->
-
 	
 	<!-- ASQ TOLA Work Starts -->
     <Prompt name="ASQ_TOLA_QTY_SOH_ERROR" type="NotifyCancel" title="_weight" message="_tolaItemQtyValidationError">

@@ -25,8 +25,8 @@
     <OpChain name="SALE_COMPLETE_FINISH.pre">
     	<Op class= "asq.pos.register.sale.zatca.AsqZatcaSaleQrCodeGenerationOp" />
     </OpChain>
-	<!-- ASQ Zatca Integration Ends -->
-	
+    <!-- ASQ Zatca Integration Ends -->
+    
 	<!--ASQ STC Integratin Service Starts-->
 	<OpChain name="ASQ_STC_MOBILE">
 		<Op class="asq.pos.loyalty.stc.tender.op.AsqSTCMobileNumberOp" longRunning="true" />
@@ -122,7 +122,11 @@
     </OpChain>
    <!--BNPL TAMARA Service Ends-->
    
-   
+   <!--Neqaty Service Starts-->
+ 	<OpChain name="ASQ_TENDER_NEQATY">
+	  	<Op class="asq.pos.loyalty.neqaty.tender.op.AsqNeqatyTenderOp"/>
+    </OpChain>
+   <!--Neqaty Service Ends-->
 
   
 </OpChainSet>

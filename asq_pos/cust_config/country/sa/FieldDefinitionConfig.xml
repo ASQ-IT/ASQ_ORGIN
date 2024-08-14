@@ -14,7 +14,6 @@
    <Field name="stcRedeemPointsLabel" type="Label" text="_asqPromptmsgEnterRedeemPoints" />
   <!-- ASQ STC Integration Ends -->
    
-   
    <!-- ASQ Capture Customer Mobile Number Starts -->
    <Field name="custMobileNumber" type="Text" resource="custMobileNumber" dataFieldRef="Phone"/>
    <Field name="custMobileNumberLabel" type="Label" text="_asqPromptmsgEnterMobileNumber" />
