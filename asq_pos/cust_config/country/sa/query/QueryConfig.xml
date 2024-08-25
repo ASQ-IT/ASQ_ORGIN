@@ -10,19 +10,12 @@
 			<ResultField name="InvoiceDate" type="Date" />
 			<ResultField name="InvoiceHash" type="String" />
 			<SQL>
-				<Statement><![CDATA[SELECT
-		   								 hashinvoice.icv,
-										 hashinvoice.invoice_id,
-		    							 hashinvoice.invoice_date,
-				                         hashinvoice.invoice_hash
-									FROM
-									(SELECT MAX(icv)icv
-									 FROM ASQ_ZATCA_INVOICE_HASH    
-									WHERE   
-										organization_id = ? )MAXHICV,
-										ASQ_ZATCA_INVOICE_HASH hashinvoice 
-									WHERE   
-									hashinvoice.icv = MAXHICV.ICV]]>
+				<Statement><![CDATA[
+				SELECT stag.icv,stag.INVOICE_ID,stag.INVOICE_DATE,stag.INVOICE_HASHCODE 
+				from ASQ_ZATCA_INVOICE_STAGING stag
+				where stag.icv = (SELECT MAX(icv)icv FROM ASQ_ZATCA_INVOICE_STAGING)
+				and stag.ORGANIZATION_ID = ?
+				]]>
 				</Statement>
 				<Parameter name="argOrganizationId"/>
 			</SQL>
@@ -38,7 +31,7 @@
 			<ResultField name="WKSTN_ID" type="String" />
 			<ResultField name="STATUS" type="String" />
 			<ResultField name="INVOICE_QRCODE" type="byte[]" />
-			<ResultField name="JSON_INVOICE" type="byte[]" />
+			<ResultField name="INVOICE_XML" type="byte[]" />
 			<ResultField name="CREATE_DATE" type="Date" />
 			<ResultField name="CREATE_USER_ID" type="String" />
 			<ResultField name="UPDATE_USER_ID" type="String" />
@@ -48,19 +41,15 @@
 			<SQL>
 				<Statement>
 				<![CDATA[
-					SELECT zatcaInvoice.ORGANIZATION_ID, zatcaInvoice.INVOICE_ID, zatcaInvoice.BUSINESS_DATE,zatcaInvoice.TRANS_SEQ, zatcaInvoice.WKSTN_ID,
-					zatcaInvoice.STATUS, zatcaInvoice.INVOICE_QRCODE, zatcaInvoice.JSON_INVOICE,zatcaInvoice.CREATE_DATE, 
-					zatcaInvoice.CREATE_USER_ID, zatcaInvoice.UPDATE_USER_ID, zatcaInvoice.UPDATE_DATE, invoiceHash.INVOICE_HASH,zatcaInvoice.INVOICE_UUID
+	            	SELECT zatcaInvoice.ORGANIZATION_ID, zatcaInvoice.INVOICE_ID, zatcaInvoice.BUSINESS_DATE,zatcaInvoice.TRANS_SEQ, zatcaInvoice.WKSTN_ID,
+					zatcaInvoice.STATUS, zatcaInvoice.INVOICE_QRCODE, zatcaInvoice.INVOICE_XML,zatcaInvoice.CREATE_DATE, 
+					zatcaInvoice.CREATE_USER_ID, zatcaInvoice.UPDATE_USER_ID,zatcaInvoice.UPDATE_DATE,zatcaInvoice.INVOICE_HASHCODE,zatcaInvoice.INVOICE_UUID
 		   			FROM ASQ_ZATCA_INVOICE_STAGING zatcaInvoice 
-		   			join ASQ_ZATCA_INVOICE_HASH invoiceHash 
-	            	ON zatcaInvoice.INVOICE_ID = invoiceHash.INVOICE_ID
-	            	AND zatcaInvoice.ORGANIZATION_ID = invoiceHash.ORGANIZATION_ID
-	            	where zatcaInvoice.STATUS ='NEW'
+		   			where zatcaInvoice.STATUS ='NEW'
 		   		]]>
 				</Statement>
 			</SQL>
 		</Query>
-		
 		
 		<Query name = "ASQ_ZATCA_INVOICES_UPDATE" pmType ="TRANSACTION" >
 	        <QueryHandler>dtv.data2.access.query.SqlQueryHandler</QueryHandler>

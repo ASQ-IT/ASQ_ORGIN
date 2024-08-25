@@ -1,7 +1,5 @@
 package asq.pos.zatca.invoice.submition.worker.service;
 
-import java.util.Date;
-
 import dtv.service.req.IServiceRequest;
 
 public interface IAsqSubmitZatcaInvoiceToOicServiceRequest extends IServiceRequest {
@@ -18,13 +16,13 @@ public interface IAsqSubmitZatcaInvoiceToOicServiceRequest extends IServiceReque
 
 	public void setTransactionNo(String transactionNo);
 
-	public Date getBusinessDate();
+	public String getBusinessDate();
 
-	public void setBusinessDate(Date businessDate);
+	public void setBusinessDate(String businessDate);
 
-	public Date getCreationDate();
+	public String getCreationDate();
 
-	public void setCreationDate(Date creationDate);
+	public void setCreationDate(String creationDate);
 
 	public String getTillId();
 

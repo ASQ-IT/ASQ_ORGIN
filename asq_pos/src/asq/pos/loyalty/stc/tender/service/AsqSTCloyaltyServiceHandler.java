@@ -63,6 +63,7 @@ public class AsqSTCloyaltyServiceHandler extends AbstractJaxRsHandler<IAsqSTCLoy
 			rawResponse = httpClient.send(httpRequest, HttpResponse.BodyHandlers.ofString());
 			LOG.info("STC API returning response :" +rawResponse);
 			checkForExceptions(rawResponse);
+			System.out.println();
 			return asqStcHelper.convertJSONToPojo(rawResponse.body(), AsqSTCLoyaltyServiceResponse.class);
 		} catch (Exception ex) {
 			LOG.error("WE have recieved a exception in STC we service call ", ex);

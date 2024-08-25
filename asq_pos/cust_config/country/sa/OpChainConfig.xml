@@ -25,9 +25,9 @@
     <OpChain name="SALE_COMPLETE_FINISH.pre">
     	<Op class= "asq.pos.register.sale.zatca.AsqZatcaSaleQrCodeGenerationOp" />
     </OpChain>
-    <!-- ASQ Zatca Integration Ends -->
-    
-	<!--ASQ STC Integratin Service Starts-->
+	<!-- ASQ Zatca Integration Ends -->
+	
+	<!-- ASQ STC Integratin Service Starts-->
 	<OpChain name="ASQ_STC_MOBILE">
 		<Op class="asq.pos.loyalty.stc.tender.op.AsqSTCMobileNumberOp" longRunning="true" />
 	</OpChain>
@@ -60,7 +60,15 @@
 			<Parameter name="MenuKey" value="SALE::TENDER_OPTIONS" />
 		</Op>
 	</OpChain>
-	<!--ASQ STC Integratin Service Ends-->
+	<!-- ASQ STC Integratin Service Ends-->
+	
+	<!-- ASQ Neqaty Integration Service Starts-->
+	<OpChain name="ASQ_TENDER_NEQATY">
+		<Op class="asq.pos.loyalty.neqaty.tender.op.AsqNeqatyMobileNumberOp" longRunning="true" />
+	</OpChain>
+	
+	<!-- ASQ Neqaty Integration Service Ends-->
+	
    
    <OpChain name="SALE_ITEM_AFTER_LOOKUP">
     <OpChainRoute chainKey="VALIDATE_ITEM_AVAILABILITY_FOR_SALE" />
@@ -117,16 +125,52 @@
   </OpChain>
   
    <!--BNPL TAMARA Service Starts-->
- 	<OpChain name="ASQ_TENDER_TAMARA">
-	  	<Op class="asq.pos.bnpl.tabby.tender.op.AsqBnplTamaraTenderOp"/>
+ 	<OpChain name="ASQ_TAMARA_MOBILE">
+	  	<Op class="asq.pos.bnpl.tamara.tender.op.AsqBnplTamaraTenderOp"/>
     </OpChain>
+    <OpChain name="ASQ_TENDER_TAMARA" signal="TransactionModified" contextKey="SALE_TENDER_EMPTY_MENU_OPTION">
+		<Op class="dtv.pos.tender.CreateTenderLineItemOp">
+			<Parameter name="TenderStatus" value="Tender" />
+			<Parameter name="TenderId" value="TAMARA" />
+		</Op>
+		<PromptOp class="dtv.pos.tender.PromptCustAsscRequiredForTenderOp" />
+		<Op class="dtv.pos.tender.check.PromptIdentityVerificationOp" />
+		<PromptOp class="dtv.pos.tender.PromptTenderAmtOp" validationsBean="tenderAmountRules" />
+		<Op class="dtv.pos.tender.AddTenderToSaleTranOp" />
+		<Op class="dtv.pos.tender.rounding.UpdateTransactionRoundedAmountOp" />
+		<OpChainRoute chainKey="CHECK_SALE_COMPLETE" chainType="START" />
+	</OpChain>
+    <OpChain name="VOID_TENDER" signal="TransactionModified" contextKey="SALE_TENDER_EMPTY_MENU_OPTION">
+    <Op class="asq.pos.bnpl.tamara.tender.op.AsqBnplTamaraVerifyPaymentOp">
+    <Parameter name="TenderType" value="TAMARA" />
+    </Op>
+    <PromptOp class="dtv.pos.tender.modifytender.PromptTendersToVoidOp">
+      <Parameter name="disallowNonVoidableTenders" value="true" />
+    </PromptOp>
+    <OpChainRoute chainKey="GUEST_LOOKUP" />
+    <OpChainRoute chainKey="VOID_ROOM_CHARGE" />
+    <OpChainRoute chainKey="EFTLINK_VOID_TENDER" />
+    <OpChainRoute chainKey="CANCEL_TENDER_CHANGE_AUTH" condition="oracle.retail.xstore.countrypack.common.voucher.condition.HasChangeTenderAuthCondition" />
+    <WorkerOp workersBean="updateTenderVoidWorkers" />
+    <Op class="dtv.pos.framework.op.PersistTranInProcessOp" />
+    <OpChainRoute chainKey="CHECK_SALE_COMPLETE" chainType="START" />
+  </OpChain>
+  <OpChain name="VOID_REFUND_TENDER" signal="TransactionModified" contextKey="REFUND_TENDER_EMPTY_MENU_OPTION">
+    <PromptOp class="dtv.pos.tender.modifytender.PromptTendersToVoidOp">
+    <!--Parameter name="disallowAuthorizedTenders" value="true" /-->
+    </PromptOp>
+    <OpChainRoute chainKey="GUEST_LOOKUP" />
+    <OpChainRoute chainKey="VOID_ROOM_CHARGE" />
+    <OpChainRoute chainKey="EFTLINK_VOID_TENDER" />
+    <WorkerOp workersBean="updateTenderVoidWorkers" />
+    <Op class="dtv.pos.tender.creditcard.SkipOriginalCreditCardSelectionOp"/>
+    <OpChainRoute chainKey="CHECK_SALE_COMPLETE" chainType="START" />
+  </OpChain>
    <!--BNPL TAMARA Service Ends-->
    
-   <!--Neqaty Service Starts-->
- 	<OpChain name="ASQ_TENDER_NEQATY">
-	  	<Op class="asq.pos.loyalty.neqaty.tender.op.AsqNeqatyTenderOp"/>
+  <!--BNPL TABBY Service Starts-->
+  <OpChain name="ASQ_TABBY_MOBILE">
+	  	<Op class="asq.pos.bnpl.tabby.tender.op.AsqBnplTabbyTenderOp"/>
     </OpChain>
-   <!--Neqaty Service Ends-->
-
-  
+   <!--BNPL TABBY Service Ends-->
 </OpChainSet>

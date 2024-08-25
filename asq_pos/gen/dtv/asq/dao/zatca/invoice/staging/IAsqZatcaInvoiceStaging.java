@@ -1,5 +1,5 @@
 // Copyright (c) 2024, Oracle and/or its affiliates. All rights reserved.
-// Generated using dtv.data2.access.impl.daogen.GenerateInterfaces 2024-08-11T15:27:53
+// Generated using dtv.data2.access.impl.daogen.GenerateInterfaces 2024-08-22T18:06:17
 // CHECKSTYLE:OFF
 package dtv.asq.dao.zatca.invoice.staging;
 
@@ -20,10 +20,13 @@ public interface IAsqZatcaInvoiceStaging extends IDataModel, dtv.data2.access.IH
   public static final dtv.event.EventEnum SET_BUSINESSDATE = new dtv.event.EventEnum("set businessDate");
   public static final dtv.event.EventEnum SET_TRANSACTIONSEQ = new dtv.event.EventEnum("set transactionSeq");
   public static final dtv.event.EventEnum SET_WORKSTATIONID = new dtv.event.EventEnum("set workStationId");
+  public static final dtv.event.EventEnum SET_ICV = new dtv.event.EventEnum("set icv");
   public static final dtv.event.EventEnum SET_STATUS = new dtv.event.EventEnum("set status");
   public static final dtv.event.EventEnum SET_SUBMITTEDJSON = new dtv.event.EventEnum("set submittedJSON");
   public static final dtv.event.EventEnum SET_INVOICEQRCODE = new dtv.event.EventEnum("set invoiceQrCode");
   public static final dtv.event.EventEnum SET_INVOICEUUID = new dtv.event.EventEnum("set invoiceUUID");
+  public static final dtv.event.EventEnum SET_INVOICEHASHCODE = new dtv.event.EventEnum("set invoiceHashCode");
+  public static final dtv.event.EventEnum SET_INVOICEDATE = new dtv.event.EventEnum("set invoiceDate");
   public static final dtv.event.EventEnum SET_CREATEUSERID = new dtv.event.EventEnum("set createUserId");
   public static final dtv.event.EventEnum SET_CREATEDATE = new dtv.event.EventEnum("set createDate");
   public static final dtv.event.EventEnum SET_UPDATEUSERID = new dtv.event.EventEnum("set updateUserId");
@@ -97,6 +100,18 @@ public interface IAsqZatcaInvoiceStaging extends IDataModel, dtv.data2.access.IH
    * @param argWorkStationId DAO alias for column wkstn_id
    */
   public void setWorkStationId(long argWorkStationId);
+
+  /**
+   * Getter for icv.
+   * @return DAO alias for column ICV
+   */
+  public long getIcv();
+
+  /**
+   * Setter for icv.
+   * @param argIcv DAO alias for column ICV
+   */
+  public void setIcv(long argIcv);
 
   /**
    * Getter for createUserId.

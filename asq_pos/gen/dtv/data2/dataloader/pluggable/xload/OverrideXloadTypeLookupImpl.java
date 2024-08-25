@@ -1,5 +1,5 @@
 // Copyright (c) 2024, Oracle and/or its affiliates. All rights reserved.
-// Generated using dtv.data2.access.impl.daogen.GenerateXloadTypeLookupImpl 2024-08-11T15:27:53
+// Generated using dtv.data2.access.impl.daogen.GenerateXloadTypeLookupImpl 2024-08-22T18:06:17
 // CHECKSTYLE:OFF
 package dtv.data2.dataloader.pluggable.xload;
 
@@ -47,10 +47,13 @@ public class OverrideXloadTypeLookupImpl
           new ColumnMetadata("ASQ_ZATCA_INVOICE_STAGING", "BUSINESS_DATE", FieldDataType.DATE, true),
           new ColumnMetadata("ASQ_ZATCA_INVOICE_STAGING", "TRANS_SEQ", FieldDataType.LONG, true),
           new ColumnMetadata("ASQ_ZATCA_INVOICE_STAGING", "WKSTN_ID", FieldDataType.LONG, true),
+          new ColumnMetadata("ASQ_ZATCA_INVOICE_STAGING", "ICV", FieldDataType.LONG, true),
           new ColumnMetadata("ASQ_ZATCA_INVOICE_STAGING", "STATUS", FieldDataType.STRING, false),
-          new ColumnMetadata("ASQ_ZATCA_INVOICE_STAGING", "JSON_INVOICE", FieldDataType.OBJECT, false),
+          new ColumnMetadata("ASQ_ZATCA_INVOICE_STAGING", "INVOICE_XML", FieldDataType.OBJECT, false),
           new ColumnMetadata("ASQ_ZATCA_INVOICE_STAGING", "INVOICE_QRCODE", FieldDataType.OBJECT, false),
-          new ColumnMetadata("ASQ_ZATCA_INVOICE_STAGING", "INVOICE_UIID", FieldDataType.STRING, false),
+          new ColumnMetadata("ASQ_ZATCA_INVOICE_STAGING", "INVOICE_UUID", FieldDataType.STRING, false),
+          new ColumnMetadata("ASQ_ZATCA_INVOICE_STAGING", "INVOICE_HASHCODE", FieldDataType.STRING, false),
+          new ColumnMetadata("ASQ_ZATCA_INVOICE_STAGING", "INVOICE_DATE", FieldDataType.DATE, false),
           new ColumnMetadata("ASQ_ZATCA_INVOICE_STAGING", "CREATE_USER_ID", FieldDataType.STRING, false),
           new ColumnMetadata("ASQ_ZATCA_INVOICE_STAGING", "CREATE_DATE", FieldDataType.DATE, false),
           new ColumnMetadata("ASQ_ZATCA_INVOICE_STAGING", "UPDATE_USER_ID", FieldDataType.STRING, false),
@@ -61,6 +64,7 @@ public class OverrideXloadTypeLookupImpl
           new ColumnMetadata("ASQ_ZATCA_INVOICE_STAGING_P", "BUSINESS_DATE", FieldDataType.DATE, true),
           new ColumnMetadata("ASQ_ZATCA_INVOICE_STAGING_P", "TRANS_SEQ", FieldDataType.LONG, true),
           new ColumnMetadata("ASQ_ZATCA_INVOICE_STAGING_P", "WKSTN_ID", FieldDataType.LONG, true),
+          new ColumnMetadata("ASQ_ZATCA_INVOICE_STAGING_P", "ICV", FieldDataType.LONG, true),
           new ColumnMetadata("ASQ_ZATCA_INVOICE_STAGING_P", "PROPERTY_CODE", FieldDataType.STRING, true),
           new ColumnMetadata("ASQ_ZATCA_INVOICE_STAGING_P", "TYPE", FieldDataType.STRING, false),
           new ColumnMetadata("ASQ_ZATCA_INVOICE_STAGING_P", "STRING_VALUE", FieldDataType.STRING, false),
@@ -94,6 +98,7 @@ public class OverrideXloadTypeLookupImpl
           new ColumnMetadata("ASQ_ZATCA_INVOICE_STAGING_P", "BUSINESS_DATE", FieldDataType.DATE, true),
           new ColumnMetadata("ASQ_ZATCA_INVOICE_STAGING_P", "TRANS_SEQ", FieldDataType.LONG, true),
           new ColumnMetadata("ASQ_ZATCA_INVOICE_STAGING_P", "WKSTN_ID", FieldDataType.LONG, true),
+          new ColumnMetadata("ASQ_ZATCA_INVOICE_STAGING_P", "ICV", FieldDataType.LONG, true),
           new ColumnMetadata("ASQ_ZATCA_INVOICE_STAGING_P", "PROPERTY_CODE", FieldDataType.STRING, true),
           new ColumnMetadata("ASQ_ZATCA_INVOICE_STAGING_P", "TYPE", FieldDataType.STRING, false),
           new ColumnMetadata("ASQ_ZATCA_INVOICE_STAGING_P", "STRING_VALUE", FieldDataType.STRING, false),

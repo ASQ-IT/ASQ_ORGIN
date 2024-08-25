@@ -9,6 +9,7 @@
 	    <!-- ASQ Zatca Integration Starts -->
 	    <MenuOption ref="ADMIN::ZATCA_CERTIFICATE_GENERATION" />   
 	    <!-- ASQ Zatca Integration Ends -->
+		
   	</MenuItem>
  
     <MenuItem name="SALE::TENDER_OPTIONS" text="_menuSaleTender" displayType="LIST" category="Tender" keywords="sale_tender" style="TILED_MENU">
@@ -17,11 +18,14 @@
     	<MenuOption ref="SALE::ASQ_TENDER_STC" />
      	<!-- STC Zatca Integration Ends -->
      	<!-- TAMARA Integration Starts -->
-	    <MenuOption ref="SALE::TENDER_TAMARA" />
+	    <MenuOption ref="SALE::ASQ_TENDER_TAMARA" />
 	  	<!-- TAMARA Integration Ends -->
-	  	<!-- TAMARA Integration Starts -->
-	    <MenuOption ref="SALE::TENDER_NEQATY" />
-	  	<!-- TAMARA Integration Ends -->
+	  	<!-- Neqaty Integration Starts -->
+	    <MenuOption ref="SALE::ASQ_TENDER_NEQATY" />
+	    <!-- Neqaty Integration Ends -->
+		<!-- Tabby Integration Starts -->
+	    <MenuOption ref="SALE::ASQ_TENDER_TABBY" />
+	    <!-- Tabby Integration Ends -->
 	    <MenuOption ref="SALE::TENDER_CREDIT_CARD" />
 	    <MenuOption ref="SALE::TENDER_EWALLET" />
 	    <MenuOption ref="SALE::TENDER_PAYMENT_BY_LINK" />

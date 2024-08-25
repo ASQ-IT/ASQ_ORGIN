@@ -1,27 +1,25 @@
 package asq.pos.bnpl.tamara.tender.service;
 
-import java.math.BigDecimal;
-import java.util.Currency;
-
 public class AsqBnplTamaraAmountObj {
 
-    private BigDecimal amount;
-	private Currency currency;
-    
-	public Currency getCurrency() {
-		return currency;
-	}
+    private Number amount;
 
-	public void setCurrency(Currency currency) {
-		this.currency = currency;
-	}
+    private String currency;
 
-	public BigDecimal getAmount() {
-		return amount;
-	}
+    public Number getAmount() {
+        return amount;
+    }
 
-	public void setAmount(BigDecimal amount) {
-		this.amount = amount;
-	}
+    public void setAmount(Number amount) {
+        this.amount = amount;
+    }
+
+    public String getCurrency() {
+        return currency;
+    }
+
+    public void setCurrency(String currency) {
+        this.currency = currency;
+    }
 
 }

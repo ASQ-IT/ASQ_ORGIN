@@ -33,7 +33,7 @@
     </Prompt>
 	<!-- ASQ Zatca Integration Ends -->
 	
-	<!-- ASQ STC Integration Error Promots Starts -->
+	<!-- ASQ STC Integration Error Prompts Starts -->
 	
 	<Prompt name="ASQ_STC_OTP" type="Text" title="_asqSTCOTPScreen" message="_asqSTCPromptToCaptureOTPMessage">
 		<DataField ref="ASQ_OTP" />
@@ -126,7 +126,19 @@
 	<Prompt name="ASQ_STC_REWARD_AMOUNT_GREATER_2_ERROR" type="Notify" title="_asqStcRewardErrorTitle" message="_asqPromptmsgRewardAmountGreaterError2">
 		<Action ref="CANCEL_BACK" />
 	</Prompt>
-	<!-- ASQ STC Integration Ends -->
+	<!-- ASQ STC Integration Prompts Ends -->
+	
+	<!-- ASQ TAMARA Integration Prompts Starts -->
+	<Prompt name="ASQ_TAMARA_REFUND_INITIATE" type="NotifyYesNo" title="_asqTamaraRefundInitiatePromptTitle" message="_asqTamraRefundInitiatePromptYesOrNo" >
+		<Action ref="YES"/>
+	    <Action ref="NO" />
+	</Prompt>
+	
+	<Prompt name="ASQ_TAMARA_CANCEL_SESSION" type="NotifyYesNo" title="_asqInitiateCancelPromptTitle" message="_asqInitiateCancelTransactionPromptYesOrNo" >
+		<Action ref="YES"/>
+	    <Action ref="NO" />
+	</Prompt>
+
 	
 	<!-- ASQ TOLA Work Starts -->
     <Prompt name="ASQ_TOLA_QTY_SOH_ERROR" type="NotifyCancel" title="_weight" message="_tolaItemQtyValidationError">

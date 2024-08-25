@@ -6,19 +6,12 @@ import java.io.IOException;
 import java.math.BigDecimal;
 import java.math.BigInteger;
 import java.security.KeyStore;
-import java.security.KeyStoreException;
 import java.security.NoSuchAlgorithmException;
-import java.security.cert.CertificateException;
 import java.security.cert.X509Certificate;
-import java.text.DateFormat;
 import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.Date;
-import java.util.GregorianCalendar;
 import java.util.List;
-import java.util.Locale;
 
 import javax.inject.Inject;
 import javax.xml.bind.JAXBContext;
@@ -26,8 +19,6 @@ import javax.xml.bind.JAXBElement;
 import javax.xml.bind.JAXBException;
 import javax.xml.bind.Unmarshaller;
 import javax.xml.datatype.DatatypeConfigurationException;
-import javax.xml.datatype.DatatypeConstants;
-import javax.xml.datatype.DatatypeFactory;
 import javax.xml.datatype.XMLGregorianCalendar;
 import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.transform.TransformerException;
@@ -53,7 +44,6 @@ import asq.pos.zatca.cert.generation.AsqZatcaHelper;
 import asq.pos.zatca.cert.generation.service.AsqSubmitZatcaCertServiceRequest;
 import asq.pos.zatca.cert.generation.service.AsqSubmitZatcaCertServiceResponse;
 import asq.pos.zatca.database.helper.AsqZatcaDatabaseHelper;
-import asq.pos.zatca.database.helper.AsqZatcaInvoiceHashQueryResult;
 import asq.pos.zatca.invoice.generation.utils.ASQException;
 import asq.pos.zatca.invoice.generation.utils.InvoiceHash;
 import asq.pos.zatca.invoice.models.AdditionalDocumentReference;
@@ -64,14 +54,13 @@ import asq.pos.zatca.invoice.models.LineItems;
 import asq.pos.zatca.invoice.models.OutboundInvoice;
 import asq.pos.zatca.invoice.models.SignatureData;
 import asq.pos.zatca.invoice.models.TaxSubtotal;
-import asq.pos.zatca.invoice.models.TaxTotal;
-import dtv.asq.dao.zatca.impl.AsqZatcaInvoiceHashModel;
 import dtv.pos.customer.ICustomerHelper;
 import dtv.util.StringUtils;
+import dtv.util.sequence.SequenceFactory;
 import dtv.xst.dao.crm.IParty;
 import dtv.xst.dao.crm.IPartyLocaleInformation;
 import dtv.xst.dao.loc.IRetailLocation;
-import dtv.xst.dao.trl.IRetailTransactionLineItem;
+import dtv.xst.dao.trl.impl.SaleReturnLineItemModel;
 import oasis.names.specification.ubl.schema.xsd.commonaggregatecomponents_2.AddressType;
 import oasis.names.specification.ubl.schema.xsd.commonaggregatecomponents_2.AllowanceChargeType;
 import oasis.names.specification.ubl.schema.xsd.commonaggregatecomponents_2.AttachmentType;
@@ -91,7 +80,6 @@ import oasis.names.specification.ubl.schema.xsd.commonaggregatecomponents_2.Part
 import oasis.names.specification.ubl.schema.xsd.commonaggregatecomponents_2.PaymentMeansType;
 import oasis.names.specification.ubl.schema.xsd.commonaggregatecomponents_2.PriceType;
 import oasis.names.specification.ubl.schema.xsd.commonaggregatecomponents_2.SignatureType;
-import oasis.names.specification.ubl.schema.xsd.commonaggregatecomponents_2.SupplierPartyType;
 import oasis.names.specification.ubl.schema.xsd.commonaggregatecomponents_2.TaxCategoryType;
 import oasis.names.specification.ubl.schema.xsd.commonaggregatecomponents_2.TaxSchemeType;
 import oasis.names.specification.ubl.schema.xsd.commonaggregatecomponents_2.TaxSubtotalType;
@@ -109,19 +97,14 @@ import oasis.names.specification.ubl.schema.xsd.commonbasiccomponents_2.CitySubd
 import oasis.names.specification.ubl.schema.xsd.commonbasiccomponents_2.CompanyIDType;
 import oasis.names.specification.ubl.schema.xsd.commonbasiccomponents_2.CountrySubentityType;
 import oasis.names.specification.ubl.schema.xsd.commonbasiccomponents_2.DistrictType;
-import oasis.names.specification.ubl.schema.xsd.commonbasiccomponents_2.DocumentCurrencyCodeType;
 import oasis.names.specification.ubl.schema.xsd.commonbasiccomponents_2.EmbeddedDocumentBinaryObjectType;
 import oasis.names.specification.ubl.schema.xsd.commonbasiccomponents_2.IDType;
 import oasis.names.specification.ubl.schema.xsd.commonbasiccomponents_2.IdentificationCodeType;
 import oasis.names.specification.ubl.schema.xsd.commonbasiccomponents_2.InstructionNoteType;
-import oasis.names.specification.ubl.schema.xsd.commonbasiccomponents_2.InvoiceTypeCodeType;
 import oasis.names.specification.ubl.schema.xsd.commonbasiccomponents_2.InvoicedQuantityType;
-import oasis.names.specification.ubl.schema.xsd.commonbasiccomponents_2.IssueDateType;
-import oasis.names.specification.ubl.schema.xsd.commonbasiccomponents_2.IssueTimeType;
 import oasis.names.specification.ubl.schema.xsd.commonbasiccomponents_2.LineExtensionAmountType;
 import oasis.names.specification.ubl.schema.xsd.commonbasiccomponents_2.MultiplierFactorNumericType;
 import oasis.names.specification.ubl.schema.xsd.commonbasiccomponents_2.NameType;
-import oasis.names.specification.ubl.schema.xsd.commonbasiccomponents_2.NoteType;
 import oasis.names.specification.ubl.schema.xsd.commonbasiccomponents_2.PayableAmountType;
 import oasis.names.specification.ubl.schema.xsd.commonbasiccomponents_2.PayableRoundingAmountType;
 import oasis.names.specification.ubl.schema.xsd.commonbasiccomponents_2.PaymentMeansCodeType;
@@ -130,13 +113,11 @@ import oasis.names.specification.ubl.schema.xsd.commonbasiccomponents_2.PlotIden
 import oasis.names.specification.ubl.schema.xsd.commonbasiccomponents_2.PostalZoneType;
 import oasis.names.specification.ubl.schema.xsd.commonbasiccomponents_2.PrepaidAmountType;
 import oasis.names.specification.ubl.schema.xsd.commonbasiccomponents_2.PriceAmountType;
-import oasis.names.specification.ubl.schema.xsd.commonbasiccomponents_2.ProfileIDType;
 import oasis.names.specification.ubl.schema.xsd.commonbasiccomponents_2.RegistrationNameType;
 import oasis.names.specification.ubl.schema.xsd.commonbasiccomponents_2.RoundingAmountType;
 import oasis.names.specification.ubl.schema.xsd.commonbasiccomponents_2.SignatureMethodType;
 import oasis.names.specification.ubl.schema.xsd.commonbasiccomponents_2.StreetNameType;
 import oasis.names.specification.ubl.schema.xsd.commonbasiccomponents_2.TaxAmountType;
-import oasis.names.specification.ubl.schema.xsd.commonbasiccomponents_2.TaxCurrencyCodeType;
 import oasis.names.specification.ubl.schema.xsd.commonbasiccomponents_2.TaxExclusiveAmountType;
 import oasis.names.specification.ubl.schema.xsd.commonbasiccomponents_2.TaxExemptionReasonCodeType;
 import oasis.names.specification.ubl.schema.xsd.commonbasiccomponents_2.TaxExemptionReasonType;
@@ -274,11 +255,13 @@ public class AsqZatcaInvoiceGenerationHelper {
 		// invoiceData.getIrn();
 		String xmlIrnValue = invoiceData.getID().getValue();
 
+		Long nextICV = SequenceFactory.getNextLongValue("ASQ_ZATCA_SEQ");
+
 		SignatureData signatureData = new SignatureData();
 
 		logger.debug(" ---------------------------Generate QR Starts---------------------- ");
 		HashQRData data = getHashAndQR(sellerName, sellerVATRegNumber, invoiceIssueTime, invoiceIssueDate, payableAmount, vatTotal, invoiceXmlString, AsqZatcaConstant.keySecret,
-				AsqZatcaConstant.keyAlg, addDocQR, xmlUUID, xmlIrnValue, signatureData);
+				AsqZatcaConstant.keyAlg, addDocQR, xmlUUID, xmlIrnValue, signatureData, nextICV);
 
 		if (data.isCertificateExpired()) {
 			logger.error("*******Certificate Expired************");
@@ -323,33 +306,6 @@ public class AsqZatcaInvoiceGenerationHelper {
 		oi.setInvoice(base64.encodeToString(invoiceXML.getBytes()));
 		SmartHubUtil.writeInvoiceJSON(invoiceData.getID().getValue(), invoiceIssueDate, invoiceIssueTime, oi);
 		return new AsqSubmitZatcaCertServiceResponse();
-	}
-
-	public String generate(InvoiceType invoiceData)
-			throws JAXBException, DatatypeConfigurationException, ParseException, KeyStoreException, CertificateException, IOException, NoSuchAlgorithmException, ASQException {
-		Base64 base64 = new Base64();
-		HashQRData data = null;
-
-		InvoiceType in = asqZatcaHelper.getZatcaOjectFactory(oasis.names.specification.ubl.schema.xsd.invoice_2.ObjectFactory.class).createInvoiceType();
-		oasis.names.specification.ubl.schema.xsd.commonaggregatecomponents_2.ObjectFactory cac = asqZatcaHelper
-				.getZatcaOjectFactory(oasis.names.specification.ubl.schema.xsd.commonaggregatecomponents_2.ObjectFactory.class);
-		oasis.names.specification.ubl.schema.xsd.commonbasiccomponents_2.ObjectFactory cbc = asqZatcaHelper
-				.getZatcaOjectFactory(oasis.names.specification.ubl.schema.xsd.commonbasiccomponents_2.ObjectFactory.class);
-
-		AdditionalDocumentReference addDocQR = new AdditionalDocumentReference("QR", StringUtils.EMPTY, StringUtils.EMPTY);
-
-		// Here we are putting value in invoice object
-		// poulateXMLInvoiceType(in, invoiceData, cbc, cac, addDocQR);
-
-		/** ---------------------------Generate XML---------------------- **/
-		String xmlData = SmartHubUtil.generateInvoiceXML(in);
-		logger.info("First Initial XML " + xmlData);
-		/** ---------------------------Generate XML---------------------- **/
-
-		logger.info(" ---------------------------Generate QR Begin---------------------- ");
-		// Declaring a new signature to populate the object
-
-		return SmartHubUtil.generateResponse(null);
 	}
 
 	/**
@@ -430,7 +386,7 @@ public class AsqZatcaInvoiceGenerationHelper {
 		PartyIdentificationType partyIdentificationType = cac.createPartyIdentificationType();
 		IDType idType = cbc.createIDType();
 		idType.setSchemeID("CRN");
-		idType.setValue("1010270035");
+		idType.setValue(System.getProperty("asq.zatca.company.crn.number"));
 		partyIdentificationType.setID(idType);
 		partyType.getPartyIdentification().add(partyIdentificationType);
 
@@ -482,7 +438,7 @@ public class AsqZatcaInvoiceGenerationHelper {
 		PartyTaxSchemeType partyTaxSchemeType = cac.createPartyTaxSchemeType();
 
 		CompanyIDType companyIDType = cbc.createCompanyIDType();
-		companyIDType.setValue("300099496800003");
+		companyIDType.setValue(System.getProperty("asq.zatca.company.vat.reg.number"));
 		partyTaxSchemeType.setCompanyID(companyIDType);
 
 		TaxSchemeType taxSchemeType = cac.createTaxSchemeType();
@@ -497,7 +453,7 @@ public class AsqZatcaInvoiceGenerationHelper {
 		// Setting Zatca Customer Reg Name
 		PartyLegalEntityType partyLegalEntityType = cac.createPartyLegalEntityType();
 		RegistrationNameType registrationNameType = cbc.createRegistrationNameType();
-		registrationNameType.setValue("");
+		registrationNameType.setValue(System.getProperty("asq.zatca.company.legalenity.name"));
 		partyLegalEntityType.setRegistrationName(registrationNameType);
 		partyType.getPartyLegalEntity().add(partyLegalEntityType);
 
@@ -631,26 +587,17 @@ public class AsqZatcaInvoiceGenerationHelper {
 	 * @return deliveryType
 	 */
 
-	public DeliveryType setDeliveryType(String actualDeliveryDate, String latestDeliveryDate, oasis.names.specification.ubl.schema.xsd.commonbasiccomponents_2.ObjectFactory cbc,
-			oasis.names.specification.ubl.schema.xsd.commonaggregatecomponents_2.ObjectFactory cac) throws DatatypeConfigurationException, ParseException {
+	public DeliveryType setDeliveryType(XMLGregorianCalendar actualDeliveryDate, XMLGregorianCalendar latestDeliveryDate,
+			oasis.names.specification.ubl.schema.xsd.commonbasiccomponents_2.ObjectFactory cbc, oasis.names.specification.ubl.schema.xsd.commonaggregatecomponents_2.ObjectFactory cac)
+			throws DatatypeConfigurationException, ParseException {
 		DeliveryType deliveryType = cac.createDeliveryType();
-		GregorianCalendar gregorianCalendarActualDeliveryDate = new GregorianCalendar();
-		GregorianCalendar gregorianCalendarLatestDeliveryDateType = new GregorianCalendar();
-		DateFormat dateFormat = new SimpleDateFormat(AsqZatcaConstant.commonDateFormat, Locale.ENGLISH);
-
-		if (null != actualDeliveryDate && !actualDeliveryDate.isEmpty()) {
-			gregorianCalendarActualDeliveryDate.setTime(dateFormat.parse(actualDeliveryDate));
-			XMLGregorianCalendar actualDeliveryDateObj = DatatypeFactory.newInstance().newXMLGregorianCalendarDate(gregorianCalendarActualDeliveryDate.get(Calendar.YEAR),
-					gregorianCalendarActualDeliveryDate.get(Calendar.MONTH) + 1, gregorianCalendarActualDeliveryDate.get(Calendar.DAY_OF_MONTH), DatatypeConstants.FIELD_UNDEFINED);
+		if (null != actualDeliveryDate) {
 			ActualDeliveryDateType actualDeliveryDateType = cbc.createActualDeliveryDateType();
-			actualDeliveryDateType.setValue(actualDeliveryDateObj);
+			actualDeliveryDateType.setValue(actualDeliveryDate);
 			deliveryType.setActualDeliveryDate(actualDeliveryDateType);
-		} else if (null != latestDeliveryDate && !latestDeliveryDate.isEmpty()) {
-			gregorianCalendarLatestDeliveryDateType.setTime(dateFormat.parse(latestDeliveryDate));
-			XMLGregorianCalendar latestDeliveryDateObj = DatatypeFactory.newInstance().newXMLGregorianCalendarDate(gregorianCalendarLatestDeliveryDateType.get(Calendar.YEAR),
-					gregorianCalendarLatestDeliveryDateType.get(Calendar.MONTH) + 1, gregorianCalendarLatestDeliveryDateType.get(Calendar.DAY_OF_MONTH), DatatypeConstants.FIELD_UNDEFINED);
+		} else if (null != latestDeliveryDate) {
 			ActualDeliveryDateType actualDeliveryDateType = cbc.createActualDeliveryDateType();
-			actualDeliveryDateType.setValue(latestDeliveryDateObj);
+			actualDeliveryDateType.setValue(latestDeliveryDate);
 			deliveryType.setActualDeliveryDate(actualDeliveryDateType);
 		}
 		return deliveryType;
@@ -870,8 +817,8 @@ public class AsqZatcaInvoiceGenerationHelper {
 	 * @param cac
 	 * @return
 	 */
-	public MonetaryTotalType setMonetaryTotalType(String currencyID, String lineExtensionAmount, String taxExclusiveAmount, String taxInclusiveAmount, String allowanceTotalAmount,
-			String prepaidAmount, String payableAmount, String payableRoundingAmount, oasis.names.specification.ubl.schema.xsd.commonbasiccomponents_2.ObjectFactory cbc,
+	public MonetaryTotalType setMonetaryTotalType(String currencyID, BigDecimal lineExtensionAmount, BigDecimal taxExclusiveAmount, BigDecimal taxInclusiveAmount, String allowanceTotalAmount,
+			String prepaidAmount, BigDecimal payableAmount, String payableRoundingAmount, oasis.names.specification.ubl.schema.xsd.commonbasiccomponents_2.ObjectFactory cbc,
 			oasis.names.specification.ubl.schema.xsd.commonaggregatecomponents_2.ObjectFactory cac) {
 
 		MonetaryTotalType monetaryTotalType = cac.createMonetaryTotalType();
@@ -891,12 +838,12 @@ public class AsqZatcaInvoiceGenerationHelper {
 		payableAmountType.setCurrencyID(currencyID);
 		payableRoundingAmountType.setCurrencyID(currencyID);
 
-		lineExtensionAmountType.setValue(new BigDecimal(lineExtensionAmount));
-		taxExclusiveAmountType.setValue(new BigDecimal(taxExclusiveAmount));
-		taxInclusiveAmountType.setValue(new BigDecimal(taxInclusiveAmount));
+		lineExtensionAmountType.setValue(lineExtensionAmount);
+		taxExclusiveAmountType.setValue(taxExclusiveAmount);
+		taxInclusiveAmountType.setValue(taxInclusiveAmount);
 		allowanceTotalAmountType.setValue(new BigDecimal(allowanceTotalAmount));
 		prepaidAmountType.setValue(new BigDecimal(prepaidAmount));
-		payableAmountType.setValue(new BigDecimal(payableAmount));
+		payableAmountType.setValue(payableAmount);
 
 		if (null != payableRoundingAmount && !payableRoundingAmount.isEmpty()) {
 			payableRoundingAmountType.setValue(new BigDecimal(payableRoundingAmount));
@@ -924,7 +871,7 @@ public class AsqZatcaInvoiceGenerationHelper {
 	 * @param cac
 	 * @return
 	 */
-	public AllowanceChargeType setAllowanceChargeType(String chargeIndicator, String allowanceChargeReason, BigDecimal amount, BigDecimal baseAmount, String currencyID, String multiplierNumeric,
+	public AllowanceChargeType setAllowanceChargeType(String chargeIndicator, String allowanceChargeReason, BigDecimal amount, BigDecimal baseAmount, String currencyID, BigDecimal multiplierNumeric,
 			oasis.names.specification.ubl.schema.xsd.commonbasiccomponents_2.ObjectFactory cbc, oasis.names.specification.ubl.schema.xsd.commonaggregatecomponents_2.ObjectFactory cac) {
 
 		AllowanceChargeType allowanceChargeType = cac.createAllowanceChargeType();
@@ -957,7 +904,7 @@ public class AsqZatcaInvoiceGenerationHelper {
 		}
 
 		if (null != multiplierNumeric) {
-			multiplierFactorNumeric.setValue(new BigDecimal(multiplierNumeric));
+			multiplierFactorNumeric.setValue(multiplierNumeric);
 			allowanceChargeType.setMultiplierFactorNumeric(multiplierFactorNumeric);
 		}
 
@@ -983,8 +930,9 @@ public class AsqZatcaInvoiceGenerationHelper {
 		priceAmountType.setCurrencyID(currencyID);
 		priceAmountType.setValue(priceAmount);
 		priceType.setPriceAmount(priceAmountType);
-		priceType.getAllowanceCharge().addAll(listAllowanceChargeType);
-
+		if (null != listAllowanceChargeType) {
+			priceType.getAllowanceCharge().addAll(listAllowanceChargeType);
+		}
 		return priceType;
 	}
 
@@ -1054,7 +1002,7 @@ public class AsqZatcaInvoiceGenerationHelper {
 	 * @param cac
 	 * @return
 	 */
-	public InvoiceLineType setInvoiceLineType(IRetailTransactionLineItem lineItem, oasis.names.specification.ubl.schema.xsd.commonbasiccomponents_2.ObjectFactory cbc,
+	public InvoiceLineType setInvoiceLineType(SaleReturnLineItemModel lineItem, oasis.names.specification.ubl.schema.xsd.commonbasiccomponents_2.ObjectFactory cbc,
 			oasis.names.specification.ubl.schema.xsd.commonaggregatecomponents_2.ObjectFactory cac) {
 
 		InvoiceLineType invoiceLineType = cac.createInvoiceLineType();
@@ -1062,44 +1010,37 @@ public class AsqZatcaInvoiceGenerationHelper {
 		LineExtensionAmountType lineExtensionAmountType = cbc.createLineExtensionAmountType();
 
 		IDType invoiceLineTypeID = cbc.createIDType();
-		// invoiceLineTypeID.setValue(lineItem.getInvoiceLineID());
-		// invoicedQuantityType.setUnitCode(lineItem.getInvoicedQuantityUnitCode());
-		// invoicedQuantityType.setValue(new
-		// BigDecimal(lineItem.getInvoiceLineInvoicedQuantity()));
+		invoiceLineTypeID.setValue(String.valueOf(lineItem.getLineItemSequence()));
+		invoicedQuantityType.setUnitCode("PCE");
+		invoicedQuantityType.setValue(lineItem.getQuantity());
 		lineExtensionAmountType.setCurrencyID(lineItem.getCurrencyId());
-		// lineExtensionAmountType.setValue(new
-		// BigDecimal(lineItem.getInvoiceLineLineExtensionAmount()));
+		lineExtensionAmountType.setValue(lineItem.getGrossAmount());
 
 		invoiceLineType.setID(invoiceLineTypeID);
 		invoiceLineType.setInvoicedQuantity(invoicedQuantityType);
 		invoiceLineType.setLineExtensionAmount(lineExtensionAmountType);
 
-		// mapAllowanceCharges(invoiceLineType, lineItem, cbc, cac);
+		if (lineItem.getDiscounted()) {
+			// mapAllowanceCharges(invoiceLineType, lineItem, cbc, cac);
+		}
 
-		/*
-		 * if (null != lineItem.getInvoiceLineTaxAmountCurrencyID() && null !=
-		 * lineItem.getInvoiceLineTaxAmount() && null !=
-		 * lineItem.getInvoiceLineRoundingAmount()) {
-		 * invoiceLineType.getTaxTotal().add(setTaxTotalType(lineItem.
-		 * getInvoiceLineTaxAmountCurrencyID(), new
-		 * BigDecimal(lineItem.getInvoiceLineTaxAmount()), new
-		 * BigDecimal(lineItem.getInvoiceLineRoundingAmount()), null, cbc, cac)); }
-		 * 
-		 * invoiceLineType.setItem(setItemType(lineItem.getItemClassifiedTaxCategoryID()
-		 * , lineItem.getItemName(), new
-		 * BigDecimal(lineItem.getItemClassifiedTaxCategoryPercent()),
-		 * setTaxSchemeType(lineItem.getItemClassifiedTaxCategoryTaxSchemeID(),
-		 * EmptyString, EmptyString, cbc, cac), cbc, cac));
-		 * 
-		 * invoiceLineType.setPrice(setPriceType(lineItem.getItemPriceAmountCurrencyID()
-		 * , new BigDecimal(lineItem.getItemPriceAmount()), listAllowanceChargeType,
-		 * cbc, cac));
-		 * 
-		 * if (null != lineItem.getNotes() && lineItem.getNotes().length > 0) { for
-		 * (String note : lineItem.getNotes()) { NoteType noteType =
-		 * cbc.createNoteType(); noteType.setValue(note);
-		 * invoiceLineType.getNote().add(noteType); } }
-		 */
+		if (null != lineItem.getCurrencyId() && null != lineItem.getTaxModifiers()) {
+			invoiceLineType.getTaxTotal().add(setTaxTotalType(lineItem.getCurrencyId(), lineItem.getTaxModifiers().get(0).getRawTaxAmount(), new BigDecimal(0), null, cbc, cac));
+		}
+
+		invoiceLineType.setItem(setItemType("S", lineItem.getItemDescription(), asqZatcaHelper.getFormatttedBigDecimalValue(lineItem.getTaxModifiers().get(0).getRawTaxPercentage()),
+				setTaxSchemeType(lineItem.getTaxModifiers().get(0).getTaxGroupId(), AsqZatcaConstant.ZATCA_SCHEME_AGENCYID, AsqZatcaConstant.ZATCA_TAXSCHEME_SCHEMEID, cbc, cac), cbc, cac));
+
+		invoiceLineType.setPrice(setPriceType(lineItem.getCurrencyId(), lineItem.getNetAmount(), null, cbc, cac));
+
+		// if (null != lineItem.getNotes() && lineItem.getNotes().length > 0) {
+		// for (String note : lineItem.getNotes()) {
+		// NoteType noteType = cbc.createNoteType();
+		// noteType.setValue(note);
+		// invoiceLineType.getNote().add(noteType);
+		// }
+		// }
+
 		return invoiceLineType;
 	}
 
@@ -1219,14 +1160,14 @@ public class AsqZatcaInvoiceGenerationHelper {
 	 * @throws Exception
 	 */
 	public HashQRData getHashAndQR(String sellerName, String vatNumber, String invoiceIssueTimeStamp, String invoiceIssueDate, String invoiceTotal, String vatTotal, String xmlData, String keySecret,
-			String keyAlias, AdditionalDocumentReference addDocQR, String xmlUUID, String xmlIrnValue, SignatureData signatureData) throws ASQException, Exception {
+			String keyAlias, AdditionalDocumentReference addDocQR, String xmlUUID, String xmlIrnValue, SignatureData signatureData, Long nextICV) throws ASQException, Exception {
 
 		Base64 base64 = new Base64();
 		String xml = SmartHubUtil.removeNewlineAndWhiteSpaces(xmlData);
-		logger.info("**********Initial XML Generated : " + xml);
+		logger.debug("**********Initial XML Generated : " + xml);
 		String hashedXML = new InvoiceHash().getInvoiceHash(xml);// generating hash
-		logger.info("**********Invoice Hash : " + hashedXML);
-		logger.info("**********KeyStore Fetching from Properties - Path -{} -- Key- {} : ", AsqZatcaConstant.certificateFilePath, keySecret);
+		logger.debug("**********Invoice Hash : " + hashedXML);
+		logger.debug("**********KeyStore Fetching from Properties - Path -{} -- Key- {} : ", AsqZatcaConstant.certificateFilePath, keySecret);
 		KeyStore ks = SmartHubUtil.getKeyStore(AsqZatcaConstant.certificateFilePath, keySecret);
 
 		X509Certificate x509 = SmartHubUtil.readCSIDFile(AsqZatcaConstant.csidCertificateFilePath);
@@ -1249,10 +1190,11 @@ public class AsqZatcaInvoiceGenerationHelper {
 		addDocQR.setEmbeddedDocumentBinaryObject(qrCode);
 
 		// saving the hash value in the database
+		// AsqZatcaInvoiceHashModel model =
+		// asqZatcaDatabaseHelper.saveInvoiceHash(xmlIrnValue, xmlUUID, hashedXML,
+		// signingTime.toXMLFormat());
 
-		AsqZatcaInvoiceHashModel model = asqZatcaDatabaseHelper.saveInvoiceHash(xmlIrnValue, xmlUUID, hashedXML, signingTime.toXMLFormat());
-
-		signatureData.setICV(Long.valueOf(model.getIcv()).intValue());
+		signatureData.setICV(nextICV.intValue());
 		signatureData.setSignatureValue(signedHashAsBytes);
 		signatureData.setDigestValueInvoiceSignedData(hashedXML.getBytes());
 		signatureData.setX509Certificate(csidCertificate);
@@ -1412,167 +1354,6 @@ public class AsqZatcaInvoiceGenerationHelper {
 
 	/**
 	 * 
-	 * @param in
-	 * @param invoiceData
-	 * @param cbc
-	 * @param cac
-	 * @return xmlData
-	 * @throws ParseException
-	 * @throws DatatypeConfigurationException
-	 */
-	private void poulateXMLInvoiceType(InvoiceType in, InvoiceData invoiceData, oasis.names.specification.ubl.schema.xsd.commonbasiccomponents_2.ObjectFactory cbc,
-			oasis.names.specification.ubl.schema.xsd.commonaggregatecomponents_2.ObjectFactory cac, AdditionalDocumentReference addDocQR) throws ParseException, DatatypeConfigurationException {
-
-		ProfileIDType profileID = cbc.createProfileIDType();
-		profileID.setValue(invoiceData.getProfileID());
-
-		IDType idType = cbc.createIDType();
-		idType.setValue(invoiceData.getIrn());
-
-		UUIDType uuidType = cbc.createUUIDType();
-		uuid = SmartHubUtil.generateUUID();
-		uuidType.setValue(uuid);
-
-		InvoiceTypeCodeType invoiceTypeCodeType = cbc.createInvoiceTypeCodeType();
-		invoiceTypeCodeType.setName(invoiceData.getInvoiceTypeCodeName());
-		invoiceTypeCodeType.setValue(invoiceData.getInvoiceTypeCode());
-
-		DocumentCurrencyCodeType documentCurrencyCodeType = cbc.createDocumentCurrencyCodeType();
-		documentCurrencyCodeType.setValue(invoiceData.getCurrency());
-
-		TaxCurrencyCodeType taxCurrencyCodeType = cbc.createTaxCurrencyCodeType();
-		taxCurrencyCodeType.setValue(invoiceData.getCurrency());
-
-		// setting Supplier
-		SupplierPartyType supplierPartyType = cac.createSupplierPartyType();
-		/*
-		 * supplierPartyType.setParty(setPartyType(new String[] {
-		 * invoiceData.getSupplierPartyIdentificationID() }, new String[] {
-		 * invoiceData.getSupplierPartyIdentificationschemeID() },
-		 * invoiceData.getSellerAddressStreet(),
-		 * invoiceData.getSellerAddressAdditinalStreet(),
-		 * invoiceData.getSellerBuildingNumber(),
-		 * invoiceData.getSellerPlotIdentification(),
-		 * invoiceData.getSellerCitySubdivisionName(), invoiceData.getSellerCity(),
-		 * invoiceData.getSellerPostalCode(), invoiceData.getSelletCountrySubentity(),
-		 * invoiceData.getSellerCountryCode(), new String[] {
-		 * invoiceData.getSellerVATRegNumber() }, new String[] { "VAT" }, cbc, cac,
-		 * invoiceData.getSellerName()));
-		 */
-
-		// Setting Supplier
-		CustomerPartyType customerPartyType = cac.createCustomerPartyType();
-		/*
-		 * customerPartyType.setParty(setCustomerShippingAddress(invoiceData.
-		 * getBuyerPartyIdentificationID(),
-		 * invoiceData.getBuyerPartyIdentificationschemeID(),
-		 * invoiceData.getBuyerAddressStreet(),
-		 * invoiceData.getBuyerAddressAdditionalStreet(),
-		 * invoiceData.getBuyerBuildingNumber(),
-		 * invoiceData.getBuyerPlotIdentification(),
-		 * invoiceData.getBuyerCitySubdivisionName(), invoiceData.getBuyerCity(),
-		 * invoiceData.getBuyerPostalCode(), invoiceData.getBuyerDistrict(),
-		 * invoiceData.getBuyerState(), invoiceData.getBuyerCountryCode(),
-		 * invoiceData.getBuyerTaxScheme(), invoiceData.getBuyerName(), cbc, cac));
-		 */
-		mapBuyerPhoneNumber(customerPartyType, invoiceData.getBuyerPhoneNumber(), cbc, cac);
-
-		// setting Date
-		IssueDateType issueDateType = cbc.createIssueDateType();
-		GregorianCalendar gregorianCalendarIssueDate = new GregorianCalendar();
-		gregorianCalendarIssueDate.setTime(new SimpleDateFormat(AsqZatcaConstant.commonDateFormat, Locale.ENGLISH).parse(invoiceData.getInvoiceIssueDate()));
-
-		XMLGregorianCalendar date = DatatypeFactory.newInstance().newXMLGregorianCalendarDate(gregorianCalendarIssueDate.get(Calendar.YEAR), gregorianCalendarIssueDate.get(Calendar.MONTH) + 1,
-				gregorianCalendarIssueDate.get(Calendar.DAY_OF_MONTH), DatatypeConstants.FIELD_UNDEFINED);
-		issueDateType.setValue(date);
-
-		// Setting Issue Date
-		IssueTimeType issueTimeType = cbc.createIssueTimeType();
-		issueTimeType.setValue(SmartHubUtil.IssueTimeFormatConversion(invoiceData.getInvoiceIssueTime()));
-
-		// DocumentLevel Notes
-		if (null != invoiceData.getNotes() && invoiceData.getNotes().length > 0) {
-			for (String note : invoiceData.getNotes()) {
-				NoteType notes = cbc.createNoteType();
-				notes.setValue(note);
-				in.getNote().add(notes);
-			}
-		}
-
-		in.setProfileID(profileID);
-		in.setID(idType);
-		in.setUUID(uuidType);
-		in.setIssueDate(issueDateType);
-		in.setIssueTime(issueTimeType);
-		in.setInvoiceTypeCode(invoiceTypeCodeType);
-		in.setDocumentCurrencyCode(documentCurrencyCodeType);
-		in.setTaxCurrencyCode(taxCurrencyCodeType);
-
-		// retrieving hash value
-		try {
-			List<AsqZatcaInvoiceHashQueryResult> invoiceHashQryResult = asqZatcaDatabaseHelper.getPrevInvoiceHashFromDB();
-
-			if (invoiceHashQryResult != null && !invoiceHashQryResult.isEmpty()) {
-				for (AsqZatcaInvoiceHashQueryResult queryResult : invoiceHashQryResult) {
-					logger.debug("Fetching data from previousInvoiceHash from DB:" + invoiceHashQryResult.toString());
-					AdditionalDocumentReference addDocPIH = new AdditionalDocumentReference("PIH", EmptyString, EmptyString);
-					addDocPIH.setEmbeddedDocumentBinaryObject(queryResult.get("InvoiceHash").toString());// invoice hash to be taken from constant file
-					ArrayList<AdditionalDocumentReference> docList = new ArrayList<AdditionalDocumentReference>();
-					docList.add(new AdditionalDocumentReference("ICV", String.valueOf(queryResult.getIcv() + 1), EmptyString));
-					docList.add(addDocPIH);
-					docList.add(addDocQR);
-					invoiceData.setAdditionalDocumentReference(docList);
-				}
-			} else {
-				logger.debug("PreviousHashFromDb is empty:" + invoiceHashQryResult.toString());
-			}
-		} catch (Exception exception) {
-			logger.error("Returned null from getPreviousInvoiceHashFromDB method:" + exception);
-		}
-
-		for (AdditionalDocumentReference docRef : invoiceData.getAdditionalDocumentReference()) {
-			if (!"QR".equalsIgnoreCase(docRef.getId())) {
-				in.getAdditionalDocumentReference().add(setDocumentReferenceType(docRef.getId(), docRef.getUUID(), cbc, cac, docRef.getEmbeddedDocumentBinaryObject()));
-			}
-		}
-
-		in.setAccountingSupplierParty(supplierPartyType);
-		in.setAccountingCustomerParty(customerPartyType);
-		in.getDelivery().add(setDeliveryType(invoiceData.getOrgSupplyDate(), invoiceData.getSupplyDate(), cbc, cac));
-		in.getPaymentMeans().add(setPaymentMeans(invoiceData.getPaymentMeansCode(), invoiceData.getCreditDebitReason(), cbc, cac));
-
-		// mapping TaxTotal
-		double totalTaxvalue = 0.0;
-		for (TaxTotal taxTotal : invoiceData.getTaxTotal()) {
-			in.getTaxTotal().add(setTaxTotalType(taxTotal.getCurrency(), new BigDecimal(taxTotal.getTaxAmount()), null, mapTaxSubtotal(taxTotal.getTaxSubtotal(), cbc, cac), cbc, cac));
-			totalTaxvalue = totalTaxvalue + Double.parseDouble(taxTotal.getTaxAmount());
-		}
-
-		in.getTaxTotal().add(mapTotalTaxAmoutTag(String.valueOf(totalTaxvalue), invoiceData.getTaxTotal().get(0).getCurrency(), cbc, cac));
-		in.setLegalMonetaryTotal(setMonetaryTotalType(invoiceData.getCurrency(), invoiceData.getLineExtensionAmount(), invoiceData.getTaxExclusiveAmount(), invoiceData.getTaxInclusiveAmount(),
-				invoiceData.getAllowanceTotalAmount(), invoiceData.getPrepaidAmount(), invoiceData.getPayableAmount(), invoiceData.getPayableRoundingAmount(), cbc, cac));
-
-		for (LineItems lineItem : invoiceData.getLineItems()) {
-			List<AllowanceChargeType> listAllowanceChargeType = new ArrayList<AllowanceChargeType>();
-			if (null != lineItem.getItemAllowanceCharges()) {
-				for (ItemAllowanceCharges itemAllowanceCharge : lineItem.getItemAllowanceCharges()) {
-					listAllowanceChargeType.add(setAllowanceChargeType(new String().valueOf(itemAllowanceCharge.isItemAllowanceChargeIndicator()), itemAllowanceCharge.getItemAllowanceChargeReason(),
-							new BigDecimal(itemAllowanceCharge.getItemAllowanceChargeAmount()), new BigDecimal(itemAllowanceCharge.getItemBaseAmount()), lineItem.getItemPriceAmountCurrencyID(),
-							itemAllowanceCharge.getItemMultiplierFactorNummeric(), cbc, cac));
-				}
-			}
-			// in.getInvoiceLine().add(setInvoiceLineType(lineItem, listAllowanceChargeType,
-			// cbc, cac));
-		}
-		if (null != invoiceData.getOriginalInvoiceNumbers() && !invoiceData.getOriginalInvoiceNumbers().isEmpty()) {
-			in.getBillingReference().add(setBillingReference(invoiceData.getOriginalInvoiceNumbers()));
-		} else {
-			logger.info("OriginalInvoiceNumbers is null or empty in the invoice Request");
-		}
-	}
-
-	/**
-	 * 
 	 * @param customerPartyType
 	 * @param buyerPhoneNumber
 	 * @param cbc
@@ -1662,7 +1443,7 @@ public class AsqZatcaInvoiceGenerationHelper {
 
 	public String generateFinalXML(InvoiceType in, String argQRCode, SignatureData signatureData) throws NoSuchAlgorithmException, IOException, JAXBException {
 		String invoiceXML = SmartHubUtil.generateCompleteSignedInvoiceXML(in);
-		logger.info("Before Invoice Generated: " + invoiceXML);
+		logger.debug("Before Invoice Generated: " + invoiceXML);
 		invoiceXML = invoiceXML.replace(AsqZatcaConstant.UBLDocumentSignaturesTag, AsqZatcaConstant.UBLDocumentSignaturesWithNamespace);
 		invoiceXML = invoiceXML.replace(AsqZatcaConstant.SignatureTag, AsqZatcaConstant.SignatureWithNamespace);
 		invoiceXML = invoiceXML.replace(AsqZatcaConstant.QualifyingPropertiesTag, AsqZatcaConstant.QualifyingPropertiesWithNamespace);
@@ -1672,7 +1453,7 @@ public class AsqZatcaInvoiceGenerationHelper {
 		invoiceXML = invoiceXML.replace("UmVwbGFjZVNpZ25hdHVyZQ==", SmartHubUtil.hashSignatureProperties(getSignaturePropertyHashingString(signatureData)));
 		invoiceXML = SmartHubUtil.removeSigAttributes(invoiceXML);
 		invoiceXML = SmartHubUtil.removeNewlineAndWhiteSpaces(invoiceXML);
-		logger.info("After Invoice Generated: " + invoiceXML);
+		logger.debug("After Invoice Generated: " + invoiceXML);
 		return invoiceXML;
 	}
 

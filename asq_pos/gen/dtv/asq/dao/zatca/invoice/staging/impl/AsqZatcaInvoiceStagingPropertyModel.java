@@ -1,5 +1,5 @@
 // Copyright (c) 2024, Oracle and/or its affiliates. All rights reserved.
-// Generated using dtv.data2.access.impl.daogen.DefaultModelGenerator 2024-08-11T15:27:53
+// Generated using dtv.data2.access.impl.daogen.DefaultModelGenerator 2024-08-22T18:06:17
 // CHECKSTYLE:OFF
 package dtv.asq.dao.zatca.invoice.staging.impl;
 
@@ -246,6 +246,49 @@ public class AsqZatcaInvoiceStagingPropertyModel
       if (_myExtension != null) {
         // Propagate changes to customer extension object.
         dtv.util.ObjectUtils.invokeMethod("setWorkStationId_noev", _myExtension, new Class<?>[] {long.class}, new Object[] {argWorkStationId}, null);
+      }
+    }
+
+    return ev_postable;
+  }
+
+  /**
+   * Gets the value of the ICV field.
+   * @return The value of the field.
+   */
+  public long getIcv() {
+    if (getDAO_().getIcv() != null) {
+      return getDAO_().getIcv().longValue();
+    }
+    else {
+      return 0; // no default specified in the dtx; we default to 0
+    }
+  }
+
+  /**
+   * Sets the value of the ICV field.
+   * @param argIcv The new value for the field.
+   */
+  public void setIcv(long argIcv) {
+    if (setIcv_noev(argIcv)) {
+      if (_events != null) {
+        if (postEventsForChanges()) {
+          _events.post(dtv.asq.dao.zatca.invoice.staging.IAsqZatcaInvoiceStagingProperty.SET_ICV, Long.valueOf(argIcv));
+        }
+      }
+    }
+  }
+
+  public boolean setIcv_noev(long argIcv) {
+    boolean ev_postable = false;
+
+    if ((getDAO_().getIcv() == null && Long.valueOf(argIcv) != null) ||
+        (getDAO_().getIcv() != null && !getDAO_().getIcv().equals(Long.valueOf(argIcv)))) {
+      getDAO_().setIcv(Long.valueOf(argIcv));
+      ev_postable = true;
+      if (_myExtension != null) {
+        // Propagate changes to customer extension object.
+        dtv.util.ObjectUtils.invokeMethod("setIcv_noev", _myExtension, new Class<?>[] {long.class}, new Object[] {argIcv}, null);
       }
     }
 

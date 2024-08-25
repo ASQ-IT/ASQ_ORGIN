@@ -1,5 +1,5 @@
 // Copyright (c) 2024, Oracle and/or its affiliates. All rights reserved.
-// Generated using dtv.data2.access.impl.daogen.GenerateInterfaces 2024-08-11T15:27:53
+// Generated using dtv.data2.access.impl.daogen.GenerateInterfaces 2024-08-22T18:06:17
 // CHECKSTYLE:OFF
 package dtv.asq.dao.zatca.invoice.staging;
 
@@ -20,6 +20,7 @@ public interface IAsqZatcaInvoiceStagingProperty extends IDataModel, dtv.data2.a
   public static final dtv.event.EventEnum SET_BUSINESSDATE = new dtv.event.EventEnum("set businessDate");
   public static final dtv.event.EventEnum SET_TRANSACTIONSEQ = new dtv.event.EventEnum("set transactionSeq");
   public static final dtv.event.EventEnum SET_WORKSTATIONID = new dtv.event.EventEnum("set workStationId");
+  public static final dtv.event.EventEnum SET_ICV = new dtv.event.EventEnum("set icv");
   public static final dtv.event.EventEnum SET_PROPERTYCODE = new dtv.event.EventEnum("set propertyCode");
   public static final dtv.event.EventEnum SET_TYPE = new dtv.event.EventEnum("set type");
   public static final dtv.event.EventEnum SET_STRINGVALUE = new dtv.event.EventEnum("set stringValue");
@@ -95,6 +96,18 @@ public interface IAsqZatcaInvoiceStagingProperty extends IDataModel, dtv.data2.a
    * @param argWorkStationId DAO alias for column wkstn_id
    */
   public void setWorkStationId(long argWorkStationId);
+
+  /**
+   * Getter for icv.
+   * @return DAO alias for column ICV
+   */
+  public long getIcv();
+
+  /**
+   * Setter for icv.
+   * @param argIcv DAO alias for column ICV
+   */
+  public void setIcv(long argIcv);
 
   /**
    * Getter for propertyCode.

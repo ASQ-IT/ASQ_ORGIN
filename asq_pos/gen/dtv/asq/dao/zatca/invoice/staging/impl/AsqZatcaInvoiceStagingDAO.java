@@ -1,5 +1,5 @@
 // Copyright (c) 2024, Oracle and/or its affiliates. All rights reserved.
-// Generated using dtv.data2.access.impl.daogen.GenerateDaoAndDba 2024-08-11T15:27:53
+// Generated using dtv.data2.access.impl.daogen.GenerateDaoAndDba 2024-08-22T18:06:17
 // CHECKSTYLE:OFF
 package dtv.asq.dao.zatca.invoice.staging.impl;
 
@@ -26,10 +26,13 @@ public class AsqZatcaInvoiceStagingDAO
   private dtv.util.DtvDate _businessDate;
   private Long _transactionSeq;
   private Long _workStationId;
+  private Long _icv;
   private String _status;
   private byte[] _submittedJSON;
   private byte[] _invoiceQrCode;
   private String _invoiceUUID;
+  private String _invoiceHashCode;
+  private dtv.util.DtvDate _invoiceDate;
   private String _createUserId;
   private dtv.util.DtvDate _createDate;
   private String _updateUserId;
@@ -127,6 +130,24 @@ public class AsqZatcaInvoiceStagingDAO
   }
 
   /**
+   * Gets the value of the ICV field.
+   * @return The value of the field.
+   */
+  public final Long getIcv() {
+    return _icv;
+  }
+
+  /**
+   * Sets the value of the ICV field.
+   * @param argIcv The new value of the field.
+   */
+  public final void setIcv(Long argIcv) {
+    if (changed(argIcv, _icv, "icv")) {
+      _icv = argIcv;
+    }
+  }
+
+  /**
    * Gets the value of the Status field.
    * @return The value of the field.
    */
@@ -145,7 +166,7 @@ public class AsqZatcaInvoiceStagingDAO
   }
 
   /**
-   * Gets the value of the JSON_INVOICE field.
+   * Gets the value of the INVOICE_XML field.
    * @return The value of the field.
    */
   public final byte[] getSubmittedJSON() {
@@ -153,7 +174,7 @@ public class AsqZatcaInvoiceStagingDAO
   }
 
   /**
-   * Sets the value of the JSON_INVOICE field.
+   * Sets the value of the INVOICE_XML field.
    * @param argSubmittedJSON The new value of the field.
    */
   public final void setSubmittedJSON(byte[] argSubmittedJSON) {
@@ -181,7 +202,7 @@ public class AsqZatcaInvoiceStagingDAO
   }
 
   /**
-   * Gets the value of the INVOICE_UIID field.
+   * Gets the value of the INVOICE_UUID field.
    * @return The value of the field.
    */
   public final String getInvoiceUUID() {
@@ -189,12 +210,49 @@ public class AsqZatcaInvoiceStagingDAO
   }
 
   /**
-   * Sets the value of the INVOICE_UIID field.
+   * Sets the value of the INVOICE_UUID field.
    * @param argInvoiceUUID The new value of the field.
    */
   public final void setInvoiceUUID(String argInvoiceUUID) {
     if (changed(argInvoiceUUID, _invoiceUUID, "invoiceUUID")) {
       _invoiceUUID = argInvoiceUUID;
+    }
+  }
+
+  /**
+   * Gets the value of the INVOICE_HASHCODE field.
+   * @return The value of the field.
+   */
+  public final String getInvoiceHashCode() {
+    return _invoiceHashCode;
+  }
+
+  /**
+   * Sets the value of the INVOICE_HASHCODE field.
+   * @param argInvoiceHashCode The new value of the field.
+   */
+  public final void setInvoiceHashCode(String argInvoiceHashCode) {
+    if (changed(argInvoiceHashCode, _invoiceHashCode, "invoiceHashCode")) {
+      _invoiceHashCode = argInvoiceHashCode;
+    }
+  }
+
+  /**
+   * Gets the value of the INVOICE_DATE field.
+   * @return The value of the field.
+   */
+  public final Date getInvoiceDate() {
+    return _invoiceDate;
+  }
+
+  /**
+   * Sets the value of the INVOICE_DATE field.
+   * @param argInvoiceDate The new value of the field.
+   */
+  public final void setInvoiceDate(Date argInvoiceDate) {
+    if (changed(argInvoiceDate, _invoiceDate, "invoiceDate")) {
+      _invoiceDate = (argInvoiceDate == null || argInvoiceDate instanceof dtv.util.DtvDate) ? 
+          (dtv.util.DtvDate) argInvoiceDate : new dtv.util.DtvDate(argInvoiceDate);
     }
   }
 
@@ -292,6 +350,9 @@ public class AsqZatcaInvoiceStagingDAO
     if (getWorkStationId() != null) {
       buf.append("workStationId").append("=").append(getWorkStationId()).append(" ");
     }
+    if (getIcv() != null) {
+      buf.append("icv").append("=").append(getIcv()).append(" ");
+    }
     if (getStatus() != null) {
       buf.append("status").append("=").append(getStatus()).append(" ");
     }
@@ -303,6 +364,12 @@ public class AsqZatcaInvoiceStagingDAO
     }
     if (getInvoiceUUID() != null) {
       buf.append("invoiceUUID").append("=").append(getInvoiceUUID()).append(" ");
+    }
+    if (getInvoiceHashCode() != null) {
+      buf.append("invoiceHashCode").append("=").append(getInvoiceHashCode()).append(" ");
+    }
+    if (getInvoiceDate() != null) {
+      buf.append("invoiceDate").append("=").append(getInvoiceDate()).append(" ");
     }
     if (getCreateUserId() != null) {
       buf.append("createUserId").append("=").append(getCreateUserId()).append(" ");
@@ -339,6 +406,7 @@ public class AsqZatcaInvoiceStagingDAO
         (dtv.util.DtvDate) objectId.getBusinessDate() : new dtv.util.DtvDate(objectId.getBusinessDate());
     _transactionSeq = objectId.getTransactionSeq();
     _workStationId = objectId.getWorkStationId();
+    _icv = objectId.getIcv();
   }
 
   /**
@@ -351,7 +419,7 @@ public class AsqZatcaInvoiceStagingDAO
 
   @Override
   protected int getToStringBufferSize() {
-    return 650;
+    return 800;
   }
 
   private static final java.util.Collection<String> FIELD_NAMES;
@@ -362,10 +430,13 @@ public class AsqZatcaInvoiceStagingDAO
       names.add("BusinessDate");
       names.add("TransactionSeq");
       names.add("WorkStationId");
+      names.add("Icv");
       names.add("Status");
       names.add("SubmittedJSON");
       names.add("InvoiceQrCode");
       names.add("InvoiceUUID");
+      names.add("InvoiceHashCode");
+      names.add("InvoiceDate");
       names.add("CreateUserId");
       names.add("CreateDate");
       names.add("UpdateUserId");
@@ -387,10 +458,13 @@ public class AsqZatcaInvoiceStagingDAO
       case "BusinessDate": return _businessDate;
       case "TransactionSeq": return _transactionSeq;
       case "WorkStationId": return _workStationId;
+      case "Icv": return _icv;
       case "Status": return _status;
       case "SubmittedJSON": return _submittedJSON;
       case "InvoiceQrCode": return _invoiceQrCode;
       case "InvoiceUUID": return _invoiceUUID;
+      case "InvoiceHashCode": return _invoiceHashCode;
+      case "InvoiceDate": return _invoiceDate;
       case "CreateUserId": return _createUserId;
       case "CreateDate": return _createDate;
       case "UpdateUserId": return _updateUserId;
@@ -407,10 +481,13 @@ public class AsqZatcaInvoiceStagingDAO
       case "BusinessDate": return dtv.data2.access.FieldDataType.DATE;
       case "TransactionSeq": return dtv.data2.access.FieldDataType.LONG;
       case "WorkStationId": return dtv.data2.access.FieldDataType.LONG;
+      case "Icv": return dtv.data2.access.FieldDataType.LONG;
       case "Status": return dtv.data2.access.FieldDataType.STRING;
       case "SubmittedJSON": return dtv.data2.access.FieldDataType.OBJECT;
       case "InvoiceQrCode": return dtv.data2.access.FieldDataType.OBJECT;
       case "InvoiceUUID": return dtv.data2.access.FieldDataType.STRING;
+      case "InvoiceHashCode": return dtv.data2.access.FieldDataType.STRING;
+      case "InvoiceDate": return dtv.data2.access.FieldDataType.DATE;
       case "CreateUserId": return dtv.data2.access.FieldDataType.STRING;
       case "CreateDate": return dtv.data2.access.FieldDataType.DATE;
       case "UpdateUserId": return dtv.data2.access.FieldDataType.STRING;
@@ -462,6 +539,14 @@ public class AsqZatcaInvoiceStagingDAO
           throw new dtv.data2.access.exception.DtxException("An exception occurred while calling setWorkStationId() with " + argValue + " on: " + this + " " + ee.toString(), ee);
         }
         break;
+      case "Icv":
+        try {
+          setIcv(valueForLong(argValue));
+        }
+        catch (Exception ee) {
+          throw new dtv.data2.access.exception.DtxException("An exception occurred while calling setIcv() with " + argValue + " on: " + this + " " + ee.toString(), ee);
+        }
+        break;
       case "Status":
         try {
           setStatus(valueForString(argValue));
@@ -492,6 +577,22 @@ public class AsqZatcaInvoiceStagingDAO
         }
         catch (Exception ee) {
           throw new dtv.data2.access.exception.DtxException("An exception occurred while calling setInvoiceUUID() with " + argValue + " on: " + this + " " + ee.toString(), ee);
+        }
+        break;
+      case "InvoiceHashCode":
+        try {
+          setInvoiceHashCode(valueForString(argValue));
+        }
+        catch (Exception ee) {
+          throw new dtv.data2.access.exception.DtxException("An exception occurred while calling setInvoiceHashCode() with " + argValue + " on: " + this + " " + ee.toString(), ee);
+        }
+        break;
+      case "InvoiceDate":
+        try {
+          setInvoiceDate(valueForDate(argValue));
+        }
+        catch (Exception ee) {
+          throw new dtv.data2.access.exception.DtxException("An exception occurred while calling setInvoiceDate() with " + argValue + " on: " + this + " " + ee.toString(), ee);
         }
         break;
       case "CreateUserId":

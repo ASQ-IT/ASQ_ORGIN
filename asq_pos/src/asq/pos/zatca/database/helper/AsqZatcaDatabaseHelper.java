@@ -63,19 +63,22 @@ public class AsqZatcaDatabaseHelper {
 	}
 
 	public AsqZatcaInvoiceStagingModel saveInvoiceInStaging(String argInvoiceID, Date argBusinessDate, Long argWkStnID, Long argTranSeq, String argJsonInvoice, String argInvoiceQRCode,
-			String argXmlUUID) {
+			String argXmlUUID, String argInvoiceHashCode, Long argnextICV) {
 		AsqZatcaInvoiceStagingId invoiceJsonId = new AsqZatcaInvoiceStagingId();
 		invoiceJsonId.setInvoiceId(argInvoiceID);
 		invoiceJsonId.setOrganizationId(ConfigurationMgr.getOrganizationId());
 		invoiceJsonId.setBusinessDate(argBusinessDate);
 		invoiceJsonId.setWorkStationId(argWkStnID);
 		invoiceJsonId.setTransactionSeq(argTranSeq);
+		invoiceJsonId.setIcv(argnextICV);
 
 		AsqZatcaInvoiceStagingModel invoice = (AsqZatcaInvoiceStagingModel) DataFactory.createObject(invoiceJsonId, IAsqZatcaInvoiceStaging.class);
 		invoice.setSubmittedJSON(argJsonInvoice.getBytes());
 		invoice.setInvoiceQrCode(argInvoiceQRCode.getBytes());
 		invoice.setStatus(AsqZatcaConstant.ZATCA_STATUS_NEW);
 		invoice.setInvoiceUUID(argXmlUUID);
+		invoice.setInvoiceHashCode(argInvoiceHashCode);
+		invoice.setInvoiceDate(new Date());
 		invoice.getDAO().setObjectState(DaoState.INSERT_OR_UPDATE.intVal());
 		return DataFactory.makePersistent(invoice);
 	}

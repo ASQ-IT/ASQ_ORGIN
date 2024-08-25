@@ -29,7 +29,7 @@
   </bean> 
   
   <bean abstract="true" id="AbstractZatcaOICRestServiceBean">
-    <property name="serviceId" value="ZATCA_OIC_SRV" />
+    <property name="serviceId" value="ZATCA_OIC_REST" />
     <property name="exceptionHandler" ref="standardJaxRsExceptionHandler" />
     <property name="serviceConfigHelper" ref="serviceConfigHelper" />
     <property name="logEntity" value="false" />
@@ -134,5 +134,18 @@
     <!-- <property name="exceptionHandler" ref="qasExceptionHandler" />-->
   </bean>
   <!-- Neqaty work Starts --> 
+  
+  <!-- Tamara work Starts -->
+  <bean id="BNPL_TAMARA_ORDER_DETAIL_SRV" class="asq.pos.bnpl.tamara.tender.service.AsqBnplTamaraServiceHandler" parent="AbstractBnplTamaraRestServiceBean">
+    <property name="servicePath" value="/orders/{order_id}" />
+  </bean> 
+    <bean id="BNPL_TAMARA_CANCEL_SESSION_SRV" class="asq.pos.bnpl.tamara.tender.service.AsqBnplTamaraServiceHandler" parent="AbstractBnplTamaraRestServiceBean">
+    <property name="servicePath" value="/checkout/{checkoutId}/void" />
+  </bean> 
+     <bean id="BNPL_TAMARA_REFUND_SRV" class="asq.pos.bnpl.tamara.tender.service.AsqBnplTamaraServiceHandler" parent="AbstractBnplTamaraRestServiceBean">
+    <property name="servicePath" value="/payments/simplified-refund/{orderId}" />
+    </bean> 
+   <!-- Tamara work Ends -->
+
 </beans>
   

@@ -13,7 +13,7 @@
   	<!-- ASQ Zatca Integration Ends -->
   	
   	 <!-- ASQ STC Integration Starts -->
-	<Action name="SALE::ASQ_TENDER_STC" category="Register" keywords="sale_tender" text="_menuTextSTC" chainKey="ASQ_STC_MOBILE">
+	<Action name="SALE::ASQ_TENDER_STC" category="Register" keywords="sale_tender" text="_asqMenuTextSTC" chainKey="ASQ_STC_MOBILE">
     <IconGroup icon="_imageTenderCash" rollIcon="_imageTenderCashRoll" pressIcon="_imageTenderCashPress" disabledIcon="_imageTenderCashDisabled" />
     <VisibilityRule class="dtv.pos.shared.visibilityrules.TenderEnabledCheck" >
       <Parameter name="tender" value="LOCAL_CURRENCY" />
@@ -29,7 +29,7 @@
   	 <!-- ASQ STC Integration Ends -->
   	 
 	<!-- ASQ Tamara Integration Starts -->
-  	 <Action name="SALE::TENDER_TAMARA" category="Register" keywords="sale_tender" text="_menuTextTamara" chainKey="ASQ_TENDER_TAMARA">
+  	 <Action name="SALE::ASQ_TENDER_TAMARA" category="Register" keywords="sale_tender" text="_asqMenuTextTamara" chainKey="ASQ_TAMARA_MOBILE">
     	<IconGroup icon="_imageTenderCash" rollIcon="_imageTenderCashRoll" pressIcon="_imageTenderCashPress" disabledIcon="_imageTenderCashDisabled" />
     	<VisibilityRule class="dtv.pos.shared.visibilityrules.TenderEnabledCheck" >
       		<Parameter name="tender" value="LOCAL_CURRENCY" />
@@ -45,20 +45,36 @@
 	<!-- ASQ Tamara Integration Ends -->
 	
 	<!-- ASQ Neqaty Integration Starts -->
-  	 <Action name="SALE::TENDER_NEQATY" category="Register" keywords="sale_tender" text="_menuTextNeqaty" chainKey="ASQ_TENDER_NEQATY">
-    	<IconGroup icon="_imageTenderCash" rollIcon="_imageTenderCashRoll" pressIcon="_imageTenderCashPress" disabledIcon="_imageTenderCashDisabled" />
-    	<VisibilityRule class="dtv.pos.shared.visibilityrules.TenderEnabledCheck" >
-      		<Parameter name="tender" value="LOCAL_CURRENCY" />
-    	</VisibilityRule>
-	    <VisibilityRule class="dtv.pos.shared.visibilityrules.EffectiveTenderAccCheck" >
-	      	<Parameter name="tender" value="LOCAL_CURRENCY" />
-	    </VisibilityRule>
-	    <VisibilityRule class="dtv.pos.shared.visibilityrules.AvailableLayawayTenderAccCheck" >
-	      	<Parameter name="tender" value="LOCAL_CURRENCY" />
-	    </VisibilityRule>
-	    <VisibilityRule class="dtv.pos.register.sale.AmountDueVisibilityRule" />
-  	 </Action>
+	<Action name="SALE::ASQ_TENDER_NEQATY" category="Register" keywords="sale_tender" text="_asqMenuTextNeqaty" chainKey="ASQ_TENDER_NEQATY">
+		<IconGroup icon="_imageTenderCash" rollIcon="_imageTenderCashRoll" pressIcon="_imageTenderCashPress" disabledIcon="_imageTenderCashDisabled" />
+		<VisibilityRule class="dtv.pos.shared.visibilityrules.TenderEnabledCheck">
+			<Parameter name="tender" value="LOCAL_CURRENCY" />
+		</VisibilityRule>
+		<VisibilityRule class="dtv.pos.shared.visibilityrules.EffectiveTenderAccCheck">
+			<Parameter name="tender" value="LOCAL_CURRENCY" />
+		</VisibilityRule>
+		<VisibilityRule class="dtv.pos.shared.visibilityrules.AvailableLayawayTenderAccCheck">
+			<Parameter name="tender" value="LOCAL_CURRENCY" />
+		</VisibilityRule>
+		<VisibilityRule class="dtv.pos.register.sale.AmountDueVisibilityRule" />
+	</Action>
 	<!-- ASQ Neqaty Integration Ends -->
+	
+	<!-- ASQ Tabby Integration Starts -->
+	<Action name="SALE::ASQ_TENDER_TABBY" category="Register" keywords="sale_tender" text="_asqMenuTextTabby" chainKey="ASQ_TABBY_MOBILE">
+		<IconGroup icon="_imageTenderCash" rollIcon="_imageTenderCashRoll" pressIcon="_imageTenderCashPress" disabledIcon="_imageTenderCashDisabled" />
+		<VisibilityRule class="dtv.pos.shared.visibilityrules.TenderEnabledCheck">
+			<Parameter name="tender" value="LOCAL_CURRENCY" />
+		</VisibilityRule>
+		<VisibilityRule class="dtv.pos.shared.visibilityrules.EffectiveTenderAccCheck">
+			<Parameter name="tender" value="LOCAL_CURRENCY" />
+		</VisibilityRule>
+		<VisibilityRule class="dtv.pos.shared.visibilityrules.AvailableLayawayTenderAccCheck">
+			<Parameter name="tender" value="LOCAL_CURRENCY" />
+		</VisibilityRule>
+		<VisibilityRule class="dtv.pos.register.sale.AmountDueVisibilityRule" />
+	</Action>
+	<!-- ASQ Tabby Integration Ends -->
   	
   	
 </ActionSet>

@@ -20,13 +20,11 @@ public class AsqZatcaInvoiceSubmittToOICServiceImpl implements IAsqZatcaInvoiceS
 	public IServiceResponse submitInvoiceToOIC(IAsqSubmitZatcaInvoiceToOicServiceRequest argRequest) throws ServiceException {
 		try {
 			IServiceHandler<IAsqSubmitZatcaInvoiceToOicServiceRequest, IServiceResponse> serviceHandler = _serviceHandlerFactory.getServiceHandler(ZATCA_INVOICE_TO_OIC);
-			IServiceResponse response = serviceHandler.handleService(argRequest, ZATCA_INVOICE_TO_OIC);
-			return response;
+			return serviceHandler.handleService(argRequest, ZATCA_INVOICE_TO_OIC);
 		} catch (ServiceException ex) {
 			throw ex;
 		} catch (Exception ex) {
 			throw new ServiceException(ex);
 		}
 	}
-
 }

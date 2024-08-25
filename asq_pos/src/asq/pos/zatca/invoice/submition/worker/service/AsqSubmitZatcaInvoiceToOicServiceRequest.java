@@ -1,7 +1,5 @@
 package asq.pos.zatca.invoice.submition.worker.service;
 
-import java.util.Date;
-
 import dtv.servicex.impl.req.ServiceRequest;
 
 public class AsqSubmitZatcaInvoiceToOicServiceRequest extends ServiceRequest implements IAsqSubmitZatcaInvoiceToOicServiceRequest {
@@ -9,8 +7,8 @@ public class AsqSubmitZatcaInvoiceToOicServiceRequest extends ServiceRequest imp
 	private String vatRegNo;
 	private String storeNumber;
 	private String transactionNo;
-	Date businessDate;
-	Date creationDate;
+	private String businessDate;
+	private String creationDate;
 	private String tillId;
 	private String invoiceHash;
 	private String Username;
@@ -46,26 +44,6 @@ public class AsqSubmitZatcaInvoiceToOicServiceRequest extends ServiceRequest imp
 	@Override
 	public void setTransactionNo(String transactionNo) {
 		this.transactionNo = transactionNo;
-	}
-
-	@Override
-	public Date getBusinessDate() {
-		return businessDate;
-	}
-
-	@Override
-	public void setBusinessDate(Date businessDate) {
-		this.businessDate = businessDate;
-	}
-
-	@Override
-	public Date getCreationDate() {
-		return creationDate;
-	}
-
-	@Override
-	public void setCreationDate(Date creationDate) {
-		this.creationDate = creationDate;
 	}
 
 	@Override
@@ -126,6 +104,26 @@ public class AsqSubmitZatcaInvoiceToOicServiceRequest extends ServiceRequest imp
 	@Override
 	public void setPassword(String password) {
 		Password = password;
+	}
+
+	@Override
+	public String getBusinessDate() {
+		return businessDate;
+	}
+
+	@Override
+	public void setBusinessDate(String businessDate) {
+		this.businessDate = businessDate;
+	}
+
+	@Override
+	public String getCreationDate() {
+		return creationDate;
+	}
+
+	@Override
+	public void setCreationDate(String creationDate) {
+		this.creationDate = creationDate;
 	}
 
 }

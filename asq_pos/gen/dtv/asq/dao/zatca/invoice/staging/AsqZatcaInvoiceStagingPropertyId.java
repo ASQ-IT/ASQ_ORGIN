@@ -1,5 +1,5 @@
 // Copyright (c) 2024, Oracle and/or its affiliates. All rights reserved.
-// Generated using dtv.data2.access.impl.daogen.GenerateIds 2024-08-11T15:27:53
+// Generated using dtv.data2.access.impl.daogen.GenerateIds 2024-08-22T18:06:17
 // CHECKSTYLE:OFF
 package dtv.asq.dao.zatca.invoice.staging;
 
@@ -20,7 +20,7 @@ public class AsqZatcaInvoiceStagingPropertyId
   // Fix serialization compatibility based on the name of the DAO
   private static final long serialVersionUID = 1272365967L;
 
-  public static final String[] FIELDS = { "organizationId", "invoiceId", "businessDate", "transactionSeq", "workStationId", "propertyCode" };
+  public static final String[] FIELDS = { "organizationId", "invoiceId", "businessDate", "transactionSeq", "workStationId", "icv", "propertyCode" };
 
   @Override
   public int getBaseVersion() {
@@ -42,6 +42,7 @@ public class AsqZatcaInvoiceStagingPropertyId
         (dtv.util.DtvDate) argDao.getBusinessDate() : new dtv.util.DtvDate(argDao.getBusinessDate());
     _transactionSeq = argDao.getTransactionSeq();
     _workStationId = argDao.getWorkStationId();
+    _icv = argDao.getIcv();
     _propertyCode = argDao.getPropertyCode();
   }
 
@@ -49,6 +50,7 @@ public class AsqZatcaInvoiceStagingPropertyId
   private dtv.util.DtvDate _businessDate;
   private Long _transactionSeq;
   private Long _workStationId;
+  private Long _icv;
   private String _propertyCode;
 
   public String getDtxTypeName() {
@@ -126,6 +128,22 @@ public class AsqZatcaInvoiceStagingPropertyId
   }
 
   /**
+   * Gets the value of the ICV field.
+   * @return The value of the field.
+   */
+  public Long getIcv() {
+    return _icv;
+  }
+
+  /**
+   * Sets the value of the ICV field.
+   * @param argIcv The new value of the field.
+   */
+  public void setIcv(Long argIcv) {
+    _icv = argIcv;
+  }
+
+  /**
    * Gets the value of the property_code field.
    * @return The value of the field.
    */
@@ -176,6 +194,9 @@ public class AsqZatcaInvoiceStagingPropertyId
       setWorkStationId(java.lang.Long.valueOf(str));
       str = tokens[5];
 
+      setIcv(java.lang.Long.valueOf(str));
+      str = tokens[6];
+
       if ("null".equals(str)) {
         setPropertyCode(null);
       }
@@ -213,6 +234,9 @@ public class AsqZatcaInvoiceStagingPropertyId
         && ((_workStationId == null && other._workStationId == null) ||
             (this._workStationId != null &&
              this._workStationId.equals(other._workStationId)))
+        && ((_icv == null && other._icv == null) ||
+            (this._icv != null &&
+             this._icv.equals(other._icv)))
         && ((_propertyCode == null && other._propertyCode == null) ||
             (this._propertyCode != null &&
              this._propertyCode.equals(other._propertyCode)))
@@ -227,13 +251,14 @@ public class AsqZatcaInvoiceStagingPropertyId
         + ((_businessDate == null) ? 0 : _businessDate.hashCode())
         + ((_transactionSeq == null) ? 0 : _transactionSeq.hashCode())
         + ((_workStationId == null) ? 0 : _workStationId.hashCode())
+        + ((_icv == null) ? 0 : _icv.hashCode())
         + ((_propertyCode == null) ? 0 : _propertyCode.hashCode())
         );
   }
 
   @Override
   public String toString() {
-    StringBuilder buff = new StringBuilder(12 * 6);
+    StringBuilder buff = new StringBuilder(12 * 7);
 
     return buff.append(
       String.valueOf(_organizationId)).
@@ -241,6 +266,7 @@ public class AsqZatcaInvoiceStagingPropertyId
       append("::").append(_businessDate == null ? "null" : String.valueOf(_businessDate.getTimeSerializable())).
       append("::").append(String.valueOf(_transactionSeq)).
       append("::").append(String.valueOf(_workStationId)).
+      append("::").append(String.valueOf(_icv)).
       append("::").append(_propertyCode).
     toString();
   }
@@ -256,6 +282,9 @@ public class AsqZatcaInvoiceStagingPropertyId
       return false;
     }
     if (_workStationId == null) {
+      return false;
+    }
+    if (_icv == null) {
       return false;
     }
     if (_propertyCode == null) {

@@ -1,5 +1,5 @@
 // Copyright (c) 2024, Oracle and/or its affiliates. All rights reserved.
-// Generated using dtv.data2.access.impl.daogen.GenerateDaoAndDba 2024-08-11T15:27:53
+// Generated using dtv.data2.access.impl.daogen.GenerateDaoAndDba 2024-08-22T18:06:17
 // CHECKSTYLE:OFF
 package dtv.asq.dao.zatca.invoice.staging.impl;
 
@@ -26,6 +26,7 @@ public class AsqZatcaInvoiceStagingPropertyDAO
   private dtv.util.DtvDate _businessDate;
   private Long _transactionSeq;
   private Long _workStationId;
+  private Long _icv;
   private String _propertyCode;
   private String _type;
   private String _stringValue;
@@ -124,6 +125,24 @@ public class AsqZatcaInvoiceStagingPropertyDAO
   public final void setWorkStationId(Long argWorkStationId) {
     if (changed(argWorkStationId, _workStationId, "workStationId")) {
       _workStationId = argWorkStationId;
+    }
+  }
+
+  /**
+   * Gets the value of the ICV field.
+   * @return The value of the field.
+   */
+  public final Long getIcv() {
+    return _icv;
+  }
+
+  /**
+   * Sets the value of the ICV field.
+   * @param argIcv The new value of the field.
+   */
+  public final void setIcv(Long argIcv) {
+    if (changed(argIcv, _icv, "icv")) {
+      _icv = argIcv;
     }
   }
 
@@ -312,6 +331,9 @@ public class AsqZatcaInvoiceStagingPropertyDAO
     if (getWorkStationId() != null) {
       buf.append("workStationId").append("=").append(getWorkStationId()).append(" ");
     }
+    if (getIcv() != null) {
+      buf.append("icv").append("=").append(getIcv()).append(" ");
+    }
     if (getPropertyCode() != null) {
       buf.append("propertyCode").append("=").append(getPropertyCode()).append(" ");
     }
@@ -362,6 +384,7 @@ public class AsqZatcaInvoiceStagingPropertyDAO
         (dtv.util.DtvDate) objectId.getBusinessDate() : new dtv.util.DtvDate(objectId.getBusinessDate());
     _transactionSeq = objectId.getTransactionSeq();
     _workStationId = objectId.getWorkStationId();
+    _icv = objectId.getIcv();
     _propertyCode = objectId.getPropertyCode();
   }
 
@@ -375,7 +398,7 @@ public class AsqZatcaInvoiceStagingPropertyDAO
 
   @Override
   protected int getToStringBufferSize() {
-    return 700;
+    return 750;
   }
 
   private static final java.util.Collection<String> FIELD_NAMES;
@@ -386,6 +409,7 @@ public class AsqZatcaInvoiceStagingPropertyDAO
       names.add("BusinessDate");
       names.add("TransactionSeq");
       names.add("WorkStationId");
+      names.add("Icv");
       names.add("PropertyCode");
       names.add("Type");
       names.add("StringValue");
@@ -412,6 +436,7 @@ public class AsqZatcaInvoiceStagingPropertyDAO
       case "BusinessDate": return _businessDate;
       case "TransactionSeq": return _transactionSeq;
       case "WorkStationId": return _workStationId;
+      case "Icv": return _icv;
       case "PropertyCode": return _propertyCode;
       case "Type": return _type;
       case "StringValue": return _stringValue;
@@ -433,6 +458,7 @@ public class AsqZatcaInvoiceStagingPropertyDAO
       case "BusinessDate": return dtv.data2.access.FieldDataType.DATE;
       case "TransactionSeq": return dtv.data2.access.FieldDataType.LONG;
       case "WorkStationId": return dtv.data2.access.FieldDataType.LONG;
+      case "Icv": return dtv.data2.access.FieldDataType.LONG;
       case "PropertyCode": return dtv.data2.access.FieldDataType.STRING;
       case "Type": return dtv.data2.access.FieldDataType.STRING;
       case "StringValue": return dtv.data2.access.FieldDataType.STRING;
@@ -487,6 +513,14 @@ public class AsqZatcaInvoiceStagingPropertyDAO
         }
         catch (Exception ee) {
           throw new dtv.data2.access.exception.DtxException("An exception occurred while calling setWorkStationId() with " + argValue + " on: " + this + " " + ee.toString(), ee);
+        }
+        break;
+      case "Icv":
+        try {
+          setIcv(valueForLong(argValue));
+        }
+        catch (Exception ee) {
+          throw new dtv.data2.access.exception.DtxException("An exception occurred while calling setIcv() with " + argValue + " on: " + this + " " + ee.toString(), ee);
         }
         break;
       case "PropertyCode":

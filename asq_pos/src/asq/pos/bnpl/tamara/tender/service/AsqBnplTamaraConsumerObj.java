@@ -6,7 +6,8 @@ public class AsqBnplTamaraConsumerObj {
     private String last_name;
     private String phone_number;
     private String email;
-	public String getFirst_name() {
+
+    public String getFirst_name() {
 		return first_name;
 	}
 	public void setFirst_name(String first_name) {

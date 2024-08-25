@@ -12,8 +12,12 @@ public class AsqSubmitBnplTamraServiceRequest extends ServiceRequest implements 
     private AsqBnplTamaraAmountObj total_amount;
     private String phone_number;
     private ArrayList<AsqBnplTamaraItemObj> items;
-    private String order_reference_id;
+    private Long order_reference_id;
     private AsqBnplTamaraAddDataObj additional_data;
+    private String order_id;
+    private String comment;
+    private String store_code;
+    private String checkout_id;
 
     public AsqBnplTamaraAmountObj getTotal_amount() {
         return total_amount;
@@ -32,11 +36,11 @@ public class AsqSubmitBnplTamraServiceRequest extends ServiceRequest implements 
     }
 
 
-    public String getOrder_reference_id() {
+    public Long getOrder_reference_id() {
         return order_reference_id;
     }
 
-    public void setOrder_reference_id(String order_reference_id) {
+    public void setOrder_reference_id(Long order_reference_id) {
         this.order_reference_id = order_reference_id;
     }
 
@@ -56,4 +60,35 @@ public class AsqSubmitBnplTamraServiceRequest extends ServiceRequest implements 
 		this.additional_data = additional_data;
 	}
 
+	public String getOrder_id() {
+		return order_id;
+	}
+
+	public void setOrder_id(String order_id) {
+		this.order_id = order_id;
+	}
+
+	public String getComment() {
+		return comment;
+	}
+
+	public void setComment(String comment) {
+		this.comment = comment;
+	}
+
+	public String getStore_code() {
+		return store_code;
+	}
+
+	public void setStore_code(String store_code) {
+		this.store_code = store_code;
+	}
+
+	public String getCheckout_id() {
+		return checkout_id;
+	}
+
+	public void setCheckout_id(String checkout_id) {
+		this.checkout_id = checkout_id;
+	}
 }

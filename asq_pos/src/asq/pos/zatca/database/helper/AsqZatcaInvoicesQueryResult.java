@@ -16,7 +16,7 @@ public class AsqZatcaInvoicesQueryResult extends AbstractQueryResult {
 	private String WKSTN_ID;
 	private String STATUS;
 	private byte[] INVOICE_QRCODE;
-	private byte[] JSON_INVOICE;
+	private byte[] INVOICE_XML;
 	private Date CREATE_DATE;
 	private String CREATE_USER_ID;
 	private String UPDATE_USER_ID;
@@ -101,14 +101,6 @@ public class AsqZatcaInvoicesQueryResult extends AbstractQueryResult {
 		INVOICE_QRCODE = iNVOICE_QRCODE;
 	}
 
-	public byte[] getJSON_INVOICE() {
-		return JSON_INVOICE;
-	}
-
-	public void setJSON_INVOICE(byte[] jSON_INVOICE) {
-		JSON_INVOICE = jSON_INVOICE;
-	}
-
 	public Date getCREATE_DATE() {
 		return CREATE_DATE;
 	}
@@ -141,4 +133,11 @@ public class AsqZatcaInvoicesQueryResult extends AbstractQueryResult {
 		UPDATE_DATE = uPDATE_DATE;
 	}
 
+	public byte[] getINVOICE_XML() {
+		return INVOICE_XML;
+	}
+
+	public void setINVOICE_XML(byte[] iNVOICE_XML) {
+		INVOICE_XML = iNVOICE_XML;
+	}
 }

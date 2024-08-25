@@ -1,5 +1,5 @@
 // Copyright (c) 2024, Oracle and/or its affiliates. All rights reserved.
-// Generated using dtv.data2.access.impl.daogen.DefaultModelGenerator 2024-08-11T15:27:53
+// Generated using dtv.data2.access.impl.daogen.DefaultModelGenerator 2024-08-22T18:06:17
 // CHECKSTYLE:OFF
 package dtv.asq.dao.zatca.invoice.staging.impl;
 
@@ -295,6 +295,57 @@ public class AsqZatcaInvoiceStagingModel
   }
 
   /**
+   * Gets the value of the ICV field.
+   * @return The value of the field.
+   */
+  public long getIcv() {
+    if (getDAO_().getIcv() != null) {
+      return getDAO_().getIcv().longValue();
+    }
+    else {
+      return 0; // no default specified in the dtx; we default to 0
+    }
+  }
+
+  /**
+   * Sets the value of the ICV field.
+   * @param argIcv The new value for the field.
+   */
+  public void setIcv(long argIcv) {
+    if (setIcv_noev(argIcv)) {
+      if (_events != null) {
+        if (postEventsForChanges()) {
+          _events.post(dtv.asq.dao.zatca.invoice.staging.IAsqZatcaInvoiceStaging.SET_ICV, Long.valueOf(argIcv));
+        }
+      }
+    }
+  }
+
+  public boolean setIcv_noev(long argIcv) {
+    boolean ev_postable = false;
+
+    if ((getDAO_().getIcv() == null && Long.valueOf(argIcv) != null) ||
+        (getDAO_().getIcv() != null && !getDAO_().getIcv().equals(Long.valueOf(argIcv)))) {
+      getDAO_().setIcv(Long.valueOf(argIcv));
+      ev_postable = true;
+      if (_myExtension != null) {
+        // Propagate changes to customer extension object.
+        dtv.util.ObjectUtils.invokeMethod("setIcv_noev", _myExtension, new Class<?>[] {long.class}, new Object[] {argIcv}, null);
+      }
+      if (_properties != null) {
+        // Propagate changes to related objects in relation Properties.
+        java.util.Iterator it = _properties.iterator();
+        while(it.hasNext()) {
+          // Use the non-eventing setter directly.
+          ((dtv.asq.dao.zatca.invoice.staging.impl.AsqZatcaInvoiceStagingPropertyModel) it.next()).setIcv_noev(argIcv);
+        }
+      }
+    }
+
+    return ev_postable;
+  }
+
+  /**
    * Gets the value of the Status field.
    * @return The value of the field.
    */
@@ -329,7 +380,7 @@ public class AsqZatcaInvoiceStagingModel
   }
 
   /**
-   * Gets the value of the JSON_INVOICE field.
+   * Gets the value of the INVOICE_XML field.
    * @return The value of the field.
    */
   public byte[] getSubmittedJSON() {
@@ -337,7 +388,7 @@ public class AsqZatcaInvoiceStagingModel
   }
 
   /**
-   * Sets the value of the JSON_INVOICE field.
+   * Sets the value of the INVOICE_XML field.
    * @param argSubmittedJSON The new value for the field.
    */
   public void setSubmittedJSON(byte[] argSubmittedJSON) {
@@ -397,7 +448,7 @@ public class AsqZatcaInvoiceStagingModel
   }
 
   /**
-   * Gets the value of the INVOICE_UIID field.
+   * Gets the value of the INVOICE_UUID field.
    * @return The value of the field.
    */
   public String getInvoiceUUID() {
@@ -405,7 +456,7 @@ public class AsqZatcaInvoiceStagingModel
   }
 
   /**
-   * Sets the value of the INVOICE_UIID field.
+   * Sets the value of the INVOICE_UUID field.
    * @param argInvoiceUUID The new value for the field.
    */
   public void setInvoiceUUID(String argInvoiceUUID) {
@@ -424,6 +475,74 @@ public class AsqZatcaInvoiceStagingModel
     if ((getDAO_().getInvoiceUUID() == null && argInvoiceUUID != null) ||
         (getDAO_().getInvoiceUUID() != null && !getDAO_().getInvoiceUUID().equals(argInvoiceUUID))) {
       getDAO_().setInvoiceUUID(argInvoiceUUID);
+      ev_postable = true;
+    }
+
+    return ev_postable;
+  }
+
+  /**
+   * Gets the value of the INVOICE_HASHCODE field.
+   * @return The value of the field.
+   */
+  public String getInvoiceHashCode() {
+    return getDAO_().getInvoiceHashCode();
+  }
+
+  /**
+   * Sets the value of the INVOICE_HASHCODE field.
+   * @param argInvoiceHashCode The new value for the field.
+   */
+  public void setInvoiceHashCode(String argInvoiceHashCode) {
+    if (setInvoiceHashCode_noev(argInvoiceHashCode)) {
+      if (_events != null) {
+        if (postEventsForChanges()) {
+          _events.post(dtv.asq.dao.zatca.invoice.staging.IAsqZatcaInvoiceStaging.SET_INVOICEHASHCODE, argInvoiceHashCode);
+        }
+      }
+    }
+  }
+
+  public boolean setInvoiceHashCode_noev(String argInvoiceHashCode) {
+    boolean ev_postable = false;
+
+    if ((getDAO_().getInvoiceHashCode() == null && argInvoiceHashCode != null) ||
+        (getDAO_().getInvoiceHashCode() != null && !getDAO_().getInvoiceHashCode().equals(argInvoiceHashCode))) {
+      getDAO_().setInvoiceHashCode(argInvoiceHashCode);
+      ev_postable = true;
+    }
+
+    return ev_postable;
+  }
+
+  /**
+   * Gets the value of the INVOICE_DATE field.
+   * @return The value of the field.
+   */
+  public Date getInvoiceDate() {
+    return getDAO_().getInvoiceDate();
+  }
+
+  /**
+   * Sets the value of the INVOICE_DATE field.
+   * @param argInvoiceDate The new value for the field.
+   */
+  public void setInvoiceDate(Date argInvoiceDate) {
+    if (setInvoiceDate_noev(argInvoiceDate)) {
+      if (_events != null) {
+        if (postEventsForChanges()) {
+          _events.post(dtv.asq.dao.zatca.invoice.staging.IAsqZatcaInvoiceStaging.SET_INVOICEDATE, argInvoiceDate);
+        }
+      }
+    }
+  }
+
+  public boolean setInvoiceDate_noev(Date argInvoiceDate) {
+    boolean ev_postable = false;
+
+    if ((getDAO_().getInvoiceDate() == null && argInvoiceDate != null) ||
+        (getDAO_().getInvoiceDate() != null && !getDAO_().getInvoiceDate().equals(argInvoiceDate))) {
+      getDAO_().setInvoiceDate(argInvoiceDate);
       ev_postable = true;
     }
 
@@ -574,6 +693,7 @@ public class AsqZatcaInvoiceStagingModel
     id.setBusinessDate(getBusinessDate());
     id.setTransactionSeq(Long.valueOf(getTransactionSeq()));
     id.setWorkStationId(Long.valueOf(getWorkStationId()));
+    id.setIcv(Long.valueOf(getIcv()));
     id.setPropertyCode(argPropertyName);
 
     dtv.asq.dao.zatca.invoice.staging.IAsqZatcaInvoiceStagingProperty prop = dtv.data2.access.DataFactory.createObject(id, dtv.asq.dao.zatca.invoice.staging.IAsqZatcaInvoiceStagingProperty.class);
@@ -606,6 +726,7 @@ public class AsqZatcaInvoiceStagingModel
       model.setBusinessDate_noev(this.getBusinessDate());
       model.setTransactionSeq_noev(this.getTransactionSeq());
       model.setWorkStationId_noev(this.getWorkStationId());
+      model.setIcv_noev(this.getIcv());
       if (child instanceof IDataModelImpl) {
         IDataAccessObject childDao = ((IDataModelImpl) child).getDAO();
         if (dtv.util.StringUtils.isEmpty(childDao.getOriginDataSource()) && 
@@ -628,6 +749,7 @@ public class AsqZatcaInvoiceStagingModel
     argAsqZatcaInvoiceStagingProperty.setBusinessDate(this.getBusinessDate());
     argAsqZatcaInvoiceStagingProperty.setTransactionSeq(this.getTransactionSeq());
     argAsqZatcaInvoiceStagingProperty.setWorkStationId(this.getWorkStationId());
+    argAsqZatcaInvoiceStagingProperty.setIcv(this.getIcv());
     if (argAsqZatcaInvoiceStagingProperty instanceof IDataModelImpl) {
       IDataAccessObject childDao = ((IDataModelImpl) argAsqZatcaInvoiceStagingProperty).getDAO();
       if (dtv.util.StringUtils.isEmpty(childDao.getOriginDataSource()) && 

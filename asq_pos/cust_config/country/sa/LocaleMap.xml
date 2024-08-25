@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+/* ========================================================================================================
+ *  Description : Contains the report query configurations.
+ *  Created By  : RA
+ *
+ *  VERSION     MODIFIED BY               (MM/DD/YY)      Description
+ *  =======================================================================================================
+ *  1.0			RA                         01/07/19		  Enable arabic language pack
+ *  =======================================================================================================
+ */
+-->
+<Root dtype="Map" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="LocaleMap.xsd" xmlns="http://micros.com/xstore/config/localemap">
+  <MapEntry key="Default" value="ar_SA" />
+  <MapEntry key="Document" value="ar_SA" />
+  <MapEntry key="PoleDisplay" value="ar_SA" />
+  <MapEntry key="Receipt" value="ar_SA" />
+  <MapEntry key="View" value="ar_SA" />
+  <MapEntry key="Error" value="ar_SA" />
+  <MapEntry key="Log" value="ar_SA" />
+</Root>

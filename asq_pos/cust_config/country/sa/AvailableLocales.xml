@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+/* ========================================================================================================
+ *  Description : Contains the report query configurations.
+ *  Created By  : RA
+ *
+ *  VERSION     MODIFIED BY               (MM/DD/YY)      Description
+ *  =======================================================================================================
+ *  1.0			RA                         01/07/19		  Enable arabic language pack
+ *  =======================================================================================================
+ */
+-->
+<Root dtype="List" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="AvailableLocales.xsd"  xmlns="http://micros.com/xstore/config/availablelocales">
+	<Entry dtype="String">ar_SA</Entry>
+</Root>

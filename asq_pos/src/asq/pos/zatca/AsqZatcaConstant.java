@@ -34,6 +34,32 @@ public interface AsqZatcaConstant {
 
 	// STC Integration API constants
 	String CUSTOMER_UNAVAILABLE = "Customer not linked to the transaction";
-	String STC_SUCCESS_RESPONSE = "STC_SUCCESS_RESPONSE";
+	String STC_EARN_SUCCESS_CODE = "SUCCESS";
+	String STC_SUCCESS_EARN_RESPONSE = "STC_SUCCESS_EARN_RESPONSE";
+	String STC_SUCCESS_REDEEM_RESPONSE = "STC_SUCCESS_REDEEM_RESPONSE";
+	String TAMARA_SUCCESS_CHECK_OUT_SESSION_RESPONSE = "TAMARA_SUCCESS_CHECK_OUT_SESSION_RESPONSE";
+
+	String ZATCA_SALE_CODE = "388";
+	String ZATCA_RETURN_CODE = "381";
+	String ZATCA_BUSINESS_TO_CUSTOMER = "0200000";
+
+	/**
+	 * Reason Code : Their are 5 reason - Cancellation or suspension of the supplies
+	 * after its occurrence either wholly or partially - In case of essential change
+	 * or amendment in the supply, which leads to the change of the VAT due-
+	 * Amendment of the supply value which is pre-agreed upon between the supplier
+	 * and consumer - In case of goods or services refund. - In case of change in
+	 * Seller's or Buyer's information
+	 */
+	String ZATCA_RETURN_REASON_CODE = "In case of goods or services refund. (عند ترجيع السلع أو الخدمات)";
+
+	String ZATCA_TENDER_CASH_CODE = "10";
+	String ZATCA_TENDER_CREDIT_CODE = "54";
+	String ZATCA_TENDER_DEBIT_CODE = "55";
+	String ZATCA_TENDER_PAYLINK_CODE = "68";
+
+	String ZATCA_TAXCATEGORY_SCHEMEID = "UN/ECE 5305";
+	String ZATCA_TAXSCHEME_SCHEMEID = "UN/ECE 5153";
+	String ZATCA_SCHEME_AGENCYID = "6";
 
 }

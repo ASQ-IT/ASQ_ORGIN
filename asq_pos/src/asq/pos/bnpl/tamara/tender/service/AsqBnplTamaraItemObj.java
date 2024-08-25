@@ -1,19 +1,21 @@
 package asq.pos.bnpl.tamara.tender.service;
 
+import java.math.BigDecimal;
+
 public class AsqBnplTamaraItemObj {
 
-    private Long reference_id;
+    private int reference_id;
     private String type;
-    private String itemDescription;
-	private String sku;
-    private int quantity;
+    private String name;
+    private String sku;
+    private BigDecimal quantity;
     private AsqBnplTamaraAmountObj total_amount;
 
-    public Long getReference_id() {
+    public int getReference_id() {
         return reference_id;
     }
 
-    public void setReference_id(Long reference_id) {
+    public void setReference_id(int reference_id) {
         this.reference_id = reference_id;
     }
 
@@ -25,14 +27,14 @@ public class AsqBnplTamaraItemObj {
         this.type = type;
     }
 
-    public String getItemDescription() {
-		return itemDescription;
-	}
+    public String getName() {
+        return name;
+    }
 
-	public void setItemDescription(String itemDescription) {
-		this.itemDescription = itemDescription;
-	}
-   
+    public void setName(String name) {
+        this.name = name;
+    }
+
     public String getSku() {
         return sku;
     }
@@ -41,11 +43,11 @@ public class AsqBnplTamaraItemObj {
         this.sku = sku;
     }
 
-    public int getQuantity() {
+    public BigDecimal getQuantity() {
         return quantity;
     }
 
-    public void setQuantity(int quantity) {
+    public void setQuantity(BigDecimal quantity) {
         this.quantity = quantity;
     }
 

@@ -1,5 +1,5 @@
 // Copyright (c) 2024, Oracle and/or its affiliates. All rights reserved.
-// Generated using dtv.data2.access.impl.daogen.GenerateRelationships 2024-08-11T15:27:53
+// Generated using dtv.data2.access.impl.daogen.GenerateRelationships 2024-08-22T18:06:17
 // CHECKSTYLE:OFF
 package dtv.asq.dao.zatca.invoice.staging.impl;
 
@@ -19,10 +19,10 @@ import dtv.data2.access.impl.jdbc.IJDBCRelationshipAdapter;
 @SuppressWarnings("all")
 public class AsqZatcaInvoiceStagingPropertiesRelationshipDBA implements IJDBCRelationshipAdapter {
 
- private List<Object> _parameterList = new ArrayList<Object>(5);
+ private List<Object> _parameterList = new ArrayList<Object>(6);
 
   public String getSelect() {
-    return "SELECT organization_id, INVOICE_ID, BUSINESS_DATE, TRANS_SEQ, wkstn_id, property_code, type, string_value, date_value, decimal_value, create_user_id, create_date, update_user_id, update_date FROM ASQ_ZATCA_INVOICE_STAGING_p WHERE organization_id = ? AND INVOICE_ID = ? AND BUSINESS_DATE = ? AND TRANS_SEQ = ? AND wkstn_id = ?";
+    return "SELECT organization_id, INVOICE_ID, BUSINESS_DATE, TRANS_SEQ, wkstn_id, ICV, property_code, type, string_value, date_value, decimal_value, create_user_id, create_date, update_user_id, update_date FROM ASQ_ZATCA_INVOICE_STAGING_p WHERE organization_id = ? AND INVOICE_ID = ? AND BUSINESS_DATE = ? AND TRANS_SEQ = ? AND wkstn_id = ? AND ICV = ?";
 
   }
 
@@ -33,6 +33,7 @@ public class AsqZatcaInvoiceStagingPropertiesRelationshipDBA implements IJDBCRel
     _parameterList.add(dao.getBusinessDate());
     _parameterList.add(dao.getTransactionSeq());
     _parameterList.add(dao.getWorkStationId());
+    _parameterList.add(dao.getIcv());
   }
 
   @Override

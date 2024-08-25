@@ -8,6 +8,8 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.StringWriter;
+import java.math.BigDecimal;
+import java.math.MathContext;
 import java.net.URISyntaxException;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -281,5 +283,9 @@ public class AsqZatcaHelper {
 		StringBuilder builder = new StringBuilder(String.valueOf(argSaleTrans.getBusinessDate().getTime())).append(argSaleTrans.getRetailLocationId()).append(argSaleTrans.getWorkstationId())
 				.append(argSaleTrans.getTransactionSequence());
 		return builder.toString();
+	}
+
+	public BigDecimal getFormatttedBigDecimalValue(BigDecimal argValueToFormat) {
+		return new BigDecimal(argValueToFormat.multiply(new BigDecimal(100), MathContext.DECIMAL32).longValue());
 	}
 }

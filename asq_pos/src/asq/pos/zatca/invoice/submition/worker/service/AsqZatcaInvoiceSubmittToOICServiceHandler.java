@@ -27,7 +27,9 @@ public class AsqZatcaInvoiceSubmittToOICServiceHandler extends AbstractJaxRsHand
 		Response rawResponse = null;
 		Builder requestBuilder = getZatcaBaseRequestHeader();
 		try {
-			rawResponse = requestBuilder.post(Entity.json(asqZatcaHelper.convertTojson(argServiceRequest)));
+			String request = asqZatcaHelper.convertTojson(argServiceRequest);
+			System.out.println(request);
+			rawResponse = requestBuilder.post(Entity.json(request));
 			checkForExceptions(rawResponse);
 			return asqZatcaHelper.convertJSONToPojo(rawResponse.readEntity(String.class), AsqSubmitZatcaCertServiceResponse.class);
 		} catch (Exception ex) {

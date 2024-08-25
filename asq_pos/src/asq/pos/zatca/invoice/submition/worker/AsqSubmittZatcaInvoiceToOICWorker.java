@@ -15,6 +15,7 @@ import asq.pos.zatca.invoice.submition.worker.service.AsqSubmitZatcaInvoiceToOic
 import asq.pos.zatca.invoice.submition.worker.service.IAsqZatcaInvoiceSubmittToOICService;
 import dtv.pos.common.LocationFactory;
 import dtv.pos.framework.worker.AbstractWorker;
+import dtv.service.req.IServiceResponse;
 import dtv.xst.dao.loc.IRetailLocation;
 
 public class AsqSubmittZatcaInvoiceToOICWorker extends AbstractWorker {
@@ -39,9 +40,9 @@ public class AsqSubmittZatcaInvoiceToOICWorker extends AbstractWorker {
 				for (AsqZatcaInvoicesQueryResult invoice : results) {
 					AsqSubmitZatcaInvoiceToOicServiceRequest oicZatcaRequest = new AsqSubmitZatcaInvoiceToOicServiceRequest();
 
-					oicZatcaRequest.setCreationDate(invoice.getCREATE_DATE());
-					oicZatcaRequest.setBusinessDate(invoice.getBUSINESS_DATE());
-					oicZatcaRequest.setInvoice(new String(invoice.getJSON_INVOICE(), StandardCharsets.UTF_8));
+					oicZatcaRequest.setCreationDate(invoice.getCREATE_DATE().toString());
+					oicZatcaRequest.setBusinessDate(invoice.getBUSINESS_DATE().toString());
+					oicZatcaRequest.setInvoice(new String(invoice.getINVOICE_XML(), StandardCharsets.UTF_16));
 					oicZatcaRequest.setInvoiceHash(invoice.getINVOICE_HASH());
 					oicZatcaRequest.setUuid(invoice.getINVOICE_UUID());
 					oicZatcaRequest.setTillId(invoice.getWKSTN_ID());
@@ -54,14 +55,18 @@ public class AsqSubmittZatcaInvoiceToOICWorker extends AbstractWorker {
 					oicZatcaRequest.setVatRegNo(String.valueOf(loc.getStringProperty("ASQ_VAT_NUMBER")));
 					oicZatcaRequest.setStoreNumber(loc.getStoreNbr());
 
-					zatcaOicService.get().submitInvoiceToOIC(oicZatcaRequest);
-
-					zatcaDatabaseHelper.updateZatcaInvoiceStatus(invoice);
+					IServiceResponse response = zatcaOicService.get().submitInvoiceToOIC(oicZatcaRequest);
+					if (response != null) {
+						LOG.debug("Successfully submitted the Zatca Invoices to OIC server service with invoice Id : " + oicZatcaRequest.getUuid());
+						zatcaDatabaseHelper.updateZatcaInvoiceStatus(invoice);
+						LOG.debug("Successfully updated the Zatca Invoices status in the staging Table");
+					}
 				}
 			}
 		} catch (Exception workerExc) {
 			LOG.error("We have recieved exception in Store to OIC zatca invoice submition", workerExc);
 		}
+		LOG.debug("Ended working on submitting the Zatca Invoices to OIC service ");
 	}
 
 }
