@@ -35,6 +35,12 @@
 		<Op class="asq.pos.loyalty.stc.tender.op.AsqSTCTenderOp" longRunning="true" />
 	</OpChain>
 
+	<OpChain name="ASQ_NEQATY_OTP">
+		<Op class="asq.pos.loyalty.neqaty.tender.op.AsqNeqatyOTPOp" longRunning="true" />
+	</OpChain>
+	<OpChain name="ASQ_NEQATY_REDEEM_OPTION">
+		<Op class="asq.pos.loyalty.neqaty.tender.op.AsqNeqatyRedeemOp" longRunning="true" />
+	</OpChain>
 	<OpChain name="ASQ_TENDER_STC" signal="TransactionModified" contextKey="SALE_TENDER_EMPTY_MENU_OPTION">
 		<Op class="dtv.pos.tender.CreateTenderLineItemOp">
 			<Parameter name="TenderStatus" value="Tender" />

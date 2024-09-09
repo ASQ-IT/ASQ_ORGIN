@@ -3,14 +3,11 @@ package asq.pos.register.sale.zatca;
 import java.math.BigDecimal;
 import java.text.ParseException;
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.GregorianCalendar;
 import java.util.List;
 
 import javax.inject.Inject;
 import javax.xml.datatype.DatatypeConfigurationException;
-import javax.xml.datatype.DatatypeConstants;
-import javax.xml.datatype.DatatypeFactory;
 import javax.xml.datatype.XMLGregorianCalendar;
 
 import org.apache.commons.codec.binary.Base64;
@@ -110,11 +107,14 @@ public class AsqZatcaSaleQrCodeGenerationOp extends Operation {
 		// invoiceData.getSellerVATRegNumber()
 		String sellerVATRegNumber = String.valueOf(loc.getStringProperty("ASQ_VAT_NUMBER"));
 
+		GregorianCalendar gregorianCalendarIssueDate = new GregorianCalendar();
+		gregorianCalendarIssueDate.setTime(currentSaleTrans.getCreateDate());
+
 		// invoiceData.getInvoiceIssueTime()
-		String invoiceIssueTime = asqZatcaHelper.getIssueTime(currentSaleTrans.getCreateDate());
+		XMLGregorianCalendar invoiceIssueDate = asqZatcaHelper.getZatcaIssueDate(gregorianCalendarIssueDate);
 
 		// invoiceData.getInvoiceIssueDate()
-		String invoiceIssueDate = asqZatcaHelper.getIssueDate(currentSaleTrans.getCreateDate());
+		XMLGregorianCalendar invoiceIssueTime = asqZatcaHelper.getZatcaIssueTime(gregorianCalendarIssueDate);
 
 		// invoiceData.getPayableAmount
 		String payableAmount = currentSaleTrans.getAmountTendered().toString();
@@ -142,8 +142,8 @@ public class AsqZatcaSaleQrCodeGenerationOp extends Operation {
 		String intialTransInvoice = asqZatcaHelper.generateInvoiceXML(zatcaInvoiceObj);
 
 		logger.debug(" ---------------------------Generate QR Starts---------------------- ");
-		HashQRData data = asqZatcaInvoiceGenerationHelper.getHashAndQR(sellerName, sellerVATRegNumber, invoiceIssueTime, invoiceIssueDate, payableAmount, vatTotal, intialTransInvoice,
-				AsqZatcaConstant.keySecret, AsqZatcaConstant.keyAlg, addDocQR, xmlUUID, xmlIrnValue, signatureData, nextICV);
+		HashQRData data = asqZatcaInvoiceGenerationHelper.getHashAndQR(sellerName, sellerVATRegNumber, invoiceIssueDate, invoiceIssueTime, payableAmount, vatTotal, intialTransInvoice,
+				AsqZatcaConstant.keySecret, AsqZatcaConstant.keyAlg, addDocQR, xmlUUID, xmlIrnValue, signatureData, nextICV, currentSaleTrans.getCreateDate());
 
 		if (data.isCertificateExpired()) {
 			logger.error("*******Certificate Expired************");
@@ -190,7 +190,7 @@ public class AsqZatcaSaleQrCodeGenerationOp extends Operation {
 
 	private void poulateXMLInvoiceType(IRetailTransaction currentSaleTrans, IRetailLocation loc, InvoiceType argZatcaInvoiceObj,
 			oasis.names.specification.ubl.schema.xsd.commonbasiccomponents_2.ObjectFactory cbc, oasis.names.specification.ubl.schema.xsd.commonaggregatecomponents_2.ObjectFactory cac,
-			AdditionalDocumentReference addDocQR, String xmlIrnValue, String xmlUUID, String invoiceIssueDate, String invoiceIssueTime, Long nextICV)
+			AdditionalDocumentReference addDocQR, String xmlIrnValue, String xmlUUID, XMLGregorianCalendar invoiceIssueDate, XMLGregorianCalendar invoiceIssueTime, Long nextICV)
 			throws ParseException, DatatypeConfigurationException {
 
 		// setting Profile ID
@@ -233,19 +233,12 @@ public class AsqZatcaSaleQrCodeGenerationOp extends Operation {
 
 		// setting transaction Date
 		IssueDateType issueDateType = cbc.createIssueDateType();
-		GregorianCalendar gregorianCalendarIssueDate = new GregorianCalendar();
-		gregorianCalendarIssueDate.setTime(currentSaleTrans.getCreateDate());
-
-		XMLGregorianCalendar date = DatatypeFactory.newInstance().newXMLGregorianCalendarDate(gregorianCalendarIssueDate.get(Calendar.YEAR), gregorianCalendarIssueDate.get(Calendar.MONTH) + 1,
-				gregorianCalendarIssueDate.get(Calendar.DAY_OF_MONTH), DatatypeConstants.FIELD_UNDEFINED);
-		issueDateType.setValue(date);
+		issueDateType.setValue(invoiceIssueDate);
 		argZatcaInvoiceObj.setIssueDate(issueDateType);
 
 		// Setting transaction Issue time
 		IssueTimeType issueTimeType = cbc.createIssueTimeType();
-		XMLGregorianCalendar time = DatatypeFactory.newInstance().newXMLGregorianCalendarTime(gregorianCalendarIssueDate.get(Calendar.HOUR), gregorianCalendarIssueDate.get(Calendar.MINUTE),
-				gregorianCalendarIssueDate.get(Calendar.SECOND), DatatypeConstants.FIELD_UNDEFINED);
-		issueTimeType.setValue(time);
+		issueTimeType.setValue(invoiceIssueTime);
 		argZatcaInvoiceObj.setIssueTime(issueTimeType);
 
 		// setting Supplier
@@ -301,7 +294,7 @@ public class AsqZatcaSaleQrCodeGenerationOp extends Operation {
 
 		// It will we same as issue date for sale and for return it will be actual issue
 		// date of Org transaction
-		argZatcaInvoiceObj.getDelivery().add(asqZatcaInvoiceGenerationHelper.setDeliveryType(date, date, cbc, cac));
+		argZatcaInvoiceObj.getDelivery().add(asqZatcaInvoiceGenerationHelper.setDeliveryType(invoiceIssueDate, invoiceIssueDate, cbc, cac));
 
 		List<IRetailTransactionLineItem> tenderLine = currentSaleTrans.getLineItemsByTypeCode(LineItemType.TENDER.getName());
 		String tenderType = AsqZatcaConstant.ZATCA_TENDER_CASH_CODE;

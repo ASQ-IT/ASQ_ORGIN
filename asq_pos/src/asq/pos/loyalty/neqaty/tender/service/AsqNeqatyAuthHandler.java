@@ -1,4 +1,4 @@
-package asq.pos.loyalty.neqaty.tender;
+package asq.pos.loyalty.neqaty.tender.service;
 
 import java.util.Collections;
 import java.util.HashMap;

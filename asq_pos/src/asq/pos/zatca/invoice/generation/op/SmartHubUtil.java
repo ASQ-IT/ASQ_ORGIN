@@ -30,6 +30,7 @@ import java.security.cert.X509Certificate;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.Locale;
 import java.util.UUID;
 
 import javax.xml.bind.JAXBContext;
@@ -56,6 +57,7 @@ import org.apache.logging.log4j.Logger;
 import org.etsi.uri._01903.v1_3.SignedPropertiesType;
 import org.etsi.uri._01903.v1_3.SignedSignaturePropertiesType;
 import org.json.simple.JSONObject;
+import org.python.icu.math.BigDecimal;
 import org.w3c.dom.Document;
 import org.xml.sax.InputSource;
 
@@ -326,8 +328,8 @@ public class SmartHubUtil {
 	}
 
 	// generate QR code
-	public static String generateQRCode(String sellerName, String vatNumber, String invoiceTimeStamp, String invoiceDate, String invoiceTotal, String vatTotal, String signedHash, String signatureECDA,
-			byte[] publicKeyECDA, byte[] signatureCSID) throws DecoderException {
+	public static String generateQRCode(String sellerName, String vatNumber, XMLGregorianCalendar invoiceTimeStamp, XMLGregorianCalendar invoiceDate, String invoiceTotal, String vatTotal,
+			String signedHash, String signatureECDA, byte[] publicKeyECDA, byte[] signatureCSID) throws DecoderException {
 
 		QRCode qrCode = new QRCode(sellerName, vatNumber, invoiceTimeStamp, invoiceDate, invoiceTotal, vatTotal, signedHash, signatureECDA, publicKeyECDA, signatureCSID);
 		String hexString = qrCode.getHexString(qrCode);
@@ -638,18 +640,10 @@ public class SmartHubUtil {
 		return dateXMLGreg;
 	}
 
-	public static XMLGregorianCalendar signingTimeConversion(String date, String time) throws ParseException, DatatypeConfigurationException {
-
-		SimpleDateFormat format1 = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-		SimpleDateFormat format2 = new SimpleDateFormat("dd-MMM-yy HH:mm:ss aa");
-
-		Date signingTime = format1.parse(date + " " + time);
-		// Date signingTime = format1.parse("2023-01-11 11:28:50");
-		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss");
-		String formatted = sdf.format(signingTime);
-		XMLGregorianCalendar dateXMLGreg = DatatypeFactory.newInstance().newXMLGregorianCalendar(formatted);
-		return dateXMLGreg;
-
+	public static XMLGregorianCalendar signingTimeConversion(Date argTransactionDate) throws ParseException, DatatypeConfigurationException {
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss", Locale.ENGLISH);
+		String formatted = sdf.format(argTransactionDate);
+		return DatatypeFactory.newInstance().newXMLGregorianCalendar(formatted);
 	}
 
 	public static XMLGregorianCalendar IssueTimeFormatConversion(String time) throws ParseException, DatatypeConfigurationException {
@@ -702,10 +696,10 @@ public class SmartHubUtil {
 		return java.util.Base64.getEncoder().encodeToString(stringTobBeEncoded);
 	}
 
-	public static void writeInvoiceJSON(String invoiceID, String invoiceIssueDate, String invoiceIssueTime, AsqSubmitZatcaCertServiceRequest zatcaInvoiceRequest)
+	public static void writeInvoiceJSON(String invoiceID, XMLGregorianCalendar invoiceIssueDate, XMLGregorianCalendar invoiceIssueTime, AsqSubmitZatcaCertServiceRequest zatcaInvoiceRequest)
 			throws ParserConfigurationException, IOException {
 		StringBuilder fileName = new StringBuilder(System.getProperty("asq.pos.invoice.outboundFolder")).append(System.getProperty("asq.pos.invoice.invoiceFileName")).append(invoiceID).append("_")
-				.append(invoiceIssueDate.replace("-", "")).append(invoiceIssueTime.replace(":", "")).append(System.getProperty("asq.pos.invoice.invoiceFileJsonExt"));
+				.append(invoiceIssueDate.toXMLFormat().replace("-", "")).append(invoiceIssueTime.toXMLFormat().replace(":", "")).append(System.getProperty("asq.pos.invoice.invoiceFileJsonExt"));
 
 		ObjectMapper mapper = new ObjectMapper();
 		String outboundJson = mapper.writeValueAsString(zatcaInvoiceRequest);
@@ -714,5 +708,19 @@ public class SmartHubUtil {
 		out.close();
 
 		logger.debug("Invoice file has been created in outbound dir : " + fileName.toString());
+	}
+
+	public static void main(String args[]) {
+
+		Date signingTime;
+		try {
+			BigDecimal big = new BigDecimal("25.95652174");
+			System.out.println(big.setScale(2, BigDecimal.ROUND_UP));
+			System.out.println(big);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
 	}
 }

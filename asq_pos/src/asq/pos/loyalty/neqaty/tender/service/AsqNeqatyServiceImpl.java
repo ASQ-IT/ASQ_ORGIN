@@ -1,4 +1,4 @@
-package asq.pos.loyalty.neqaty.tender;
+package asq.pos.loyalty.neqaty.tender.service;
 
 import javax.inject.Inject;
 
@@ -25,16 +25,16 @@ public class AsqNeqatyServiceImpl implements IAsqNeqatyService {
 
 	private static final ServiceType<IAsqNeqatyServiceRequest, IServiceResponse> ASQ_NEQATY_SERVICE = new ServiceType<IAsqNeqatyServiceRequest, IServiceResponse>("ASQ_NEQATY_SRV");
 
-	@Override
-	public IServiceResponse inqueryWithOTP(IAsqNeqatyServiceRequest paramAsqSTCLoyalityRequest) throws ServiceException {
-		IServiceHandler<IAsqNeqatyServiceRequest, IServiceResponse> serviceHandler = _serviceHandlerFactory.getServiceHandler(ASQ_NEQATY_SERVICE);
-		return serviceHandler.handleService(paramAsqSTCLoyalityRequest, ASQ_NEQATY_SERVICE);
-	}
+//	@Override
+//	public IServiceResponse inqueryWithOTP(IAsqNeqatyServiceRequest paramAsqSTCLoyalityRequest) throws ServiceException {
+//		IServiceHandler<IAsqNeqatyServiceRequest, IServiceResponse> serviceHandler = _serviceHandlerFactory.getServiceHandler(ASQ_NEQATY_SERVICE);
+//		return serviceHandler.handleService(paramAsqSTCLoyalityRequest, ASQ_NEQATY_SERVICE);
+//	}
 
 	@Override
 	public IServiceResponse redeemNeqityPoint(IAsqNeqatyServiceRequest paramAsqSTCLoyalityRequest) throws ServiceException {
-
-		return null;
+		IServiceHandler<IAsqNeqatyServiceRequest, IServiceResponse> serviceHandler = _serviceHandlerFactory.getServiceHandler(ASQ_NEQATY_SERVICE);
+		return serviceHandler.handleService(paramAsqSTCLoyalityRequest, ASQ_NEQATY_SERVICE);
 	}
 
 	@Override

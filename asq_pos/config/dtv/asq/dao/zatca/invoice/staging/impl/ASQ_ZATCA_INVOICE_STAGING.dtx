@@ -1,0 +1,19 @@
+<DAOMapping xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../../../../../../data2/config/dtv/res/config/xmlschema/dtx.xsd">
+	<DAO name="AsqZatcaInvoiceStaging" package="dtv.asq.dao.zatca.invoice.staging" table="ASQ_ZATCA_INVOICE_STAGING">
+		 <!--Primary Key =============================-->
+		 <field name="organizationId" column="organization_id" type="Long" key="true"/>
+		 <field name="invoiceId" column="INVOICE_ID" type="String" key="true"/>
+		 <field name="businessDate" column="BUSINESS_DATE" type="Date" key="true"/>
+		 <field name="transactionSeq" column="TRANS_SEQ" type="Long" key="true"/>
+		 <field name="workStationId" column="wkstn_id" type="Long" key="true"/>
+		 <field name="icv" column="ICV" type="Long" key="true"/>
+		 <!--Row modification info ===================-->
+		 <field name="status" column="Status" type="String" export="false"/>
+		 <field name="submittedJSON" column="INVOICE_XML" type="byte[]" export="false"/>
+		 <field name="invoiceQrCode" column="INVOICE_QRCODE" type="byte[]" export="false"/>
+		 <field name="invoiceUUID" column="INVOICE_UUID" type="String" export="false"/>
+		 <field name="invoiceHashCode" column="INVOICE_HASHCODE" type="String" export="false"/>
+		 <field name="invoiceDate" column="INVOICE_DATE" type="Date" export="false"/>
+		 <!--Fields ==================================-->
+	</DAO>
+</DAOMapping>

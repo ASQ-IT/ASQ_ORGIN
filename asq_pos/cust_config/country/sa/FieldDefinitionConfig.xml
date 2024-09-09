@@ -13,7 +13,13 @@
    <Field name="stcRedeemPoints" type="Text" resource="stcRedeemPoints" dataFieldRef="Numeric"/>
    <Field name="stcRedeemPointsLabel" type="Label" text="_asqPromptmsgEnterRedeemPoints" />
   <!-- ASQ STC Integration Ends -->
+  <!-- ASQ Neqaty Integration Starts -->
+   <Field name="neqatyOTP" type="Text" resource="neqatyOTP" dataFieldRef="ASQ_OTP"/>
+   <Field name="neqatyOTPLabel" type="Label" text="_asqPromptmsgEnterOTP" />
    
+   <Field name="neqatyRedeemPoints" type="Text" resource="neqatyRedeemPoints" dataFieldRef="Numeric"/>
+   <Field name="neqatyRedeemPointsLabel" type="Label" text="_asqPromptmsgEnterRedeemPoints" />
+  <!-- ASQ Neqaty Integration Ends -->
    <!-- ASQ Capture Customer Mobile Number Starts -->
    <Field name="custMobileNumber" type="Text" resource="custMobileNumber" dataFieldRef="Phone"/>
    <Field name="custMobileNumberLabel" type="Label" text="_asqPromptmsgEnterMobileNumber" />

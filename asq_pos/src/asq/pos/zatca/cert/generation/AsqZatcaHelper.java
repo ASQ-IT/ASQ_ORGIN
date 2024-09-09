@@ -14,13 +14,19 @@ import java.net.URISyntaxException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.Base64;
+import java.util.Calendar;
 import java.util.Date;
+import java.util.GregorianCalendar;
 import java.util.Properties;
 
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBElement;
 import javax.xml.bind.JAXBException;
 import javax.xml.bind.Marshaller;
+import javax.xml.datatype.DatatypeConfigurationException;
+import javax.xml.datatype.DatatypeConstants;
+import javax.xml.datatype.DatatypeFactory;
+import javax.xml.datatype.XMLGregorianCalendar;
 import javax.xml.namespace.QName;
 
 import org.apache.logging.log4j.LogManager;
@@ -287,5 +293,14 @@ public class AsqZatcaHelper {
 
 	public BigDecimal getFormatttedBigDecimalValue(BigDecimal argValueToFormat) {
 		return new BigDecimal(argValueToFormat.multiply(new BigDecimal(100), MathContext.DECIMAL32).longValue());
+	}
+
+	public XMLGregorianCalendar getZatcaIssueDate(GregorianCalendar argdate) throws DatatypeConfigurationException {
+		return DatatypeFactory.newInstance().newXMLGregorianCalendarDate(argdate.get(Calendar.YEAR), argdate.get(Calendar.MONTH) + 1, argdate.get(Calendar.DAY_OF_MONTH),
+				DatatypeConstants.FIELD_UNDEFINED);
+	}
+
+	public XMLGregorianCalendar getZatcaIssueTime(GregorianCalendar argdate) throws DatatypeConfigurationException {
+		return DatatypeFactory.newInstance().newXMLGregorianCalendarTime(argdate.get(Calendar.HOUR), argdate.get(Calendar.MINUTE), argdate.get(Calendar.SECOND), DatatypeConstants.FIELD_UNDEFINED);
 	}
 }

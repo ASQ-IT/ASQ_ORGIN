@@ -13,9 +13,13 @@ public final class AsqValueKeys {
 
 	public static final ValueKey<String> ASQ_MOBILE_NUMBER = new ValueKey<String>(String.class, "ASQ_MOBILE_NUMBER");
 
-	public static final ValueKey<String> ASQ_STC_OTP = new ValueKey(String.class, "ASQ_STC_OTP");
+	public static final ValueKey<String> ASQ_STC_OTP = new ValueKey<String>(String.class, "ASQ_STC_OTP");
 
-	public static final ValueKey<String> ASQ_ZATCA_QR_CODE = new ValueKey(String.class, "");
-	
-	 public static final ValueKey<Boolean> ASQ_TAMARA_PAYMENT_SUCCESS = new ValueKey<Boolean>(Boolean.class, "ASQ_TAMARA_PAYMENT_SUCCESS");
+	public static final ValueKey<String> ASQ_ZATCA_QR_CODE = new ValueKey<String>(String.class, "");
+
+	public static final ValueKey<Boolean> ASQ_TAMARA_PAYMENT_SUCCESS = new ValueKey<Boolean>(Boolean.class, "ASQ_TAMARA_PAYMENT_SUCCESS");
+
+	public static final ValueKey<String> ASQ_NEQATY_MOBILE = new ValueKey<String>(String.class, "ASQ_NEQATY_MOBILE");
+
+	public static final ValueKey<String> ASQ_NEQATY_TRANS_REFERENCE = new ValueKey<String>(String.class, "ASQ_NEQATY_TRANS_REFERENCE");
 }

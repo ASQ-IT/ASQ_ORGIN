@@ -15,8 +15,9 @@
   
   <bean id="asqBnplTamaraServices" class=" asq.pos.bnpl.tamara.tender.service.AsqBnplTamaraServicesImpl"/>
   <bean id="asqSTCLoyalityTenderService" class="asq.pos.loyalty.stc.tender.service.AsqSTCTenderServiceImpl"/>
-  <bean id="asqNeqatyLoyalityTenderService" class="asq.pos.loyalty.neqaty.tender.AsqNeqatyServiceImpl"/>
   
+  <bean id="asqNeqatyHelper" class="asq.pos.loyalty.neqaty.tender.service.AsqNeqatyHelper"/>
+  <bean id="asqNeqatyService" class="asq.pos.loyalty.neqaty.tender.service.AsqNeqatyServiceImpl"/>
   
   <bean abstract="true" id="AbstractZatcaRestServiceBean">
     <property name="serviceId" value="ZATCA_CERT_REST" />
@@ -128,12 +129,12 @@
     <!--  property name="lookupServiceOnStartup" value="true" / -->
   </bean>
   
-  <bean id="ASQ_NEQATY_SRV" class="asq.pos.loyalty.neqaty.tender.AsqNeqatyServiceHandler">
+  <bean id="ASQ_NEQATY_SRV" class="asq.pos.loyalty.neqaty.tender.service.AsqNeqatyServiceHandler">
     <property name="serviceId" value="NEQATY_SRV" />
     <property name="servicePort" ref="asqNeqatyJaxWsServicePort" />
     <!-- <property name="exceptionHandler" ref="qasExceptionHandler" />-->
   </bean>
-  <!-- Neqaty work Starts --> 
+  <!-- Neqaty work ends --> 
   
   <!-- Tamara work Starts -->
   <bean id="BNPL_TAMARA_ORDER_DETAIL_SRV" class="asq.pos.bnpl.tamara.tender.service.AsqBnplTamaraServiceHandler" parent="AbstractBnplTamaraRestServiceBean">

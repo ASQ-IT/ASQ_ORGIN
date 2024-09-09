@@ -6,10 +6,10 @@ import javax.inject.Provider;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import asq.pos.loyalty.neqaty.tender.AsqNeqatyServiceRequest;
-import asq.pos.loyalty.neqaty.tender.AsqNeqatyServiceResponse;
-import asq.pos.loyalty.neqaty.tender.IAsqNeqatyService;
-import asq.pos.loyalty.neqaty.tender.IAsqNeqatyServiceRequest;
+import asq.pos.loyalty.neqaty.tender.service.AsqNeqatyServiceRequest;
+import asq.pos.loyalty.neqaty.tender.service.AsqNeqatyServiceResponse;
+import asq.pos.loyalty.neqaty.tender.service.IAsqNeqatyService;
+import asq.pos.loyalty.neqaty.tender.service.IAsqNeqatyServiceRequest;
 import asq.pos.loyalty.stc.tender.AsqStcHelper;
 import asq.pos.loyalty.stc.tender.service.AsqSTCErrorDesc;
 import asq.pos.loyalty.stc.tender.service.AsqSTCLoyaltyServiceResponse;
@@ -67,7 +67,7 @@ public class AsqNeqatyTenderOp extends AbstractFormOp<AsqNeqatyMobileNumberEditM
 				AsqNeqatyMobileNumberEditModel model = getModel();
 				IAsqNeqatyServiceRequest request = new AsqNeqatyServiceRequest();
 
-				AsqNeqatyServiceResponse response = (AsqNeqatyServiceResponse) asqNeqatyService.get().inqueryWithOTP(request);
+				AsqNeqatyServiceResponse response = (AsqNeqatyServiceResponse) asqNeqatyService.get().redeemNeqityPoint(request);
 			}
 
 		} catch (Exception exception) {

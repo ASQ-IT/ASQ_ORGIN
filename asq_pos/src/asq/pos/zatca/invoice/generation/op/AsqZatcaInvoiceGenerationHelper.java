@@ -11,6 +11,7 @@ import java.security.cert.X509Certificate;
 import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.GregorianCalendar;
 import java.util.List;
 
 import javax.inject.Inject;
@@ -237,11 +238,16 @@ public class AsqZatcaInvoiceGenerationHelper {
 		// invoiceData.getSellerVATRegNumber()
 		String sellerVATRegNumber = invoiceData.getAccountingSupplierParty().getParty().getPartyTaxScheme().get(0).getCompanyID().getValue();
 
+		Date argTransactionDate = new Date();
+
+		GregorianCalendar gregorianCalendarIssueDate = new GregorianCalendar();
+		gregorianCalendarIssueDate.setTime(argTransactionDate);
+
 		// invoiceData.getInvoiceIssueTime()
-		String invoiceIssueTime = invoiceData.getIssueTime().getValue().toString();
+		XMLGregorianCalendar invoiceIssueTime = asqZatcaHelper.getZatcaIssueDate(gregorianCalendarIssueDate);
 
 		// invoiceData.getInvoiceIssueDate()
-		String invoiceIssueDate = invoiceData.getIssueDate().getValue().toString();
+		XMLGregorianCalendar invoiceIssueDate = asqZatcaHelper.getZatcaIssueTime(gregorianCalendarIssueDate);
 
 		// invoiceData.getPayableAmount
 		String payableAmount = invoiceData.getNote().get(0).getValue();
@@ -261,7 +267,7 @@ public class AsqZatcaInvoiceGenerationHelper {
 
 		logger.debug(" ---------------------------Generate QR Starts---------------------- ");
 		HashQRData data = getHashAndQR(sellerName, sellerVATRegNumber, invoiceIssueTime, invoiceIssueDate, payableAmount, vatTotal, invoiceXmlString, AsqZatcaConstant.keySecret,
-				AsqZatcaConstant.keyAlg, addDocQR, xmlUUID, xmlIrnValue, signatureData, nextICV);
+				AsqZatcaConstant.keyAlg, addDocQR, xmlUUID, xmlIrnValue, signatureData, nextICV, argTransactionDate);
 
 		if (data.isCertificateExpired()) {
 			logger.error("*******Certificate Expired************");
@@ -696,10 +702,11 @@ public class AsqZatcaInvoiceGenerationHelper {
 		TaxTotalType taxTotalType = cac.createTaxTotalType();
 		TaxAmountType taxAmountType = cbc.createTaxAmountType();
 		RoundingAmountType roundingAmountType = cbc.createRoundingAmountType();
-
-		taxAmountType.setValue(taxAmount);
-		taxAmountType.setCurrencyID(currencyID);
-		taxTotalType.setTaxAmount(taxAmountType);
+		if (null != taxAmount) {
+			taxAmountType.setValue(taxAmount.setScale(2, BigDecimal.ROUND_UP));
+			taxAmountType.setCurrencyID(currencyID);
+			taxTotalType.setTaxAmount(taxAmountType);
+		}
 
 		if (taxSubtotalTypes != null) {
 			for (TaxSubtotalType taxSubtotalType : taxSubtotalTypes) {
@@ -1159,8 +1166,9 @@ public class AsqZatcaInvoiceGenerationHelper {
 	 * @throws ASQException
 	 * @throws Exception
 	 */
-	public HashQRData getHashAndQR(String sellerName, String vatNumber, String invoiceIssueTimeStamp, String invoiceIssueDate, String invoiceTotal, String vatTotal, String xmlData, String keySecret,
-			String keyAlias, AdditionalDocumentReference addDocQR, String xmlUUID, String xmlIrnValue, SignatureData signatureData, Long nextICV) throws ASQException, Exception {
+	public HashQRData getHashAndQR(String sellerName, String vatNumber, XMLGregorianCalendar invoiceIssueDate, XMLGregorianCalendar invoiceIssueTimeStamp, String invoiceTotal, String vatTotal,
+			String xmlData, String keySecret, String keyAlias, AdditionalDocumentReference addDocQR, String xmlUUID, String xmlIrnValue, SignatureData signatureData, Long nextICV,
+			Date transactionDate) throws ASQException, Exception {
 
 		Base64 base64 = new Base64();
 		String xml = SmartHubUtil.removeNewlineAndWhiteSpaces(xmlData);
@@ -1184,7 +1192,7 @@ public class AsqZatcaInvoiceGenerationHelper {
 		String csidCertificate = SmartHubUtil.getReadCSIDCertificateString(AsqZatcaConstant.csidCertificateFilePath);
 		csidCertificate = SmartHubUtil.removeHeaderAndFooter(csidCertificate);
 
-		XMLGregorianCalendar signingTime = SmartHubUtil.signingTimeConversion(invoiceIssueDate, invoiceIssueTimeStamp);
+		XMLGregorianCalendar signingTime = SmartHubUtil.signingTimeConversion(transactionDate);
 
 		String qrCode = SmartHubUtil.generateQRCode(sellerName, vatNumber, invoiceIssueTimeStamp, invoiceIssueDate, invoiceTotal, vatTotal, hashedXML, signedHash, publicKeyString, csidSignature);
 		addDocQR.setEmbeddedDocumentBinaryObject(qrCode);

@@ -2,6 +2,8 @@ package asq.pos.zatca.invoice.models;
 
 import java.nio.charset.StandardCharsets;
 
+import javax.xml.datatype.XMLGregorianCalendar;
+
 import dtv.util.Base64;
 import oracle.dss.util.xdo.common.util.Hex;
 
@@ -9,25 +11,25 @@ public class QRCode {
 
 	private String sellerName;
 	private String vatNumber;
-	private String invoiceTimeStamp;
+	private XMLGregorianCalendar invoiceTimeStamp;
 	private String invoiceTotal;
 	private String vatTotal;
 	private String hashOfXML;
 	private String signatureECDA;
 	private byte[] publicKeyECDA;
 	private byte[] signatureCSID;
-	private String invoiceDate;
+	private XMLGregorianCalendar invoiceDate;
 
-	public String getInvoiceDate() {
+	public XMLGregorianCalendar getInvoiceDate() {
 		return invoiceDate;
 	}
 
-	public void setInvoiceDate(String invoiceDate) {
+	public void setInvoiceDate(XMLGregorianCalendar invoiceDate) {
 		this.invoiceDate = invoiceDate;
 	}
 
-	public QRCode(String sellerName, String vatNumber, String invoiceTimeStamp, String invoiceDate, String invoiceTotal, String vatTotal,
-			String hashOfXML, String signatureECDA2, byte[] publicKeyECDA2, byte[] signatureCSID2) {
+	public QRCode(String sellerName, String vatNumber, XMLGregorianCalendar invoiceTimeStamp, XMLGregorianCalendar invoiceDate, String invoiceTotal, String vatTotal, String hashOfXML,
+			String signatureECDA2, byte[] publicKeyECDA2, byte[] signatureCSID2) {
 		super();
 		this.sellerName = sellerName;
 		this.vatNumber = vatNumber;
@@ -43,31 +45,29 @@ public class QRCode {
 
 	@Override
 	public String toString() {
-		return "QRCode [sellerName=" + sellerName + ", vatNumber=" + vatNumber + ", invoiceTimeStamp="
-				+ invoiceTimeStamp + ", invoiceTotal=" + invoiceTotal + ", vatTotal=" + vatTotal + ", hashOfXML="
-				+ hashOfXML + ", signatureECDA=" + signatureECDA + ", publicKeyECDA=" + publicKeyECDA
-				+ ", signatureCSID=" + signatureCSID + "]";
+		return "QRCode [sellerName=" + sellerName + ", vatNumber=" + vatNumber + ", invoiceTimeStamp=" + invoiceTimeStamp + ", invoiceTotal=" + invoiceTotal + ", vatTotal=" + vatTotal + ", hashOfXML="
+				+ hashOfXML + ", signatureECDA=" + signatureECDA + ", publicKeyECDA=" + publicKeyECDA + ", signatureCSID=" + signatureCSID + "]";
 	}
 
-	public String getHexString(QRCode qrCode)  {
+	public String getHexString(QRCode qrCode) {
 
 		String tag1 = getHexString(1, qrCode.getSellerName());
 		String tag2 = getHexString(2, qrCode.getVatNumber());
-//		String tag3 = getHexString(3, qrCode.getInvoiceDate()+"T"+qrCode.getInvoiceTimeStamp()+"Z");
-		String tag3 = getHexString(3, qrCode.getInvoiceDate()+"T"+qrCode.getInvoiceTimeStamp());
+		// String tag3 = getHexString(3,
+		// qrCode.getInvoiceDate()+"T"+qrCode.getInvoiceTimeStamp()+"Z");
+		String tag3 = getHexString(3, qrCode.getInvoiceDate() + "T" + qrCode.getInvoiceTimeStamp());
 		String tag4 = getHexString(4, qrCode.getInvoiceTotal());
 		String tag5 = getHexString(5, qrCode.getVatTotal());
 		String tag6 = getHexString(6, qrCode.getHashOfXML());
 		String tag7 = getHexString(7, qrCode.getSignatureECDA());
-		String tag8 = getHexBytes(8, qrCode.getPublicKeyECDA());//tag  8 byte and public parameter byte 
-		String tag9 = getHexBytes(9, qrCode.getSignatureCSID());// tag 9 byte and suganbature parameter byte  
+		String tag8 = getHexBytes(8, qrCode.getPublicKeyECDA());// tag 8 byte and public parameter byte
+		String tag9 = getHexBytes(9, qrCode.getSignatureCSID());// tag 9 byte and suganbature parameter byte
 
-		String finalHexString = tag1 + tag2 + tag3 + tag4 + tag5 + tag6 + tag7 + tag8+ tag9;
+		String finalHexString = tag1 + tag2 + tag3 + tag4 + tag5 + tag6 + tag7 + tag8 + tag9;
 		return finalHexString;
-		
+
 	}
-	
-	
+
 	public QRCode() {
 		super();
 		// TODO Auto-generated constructor stub
@@ -78,47 +78,49 @@ public class QRCode {
 		return decodedHex;
 	}
 
-	public String encodeBase64String (byte[] decodedHex) {
+	public String encodeBase64String(byte[] decodedHex) {
 		String encodedBase64String = Base64.byteArrayToBase64(decodedHex);
 		return encodedBase64String;
 	}
-	
+
 	public String getHexString(int tagNo, String tagValue) {
 		String tagNumLengthHexString = Integer.toHexString(tagNo);
 
 		byte[] tagValueBytes = tagValue.getBytes(StandardCharsets.UTF_8);
-//		int tagValueLength = tagValue.length();
-		int tagValueLength=tagValueBytes.length;
+		// int tagValueLength = tagValue.length();
+		int tagValueLength = tagValueBytes.length;
 		String tagValueLengthHexString = Integer.toHexString(tagValueLength);
-		 if(tagValueLengthHexString.length()==1) {
-			 tagValueLengthHexString = "0"+tagValueLengthHexString;
-		 }
+		if (tagValueLengthHexString.length() == 1) {
+			tagValueLengthHexString = "0" + tagValueLengthHexString;
+		}
 		String tagValueHexString = Hex.dump(tagValueBytes);
-       // System.out.println("Tag : "+tagNo+" - "+(0 + tagNumLengthHexString) + ( tagValueLengthHexString) + tagValueHexString);
-		return (0 + tagNumLengthHexString) + ( tagValueLengthHexString) + tagValueHexString;
-		
+		// System.out.println("Tag : "+tagNo+" - "+(0 + tagNumLengthHexString) + (
+		// tagValueLengthHexString) + tagValueHexString);
+		return (0 + tagNumLengthHexString) + (tagValueLengthHexString) + tagValueHexString;
+
 	}
-	
+
 	public String getHexBytes(int tagNo, byte[] tagValue) {
 		String tagNumLengthHexString = Integer.toHexString(tagNo);
 
 		int tagValueLength = tagValue.length;
 		String tagValueLengthHexString = Integer.toHexString(tagValueLength);
-		if(tagValueLengthHexString.length()==1) {
-			  tagValueLengthHexString = "0"+tagValueLengthHexString;
-		  }
-//		byte[] tagValueBytes = tagValue.getBytes(StandardCharsets.UTF_8);
+		if (tagValueLengthHexString.length() == 1) {
+			tagValueLengthHexString = "0" + tagValueLengthHexString;
+		}
+		// byte[] tagValueBytes = tagValue.getBytes(StandardCharsets.UTF_8);
 		String tagValueHexString = Hex.dump(tagValue);
 		return ((0 + tagNumLengthHexString) + (tagValueLengthHexString) + tagValueHexString);
 	}
 
 	private String bytesArrayToString(byte[] tagValue) {
-		String byteToString="";
-		for(byte t:tagValue) {
-			byteToString=byteToString+t;
+		String byteToString = "";
+		for (byte t : tagValue) {
+			byteToString = byteToString + t;
 		}
 		return byteToString;
 	}
+
 	public String getSellerName() {
 		return sellerName;
 	}
@@ -135,11 +137,11 @@ public class QRCode {
 		this.vatNumber = vatNumber;
 	}
 
-	public String getInvoiceTimeStamp() {
+	public XMLGregorianCalendar getInvoiceTimeStamp() {
 		return invoiceTimeStamp;
 	}
 
-	public void setInvoiceTimeStamp(String invoiceTimeStamp) {
+	public void setInvoiceTimeStamp(XMLGregorianCalendar invoiceTimeStamp) {
 		this.invoiceTimeStamp = invoiceTimeStamp;
 	}
 
@@ -190,9 +192,5 @@ public class QRCode {
 	public void setSignatureCSID(byte[] signatureCSID) {
 		this.signatureCSID = signatureCSID;
 	}
-
-	
-
-	
 
 }
