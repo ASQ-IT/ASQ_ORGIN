@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<InputTypeList xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="InputConfig.xsd">
+
+  <!-- ASQ Input Config Changes Starts-->
+  <InputType name="GIFT_CERT">
+    <Event dtype="Class">dtv.hardware.events.VoucherEvent</Event>
+    <Type dtype="String">GIFT_CERTIFICATE</Type>
+    <InputRuleList>      
+      <InputRule RuleType="LengthRule">
+        <Parameter name="length" value="16"/>
+      </InputRule>
+      <InputRule RuleType="RangeRule">
+        <Parameter name="range_start" value="GC"/>
+        <Parameter name="range_end" value="GC"/>
+      </InputRule>
+    </InputRuleList>
+  </InputType>
+
+
+  <InputType name="LAYAWAY_SCAN">
+    <Event dtype="Class">dtv.hardware.events.LayawayScanEvent</Event>
+    <Type dtype="String">INPUT_LAYAWAY_ID</Type>
+    <InputRuleList>
+      <InputRule RuleType="ScannerSourceRule"/>
+      <InputRule RuleType="RangeRule">
+        <Parameter name="range_start" value="L"/>
+        <Parameter name="range_end" value="L"/>
+      </InputRule>
+      <InputRule RuleType="LengthRule">
+        <Parameter name="length" value="15"/>
+      </InputRule>
+    </InputRuleList>
+  </InputType>
+
+  <InputType name="SPECIAL_ORDER_SCAN">
+    <Event dtype="Class">dtv.hardware.events.SpecialOrderScanEvent</Event>
+    <Type dtype="String">INPUT_SP_ORDER_ID</Type>
+    <InputRuleList>
+      <InputRule RuleType="ScannerSourceRule"/>
+      <InputRule RuleType="RangeRule">
+        <Parameter name="range_start" value="S"/>
+        <Parameter name="range_end" value="S"/>
+      </InputRule>
+      <InputRule RuleType="LengthRule">
+        <Parameter name="length" value="15"/>
+      </InputRule>
+    </InputRuleList>
+  </InputType>
+  
+
+  <InputType name="STORE_CREDIT_SCAN">
+    <Event dtype="Class">dtv.hardware.events.VoucherEvent</Event>
+    <Type dtype="String">STORE_CREDIT</Type>
+    <InputRuleList>
+      <InputRule RuleType="ScannerSourceRule"/>
+      <InputRule RuleType="LengthRule">
+        <Parameter name="length" value="16"/>
+      </InputRule>
+      <InputRule RuleType="RangeRule">
+        <Parameter name="range_start" value="SC"/>
+        <Parameter name="range_end" value="SC"/>
+      </InputRule>
+    </InputRuleList>
+  </InputType>
+
+  <InputType name="STORE_CREDIT_MANUAL">
+    <Event dtype="Class">dtv.hardware.events.VoucherEvent</Event>
+    <Type dtype="String">STORE_CREDIT</Type>
+    <InputRuleList>
+      <InputRule RuleType="LengthRule">
+        <Parameter name="length" value="16"/>
+      </InputRule>
+      <InputRule RuleType="RangeRule">
+        <Parameter name="range_start" value="SC"/>
+        <Parameter name="range_end" value="SC"/>
+      </InputRule>
+    </InputRuleList>
+  </InputType>
+  
+  <InputType name="WARRANTY_SCAN">
+    <Event dtype="Class">dtv.pos.warranty.hardware.WarrantyScanEvent</Event>
+    <InputRuleList>
+      <InputRule RuleType="ScannerSourceRule"/>
+      <InputRule RuleType="LengthRule">
+        <Parameter name="length" value="16"/>
+      </InputRule>
+      <InputRule RuleType="RangeRule">
+        <Parameter name="range_start" value="WA"/>
+        <Parameter name="range_end" value="WA"/>
+      </InputRule>
+    </InputRuleList>
+  </InputType>
+  <!-- ASQ Input Config Changes Ends-->
+</InputTypeList>

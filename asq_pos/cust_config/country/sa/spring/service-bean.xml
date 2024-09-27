@@ -12,12 +12,12 @@
   <bean id="asqZatcaInvoiceGenerationHelper" class="asq.pos.zatca.invoice.generation.op.AsqZatcaInvoiceGenerationHelper"/>
   <bean id="asqZatcaCertRegistrationServices" class="asq.pos.zatca.cert.generation.service.AsqZatcaCertRegistrationServicesImpl" primary="true"/>     
   <bean id="asqZatcaToOICServices" class="asq.pos.zatca.invoice.submition.worker.service.AsqZatcaInvoiceSubmittToOICServiceImpl"/>
-  
   <bean id="asqBnplTamaraServices" class=" asq.pos.bnpl.tamara.tender.service.AsqBnplTamaraServicesImpl"/>
   <bean id="asqSTCLoyalityTenderService" class="asq.pos.loyalty.stc.tender.service.AsqSTCTenderServiceImpl"/>
-  
   <bean id="asqNeqatyHelper" class="asq.pos.loyalty.neqaty.tender.service.AsqNeqatyHelper"/>
   <bean id="asqNeqatyService" class="asq.pos.loyalty.neqaty.tender.service.AsqNeqatyServiceImpl"/>
+  <bean id="asqBnplTabbyServices" class=" asq.pos.bnpl.tabby.tender.service.AsqBnplTabbyServicesImpl" primary="true"/>
+  
   
   <bean abstract="true" id="AbstractZatcaRestServiceBean">
     <property name="serviceId" value="ZATCA_CERT_REST" />
@@ -106,7 +106,7 @@
   </bean>
   
   
-  <!-- Neqaty work Starts -->
+  <!-- Neqaty Integration - Starts -->
   <bean id="asqNeqatyJaxWsHandlerResolver" parent="wsLoggingHandlerResolver">
     <property name="handlers">
       <list value-type="java.xml.ws.handler.Handler" merge="true">
@@ -134,9 +134,10 @@
     <property name="servicePort" ref="asqNeqatyJaxWsServicePort" />
     <!-- <property name="exceptionHandler" ref="qasExceptionHandler" />-->
   </bean>
-  <!-- Neqaty work ends --> 
   
-  <!-- Tamara work Starts -->
+  <!-- Neqaty Integration - Ends --> 
+  
+  <!-- Tamara Integration - Starts -->
   <bean id="BNPL_TAMARA_ORDER_DETAIL_SRV" class="asq.pos.bnpl.tamara.tender.service.AsqBnplTamaraServiceHandler" parent="AbstractBnplTamaraRestServiceBean">
     <property name="servicePath" value="/orders/{order_id}" />
   </bean> 
@@ -146,7 +147,38 @@
      <bean id="BNPL_TAMARA_REFUND_SRV" class="asq.pos.bnpl.tamara.tender.service.AsqBnplTamaraServiceHandler" parent="AbstractBnplTamaraRestServiceBean">
     <property name="servicePath" value="/payments/simplified-refund/{orderId}" />
     </bean> 
-   <!-- Tamara work Ends -->
+   <!-- Tamara Integration - Ends -->
+    <!-- Tabby Integration - Starts -->
+   
+   <bean abstract="true" id="AbstractBnplTabbyRestServiceBean">
+    <property name="serviceId" value="TABBY_REST" />
+    <property name="exceptionHandler" ref="standardJaxRsExceptionHandler" />
+    <property name="serviceConfigHelper" ref="serviceConfigHelper" />
+<!--    <property name="logEntity" value="false" />
+    <property name="oAuth2" value="false" />
+    <property name="username" value="${asq.bnpl.tender.tamara.username}" />
+    <property name="password" value="${asq.bnpl.tender.tamara.password}" />-->
+  </bean> 
+    <bean id="BNPL_TABBY_CREATE_SESSION_SRV" class="asq.pos.bnpl.tabby.tender.service.AsqBnplTabbyServiceHandler" parent="AbstractBnplTabbyRestServiceBean">
+    <property name="servicePath" value="/api/v2/checkout" />
+  </bean> 
 
+    <bean id="BNPL_TABBY_NOTIFICATION_SRV" class="asq.pos.bnpl.tabby.tender.service.AsqBnplTabbyServiceHandler" parent="AbstractBnplTabbyRestServiceBean">
+    <property name="servicePath" value="/api/v2/checkout/{session_id}/send_hpp_link" />
+  </bean> 
+
+    <bean id="BNPL_TABBY_CANCEL_SESSION_SRV" class="asq.pos.bnpl.tabby.tender.service.AsqBnplTabbyServiceHandler" parent="AbstractBnplTabbyRestServiceBean">
+    <property name="servicePath" value="/api/v2/checkout/{session_id}/cancel" />
+  </bean> 
+
+    <bean id="BNPL_TABBY_RETRIEVE_PAYMENT_SRV" class="asq.pos.bnpl.tabby.tender.service.AsqBnplTabbyServiceHandler" parent="AbstractBnplTabbyRestServiceBean">
+    <property name="servicePath" value="/api/v2/payments/{payment_id}" />
+  </bean> 
+
+    <bean id="BNPL_TABBY_REFUND_PAYMENT_SRV" class="asq.pos.bnpl.tabby.tender.service.AsqBnplTabbyServiceHandler" parent="AbstractBnplTabbyRestServiceBean">
+    <property name="servicePath" value="/api/v1/payments/{payment_id}/refunds" />
+  </bean> 
+   
+ <!-- Tabby Integration - Ends -->
 </beans>
   

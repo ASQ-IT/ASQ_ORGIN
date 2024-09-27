@@ -20,20 +20,6 @@
    </FieldLayout>
    <!-- ASQ STC Integration Ends -->
    
-    <!-- ASQ Neqaty Integration Starts -->
-   <FieldLayout name="neqatyOTPLayout" type="SimpleLayout">
-    <Row>
-      <Column start="0" width="100" fieldRef="neqatyOTP" required="true" labeledBy="neqatyOTPLabel" verticalAlignment="Center"/>
-    </Row>
-   </FieldLayout>
-   
-    <FieldLayout name="neqatyRedeemLayout" type="SimpleLayout">
-    <Row>
-      <Column start="0" width="100" fieldRef="neqatyRedeemPoints" required="true" labeledBy="neqatyRedeemPointsLabel" verticalAlignment="Center"/>
-    </Row>
-   </FieldLayout>
-   <!-- ASQ Neqaty Integration Ends -->
-   
    <!-- ASQ Capture Customer Mobile Number Starts -->
    <FieldLayout name="ASQ_MOBILE_NUMBER_LAYOUT" type="SimpleLayout">
 	   	<Row>
@@ -41,5 +27,16 @@
 	   	</Row>
    </FieldLayout>
    <!-- ASQ Capture Customer Mobile Number Ends -->
+
+ <!-- ASQ Tabby Integration Starts -->
+   <FieldLayout name="tabbyDetailsLayout" type="SimpleLayout">
+    <Row>
+      <Column start="0" width="100" fieldRef="custMobileNumber" labeledBy="custMobileNumberLabel" verticalAlignment="Center"/>
+    </Row>
+     <Row>
+      <Column start="0" width="100" fieldRef="custEmailAddress"  labeledBy="custEmailAddressLabel" verticalAlignment="Center"/>
+    </Row>
+   </FieldLayout>
+   <!-- ASQ Tabby Integration Ends -->
    
 </FieldLayoutSet>

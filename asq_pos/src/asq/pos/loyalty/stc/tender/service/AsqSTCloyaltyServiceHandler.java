@@ -44,12 +44,12 @@ public class AsqSTCloyaltyServiceHandler extends AbstractJaxRsHandler<IAsqSTCLoy
 			ServiceType<IAsqSTCLoyaltyServiceRequest, IServiceResponse> argServiceType) {
 		HttpResponse<String> rawResponse = null;
 		try {
-			LOG.info("STC API HandleService Method starts here:");
+			LOG.debug("STC API HandleService Method starts here:");
 			String secretToken = System.getProperty("asq.stc.auth.secrettoken");
 			String authUsernamePassword = System.getProperty("asq.stc.auth.username") + ":"
 					+ System.getProperty("asq.stc.auth.password");
 			String authToken = Base64.getEncoder().encodeToString(authUsernamePassword.getBytes());
-			LOG.info("STC API AuthToken for request: :" +authToken);
+			LOG.debug("STC API AuthToken for request: :" +authToken);
 			String globalId = argServiceRequest.getGlobalId();
 			argServiceRequest.setGlobalId(null);
 			HttpClient httpClient = HttpClient.newHttpClient();
@@ -57,13 +57,12 @@ public class AsqSTCloyaltyServiceHandler extends AbstractJaxRsHandler<IAsqSTCLoy
 			builder.header("Content-Type", "application/json").header("Authorization", "Basic " + authToken)
 					.header("X-Secret-Token", secretToken).header("GlobalId", globalId);
 			builder.uri(URI.create(getEndpointAddress() + getServicePath()));
-			LOG.info("STC API Posting request starts here:");
+			LOG.debug("STC API Posting request starts here:");
 			builder.POST(HttpRequest.BodyPublishers.ofString(asqStcHelper.convertTojson(argServiceRequest)));
 			HttpRequest httpRequest = builder.build();
 			rawResponse = httpClient.send(httpRequest, HttpResponse.BodyHandlers.ofString());
-			LOG.info("STC API returning response :" +rawResponse);
-			checkForExceptions(rawResponse);
-			System.out.println();
+			LOG.debug("STC API returning response :" +rawResponse);
+			//checkForExceptions(rawResponse);
 			return asqStcHelper.convertJSONToPojo(rawResponse.body(), AsqSTCLoyaltyServiceResponse.class);
 		} catch (Exception ex) {
 			LOG.error("WE have recieved a exception in STC we service call ", ex);

@@ -5,6 +5,8 @@ import java.io.FilenameFilter;
 import java.io.IOException;
 import java.math.BigDecimal;
 import java.math.BigInteger;
+import java.math.RoundingMode;
+import java.nio.charset.StandardCharsets;
 import java.security.KeyStore;
 import java.security.NoSuchAlgorithmException;
 import java.security.cert.X509Certificate;
@@ -44,7 +46,6 @@ import asq.pos.zatca.AsqZatcaConstant;
 import asq.pos.zatca.cert.generation.AsqZatcaHelper;
 import asq.pos.zatca.cert.generation.service.AsqSubmitZatcaCertServiceRequest;
 import asq.pos.zatca.cert.generation.service.AsqSubmitZatcaCertServiceResponse;
-import asq.pos.zatca.database.helper.AsqZatcaDatabaseHelper;
 import asq.pos.zatca.invoice.generation.utils.ASQException;
 import asq.pos.zatca.invoice.generation.utils.InvoiceHash;
 import asq.pos.zatca.invoice.models.AdditionalDocumentReference;
@@ -60,7 +61,6 @@ import dtv.util.StringUtils;
 import dtv.util.sequence.SequenceFactory;
 import dtv.xst.dao.crm.IParty;
 import dtv.xst.dao.crm.IPartyLocaleInformation;
-import dtv.xst.dao.loc.IRetailLocation;
 import dtv.xst.dao.trl.impl.SaleReturnLineItemModel;
 import oasis.names.specification.ubl.schema.xsd.commonaggregatecomponents_2.AddressType;
 import oasis.names.specification.ubl.schema.xsd.commonaggregatecomponents_2.AllowanceChargeType;
@@ -139,9 +139,6 @@ public class AsqZatcaInvoiceGenerationHelper {
 
 	@Inject
 	private AsqZatcaHelper asqZatcaHelper;
-
-	@Inject
-	private AsqZatcaDatabaseHelper asqZatcaDatabaseHelper;
 
 	@Inject
 	ICustomerHelper customerHelper;
@@ -244,10 +241,10 @@ public class AsqZatcaInvoiceGenerationHelper {
 		gregorianCalendarIssueDate.setTime(argTransactionDate);
 
 		// invoiceData.getInvoiceIssueTime()
-		XMLGregorianCalendar invoiceIssueTime = asqZatcaHelper.getZatcaIssueDate(gregorianCalendarIssueDate);
+		XMLGregorianCalendar invoiceIssueDate = asqZatcaHelper.getZatcaIssueDate(gregorianCalendarIssueDate);
 
 		// invoiceData.getInvoiceIssueDate()
-		XMLGregorianCalendar invoiceIssueDate = asqZatcaHelper.getZatcaIssueTime(gregorianCalendarIssueDate);
+		XMLGregorianCalendar invoiceIssueTime = asqZatcaHelper.getZatcaIssueTime(gregorianCalendarIssueDate);
 
 		// invoiceData.getPayableAmount
 		String payableAmount = invoiceData.getNote().get(0).getValue();
@@ -305,11 +302,10 @@ public class AsqZatcaInvoiceGenerationHelper {
 		invoiceData.setUBLExtensions(ublExtensionsType);
 		String invoiceXML = generateFinalXML(invoiceData, data.getQR(), signatureData);
 
-		Base64 base64 = new Base64();
 		AsqSubmitZatcaCertServiceRequest oi = new AsqSubmitZatcaCertServiceRequest();
 		oi.setInvoiceHash(data.getInvoiceHash());
 		oi.setUuid(xmlUUID);
-		oi.setInvoice(base64.encodeToString(invoiceXML.getBytes()));
+		oi.setInvoice(asqZatcaHelper.encodeBase64(invoiceXML.getBytes()));
 		SmartHubUtil.writeInvoiceJSON(invoiceData.getID().getValue(), invoiceIssueDate, invoiceIssueTime, oi);
 		return new AsqSubmitZatcaCertServiceResponse();
 	}
@@ -378,12 +374,11 @@ public class AsqZatcaInvoiceGenerationHelper {
 	/**
 	 * In this method we setup the store address and it zatca information
 	 * 
-	 * @param IRetailLocation
 	 * @param cbc
 	 * @param cac
 	 * @return
 	 */
-	public PartyType setPartyType(IRetailLocation loc, oasis.names.specification.ubl.schema.xsd.commonbasiccomponents_2.ObjectFactory cbc,
+	public PartyType setPartyType(oasis.names.specification.ubl.schema.xsd.commonbasiccomponents_2.ObjectFactory cbc,
 			oasis.names.specification.ubl.schema.xsd.commonaggregatecomponents_2.ObjectFactory cac) {
 
 		PartyType partyType = cac.createPartyType();
@@ -392,14 +387,14 @@ public class AsqZatcaInvoiceGenerationHelper {
 		PartyIdentificationType partyIdentificationType = cac.createPartyIdentificationType();
 		IDType idType = cbc.createIDType();
 		idType.setSchemeID("CRN");
-		idType.setValue(System.getProperty("asq.zatca.company.crn.number"));
+		idType.setValue(AsqZatcaConstant.companyCRNNumber);
 		partyIdentificationType.setID(idType);
 		partyType.getPartyIdentification().add(partyIdentificationType);
 
 		// setting the store address
 		AddressType addressType = cac.createAddressType();
 		StreetNameType streetNameType = cbc.createStreetNameType();
-		streetNameType.setValue(loc.getAddress1());
+		streetNameType.setValue(AsqZatcaConstant.companyAddStreetName);
 		addressType.setStreetName(streetNameType);
 
 		/*
@@ -409,32 +404,32 @@ public class AsqZatcaInvoiceGenerationHelper {
 		 */
 
 		BuildingNumberType buildingNumberType = cbc.createBuildingNumberType();
-		buildingNumberType.setValue(loc.getAddress2());
+		buildingNumberType.setValue(AsqZatcaConstant.companyAddBuildingNumber);
 		addressType.setBuildingNumber(buildingNumberType);
 
 		PlotIdentificationType plotIdentificationType = cbc.createPlotIdentificationType();
-		plotIdentificationType.setValue(loc.getAddress3());
+		plotIdentificationType.setValue(AsqZatcaConstant.companyAddPlotNumber);
 		addressType.setPlotIdentification(plotIdentificationType);
 
 		CitySubdivisionNameType citySubdivisionName = cbc.createCitySubdivisionNameType();
-		citySubdivisionName.setValue(loc.getAddress4());
+		citySubdivisionName.setValue(AsqZatcaConstant.companyAddCitySubdivision);
 		addressType.setCitySubdivisionName(citySubdivisionName);
 
 		CityNameType cityNameType = cbc.createCityNameType();
-		cityNameType.setValue(loc.getCity());
+		cityNameType.setValue(AsqZatcaConstant.companyAddCityName);
 		addressType.setCityName(cityNameType);
 
 		PostalZoneType postalZoneType = cbc.createPostalZoneType();
-		postalZoneType.setValue(loc.getPostalCode());
+		postalZoneType.setValue(AsqZatcaConstant.companyAddPostalZone);
 		addressType.setPostalZone(postalZoneType);
 
 		CountrySubentityType countrySubentityType = cbc.createCountrySubentityType();
-		countrySubentityType.setValue(loc.getDistrict());
+		countrySubentityType.setValue(AsqZatcaConstant.companyAddCountrySubentity);
 		addressType.setCountrySubentity(countrySubentityType);
 
 		CountryType countryType = cac.createCountryType();
 		IdentificationCodeType identificationCodeType = cbc.createIdentificationCodeType();
-		identificationCodeType.setValue(loc.getCountry());
+		identificationCodeType.setValue(AsqZatcaConstant.companyAddCountry);
 		countryType.setIdentificationCode(identificationCodeType);
 		addressType.setCountry(countryType);
 
@@ -703,7 +698,7 @@ public class AsqZatcaInvoiceGenerationHelper {
 		TaxAmountType taxAmountType = cbc.createTaxAmountType();
 		RoundingAmountType roundingAmountType = cbc.createRoundingAmountType();
 		if (null != taxAmount) {
-			taxAmountType.setValue(taxAmount.setScale(2, BigDecimal.ROUND_UP));
+			taxAmountType.setValue(taxAmount.setScale(2, RoundingMode.FLOOR));
 			taxAmountType.setCurrencyID(currencyID);
 			taxTotalType.setTaxAmount(taxAmountType);
 		}
@@ -1021,7 +1016,9 @@ public class AsqZatcaInvoiceGenerationHelper {
 		invoicedQuantityType.setUnitCode("PCE");
 		invoicedQuantityType.setValue(lineItem.getQuantity());
 		lineExtensionAmountType.setCurrencyID(lineItem.getCurrencyId());
-		lineExtensionAmountType.setValue(lineItem.getGrossAmount());
+
+		// this should be one unit price
+		lineExtensionAmountType.setValue(lineItem.getNetAmount());
 
 		invoiceLineType.setID(invoiceLineTypeID);
 		invoiceLineType.setInvoicedQuantity(invoicedQuantityType);
@@ -1032,13 +1029,13 @@ public class AsqZatcaInvoiceGenerationHelper {
 		}
 
 		if (null != lineItem.getCurrencyId() && null != lineItem.getTaxModifiers()) {
-			invoiceLineType.getTaxTotal().add(setTaxTotalType(lineItem.getCurrencyId(), lineItem.getTaxModifiers().get(0).getRawTaxAmount(), new BigDecimal(0), null, cbc, cac));
+			invoiceLineType.getTaxTotal().add(setTaxTotalType(lineItem.getCurrencyId(), lineItem.getVatAmount(), lineItem.getGrossAmount(), null, cbc, cac));
 		}
 
 		invoiceLineType.setItem(setItemType("S", lineItem.getItemDescription(), asqZatcaHelper.getFormatttedBigDecimalValue(lineItem.getTaxModifiers().get(0).getRawTaxPercentage()),
 				setTaxSchemeType(lineItem.getTaxModifiers().get(0).getTaxGroupId(), AsqZatcaConstant.ZATCA_SCHEME_AGENCYID, AsqZatcaConstant.ZATCA_TAXSCHEME_SCHEMEID, cbc, cac), cbc, cac));
 
-		invoiceLineType.setPrice(setPriceType(lineItem.getCurrencyId(), lineItem.getNetAmount(), null, cbc, cac));
+		invoiceLineType.setPrice(setPriceType(lineItem.getCurrencyId(), lineItem.getNetAmount().divide(lineItem.getQuantity()), null, cbc, cac));
 
 		// if (null != lineItem.getNotes() && lineItem.getNotes().length > 0) {
 		// for (String note : lineItem.getNotes()) {
@@ -1170,7 +1167,6 @@ public class AsqZatcaInvoiceGenerationHelper {
 			String xmlData, String keySecret, String keyAlias, AdditionalDocumentReference addDocQR, String xmlUUID, String xmlIrnValue, SignatureData signatureData, Long nextICV,
 			Date transactionDate) throws ASQException, Exception {
 
-		Base64 base64 = new Base64();
 		String xml = SmartHubUtil.removeNewlineAndWhiteSpaces(xmlData);
 		logger.debug("**********Initial XML Generated : " + xml);
 		String hashedXML = new InvoiceHash().getInvoiceHash(xml);// generating hash
@@ -1185,10 +1181,16 @@ public class AsqZatcaInvoiceGenerationHelper {
 			data.setExpirationDate(x509.getNotAfter().toString());
 			return data;
 		}
-		byte[] signedHashAsBytes = SmartHubUtil.sigData(ks, AsqZatcaConstant.keyAlg, keySecret, AsqZatcaConstant.sigAlg, hashedXML);
-		String signedHash = base64.encodeBase64String(signedHashAsBytes);
+		Base64 base64 = new Base64();
+		byte[] xmlHashingBytes = base64.decode(hashedXML.getBytes(StandardCharsets.UTF_8));
+
+		byte[] signatureECDA = SmartHubUtil.sigData(ks, AsqZatcaConstant.keyAlg, keySecret, AsqZatcaConstant.sigAlg, hashedXML);
+
+		String signedHash = base64.encodeBase64String(signatureECDA);
+
 		byte[] csidSignature = x509.getSignature();
 		byte[] publicKeyString = x509.getPublicKey().getEncoded();
+
 		String csidCertificate = SmartHubUtil.getReadCSIDCertificateString(AsqZatcaConstant.csidCertificateFilePath);
 		csidCertificate = SmartHubUtil.removeHeaderAndFooter(csidCertificate);
 
@@ -1203,7 +1205,7 @@ public class AsqZatcaInvoiceGenerationHelper {
 		// signingTime.toXMLFormat());
 
 		signatureData.setICV(nextICV.intValue());
-		signatureData.setSignatureValue(signedHashAsBytes);
+		signatureData.setSignatureValue(signatureECDA);
 		signatureData.setDigestValueInvoiceSignedData(hashedXML.getBytes());
 		signatureData.setX509Certificate(csidCertificate);
 		signatureData.setCsidCertSigningTime(signingTime);// take from invoice json
@@ -1304,6 +1306,7 @@ public class AsqZatcaInvoiceGenerationHelper {
 		referenceType01.setTransforms(transformsType);
 		DigestMethodType digestMethodType01 = ds.createDigestMethodType();
 		digestMethodType01.setAlgorithm(System.getProperty("asq.pos.invoice.digestMethod_Algorithm"));
+		// digestMethodType01.set
 		referenceType01.setDigestMethod(digestMethodType01);
 		referenceType01.setDigestValue(signatureData.getDigestValueInvoiceSignedData());
 		referenceType02.setType(System.getProperty("asq.pos.invoice.referenceSignedProperties"));
@@ -1326,7 +1329,7 @@ public class AsqZatcaInvoiceGenerationHelper {
 		org.w3._2000._09.xmldsig_.ObjectType objectType = ds.createObjectType();
 		// ATUL
 		QualifyingPropertiesType qualifyingPropertiesType = xades.createQualifyingPropertiesType();
-		qualifyingPropertiesType.setTarget("");
+		qualifyingPropertiesType.setTarget("signature");
 		// ATUL
 		SignedPropertiesType signedPropertiesType = xades.createSignedPropertiesType();
 		SignedSignaturePropertiesType signedSignaturePropertiesType = xades.createSignedSignaturePropertiesType();
@@ -1347,7 +1350,6 @@ public class AsqZatcaInvoiceGenerationHelper {
 		signedSignaturePropertiesType.setSigningCertificate(certIDListType);
 		signedPropertiesType.setId(System.getProperty("asq.pos.invoice.signedPropertiesID"));
 		signedPropertiesType.setSignedSignatureProperties(signedSignaturePropertiesType);
-		Base64 base64 = new Base64();
 		signatureData.setDigestValueXadesSignedProperties("ReplaceSignature".getBytes());
 		referenceType02.setDigestValue(signatureData.getDigestValueXadesSignedProperties());
 
@@ -1469,18 +1471,20 @@ public class AsqZatcaInvoiceGenerationHelper {
 	 * 
 	 * @param signatureData
 	 * @param argQRCode
-	 * @param signatureData
+	 * @param signatureData1
 	 * @throws NoSuchAlgorithmException
 	 * @throws IOException
 	 * @return signaturePropertyHashingString
 	 */
 
 	private String getSignaturePropertyHashingString(SignatureData signatureData) throws NoSuchAlgorithmException, IOException {
-		String signaturePropertyHashingString = "<xades:SignedProperties xmlns:xades=\"http://uri.etsi.org/01903/v1.3.2#\" Id=\"xadesSignedProperties\"><xades:SignedSignatureProperties><xades:SigningTime>SITV</xades:SigningTime><xades:SigningCertificate><xades:Cert><xades:CertDigest><ds:DigestMethod xmlns:ds=\"http://www.w3.org/2000/09/xmldsig#\" Algorithm=\"http://www.w3.org/2001/04/xmlenc#sha256\"/><ds:DigestValue xmlns:ds=\"http://www.w3.org/2000/09/xmldsig#\">CERTV</ds:DigestValue></xades:CertDigest><xades:IssuerSerial><ds:X509IssuerName xmlns:ds=\"http://www.w3.org/2000/09/xmldsig#\">ISSUEV</ds:X509IssuerName><ds:X509SerialNumber xmlns:ds=\"http://www.w3.org/2000/09/xmldsig#\">SNOV</ds:X509SerialNumber></xades:IssuerSerial></xades:Cert></xades:SigningCertificate></xades:SignedSignatureProperties></xades:SignedProperties>";
+		String signaturePropertyHashingString = "<ns7:SignedProperties xmlns:ns7=\"http://uri.etsi.org/01903/v1.3.2#\" Id=\"xadesSignedProperties\"><ns7:SignedSignatureProperties><ns7:SigningTime>SITV</ns7:SigningTime><ns7:SigningCertificate><ns7:Cert><ns7:CertDigest><ns5:DigestMethod xmlns:ns5=\"http://www.w3.org/2000/09/xmldsig#\" Algorithm=\"http://www.w3.org/2001/04/xmlenc#sha256\"/><ns5:DigestValue xmlns:ns5=\"http://www.w3.org/2000/09/xmldsig#\">CERTV</ns5:DigestValue></ns7:CertDigest><ns7:IssuerSerial><ns5:X509IssuerName xmlns:ns5=\"http://www.w3.org/2000/09/xmldsig#\">ISSUEV</ns5:X509IssuerName><ns5:X509SerialNumber xmlns:ns5=\"http://www.w3.org/2000/09/xmldsig#\">SNOV</ns5:X509SerialNumber></ns7:IssuerSerial></ns7:Cert></ns7:SigningCertificate></ns7:SignedSignatureProperties></ns7:SignedProperties>";
+		logger.debug("Signature Property Before: " + signaturePropertyHashingString);
 		signaturePropertyHashingString = signaturePropertyHashingString.replace("SITV", signatureData.getCsidCertSigningTime().toString());
 		signaturePropertyHashingString = signaturePropertyHashingString.replace("CERTV", SmartHubUtil.hashCertificate(AsqZatcaConstant.csidCertificateFilePath));
 		signaturePropertyHashingString = signaturePropertyHashingString.replace("ISSUEV", signatureData.getCsidCertIssuerName());
 		signaturePropertyHashingString = signaturePropertyHashingString.replace("SNOV", signatureData.getCsidCertSerialNumber());
+		logger.debug("Signature Property After: " + signaturePropertyHashingString);
 		return signaturePropertyHashingString;
 	}
 
@@ -1519,4 +1523,5 @@ public class AsqZatcaInvoiceGenerationHelper {
 			}
 		});
 	}
+
 }

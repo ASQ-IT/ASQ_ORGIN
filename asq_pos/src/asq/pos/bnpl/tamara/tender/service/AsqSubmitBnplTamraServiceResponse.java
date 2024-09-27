@@ -31,7 +31,9 @@ public class AsqSubmitBnplTamraServiceResponse implements IServiceResponse{
 	
 	@JsonProperty("screen_type")
     private Object screen_type;
-    
+	
+	@JsonProperty("checkout_link")
+    private String checkout_link;
     
 /** cancel session srv response */		
 	@JsonProperty("order_was_voided")
@@ -58,7 +60,7 @@ public class AsqSubmitBnplTamraServiceResponse implements IServiceResponse{
 //    private String order_id;
 
     @JsonProperty("order_reference_id")
-    private String order_reference_id;
+    private Long order_reference_id;
     
     @JsonProperty("order_number")
     private String order_number;
@@ -96,8 +98,15 @@ public class AsqSubmitBnplTamraServiceResponse implements IServiceResponse{
     @JsonProperty("tax_amount")
     private AsqBnplTamaraAmountObj tax_amount;
     
-    @JsonProperty("discount_amount")
-    private AsqBnplTamaraAmountObj discount_amount;
+    public AsqBnplTamaraDisAmtObj getDiscount_amount() {
+		return discount_amount;
+	}
+	public void setDiscount_amount(AsqBnplTamaraDisAmtObj discount_amount) {
+		this.discount_amount = discount_amount;
+	}
+
+	@JsonProperty("discount_amount")
+    private AsqBnplTamaraDisAmtObj discount_amount;
     
 //    @JsonProperty("captured_amount")
 //    private AsqBnplTamaraAmountObj captured_amount;
@@ -248,11 +257,11 @@ public class AsqSubmitBnplTamraServiceResponse implements IServiceResponse{
 		this.capture_id = capture_id;
 	}
 
-	public String getOrder_reference_id() {
+	public Long getOrder_reference_id() {
 		return order_reference_id;
 	}
 
-	public void setOrder_reference_id(String order_reference_id) {
+	public void setOrder_reference_id(Long order_reference_id) {
 		this.order_reference_id = order_reference_id;
 	}
 
@@ -352,13 +361,13 @@ public class AsqSubmitBnplTamraServiceResponse implements IServiceResponse{
 		this.tax_amount = tax_amount;
 	}
 
-	public AsqBnplTamaraAmountObj getDiscount_amount() {
-		return discount_amount;
-	}
-
-	public void setDiscount_amount(AsqBnplTamaraAmountObj discount_amount) {
-		this.discount_amount = discount_amount;
-	}
+	/*
+	 * public AsqBnplTamaraAmountObj getDiscount_amount() { return discount_amount;
+	 * }
+	 * 
+	 * public void setDiscount_amount(AsqBnplTamaraAmountObj discount_amount) {
+	 * this.discount_amount = discount_amount; }
+	 */
 
 	public AsqBnplTamaraAmountObj getRefunded_amount() {
 		return refunded_amount;
@@ -422,5 +431,12 @@ public class AsqSubmitBnplTamraServiceResponse implements IServiceResponse{
 
 	public void setProcessing(boolean processing) {
 		this.processing = processing;
+	}
+	
+	public String getCheckout_link() {
+		return checkout_link;
+	}
+	public void setCheckout_link(String checkout_link) {
+		this.checkout_link = checkout_link;
 	}
 }

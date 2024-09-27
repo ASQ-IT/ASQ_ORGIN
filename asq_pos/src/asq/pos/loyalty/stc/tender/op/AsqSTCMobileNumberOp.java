@@ -209,7 +209,7 @@ public class AsqSTCMobileNumberOp extends AbstractFormOp<AsqSTCMobileNumberEditM
 			return technicalErrorScreen("Service has null response");
 		}
 		LOG.info("STC API saving response to DB started");
-		asqStcHelper.saveSTCResponseToDB(trans, globalID, requestDate, earnPoints);
+		//asqStcHelper.saveSTCResponseToDB(trans, globalID, requestDate, earnPoints);
 		LOG.info("STC API saving response to DB successfull");
 		return this.HELPER.getCompleteStackChainResponse(OpChainKey.valueOf("ASQ_STC_OTP"));
 	}

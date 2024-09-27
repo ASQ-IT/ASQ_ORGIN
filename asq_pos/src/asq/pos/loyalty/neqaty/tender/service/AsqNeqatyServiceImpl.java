@@ -32,15 +32,9 @@ public class AsqNeqatyServiceImpl implements IAsqNeqatyService {
 //	}
 
 	@Override
-	public IServiceResponse redeemNeqityPoint(IAsqNeqatyServiceRequest paramAsqSTCLoyalityRequest) throws ServiceException {
+	public IServiceResponse callNeqatyService(IAsqNeqatyServiceRequest paramAsqNeqatyLoyalityRequest) throws ServiceException {
 		IServiceHandler<IAsqNeqatyServiceRequest, IServiceResponse> serviceHandler = _serviceHandlerFactory.getServiceHandler(ASQ_NEQATY_SERVICE);
-		return serviceHandler.handleService(paramAsqSTCLoyalityRequest, ASQ_NEQATY_SERVICE);
-	}
-
-	@Override
-	public IServiceResponse earnNeqityPoint(IAsqNeqatyServiceRequest argRequest) throws ServiceException {
-
-		return null;
+		return serviceHandler.handleService(paramAsqNeqatyLoyalityRequest, ASQ_NEQATY_SERVICE);
 	}
 
 }

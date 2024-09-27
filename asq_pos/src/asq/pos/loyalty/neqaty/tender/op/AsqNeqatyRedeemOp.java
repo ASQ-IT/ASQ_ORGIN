@@ -23,6 +23,7 @@ import dtv.pos.framework.action.type.XstDataActionKey;
 import dtv.pos.framework.op.AbstractFormOp;
 import dtv.pos.iframework.action.IXstDataAction;
 import dtv.pos.iframework.op.IOpResponse;
+import dtv.xst.dao.trl.IRetailTransaction;
 import dtv.xst.dao.trn.IPosTransaction;
 import dtv.xst.dao.ttr.ITenderLineItem;
 
@@ -52,11 +53,12 @@ public class AsqNeqatyRedeemOp extends AbstractFormOp<AsqNeqatyRedeemEditModel> 
 		return new AsqNeqatyRedeemEditModel();
 	}
 
-	@Override
-	protected String getFormKey() {
-		return "ASQ_NEQATY_REDEEM_OPTION";
-	}
-
+	
+	 @Override 
+	 protected String getFormKey() { 
+		 return "ASQ_CAPTURE_OTP";
+	 }
+	
 	@Override
 	protected IOpResponse handleDataAction(IXstDataAction argAction) {
 		
@@ -84,17 +86,21 @@ public class AsqNeqatyRedeemOp extends AbstractFormOp<AsqNeqatyRedeemEditModel> 
 		IAsqNeqatyServiceRequest request = new AsqNeqatyServiceRequest();
 		request.setAuthenticationKey(System.getProperty("asq.neqaty.auth.key"));
 		request.setOperationType("Redeem-OTP");
-		request.setMsisdn(custMobileNumber);
+		request.setMsisdn(custMobileNmbr);
 		
-		///// 3 value need to be passed to Neqaty to redeem
-		request.setAmount(0);//transaction amount
+		String token=getScopedValue(AsqValueKeys.ASQ_NEQATY_TRANS_TOKEN);
+		try {
+			request.setToken(Integer.parseInt(token));
+		}catch(Exception e) {
+			LOG.error("Invalid token in the scope - Token {}",token);
+		}
 		request.setRedeemCode(0);//customer selected redeem option code from inquire response
 		request.setRedeemPoints(0);//redeem points from the selected option
 		
 		request.setTid(0);
 		request.setMethod(NeqatyMethod.AUTHORIZE);
 //		return this.HELPER.getCompleteStackChainResponse(OpChainKey.valueOf("ASQ_NEQATY_OTP"));
-		AsqNeqatyServiceResponse response= (AsqNeqatyServiceResponse) asqNeqatyService.get().redeemNeqityPoint(request);
+		AsqNeqatyServiceResponse response= (AsqNeqatyServiceResponse) asqNeqatyService.get().callNeqatyService(request);
 		return validateResponse(response);
 	}
 

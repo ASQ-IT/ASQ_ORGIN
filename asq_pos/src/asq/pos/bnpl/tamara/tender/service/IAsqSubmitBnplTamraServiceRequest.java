@@ -18,9 +18,9 @@ public interface IAsqSubmitBnplTamraServiceRequest extends IServiceRequest {
 
 	    public void setItems(ArrayList<AsqBnplTamaraItemObj> items);
 
-	    public Long getOrder_reference_id();
+	    public String getOrder_reference_id();
 
-	    public void setOrder_reference_id(Long order_reference_id);
+	    public void setOrder_reference_id(String order_reference_id);
 	    
 		public String getOrder_id();
 

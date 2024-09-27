@@ -20,9 +20,11 @@ DELETE FROM CRM_PARTY WHERE organization_id = 1 AND party_id = 0;
 INSERT INTO crm_party (organization_id, party_id, employee_id, last_name, party_typcode, create_date, create_user_id, update_date, update_user_id) 
   VALUES ($(OrgID) , 0, 0, 'ASQ SYSTEM USER', 'SYSTEM', GETUTCDATE(), 'ASQBDATA', GETUTCDATE(), 'ASQBDATA');
 
-DELETE FROM crm_party_locale_information WHERE organization_id = 1 AND party_id = 0 AND party_locale_seq <= 1;
+DELETE FROM crm_party_locale_information WHERE organization_id = 1 AND party_id = 0;
 INSERT INTO crm_party_locale_information (organization_id, party_id, party_locale_seq, primary_flag, address1, city, state, postal_code, country, create_date, create_user_id, update_date, update_user_id)
-  VALUES ($(OrgID) , 0, 1, 1, 'طريق الامير سلطان، السلامة، جدة ', 'Jeddah', 'Makkah', '21955', 'SA', GETUTCDATE(), 'ASQBDATA', GETUTCDATE(), 'ASQBDATA');
+  VALUES ($(OrgID), 0, 2, 1, '30500 Bruce Industrial Pkwy', 'Solon', 'OH', '44139', 'US', GETUTCDATE(), 'ASQBDATA', GETUTCDATE(), 'ASQBDATA');
+INSERT INTO crm_party_locale_information (organization_id, party_id, party_locale_seq, primary_flag, address1, city, state, postal_code, country, create_date, create_user_id, update_date, update_user_id)
+  VALUES ($(OrgID), 0, 3, 0, '353 Oxford St', 'London', 'England', 'SW1A 1AA', 'UK', GETUTCDATE(), 'ASQBDATA', GETUTCDATE(), 'ASQBDATA');
 
 DELETE FROM crm_party_telephone WHERE organization_id = 1 AND party_id = 0 AND telephone_type in ('Home', 'HOME');
 INSERT INTO crm_party_telephone (organization_id, party_id, telephone_type, telephone_number, create_date, create_user_id, update_date, update_user_id)
@@ -40,6 +42,14 @@ DELETE FROM CRM_PARTY WHERE organization_id = 1 AND party_id = 100;
 INSERT INTO crm_party (organization_id, party_id, employee_id, last_name, party_typcode, create_date, create_user_id, update_date, update_user_id) 
   VALUES ($(OrgID) , 100, 100, 'ASQ LOGIN USER', 'SYSTEM', GETUTCDATE(), 'ASQBDATA', GETUTCDATE(), 'ASQBDATA');
 
+DELETE FROM crm_party_locale_information WHERE organization_id = 1 AND party_id = 100 AND party_locale_seq <= 1;
+INSERT INTO crm_party_locale_information (organization_id, party_id, party_locale_seq, primary_flag, address1, city, state, postal_code, country, create_date, create_user_id, update_date, update_user_id)
+  VALUES ($(OrgID) , 100, 2, 1, 'طريق الامير سلطان، السلامة، جدة ', 'Jeddah', 'Makkah', '21955', 'SA', GETUTCDATE(), 'ASQBDATA', GETUTCDATE(), 'ASQBDATA');
+
+DELETE FROM crm_party_telephone WHERE organization_id = 1 AND party_id = 100 AND telephone_type in ('Home', 'HOME');
+INSERT INTO crm_party_telephone (organization_id, party_id, telephone_type, telephone_number, create_date, create_user_id, update_date, update_user_id)
+  VALUES ($(OrgID) , 100, 'HOME', '+966 126 599 569', GETUTCDATE(), 'ASQBDATA', GETUTCDATE(), 'ASQBDATA');
+
 DELETE FROM hrs_employee WHERE organization_id = 1 AND employee_id = '100';
 INSERT INTO hrs_employee (organization_id, employee_id, login_id, party_id, job_title, employee_role_code, group_membership,
       primary_group, employee_typcode, training_status_enum,  employee_statcode, create_date, create_user_id, update_date, update_user_id)
@@ -50,14 +60,6 @@ INSERT INTO hrs_employee_password (organization_id, employee_id, password, effec
 
 DELETE FROM hrs_employee_store WHERE organization_id = $(OrgID) AND employee_id = '100';
 INSERT INTO hrs_employee_store (organization_id, rtl_loc_id, employee_id, employee_store_seq, create_date, create_user_id, update_date, update_user_id) VALUES ($(OrgID) , $(StoreID), '100', 0, GETUTCDATE(), 'ASQBDATA', GETUTCDATE(), 'ASQBDATA');
-
-DELETE FROM crm_party_locale_information WHERE organization_id = 1 AND party_id = 100 AND party_locale_seq <= 1;
-INSERT INTO crm_party_locale_information (organization_id, party_id, party_locale_seq, primary_flag, address1, city, state, postal_code, country, create_date, create_user_id, update_date, update_user_id)
-  VALUES ($(OrgID) , 100, 2, 1, 'طريق الامير سلطان، السلامة، جدة ', 'Jeddah', 'Makkah', '21955', 'SA', GETUTCDATE(), 'ASQBDATA', GETUTCDATE(), 'ASQBDATA');
-
-DELETE FROM crm_party_telephone WHERE organization_id = 1 AND party_id = 100 AND telephone_type in ('Home', 'HOME');
-INSERT INTO crm_party_telephone (organization_id, party_id, telephone_type, telephone_number, create_date, create_user_id, update_date, update_user_id)
-  VALUES ($(OrgID) , 100, 'HOME', '+966 126 599 569', GETUTCDATE(), 'ASQBDATA', GETUTCDATE(), 'ASQBDATA');
 
 -- *******************************************
 -- Tender Type code
@@ -70,46 +72,19 @@ INSERT INTO loc_wkstn (organization_id, rtl_loc_id, wkstn_id, create_date, creat
 -- *******************************************
 DELETE FROM TND_TNDR_TYPCODE WHERE organization_id = 1;
 
-INSERT INTO tnd_tndr_typcode (organization_id, tndr_typcode, description, sort_order, unit_count_req_code, create_date, create_user_id, update_date, update_user_id) VALUES ($(OrgID), 'ACCOUNT', '+TND_TNDR_TYPCODE_ACCOUNT', 60, 'TOTAL_NORMAL', GETUTCDATE(), 'ASQBDATA', GETUTCDATE(), 'ASQBDATA');
-INSERT INTO tnd_tndr_typcode (organization_id, tndr_typcode, description, sort_order, unit_count_req_code, create_date, create_user_id, update_date, update_user_id) VALUES ($(OrgID), 'ACCOUNT_CREDIT', '+TND_TNDR_TYPCODE_ACCOUNT_CREDIT', 10, 'TOTAL_NORMAL', GETUTCDATE(), 'ASQBDATA', GETUTCDATE(), 'ASQBDATA');
-INSERT INTO tnd_tndr_typcode (organization_id, tndr_typcode, description, sort_order, unit_count_req_code, create_date, create_user_id, update_date, update_user_id) VALUES ($(OrgID), 'CURRENCY', '+TND_TNDR_TYPCODE_CURRENCY', 0, 'DENOMINATION', GETUTCDATE(), 'ASQBDATA', GETUTCDATE(), 'ASQBDATA');
-INSERT INTO tnd_tndr_typcode (organization_id, tndr_typcode, description, sort_order, unit_count_req_code, create_date, create_user_id, update_date, update_user_id) VALUES ($(OrgID), 'CREDIT_CARD', '+TND_TNDR_TYPCODE_CREDIT_CARD', 20, 'TOTAL_NORMAL', GETUTCDATE(), 'ASQBDATA', GETUTCDATE(), 'ASQBDATA');
-INSERT INTO tnd_tndr_typcode (organization_id, tndr_typcode, description, sort_order, unit_count_req_code, create_date, create_user_id, update_date, update_user_id) VALUES ($(OrgID), 'MISCELLANEOUS', '+TND_TNDR_TYPCODE_MISCELLANEOUS', 40, 'TOTAL_NORMAL', GETUTCDATE(), 'ASQBDATA', GETUTCDATE(), 'ASQBDATA');
-INSERT INTO tnd_tndr_typcode (organization_id, tndr_typcode, description, sort_order, unit_count_req_code, create_date, create_user_id, update_date, update_user_id) VALUES ($(OrgID), 'MISCELLANEOUS_VOUCHER', '+TND_TNDR_TYPCODE_MISCELLANEOUS_VOUCHER', 45, 'TOTAL_NORMAL', GETUTCDATE(), 'ASQBDATA', GETUTCDATE(), 'ASQBDATA');
-INSERT INTO tnd_tndr_typcode (organization_id, tndr_typcode, description, sort_order, unit_count_req_code, create_date, create_user_id, update_date, update_user_id) VALUES ($(OrgID), 'VOUCHER', '+TND_TNDR_TYPCODE_VOUCHER', 80, 'TOTAL_SHORT', GETUTCDATE(), 'ASQBDATA', GETUTCDATE(), 'ASQBDATA');
-INSERT INTO tnd_tndr_typcode (organization_id, tndr_typcode, description, sort_order, unit_count_req_code, create_date, create_user_id, update_date, update_user_id) VALUES ($(OrgID), 'DEBIT_CARD', '+TND_TNDR_TYPCODE_DEBIT_CARD', 100, 'TOTAL_NORMAL', GETUTCDATE(), 'ASQBDATA', GETUTCDATE(), 'ASQBDATA');
-INSERT INTO tnd_tndr_typcode (organization_id, tndr_typcode, description, sort_order, unit_count_req_code, create_date, create_user_id, update_date, update_user_id) VALUES ($(OrgID), 'PAY_BY_LINK', '+TND_TNDR_TYPCODE_PAY_BY_LINK', 50, 'TOTAL_NORMAL', GETUTCDATE(), 'ASQBDATA', GETUTCDATE(), 'ASQBDATA');
-INSERT INTO tnd_tndr_typcode (organization_id, tndr_typcode, description, sort_order, unit_count_req_code, create_date, create_user_id, update_date, update_user_id) VALUES ($(OrgID), 'LOYALITY', '+TND_TNDR_TYPCODE_LOYALITY', 20, 'TOTAL_NORMAL', GETUTCDATE(), 'ASQBDATA', GETUTCDATE(), 'ASQBDATA');
-INSERT INTO tnd_tndr_typcode (organization_id, tndr_typcode, description, sort_order, unit_count_req_code, create_date, create_user_id, update_date, update_user_id) VALUES ($(OrgID), 'MISCELLANEOUS_EFTLINK', '+TND_TNDR_TYPCODE_MISCELLANEOUS_EFTLINK', 140, 'TOTAL_NORMAL', GETUTCDATE(), 'ASQBDATA', GETUTCDATE(), 'ASQBDATA');
-INSERT INTO tnd_tndr_typcode (organization_id, tndr_typcode, description, sort_order, unit_count_req_code, create_date, create_user_id, update_date, update_user_id) VALUES ($(OrgID), 'COUPON', '+TND_TNDR_TYPCODE_COUPON', 30, 'TOTAL_SHORT', GETUTCDATE(), 'ASQBDATA', GETUTCDATE(), 'ASQBDATA');
+INSERT INTO tnd_tndr_typcode (organization_id, tndr_typcode, description, sort_order, unit_count_req_code, create_date, create_user_id, update_date, update_user_id) VALUES ($(OrgID), 'ACCOUNT', 'Account', 60, 'TOTAL_NORMAL', GETUTCDATE(), 'ASQBDATA', GETUTCDATE(), 'ASQBDATA');
+INSERT INTO tnd_tndr_typcode (organization_id, tndr_typcode, description, sort_order, unit_count_req_code, create_date, create_user_id, update_date, update_user_id) VALUES ($(OrgID), 'ACCOUNT_CREDIT', 'Account Credit', 10, 'TOTAL_NORMAL', GETUTCDATE(), 'ASQBDATA', GETUTCDATE(), 'ASQBDATA');
+INSERT INTO tnd_tndr_typcode (organization_id, tndr_typcode, description, sort_order, unit_count_req_code, create_date, create_user_id, update_date, update_user_id) VALUES ($(OrgID), 'CURRENCY', 'Currency', 0, 'DENOMINATION', GETUTCDATE(), 'ASQBDATA', GETUTCDATE(), 'ASQBDATA');
+INSERT INTO tnd_tndr_typcode (organization_id, tndr_typcode, description, sort_order, unit_count_req_code, create_date, create_user_id, update_date, update_user_id) VALUES ($(OrgID), 'CREDIT_CARD', 'Credit Card', 20, 'TOTAL_NORMAL', GETUTCDATE(), 'ASQBDATA', GETUTCDATE(), 'ASQBDATA');
+INSERT INTO tnd_tndr_typcode (organization_id, tndr_typcode, description, sort_order, unit_count_req_code, create_date, create_user_id, update_date, update_user_id) VALUES ($(OrgID), 'MISCELLANEOUS', 'Miscellaneous', 40, 'TOTAL_NORMAL', GETUTCDATE(), 'ASQBDATA', GETUTCDATE(), 'ASQBDATA');
+INSERT INTO tnd_tndr_typcode (organization_id, tndr_typcode, description, sort_order, unit_count_req_code, create_date, create_user_id, update_date, update_user_id) VALUES ($(OrgID), 'MISCELLANEOUS_VOUCHER', 'Miscellaneous Voucher', 45, 'TOTAL_NORMAL', GETUTCDATE(), 'ASQBDATA', GETUTCDATE(), 'ASQBDATA');
+INSERT INTO tnd_tndr_typcode (organization_id, tndr_typcode, description, sort_order, unit_count_req_code, create_date, create_user_id, update_date, update_user_id) VALUES ($(OrgID), 'VOUCHER', 'Voucher', 80, 'TOTAL_SHORT', GETUTCDATE(), 'ASQBDATA', GETUTCDATE(), 'ASQBDATA');
+INSERT INTO tnd_tndr_typcode (organization_id, tndr_typcode, description, sort_order, unit_count_req_code, create_date, create_user_id, update_date, update_user_id) VALUES ($(OrgID), 'DEBIT_CARD', 'Debit Card', 100, 'TOTAL_NORMAL', GETUTCDATE(), 'ASQBDATA', GETUTCDATE(), 'ASQBDATA');
+INSERT INTO tnd_tndr_typcode (organization_id, tndr_typcode, description, sort_order, unit_count_req_code, create_date, create_user_id, update_date, update_user_id) VALUES ($(OrgID), 'PAY_BY_LINK', 'Pay By Link', 50, 'TOTAL_NORMAL', GETUTCDATE(), 'ASQBDATA', GETUTCDATE(), 'ASQBDATA');
+INSERT INTO tnd_tndr_typcode (organization_id, tndr_typcode, description, sort_order, unit_count_req_code, create_date, create_user_id, update_date, update_user_id) VALUES ($(OrgID), 'LOYALITY', 'Loyality', 20, 'TOTAL_NORMAL', GETUTCDATE(), 'ASQBDATA', GETUTCDATE(), 'ASQBDATA');
+INSERT INTO tnd_tndr_typcode (organization_id, tndr_typcode, description, sort_order, unit_count_req_code, create_date, create_user_id, update_date, update_user_id) VALUES ($(OrgID), 'MISCELLANEOUS_EFTLINK', 'Miscellaneous EFTLink Tender', 140, 'TOTAL_NORMAL', GETUTCDATE(), 'ASQBDATA', GETUTCDATE(), 'ASQBDATA');
+INSERT INTO tnd_tndr_typcode (organization_id, tndr_typcode, description, sort_order, unit_count_req_code, create_date, create_user_id, update_date, update_user_id) VALUES ($(OrgID), 'COUPON', 'Coupon', 30, 'TOTAL_SHORT', GETUTCDATE(), 'ASQBDATA', GETUTCDATE(), 'ASQBDATA');
 
--- ************************************
--- COM Transalation for tender Arabic
--- ************************************
-DELETE FROM com_translations WHERE organization_id = $(OrgID) AND translation_key='+TND_TNDR_TYPCODE_ACCOUNT';
-INSERT INTO com_translations (organization_id, translation_key, locale, org_code, org_value, translation, create_date, create_user_id, update_date, update_user_id) VALUES ($(OrgID), '+TND_TNDR_TYPCODE_ACCOUNT', 'AR', '*', '*', 'الحساب', GETUTCDATE(), 'ASQBDATA', GETUTCDATE(), 'ASQBDATA');
-DELETE FROM com_translations WHERE organization_id = $(OrgID) AND translation_key='+TND_TNDR_TYPCODE_ACCOUNT_CREDIT';
-INSERT INTO com_translations (organization_id, translation_key, locale, org_code, org_value, translation, create_date, create_user_id, update_date, update_user_id) VALUES ($(OrgID), '+TND_TNDR_TYPCODE_ACCOUNT_CREDIT', 'AR', '*', '*', 'ائتمان الحساب مثل طرق حجز البضاعة', GETUTCDATE(), 'ASQBDATA', GETUTCDATE(), 'ASQBDATA');
-DELETE FROM com_translations WHERE organization_id = $(OrgID) AND translation_key='+TND_TNDR_TYPCODE_COUPON';
-INSERT INTO com_translations (organization_id, translation_key, locale, org_code, org_value, translation, create_date, create_user_id, update_date, update_user_id) VALUES ($(OrgID), '+TND_TNDR_TYPCODE_COUPON', 'AR', '*', '*', 'كوبون', GETUTCDATE(), 'ASQBDATA', GETUTCDATE(), 'ASQBDATA');
-DELETE FROM com_translations WHERE organization_id = $(OrgID) AND translation_key='+TND_TNDR_TYPCODE_CREDIT_CARD';
-INSERT INTO com_translations (organization_id, translation_key, locale, org_code, org_value, translation, create_date, create_user_id, update_date, update_user_id) VALUES ($(OrgID), '+TND_TNDR_TYPCODE_CREDIT_CARD', 'AR', '*', '*', 'بطاقة الائتمان', GETUTCDATE(), 'ASQBDATA', GETUTCDATE(), 'ASQBDATA');
-DELETE FROM com_translations WHERE organization_id = $(OrgID) AND translation_key='+TND_TNDR_TYPCODE_CURRENCY';
-INSERT INTO com_translations (organization_id, translation_key, locale, org_code, org_value, translation, create_date, create_user_id, update_date, update_user_id) VALUES ($(OrgID), '+TND_TNDR_TYPCODE_CURRENCY', 'AR', '*', '*', 'عملة', GETUTCDATE(), 'ASQBDATA', GETUTCDATE(), 'ASQBDATA');
-DELETE FROM com_translations WHERE organization_id = $(OrgID) AND translation_key='+TND_TNDR_TYPCODE_MISCELLANEOUS';
-INSERT INTO com_translations (organization_id, translation_key, locale, org_code, org_value, translation, create_date, create_user_id, update_date, update_user_id) VALUE ($(OrgID), '+TND_TNDR_TYPCODE_MISCELLANEOUS', 'AR', '*', '*', 'المتنوعات', GETUTCDATE(), 'ASQBDATA', GETUTCDATE(), 'ASQBDATA');
-DELETE FROM com_translations WHERE organization_id = $(OrgID) AND translation_key='+TND_TNDR_TYPCODE_MISCELLANEOUS_VOUCHER';
-INSERT INTO com_translations (organization_id, translation_key, locale, org_code, org_value, translation, create_date, create_user_id, update_date, update_user_id) VALUES ($(OrgID), '+TND_TNDR_TYPCODE_MISCELLANEOUS_VOUCHER', 'AR', '*', '*', 'إيصال المتنوعات', GETUTCDATE(), 'ASQBDATA', GETUTCDATE(), 'ASQBDATA');
-DELETE FROM com_translations WHERE organization_id = $(OrgID) AND translation_key='+TND_TNDR_TYPCODE_VOUCHER';
-INSERT INTO com_translations (organization_id, translation_key, locale, org_code, org_value, translation, create_date, create_user_id, update_date, update_user_id) VALUES ($(OrgID), '+TND_TNDR_TYPCODE_VOUCHER', 'AR', '*', '*', 'الإيصال', GETUTCDATE(), 'ASQBDATA', GETUTCDATE(), 'ASQBDATA');
-DELETE FROM com_translations WHERE organization_id = $(OrgID) AND translation_key='+TND_TNDR_TYPCODE_MISCELLANEOUS_EFTLINK';
-INSERT INTO com_translations (organization_id, translation_key, locale, org_code, org_value, translation, create_date, create_user_id, update_date, update_user_id) VALUES ($(OrgID), '+TND_TNDR_TYPCODE_MISCELLANEOUS_EFTLINK', 'AR', '*', '*', 'طريقة دفع EFTLink للمتنوعات', GETUTCDATE(), 'ASQBDATA', GETUTCDATE(), 'ASQBDATA');
-DELETE FROM com_translations WHERE organization_id = $(OrgID) AND translation_key='+TND_TNDR_TYPCODE_DEBIT_CARD';
-INSERT INTO com_translations (organization_id, translation_key, locale, org_code, org_value, translation, create_date, create_user_id, update_date, update_user_id) VALUES ($(OrgID), '+TND_TNDR_TYPCODE_DEBIT_CARD', 'AR', '*', '*', 'بطاقة الخصم', GETUTCDATE(), 'ASQBDATA', GETUTCDATE(), 'ASQBDATA');
-DELETE FROM com_translations WHERE organization_id = $(OrgID) AND translation_key='+TND_TNDR_TYPCODE_PAY_BY_LINK';
-INSERT INTO com_translations (organization_id, translation_key, locale, org_code, org_value, translation, create_date, create_user_id, update_date, update_user_id) VALUES ($(OrgID), '+TND_TNDR_TYPCODE_PAY_BY_LINK', 'AR', '*', '*', 'الدفع عن طريق الارتباط', GETUTCDATE(), 'ASQBDATA', GETUTCDATE(), 'ASQBDATA');
-DELETE FROM com_translations WHERE organization_id = $(OrgID) AND translation_key='+TND_TNDR_TYPCODE_LOYALITY';
-INSERT INTO com_translations (organization_id, translation_key, locale, org_code, org_value, translation, create_date, create_user_id, update_date, update_user_id) VALUES ($(OrgID), '+TND_TNDR_TYPCODE_LOYALITY', 'AR', '*', '*', 'الولاء', GETUTCDATE(), 'ASQBDATA', GETUTCDATE(), 'ASQBDATA');
 
 -- *************************
 -- Session Store Data
@@ -132,7 +107,7 @@ INSERT INTO tsn_tndr_repository (organization_id, tndr_repository_id, rtl_loc_id
   VALUES ($(OrgID) , '001', $(StoreID), 'TILL', 0, 'ASQ Default Registor 001', 1, GETUTCDATE(), 'ASQBDATA', GETUTCDATE(), 'ASQBDATA');
    
 DELETE FROM com_translations WHERE organization_id = $(OrgID) AND translation_key='+TSN_TNDR_REPOSITORY_DEPOSIT_BANK';
-INSERT INTO com_translations (organization_id, translation_key, locale, org_code, org_value, translation, create_date, create_user_id, update_date, update_user_id) VALUES ($(OrgID), '+TSN_TNDR_REPOSITORY_DEPOSIT_BANK', 'AR', '*', '*', 'بنك الإيداع', GETUTCDATE(), 'ASQBDATA', GETUTCDATE(), 'ASQBDATA');
+INSERT INTO com_translations (organization_id, translation_key, locale, org_code, org_value, translation, create_date, create_user_id, update_date, update_user_id) VALUES ($(OrgID), '+TSN_TNDR_REPOSITORY_DEPOSIT_BANK', 'DEFAULT', '*', '*', 'Deposit Bank', GETUTCDATE(), 'ASQBDATA', GETUTCDATE(), 'ASQBDATA');
   
 -- *******************************************
 -- Store safe session

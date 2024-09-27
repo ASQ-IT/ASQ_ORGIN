@@ -29,14 +29,14 @@
     </Parameters>
   </Service>
   
-  <Service name="TABBY_REST">
+ <Service name="TABBY_REST">
     <Parameters dtype="Map">
-      <TargetUri dtype="String">${asq.zatca.certificate.registration.uri}</TargetUri>
-      <ConnectTimeout dtype="Integer">${asq.zatca.certificate.registration.connection.timeout}</ConnectTimeout>
+      <TargetUri dtype="String">${asq.bnpl.tender.tabby.uri}</TargetUri>
+      <ConnectTimeout dtype="Integer">${asq.bnpl.tender.tabby.uri.timeout}</ConnectTimeout>
     </Parameters>
   </Service>
   
-  <Service name="NEQATY_SRV">
+ <Service name="NEQATY_SRV">
     <Parameters dtype="Map">
       <TargetUri dtype="String">${asq.neqaty.soap.protocol}://${asq.neqaty.soap.host}:${asq.neqaty.soap.port}/${asq.neqaty.soap.uri}</TargetUri>
       <WsdlLocation dtype="String">${asq.neqaty.soap.protocol}://${asq.neqaty.soap.host}:${asq.neqaty.soap.port}/${asq.neqaty.soap.wsdl}</WsdlLocation>

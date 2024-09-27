@@ -12,7 +12,7 @@ public class AsqSubmitBnplTamraServiceRequest extends ServiceRequest implements 
     private AsqBnplTamaraAmountObj total_amount;
     private String phone_number;
     private ArrayList<AsqBnplTamaraItemObj> items;
-    private Long order_reference_id;
+    private String order_reference_id;
     private AsqBnplTamaraAddDataObj additional_data;
     private String order_id;
     private String comment;
@@ -36,11 +36,11 @@ public class AsqSubmitBnplTamraServiceRequest extends ServiceRequest implements 
     }
 
 
-    public Long getOrder_reference_id() {
+    public String getOrder_reference_id() {
         return order_reference_id;
     }
 
-    public void setOrder_reference_id(Long order_reference_id) {
+    public void setOrder_reference_id(String order_reference_id) {
         this.order_reference_id = order_reference_id;
     }
 

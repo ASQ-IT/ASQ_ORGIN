@@ -329,9 +329,9 @@ public class SmartHubUtil {
 
 	// generate QR code
 	public static String generateQRCode(String sellerName, String vatNumber, XMLGregorianCalendar invoiceTimeStamp, XMLGregorianCalendar invoiceDate, String invoiceTotal, String vatTotal,
-			String signedHash, String signatureECDA, byte[] publicKeyECDA, byte[] signatureCSID) throws DecoderException {
+			String argHashedXML, String signatureECDA, byte[] publicKeyECDA, byte[] signatureCSID) throws DecoderException {
 
-		QRCode qrCode = new QRCode(sellerName, vatNumber, invoiceTimeStamp, invoiceDate, invoiceTotal, vatTotal, signedHash, signatureECDA, publicKeyECDA, signatureCSID);
+		QRCode qrCode = new QRCode(sellerName, vatNumber, invoiceTimeStamp, invoiceDate, invoiceTotal, vatTotal, argHashedXML, signatureECDA, publicKeyECDA, signatureCSID);
 		String hexString = qrCode.getHexString(qrCode);
 
 		// handling the Odd number of characters issue by adding the "0"
@@ -698,8 +698,10 @@ public class SmartHubUtil {
 
 	public static void writeInvoiceJSON(String invoiceID, XMLGregorianCalendar invoiceIssueDate, XMLGregorianCalendar invoiceIssueTime, AsqSubmitZatcaCertServiceRequest zatcaInvoiceRequest)
 			throws ParserConfigurationException, IOException {
+		String invoiceIssueTimeFormat = invoiceIssueTime.toXMLFormat().replace(":", "");
+		String invoiceIssueDateFormat = invoiceIssueDate.toXMLFormat().replace("-", "");
 		StringBuilder fileName = new StringBuilder(System.getProperty("asq.pos.invoice.outboundFolder")).append(System.getProperty("asq.pos.invoice.invoiceFileName")).append(invoiceID).append("_")
-				.append(invoiceIssueDate.toXMLFormat().replace("-", "")).append(invoiceIssueTime.toXMLFormat().replace(":", "")).append(System.getProperty("asq.pos.invoice.invoiceFileJsonExt"));
+				.append(invoiceIssueDateFormat).append(invoiceIssueTimeFormat).append(System.getProperty("asq.pos.invoice.invoiceFileJsonExt"));
 
 		ObjectMapper mapper = new ObjectMapper();
 		String outboundJson = mapper.writeValueAsString(zatcaInvoiceRequest);

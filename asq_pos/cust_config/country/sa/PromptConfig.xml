@@ -129,17 +129,16 @@
 	<!-- ASQ STC Integration Prompts Ends -->
 	
 	<!-- ASQ TAMARA Integration Prompts Starts -->
-	<Prompt name="ASQ_TAMARA_REFUND_INITIATE" type="NotifyYesNo" title="_asqTamaraRefundInitiatePromptTitle" message="_asqTamraRefundInitiatePromptYesOrNo" >
-		<Action ref="YES"/>
-	    <Action ref="NO" />
-	</Prompt>
-	
-	<Prompt name="ASQ_TAMARA_CANCEL_SESSION" type="NotifyYesNo" title="_asqInitiateCancelPromptTitle" message="_asqInitiateCancelTransactionPromptYesOrNo" >
-		<Action ref="YES"/>
-	    <Action ref="NO" />
+	<Prompt name="ASQ_TAMARA_REFUND_INITIATE" type="NotifyYesNo" title="_asqTamaraRefundInitiatePromptTitle" message="_asqTamraRefundInitiatePromptYesOrNo">
+		<Action ref="YES" />
+		<Action ref="NO" />
 	</Prompt>
 
-	
+	<Prompt name="ASQ_TAMARA_CANCEL_SESSION" type="NotifyYesNo" title="_asqInitiateCancelPromptTitle" message="_asqInitiateCancelTransactionPromptYesOrNo">
+		<Action ref="YES" />
+		<Action ref="NO" />
+	</Prompt>
+
 	<!-- ASQ TOLA Work Starts -->
     <Prompt name="ASQ_TOLA_QTY_SOH_ERROR" type="NotifyCancel" title="_weight" message="_tolaItemQtyValidationError">
 	    <IconGroup icon="_imagePromptItemWeight" />
@@ -152,4 +151,10 @@
     </Prompt>
     <!-- ASQ TOLA Work Ends -->
 	
+	<Prompt name="ASQ_NEQATY_REDEEM_OPTIONS_LIST" type="List" title="_asqRedemptionListTitle" message="_asqRedemptionListSelect">
+    <ListViewType dtype="String">ASQ_NEQATY_REDEEM_OPTIONS_LIST</ListViewType>
+     <DataSelection selectionMode="UNSELECTABLE" />
+    <Action ref="YES_ENTER" />
+    <Action ref="CANCEL_BACK" />
+  </Prompt>	
 </PromptSet>

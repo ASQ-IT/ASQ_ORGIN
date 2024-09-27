@@ -6,8 +6,8 @@
 	  	<Op class="asq.pos.zatca.cert.generation.op.AsqZatcaCertRegistrationOp" longRunning="true">
 	  		<Parameter name="LongRunningMessage" value="Please wait.." />
 	  	</Op>
-	  	<OpChainRoute chainKey="ASQ_ZATCA_INVOICE_GENERATION" />
-	  	<OpChainRoute chainKey="ASQ_ZATCA_PROD_CERTIFICATE_GENERATION" />
+	  	<OpChainRoute chainKey="ASQ_ZATCA_INVOICE_GENERATION"/>
+	  	<OpChainRoute chainKey="ASQ_ZATCA_PROD_CERTIFICATE_GENERATION"/>
     </OpChain>
     
     <OpChain name="ASQ_ZATCA_INVOICE_GENERATION">
@@ -27,7 +27,7 @@
     </OpChain>
 	<!-- ASQ Zatca Integration Ends -->
 	
-	<!-- ASQ STC Integratin Service Starts-->
+	<!-- ASQ STC Integration Service Starts-->
 	<OpChain name="ASQ_STC_MOBILE">
 		<Op class="asq.pos.loyalty.stc.tender.op.AsqSTCMobileNumberOp" longRunning="true" />
 	</OpChain>
@@ -35,12 +35,6 @@
 		<Op class="asq.pos.loyalty.stc.tender.op.AsqSTCTenderOp" longRunning="true" />
 	</OpChain>
 
-	<OpChain name="ASQ_NEQATY_OTP">
-		<Op class="asq.pos.loyalty.neqaty.tender.op.AsqNeqatyOTPOp" longRunning="true" />
-	</OpChain>
-	<OpChain name="ASQ_NEQATY_REDEEM_OPTION">
-		<Op class="asq.pos.loyalty.neqaty.tender.op.AsqNeqatyRedeemOp" longRunning="true" />
-	</OpChain>
 	<OpChain name="ASQ_TENDER_STC" signal="TransactionModified" contextKey="SALE_TENDER_EMPTY_MENU_OPTION">
 		<Op class="dtv.pos.tender.CreateTenderLineItemOp">
 			<Parameter name="TenderStatus" value="Tender" />
@@ -73,8 +67,13 @@
 		<Op class="asq.pos.loyalty.neqaty.tender.op.AsqNeqatyMobileNumberOp" longRunning="true" />
 	</OpChain>
 	
+	<OpChain name="ASQ_NEQATY_OTP">
+		<Op class="asq.pos.loyalty.neqaty.tender.op.AsqNeqatyOTPOp" longRunning="true" />
+	</OpChain>
+	<OpChain name="ASQ_NEQATY_REDEEM_OPTION">
+		<Op class="asq.pos.loyalty.neqaty.tender.op.AsqNeqatyRedeemOp" longRunning="true" />
+	</OpChain>
 	<!-- ASQ Neqaty Integration Service Ends-->
-	
    
    <OpChain name="SALE_ITEM_AFTER_LOOKUP">
     <OpChainRoute chainKey="VALIDATE_ITEM_AVAILABILITY_FOR_SALE" />
@@ -132,7 +131,7 @@
   
    <!--BNPL TAMARA Service Starts-->
  	<OpChain name="ASQ_TAMARA_MOBILE">
-	  	<Op class="asq.pos.bnpl.tamara.tender.op.AsqBnplTamaraTenderOp"/>
+	  	<Op class="asq.pos.bnpl.tamara.tender.op.AsqBnplTamaraTenderOp" longRunning="true"/>
     </OpChain>
     <OpChain name="ASQ_TENDER_TAMARA" signal="TransactionModified" contextKey="SALE_TENDER_EMPTY_MENU_OPTION">
 		<Op class="dtv.pos.tender.CreateTenderLineItemOp">
@@ -146,21 +145,21 @@
 		<Op class="dtv.pos.tender.rounding.UpdateTransactionRoundedAmountOp" />
 		<OpChainRoute chainKey="CHECK_SALE_COMPLETE" chainType="START" />
 	</OpChain>
-    <OpChain name="VOID_TENDER" signal="TransactionModified" contextKey="SALE_TENDER_EMPTY_MENU_OPTION">
-    <Op class="asq.pos.bnpl.tamara.tender.op.AsqBnplTamaraVerifyPaymentOp">
-    <Parameter name="TenderType" value="TAMARA" />
-    </Op>
-    <PromptOp class="dtv.pos.tender.modifytender.PromptTendersToVoidOp">
-      <Parameter name="disallowNonVoidableTenders" value="true" />
-    </PromptOp>
-    <OpChainRoute chainKey="GUEST_LOOKUP" />
-    <OpChainRoute chainKey="VOID_ROOM_CHARGE" />
-    <OpChainRoute chainKey="EFTLINK_VOID_TENDER" />
-    <OpChainRoute chainKey="CANCEL_TENDER_CHANGE_AUTH" condition="oracle.retail.xstore.countrypack.common.voucher.condition.HasChangeTenderAuthCondition" />
-    <WorkerOp workersBean="updateTenderVoidWorkers" />
-    <Op class="dtv.pos.framework.op.PersistTranInProcessOp" />
-    <OpChainRoute chainKey="CHECK_SALE_COMPLETE" chainType="START" />
-  </OpChain>
+	<OpChain name="VOID_TENDER" signal="TransactionModified" contextKey="SALE_TENDER_EMPTY_MENU_OPTION">
+		<PromptOp class="dtv.pos.tender.modifytender.PromptTendersToVoidOp">
+			<Parameter name="disallowNonVoidableTenders" value="true" />
+		</PromptOp>
+		<Op class="asq.pos.bnpl.tamara.tender.op.AsqBnplTamaraVerifyPaymentOp">
+			<Parameter name="TenderType" value="TAMARA" />
+		</Op>
+		<OpChainRoute chainKey="GUEST_LOOKUP" />
+		<OpChainRoute chainKey="VOID_ROOM_CHARGE" />
+		<OpChainRoute chainKey="EFTLINK_VOID_TENDER" />
+		<OpChainRoute chainKey="CANCEL_TENDER_CHANGE_AUTH" condition="oracle.retail.xstore.countrypack.common.voucher.condition.HasChangeTenderAuthCondition" />
+		<WorkerOp workersBean="updateTenderVoidWorkers" />
+		<Op class="dtv.pos.framework.op.PersistTranInProcessOp" />
+		<OpChainRoute chainKey="CHECK_SALE_COMPLETE" chainType="START" />
+	</OpChain>
   <OpChain name="VOID_REFUND_TENDER" signal="TransactionModified" contextKey="REFUND_TENDER_EMPTY_MENU_OPTION">
     <PromptOp class="dtv.pos.tender.modifytender.PromptTendersToVoidOp">
     <!--Parameter name="disallowAuthorizedTenders" value="true" /-->

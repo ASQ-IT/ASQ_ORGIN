@@ -17,9 +17,15 @@ public final class AsqValueKeys {
 
 	public static final ValueKey<String> ASQ_ZATCA_QR_CODE = new ValueKey<String>(String.class, "");
 
-	public static final ValueKey<Boolean> ASQ_TAMARA_PAYMENT_SUCCESS = new ValueKey<Boolean>(Boolean.class, "ASQ_TAMARA_PAYMENT_SUCCESS");
+	 public static final ValueKey<Boolean> ASQ_TAMARA_PAYMENT_SUCCESS = new ValueKey<Boolean>(Boolean.class, "ASQ_TAMARA_PAYMENT_SUCCESS");
 
-	public static final ValueKey<String> ASQ_NEQATY_MOBILE = new ValueKey<String>(String.class, "ASQ_NEQATY_MOBILE");
-
-	public static final ValueKey<String> ASQ_NEQATY_TRANS_REFERENCE = new ValueKey<String>(String.class, "ASQ_NEQATY_TRANS_REFERENCE");
+	 public static final ValueKey<String> ASQ_TAMARA_ORDERID = new ValueKey(String.class, "ASQ_TAMARA_ORDERID");
+	 
+	 public static final ValueKey<String> ASQ_TAMARA_CHECKOUTID = new ValueKey(String.class, "ASQ_TAMARA_CHECKOUTID");
+	 
+	 public static final ValueKey<String> ASQ_NEQATY_MOBILE = new ValueKey(String.class, "ASQ_NEQATY_MOBILE");
+		
+	public static final ValueKey<String> ASQ_NEQATY_TRANS_REFERENCE = new ValueKey(String.class, "ASQ_NEQATY_TRANS_REFERENCE");
+		
+	public static final ValueKey<String> ASQ_NEQATY_TRANS_TOKEN = new ValueKey(String.class, "ASQ_NEQATY_TRANS_TOKEN");
 }

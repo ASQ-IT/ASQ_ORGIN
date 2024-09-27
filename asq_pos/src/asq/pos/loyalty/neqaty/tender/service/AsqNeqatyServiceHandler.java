@@ -2,6 +2,7 @@ package asq.pos.loyalty.neqaty.tender.service;
 
 import javax.xml.ws.Holder;
 
+import org.apache.commons.lang3.StringUtils;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -14,12 +15,14 @@ import asq.pos.loyalty.neqaty.gen.ObjectFactory;
 import dtv.servicex.ServiceType;
 import dtv.servicex.impl.AbstractJaxWsHandler;
 
-public class AsqNeqatyServiceHandler extends AbstractJaxWsHandler<NeqatyWSAPIPortType, IAsqNeqatyServiceRequest, AsqNeqatyServiceResponse> {
+public class AsqNeqatyServiceHandler
+		extends AbstractJaxWsHandler<NeqatyWSAPIPortType, IAsqNeqatyServiceRequest, AsqNeqatyServiceResponse> {
 
 	private static final Logger LOG = LogManager.getLogger(AsqNeqatyServiceHandler.class);
 
 	@Override
-	public AsqNeqatyServiceResponse handleService(IAsqNeqatyServiceRequest argServiceRequest, ServiceType<IAsqNeqatyServiceRequest, AsqNeqatyServiceResponse> paramServiceType) {
+	public AsqNeqatyServiceResponse handleService(IAsqNeqatyServiceRequest argServiceRequest,
+			ServiceType<IAsqNeqatyServiceRequest, AsqNeqatyServiceResponse> paramServiceType) {
 
 		AsqNeqatyServiceResponse response = null;
 		try {
@@ -33,7 +36,8 @@ public class AsqNeqatyServiceHandler extends AbstractJaxWsHandler<NeqatyWSAPIPor
 
 			switch (argServiceRequest.getMethod()) {
 			case AUTHORIZE:
-				servicePort.authorize(getAuthorizeRequest(argServiceRequest), resultCode, resultDescription, token, transactionReference, optionsData);
+				servicePort.authorize(getAuthorizeRequest(argServiceRequest), resultCode, resultDescription, token,
+						transactionReference, optionsData);
 				break;
 			case CONFIRM:
 				servicePort.confirm(getConfirmRequest(argServiceRequest), resultCode, resultDescription, optionsData);
@@ -60,9 +64,11 @@ public class AsqNeqatyServiceHandler extends AbstractJaxWsHandler<NeqatyWSAPIPor
 	private AuthorizeRequest getAuthorizeRequest(IAsqNeqatyServiceRequest argServiceRequest) {
 		ObjectFactory factory = new ObjectFactory();
 		AuthorizeRequest requestPayload = factory.createAuthorizeRequest();
-		requestPayload.setAuthenticationKey(factory.createAuthorizeRequestAuthenticationKey(argServiceRequest.getAuthenticationKey()));
+		requestPayload.setAuthenticationKey(
+				factory.createAuthorizeRequestAuthenticationKey(argServiceRequest.getAuthenticationKey()));
 		requestPayload.setMsisdn(factory.createAuthorizeRequestMsisdn(argServiceRequest.getMsisdn()));
-		requestPayload.setOperationType(factory.createAuthorizeRequestOperationType(argServiceRequest.getOperationType()));
+		requestPayload
+				.setOperationType(factory.createAuthorizeRequestOperationType(argServiceRequest.getOperationType()));
 
 		requestPayload.setTid(factory.createAuthorizeRequestTid(argServiceRequest.getTid()));
 
@@ -74,11 +80,15 @@ public class AsqNeqatyServiceHandler extends AbstractJaxWsHandler<NeqatyWSAPIPor
 	private ConfirmRequest getConfirmRequest(IAsqNeqatyServiceRequest argServiceRequest) {
 		ObjectFactory factory = new ObjectFactory();
 		ConfirmRequest request = factory.createConfirmRequest();
-		request.setAuthenticationKey(factory.createConfirmRequestAuthenticationKey(argServiceRequest.getAuthenticationKey()));
+		request.setAuthenticationKey(
+				factory.createConfirmRequestAuthenticationKey(argServiceRequest.getAuthenticationKey()));
 		request.setMsisdn(factory.createConfirmRequestMsisdn(argServiceRequest.getMsisdn()));
 
-		request.setOneTimePassword(factory.createConfirmRequestOneTimePassword(argServiceRequest.getOtp()));
-		request.setTransactionReference(factory.createConfirmRequestTransactionReference(argServiceRequest.getTransactionReference()));
+		if (!StringUtils.isBlank(argServiceRequest.getOtp())) {
+			request.setOneTimePassword(factory.createConfirmRequestOneTimePassword(argServiceRequest.getOtp()));
+		}
+		request.setTransactionReference(
+				factory.createConfirmRequestTransactionReference(argServiceRequest.getTransactionReference()));
 
 		request.setTid(factory.createConfirmRequestTid(argServiceRequest.getTid()));
 		return request;
@@ -87,17 +97,19 @@ public class AsqNeqatyServiceHandler extends AbstractJaxWsHandler<NeqatyWSAPIPor
 	private AbortRequest getAbortRequest(IAsqNeqatyServiceRequest argServiceRequest) {
 		ObjectFactory factory = new ObjectFactory();
 		AbortRequest request = factory.createAbortRequest();
-		request.setAuthenticationKey(factory.createAbortRequestAuthenticationKey(argServiceRequest.getAuthenticationKey()));
+		request.setAuthenticationKey(
+				factory.createAbortRequestAuthenticationKey(argServiceRequest.getAuthenticationKey()));
 		request.setMsisdn(factory.createAbortRequestMsisdn(argServiceRequest.getMsisdn()));
 
-		request.setTransactionReference(factory.createAbortRequestTransactionReference(argServiceRequest.getTransactionReference()));
+		request.setTransactionReference(
+				factory.createAbortRequestTransactionReference(argServiceRequest.getTransactionReference()));
 
 		request.setTid(factory.createAbortRequestTid(argServiceRequest.getTid()));
 		return request;
 	}
 
-	private AsqNeqatyServiceResponse mapToNeqatyResponse(Holder<Integer> resultCode, Holder<String> resultDescription, Holder<Integer> token, Holder<String> transactionReference,
-			Holder<NeqatyWSAPIOptionsData> optionsData) {
+	private AsqNeqatyServiceResponse mapToNeqatyResponse(Holder<Integer> resultCode, Holder<String> resultDescription,
+			Holder<Integer> token, Holder<String> transactionReference, Holder<NeqatyWSAPIOptionsData> optionsData) {
 
 		AsqNeqatyServiceResponse responseNeqaty = new AsqNeqatyServiceResponse();
 		responseNeqaty.setResultCode(resultCode.value);

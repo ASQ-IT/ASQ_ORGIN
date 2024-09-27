@@ -38,6 +38,7 @@ import com.oracle.shaded.fasterxml.jackson.databind.JsonMappingException;
 import com.oracle.shaded.fasterxml.jackson.databind.MapperFeature;
 import com.oracle.shaded.fasterxml.jackson.databind.ObjectMapper;
 
+import asq.pos.zatca.AsqZatcaConstant;
 import asq.pos.zatca.cert.generation.service.AsqSubmitZatcaCertServiceResponse;
 import asq.pos.zatca.integration.data.CommandPrompt;
 import asq.pos.zatca.integration.zatca.util.POSUtil;
@@ -270,8 +271,8 @@ public class AsqZatcaHelper {
 
 	public String getZatcaAuthToken() throws IOException {
 		Properties csidProperties = getCSIDProperties();
-		StringBuilder zatcaAuthToken = new StringBuilder(csidProperties.getProperty("binarySecurityToken"));
-		zatcaAuthToken.append(":").append(csidProperties.getProperty("secret"));
+		StringBuilder zatcaAuthToken = new StringBuilder(csidProperties.getProperty(AsqZatcaConstant.ASQ_ZATCA_TOKEN_KEY));
+		zatcaAuthToken.append(":").append(csidProperties.getProperty(AsqZatcaConstant.ASQ_ZATCA_SECRET_KEY));
 		return AsqZatcaIntegrationConstants.Basic + Base64.getEncoder().encodeToString(zatcaAuthToken.toString().getBytes());
 	}
 
@@ -303,4 +304,9 @@ public class AsqZatcaHelper {
 	public XMLGregorianCalendar getZatcaIssueTime(GregorianCalendar argdate) throws DatatypeConfigurationException {
 		return DatatypeFactory.newInstance().newXMLGregorianCalendarTime(argdate.get(Calendar.HOUR), argdate.get(Calendar.MINUTE), argdate.get(Calendar.SECOND), DatatypeConstants.FIELD_UNDEFINED);
 	}
+
+	public String encodeBase64(byte[] stringTobBeEncoded) {
+		return Base64.getEncoder().encodeToString(stringTobBeEncoded);
+	}
+
 }

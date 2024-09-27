@@ -1,9 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<OpChainSet xmlns="http://micros.com/xstore/config/opchain">
-
-<!--STC Service Starts-->
- 	<OpChain name="STC_SERVICE">
-	  	<Op class="asq.pos.loyality.stc.tender.op.AsqSTCTenderOp"/>
-    </OpChain>
-<!--STC Service Ends-->  
-</OpChainSet>

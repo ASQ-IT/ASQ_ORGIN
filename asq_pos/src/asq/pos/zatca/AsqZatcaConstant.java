@@ -37,8 +37,9 @@ public interface AsqZatcaConstant {
 	String STC_EARN_SUCCESS_CODE = "SUCCESS";
 	String STC_SUCCESS_EARN_RESPONSE = "STC_SUCCESS_EARN_RESPONSE";
 	String STC_SUCCESS_REDEEM_RESPONSE = "STC_SUCCESS_REDEEM_RESPONSE";
-	String TAMARA_SUCCESS_CHECK_OUT_SESSION_RESPONSE = "TAMARA_SUCCESS_CHECK_OUT_SESSION_RESPONSE";
-
+	String ASQ_TAMARA_TRANSACTION_COMMENT = "ASQ_TAMARA_TRANSACTION";
+	String ASQ_TAMARA_STORE_TYPE_DEFAULT = "IN_STORE";
+	String ASQ_TAMARA_STORE_CODE_DEFAULT = "STORE_A";
 	String ZATCA_SALE_CODE = "388";
 	String ZATCA_RETURN_CODE = "381";
 	String ZATCA_BUSINESS_TO_CUSTOMER = "0200000";
@@ -62,4 +63,30 @@ public interface AsqZatcaConstant {
 	String ZATCA_TAXSCHEME_SCHEMEID = "UN/ECE 5153";
 	String ZATCA_SCHEME_AGENCYID = "6";
 
+	// These value will remain constant
+	String companyLegalName = System.getProperty("asq.zatca.company.legalenity.name");
+	String companyVatNumber = System.getProperty("asq.zatca.company.vat.reg.number");
+	String companyCRNNumber = System.getProperty("asq.zatca.company.crn.number");
+
+	String companyAddStreetName = System.getProperty("asq.zatca.company.street.name");
+	String companyAddBuildingNumber = System.getProperty("asq.zatca.company.building.number");
+	String companyAddPlotNumber = System.getProperty("asq.zatca.company.plot.number");
+	String companyAddCitySubdivision = System.getProperty("asq.zatca.company.sub.division");
+	String companyAddCityName = System.getProperty("asq.zatca.company.city.name");
+	String companyAddPostalZone = System.getProperty("asq.zatca.company.postal.zone");
+	String companyAddCountrySubentity = System.getProperty("asq.zatca.company.country.subentity");
+	String companyAddCountry = System.getProperty("asq.zatca.company.country");
+
+	String ASQ_ZATCA_SECRET_KEY = "secret";
+	String ASQ_ZATCA_TOKEN_KEY = "binarySecurityToken";
+
+	String ASQ_QR_CODE = "QR";
+	String ASQ_UIID_CHAR_TOREP = "::";
+	String ASQ_UIID_CHAR_BEREP = "-";
+
+	String ASQ_ZATCA_SEQ = "ASQ_ZATCA_SEQ";
+	String ASQ_ZATCA_REPORTING = "reporting:1.0";
+
+	String ASQ_FALSE = "false";
+	String ASQ_DISCOUNT = "Discount";
 }

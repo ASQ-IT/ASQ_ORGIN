@@ -2,6 +2,9 @@ package asq.pos.bnpl.tamara.tender.service;
 
 import java.math.BigDecimal;
 
+import com.oracle.shaded.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
+@JsonIgnoreProperties(ignoreUnknown =true)
 public class AsqBnplTamaraItemObj {
 
     private int reference_id;
@@ -9,7 +12,9 @@ public class AsqBnplTamaraItemObj {
     private String name;
     private String sku;
     private BigDecimal quantity;
-    private AsqBnplTamaraAmountObj total_amount;
+   // private BigDecimal amount;
+
+	private AsqBnplTamaraAmountObj total_amount;
 
     public int getReference_id() {
         return reference_id;
@@ -51,6 +56,13 @@ public class AsqBnplTamaraItemObj {
         this.quantity = quantity;
     }
 
+	
+	/*
+	 * public BigDecimal getAmount() { return amount; }
+	 * 
+	 * public void setAmount(BigDecimal amount) { this.amount = amount; }
+	 */
+	 
 
     public AsqBnplTamaraAmountObj getTotal_amount() {
         return total_amount;

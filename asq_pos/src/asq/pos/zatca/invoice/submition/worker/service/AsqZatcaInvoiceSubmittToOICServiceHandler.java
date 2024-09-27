@@ -36,7 +36,7 @@ public class AsqZatcaInvoiceSubmittToOICServiceHandler extends AbstractJaxRsHand
 			LOG.error("We have reieved exception in calling of Zatca webservice ", ex);
 			AsqSubmitZatcaCertServiceResponse arg = new AsqSubmitZatcaCertServiceResponse();
 			AsqZatcaErrorDesc errDesc = new AsqZatcaErrorDesc();
-			if (null != rawResponse.getStatusInfo()) {
+			if (null != rawResponse && null != rawResponse.getStatusInfo()) {
 				errDesc.setCode(String.valueOf(rawResponse.getStatusInfo().getStatusCode()));
 				errDesc.setMessage(rawResponse.getStatusInfo().getReasonPhrase());
 			} else {

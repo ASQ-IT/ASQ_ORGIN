@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ListView xmlns="http://micros.com/xstore/config/listview">
+
+  <RuleSet name="ASQ_NEQATY_REDEEM_OPTIONS_LIST">
+ 
+ 	<RuleKey>listViewRule_ASQ_NEQATY_REDEEM_OPTIONS_LIST</RuleKey>
+   
+  </RuleSet>
+ 
+ <Header name="ASQ_NEQATY_REDEEM_OPTIONS_LIST">
+    <Row>
+      <Column start="0" width="25" translatable="_asqRedeempoints" />
+      <Column start="28" width="40" translatable="_asqAmount" />
+      <Column start="62" width="75" translatable="_asqRedeemCode" />
+    </Row>
+    
+  </Header>
+  <Element name="ASQ_NEQATY_REDEEM_OPTIONS_LIST">
+    <Row>
+      <Column start="0" width="25" method="getRedeemPoints"/>
+      <Column start="28" width="40" method="getRedeemAmount" />
+      <Column start="62" width="75" method="getRedeemCode"/>
+    </Row>
+  </Element>
+  </ListView>
+  

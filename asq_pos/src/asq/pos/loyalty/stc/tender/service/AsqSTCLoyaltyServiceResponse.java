@@ -1,10 +1,13 @@
 package asq.pos.loyalty.stc.tender.service;
 
+import com.oracle.shaded.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.oracle.shaded.fasterxml.jackson.annotation.JsonInclude;
 import com.oracle.shaded.fasterxml.jackson.annotation.JsonProperty;
-
 import dtv.service.req.IServiceResponse;
 import dtv.servicex.impl.req.ServiceRequest;
 
+@JsonIgnoreProperties(ignoreUnknown = true)
+@JsonInclude(JsonInclude.Include.NON_NULL)
 public class AsqSTCLoyaltyServiceResponse extends ServiceRequest implements IServiceResponse{
 	
 	/**

@@ -18,13 +18,7 @@ public class AsqZatcaInvoiceSubmittToOICServiceImpl implements IAsqZatcaInvoiceS
 
 	@Override
 	public IServiceResponse submitInvoiceToOIC(IAsqSubmitZatcaInvoiceToOicServiceRequest argRequest) throws ServiceException {
-		try {
-			IServiceHandler<IAsqSubmitZatcaInvoiceToOicServiceRequest, IServiceResponse> serviceHandler = _serviceHandlerFactory.getServiceHandler(ZATCA_INVOICE_TO_OIC);
-			return serviceHandler.handleService(argRequest, ZATCA_INVOICE_TO_OIC);
-		} catch (ServiceException ex) {
-			throw ex;
-		} catch (Exception ex) {
-			throw new ServiceException(ex);
-		}
+		IServiceHandler<IAsqSubmitZatcaInvoiceToOicServiceRequest, IServiceResponse> serviceHandler = _serviceHandlerFactory.getServiceHandler(ZATCA_INVOICE_TO_OIC);
+		return serviceHandler.handleService(argRequest, ZATCA_INVOICE_TO_OIC);
 	}
 }

@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans profile="xstore"
+  xmlns="http://www.springframework.org/schema/beans"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xmlns:mvc="http://www.springframework.org/schema/mvc"
+  xmlns:context="http://www.springframework.org/schema/context"
+  xsi:schemaLocation="
+        http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc.xsd
+        http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
+  <!-- Note: default-init-method="init" is intentionally absent from this file, as it contains many frequently  -->
+  <!-- obtained prototype beans without init methods, and the cost of reflective lookups on every bean creation -->
+  <!-- outweighs the the convenience of including that configuration.  Please use init-method where necessary.   -->
+  
+  <!-- ASQ Neqaty Integration - Starts -->
+  
+   <bean id="listViewRule_ASQ_NEQATY_REDEEM_OPTIONS_LIST" class="asq.pos.loyalty.neqaty.tender.op.AsqNeqatyRule" scope="workstation">
+    <property name="viewElementType" value="ASQ_NEQATY_REDEEM_OPTIONS_LIST" />
+  </bean>
+  
+ <!-- ASQ Neqaty Integration - Ends -->
+</beans>

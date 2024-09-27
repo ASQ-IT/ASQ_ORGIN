@@ -81,7 +81,7 @@ public class AsqZatcaInvoiceGenerationOp extends Operation {
 				logger.error("Their are no file to read in sample Invoices directory");
 			}
 		} catch (Exception exception) {
-			logger.error("We have recieved in submiiting the invoices :" + exception);
+			logger.error("We have recieved in submiiting the invoices :", exception);
 			IFormattable[] args = new IFormattable[2];
 			args[0] = _formattables.getSimpleFormattable("System Error");
 			args[1] = _formattables.getSimpleFormattable(exception.getLocalizedMessage());
@@ -134,7 +134,7 @@ public class AsqZatcaInvoiceGenerationOp extends Operation {
 				String requestXmlString = Files.readString(Path.of(sampleSignedInvoice.getPath()));
 				AsqSubmitZatcaCertServiceRequest asqSubmitZatcaCertServiceRequest = zatcaInvoiceRequestMapper(requestXmlString);
 				response = (AsqSubmitZatcaCertServiceResponse) zatcaService.get().submitZatcaInvoiceForRegistration(asqSubmitZatcaCertServiceRequest);
-				if ("PASS".equalsIgnoreCase(response.getValidationResults().getStatus())) {
+				if ("PASS".equalsIgnoreCase(response.getValidationResults().getStatus()) || "WARNING".equalsIgnoreCase(response.getValidationResults().getStatus())) {
 					logger.debug("File Name: " + sampleSignedInvoice.getName() + "has been submitted sucessfully on Zatca ");
 				} else {
 					return handleServiceError(response);

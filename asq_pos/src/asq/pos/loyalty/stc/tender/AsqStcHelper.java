@@ -1,8 +1,11 @@
 package asq.pos.loyalty.stc.tender;
 
 import java.math.BigDecimal;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map.Entry;
 import java.util.Random;
 
 import javax.inject.Inject;
@@ -19,6 +22,7 @@ import com.oracle.shaded.fasterxml.jackson.databind.JsonMappingException;
 import com.oracle.shaded.fasterxml.jackson.databind.MapperFeature;
 import com.oracle.shaded.fasterxml.jackson.databind.ObjectMapper;
 
+import asq.pos.bnpl.tamara.tender.service.AsqSubmitBnplTamraServiceResponse;
 import asq.pos.zatca.AsqZatcaConstant;
 import dtv.data2.access.DataFactory;
 import dtv.data2.access.exception.PersistenceException;
@@ -27,6 +31,7 @@ import dtv.pos.framework.scope.TransactionScope;
 import dtv.xst.dao.trl.IRetailTransaction;
 import dtv.xst.dao.trl.ISaleReturnLineItem;
 import dtv.xst.dao.trn.IPosTransactionProperty;
+import oracle.dss.dataView.datacache.Map;
 
 public class AsqStcHelper {
 
@@ -173,82 +178,4 @@ public class AsqStcHelper {
 		return globalId;
 	}
 
-	/**
-	 * This method saves the response of STC API like GlobalID and Request Date to
-	 * TRN_TRNS_P table for audit purpose
-	 * 
-	 * @throws Database persistent Exception
-	 * @param IRetailTransaction originalPosTrx, String globalID, Date requestDate
-	 * @return 
-	 */
-
-	public void saveSTCResponseToDB(IRetailTransaction originalPosTrx, String globalID, Date requestDate,
-			String earnPoints) {
-
-		IPosTransactionProperty newTrxProps = DataFactory.createObject(IPosTransactionProperty.class);
-		LOG.info("STC API Response values setting to Trx Property table start here:");
-		newTrxProps.setOrganizationId(originalPosTrx.getOrganizationId());
-		newTrxProps.setRetailLocationId(originalPosTrx.getRetailLocationId());
-		newTrxProps.setBusinessDate(originalPosTrx.getBusinessDate());
-		newTrxProps.setWorkstationId(originalPosTrx.getWorkstationId());
-		newTrxProps.setTransactionSequence(originalPosTrx.getTransactionSequence());
-		newTrxProps.setType("STRING");
-		newTrxProps.setPropertyValue(globalID);
-		newTrxProps.setDateValue(requestDate);
-		if (earnPoints != null) {
-			BigDecimal earnPntsDecimal = new BigDecimal(earnPoints);
-			newTrxProps.setDecimalValue(earnPntsDecimal);
-			newTrxProps.setPropertyCode(AsqZatcaConstant.STC_SUCCESS_EARN_RESPONSE);
-		} else {
-			newTrxProps.setPropertyCode(AsqZatcaConstant.STC_SUCCESS_REDEEM_RESPONSE);
-		}
-		LOG.info("STC API Redeem Response values setting to Trx Property table Ends here:" + newTrxProps);
-		try {
-			DataFactory.makePersistent(newTrxProps);
-			LOG.error("Successfull Persisting of STC API Redeem/Earn response to Transaction Property table",
-					newTrxProps);
-		} catch (PersistenceException var5) {
-			LOG.error("Exception caught while persisting STC API Redeem/Earn response to Transaction Property table",
-					newTrxProps);
-			throw new OpExecutionException(var5);
-		}
-	}
-	
-	/**
-	 * This method saves the response of TAMARA API like checkoutID and orderID to
-	 * TRN_TRNS_P table for other TAMARA API calls
-	 * 
-	 * @throws Database persistent Exception
-	 * @param IRetailTransaction originalPosTrx, String checkoutID, String orderID
-	 * @return
-	 */
-
-	public void saveTamaraResponseToDB(IRetailTransaction originalPosTrx, List<String> responseList) {
-
-		IPosTransactionProperty newTrxProps = DataFactory.createObject(IPosTransactionProperty.class);
-		LOG.info("TAMARA Checkout Store Session API Response values setting to Trx Property table start here:");
-		for (String updatingList : responseList) {
-		newTrxProps.setOrganizationId(originalPosTrx.getOrganizationId());
-		newTrxProps.setRetailLocationId(originalPosTrx.getRetailLocationId());
-		newTrxProps.setBusinessDate(originalPosTrx.getBusinessDate());
-		newTrxProps.setWorkstationId(originalPosTrx.getWorkstationId());
-		newTrxProps.setTransactionSequence(originalPosTrx.getTransactionSequence());
-		newTrxProps.setType("STRING");
-	//	updatingList.get
-	//	newTrxProps.setPropertyValue(updatingList.);
-	//	newTrxProps.setDecimalValue(orderID);
-		newTrxProps.setPropertyCode(AsqZatcaConstant.TAMARA_SUCCESS_CHECK_OUT_SESSION_RESPONSE);
-		}
-		LOG.info("TAMARA API Check out Session Response values setting to Trx Property table Ends here:" + newTrxProps);
-		try {
-			this._transactionScope.getTransaction().addPosTransactionProperty(newTrxProps);
-		//	DataFactory.makePersistent(newTrxProps);
-			LOG.error("Successfull Persisting of TAMARA API Check Out Session response to Transaction Property table",
-					newTrxProps);
-		} catch (PersistenceException var5) {
-			LOG.error("Exception caught while persisting TAMARA API Check Out Session response to Transaction Property table",
-					newTrxProps);
-			throw new OpExecutionException(var5);
-		}
-	}
 }

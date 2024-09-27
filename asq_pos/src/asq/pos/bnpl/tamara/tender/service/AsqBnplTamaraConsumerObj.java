@@ -1,5 +1,8 @@
 package asq.pos.bnpl.tamara.tender.service;
 
+import com.oracle.shaded.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
+@JsonIgnoreProperties(ignoreUnknown =true)
 public class AsqBnplTamaraConsumerObj {
 	
     private String first_name;

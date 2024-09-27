@@ -1,9 +1,11 @@
 package asq.pos.loyalty.stc.tender.op;
 
 import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.HashMap;
 import javax.inject.Inject;
 import javax.inject.Provider;
 import org.apache.logging.log4j.LogManager;
@@ -16,6 +18,8 @@ import asq.pos.loyalty.stc.tender.service.AsqSTCLoyaltyServiceRequest;
 import asq.pos.loyalty.stc.tender.service.AsqSTCLoyaltyServiceResponse;
 import asq.pos.loyalty.stc.tender.service.IAsqSTCLoyaltyServiceRequest;
 import asq.pos.loyalty.stc.tender.service.IAsqSTCLoyaltyTenderService;
+import asq.pos.zatca.AsqZatcaConstant;
+import dtv.data2.access.DataFactory;
 import dtv.i18n.IFormattable;
 import dtv.pos.common.OpChainKey;
 import dtv.pos.common.ValueKeys;
@@ -30,6 +34,7 @@ import dtv.pos.iframework.validation.SimpleValidationResult;
 import dtv.util.StringUtils;
 import dtv.xst.dao.trl.IRetailTransaction;
 import dtv.xst.dao.trn.IPosTransaction;
+import dtv.xst.dao.trn.IPosTransactionProperty;
 import dtv.xst.dao.ttr.ITenderLineItem;
 
 public class AsqSTCTenderOp extends AbstractFormOp<AsqSTCTenderOTPEditModel> {
@@ -73,27 +78,26 @@ public class AsqSTCTenderOp extends AbstractFormOp<AsqSTCTenderOTPEditModel> {
 			if (XstDataActionKey.ACCEPT.equals(argAction.getActionKey())) {
 				AsqSTCTenderOTPEditModel model = getModel();
 				ITenderLineItem tenderLine = getScopedValue(ValueKeys.CURRENT_TENDER_LINE);
-				String tender = tenderLine.getTenderId();
-				if ((model.getStcOTP() != null) && (model.getStcRedeemPoints() != null)
-						&& (!model.getStcRedeemPoints().equals(""))) {
+				if ((model.getStcOTP() != null) && (model.getStcRedeemPoints() != null) && (!model.getStcRedeemPoints().equals(""))) {
 					LOG.debug("Process of STC Redemption points Tender starts here :" + model.getStcOTP());
 					IPosTransaction trans = (IPosTransaction) this._transactionScope.getTransaction();
+					
 					BigDecimal redemptionValueBigDec = new BigDecimal(model.getStcRedeemPoints());
+					BigDecimal  trxTotal = trans.getSubtotal();//excluding tax
+					BigDecimal roundedAmount = trxTotal.setScale(0, RoundingMode.HALF_UP);
 					if (trans.getTotal().compareTo(BigDecimal.ZERO) == 0) {
-						return HELPER.getErrorResponse(
-								_formattables.getSimpleFormattable("_asqSTCEnteredZeroPointValueMessage"));
-					} else if (trans.getTotal().compareTo(redemptionValueBigDec) == 1) {
-						LOG.info("Calculated Redemption amount has been set here to transaction :"
-								+ trans.getTotal().compareTo(redemptionValueBigDec));
-						trans.setTotal(trans.getTotal().subtract(redemptionValueBigDec));
-					} else if (trans.getTotal().compareTo(redemptionValueBigDec) == -1) {
-						return HELPER.getErrorResponse(
-								_formattables.getSimpleFormattable("_asqSTCEnteredPointsValueMessage"));
+						return HELPER.getErrorResponse(_formattables.getSimpleFormattable("_asqSTCEnteredZeroPointValueMessage"));
+					} else if (trxTotal.compareTo(redemptionValueBigDec) == 1) {
+						LOG.info("Calculated Redemption amount has been set here to transaction :"+ roundedAmount.compareTo(redemptionValueBigDec));
+						roundedAmount = trxTotal.subtract(redemptionValueBigDec);
+						trans.setAmountTendered(roundedAmount);
+						//setSubtotal(roundedAmount); //tenderedamount
+					} else if (trxTotal.compareTo(redemptionValueBigDec) == -1) {
+						return HELPER.getErrorResponse(_formattables.getSimpleFormattable("_asqSTCEnteredPointsValueMessage"));
 					} else if (redemptionValueBigDec.compareTo(BigDecimal.ZERO) == 0) {
-						return HELPER.getErrorResponse(
-								_formattables.getSimpleFormattable("_asqSTCEnteredZeroPointValueMessage"));
+						return HELPER.getErrorResponse(_formattables.getSimpleFormattable("_asqSTCEnteredZeroPointValueMessage"));
 					}
-					amount = redemptionValueBigDec.intValue();
+					amount = roundedAmount.intValue();
 				} else if (model.getStcOTP() == null) {
 					return super.handleDataAction(argAction);
 				}
@@ -105,10 +109,33 @@ public class AsqSTCTenderOp extends AbstractFormOp<AsqSTCTenderOTPEditModel> {
 		} catch (Exception exception) {
 			LOG.error("Exception from STC_OTP form in Handling Data Action :" + exception);
 			return technicalErrorScreen("Exception from STC_OTP form in Handling Data Action :" + exception);
-
 		}
 		LOG.info("Action key is not equal to ACCEPT, rolling back to Sale Screen :" +argAction.getActionKey());
 		return this.HELPER.getOpChainRollBackRequest() ;
+	}
+	
+	/**
+	 * This method checks whether customer is linked to transaction or not
+	 * 
+	 * @param
+	 * @return
+	 */
+
+	protected IOpResponse handleInitialState() {
+		AsqSTCTenderOTPEditModel editModel = getModel();
+		try {
+			IRetailTransaction trans = (IRetailTransaction) this._transactionScope.getTransaction();
+			if (trans != null)
+			{
+				BigDecimal roundedAmount = trans.getSubtotal();
+				editModel.setStcRedeemPoints(roundedAmount.toString());
+				return super.handleInitialState();
+		} 
+		}catch (Exception ex) {
+			LOG.info(
+					"STC OTP API amount auto populate exception and Trans object is null:");
+		}
+		return super.handleInitialState();
 	}
 
 	/**
@@ -154,10 +181,39 @@ public class AsqSTCTenderOp extends AbstractFormOp<AsqSTCTenderOTPEditModel> {
 		}
 		IRetailTransaction trans = (IRetailTransaction) this._transactionScope.getTransaction();
 		LOG.info("STC REDEEM API saving response to DB started");
-		asqStcHelper.saveSTCResponseToDB(trans, globalID, requestDate, earnPoints);
+		saveSTCResponseToDB(trans, globalID, requestDate, earnPoints);
 		LOG.info("STC REDEEM API saving response to DB successfull");
 		return this.HELPER.getCompleteStackChainResponse(OpChainKey.valueOf("ASQ_TENDER_STC"));
 	}
+	
+	/**
+	 * This method saves the response of STC API like GlobalID and Request Date to
+	 * TRN_TRNS_P table for audit purpose
+	 * 
+	 * @throws 
+	 * @param IRetailTransaction originalPosTrx, String globalID, Date requestDate
+	 * @return
+	 */
+	
+	public void saveSTCResponseToDB(IRetailTransaction originalPosTrx, String globalID, Date requestDate,
+			String earnPoints) {
+		IPosTransactionProperty newTrxProps = DataFactory.createObject(IPosTransactionProperty.class);
+		newTrxProps.setType("STRING");
+		newTrxProps.setPropertyValue(globalID);
+		newTrxProps.setDateValue(requestDate);
+		if (earnPoints != null) {
+			BigDecimal earnPntsDecimal = new BigDecimal(earnPoints);
+			newTrxProps.setDecimalValue(earnPntsDecimal);
+			originalPosTrx.addPosTransactionProperty(newTrxProps);
+			newTrxProps.setPropertyCode(AsqZatcaConstant.STC_SUCCESS_EARN_RESPONSE);
+		}
+		else {
+			newTrxProps.setPropertyCode(AsqZatcaConstant.STC_SUCCESS_REDEEM_RESPONSE);
+			originalPosTrx.addPosTransactionProperty(newTrxProps);
+			System.out.println();
+		}
+	}
+	
 
 	/**
 	 * This method return Technical Error
