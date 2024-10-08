@@ -40,6 +40,7 @@ import dtv.xst.dao.trl.IRetailTransaction;
 import dtv.xst.dao.trl.IRetailTransactionLineItem;
 import dtv.xst.dao.trl.impl.SaleReturnLineItemModel;
 import dtv.xst.dao.trl.impl.TaxLineItemModel;
+import dtv.xst.dao.trn.PosTransactionId;
 import dtv.xst.dao.ttr.impl.TenderLineItemModel;
 import oasis.names.specification.ubl.schema.xsd.commonaggregatecomponents_2.AllowanceChargeType;
 import oasis.names.specification.ubl.schema.xsd.commonaggregatecomponents_2.CustomerPartyType;
@@ -105,7 +106,7 @@ public class AsqZatcaSaleQrCodeGenerationOp extends Operation {
 		XMLGregorianCalendar invoiceIssueTime = asqZatcaHelper.getZatcaIssueTime(gregorianCalendarIssueDate);
 
 		// invoiceData.getPayableAmount
-		String payableAmount = currentSaleTrans.getAmountTendered().toString();
+		String payableAmount = String.valueOf(currentSaleTrans.getAmountTendered().abs());
 
 		// invoiceData.getAdditionalDocumentReference().get(i).getUUID()
 		String xmlUUID = String.valueOf(currentSaleTrans.getObjectIdAsString());
@@ -115,7 +116,7 @@ public class AsqZatcaSaleQrCodeGenerationOp extends Operation {
 		String xmlIrnValue = asqZatcaHelper.getTransactionUIID(currentSaleTrans);
 
 		// vatTotal
-		String vatTotal = String.valueOf(currentSaleTrans.getTaxAmount());
+		String vatTotal = String.valueOf(currentSaleTrans.getTaxAmount().abs());
 
 		SignatureData signatureData = new SignatureData();
 
@@ -200,7 +201,14 @@ public class AsqZatcaSaleQrCodeGenerationOp extends Operation {
 		InvoiceTypeCodeType invoiceTypeCodeType = cbc.createInvoiceTypeCodeType();
 		// setting return sale parameters
 		String reasonCode = StringUtils.EMPTY;
-		if (retunManager != null && null != retunManager.getReturnItemId()) {
+		if (retunManager != null && null != retunManager.getCurrentReturnType()) {
+			// This flow is for return need to set
+			if (null != retunManager.getCurrentOrigTransactionId()) {
+				PosTransactionId orgTrans = retunManager.getCurrentOrigTransactionId();
+				argZatcaInvoiceObj.getBillingReference().add(asqZatcaInvoiceGenerationHelper.setBillingReference(String.valueOf(orgTrans.getTransactionSequence())));
+			} else {
+				logger.info("OriginalInvoiceNumbers is null or empty in the invoice Request");
+			}
 			reasonCode = AsqZatcaConstant.ZATCA_RETURN_REASON_CODE;
 			invoiceTypeCodeType.setValue(AsqZatcaConstant.ZATCA_RETURN_CODE);
 		}
@@ -248,7 +256,7 @@ public class AsqZatcaSaleQrCodeGenerationOp extends Operation {
 		// DocumentLevel Notes // tender total //not a mandatory
 		if (null != currentSaleTrans.getTotal()) {
 			NoteType notes = cbc.createNoteType();
-			notes.setValue(String.valueOf(currentSaleTrans.getTotal()));
+			notes.setValue(String.valueOf(currentSaleTrans.getTotal().abs()));
 			argZatcaInvoiceObj.getNote().add(notes);
 		}
 
@@ -300,7 +308,7 @@ public class AsqZatcaSaleQrCodeGenerationOp extends Operation {
 						calculated = currentSaleTrans.getTaxAmount();
 					}
 					argZatcaInvoiceObj.getTaxTotal()
-							.add(asqZatcaInvoiceGenerationHelper.mapTotalTaxAmoutTag(String.valueOf(currentSaleTrans.getTaxAmount()), System.getProperty("dtv.location.CurrencyId"), cbc, cac));
+							.add(asqZatcaInvoiceGenerationHelper.mapTotalTaxAmoutTag(String.valueOf(currentSaleTrans.getTaxAmount().abs()), System.getProperty("dtv.location.CurrencyId"), cbc, cac));
 				} else if ("CREDIT_CARD".equalsIgnoreCase(tender.getTenderType().getTenderTypecode())) {
 					tenderType = AsqZatcaConstant.ZATCA_TENDER_CREDIT_CODE;
 				} else if ("DEBIT_CARD".equalsIgnoreCase(tender.getTenderType().getTenderTypecode())) {
@@ -318,44 +326,48 @@ public class AsqZatcaSaleQrCodeGenerationOp extends Operation {
 		for (IRetailTransactionLineItem taxLine : taxLines) {
 			if (taxLine instanceof TaxLineItemModel) {
 				TaxLineItemModel taxLineModel = (TaxLineItemModel) taxLine;
-				// get Taxable Amount
-				taxableValue = taxLineModel.getTaxableAmount().subtract(taxLineModel.getTaxAmount());
-				taxSubtotalTypes.add(asqZatcaInvoiceGenerationHelper.setTaxSubtotalType(taxLineModel.getCurrencyId(), taxLineModel.getTaxAmount(), taxableValue,
-						asqZatcaInvoiceGenerationHelper.setTaxCategoryType(new String[] { AsqZatcaConstant.ZATCA_TAXCATEGORY_SCHEMEID }, new String[] { AsqZatcaConstant.ZATCA_SCHEME_AGENCYID },
-								new String[] { "S" }, new BigDecimal[] { asqZatcaHelper.getFormatttedBigDecimalValue(taxLineModel.getTaxPercentage()) },
-								new String[] { AsqZatcaConstant.ZATCA_TAXSCHEME_SCHEMEID }, new String[] { taxLineModel.getTaxGroupId() }, new String[] { AsqZatcaConstant.ZATCA_SCHEME_AGENCYID },
-								// taxSubTotal.getTaxExemptionReasonCode(),
-								// taxSubTotal.getTaxExemptionReason(),
-								null, null, cbc, cac),
-						cbc, cac));
+				if (!taxLineModel.getVoid()) {
+					// get Taxable Amount
+					taxableValue = taxLineModel.getTaxableAmount().subtract(taxLineModel.getTaxAmount());
+					taxableValue = taxableValue.abs();
+					taxSubtotalTypes.add(asqZatcaInvoiceGenerationHelper.setTaxSubtotalType(taxLineModel.getCurrencyId(), taxLineModel.getTaxAmount().abs(), taxableValue,
+							asqZatcaInvoiceGenerationHelper.setTaxCategoryType(new String[] { AsqZatcaConstant.ZATCA_TAXCATEGORY_SCHEMEID }, new String[] { AsqZatcaConstant.ZATCA_SCHEME_AGENCYID },
+									new String[] { "S" }, new BigDecimal[] { asqZatcaHelper.getFormatttedBigDecimalValue(taxLineModel.getTaxPercentage()) },
+									new String[] { AsqZatcaConstant.ZATCA_TAXSCHEME_SCHEMEID }, new String[] { taxLineModel.getTaxGroupId() }, new String[] { AsqZatcaConstant.ZATCA_SCHEME_AGENCYID },
+									// taxSubTotal.getTaxExemptionReasonCode(),
+									// taxSubTotal.getTaxExemptionReason(),
+									null, null, cbc, cac),
+							cbc, cac));
+				}
 			}
 		}
 		argZatcaInvoiceObj.getTaxTotal()
-				.add(asqZatcaInvoiceGenerationHelper.setTaxTotalType(System.getProperty("dtv.location.CurrencyId"), currentSaleTrans.getTaxAmount(), null, taxSubtotalTypes, cbc, cac));
+				.add(asqZatcaInvoiceGenerationHelper.setTaxTotalType(System.getProperty("dtv.location.CurrencyId"), currentSaleTrans.getTaxAmount().abs(), null, taxSubtotalTypes, cbc, cac));
 
 		// Need to set AllowanceTotalAmount for transaction level discount
+		String discountValue = String.valueOf(currentSaleTrans.getDiscountAmount());
+		if (null == discountValue) {
+			discountValue = "0";
+		}
+
+		System.out.println();
+
 		argZatcaInvoiceObj.setLegalMonetaryTotal(asqZatcaInvoiceGenerationHelper.setMonetaryTotalType(System.getProperty("dtv.location.CurrencyId"), taxableValue, taxableValue,
-				currentSaleTrans.getTotal(), String.valueOf(new BigDecimal(0)), String.valueOf(new BigDecimal(0)), currentSaleTrans.getTotal(), String.valueOf(new BigDecimal(0)), cbc, cac));
+				currentSaleTrans.getTotal().abs(), discountValue, String.valueOf(new BigDecimal(0)), currentSaleTrans.getTotal().abs(), String.valueOf(new BigDecimal(0)), cbc, cac));
 
 		for (IRetailTransactionLineItem lineItem : currentSaleTrans.getSaleLineItems()) {
 			if (lineItem instanceof SaleReturnLineItemModel) {
 				// need to check on allowance charges
 				SaleReturnLineItemModel salelineItem = (SaleReturnLineItemModel) lineItem;
-				List<AllowanceChargeType> listAllowanceChargeType = new ArrayList<AllowanceChargeType>();
-				if (null != lineItem && salelineItem.getDiscounted()) {
-					listAllowanceChargeType.add(asqZatcaInvoiceGenerationHelper.setAllowanceChargeType(AsqZatcaConstant.ASQ_FALSE, AsqZatcaConstant.ASQ_DISCOUNT, salelineItem.getPreDealAmount(),
-							salelineItem.getUnitPrice(), System.getProperty("dtv.location.CurrencyId"), salelineItem.getQuantity(), cbc, cac));
+				if (!salelineItem.getVoid()) {
+					List<AllowanceChargeType> listAllowanceChargeType = new ArrayList<AllowanceChargeType>();
+					if (null != lineItem && salelineItem.getDiscounted()) {
+						listAllowanceChargeType.add(asqZatcaInvoiceGenerationHelper.setAllowanceChargeType(AsqZatcaConstant.ASQ_FALSE, AsqZatcaConstant.ASQ_DISCOUNT, salelineItem.getPreDealAmount(),
+								salelineItem.getUnitPrice().abs(), System.getProperty("dtv.location.CurrencyId"), salelineItem.getQuantity(), cbc, cac));
+					}
+					argZatcaInvoiceObj.getInvoiceLine().add(asqZatcaInvoiceGenerationHelper.setInvoiceLineType(salelineItem, cbc, cac));
 				}
-				argZatcaInvoiceObj.getInvoiceLine().add(asqZatcaInvoiceGenerationHelper.setInvoiceLineType(salelineItem, cbc, cac));
 			}
 		}
-		// This flow is for return need to set
-		// if (null != invoiceData.getOriginalInvoiceNumbers() &&
-		// !invoiceData.getOriginalInvoiceNumbers().isEmpty()) {
-		// in.getBillingReference().add(asqZatcaInvoiceGenerationHelper.setBillingReference(invoiceData.getOriginalInvoiceNumbers()));
-		// } else {
-		// logger.info("OriginalInvoiceNumbers is null or empty in the invoice
-		// Request");
-		// }
 	}
 }

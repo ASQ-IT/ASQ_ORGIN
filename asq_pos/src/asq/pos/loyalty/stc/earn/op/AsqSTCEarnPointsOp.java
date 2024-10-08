@@ -47,6 +47,13 @@ public class AsqSTCEarnPointsOp extends Operation {
 
 	@Inject
 	AsqStcHelper asqStcHelper;
+	
+	
+	//Need to update conditions here as Xstore can run only one loyalty program
+	 @Override
+	  public boolean isOperationApplicable() {
+	    return false;
+	  }
 
 	/**
 	 * This method handles the customer availability parameter check and points calculation
@@ -63,7 +70,7 @@ public class AsqSTCEarnPointsOp extends Operation {
 		IRetailTransaction txn = this._transactionScope.getTransaction(TransactionType.RETAIL_SALE);
 		boolean isCustomerPresent = false;
 		String custMobileNmbr = "";
-		boolean isCustomerRequired = AsqConfigurationMgr.getSTCCustomerAvailable();
+		boolean isCustomerRequired = AsqConfigurationMgr.getSTCCustomerAvailable();//Any other filter to be defined as this will be called for every transaction
 		LOG.info("STC Earn API customer availability parameter : " + isCustomerRequired);
 		int pointsForCalculation = AsqConfigurationMgr.getSTCPointsCalculation();
 		LOG.info("STC Earn API Point calculation value parameter : " + pointsForCalculation);

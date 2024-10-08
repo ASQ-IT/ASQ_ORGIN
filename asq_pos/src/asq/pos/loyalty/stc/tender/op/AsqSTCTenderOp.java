@@ -81,7 +81,6 @@ public class AsqSTCTenderOp extends AbstractFormOp<AsqSTCTenderOTPEditModel> {
 				if ((model.getStcOTP() != null) && (model.getStcRedeemPoints() != null) && (!model.getStcRedeemPoints().equals(""))) {
 					LOG.debug("Process of STC Redemption points Tender starts here :" + model.getStcOTP());
 					IPosTransaction trans = (IPosTransaction) this._transactionScope.getTransaction();
-					
 					BigDecimal redemptionValueBigDec = new BigDecimal(model.getStcRedeemPoints());
 					BigDecimal  trxTotal = trans.getSubtotal();//excluding tax
 					BigDecimal roundedAmount = trxTotal.setScale(0, RoundingMode.HALF_UP);
@@ -91,7 +90,6 @@ public class AsqSTCTenderOp extends AbstractFormOp<AsqSTCTenderOTPEditModel> {
 						LOG.info("Calculated Redemption amount has been set here to transaction :"+ roundedAmount.compareTo(redemptionValueBigDec));
 						roundedAmount = trxTotal.subtract(redemptionValueBigDec);
 						trans.setAmountTendered(roundedAmount);
-						//setSubtotal(roundedAmount); //tenderedamount
 					} else if (trxTotal.compareTo(redemptionValueBigDec) == -1) {
 						return HELPER.getErrorResponse(_formattables.getSimpleFormattable("_asqSTCEnteredPointsValueMessage"));
 					} else if (redemptionValueBigDec.compareTo(BigDecimal.ZERO) == 0) {

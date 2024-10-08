@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import com.oracle.shaded.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.oracle.shaded.fasterxml.jackson.annotation.JsonProperty;
 
+import asq.pos.loyalty.stc.tender.service.AsqSTCErrorDesc;
 import dtv.service.req.IServiceResponse;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
@@ -115,7 +116,10 @@ public class AsqSubmitBnplTabbyServiceResponse implements IServiceResponse{
 	@JsonProperty("is_ipqs_requested")
     private boolean is_ipqs_requested;
 	
-    private AsqBnplTabbyErrorDesc error;
+	@JsonProperty("errors")
+	private AsqBnplTabbyErrorDesc error;
+    
+   
 
     public String getId() {
         return id;

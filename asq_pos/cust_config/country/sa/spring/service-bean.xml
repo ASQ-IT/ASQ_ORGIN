@@ -25,8 +25,6 @@
     <property name="serviceConfigHelper" ref="serviceConfigHelper" />
     <property name="logEntity" value="false" />
     <property name="oAuth2" value="false" />
-    <property name="username" value="${xcenter.db.user}" />
-    <property name="password" value="${xcenter.db.pwd}" />
   </bean> 
   
   <bean abstract="true" id="AbstractZatcaOICRestServiceBean">
@@ -59,19 +57,10 @@
     <property name="serviceId" value="ASQ_STC_REST" />
     <property name="exceptionHandler" ref="standardJaxRsExceptionHandler" />
     <property name="serviceConfigHelper" ref="serviceConfigHelper" />
-    <!-- <property name="extensionProviders">
-      <list value-type="java.lang.Object">
-        <bean class="dtv.servicex.impl.GzipReaderInterceptor" />
-        should only be present if using cloud
-        <bean class="dtv.servicex.impl.AuthorizationFilter" />
-        
-      </list>
-    </property>
-    <property name="gzip" value="true" /> -->
     <property name="logEntity" value="false" />
     <property name="oAuth2" value="false" />
-    <property name="username" value="${xcenter.db.user}" />
-    <property name="password" value="${xcenter.db.pwd}" />
+    <property name="username" value="${asq.stc.auth.username}" />
+    <property name="password" value="${asq.stc.auth.password}" />
   </bean> 
   
   <bean id="ASQ_STC_TENDER_REDEEM_SERVICE" class="asq.pos.loyalty.stc.tender.service.AsqSTCloyaltyServiceHandler" parent="AbstractSTCRestServiceBean">

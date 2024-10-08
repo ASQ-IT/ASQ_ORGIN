@@ -177,5 +177,17 @@
   <OpChain name="ASQ_TABBY_MOBILE">
 	  	<Op class="asq.pos.bnpl.tabby.tender.op.AsqBnplTabbyTenderOp"/>
     </OpChain>
+    <OpChain name="ASQ_TENDER_TABBY" signal="TransactionModified" contextKey="SALE_TENDER_EMPTY_MENU_OPTION">
+		<Op class="dtv.pos.tender.CreateTenderLineItemOp">
+			<Parameter name="TenderStatus" value="Tender" />
+			<Parameter name="TenderId" value="TABBY" />
+		</Op>
+		<PromptOp class="dtv.pos.tender.PromptCustAsscRequiredForTenderOp" />
+		<Op class="dtv.pos.tender.check.PromptIdentityVerificationOp" />
+		<PromptOp class="dtv.pos.tender.PromptTenderAmtOp" validationsBean="tenderAmountRules" />
+		<Op class="dtv.pos.tender.AddTenderToSaleTranOp" />
+		<Op class="dtv.pos.tender.rounding.UpdateTransactionRoundedAmountOp" />
+		<OpChainRoute chainKey="CHECK_SALE_COMPLETE" chainType="START" />
+	</OpChain>
    <!--BNPL TABBY Service Ends-->
 </OpChainSet>

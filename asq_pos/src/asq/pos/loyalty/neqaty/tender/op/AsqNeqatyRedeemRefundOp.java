@@ -31,9 +31,9 @@ import dtv.xst.dao.ttr.ITenderLineItem;
  * @author RA20221457
  *
  */
-public class AsqNeqatyRedeemOp extends AbstractFormOp<AsqNeqatyRedeemEditModel> {
+public class AsqNeqatyRedeemRefundOp extends AbstractFormOp<AsqNeqatyRedeemEditModel> {
 
-	private static final Logger LOG = LogManager.getLogger(AsqNeqatyRedeemOp.class);
+	private static final Logger LOG = LogManager.getLogger(AsqNeqatyRedeemRefundOp.class);
 
 	private String custMobileNumber = "";
 
@@ -53,11 +53,19 @@ public class AsqNeqatyRedeemOp extends AbstractFormOp<AsqNeqatyRedeemEditModel> 
 		return new AsqNeqatyRedeemEditModel();
 	}
 
+	@Override
+	protected String getFormKey() {
+		return "ASQ_NEQATY_REDEEM_OPTION";
+	}
+
 	
-	 @Override 
-	 protected String getFormKey() { 
-		 return "ASQ_CAPTURE_OTP";
-	 }
+	
+//	protected IOpResponse handleInitialState() {
+//		AsqNeqatyRedeemEditModel model = getModel();
+//		model.setNeqatyRedeemPoints("100 200 300");
+////				setScopedValue(AsqValueKeys.ASQ_NEQATY_MOBILE, editModel.getCustMobileNumber());
+//		return super.handleInitialState();
+//	}
 	
 	@Override
 	protected IOpResponse handleDataAction(IXstDataAction argAction) {
@@ -72,6 +80,7 @@ public class AsqNeqatyRedeemOp extends AbstractFormOp<AsqNeqatyRedeemEditModel> 
 				}
 				String custMobileNmbr = getScopedValue(AsqValueKeys.ASQ_MOBILE_NUMBER);
 				return redeemPoints(custMobileNmbr, model.getNeqatyRedeemPoints());
+
 			}
 		} catch (Exception exception) {
 			LOG.error("Exception from STC_OTP form in Handling Data Action :" + exception);

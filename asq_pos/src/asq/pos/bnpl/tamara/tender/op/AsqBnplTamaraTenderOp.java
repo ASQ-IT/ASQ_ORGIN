@@ -102,6 +102,7 @@ public class AsqBnplTamaraTenderOp extends AbstractFormOp<AsqBnplTamaraEditModel
 				return super.handleDataAction(argAction);
 			}
 			LOG.info("TAMARA API request preparer for service call starts here: ");
+			System.out.println();
 			return requestPreparerStoreCheckOutSession(trans);
 		}
 		LOG.info("Action key is not equal to ACCEPT, rolling back to Sale Screen :" + argAction.getActionKey());
@@ -195,7 +196,6 @@ public class AsqBnplTamaraTenderOp extends AbstractFormOp<AsqBnplTamaraEditModel
 		LOG.info("TAMARA API saving response to DB started");
 		saveTamaraResponseToDB(trans, responseList);
 		LOG.info("TAMARA API saving response to DB successfull");
-		// this.HELPER.getCompleteStackChainResponse(OpChainKey.valueOf("ASQ_TENDER_TAMARA"));
 		return (IOpResponse) requestPreparerGetOrderDetails(response, trans);
 	}
 

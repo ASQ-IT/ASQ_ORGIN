@@ -28,4 +28,17 @@ public final class AsqValueKeys {
 	public static final ValueKey<String> ASQ_NEQATY_TRANS_REFERENCE = new ValueKey(String.class, "ASQ_NEQATY_TRANS_REFERENCE");
 		
 	public static final ValueKey<String> ASQ_NEQATY_TRANS_TOKEN = new ValueKey(String.class, "ASQ_NEQATY_TRANS_TOKEN");
+	
+	public static final ValueKey<Boolean> ASQ_TABBY_PAYMENT_SUCCESS = new ValueKey<Boolean>(Boolean.class, "ASQ_TABBY_PAYMENT_SUCCESS");
+	
+	public static final ValueKey<String> ASQ_TABBY_SESSION_ID = new ValueKey<String>(String.class, "ASQ_TABBY_SESSION_ID");
+	
+	public static final ValueKey<String> ASQ_TABBY_PMNT_ID = new ValueKey<String>(String.class, "ASQ_TABBY_PMNT_ID");
+	
+	public static final ValueKey<String> ASQ_TABBY_PMNT_CRTN_DATE = new ValueKey<String>(String.class, "ASQ_TABBY_PMNT_CRTN_DATE");
+	
+	public static final ValueKey<String> ASQ_TABBY_PMNT_EXPRY_DATE = new ValueKey<String>(String.class, "ASQ_TABBY_PMNT_EXPRY_DATE");
+	
+	public static final ValueKey<String> ASQ_TABBY_PMNT_STATUS = new ValueKey<String>(String.class, "ASQ_TABBY_PMNT_STATUS");
+	
 }

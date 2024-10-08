@@ -1018,7 +1018,7 @@ public class AsqZatcaInvoiceGenerationHelper {
 		lineExtensionAmountType.setCurrencyID(lineItem.getCurrencyId());
 
 		// this should be one unit price
-		lineExtensionAmountType.setValue(lineItem.getNetAmount());
+		lineExtensionAmountType.setValue(lineItem.getNetAmount().abs());
 
 		invoiceLineType.setID(invoiceLineTypeID);
 		invoiceLineType.setInvoicedQuantity(invoicedQuantityType);
@@ -1029,13 +1029,13 @@ public class AsqZatcaInvoiceGenerationHelper {
 		}
 
 		if (null != lineItem.getCurrencyId() && null != lineItem.getTaxModifiers()) {
-			invoiceLineType.getTaxTotal().add(setTaxTotalType(lineItem.getCurrencyId(), lineItem.getVatAmount(), lineItem.getGrossAmount(), null, cbc, cac));
+			invoiceLineType.getTaxTotal().add(setTaxTotalType(lineItem.getCurrencyId(), lineItem.getVatAmount().abs(), lineItem.getGrossAmount().abs(), null, cbc, cac));
 		}
 
 		invoiceLineType.setItem(setItemType("S", lineItem.getItemDescription(), asqZatcaHelper.getFormatttedBigDecimalValue(lineItem.getTaxModifiers().get(0).getRawTaxPercentage()),
 				setTaxSchemeType(lineItem.getTaxModifiers().get(0).getTaxGroupId(), AsqZatcaConstant.ZATCA_SCHEME_AGENCYID, AsqZatcaConstant.ZATCA_TAXSCHEME_SCHEMEID, cbc, cac), cbc, cac));
 
-		invoiceLineType.setPrice(setPriceType(lineItem.getCurrencyId(), lineItem.getNetAmount().divide(lineItem.getQuantity()), null, cbc, cac));
+		invoiceLineType.setPrice(setPriceType(lineItem.getCurrencyId(), (lineItem.getNetAmount().divide(lineItem.getQuantity()).abs()), null, cbc, cac));
 
 		// if (null != lineItem.getNotes() && lineItem.getNotes().length > 0) {
 		// for (String note : lineItem.getNotes()) {
@@ -1198,11 +1198,6 @@ public class AsqZatcaInvoiceGenerationHelper {
 
 		String qrCode = SmartHubUtil.generateQRCode(sellerName, vatNumber, invoiceIssueTimeStamp, invoiceIssueDate, invoiceTotal, vatTotal, hashedXML, signedHash, publicKeyString, csidSignature);
 		addDocQR.setEmbeddedDocumentBinaryObject(qrCode);
-
-		// saving the hash value in the database
-		// AsqZatcaInvoiceHashModel model =
-		// asqZatcaDatabaseHelper.saveInvoiceHash(xmlIrnValue, xmlUUID, hashedXML,
-		// signingTime.toXMLFormat());
 
 		signatureData.setICV(nextICV.intValue());
 		signatureData.setSignatureValue(signatureECDA);
