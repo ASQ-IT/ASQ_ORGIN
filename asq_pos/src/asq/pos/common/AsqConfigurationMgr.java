@@ -1,6 +1,7 @@
 package asq.pos.common;
 
 import dtv.pos.common.ConfigurationMgr;
+import dtv.pos.common.SysConfigSettingFactory;
 
 /**
  * This class extends Xstore Standard Configuration Manager to check the
@@ -11,7 +12,7 @@ import dtv.pos.common.ConfigurationMgr;
  */
 public class AsqConfigurationMgr extends ConfigurationMgr {
 
-	private static AsqSysConfigSettingFactory _settingsFactory;
+	private static SysConfigSettingFactory _settingsFactory;
 
 	/**
 	 * Parameter to check the customer availability
@@ -37,5 +38,27 @@ public class AsqConfigurationMgr extends ConfigurationMgr {
 	 */
 	public static int getSTCPointsCalculation() {
 		return _settingsFactory.getInt(new String[] { "STCCustomerEarnPoints---PointsCalculation" });
+	}
+	
+	
+	/**
+	 * Planet Tax Merchant
+	 */
+	public String getPlanetMerchantIdNumber() {
+		return _settingsFactory.getString(new String[] {"PlanetTaxFree---MerchantIdNumber"});
+	}
+	
+	/**
+	 * Planet Tax Terminal
+	 */
+	public  String getPlanetTerminalNumber() {
+		return _settingsFactory.getString(new String[] {"PlanetTaxFree---TerminalNumber"});
+	}
+	
+	/**
+	 * Planet Tax Doc Type
+	 */
+	public String getPlanetType() {
+		return _settingsFactory.getString(new String[] {"PlanetTaxFree---Type"});
 	}
 }

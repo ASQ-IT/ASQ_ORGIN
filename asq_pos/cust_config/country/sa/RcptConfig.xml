@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ReceiptDefinitions xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="RcptConfig.xsd">
-
+  <sections>
    <section name="footer_cust_copy">
       <sectionref>legalWarranty</sectionref>
       <sectionref>soldItemsCount</sectionref>
@@ -13,12 +13,12 @@
       <sectionref>asq_zatca_qrcode</sectionref>
     </section>
     
-    <section name="asq_zatca_qrcode">
-      <barcode symbology="QR CODE" height="250" width="300" textposition="NONE">
+	<section name="asq_zatca_qrcode">
+      <barcode symbology="QR CODE" height="250" width="300" textposition="NONE" >
         <field>
           <aggregate class="asq.pos.register.sale.zatca.receipt.AsqZatcaTransQrCode" />
         </field>
       </barcode>
     </section>
-
+  </sections>
 </ReceiptDefinitions>

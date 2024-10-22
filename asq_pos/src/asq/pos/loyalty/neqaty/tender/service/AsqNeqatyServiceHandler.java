@@ -46,12 +46,7 @@ public class AsqNeqatyServiceHandler
 				servicePort.abort(getAbortRequest(argServiceRequest), resultCode, resultDescription);
 				break;
 			}
-
-			// servicePort.authorize(getAuthorizeRequest(argServiceRequest), resultCode,
-			// resultDescription, token,
-			// transactionReference, optionsData);
 			response = mapToNeqatyResponse(resultCode, resultDescription, token, transactionReference, optionsData);
-			System.out.print("");
 		} catch (Exception ex) {
 			for (StackTraceElement stack : ex.getStackTrace()) {
 				System.out.println(stack.toString());
@@ -71,9 +66,25 @@ public class AsqNeqatyServiceHandler
 				.setOperationType(factory.createAuthorizeRequestOperationType(argServiceRequest.getOperationType()));
 
 		requestPayload.setTid(factory.createAuthorizeRequestTid(argServiceRequest.getTid()));
+		
+		if (-1 != argServiceRequest.getToken()) {
+			requestPayload.setToken(argServiceRequest.getToken());
+		}
+		if (0 != argServiceRequest.getRedeemPoints()) {
+			requestPayload.setRedeemPoints(argServiceRequest.getRedeemPoints());
+		}
+		if (0 != argServiceRequest.getRedeemCode()) {
+			requestPayload.setRedeemCode(argServiceRequest.getRedeemCode());
+		}
+		
+		if (0 != argServiceRequest.getAmount()) {
+			requestPayload.setAmount(argServiceRequest.getAmount());
+		}
 
-		// Authorize request = factory.createAuthorize();
-		// request.setReq(factory.createAuthorizeReq(requestPayload));
+		if (null != argServiceRequest.getTransactionReference()) {
+			requestPayload.setTransactionReference(
+					factory.createConfirmRequestTransactionReference(argServiceRequest.getTransactionReference()));
+		}
 		return requestPayload;
 	}
 
@@ -112,11 +123,21 @@ public class AsqNeqatyServiceHandler
 			Holder<Integer> token, Holder<String> transactionReference, Holder<NeqatyWSAPIOptionsData> optionsData) {
 
 		AsqNeqatyServiceResponse responseNeqaty = new AsqNeqatyServiceResponse();
-		responseNeqaty.setResultCode(resultCode.value);
-		responseNeqaty.setResultDescription(resultDescription.value);
-		responseNeqaty.setToken(token.value);
-		responseNeqaty.setOptionsData(optionsData.value);
-		responseNeqaty.setTransactionReference(transactionReference.value);
+		if (null != resultCode.value) {
+			responseNeqaty.setResultCode(resultCode.value);
+		}
+		if (null != resultDescription.value) {
+			responseNeqaty.setResultDescription(resultDescription.value);
+		}
+		if (null != token.value) {
+			responseNeqaty.setToken(token.value);
+		}
+		if (null != optionsData.value) {
+			responseNeqaty.setOptionsData(optionsData.value);
+		}
+		if (null != transactionReference.value) {
+			responseNeqaty.setTransactionReference(transactionReference.value);
+		}
 		return responseNeqaty;
 	}
 

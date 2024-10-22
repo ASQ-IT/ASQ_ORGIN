@@ -9,10 +9,11 @@ import javax.inject.Provider;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import asq.pos.common.AsqValueKeys;
+import asq.pos.loyalty.neqaty.gen.NeqatyWSAPIRedeemOption;
 import asq.pos.loyalty.neqaty.tender.service.AsqNeqatyHelper;
 import asq.pos.loyalty.neqaty.tender.service.AsqNeqatyServiceRequest;
 import asq.pos.loyalty.neqaty.tender.service.AsqNeqatyServiceResponse;
+import asq.pos.loyalty.neqaty.tender.service.AsqValueKeys;
 import asq.pos.loyalty.neqaty.tender.service.IAsqNeqatyService;
 import asq.pos.loyalty.neqaty.tender.service.IAsqNeqatyServiceRequest;
 import asq.pos.loyalty.neqaty.tender.service.NeqatyMethod;
@@ -72,6 +73,7 @@ public class AsqNeqatyRedeemOp extends AbstractFormOp<AsqNeqatyRedeemEditModel> 
 				}
 				String custMobileNmbr = getScopedValue(AsqValueKeys.ASQ_MOBILE_NUMBER);
 				return redeemPoints(custMobileNmbr, model.getNeqatyRedeemPoints());
+
 			}
 		} catch (Exception exception) {
 			LOG.error("Exception from STC_OTP form in Handling Data Action :" + exception);
@@ -86,19 +88,20 @@ public class AsqNeqatyRedeemOp extends AbstractFormOp<AsqNeqatyRedeemEditModel> 
 		request.setAuthenticationKey(System.getProperty("asq.neqaty.auth.key"));
 		request.setOperationType("Redeem-OTP");
 		request.setMsisdn(custMobileNmbr);
+		request.setOtp(neqatyRedeemPoints);
 		
-		String token=getScopedValue(AsqValueKeys.ASQ_NEQATY_TRANS_TOKEN);
+		Integer token = getScopedValue(AsqValueKeys.ASQ_NEQATY_TRANS_TOKEN);
 		try {
-			request.setToken(Integer.parseInt(token));
+			request.setToken(token);
 		}catch(Exception e) {
 			LOG.error("Invalid token in the scope - Token {}",token);
 		}
-		request.setRedeemCode(0);//customer selected redeem option code from inquire response
-		request.setRedeemPoints(0);//redeem points from the selected option
-		
+		NeqatyWSAPIRedeemOption selectedRes = getScopedValue(AsqValueKeys.ASQ_NEQATY_REDEEM_POINTS);
+		request.setRedeemCode(selectedRes.getRedeemCode());//customer selected redeem option code from inquire response
+		request.setRedeemPoints(selectedRes.getRedeemPoints());//redeem points from the selected option
+		request.setAmount(selectedRes.getRedeemAmount());//redeem amount
 		request.setTid(0);
 		request.setMethod(NeqatyMethod.AUTHORIZE);
-//		return this.HELPER.getCompleteStackChainResponse(OpChainKey.valueOf("ASQ_NEQATY_OTP"));
 		AsqNeqatyServiceResponse response= (AsqNeqatyServiceResponse) asqNeqatyService.get().callNeqatyService(request);
 		return validateResponse(response);
 	}
@@ -110,7 +113,7 @@ public class AsqNeqatyRedeemOp extends AbstractFormOp<AsqNeqatyRedeemEditModel> 
 			return technicalErrorScreen("Service has null response");
 		}
 		setScopedValue(AsqValueKeys.ASQ_NEQATY_TRANS_REFERENCE, response.getTransactionReference());
-		return this.HELPER.getCompleteStackChainResponse(OpChainKey.valueOf("ASQ_NEQATY_OTP"));
+		return HELPER.getCompleteStackChainResponse(OpChainKey.valueOf("ASQ_NEQATY_OTP"));
 	}
 
 	public IOpResponse handleServiceError(AsqNeqatyServiceResponse asqServiceResponse) {

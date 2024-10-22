@@ -52,7 +52,6 @@ import asq.pos.zatca.invoice.models.AdditionalDocumentReference;
 import asq.pos.zatca.invoice.models.HashQRData;
 import asq.pos.zatca.invoice.models.InvoiceData;
 import asq.pos.zatca.invoice.models.ItemAllowanceCharges;
-import asq.pos.zatca.invoice.models.LineItems;
 import asq.pos.zatca.invoice.models.OutboundInvoice;
 import asq.pos.zatca.invoice.models.SignatureData;
 import asq.pos.zatca.invoice.models.TaxSubtotal;
@@ -647,7 +646,7 @@ public class AsqZatcaInvoiceGenerationHelper {
 	 * @return
 	 */
 	public AllowanceChargeType setAllowanceChargeType(String chargeIndicator, String allowanceChargeReason, String currencyID, String amount, String taxCategoryId, String categorySchemeAgencyID,
-			String schemeAgencyID, String taxCategorySchemeID, String taxSchemeID, String Percent, String taxSchemeId,
+			String schemeAgencyID, String taxCategorySchemeID, String taxSchemeIDValue, String Percent, String taxSchemeID,
 			oasis.names.specification.ubl.schema.xsd.commonbasiccomponents_2.ObjectFactory cbc, oasis.names.specification.ubl.schema.xsd.commonaggregatecomponents_2.ObjectFactory cac) {
 		AllowanceChargeType allowanceChargeType = cac.createAllowanceChargeType();
 		TaxCategoryType taxCategoryType = cac.createTaxCategoryType();
@@ -665,8 +664,10 @@ public class AsqZatcaInvoiceGenerationHelper {
 		taxIdType.setValue(taxCategoryId);
 		taxIdType.setSchemeAgencyID(categorySchemeAgencyID);
 		taxIdType.setSchemeID(taxCategorySchemeID);
+
 		taxCategoryType.setID(taxIdType);
-		taxSchemeIdType.setValue(taxSchemeId);
+
+		taxSchemeIdType.setValue(taxSchemeIDValue);
 		taxSchemeIdType.setSchemeAgencyID(schemeAgencyID);
 		taxSchemeIdType.setSchemeID(taxSchemeID);
 		taxSchemeType.setID(taxSchemeIdType);
@@ -698,7 +699,7 @@ public class AsqZatcaInvoiceGenerationHelper {
 		TaxAmountType taxAmountType = cbc.createTaxAmountType();
 		RoundingAmountType roundingAmountType = cbc.createRoundingAmountType();
 		if (null != taxAmount) {
-			taxAmountType.setValue(taxAmount.setScale(2, RoundingMode.FLOOR));
+			taxAmountType.setValue(taxAmount.setScale(2, RoundingMode.HALF_UP));
 			taxAmountType.setCurrencyID(currencyID);
 			taxTotalType.setTaxAmount(taxAmountType);
 		}
@@ -1004,8 +1005,9 @@ public class AsqZatcaInvoiceGenerationHelper {
 	 * @param cac
 	 * @return
 	 */
-	public InvoiceLineType setInvoiceLineType(SaleReturnLineItemModel lineItem, oasis.names.specification.ubl.schema.xsd.commonbasiccomponents_2.ObjectFactory cbc,
-			oasis.names.specification.ubl.schema.xsd.commonaggregatecomponents_2.ObjectFactory cac) {
+	public InvoiceLineType setInvoiceLineType(SaleReturnLineItemModel lineItem, List<ItemAllowanceCharges> listAllowanceChargeType,
+			oasis.names.specification.ubl.schema.xsd.commonbasiccomponents_2.ObjectFactory cbc, oasis.names.specification.ubl.schema.xsd.commonaggregatecomponents_2.ObjectFactory cac,
+			BigDecimal argPriceAmount, BigDecimal argTaxPerc, String argTaxCategoryID) {
 
 		InvoiceLineType invoiceLineType = cac.createInvoiceLineType();
 		InvoicedQuantityType invoicedQuantityType = cbc.createInvoicedQuantityType();
@@ -1024,18 +1026,18 @@ public class AsqZatcaInvoiceGenerationHelper {
 		invoiceLineType.setInvoicedQuantity(invoicedQuantityType);
 		invoiceLineType.setLineExtensionAmount(lineExtensionAmountType);
 
-		if (lineItem.getDiscounted()) {
-			// mapAllowanceCharges(invoiceLineType, lineItem, cbc, cac);
+		if (listAllowanceChargeType.size() > 0) {
+			mapAllowanceCharges(invoiceLineType, listAllowanceChargeType, cbc, cac);
 		}
 
 		if (null != lineItem.getCurrencyId() && null != lineItem.getTaxModifiers()) {
-			invoiceLineType.getTaxTotal().add(setTaxTotalType(lineItem.getCurrencyId(), lineItem.getVatAmount().abs(), lineItem.getGrossAmount().abs(), null, cbc, cac));
+			invoiceLineType.getTaxTotal().add(setTaxTotalType(lineItem.getCurrencyId(), lineItem.getVatAmount().abs(), lineItem.getExtendedAmount().abs(), null, cbc, cac));
 		}
 
-		invoiceLineType.setItem(setItemType("S", lineItem.getItemDescription(), asqZatcaHelper.getFormatttedBigDecimalValue(lineItem.getTaxModifiers().get(0).getRawTaxPercentage()),
-				setTaxSchemeType(lineItem.getTaxModifiers().get(0).getTaxGroupId(), AsqZatcaConstant.ZATCA_SCHEME_AGENCYID, AsqZatcaConstant.ZATCA_TAXSCHEME_SCHEMEID, cbc, cac), cbc, cac));
+		invoiceLineType.setItem(setItemType(AsqZatcaConstant.ZATCA_TAXCATEGORY_ID_VAL, lineItem.getItemDescription(), asqZatcaHelper.getFormatttedBigDecimalValue(argTaxPerc),
+				setTaxSchemeType(argTaxCategoryID, AsqZatcaConstant.ZATCA_SCHEME_AGENCYID, AsqZatcaConstant.ZATCA_TAXSCHEME_SCHEMEID, cbc, cac), cbc, cac));
 
-		invoiceLineType.setPrice(setPriceType(lineItem.getCurrencyId(), (lineItem.getNetAmount().divide(lineItem.getQuantity()).abs()), null, cbc, cac));
+		invoiceLineType.setPrice(setPriceType(lineItem.getCurrencyId(), argPriceAmount.abs(), null, cbc, cac));
 
 		// if (null != lineItem.getNotes() && lineItem.getNotes().length > 0) {
 		// for (String note : lineItem.getNotes()) {
@@ -1044,7 +1046,6 @@ public class AsqZatcaInvoiceGenerationHelper {
 		// invoiceLineType.getNote().add(noteType);
 		// }
 		// }
-
 		return invoiceLineType;
 	}
 
@@ -1054,10 +1055,10 @@ public class AsqZatcaInvoiceGenerationHelper {
 	 * @param lineItem
 	 * @param cac
 	 */
-	private void mapAllowanceCharges(InvoiceLineType invoiceLineType, LineItems lineItem, oasis.names.specification.ubl.schema.xsd.commonbasiccomponents_2.ObjectFactory cbc,
-			oasis.names.specification.ubl.schema.xsd.commonaggregatecomponents_2.ObjectFactory cac) {
-		if (null != lineItem.getItemLineAllowanceCharges()) {
-			for (ItemAllowanceCharges allowanceCharge : lineItem.getItemLineAllowanceCharges()) {
+	private void mapAllowanceCharges(InvoiceLineType invoiceLineType, List<ItemAllowanceCharges> listAllowanceChargeType,
+			oasis.names.specification.ubl.schema.xsd.commonbasiccomponents_2.ObjectFactory cbc, oasis.names.specification.ubl.schema.xsd.commonaggregatecomponents_2.ObjectFactory cac) {
+		if (null != listAllowanceChargeType) {
+			for (ItemAllowanceCharges allowanceCharge : listAllowanceChargeType) {
 				AllowanceChargeType allowanceChargeType = cac.createAllowanceChargeType();
 				mapChargeIndicatore(allowanceChargeType, allowanceCharge, cbc);
 				mapAllowanceChargeReason(allowanceChargeType, allowanceCharge, cbc);
@@ -1517,6 +1518,10 @@ public class AsqZatcaInvoiceGenerationHelper {
 				return false;
 			}
 		});
+	}
+
+	public BigDecimal getUnitValue(BigDecimal argGrossValue, BigDecimal argQuantity) {
+		return argGrossValue.divide(argQuantity, 2, RoundingMode.HALF_UP);
 	}
 
 }

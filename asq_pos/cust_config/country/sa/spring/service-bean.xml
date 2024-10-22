@@ -17,6 +17,7 @@
   <bean id="asqNeqatyHelper" class="asq.pos.loyalty.neqaty.tender.service.AsqNeqatyHelper"/>
   <bean id="asqNeqatyService" class="asq.pos.loyalty.neqaty.tender.service.AsqNeqatyServiceImpl"/>
   <bean id="asqBnplTabbyServices" class=" asq.pos.bnpl.tabby.tender.service.AsqBnplTabbyServicesImpl" primary="true"/>
+	<bean id="asqPlanetVatClaimServices" class=" asq.pos.planet.vat.claim.service.AsqPlanetVatClaimServicesImpl" primary="true"/>
   
   
   <bean abstract="true" id="AbstractZatcaRestServiceBean">
@@ -118,39 +119,34 @@
     <!--  property name="lookupServiceOnStartup" value="true" / -->
   </bean>
   
-  <bean id="ASQ_NEQATY_SRV" class="asq.pos.loyalty.neqaty.tender.service.AsqNeqatyServiceHandler">
+   <bean id="ASQ_NEQATY_SRV" class="asq.pos.loyalty.neqaty.tender.service.AsqNeqatyServiceHandler">
     <property name="serviceId" value="NEQATY_SRV" />
     <property name="servicePort" ref="asqNeqatyJaxWsServicePort" />
     <!-- <property name="exceptionHandler" ref="qasExceptionHandler" />-->
-  </bean>
+   </bean>
+   <!-- Neqaty Integration - Ends --> 
   
-  <!-- Neqaty Integration - Ends --> 
-  
-  <!-- Tamara Integration - Starts -->
-  <bean id="BNPL_TAMARA_ORDER_DETAIL_SRV" class="asq.pos.bnpl.tamara.tender.service.AsqBnplTamaraServiceHandler" parent="AbstractBnplTamaraRestServiceBean">
+   <!-- Tamara Integration - Starts -->
+   <bean id="BNPL_TAMARA_ORDER_DETAIL_SRV" class="asq.pos.bnpl.tamara.tender.service.AsqBnplTamaraServiceHandler" parent="AbstractBnplTamaraRestServiceBean">
     <property name="servicePath" value="/orders/{order_id}" />
-  </bean> 
+   </bean> 
     <bean id="BNPL_TAMARA_CANCEL_SESSION_SRV" class="asq.pos.bnpl.tamara.tender.service.AsqBnplTamaraServiceHandler" parent="AbstractBnplTamaraRestServiceBean">
     <property name="servicePath" value="/checkout/{checkoutId}/void" />
-  </bean> 
-     <bean id="BNPL_TAMARA_REFUND_SRV" class="asq.pos.bnpl.tamara.tender.service.AsqBnplTamaraServiceHandler" parent="AbstractBnplTamaraRestServiceBean">
+   </bean> 
+   <bean id="BNPL_TAMARA_REFUND_SRV" class="asq.pos.bnpl.tamara.tender.service.AsqBnplTamaraServiceHandler" parent="AbstractBnplTamaraRestServiceBean">
     <property name="servicePath" value="/payments/simplified-refund/{orderId}" />
-    </bean> 
+   </bean> 
    <!-- Tamara Integration - Ends -->
-    <!-- Tabby Integration - Starts -->
-   
+  
+   <!-- Tabby Integration - Starts -->
    <bean abstract="true" id="AbstractBnplTabbyRestServiceBean">
     <property name="serviceId" value="TABBY_REST" />
     <property name="exceptionHandler" ref="standardJaxRsExceptionHandler" />
     <property name="serviceConfigHelper" ref="serviceConfigHelper" />
-<!--    <property name="logEntity" value="false" />
-    <property name="oAuth2" value="false" />
-    <property name="username" value="${asq.bnpl.tender.tamara.username}" />
-    <property name="password" value="${asq.bnpl.tender.tamara.password}" />-->
-  </bean> 
+   </bean> 
     <bean id="BNPL_TABBY_CREATE_SESSION_SRV" class="asq.pos.bnpl.tabby.tender.service.AsqBnplTabbyServiceHandler" parent="AbstractBnplTabbyRestServiceBean">
     <property name="servicePath" value="/api/v2/checkout" />
-  </bean> 
+   </bean> 
 
     <bean id="BNPL_TABBY_NOTIFICATION_SRV" class="asq.pos.bnpl.tabby.tender.service.AsqBnplTabbyServiceHandler" parent="AbstractBnplTabbyRestServiceBean">
     <property name="servicePath" value="/api/v2/checkout/{session_id}/send_hpp_link" />
@@ -167,7 +163,38 @@
     <bean id="BNPL_TABBY_REFUND_PAYMENT_SRV" class="asq.pos.bnpl.tabby.tender.service.AsqBnplTabbyServiceHandler" parent="AbstractBnplTabbyRestServiceBean">
     <property name="servicePath" value="/api/v1/payments/{payment_id}/refunds" />
   </bean> 
-   
- <!-- Tabby Integration - Ends -->
+  <!-- Tabby Integration - Ends -->
+	
+	<!-- ASQ Planet Connect Integration - Starts -->
+	<bean abstract="true" id="AbstractPlanetVatClaimRestServiceBean">
+		<property name="serviceId" value="PLANET_REST" />
+		<property name="exceptionHandler" ref="standardJaxRsExceptionHandler" />
+		<property name="serviceConfigHelper" ref="serviceConfigHelper" />
+		<!-- <property name="logEntity" value="false" /> <property name="oAuth2" 
+			value="false" /> <property name="username" value="${asq.bnpl.tender.tamara.username}" 
+			/> <property name="password" value="${asq.bnpl.tender.tamara.password}" /> -->
+	</bean>
+
+	<bean id="PLANET_VAT_CLAIM_REG_SRV" class="asq.pos.planet.vat.claim.service.AsqPlanetVatClaimServiceHandler" parent="AbstractPlanetVatClaimRestServiceBean">
+		<property name="servicePath" value="/services/transactions/api/v2/new-transaction" />
+	</bean>
+
+	<bean id="PLANET_VAT_CLAIM_CANCEL_SRV" class="asq.pos.planet.vat.claim.service.AsqPlanetVatClaimServiceHandler" parent="AbstractPlanetVatClaimRestServiceBean">
+		<property name="servicePath" value="/services/transactions/api/v2/cancel-tax-refund-transaction" />
+	</bean>
+
+	<bean abstract="true" id="AbstractPlanetVatClaimAuthRestServiceBean">
+		<property name="serviceId" value="PLANET_AUTH_REST" />
+		<property name="exceptionHandler" ref="standardJaxRsExceptionHandler" />
+		<property name="serviceConfigHelper" ref="serviceConfigHelper" />
+		<!--    <property name="logEntity" value="false" />
+    <property name="oAuth2" value="false" />
+    <property name="username" value="${asq.bnpl.tender.tamara.username}" />
+    <property name="password" value="${asq.bnpl.tender.tamara.password}" />-->
+	</bean>
+
+	<bean id="PLANET_AUTH_TOKEN_SRV" class="asq.pos.planet.vat.claim.service.AsqPlanetVatClaimServiceHandler" parent="AbstractPlanetVatClaimAuthRestServiceBean">
+		<property name="servicePath" value="" />
+	</bean>
+	<!-- ASQ Planet Connect Integration - Ends -->
 </beans>
-  

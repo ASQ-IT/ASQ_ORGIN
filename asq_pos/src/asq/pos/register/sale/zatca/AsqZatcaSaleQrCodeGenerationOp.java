@@ -1,6 +1,7 @@
 package asq.pos.register.sale.zatca;
 
 import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.GregorianCalendar;
@@ -24,6 +25,7 @@ import asq.pos.zatca.invoice.generation.op.SmartHubUtil;
 import asq.pos.zatca.invoice.generation.utils.ASQException;
 import asq.pos.zatca.invoice.models.AdditionalDocumentReference;
 import asq.pos.zatca.invoice.models.HashQRData;
+import asq.pos.zatca.invoice.models.ItemAllowanceCharges;
 import asq.pos.zatca.invoice.models.SignatureData;
 import dtv.pos.common.TransactionType;
 import dtv.pos.framework.op.Operation;
@@ -36,13 +38,13 @@ import dtv.util.StringUtils;
 import dtv.util.sequence.SequenceFactory;
 import dtv.xst.cleandto.tnd.Tender;
 import dtv.xst.dao.crm.IParty;
+import dtv.xst.dao.trl.IRetailPriceModifier;
 import dtv.xst.dao.trl.IRetailTransaction;
 import dtv.xst.dao.trl.IRetailTransactionLineItem;
 import dtv.xst.dao.trl.impl.SaleReturnLineItemModel;
 import dtv.xst.dao.trl.impl.TaxLineItemModel;
 import dtv.xst.dao.trn.PosTransactionId;
 import dtv.xst.dao.ttr.impl.TenderLineItemModel;
-import oasis.names.specification.ubl.schema.xsd.commonaggregatecomponents_2.AllowanceChargeType;
 import oasis.names.specification.ubl.schema.xsd.commonaggregatecomponents_2.CustomerPartyType;
 import oasis.names.specification.ubl.schema.xsd.commonaggregatecomponents_2.SupplierPartyType;
 import oasis.names.specification.ubl.schema.xsd.commonaggregatecomponents_2.TaxSubtotalType;
@@ -322,17 +324,20 @@ public class AsqZatcaSaleQrCodeGenerationOp extends Operation {
 
 		List<TaxSubtotalType> taxSubtotalTypes = new ArrayList<>();
 		BigDecimal taxableValue = null;
+		BigDecimal taxPerc = null;
+		String taxCategory = null;
 		List<IRetailTransactionLineItem> taxLines = currentSaleTrans.getLineItemsByTypeCode(LineItemType.TAX.getName());
 		for (IRetailTransactionLineItem taxLine : taxLines) {
 			if (taxLine instanceof TaxLineItemModel) {
 				TaxLineItemModel taxLineModel = (TaxLineItemModel) taxLine;
 				if (!taxLineModel.getVoid()) {
 					// get Taxable Amount
-					taxableValue = taxLineModel.getTaxableAmount().subtract(taxLineModel.getTaxAmount());
-					taxableValue = taxableValue.abs();
+					taxableValue = (taxLineModel.getTaxableAmount().subtract(taxLineModel.getTaxAmount())).abs();
+					taxPerc = taxLineModel.getTaxPercentage();
+					taxCategory = taxLineModel.getTaxGroupId();
 					taxSubtotalTypes.add(asqZatcaInvoiceGenerationHelper.setTaxSubtotalType(taxLineModel.getCurrencyId(), taxLineModel.getTaxAmount().abs(), taxableValue,
 							asqZatcaInvoiceGenerationHelper.setTaxCategoryType(new String[] { AsqZatcaConstant.ZATCA_TAXCATEGORY_SCHEMEID }, new String[] { AsqZatcaConstant.ZATCA_SCHEME_AGENCYID },
-									new String[] { "S" }, new BigDecimal[] { asqZatcaHelper.getFormatttedBigDecimalValue(taxLineModel.getTaxPercentage()) },
+									new String[] { AsqZatcaConstant.ZATCA_TAXCATEGORY_ID_VAL }, new BigDecimal[] { asqZatcaHelper.getFormatttedBigDecimalValue(taxPerc) },
 									new String[] { AsqZatcaConstant.ZATCA_TAXSCHEME_SCHEMEID }, new String[] { taxLineModel.getTaxGroupId() }, new String[] { AsqZatcaConstant.ZATCA_SCHEME_AGENCYID },
 									// taxSubTotal.getTaxExemptionReasonCode(),
 									// taxSubTotal.getTaxExemptionReason(),
@@ -345,27 +350,57 @@ public class AsqZatcaSaleQrCodeGenerationOp extends Operation {
 				.add(asqZatcaInvoiceGenerationHelper.setTaxTotalType(System.getProperty("dtv.location.CurrencyId"), currentSaleTrans.getTaxAmount().abs(), null, taxSubtotalTypes, cbc, cac));
 
 		// Need to set AllowanceTotalAmount for transaction level discount
-		String discountValue = String.valueOf(currentSaleTrans.getDiscountAmount());
-		if (null == discountValue) {
-			discountValue = "0";
-		}
-
-		System.out.println();
-
+		BigDecimal discountAmount = new BigDecimal(0);
+		/*
+		 * if (currentSaleTrans.getDiscountLineItems() != null &&
+		 * currentSaleTrans.getDiscountLineItems().size() > 0) { for
+		 * (IRetailTransactionLineItem disc : currentSaleTrans.getDiscountLineItems()) {
+		 * if (disc instanceof DiscountLineItemModel) { DiscountLineItemModel model =
+		 * (DiscountLineItemModel) disc; discountAmount =
+		 * discountAmount.add(model.getAmount()); } }
+		 * 
+		 * discountAmount = discountAmount.divide((taxPerc.add(new BigDecimal(1))), 2,
+		 * RoundingMode.HALF_UP);
+		 * 
+		 * argZatcaInvoiceObj.getAllowanceCharge()
+		 * .add(asqZatcaInvoiceGenerationHelper.setAllowanceChargeType(AsqZatcaConstant.
+		 * ASQ_FALSE, AsqZatcaConstant.ASQ_DISCOUNT,
+		 * System.getProperty("dtv.location.CurrencyId"),
+		 * String.valueOf(discountAmount), AsqZatcaConstant.ZATCA_TAXCATEGORY_ID_VAL,
+		 * AsqZatcaConstant.ZATCA_SCHEME_AGENCYID,
+		 * AsqZatcaConstant.ZATCA_SCHEME_AGENCYID,
+		 * AsqZatcaConstant.ZATCA_TAXCATEGORY_SCHEMEID,
+		 * AsqZatcaConstant.ZATCA_TAXSCHEME_ID_VAL,
+		 * String.valueOf(asqZatcaHelper.getFormatttedBigDecimalValue(taxPerc)),
+		 * AsqZatcaConstant.ZATCA_TAXCATEGORY_SCHEMEID, cbc, cac)); }
+		 */
 		argZatcaInvoiceObj.setLegalMonetaryTotal(asqZatcaInvoiceGenerationHelper.setMonetaryTotalType(System.getProperty("dtv.location.CurrencyId"), taxableValue, taxableValue,
-				currentSaleTrans.getTotal().abs(), discountValue, String.valueOf(new BigDecimal(0)), currentSaleTrans.getTotal().abs(), String.valueOf(new BigDecimal(0)), cbc, cac));
+				currentSaleTrans.getTotal().abs(), String.valueOf(discountAmount), String.valueOf(new BigDecimal(0)), currentSaleTrans.getTotal().abs(), String.valueOf(new BigDecimal(0)), cbc, cac));
 
 		for (IRetailTransactionLineItem lineItem : currentSaleTrans.getSaleLineItems()) {
 			if (lineItem instanceof SaleReturnLineItemModel) {
 				// need to check on allowance charges
 				SaleReturnLineItemModel salelineItem = (SaleReturnLineItemModel) lineItem;
+				BigDecimal priceAmount = salelineItem.getNetAmount();
 				if (!salelineItem.getVoid()) {
-					List<AllowanceChargeType> listAllowanceChargeType = new ArrayList<AllowanceChargeType>();
-					if (null != lineItem && salelineItem.getDiscounted()) {
-						listAllowanceChargeType.add(asqZatcaInvoiceGenerationHelper.setAllowanceChargeType(AsqZatcaConstant.ASQ_FALSE, AsqZatcaConstant.ASQ_DISCOUNT, salelineItem.getPreDealAmount(),
-								salelineItem.getUnitPrice().abs(), System.getProperty("dtv.location.CurrencyId"), salelineItem.getQuantity(), cbc, cac));
+					List<ItemAllowanceCharges> listAllowanceChargeType = new ArrayList<ItemAllowanceCharges>();
+					if (salelineItem.getDiscounted() || null != salelineItem.getPrediscountAmount()) {
+						List<IRetailPriceModifier> priceModelList = salelineItem.getRetailPriceModifiers();
+						String discountPercent = "";
+						for (IRetailPriceModifier priceModel : priceModelList) {
+							// Zatca discount calculation handling starts
+							// need to check with multiple discount scenario
+							discountPercent = String.valueOf((priceModel.getPercent().multiply(new BigDecimal(100))).intValue());
+							discountAmount = priceModel.getAmount();
+							discountAmount = discountAmount.divide((taxPerc.add(new BigDecimal(1))), 2, RoundingMode.HALF_UP);
+							priceAmount = salelineItem.getPreDealAmount();
+							priceAmount = priceAmount.divide((taxPerc.add(new BigDecimal(1))), 2, RoundingMode.HALF_UP);
+							// Zatca discount calculation handling ends
+						}
+						listAllowanceChargeType.add(new ItemAllowanceCharges(AsqZatcaConstant.ASQ_FALSE, AsqZatcaConstant.ASQ_DISCOUNT, String.valueOf(discountAmount), discountPercent,
+								System.getProperty("dtv.location.CurrencyId"), String.valueOf(priceAmount)));
 					}
-					argZatcaInvoiceObj.getInvoiceLine().add(asqZatcaInvoiceGenerationHelper.setInvoiceLineType(salelineItem, cbc, cac));
+					argZatcaInvoiceObj.getInvoiceLine().add(asqZatcaInvoiceGenerationHelper.setInvoiceLineType(salelineItem, listAllowanceChargeType, cbc, cac, priceAmount, taxPerc, taxCategory));
 				}
 			}
 		}

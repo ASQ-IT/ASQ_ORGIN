@@ -2,6 +2,12 @@ package asq.pos.bnpl.tabby.tender.op;
 
 import dtv.pos.framework.form.BasicEditModel;
 
+
+/**
+ * @author RA20221457
+ *
+ */
+
 public class AsqBnplTabbyEditModel extends BasicEditModel{
 	public static final String ASQ_MOBILE_NUMBER_FIELD = "custMobileNumber";
 	public static final String ASQ_CUSTOMER_EMAIL_FIELD = "custEmailAddress";

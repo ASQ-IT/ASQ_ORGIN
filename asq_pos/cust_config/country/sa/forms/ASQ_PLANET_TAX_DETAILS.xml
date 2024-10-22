@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <FormSet xmlns="http://micros.com/xstore/config/form" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="FormConfig.xsd">
 
-   <Form name="ASQ_NEQATY_REDEEM_OPTION" type="POPUP_VIEW_PANEL">
-    <Page name="neqatyRedeemPoints">
-      <Panel startX="0" startY="0" width="100" height="100" fieldLayoutRef="neqatyRedeemLayout" />
+   <Form name="ASQ_PLANET_TAX_DETAILS" type="MULTI_PURPOSE_VIEW">
+    <Page name="planetTaxDetails">
+      <Panel startX="0" width="100" startY="0" height="50" fieldLayoutRef="asqPlanetDetailsLayout" padding="0, 4, 0, 0" />
+      <Panel startX="0" width="100" startY="50" height="50" fieldLayoutRef="asqPlanetTaxDetailsLayout" padding="4, 0, 0, 0" />
     </Page>
     
     <ActionGroup name="DEFAULT">

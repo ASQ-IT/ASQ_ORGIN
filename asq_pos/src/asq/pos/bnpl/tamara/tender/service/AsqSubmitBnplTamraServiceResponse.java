@@ -129,7 +129,17 @@ public class AsqSubmitBnplTamraServiceResponse implements IServiceResponse{
     @JsonProperty("created_at")
     private Date created_at;
     
-    @JsonProperty("wallet_prepaid_amount")
+    @JsonProperty("checkout_deeplink")
+	private String checkout_deeplink;
+    
+    public String getCheckout_deeplink() {
+		return checkout_deeplink;
+	}
+	public void setCheckout_deeplink(String checkout_deeplink) {
+		this.checkout_deeplink = checkout_deeplink;
+	}
+
+	@JsonProperty("wallet_prepaid_amount")
     private AsqBnplTamaraAmountObj wallet_prepaid_amount;
     
 //    @JsonProperty("transactions")

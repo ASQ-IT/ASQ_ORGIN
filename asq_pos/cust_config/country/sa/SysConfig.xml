@@ -1,7 +1,14 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <SysConfig xmlns="http://micros.com/xstore/config/settings">
-   
-    <Setting name="STCCustomerEarnPoints---AddSTCPointsToCustomerOnTender">False</Setting>
-    <Setting name="STCCustomerEarnPoints---PointsCalculation">100</Setting>
-    
+
+	<Setting name="STCCustomerEarnPoints---AddSTCPointsToCustomerOnTender">true</Setting>
+	<Setting name="STCCustomerEarnPoints---PointsCalculation">100</Setting>
+
+
+	<Setting name="PlanetTaxFree---MerchantIdNumber">17519</Setting>
+	<Setting name="PlanetTaxFree---TerminalNumber">22044</Setting>
+	<Setting name="PlanetTaxFree---Type">RECEIPT</Setting>
+     <!-- StockOnHand enable/ disable configuration -->
+    <Setting name="StockOnHold---Enable">true</Setting>
+
 </SysConfig>

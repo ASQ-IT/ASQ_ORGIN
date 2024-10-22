@@ -23,18 +23,28 @@ public class AsqNeqatyServiceImpl implements IAsqNeqatyService {
 	@Inject
 	private IServiceHandlerFactory _serviceHandlerFactory;
 
-	private static final ServiceType<IAsqNeqatyServiceRequest, IServiceResponse> ASQ_NEQATY_SERVICE = new ServiceType<IAsqNeqatyServiceRequest, IServiceResponse>("ASQ_NEQATY_SRV");
-
-//	@Override
-//	public IServiceResponse inqueryWithOTP(IAsqNeqatyServiceRequest paramAsqSTCLoyalityRequest) throws ServiceException {
-//		IServiceHandler<IAsqNeqatyServiceRequest, IServiceResponse> serviceHandler = _serviceHandlerFactory.getServiceHandler(ASQ_NEQATY_SERVICE);
-//		return serviceHandler.handleService(paramAsqSTCLoyalityRequest, ASQ_NEQATY_SERVICE);
-//	}
+	private static final ServiceType<IAsqNeqatyServiceRequest, IServiceResponse> ASQ_NEQATY_SERVICE = new ServiceType<>("ASQ_NEQATY_SRV");
 
 	@Override
 	public IServiceResponse callNeqatyService(IAsqNeqatyServiceRequest paramAsqNeqatyLoyalityRequest) throws ServiceException {
 		IServiceHandler<IAsqNeqatyServiceRequest, IServiceResponse> serviceHandler = _serviceHandlerFactory.getServiceHandler(ASQ_NEQATY_SERVICE);
 		return serviceHandler.handleService(paramAsqNeqatyLoyalityRequest, ASQ_NEQATY_SERVICE);
+	}
+
+
+	@Override
+	public IServiceResponse earnNeqityPoint(IAsqNeqatyServiceRequest paramAsqNeqatyLoyalityRequest)
+			throws ServiceException {
+		IServiceHandler<IAsqNeqatyServiceRequest, IServiceResponse> serviceHandler = _serviceHandlerFactory
+				.getServiceHandler(ASQ_NEQATY_SERVICE);
+		return serviceHandler.handleService(paramAsqNeqatyLoyalityRequest, ASQ_NEQATY_SERVICE);
+	}
+
+	@Override
+	public IServiceResponse redeemNeqityPoint(IAsqNeqatyServiceRequest paramAsqSTCLoyalityRequest)
+			throws ServiceException {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }

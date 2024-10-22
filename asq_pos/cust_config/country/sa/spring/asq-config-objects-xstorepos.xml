@@ -18,4 +18,6 @@
     <constructor-arg ref="sysConfigManagerProxy" />
   </bean>
   
+  <bean id="AsqConfigurationMgr" class="asq.pos.common.AsqConfigurationMgr" scope="workstation" />
+  
 </beans>

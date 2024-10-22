@@ -101,7 +101,8 @@ public class AsqSTCTenderOp extends AbstractFormOp<AsqSTCTenderOTPEditModel> {
 				}
 				String otp = model.getStcOTP();
 				setScopedValue(AsqValueKeys.ASQ_STC_OTP, otp);
-				String custMobileNmbr = getScopedValue(AsqValueKeys.ASQ_MOBILE_NUMBER);
+				String custMobileNmbr = getScopedValue(AsqValueKeys.ASQ_MOBILE_NUMBER); 
+						//"592914516";
 				return requestPreparerForRedeemPoints(otp, custMobileNmbr, amount);
 			}
 		} catch (Exception exception) {
@@ -126,7 +127,7 @@ public class AsqSTCTenderOp extends AbstractFormOp<AsqSTCTenderOTPEditModel> {
 			if (trans != null)
 			{
 				BigDecimal roundedAmount = trans.getSubtotal();
-				editModel.setStcRedeemPoints(roundedAmount.toString());
+				editModel.setStcRedeemPoints(roundedAmount.setScale(0, RoundingMode.HALF_UP).toString());
 				return super.handleInitialState();
 		} 
 		}catch (Exception ex) {
@@ -204,11 +205,9 @@ public class AsqSTCTenderOp extends AbstractFormOp<AsqSTCTenderOTPEditModel> {
 			newTrxProps.setDecimalValue(earnPntsDecimal);
 			originalPosTrx.addPosTransactionProperty(newTrxProps);
 			newTrxProps.setPropertyCode(AsqZatcaConstant.STC_SUCCESS_EARN_RESPONSE);
-		}
-		else {
+		} else {
 			newTrxProps.setPropertyCode(AsqZatcaConstant.STC_SUCCESS_REDEEM_RESPONSE);
 			originalPosTrx.addPosTransactionProperty(newTrxProps);
-			System.out.println();
 		}
 	}
 	

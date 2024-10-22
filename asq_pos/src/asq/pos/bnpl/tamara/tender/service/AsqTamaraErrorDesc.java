@@ -10,6 +10,9 @@ public class AsqTamaraErrorDesc {
 
 	@JsonProperty("error_code")
 	private String error_code;
+	
+	@JsonProperty("error")
+	private String error;
 
 	public String getError_code() {
 		return error_code;
@@ -17,5 +20,12 @@ public class AsqTamaraErrorDesc {
 
 	public void setError_code(String error_code) {
 		this.error_code = error_code;
+	}
+	
+	public String getError() {
+		return error;
+	}
+	public void setError(String error) {
+		this.error = error;
 	}
 }

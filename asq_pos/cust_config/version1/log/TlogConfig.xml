@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<LogDefinitions xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="LogConfig.xsd">
+  <!-- ***************************************************** -->
+  <!-- ** ROUTING RULES -->
+  <!-- ***************************************************** -->
+  <sections>
+   <section name="tran_header_detail">
+      <xml><![CDATA[
+        <dtv:OrganizationID>#{getOrganizationId}</dtv:OrganizationID>
+        <RetailStoreID>#{getRetailLocationId}</RetailStoreID>
+        <WorkstationID>#{getWorkstationId}</WorkstationID>
+        <AlternateStoreNbr>!{asq.pos.docbuilder.AsqAlternateStoreNumber}</AlternateStoreNbr>
+        <TillID>#{getSessionId}</TillID>
+        <dtv:CashDrawerID>#{getCashDrawerId}</dtv:CashDrawerID>
+        <SequenceNumber>#{getTransactionSequence}</SequenceNumber>
+        <BusinessDayDate>#{getBusinessDate}[date]</BusinessDayDate>
+        <BeginDateTime>#{getBeginDatetimestamp}[datetime]</BeginDateTime>
+        <EndDateTime>#{getEndDatetimestamp}[datetime]</EndDateTime>
+        <OperatorID>#{getOperatorParty.getEmployeeId}</OperatorID>
+        <FormFactor>#{getFormFactor}</FormFactor>
+        <CurrencyCode>#{dtv.pos.common.ConfigurationMgr.getLocalCurrencyId}</CurrencyCode>
+        <dtv:FiscalNumber>#{getFiscalNumber}</dtv:FiscalNumber>
+        <dtv:DeviceId>#{getDeviceId}</dtv:DeviceId>
+        <dtv:FiscalSessionNumber>#{getFiscalSessionNumber}</dtv:FiscalSessionNumber>     
+        <!--<?iterator method="getProperties"?>
+        <dtv:PosTransactionProperties>
+          <dtv:PosTransactionPropertyCode>#{getPropertyCode}</dtv:PosTransactionPropertyCode>
+          <dtv:PosTransactionPropertyValue>#{getPropertyValue}</dtv:PosTransactionPropertyValue>
+        </dtv:PosTransactionProperties>
+        <?_iterator?>-->
+      ]]></xml>
+    </section>
+ 
+  </sections>
+</LogDefinitions>

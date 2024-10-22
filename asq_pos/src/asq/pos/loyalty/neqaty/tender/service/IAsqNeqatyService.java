@@ -6,12 +6,9 @@ import dtv.service.req.IServiceResponse;
 
 public interface IAsqNeqatyService extends IService {
 
-//	IServiceResponse inqueryWithOTP(IAsqNeqatyServiceRequest paramAsqSTCLoyalityRequest) throws ServiceException;
-
-//	IServiceResponse redeemNeqityPoint(IAsqNeqatyServiceRequest paramAsqSTCLoyalityRequest) throws ServiceException;
+    IServiceResponse redeemNeqityPoint(IAsqNeqatyServiceRequest paramAsqSTCLoyalityRequest) throws ServiceException;
 
 	IServiceResponse callNeqatyService(IAsqNeqatyServiceRequest paramAsqNeqatyLoyalityRequest) throws ServiceException;
 
-//	IServiceResponse earnNeqityPoint(IAsqNeqatyServiceRequest argRequest) throws ServiceException;
-
+    IServiceResponse earnNeqityPoint(IAsqNeqatyServiceRequest paramAsqNeqatyLoyalityRequest) throws ServiceException;
 }

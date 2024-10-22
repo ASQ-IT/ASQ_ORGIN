@@ -34,33 +34,20 @@
 	<OpChain name="ASQ_STC_OTP">
 		<Op class="asq.pos.loyalty.stc.tender.op.AsqSTCTenderOp" longRunning="true" />
 	</OpChain>
-
+	
+	<!--ASQ STC Integration Earn points - Starts-->
 	<OpChain name="ASQ_TENDER_STC" signal="TransactionModified" contextKey="SALE_TENDER_EMPTY_MENU_OPTION">
 		<Op class="dtv.pos.tender.CreateTenderLineItemOp">
 			<Parameter name="TenderStatus" value="Tender" />
 			<Parameter name="TenderId" value="STC" />
 		</Op>
 		<PromptOp class="dtv.pos.tender.PromptCustAsscRequiredForTenderOp" />
-		<Op class="dtv.pos.tender.check.PromptIdentityVerificationOp" />
-		<PromptOp class="dtv.pos.tender.PromptTenderAmtOp" validationsBean="tenderAmountRules" />
-		<Op class="dtv.pos.tender.AddTenderToSaleTranOp" />
+		<Op class="asq.pos.loyalty.AsqAddLoyaltyTenderOp" />
 		<Op class="dtv.pos.tender.rounding.UpdateTransactionRoundedAmountOp" />
+		<Op class="asq.pos.loyalty.stc.earn.op.AsqSTCEarnPointsOp" />
 		<OpChainRoute chainKey="CHECK_SALE_COMPLETE" chainType="START" />
 	</OpChain>
-	<OpChain name="SALE_TENDER" contextKey="SALE_TENDER" rollbackChainKey="ROLLBACK_TENDER_PROMPT" rollbackLevel="50">
-		<OpChainRoute chainKey="SALE_TENDER.invoice.pre" />
-		<OpChainRoute chainKey="SALE_TENDER.voucher.pre" />
-		<Op class="dtv.pos.register.itemmessages.DisplayInstructionsOp">
-			<Parameter name="FILENAME" value="_instructionalTenderMsg" />
-		</Op>
-		<Op class="dtv.pos.hardware.op.SubtotalCustomerDisplayOp" />
-		<!--ASQ STC Integration Earn points - Starts-->
-		<Op class="asq.pos.loyalty.stc.earn.op.AsqSTCEarnPointsOp" />
-		<Op class="dtv.pos.register.PromptTenderMenuOp">
-			<Parameter name="MenuKey" value="SALE::TENDER_OPTIONS" />
-		</Op>
-	</OpChain>
-	<!-- ASQ STC Integratin Service Ends-->
+	<!--ASQ STC Integration Earn points - Ends-->
 	
 	<!-- ASQ Neqaty Integration Service Starts-->
 	<OpChain name="ASQ_TENDER_NEQATY">
@@ -72,6 +59,18 @@
 	</OpChain>
 	<OpChain name="ASQ_NEQATY_REDEEM_OPTION">
 		<Op class="asq.pos.loyalty.neqaty.tender.op.AsqNeqatyRedeemOp" longRunning="true" />
+	</OpChain>
+	<OpChain name="ASQ_TENDER_LOY_NEQATY" signal="TransactionModified" contextKey="SALE_TENDER_EMPTY_MENU_OPTION">
+		<Op class="dtv.pos.tender.CreateTenderLineItemOp">
+			<Parameter name="TenderStatus" value="Tender" />
+			<Parameter name="TenderId" value="NEQATI" />
+		</Op>
+		<OpChainRoute chainKey="ASQ_TENDER_NEQATY" />
+		<Op class="asq.pos.loyalty.AsqAddLoyaltyTenderOp" />
+		<Op class="dtv.pos.tender.rounding.UpdateTransactionRoundedAmountOp" />
+		<!--ASQ Neqaty Integration Earn points - Starts-->
+		<Op class="asq.pos.loyalty.neqaty.tender.service.AsqNeqatyEarnPointsOp" />
+		<OpChainRoute chainKey="CHECK_SALE_COMPLETE" chainType="START" />
 	</OpChain>
 	<!-- ASQ Neqaty Integration Service Ends-->
    
@@ -90,11 +89,11 @@
     <PromptOp class="asq.pos.register.sale.ASQPromptForItemWeightOp" validationsBean="itemWeightRules" />
     <ValidationOp class="dtv.pos.item.barcode.ValidateItemWeightBarcodeOp" validationsBean="itemWeightRules" />
     <OpChainRoute chainKey="VALIDATE_MINIMUM_AGE_FOR_ITEM" />
-   <!-- this is for India specific country pack  -->
+    <!-- this is for India specific country pack  -->
     <OpChainRoute chainKey="MRP_ITEM_PRICE" condition="dtv.pos.register.IsMrpPriceTypeEnabled" />
 		<!-- <Op class="dtv.pos.register.sale.RouteSaleItemOp" /> -->
     <OpChainRoute>
-      <!-- @todo add routing to more chains as more types of items are converted, see RouteSaleItemOp
+    <!-- @todo add routing to more chains as more types of items are converted, see RouteSaleItemOp
            Warrantries and house account payments still need to be handled. -->
       <Choice chainKey="SALE_ITEM_FINISH" condition="dtv.pos.register.IsPhysicalItem" />
       <Choice chainKey="SALE_VOUCHER_START">
@@ -129,7 +128,7 @@
     <Op class="dtv.pos.framework.op.PersistTranInProcessOp" />
   </OpChain>
   
-   <!--BNPL TAMARA Service Starts-->
+	<!--ASQ BNPL TAMARA Service Starts-->
  	<OpChain name="ASQ_TAMARA_MOBILE">
 	  	<Op class="asq.pos.bnpl.tamara.tender.op.AsqBnplTamaraTenderOp" longRunning="true"/>
     </OpChain>
@@ -139,9 +138,7 @@
 			<Parameter name="TenderId" value="TAMARA" />
 		</Op>
 		<PromptOp class="dtv.pos.tender.PromptCustAsscRequiredForTenderOp" />
-		<Op class="dtv.pos.tender.check.PromptIdentityVerificationOp" />
-		<PromptOp class="dtv.pos.tender.PromptTenderAmtOp" validationsBean="tenderAmountRules" />
-		<Op class="dtv.pos.tender.AddTenderToSaleTranOp" />
+		<Op class="asq.pos.loyalty.AsqAddLoyaltyTenderOp" />
 		<Op class="dtv.pos.tender.rounding.UpdateTransactionRoundedAmountOp" />
 		<OpChainRoute chainKey="CHECK_SALE_COMPLETE" chainType="START" />
 	</OpChain>
@@ -149,8 +146,14 @@
 		<PromptOp class="dtv.pos.tender.modifytender.PromptTendersToVoidOp">
 			<Parameter name="disallowNonVoidableTenders" value="true" />
 		</PromptOp>
-		<Op class="asq.pos.bnpl.tamara.tender.op.AsqBnplTamaraVerifyPaymentOp">
+		<Op class="asq.pos.bnpl.tamara.tender.op.AsqBnplTamaraRefundOp">
 			<Parameter name="TenderType" value="TAMARA" />
+		</Op>
+		<Op class="asq.pos.bnpl.tabby.tender.op.AsqBnplTabbyRefundOp">
+			<Parameter name="TenderType" value="TABBY" />
+		</Op>
+		<Op class="asq.pos.loyalty.neqaty.tender.op.AsqNeqatyRefundOp">
+			<Parameter name="TenderType" value="NEQATI" />
 		</Op>
 		<OpChainRoute chainKey="GUEST_LOOKUP" />
 		<OpChainRoute chainKey="VOID_ROOM_CHARGE" />
@@ -171,10 +174,10 @@
     <Op class="dtv.pos.tender.creditcard.SkipOriginalCreditCardSelectionOp"/>
     <OpChainRoute chainKey="CHECK_SALE_COMPLETE" chainType="START" />
   </OpChain>
-   <!--BNPL TAMARA Service Ends-->
+  <!--ASQ BNPL TAMARA Service Ends-->
    
-  <!--BNPL TABBY Service Starts-->
-  <OpChain name="ASQ_TABBY_MOBILE">
+    <!--ASQ BNPL TABBY Service Starts-->
+  	<OpChain name="ASQ_TABBY_MOBILE">
 	  	<Op class="asq.pos.bnpl.tabby.tender.op.AsqBnplTabbyTenderOp"/>
     </OpChain>
     <OpChain name="ASQ_TENDER_TABBY" signal="TransactionModified" contextKey="SALE_TENDER_EMPTY_MENU_OPTION">
@@ -183,11 +186,21 @@
 			<Parameter name="TenderId" value="TABBY" />
 		</Op>
 		<PromptOp class="dtv.pos.tender.PromptCustAsscRequiredForTenderOp" />
-		<Op class="dtv.pos.tender.check.PromptIdentityVerificationOp" />
-		<PromptOp class="dtv.pos.tender.PromptTenderAmtOp" validationsBean="tenderAmountRules" />
-		<Op class="dtv.pos.tender.AddTenderToSaleTranOp" />
+		<Op class="asq.pos.loyalty.AsqAddLoyaltyTenderOp" />
 		<Op class="dtv.pos.tender.rounding.UpdateTransactionRoundedAmountOp" />
 		<OpChainRoute chainKey="CHECK_SALE_COMPLETE" chainType="START" />
 	</OpChain>
-   <!--BNPL TABBY Service Ends-->
+    <!--BNPL TABBY Service Ends-->
+	
+	<!--ASQ Planet Tax  Service Starts-->
+	<OpChain name="COUNTRYPACK.TAXFREE_CUSTOMER_DATA">
+		<Op class="oracle.retail.xstore.countrypack.common.taxfree.op.TaxFreeCommErrorCleanOp">
+			<Parameter name="VoidHandlingMode" value="IssueExternalForm" />
+		</Op>
+		<OpChainRoute chainKey="COUNTRYPACK.TAXFREE_PROVIDER_CHECK_COUNTRY_ELIGIBLE" />
+		<ValidationOp class="oracle.retail.xstore.countrypack.common.taxfree.op.ValidateTaxFreeDataOp" validationsBean="countryPack.validateTaxFreeInvoiceRequest" />
+		<Op class="asq.retail.xstore.countrypack.common.taxfree.fintrax.op.AsqPlanetIssueFormAuthorizeOp" longRunning="true" />
+		<OpChainRoute chainKey="COUNTRYPACK.TAXFREE_UPDATE_TRANS" />
+	</OpChain>
+	<!--ASQ Planet Tax  Service Ends-->
 </OpChainSet>

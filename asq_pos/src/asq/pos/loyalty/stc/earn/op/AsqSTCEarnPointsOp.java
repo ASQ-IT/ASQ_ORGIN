@@ -24,12 +24,14 @@ import asq.pos.zatca.AsqZatcaConstant;
 import dtv.i18n.IFormattable;
 import dtv.pos.common.OpChainKey;
 import dtv.pos.common.TransactionType;
+import dtv.pos.common.ValueKeys;
 import dtv.pos.framework.action.XstDataAction;
 import dtv.pos.framework.action.type.XstDataActionKey;
 import dtv.pos.framework.op.Operation;
 import dtv.pos.iframework.event.IXstEvent;
 import dtv.pos.iframework.op.IOpResponse;
 import dtv.xst.dao.trl.IRetailTransaction;
+import dtv.xst.dao.ttr.ITenderLineItem;
 
 public class AsqSTCEarnPointsOp extends Operation {
 
@@ -48,13 +50,8 @@ public class AsqSTCEarnPointsOp extends Operation {
 	@Inject
 	AsqStcHelper asqStcHelper;
 	
+	private String tenderType;
 	
-	//Need to update conditions here as Xstore can run only one loyalty program
-	 @Override
-	  public boolean isOperationApplicable() {
-	    return false;
-	  }
-
 	/**
 	 * This method handles the customer availability parameter check and points calculation
 	 * for Earn API
@@ -137,6 +134,20 @@ public class AsqSTCEarnPointsOp extends Operation {
 			return true;
 		}
 		return false;
+	}
+	
+	@Override
+	public void setParameter(String argName, String argValue) {
+		if ("TenderType".equalsIgnoreCase(argName)) {
+			tenderType = argValue;
+		}
+		super.setParameter(argName, argValue);
+	}
+
+	@Override
+	public boolean isOperationApplicable() {
+		ITenderLineItem tenderLine = getScopedValue(ValueKeys.CURRENT_TENDER_LINE);
+		return (!tenderLine.getVoid() && tenderLine.getTenderId().equalsIgnoreCase(tenderType));
 	}
 
 	/**

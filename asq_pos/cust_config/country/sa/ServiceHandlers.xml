@@ -59,4 +59,17 @@
     </Parameters>
   </Service>
   
+	<Service name="PLANET_REST">
+		<Parameters dtype="Map">
+			<TargetUri dtype="String">${asq.pos.planet.uri}</TargetUri>
+			<ConnectTimeout dtype="Integer">${asq.pos.planet.uri.timeout}</ConnectTimeout>
+		</Parameters>
+	</Service>
+
+	<Service name="PLANET_AUTH_REST">
+		<Parameters dtype="Map">
+			<TargetUri dtype="String">${asq.pos.planet.auth.token.uri}</TargetUri>
+			<ConnectTimeout dtype="Integer">${asq.pos.planet.uri.timeout}</ConnectTimeout>
+		</Parameters>
+	</Service>
 </Services>

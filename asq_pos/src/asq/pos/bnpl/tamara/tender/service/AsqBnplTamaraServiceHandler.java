@@ -31,7 +31,6 @@ public class AsqBnplTamaraServiceHandler extends AbstractJaxRsHandler<AsqSubmitB
 							.header(AsqZatcaIntegrationConstants.Authorization, System.getProperty("asq.bnpl.tender.tamara.token")).header("Accept-Version", "V2");
 					rawResponse = requestBuilder.post(Entity.json(asqZatcaHelper.convertTojson(argServiceRequest)));
 				} else if (argServiceType.getServiceHandlerId().equalsIgnoreCase("BNPL_TAMARA_ORDER_DETAIL_SRV")) {
-					System.out.println();
 					Builder requestBuilder = this.getBaseWebTarget().resolveTemplate("order_id", argServiceRequest.getOrder_id()).request().header("Content-Type", "application/json")
 							.header(AsqZatcaIntegrationConstants.Authorization, System.getProperty("asq.bnpl.tender.tamara.token")).header("Accept-Version", "V2");
 					rawResponse = requestBuilder.get();
@@ -53,16 +52,13 @@ public class AsqBnplTamaraServiceHandler extends AbstractJaxRsHandler<AsqSubmitB
 				queueForRetry(retryType, retryRequest);
 			}
 			return handleResponse(rawResponse);
-			// return (IServiceResponse) rawResponse;
 		} finally {
 			if (rawResponse != null)
 				rawResponse.close();
 		}
-		// return (IServiceResponse) rawResponse;
 	}
 
 	private IServiceResponse handleResponse(Response argRawResponse) {
-		//if (argRawResponse.getStatus() == 200) {
 			try {
 				return (IServiceResponse) asqZatcaHelper.convertJSONToPojo(argRawResponse.readEntity(String.class),AsqSubmitBnplTamraServiceResponse.class);
 			} catch (JsonMappingException e) {

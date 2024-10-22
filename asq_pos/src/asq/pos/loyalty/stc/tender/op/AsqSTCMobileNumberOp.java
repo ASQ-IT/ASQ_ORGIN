@@ -86,8 +86,8 @@ public class AsqSTCMobileNumberOp extends AbstractFormOp<AsqSTCMobileNumberEditM
 				editModel.setCustMobileNumber(custMobileNumber);
 				setScopedValue(AsqValueKeys.ASQ_MOBILE_NUMBER, editModel.getCustMobileNumber());
 				return super.handleInitialState();
-			} else {
-
+			} else if(trans.getCustomerParty() == null){
+				setScopedValue(AsqValueKeys.ASQ_MOBILE_NUMBER, editModel.getCustMobileNumber());
 			}
 		} catch (Exception ex) {
 			LOG.info(

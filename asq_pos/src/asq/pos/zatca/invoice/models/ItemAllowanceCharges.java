@@ -11,11 +11,9 @@ public class ItemAllowanceCharges {
 
 	public ItemAllowanceCharges() {
 		super();
-		// TODO Auto-generated constructor stub
 	}
 
-	public ItemAllowanceCharges(String itemAllowanceChargeIndicator, String itemAllowanceChargeReason,
-			String itemAllowanceChargeAmount, String itemMultiplierFactorNummeric,
+	public ItemAllowanceCharges(String itemAllowanceChargeIndicator, String itemAllowanceChargeReason, String itemAllowanceChargeAmount, String itemMultiplierFactorNummeric,
 			String itemAllowanceChargeAmountCurrencyID, String itemBaseAmount) {
 		super();
 		this.itemAllowanceChargeIndicator = itemAllowanceChargeIndicator;
@@ -78,7 +76,5 @@ public class ItemAllowanceCharges {
 	public String getItemAllowanceChargeIndicator() {
 		return itemAllowanceChargeIndicator;
 	}
-	
-	
 
 }

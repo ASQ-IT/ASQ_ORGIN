@@ -64,6 +64,9 @@ public interface AsqZatcaConstant {
 	String ZATCA_TAXSCHEME_SCHEMEID = "UN/ECE 5153";
 	String ZATCA_SCHEME_AGENCYID = "6";
 
+	String ZATCA_TAXCATEGORY_ID_VAL = "S";
+	String ZATCA_TAXSCHEME_ID_VAL = "VAT";
+
 	// These value will remain constant
 	String companyLegalName = System.getProperty("asq.zatca.company.legalenity.name");
 	String companyVatNumber = System.getProperty("asq.zatca.company.vat.reg.number");
@@ -90,4 +93,5 @@ public interface AsqZatcaConstant {
 
 	String ASQ_FALSE = "false";
 	String ASQ_DISCOUNT = "Discount";
+	String ASQ_PLANET_TAX_ID = "PLANET_TAX_ID";
 }

@@ -102,7 +102,6 @@ public class AsqBnplTamaraTenderOp extends AbstractFormOp<AsqBnplTamaraEditModel
 				return super.handleDataAction(argAction);
 			}
 			LOG.info("TAMARA API request preparer for service call starts here: ");
-			System.out.println();
 			return requestPreparerStoreCheckOutSession(trans);
 		}
 		LOG.info("Action key is not equal to ACCEPT, rolling back to Sale Screen :" + argAction.getActionKey());
@@ -129,8 +128,6 @@ public class AsqBnplTamaraTenderOp extends AbstractFormOp<AsqBnplTamaraEditModel
 				editModel.setCustMobileNumber(custMobileNumber);
 				setScopedValue(AsqValueKeys.ASQ_MOBILE_NUMBER, editModel.getCustMobileNumber());
 				return super.handleInitialState();
-			} else {
-
 			}
 		} catch (Exception ex) {
 			LOG.info(
@@ -154,8 +151,8 @@ public class AsqBnplTamaraTenderOp extends AbstractFormOp<AsqBnplTamaraEditModel
 		IAsqSubmitBnplTamraServiceRequest asqSubmitBnplTamraServiceRequest = new AsqSubmitBnplTamraServiceRequest();
 		AsqBnplTamaraAmountObj asqBnplTamaraAmountObj = new AsqBnplTamaraAmountObj();
 		asqBnplTamaraAmountObj.setAmount(trans.getTotal());
-		// asqBnplTamaraAmountObj.setCurrency(trans.getRetailTransactionLineItems().get(0).getCurrencyId());
-		asqBnplTamaraAmountObj.setCurrency("SAR");
+		asqBnplTamaraAmountObj.setCurrency(trans.getRetailTransactionLineItems().get(0).getCurrencyId());
+		//asqBnplTamaraAmountObj.setCurrency("SAR");
 		List<ISaleReturnLineItem> saleItemList = trans.getLineItems(ISaleReturnLineItem.class);
 		ArrayList<AsqBnplTamaraItemObj> itemList = new ArrayList<AsqBnplTamaraItemObj>();
 		for (ISaleReturnLineItem lineItem : saleItemList) {
@@ -167,7 +164,8 @@ public class AsqBnplTamaraTenderOp extends AbstractFormOp<AsqBnplTamaraEditModel
 			asqBnplTamaraItemObj.setReference_id(lineItem.getLineItemSequence());
 			asqBnplTamaraItemObj.setQuantity(lineItem.getQuantity());
 			itemTotalAmnt.setAmount(lineItem.getBaseUnitPrice());
-			itemTotalAmnt.setCurrency("SAR");
+			//itemTotalAmnt.setCurrency("SAR");
+			itemTotalAmnt.setCurrency(trans.getRetailTransactionLineItems().get(0).getCurrencyId());
 			asqBnplTamaraItemObj.setTotal_amount(itemTotalAmnt);
 			itemList.add(asqBnplTamaraItemObj);
 		}
@@ -178,7 +176,8 @@ public class AsqBnplTamaraTenderOp extends AbstractFormOp<AsqBnplTamaraEditModel
 		asqSubmitBnplTamraServiceResponse = createInStoreCheckoutSession(asqSubmitBnplTamraServiceRequest);
 		System.out.println("CheckoutID: " + asqSubmitBnplTamraServiceResponse.getCheckout_id());
 		System.out.println("OrderID: " + asqSubmitBnplTamraServiceResponse.getOrder_id());
-		System.out.println("CheckoutLink: " +asqSubmitBnplTamraServiceResponse.getCheckout_link());
+		System.out.println("CheckoutLink: " + asqSubmitBnplTamraServiceResponse.getCheckout_deeplink());
+		LOG.info("CheckoutLink: " + asqSubmitBnplTamraServiceResponse.getCheckout_deeplink());
 		return validateCheckoutSessionResponseAndStoreDataInDB(asqSubmitBnplTamraServiceResponse);
 	}
 
@@ -201,7 +200,6 @@ public class AsqBnplTamaraTenderOp extends AbstractFormOp<AsqBnplTamaraEditModel
 
 	private IOpResponse requestPreparerGetOrderDetails(AsqSubmitBnplTamraServiceResponse response,
 			IPosTransaction trans) {
-
 		AsqSubmitBnplTamraServiceResponse asqSubmitBnplTamraServiceResponse = new AsqSubmitBnplTamraServiceResponse();
 		IAsqSubmitBnplTamraServiceRequest asqSubmitBnplTamraServiceRequest = new AsqSubmitBnplTamraServiceRequest();
 		if (response.getErrors() == null) {
@@ -214,14 +212,8 @@ public class AsqBnplTamaraTenderOp extends AbstractFormOp<AsqBnplTamaraEditModel
 	private IOpResponse validateGetOrderDetailsResponse(AsqSubmitBnplTamraServiceResponse response) {
 		if (null != response && null != response.getErrors() && 0 != response.getErrors().length) {
 			return handleServiceError(response);
-		} else if (null == response) {
-			// return technicalErrorScreen("TAMARA API::::: Service has null response");
-			setScopedValue(AsqValueKeys.ASQ_TAMARA_PAYMENT_SUCCESS, true);// need to correct this
-			return this.HELPER.getCompleteStackChainResponse(OpChainKey.valueOf("ASQ_TENDER_TAMARA"));// need to correct
-																										// this
-		} else if (response.getErrors() == null) {
-			setScopedValue(AsqValueKeys.ASQ_TAMARA_PAYMENT_SUCCESS, true);
-			return this.HELPER.getCompleteStackChainResponse(OpChainKey.valueOf("ASQ_TENDER_TAMARA"));
+		} else if (_transactionScope.getValue(AsqValueKeys.ASQ_TAMARA_PAYMENT_SUCCESS)) {
+			return this.HELPER.getPromptResponse("ASQ_TAMARA_PAYMENT_SUCCESSFULL");
 		}
 		return HELPER.completeCurrentChainResponse();
 	}
@@ -249,9 +241,6 @@ public class AsqBnplTamaraTenderOp extends AbstractFormOp<AsqBnplTamaraEditModel
 
 	public IOpResponse handleServiceError(AsqSubmitBnplTamraServiceResponse asqServiceResponse) {
 		IFormattable[] args = new IFormattable[2];
-		// AsqTamaraErrorDesc error = asqServiceResponse.getErrors()[0];
-		// args[0] = _formattables.getSimpleFormattable(error.getError_code());
-
 		LOG.info("Error From TAMARA API::::: " + args[0]);
 		LOG.info("Error Message Generated By Xstore based on TAMARA API Response::::: "
 				+ asqServiceResponse.getMessage());
@@ -307,7 +296,6 @@ public class AsqBnplTamaraTenderOp extends AbstractFormOp<AsqBnplTamaraEditModel
 		return response;
 	}
 
-
 	public AsqSubmitBnplTamraServiceResponse getOrderDetails(
 			IAsqSubmitBnplTamraServiceRequest asqSubmitBnplTamraServiceRequest) {
 		boolean success = false;
@@ -320,6 +308,7 @@ public class AsqBnplTamaraTenderOp extends AbstractFormOp<AsqBnplTamaraEditModel
 					if (response.getStatus().equalsIgnoreCase("fully_captured")
 							|| response.getStatus().equalsIgnoreCase("expired")) {
 						success = true;
+						_transactionScope.setValue(AsqValueKeys.ASQ_TAMARA_PAYMENT_SUCCESS, true);
 					} else {
 						Thread.sleep(1000);
 					}

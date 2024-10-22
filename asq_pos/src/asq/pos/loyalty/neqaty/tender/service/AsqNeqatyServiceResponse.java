@@ -46,6 +46,4 @@ public class AsqNeqatyServiceResponse extends ServiceRequest implements IService
 	public void setOptionsData(NeqatyWSAPIOptionsData optionsData) {
 		this.optionsData = optionsData;
 	}
-	
-	
 }

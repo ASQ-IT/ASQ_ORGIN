@@ -1,0 +1,116 @@
+<ns8:Invoice xmlns="urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2" xmlns:ns6="urn:oasis:names:specification:ubl:schema:xsd:SignatureAggregateComponents-2" xmlns:ns5="http://www.w3.org/2000/09/xmldsig#" xmlns:ns8="urn:oasis:names:specification:ubl:schema:xsd:Invoice-2" xmlns:ns7="http://uri.etsi.org/01903/v1.3.2#" xmlns:ns9="urn:oasis:names:specification:ubl:schema:xsd:CommonSignatureComponents-2" xmlns:ns2="urn:oasis:names:specification:ubl:schema:xsd:CommonExtensionComponents-2" xmlns:ns4="urn:oasis:names:specification:ubl:schema:xsd:SignatureBasicComponents-2" xmlns:ns3="urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2">
+    <ProfileID>reporting:1.0</ProfileID>
+    <ID>172548360000011347116</ID>
+    <UUID>1-11347-1725494400000-1-16</UUID>
+	<IssueDate>2024-09-17</IssueDate>
+    <IssueTime>07:23:49</IssueTime>
+    <InvoiceTypeCode name="0200000">383</InvoiceTypeCode>
+    <Note>199.00</Note>
+    <DocumentCurrencyCode>SAR</DocumentCurrencyCode>
+    <TaxCurrencyCode>SAR</TaxCurrencyCode>
+	<ns3:BillingReference>
+        <ns3:InvoiceDocumentReference>
+            <ID>123</ID>
+        </ns3:InvoiceDocumentReference>
+    </ns3:BillingReference>
+    <ns3:AdditionalDocumentReference>
+        <ID>ICV</ID>
+        <UUID>2</UUID>
+    </ns3:AdditionalDocumentReference>
+    <ns3:AdditionalDocumentReference>
+        <ID>PIH</ID>
+        <ns3:Attachment>
+            <EmbeddedDocumentBinaryObject mimeCode="text/plain">NWZlY2ViNjZmZmM4NmYzOGQ5NTI3ODZjNmQ2OTZjNzljMmRiYzIzOWRkNGU5MWI0NjcyOWQ3M2EyN2ZiNTdlOQ==</EmbeddedDocumentBinaryObject>
+        </ns3:Attachment>
+    </ns3:AdditionalDocumentReference>
+    <ns3:AccountingSupplierParty>
+       <ns3:Party>
+            <ns3:PartyIdentification>
+                <ID schemeID="CRN">3002953571</ID>
+            </ns3:PartyIdentification>
+            <ns3:PostalAddress>
+                <StreetName>Al Furqan</StreetName>
+                <BuildingNumber>6833</BuildingNumber>
+                <PlotIdentification>4230</PlotIdentification>
+                <CitySubdivisionName>Makkah Al Mukarramah</CitySubdivisionName>
+                <CityName>Makkah</CityName>
+                <PostalZone>24234</PostalZone>
+                <CountrySubentity>KSA</CountrySubentity>
+                <ns3:Country>
+                    <IdentificationCode>SA</IdentificationCode>
+                </ns3:Country>
+            </ns3:PostalAddress>
+            <ns3:PartyTaxScheme>
+                <CompanyID>300295357110003</CompanyID>
+                <ns3:TaxScheme>
+                    <ID>VAT</ID>
+                </ns3:TaxScheme>
+            </ns3:PartyTaxScheme>
+            <ns3:PartyLegalEntity>
+                <RegistrationName>شركة محلات عبدالصمد القرشى للعود و العنبر والعطور</RegistrationName>
+            </ns3:PartyLegalEntity>
+        </ns3:Party>
+    </ns3:AccountingSupplierParty>
+    <ns3:AccountingCustomerParty>
+        <ns3:Party>
+            <ns3:PostalAddress/>
+        </ns3:Party>
+    </ns3:AccountingCustomerParty>
+    <ns3:Delivery>
+        <ActualDeliveryDate>2024-09-17</ActualDeliveryDate>
+    </ns3:Delivery>
+    <ns3:PaymentMeans>
+        <PaymentMeansCode>10</PaymentMeansCode>
+		<InstructionNote>reason xyz</InstructionNote>
+    </ns3:PaymentMeans>
+    <ns3:TaxTotal>
+        <TaxAmount currencyID="SAR">25.96</TaxAmount>
+        <ns3:TaxSubtotal>
+            <TaxableAmount currencyID="SAR">173.04</TaxableAmount>
+            <TaxAmount currencyID="SAR">25.96</TaxAmount>
+            <ns3:TaxCategory>
+                <ID schemeID="UN/ECE 5305" schemeAgencyID="6">S</ID>
+                <Percent>15</Percent>
+                <ns3:TaxScheme>
+                    <ID schemeID="UN/ECE 5153" schemeAgencyID="6">VAT</ID>
+                </ns3:TaxScheme>
+            </ns3:TaxCategory>
+        </ns3:TaxSubtotal>
+    </ns3:TaxTotal>
+    <ns3:TaxTotal>
+        <TaxAmount currencyID="SAR">25.96</TaxAmount>
+    </ns3:TaxTotal>
+    <ns3:LegalMonetaryTotal>
+        <LineExtensionAmount currencyID="SAR">173.04</LineExtensionAmount>
+        <TaxExclusiveAmount currencyID="SAR">173.04</TaxExclusiveAmount>
+        <TaxInclusiveAmount currencyID="SAR">199.00</TaxInclusiveAmount>
+        <AllowanceTotalAmount currencyID="SAR">0.00</AllowanceTotalAmount>
+        <PrepaidAmount currencyID="SAR">0.00</PrepaidAmount>
+        <PayableAmount currencyID="SAR">199.00</PayableAmount>
+    </ns3:LegalMonetaryTotal>
+    <ns3:InvoiceLine>
+        <ID>1</ID>
+        <Note>199.00</Note>
+        <Note>0.00</Note>
+        <InvoicedQuantity unitCode="PCE">1</InvoicedQuantity>
+        <LineExtensionAmount currencyID="SAR">173.04</LineExtensionAmount>
+        <ns3:TaxTotal>
+            <TaxAmount currencyID="SAR">25.96</TaxAmount>
+            <RoundingAmount currencyID="SAR">199.00</RoundingAmount>
+        </ns3:TaxTotal>
+        <ns3:Item>
+            <Name>SHT FTD T/PK COT - BLEU | شراشف</Name>
+            <ns3:ClassifiedTaxCategory>
+                <ID>S</ID>
+                <Percent>15</Percent>
+                <ns3:TaxScheme>
+                    <ID schemeID="" schemeAgencyID="">VAT</ID>
+                </ns3:TaxScheme>
+            </ns3:ClassifiedTaxCategory>
+        </ns3:Item>
+        <ns3:Price>
+			<!--Unit Price without QTY-->
+            <PriceAmount currencyID="SAR">173.04</PriceAmount>
+        </ns3:Price>
+    </ns3:InvoiceLine>
+</ns8:Invoice>

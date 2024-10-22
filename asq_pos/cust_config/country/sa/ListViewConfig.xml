@@ -1,5 +1,130 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ListView xmlns="http://micros.com/xstore/config/listview">
+ <Header name="SALE">
+    <Row>
+      <Column start="0" width="43">
+        <CellDataHandler>transactionNumberCellHandler</CellDataHandler>
+        <Parameter name="TranslationKey" value="_retailtransactionitemstransactionnumber" />
+      </Column>
+      <Column start="35" width="12" translatable="_retailtransactionitemsunitprice" alignment="RIGHT" />
+      <Column start="66" width="12" translatable="_retailtransactionitemsqty" alignment="CENTER" />
+      <Column start="78" width="18" translatable="_retailtransactionitemsextendedprice" alignment="RIGHT" />
+      <Column start="48" width="12" alignment="CENTER"><CellDataHandler>asqStockOnHandHeader</CellDataHandler></Column>
+    </Row>
+  </Header>
+  <Element name="SALE_LINE_ITEM" iconFinder="saleItemIconKeyFinder" >
+    <HiddenButton ref="TOUCH::SALE.VOID_LINE">
+      <ResponsivenessRule class="dtv.pos.framework.touch.rules.PopupNotShowingResponsivenessRule" />
+      <ResponsivenessRule class="dtv.pos.framework.touch.rules.ValidateCurrentPromptResponsivenessRule" />
+    </HiddenButton>
+    <Renderer>contextSensitiveListViewElement</Renderer>
+    <Row>
+      <Column start="0" width="35" method="getItemDescription" wrapText="true" />
+      <Column start="35" width="12" alignment="RIGHT">
+        <CellDataHandler>unitPriceCellDataHandler</CellDataHandler>
+        <Touch ref="TOUCH::SALE.CHANGE_LINE_PRICE" >
+          <ResponsivenessRule class="dtv.pos.framework.touch.rules.PopupNotShowingResponsivenessRule" />
+          <ResponsivenessRule class="dtv.pos.framework.touch.rules.HiddenButtonNotShowingResponsivenessRule" />
+        </Touch>
+      </Column>
+      <Column start="61" width="5" >
+        <CellDataHandler>salePriceCellDataHandler</CellDataHandler>
+        <Parameter name="PROMO_PRICE" value="_imageListPriceMarkedDown" />
+        <Parameter name="RAINCHECK_PRICE" value="_imageListRainCheck" />
+        <Parameter name="AIRPORT_PRICE" value="_imageListAirportPrice" />
+        <Parameter name="CLEARANCE_PRICE" value="_imageListPriceClearance" />
+      </Column>
+        <Column start="48" width="12" alignment="CENTER">
+        <CellDataHandler>asqStockOnHand</CellDataHandler>
+      </Column>
+      <Column start="66" width="12" alignment="CENTER">
+        <CellDataHandler>itemQuantityCellDataHandler</CellDataHandler>
+        <Touch ref="TOUCH::SALE.CHANGE_LINE_QUANTITY" >
+          <ResponsivenessRule class="dtv.pos.framework.touch.rules.PopupNotShowingResponsivenessRule" />
+          <ResponsivenessRule class="dtv.pos.framework.touch.rules.HiddenButtonNotShowingResponsivenessRule" />
+        </Touch>
+      </Column>
+      <Column start="78" width="18" alignment="RIGHT">
+        <CellDataHandler>extendedPriceCellDataHandler</CellDataHandler>
+      </Column>
+      <Column start="96" width="4" alignment="RIGHT">
+        <CellDataHandler>taxCellDataHandler</CellDataHandler>
+      </Column>
+    </Row>
+    <Row>
+      <Column start="0" width="20" method="getCompositeSaleReturnLineItemTypeCode">
+        <Touch ref="TOUCH::DISPLAY_SELECTED_ITEM" >
+          <ResponsivenessRule class="dtv.pos.framework.touch.rules.PopupNotShowingResponsivenessRule" />
+          <ResponsivenessRule class="dtv.pos.framework.touch.rules.HiddenButtonNotShowingResponsivenessRule" />
+        </Touch>
+      </Column>
+     
+      <Column start="20" width="15" method="getItemId">
+        <Touch ref="TOUCH::DISPLAY_SELECTED_ITEM" >
+          <ResponsivenessRule class="dtv.pos.framework.touch.rules.PopupNotShowingResponsivenessRule" />
+          <ResponsivenessRule class="dtv.pos.framework.touch.rules.HiddenButtonNotShowingResponsivenessRule" />
+        </Touch>
+      </Column>
+      <Column start="35" width="43" formatter="VoucherSerialNumber">
+        <CellDataHandler>serialNumberCellDataHandler</CellDataHandler>
+      </Column>
+      <Column start="78" width="7">
+        <CellDataHandler>manualWeightEntryCellDataHandler</CellDataHandler>
+      </Column>
+      <Column start="85" width="5">
+        <CellDataHandler>itemSourceCellDataHandler</CellDataHandler>
+        <Parameter name="attachedItem" value="_imageAttachedItem" />
+        <Parameter name="wishListItem" value="_imageWishListItem" />
+        <Parameter name="digitalCartItem" value="_imageDigitalCartItem" />
+      </Column>
+      <Column start="90" width="5" icon="_imageListGift">
+        <CellDataHandler>giftReceiptCellDataHandler</CellDataHandler>
+      </Column>
+      <Column start="95" width="5">
+        <CellDataHandler>warrantyDeclinedCellDataHandler</CellDataHandler>
+        <Parameter name="WARRANTY" value="_imageListWarrantyDeclined" />
+      </Column>
+    </Row>
+    <Row>
+      <Column start="20" width="80">
+        <CellDataHandler>proratedRefundCellDataHandler</CellDataHandler>
+      </Column>
+    </Row>
+    <Row>
+      <Column start="30" width="70" wrapText="true">
+        <CellDataHandler>kitComponentsCellDataHandler</CellDataHandler>
+      </Column>
+    </Row>
+    <Row>
+      <Column start="30" width="70" method="getInventoryDocumentLineItem.getDocumentId" />
+    </Row>
+    <Row>
+      <Column start="30" width="70">
+        <CellDataHandler>giftRegistryIdCellDataHandler</CellDataHandler>
+        <Parameter name="ItemPropertyKey" value="GIFT_REGISTRY_NAME" />
+        <Parameter name="LabelTranslationKey" value="_giftRegistryLineItemLabel" />
+      </Column>
+    </Row>
+    <Row>
+      <Column start="30" width="20">
+        <CellDataHandler>itemDimensionCellDataHandler</CellDataHandler>
+        <Parameter name="DimensionIndex" value="1" />
+      </Column>
+      <Column start="52" width="20">
+        <CellDataHandler>itemDimensionCellDataHandler</CellDataHandler>
+        <Parameter name="DimensionIndex" value="2" />
+      </Column>
+      <Column start="74" width="20">
+        <CellDataHandler>itemDimensionCellDataHandler</CellDataHandler>
+        <Parameter name="DimensionIndex" value="3" />
+      </Column>
+    </Row>
+    <Row>
+      <Column start="0" width="100">
+        <CellDataHandler>mrpCellDataHandler</CellDataHandler>
+      </Column>
+    </Row>
+  </Element>
 
   <RuleSet name="ASQ_NEQATY_REDEEM_OPTIONS_LIST">
  

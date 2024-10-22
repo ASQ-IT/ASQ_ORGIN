@@ -131,4 +131,25 @@ public class AsqNeqatyHelper {
 		LOG.info("NEQATY API Generated Transaction Reference:" + transactionReference);
 		return transactionReference;
 	}
+
+		/**
+	 * This method generates globalID for STC API
+	 * 
+	 * @param
+	 * @return generated globalID for STC API request
+	 */
+
+	public String generateGlobalId() {
+		String globalId = System.getProperty("asq.stc.branchid");
+		Random rand = new Random();
+		String finalpart = "";
+		for (int i = 0; i < 3; i++) {
+			String randomNumber = String.format("%04d%n", rand.nextInt(9999));
+			globalId = globalId + "-" + randomNumber.trim();
+			finalpart = finalpart + randomNumber.trim();
+		}
+		globalId = globalId + "-" + finalpart;
+		LOG.info("STC API Generated Global ID:" + globalId);
+		return globalId;
+	}
 }

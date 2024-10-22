@@ -138,7 +138,28 @@
 		<Action ref="YES" />
 		<Action ref="NO" />
 	</Prompt>
+	<Prompt name="ASQ_TAMARA_PAYMENT_SUCCESSFULL" type="Notify" title="_asqTamaraPaymentSuccessfullPromptTitle" message="_asqTamaraPaymentSuccessfullMessage">
+		<Action chainKey="ASQ_TENDER_TAMARA" text="_ok" keyStroke="Enter" />
+	</Prompt>
 
+	<!-- ASQ TAMARA Integration Prompts Ends -->
+
+	<!-- ASQ TABBY Integration Prompts Starts -->
+	<Prompt name="ASQ_TABBY_PAYMENT_CREATED" type="Notify" title="_asqTabbyPaymentCreatedPromptTitle" message="_asqTabbyPaymentCreatedMessage">
+		<Action ref="CANCEL_BACK" />
+	</Prompt>
+	<Prompt name="ASQ_TABBY_PAYMENT_EXPIRED" type="Notify" title="_asqTabbyPaymentExpiredPromptTitle" message="_asqTabbyPaymentExpiredMessage">
+		<Action ref="CANCEL_BACK" />
+	</Prompt>
+	<Prompt name="ASQ_TABBY_PAYMENT_REJECTED" type="Notify" title="_asqTabbyPaymentRejectedPromptTitle" message="_asqTabbyPaymentRejectedMessage">
+		<Action ref="CANCEL_BACK" />
+	</Prompt>
+	<Prompt name="ASQ_TABBY_PAYMENT_SUCCESSFULL" type="Notify" title="_asqTabbyPaymentSuccessfullPromptTitle" message="_asqTabbyPaymentSuccessfullMessage">
+		<Action chainKey="ASQ_TENDER_TABBY" text="_ok" keyStroke="Enter" />
+	</Prompt>
+
+
+	<!-- ASQ TABBY Integration Prompts Ends -->
 	<!-- ASQ TOLA Work Starts -->
     <Prompt name="ASQ_TOLA_QTY_SOH_ERROR" type="NotifyCancel" title="_weight" message="_tolaItemQtyValidationError">
 	    <IconGroup icon="_imagePromptItemWeight" />
@@ -157,4 +178,102 @@
     <Action ref="YES_ENTER" />
     <Action ref="CANCEL_BACK" />
   </Prompt>	
+	<!-- ASQ Neqaty Integration - starts-->
+	<Prompt name="ASQ_NEQATY_TECHNICAL_ERROR" type="Notify" title="_asqNeqErrorTitle" message="_asqpromptmsgTechnicalError">
+		<Action ref="CANCEL_BACK" />
+	</Prompt>
+	<Prompt name="ASQ_NEQATY_TECHNICAL_ERROR" type="Notify" title="_asqNeqatyTechnicalErrorTitle" message="_asqNeqatyTechnicalError">
+		<Action ref="CANCEL_BACK" />
+	</Prompt>
+	<Prompt name="ASQ_NEQATY_REDEEM_SUCCESS" type="Notify" title="_asqNeqatySuccessTitle" message="_asqNeqatySuccessText">
+		<Action ref="CANCEL_BACK" />
+	</Prompt>
+	<Prompt name="ASQ_NEQATY_STORNO_INVALID_AMOUNT" type="Notify" title="_asqNeqatySuccessTitle" message="_asqNeqatyStornoInvalidAmount">
+		<Action ref="CANCEL_BACK" />
+	</Prompt>
+	<Prompt name="ASQ_NEQATY_DUPLICATE_REQ" type="Notify" title="_asqNeqatySuccessTitle" message="_asqNeqatyDuplicateReq">
+		<Action ref="CANCEL_BACK" />
+	</Prompt>
+	<Prompt name="ASQ_NEQATY_INVALID_MSISDN" type="Notify" title="_asqNeqatySuccessTitle" message="_asqNeqatyInvalidMsisdn">
+		<Action ref="CANCEL_BACK" />
+	</Prompt>
+	<Prompt name="ASQ_NEQATY_APP_BLOCKED" type="Notify" title="_asqNeqatySuccessTitle" message="_asqNeqatyAppBlocked">
+		<Action ref="CANCEL_BACK" />
+	</Prompt>
+	<Prompt name="ASQ_NEQATY_BRANCH_LIMIT" type="Notify" title="_asqNeqatySuccessTitle" message="_asqNeqatyBranchLimit">
+		<Action ref="CANCEL_BACK" />
+	</Prompt>
+	<Prompt name="ASQ_NEQATY_CID_MSISDN_MISMATCH" type="Notify" title="_asqNeqatySuccessTitle" message="_asqNeqatyCidMsisdnMismatch">
+		<Action ref="CANCEL_BACK" />
+	</Prompt>
+	<Prompt name="ASQ_NEQATY_CID_PIN_MISMATCH" type="Notify" title="_asqNeqatySuccessTitle" message="_asqNeqatyCidPinMismatch">
+		<Action ref="CANCEL_BACK" />
+	</Prompt>
+	<Prompt name="ASQ_NEQATY_FRAUD_DOUBLE_MSISDN" type="Notify" title="_asqNeqatySuccessTitle" message="_asqNeqatyFraudDoubleMsisdn">
+		<Action ref="CANCEL_BACK" />
+	</Prompt>
+	`
+	<Prompt name="ASQ_NEQATY_INQ_NOT_AUTH" type="Notify" title="_asqNeqatySuccessTitle" message="_asqNeqatyInqNotAuth">
+		<Action ref="CANCEL_BACK" />
+	</Prompt>
+	<Prompt name="ASQ_NEQATY_INQ_CANCELED" type="Notify" title="_asqNeqatySuccessTitle" message="_asqNeqatyInqCanceled">
+		<Action ref="CANCEL_BACK" />
+	</Prompt>
+	<Prompt name="ASQ_NEQATY_REDEEM_NOT_TRANSFERED" type="Notify" title="_asqNeqatySuccessTitle" message="_asqNeqatyRedeemNotTransfered">
+		<Action ref="CANCEL_BACK" />
+	</Prompt>
+	<Prompt name="ASQ_NEQATY_CUSTOMER_DOES_NOT_EXIST" type="Notify" title="_asqNeqatySuccessTitle" message="_asqNeqatyCustomerDoesNotExist">
+		<Action ref="CANCEL_BACK" />
+	</Prompt>
+	<Prompt name="ASQ_NEQATY_COLLECT_NOT_TRANSFERED" type="Notify" title="_asqNeqatySuccessTitle" message="_asqNeqatyCollectNotTransfered">
+		<Action ref="CANCEL_BACK" />
+	</Prompt>
+	<Prompt name="ASQ_NEQATY_COLLECT_REVERSE_AMOUNT" type="Notify" title="_asqNeqatySuccessTitle" message="_asqNeqatyCollectReverseAmount">
+		<Action ref="CANCEL_BACK" />
+	</Prompt>
+	<Prompt name="ASQ_NEQATY_LAST_REDEEM_STIL_PENDING" type="Notify" title="_asqNeqatySuccessTitle" message="_asqNeqatyLastRedeemStilPending">
+		<Action ref="CANCEL_BACK" />
+	</Prompt>
+	<Prompt name="ASQ_NEQATY_NEQATY_INVALID_MSISDN" type="Notify" title="_asqNeqatySuccessTitle" message="_asqNeqatyNeqatyInvalidMsisdn">
+		<Action ref="CANCEL_BACK" />
+	</Prompt>
+	<Prompt name="ASQ_NEQATY_NEQATY_MSISDN_DOESNT_EXIST" type="Notify" title="_asqNeqatySuccessTitle" message="_asqNeqatyNeqatyMsisdnDoesntExist">
+		<Action ref="CANCEL_BACK" />
+	</Prompt>
+	<Prompt name="ASQ_NEQATY_NEQATY_MSISDN_NOT_DEFINED" type="Notify" title="_asqNeqatySuccessTitle" message="_asqNeqatyNeqatyMsisdnNotDefined">
+		<Action ref="CANCEL_BACK" />
+	</Prompt>
+	<Prompt name="ASQ_NEQATY_NEQATY_CUST_PKG_NOT_ELIGIBLE" type="Notify" title="_asqNeqatySuccessTitle" message="_asqNeqatyNeqatyCustPkgNotEligible">
+		<Action ref="CANCEL_BACK" />
+	</Prompt>
+	<Prompt name="ASQ_NEQATY_NEQATY_ALLOWD_REDEMPTS_EXCEEDED" type="Notify" title="_asqNeqatySuccessTitle" message="_asqNeqatyNeqatyAllowdRedemptsExceeded">
+		<Action ref="CANCEL_BACK" />
+	</Prompt>
+	<Prompt name="ASQ_NEQATY_NEQATY_NOT_ENOUGH_POINTS" type="Notify" title="_asqNeqatySuccessTitle" message="_asqNeqatyNeqatyNotEnoughPoints">
+		<Action ref="CANCEL_BACK" />
+	</Prompt>
+	<Prompt name="ASQ_NEQATY_NEQATY_ITEM_NOT_IN_CUST_TIER" type="Notify" title="_asqNeqatySuccessTitle" message="_asqNeqatyNeqatyItemNotInCustTier">
+		<Action ref="CANCEL_BACK" />
+	</Prompt>
+	<Prompt name="ASQ_NEQATY_NEQATY_REF_TRANS_TOO_OLD" type="Notify" title="_asqNeqatySuccessTitle" message="_asqNeqatyNeqatyRefTransTooOld">
+		<Action ref="CANCEL_BACK" />
+	</Prompt>
+	<Prompt name="ASQ_NEQATY_MSISDN_NOT_PREPAID" type="Notify" title="_asqNeqatySuccessTitle" message="_asqNeqatyMsisdnNotPrepaid">
+		<Action ref="CANCEL_BACK" />
+	</Prompt>
+	<Prompt name="ASQ_NEQATY_TRANS_DATA_NOT_FOUND" type="Notify" title="_asqNeqatySuccessTitle" message="_asqNeqatyTransDataNotFound">
+		<Action ref="CANCEL_BACK" />
+	</Prompt>
+	<Prompt name="ASQ_NEQATY_INVALID_OTP" type="Notify" title="_asqNeqatySuccessTitle" message="_asqNeqatyinvalidOtp">
+		<Action ref="CANCEL_BACK" />
+	</Prompt>
+	<Prompt name="ASQ_NEQATY_NO_POINTS" type="Notify" title="_asqNeqatySuccessTitle" message="_asqNeqatyNoPoints" />
+
+
+	<Prompt name="ASQ_PLANET_TECHNICAL_ERROR" type="Notify" title="_asqPlanetErrorTitle" message="_asqpromptmsgTechnicalError">
+		<Action ref="CANCEL_BACK" />
+	</Prompt>
+	<Prompt name="ASQ_PLANET_REGISTER_ERROR" type="Notify" title="_asqPlanetErrorTitle" message="_asqpromptmsgDataError">
+		<Action ref="CANCEL_BACK" />
+	</Prompt>
 </PromptSet>

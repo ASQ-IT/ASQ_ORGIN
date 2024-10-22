@@ -30,22 +30,20 @@ public abstract class AsqNeqatyAbstractMobileNumberOp extends AbstractSearchForm
 
 	@Override
 	protected String getNoResultsPromptKey() {
-		// TODO Auto-generated method stub
-		return null;
+		return "ASQ_NEQATY_NO_POINTS";
 	}
 
 	@Override
 	protected IQueryResultList<IAvailableLocResult> runQueryWrapResults(Collection<IKeyedValue<String, ?>> arg0) {
-		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
 	protected void setSelectedResult(IItem arg0) {
-		// TODO Auto-generated method stub
 		
 	}
 	
+	@Override
 	protected IOpResponse handleListSelection(IXstEvent argEvent) {
 	      return this.HELPER.completeResponse();
 		    }

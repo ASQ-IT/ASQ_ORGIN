@@ -26,5 +26,4 @@ public interface IAsqNeqatyServiceRequest extends IServiceRequest {
 	public void setMethod(NeqatyMethod method);
 	public String getOtp();
 	public void setOtp(String otp);
-
 }

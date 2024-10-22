@@ -3,26 +3,20 @@
  */
 package asq.pos.loyalty.neqaty.tender.op;
 
-import java.io.StringReader;
-import java.util.ArrayList;
-import java.util.Iterator;
+import java.math.BigDecimal;
 import java.util.List;
 
 import javax.inject.Inject;
 import javax.inject.Provider;
-import javax.xml.bind.JAXBContext;
-import javax.xml.bind.Unmarshaller;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import com.google.gwt.http.client.Response;
-
-import asq.pos.common.AsqValueKeys;
 import asq.pos.loyalty.neqaty.gen.NeqatyWSAPIRedeemOption;
 import asq.pos.loyalty.neqaty.tender.service.AsqNeqatyHelper;
 import asq.pos.loyalty.neqaty.tender.service.AsqNeqatyServiceRequest;
 import asq.pos.loyalty.neqaty.tender.service.AsqNeqatyServiceResponse;
+import asq.pos.loyalty.neqaty.tender.service.AsqValueKeys;
 import asq.pos.loyalty.neqaty.tender.service.IAsqNeqatyService;
 import asq.pos.loyalty.neqaty.tender.service.IAsqNeqatyServiceRequest;
 import asq.pos.loyalty.neqaty.tender.service.NeqatyMethod;
@@ -32,14 +26,15 @@ import dtv.i18n.IFormattable;
 import dtv.pos.common.OpChainKey;
 import dtv.pos.framework.action.type.XstDataActionKey;
 import dtv.pos.iframework.action.IXstDataAction;
-import dtv.pos.iframework.event.IXstEvent;
 import dtv.pos.iframework.event.IXstEventObserver;
 import dtv.pos.iframework.event.IXstEventType;
 import dtv.pos.iframework.op.IOpResponse;
 import dtv.pos.iframework.op.IReversibleOp;
+import dtv.pos.iframework.validation.IValidationResult;
+import dtv.pos.iframework.validation.SimpleValidationResult;
 import dtv.xst.dao.crm.IParty;
 import dtv.xst.dao.trl.IRetailTransaction;
-import oracle.retail.xstore.inv.lookup.IAvailableLocResult;
+import dtv.xst.dao.trn.IPosTransaction;
 
 /**
  * @author RA20221457
@@ -63,14 +58,16 @@ public class AsqNeqatyMobileNumberOp extends AsqNeqatyAbstractMobileNumberOp
 	 * related to Mobile number field
 	 */
 
+	@Override
 	protected String getFormKey() {
 		return "ASQ_CAP_CUST_MOBILE_NO";
 	}
 
+	@Override
 	protected IOpResponse handleInitialState() {
-		AsqNeqatyMobileNumberEditModel editModel = (AsqNeqatyMobileNumberEditModel) getModel();
+		AsqNeqatyMobileNumberEditModel editModel = getModel();
 		try {
-			IRetailTransaction trans = (IRetailTransaction) this._transactionScope.getTransaction();
+			IRetailTransaction trans = (IRetailTransaction) _transactionScope.getTransaction();
 			if (trans != null && trans.getCustomerParty() != null)// Transactions Typecode condition to be included
 			{
 				LOG.info("Neqaty API Mobile number form execution Customer is Linked to Transaction:");
@@ -78,8 +75,6 @@ public class AsqNeqatyMobileNumberOp extends AsqNeqatyAbstractMobileNumberOp
 				editModel.setCustMobileNumber(custMobileNumber);
 				setScopedValue(AsqValueKeys.ASQ_NEQATY_MOBILE, editModel.getCustMobileNumber());
 				return super.handleInitialState();
-			} else {
-
 			}
 		} catch (Exception ex) {
 			LOG.info(
@@ -88,6 +83,7 @@ public class AsqNeqatyMobileNumberOp extends AsqNeqatyAbstractMobileNumberOp
 		return super.handleInitialState();
 	}
 
+	@Override
 	protected IOpResponse handleDataAction(IXstDataAction argAction) {
 
 		try {
@@ -99,7 +95,7 @@ public class AsqNeqatyMobileNumberOp extends AsqNeqatyAbstractMobileNumberOp
 				if (custMobileNumber != null && !custMobileNumber.equals("")) {
 					LOG.debug("Process of Neqaty tender starts here");
 					if (null != trans.getCustomerParty()
-							&& !(this.getScopedValue(AsqValueKeys.ASQ_NEQATY_MOBILE).equals(custMobileNumber))) {
+							&& !(getScopedValue(AsqValueKeys.ASQ_NEQATY_MOBILE).equals(custMobileNumber))) {
 						IParty info = trans.getCustomerParty();
 						info.setTelephone1(custMobileNumber);
 						LOG.debug(
@@ -110,16 +106,23 @@ public class AsqNeqatyMobileNumberOp extends AsqNeqatyAbstractMobileNumberOp
 					return super.handleDataAction(argAction);
 				}
 				this.setScopedValue(AsqValueKeys.ASQ_MOBILE_NUMBER, custMobileNumber);
-				return Inquire();
+				return inquire();
 
 			}
 
-			
-			  else if(argAction.getData()!=null){ // in this line we get the selected rowfrom screen 
-				  //Here Try calling the service....
-				  this.HELPER.getCompleteStackChainResponse(OpChainKey.valueOf("ASQ_NEQATY_REDEEM_OPTION"));
-				  }
-			 
+			else if (argAction.getData() != null) { // in this line we get the selected rowfrom screen
+				IPosTransaction trans = _transactionScope.getTransaction();
+				BigDecimal trxSubTotal = trans.getSubtotal();
+				BigDecimal trxAmountDueTotal=trans.getAmountDue();
+				BigDecimal redemptionValueBigDec = BigDecimal
+						.valueOf(((NeqatyWSAPIRedeemOption) argAction.getData()).getRedeemAmount());
+				if (trxSubTotal.compareTo(redemptionValueBigDec) < 0 || trxAmountDueTotal.compareTo(redemptionValueBigDec) < 0) {
+					return HELPER.getPromptResponse("ASQ_NEQATY_NO_POINTS");
+				}
+				setScopedValue(AsqValueKeys.ASQ_NEQATY_REDEEM_POINTS, (NeqatyWSAPIRedeemOption) argAction.getData());
+				return redeemPoints(custMobileNumber, (NeqatyWSAPIRedeemOption) argAction.getData());
+			}
+
 		} catch (Exception exception) {
 			LOG.error("Exception from Neqaty form in Handling Data Action :" + exception);
 			return technicalErrorScreen(exception.getLocalizedMessage());
@@ -127,7 +130,7 @@ public class AsqNeqatyMobileNumberOp extends AsqNeqatyAbstractMobileNumberOp
 		return this.HELPER.completeResponse();
 	}
 
-	private IOpResponse Inquire() {
+	private IOpResponse inquire() {
 		LOG.debug("Neqaty Inquire OTP Operation service call starts here: ");
 		IAsqNeqatyServiceRequest request = new AsqNeqatyServiceRequest();
 		request.setAuthenticationKey(System.getProperty("asq.neqaty.auth.key"));
@@ -138,10 +141,10 @@ public class AsqNeqatyMobileNumberOp extends AsqNeqatyAbstractMobileNumberOp
 		AsqNeqatyServiceResponse response = (AsqNeqatyServiceResponse) asqNeqatyService.get()
 				.callNeqatyService(request);
 		LOG.debug("Neqaty Inquire OTP Operation service response here: ");
-		return validateResponse(response);
+		return validateResponseAndDsipalyRedeemPointsToCustomer(response);
 	}
 
-	private IOpResponse validateResponse(AsqNeqatyServiceResponse response) {
+	private IOpResponse validateResponseAndDsipalyRedeemPointsToCustomer(AsqNeqatyServiceResponse response) {
 		if (null != response && 0 != response.getResultCode()) {
 			return handleServiceError(response);
 		} else if (null == response) {
@@ -149,8 +152,7 @@ public class AsqNeqatyMobileNumberOp extends AsqNeqatyAbstractMobileNumberOp
 		}
 		// if inquire call is success then taking redeem option and displaying in the
 		// table.
-		// this.setScopedValue(AsqValueKeys.ASQ_NEQATY_TRANS_TOKEN,
-		// response.getToken());
+		setScopedValue(AsqValueKeys.ASQ_NEQATY_TRANS_TOKEN, response.getToken());
 		List<NeqatyWSAPIRedeemOption> redeemOptionsDisplay = runQueryWrapResults(
 				response.getOptionsData().getRedeemOptions());
 		return getSearchResultsPrompt(redeemOptionsDisplay, null);
@@ -160,6 +162,32 @@ public class AsqNeqatyMobileNumberOp extends AsqNeqatyAbstractMobileNumberOp
 		String promptKey = getSearchResultsPromptKey();
 		return this.HELPER.getListPromptResponse(promptKey, resource.toArray(), null,
 				displaySearchResultsAsFullScreen(), false, resultsHaveImplicitAccept(), null);
+	}
+
+	private IOpResponse redeemPoints(String custMobileNmbr, NeqatyWSAPIRedeemOption neqatyRedeemOption) {
+		IAsqNeqatyServiceRequest request = new AsqNeqatyServiceRequest();
+		request.setAuthenticationKey(System.getProperty("asq.neqaty.auth.key"));
+		request.setOperationType("Redeem-OTP");
+		request.setMsisdn(custMobileNmbr);
+		request.setToken(this.getScopedValue(AsqValueKeys.ASQ_NEQATY_TRANS_TOKEN));
+		request.setAmount(neqatyRedeemOption.getRedeemAmount());
+		request.setRedeemCode(neqatyRedeemOption.getRedeemCode());// redeem code from the selected option
+		request.setRedeemPoints(neqatyRedeemOption.getRedeemPoints());// redeem point from the selected option
+		request.setTid(0);
+		request.setMethod(NeqatyMethod.AUTHORIZE);
+		AsqNeqatyServiceResponse response = (AsqNeqatyServiceResponse) asqNeqatyService.get()
+				.callNeqatyService(request);
+		return validateResponse(response);
+	}
+
+	public IOpResponse validateResponse(AsqNeqatyServiceResponse response) {
+		if (null != response && 0 != response.getResultCode()) {
+			return handleServiceError(response);
+		} else if (null == response) {
+			return technicalErrorScreen("Service has null response");
+		}
+		setScopedValue(AsqValueKeys.ASQ_NEQATY_TRANS_REFERENCE, response.getTransactionReference());
+		return this.HELPER.getCompleteStackChainResponse(OpChainKey.valueOf("ASQ_NEQATY_OTP"));
 	}
 
 	public IOpResponse handleServiceError(AsqNeqatyServiceResponse asqServiceResponse) {
@@ -182,7 +210,7 @@ public class AsqNeqatyMobileNumberOp extends AsqNeqatyAbstractMobileNumberOp
 
 	@Override
 	public IXstEventType[] getObservedEvents() {
-		return null;
+		return new IXstEventType[0];
 	}
 
 	protected IQueryResultList<NeqatyWSAPIRedeemOption> runQueryWrapResults(
@@ -192,7 +220,7 @@ public class AsqNeqatyMobileNumberOp extends AsqNeqatyAbstractMobileNumberOp
 		try {
 			neqatyDisplayResults = QueryResultList.makeList(neqatyRedeemOptionsList, NeqatyWSAPIRedeemOption.class);
 		} catch (Exception ex) {
-			LOG.error("Exception while handling Neqaty response.", (Throwable) ex);
+			LOG.error("Exception while handling Neqaty response.", ex);
 		}
 		return neqatyDisplayResults;
 	}

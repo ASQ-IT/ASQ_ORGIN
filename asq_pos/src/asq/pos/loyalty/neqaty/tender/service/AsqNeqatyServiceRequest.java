@@ -86,5 +86,4 @@ public class AsqNeqatyServiceRequest extends ServiceRequest implements IAsqNeqat
 	public void setOtp(String otp) {
 		this.otp = otp;
 	}
-
 }

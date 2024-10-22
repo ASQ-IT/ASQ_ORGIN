@@ -10,6 +10,11 @@ import javax.inject.Inject;
 import javax.inject.Provider;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+
+import asq.pos.bnpl.tabby.tender.service.AsqBnplTabbyPaymentObj;
+import asq.pos.bnpl.tabby.tender.service.AsqSubmitBnplTabbyServiceRequest;
+import asq.pos.bnpl.tabby.tender.service.AsqSubmitBnplTabbyServiceResponse;
+import asq.pos.bnpl.tabby.tender.service.IAsqSubmitBnplTabbyServiceRequest;
 import asq.pos.bnpl.tamara.tender.service.AsqBnplTamaraAmountObj;
 import asq.pos.bnpl.tamara.tender.service.AsqBnplTamaraItemObj;
 import asq.pos.bnpl.tamara.tender.service.AsqSubmitBnplTamraServiceRequest;
@@ -38,9 +43,11 @@ import dtv.pos.framework.action.XstDefaultAction;
  * @author RA20221457
  *
  */
-public class AsqBnplTamaraVerifyPaymentOp extends Operation {
+public class AsqBnplTamaraRefundOp extends Operation {
 
-	private static final Logger LOG = LogManager.getLogger(AsqBnplTamaraVerifyPaymentOp.class);
+	private static final Logger LOG = LogManager.getLogger(AsqBnplTamaraRefundOp.class);
+	
+	private String tenderType;
 
 	@Inject
 	protected Provider<IAsqBnplTamaraServices> tamaraService;
@@ -48,40 +55,38 @@ public class AsqBnplTamaraVerifyPaymentOp extends Operation {
 	@Override
 	public IOpResponse handleOpExec(IXstEvent paramIXstEvent) {
 		IPosTransaction trans = (IPosTransaction) this._transactionScope.getTransaction();
-		if (paramIXstEvent instanceof XstDataAction && ((XstDataAction) paramIXstEvent).getActionName() != null
-				&& ((XstDataAction) paramIXstEvent).getActionName().toString().equals("Yes")) {
-			AsqSubmitBnplTamraServiceResponse response = requestPreparerForCancelSessionService(trans);// API cancel// user want to// void
-			return HELPER.getPromptResponse("ASQ_TAMARA_CANCEL_SESSION");
-		} else if (paramIXstEvent instanceof XstDataAction && ((XstDataAction) paramIXstEvent).getActionName() != null
-				&& ((XstDataAction) paramIXstEvent).getActionName().toString().equals("Yes")) {
-			AsqSubmitBnplTamraServiceResponse response = requestPreparerForRefundService(trans);
-			response.getMessage();
-			return this.HELPER.getCompleteStackChainResponse(OpChainKey.valueOf("VOID_REFUND_TENDER"));
-		} else if (paramIXstEvent instanceof XstDataAction && ((XstDataAction) paramIXstEvent).getActionName() != null
-				&& ((XstDataAction) paramIXstEvent).getActionName().toString().equals("No")) {
-			return HELPER.completeResponse();
-		} else {
-			List<ITenderLineItem> tenderLineItemList = trans.getLineItems(ITenderLineItem.class);
-			String tenderId = tenderLineItemList.get(0).getTenderId();
-			if (tenderId.equals("TAMARA")) { // need to check payment status false here //scope value
-				return HELPER.getPromptResponse("ASQ_TAMARA_CANCEL_SESSION");
-			} else if (tenderId.equals("TAMARA")) { // payment status true here
-				return HELPER.getPromptResponse("ASQ_TAMARA_REFUND_INITIATE");
-			}
-		}
-		return HELPER.completeResponse();
+		return tamaraVoidRefund(trans);
 	}
 
+	private IOpResponse tamaraVoidRefund(IPosTransaction orgTranx) {
+		IAsqSubmitBnplTamraServiceRequest asqSubmitBnplTamaraServiceRequest = new AsqSubmitBnplTamraServiceRequest();
+		AsqSubmitBnplTamraServiceResponse asqSubmitBnplTamaraServiceResponse;
+		AsqBnplTamaraAmountObj payment = new AsqBnplTamaraAmountObj();
+		
+		 Boolean paymentStatus = _transactionScope.getValue(AsqValueKeys.ASQ_TAMARA_PAYMENT_SUCCESS);
+		if (paymentStatus) {
+			LOG.debug("Tamara refund service call starts here: ");
+			AsqSubmitBnplTamraServiceResponse response = requestPreparerForRefundService(orgTranx);
+			LOG.debug("Tamara refund service Ends here: ");
+		} else {
+			LOG.debug("Tamara cancel session service Ends here: ");
+			AsqSubmitBnplTamraServiceResponse response = requestPreparerForCancelSessionService(orgTranx);
+			LOG.debug("Tamara cancel session service Ends here: ");
+		}
+		return HELPER.completeResponse();
+}
+	
 	private AsqSubmitBnplTamraServiceResponse requestPreparerForRefundService(IPosTransaction trans) {
 
 		AsqSubmitBnplTamraServiceResponse asqSubmitBnplTamraServiceResponse;
 		IAsqSubmitBnplTamraServiceRequest asqSubmitBnplTamraServiceRequest = new AsqSubmitBnplTamraServiceRequest();
-		String orderID = this._transactionScope.getValue(AsqValueKeys.ASQ_TAMARA_ORDERID);
+		asqSubmitBnplTamraServiceRequest.setOrder_id(this._transactionScope.getValue(AsqValueKeys.ASQ_TAMARA_ORDERID));
 		asqSubmitBnplTamraServiceRequest.setComment(AsqZatcaConstant.ASQ_TAMARA_TRANSACTION_COMMENT);
 		AsqBnplTamaraAmountObj asqBnplTamaraAmountObj = new AsqBnplTamaraAmountObj();
 		asqBnplTamaraAmountObj.setAmount(trans.getAmountTendered());
-		 asqBnplTamaraAmountObj.setCurrency("SAR");// need to correct this
-		//asqBnplTamaraAmountObj.setCurrency(trans.getRetailTransactionLineItems().get(0).getCurrencyId());
+		//asqBnplTamaraAmountObj.setCurrency("SAR");
+		asqSubmitBnplTamraServiceRequest.setTotal_amount(asqBnplTamaraAmountObj);
+		asqBnplTamaraAmountObj.setCurrency(trans.getRetailTransactionLineItems().get(0).getCurrencyId());
 		return asqSubmitBnplTamraServiceResponse = simplifiedRefunds(asqSubmitBnplTamraServiceRequest);
 	}
 
@@ -121,5 +126,20 @@ public class AsqBnplTamaraVerifyPaymentOp extends Operation {
 			ex.printStackTrace();
 		}
 		return response;
+	}
+	
+	@Override
+	public void setParameter(String argName, String argValue) {
+		if ("TenderType".equalsIgnoreCase(argName)) {
+			tenderType = argValue;
+		}
+		super.setParameter(argName, argValue);
+	}
+
+	@Override
+	public boolean isOperationApplicable() {
+		
+		ITenderLineItem tenderLine = getScopedValue(ValueKeys.CURRENT_TENDER_LINE);
+		return (!tenderLine.getVoid() && tenderLine.getTenderId().equalsIgnoreCase(tenderType));
 	}
 }
