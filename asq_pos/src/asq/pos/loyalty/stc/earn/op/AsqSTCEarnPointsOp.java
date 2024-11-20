@@ -79,8 +79,8 @@ public class AsqSTCEarnPointsOp extends Operation {
 			if (txn.getSubtotal().compareTo(valueForCalculation) == 1) {
 				Byte calcltdSTCPntsForEarnAPI = (txn.getSubtotal().divide(valueForCalculation)).byteValue();
 				LOG.info("STC Points calculated Earn Service API call Starts here : " + calcltdSTCPntsForEarnAPI);
-				if (getScopedValue(AsqValueKeys.ASQ_MOBILE_NUMBER) != null) {
-					custMobileNmbr = getScopedValue(AsqValueKeys.ASQ_MOBILE_NUMBER);
+				if (_transactionScope.getValue(AsqValueKeys.ASQ_MOBILE_NUMBER) != null) {
+					custMobileNmbr = _transactionScope.getValue(AsqValueKeys.ASQ_MOBILE_NUMBER);
 				}
 				AsqSTCLoyaltyServiceResponse response = earnPoints(calcltdSTCPntsForEarnAPI);
 				if(response.getDescription().equals(AsqZatcaConstant.STC_EARN_SUCCESS_CODE)) {
@@ -173,7 +173,7 @@ public class AsqSTCEarnPointsOp extends Operation {
 		IAsqSTCLoyaltyServiceRequest request = new AsqSTCLoyaltyServiceRequest();
 		LOG.info("STC request preparation for Earn API Starts here : ");
 		if (getScopedValue(AsqValueKeys.ASQ_MOBILE_NUMBER) != null) {
-			custMobileNmbr = getScopedValue(AsqValueKeys.ASQ_MOBILE_NUMBER);
+			custMobileNmbr = _transactionScope.getValue(AsqValueKeys.ASQ_MOBILE_NUMBER);
 		}
 		request.setMsisdn(Long.parseLong(custMobileNmbr.trim()));
 		request.setBranchId(System.getProperty("asq.stc.branchid"));

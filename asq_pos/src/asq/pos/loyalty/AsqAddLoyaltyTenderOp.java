@@ -33,11 +33,11 @@ public class AsqAddLoyaltyTenderOp extends Operation implements IReversibleOp {
 		tenderLine.setAmount(BigDecimal.valueOf(reedem.getRedeemAmount()));
 		}
 		else if(tenderLine.getTenderId().equalsIgnoreCase("STC") ) {
-			Double pymntAmnt = new Double(tran.getTotal().toString()); 
-			tenderLine.setAmount(BigDecimal.valueOf(pymntAmnt));
+			BigDecimal pymntAmnt =	_transactionScope.getValue(AsqValueKeys.ASQ_STC_PNT_RDMPTN);
+			tenderLine.setAmount(pymntAmnt);
 		}
 		else if(tenderLine.getTenderId().equalsIgnoreCase("TABBY") ) {
-			String paymentAmount = getScopedValue(AsqValueKeys.ASQ_TABBY_PMNT_AMNT);
+			String paymentAmount = _transactionScope.getValue(AsqValueKeys.ASQ_TABBY_PMNT_AMNT);
 			Double pymntAmnt = new Double(paymentAmount); 
 			tenderLine.setAmount(BigDecimal.valueOf(pymntAmnt));
 		}
@@ -45,6 +45,9 @@ public class AsqAddLoyaltyTenderOp extends Operation implements IReversibleOp {
 			Double pymntAmnt = new Double(tran.getTotal().toString()); 
 			tenderLine.setAmount(BigDecimal.valueOf(pymntAmnt));
 		}
+		else if(tenderLine.getTenderId().equalsIgnoreCase("MOKAFAT")) {
+			tenderLine.setAmount(getScopedValue(AsqValueKeys.ASQ_MOKAFAA_AMOUNT));
+			}
 		tenderLine.setEndDateTimestamp(DateUtils.getNewDate());
 		tran.addRetailTransactionLineItem(tenderLine);
 		return this.HELPER.completeResponse();

@@ -54,6 +54,8 @@ public class AsqSubmitZatcaCertServiceResponse implements IServiceResponse {
 	@JsonProperty("error")
 	private String error;
 
+	private String status;
+
 	public String getRequestID() {
 		return requestID;
 	}
@@ -164,5 +166,13 @@ public class AsqSubmitZatcaCertServiceResponse implements IServiceResponse {
 
 	public void setError(String error) {
 		this.error = error;
+	}
+
+	public String getStatus() {
+		return status;
+	}
+
+	public void setStatus(String status) {
+		this.status = status;
 	}
 }

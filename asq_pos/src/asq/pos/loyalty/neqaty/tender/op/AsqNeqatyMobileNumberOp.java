@@ -16,7 +16,7 @@ import asq.pos.loyalty.neqaty.gen.NeqatyWSAPIRedeemOption;
 import asq.pos.loyalty.neqaty.tender.service.AsqNeqatyHelper;
 import asq.pos.loyalty.neqaty.tender.service.AsqNeqatyServiceRequest;
 import asq.pos.loyalty.neqaty.tender.service.AsqNeqatyServiceResponse;
-import asq.pos.loyalty.neqaty.tender.service.AsqValueKeys;
+import asq.pos.common.AsqValueKeys;
 import asq.pos.loyalty.neqaty.tender.service.IAsqNeqatyService;
 import asq.pos.loyalty.neqaty.tender.service.IAsqNeqatyServiceRequest;
 import asq.pos.loyalty.neqaty.tender.service.NeqatyMethod;
@@ -30,8 +30,6 @@ import dtv.pos.iframework.event.IXstEventObserver;
 import dtv.pos.iframework.event.IXstEventType;
 import dtv.pos.iframework.op.IOpResponse;
 import dtv.pos.iframework.op.IReversibleOp;
-import dtv.pos.iframework.validation.IValidationResult;
-import dtv.pos.iframework.validation.SimpleValidationResult;
 import dtv.xst.dao.crm.IParty;
 import dtv.xst.dao.trl.IRetailTransaction;
 import dtv.xst.dao.trn.IPosTransaction;
@@ -94,8 +92,7 @@ public class AsqNeqatyMobileNumberOp extends AsqNeqatyAbstractMobileNumberOp
 				LOG.debug("Neqaty API Mobile number captured :" + custMobileNumber);
 				if (custMobileNumber != null && !custMobileNumber.equals("")) {
 					LOG.debug("Process of Neqaty tender starts here");
-					if (null != trans.getCustomerParty()
-							&& !(getScopedValue(AsqValueKeys.ASQ_NEQATY_MOBILE).equals(custMobileNumber))) {
+					if (null != trans.getCustomerParty()) {
 						IParty info = trans.getCustomerParty();
 						info.setTelephone1(custMobileNumber);
 						LOG.debug(
@@ -105,7 +102,7 @@ public class AsqNeqatyMobileNumberOp extends AsqNeqatyAbstractMobileNumberOp
 					LOG.debug("Neqaty Inquire OTP Operation customer mobile number field is null :");
 					return super.handleDataAction(argAction);
 				}
-				this.setScopedValue(AsqValueKeys.ASQ_MOBILE_NUMBER, custMobileNumber);
+				_transactionScope.setValue(AsqValueKeys.ASQ_NEQATY_MOBILE, custMobileNumber);
 				return inquire();
 
 			}
@@ -113,10 +110,11 @@ public class AsqNeqatyMobileNumberOp extends AsqNeqatyAbstractMobileNumberOp
 			else if (argAction.getData() != null) { // in this line we get the selected rowfrom screen
 				IPosTransaction trans = _transactionScope.getTransaction();
 				BigDecimal trxSubTotal = trans.getSubtotal();
-				BigDecimal trxAmountDueTotal=trans.getAmountDue();
+				BigDecimal trxAmountDueTotal = trans.getAmountDue();
 				BigDecimal redemptionValueBigDec = BigDecimal
 						.valueOf(((NeqatyWSAPIRedeemOption) argAction.getData()).getRedeemAmount());
-				if (trxSubTotal.compareTo(redemptionValueBigDec) < 0 || trxAmountDueTotal.compareTo(redemptionValueBigDec) < 0) {
+				if (trxSubTotal.compareTo(redemptionValueBigDec) < 0
+						|| trxAmountDueTotal.compareTo(redemptionValueBigDec) < 0) {
 					return HELPER.getPromptResponse("ASQ_NEQATY_NO_POINTS");
 				}
 				setScopedValue(AsqValueKeys.ASQ_NEQATY_REDEEM_POINTS, (NeqatyWSAPIRedeemOption) argAction.getData());
@@ -169,7 +167,7 @@ public class AsqNeqatyMobileNumberOp extends AsqNeqatyAbstractMobileNumberOp
 		request.setAuthenticationKey(System.getProperty("asq.neqaty.auth.key"));
 		request.setOperationType("Redeem-OTP");
 		request.setMsisdn(custMobileNmbr);
-		request.setToken(this.getScopedValue(AsqValueKeys.ASQ_NEQATY_TRANS_TOKEN));
+		request.setToken(getScopedValue(AsqValueKeys.ASQ_NEQATY_TRANS_TOKEN));
 		request.setAmount(neqatyRedeemOption.getRedeemAmount());
 		request.setRedeemCode(neqatyRedeemOption.getRedeemCode());// redeem code from the selected option
 		request.setRedeemPoints(neqatyRedeemOption.getRedeemPoints());// redeem point from the selected option
@@ -186,7 +184,7 @@ public class AsqNeqatyMobileNumberOp extends AsqNeqatyAbstractMobileNumberOp
 		} else if (null == response) {
 			return technicalErrorScreen("Service has null response");
 		}
-		setScopedValue(AsqValueKeys.ASQ_NEQATY_TRANS_REFERENCE, response.getTransactionReference());
+		_transactionScope.setValue(AsqValueKeys.ASQ_NEQATY_TRANS_REFERENCE, response.getTransactionReference());
 		return this.HELPER.getCompleteStackChainResponse(OpChainKey.valueOf("ASQ_NEQATY_OTP"));
 	}
 

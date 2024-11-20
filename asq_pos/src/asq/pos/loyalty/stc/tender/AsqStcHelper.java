@@ -1,6 +1,9 @@
 package asq.pos.loyalty.stc.tender;
 
 import java.math.BigDecimal;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
@@ -32,10 +35,13 @@ import dtv.xst.dao.trl.IRetailTransaction;
 import dtv.xst.dao.trl.ISaleReturnLineItem;
 import dtv.xst.dao.trn.IPosTransactionProperty;
 import oracle.dss.dataView.datacache.Map;
+import java.util.Calendar;
 
 public class AsqStcHelper {
 
 	private static final Logger LOG = LogManager.getLogger(AsqStcHelper.class);
+	
+	private static int systemCycle = 0;
 
 	/**
 	 * This class checks helps to implement all the required methods for STC API
@@ -177,5 +183,69 @@ public class AsqStcHelper {
 		LOG.info("STC API Generated Global ID:" + globalId);
 		return globalId;
 	}
+	
+	/**
+	 * This method counts the expire session time for Tabby API
+	 * 
+	 * @param
+	 * @return results after completing the timecycle
+	 */
+	
+	public boolean checkForTimeExpiration(Long timeDelay, Long timeCycle) throws InterruptedException {
+		while (timeCycle > systemCycle) {
+			Thread.sleep(timeDelay);
+			systemCycle++;
+			return true;
+		}
+		systemCycle = 0;
+		return false;
+	}
+	
+	/**
+	 * This method maps all errors received from Tamara/Tabby API
+	 * 
+	 * @param Error Code
+	 * @return Error prompts
+	 */
 
+	public String mapTabbyErrors(String code) {
+		switch (code) {
+		case "400":
+			return "ASQ_TABBY_BAD_REQUEST";
+		case "401":
+			return "ASQ_TABBY_AUTHENTICATION_ERROR";
+		case "403":
+			return "ASQ_TABBY_FORBIDDEN_ERROR";
+		case "404":
+			return "ASQ_TABBY_NOT_FOUND_ERROR";
+		case "409":
+			return "ASQ_TABBY_REFUND_ERROR";
+		default:
+			return "ASQ_TABBY_TECHNICAL_ERROR";
+		}
+	}
+	
+	/**
+	 * This method maps all errors received from Tamara/Tabby API
+	 * 
+	 * @param Error Code
+	 * @return Error prompts
+	 */
+
+	public String mapTamaraErrors(String code) {
+		switch (code) {
+		case "400":
+			return "ASQ_TAMARA_BAD_REQUEST";
+		case "401":
+			return "ASQ_TAMARA_AUTHENTICATION_ERROR";
+		case "403":
+			return "ASQ_TAMARA_FORBIDDEN_ERROR";
+		case "404":
+			return "ASQ_TAMARA_NOT_FOUND_ERROR";
+		case "409":
+			return "ASQ_TAMARA_REFUND_ERROR";
+		default:
+			return "ASQ_TAMARA_TECHNICAL_ERROR";
+		}
+	}
 }

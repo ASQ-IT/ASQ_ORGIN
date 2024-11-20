@@ -1,5 +1,7 @@
 package asq.pos.common;
 
+import javax.mail.internet.InternetAddress;
+
 import dtv.pos.common.ConfigurationMgr;
 import dtv.pos.common.SysConfigSettingFactory;
 
@@ -12,7 +14,7 @@ import dtv.pos.common.SysConfigSettingFactory;
  */
 public class AsqConfigurationMgr extends ConfigurationMgr {
 
-	private static SysConfigSettingFactory _settingsFactory;
+	   private static SysConfigSettingFactory _settingsFactory;
 
 	/**
 	 * Parameter to check the customer availability
@@ -40,25 +42,54 @@ public class AsqConfigurationMgr extends ConfigurationMgr {
 		return _settingsFactory.getInt(new String[] { "STCCustomerEarnPoints---PointsCalculation" });
 	}
 	
-	
 	/**
 	 * Planet Tax Merchant
 	 */
 	public String getPlanetMerchantIdNumber() {
-		return _settingsFactory.getString(new String[] {"PlanetTaxFree---MerchantIdNumber"});
+		return _settingsFactory.getString(new String[] {"ASQ---PlanetTaxFree---MerchantIdNumber"});
 	}
 	
 	/**
 	 * Planet Tax Terminal
 	 */
 	public  String getPlanetTerminalNumber() {
-		return _settingsFactory.getString(new String[] {"PlanetTaxFree---TerminalNumber"});
+		return _settingsFactory.getString(new String[] {"ASQ---PlanetTaxFree---TerminalNumber"});
 	}
 	
 	/**
 	 * Planet Tax Doc Type
 	 */
 	public String getPlanetType() {
-		return _settingsFactory.getString(new String[] {"PlanetTaxFree---Type"});
+		return _settingsFactory.getString(new String[] {"ASQ---PlanetTaxFree---Type"});
+	}
+
+	/**
+	 * Blind Return Email Approval
+	 */
+	public boolean isBlindReturnEmailApproved() {
+		return _settingsFactory.getBoolean(new String[] {"ASQ---ItemReturn---EmailApproval"});
+	}
+
+	public String getReturnApprovalEmailOTP() {
+		return _settingsFactory.getString(new String[] {"ASQ---ReturnApprovalEmailOTP---To"});
+	}
+	
+	public int getReturnOfflineEmailOTP() {
+		return _settingsFactory.getInt(new String[] {"ASQ---ReturnOfflineOTP---To"});
+	}
+	
+	/**
+	 * Bin Transfer Email Approval
+	 */
+	public boolean isBinTransferEmailApproved() {
+		return _settingsFactory.getBoolean(new String[] { "ASQ---BinTransfer---EmailApproval" });
+	}
+
+	public String getBinTransferApprovalEmailOTP() {
+		return _settingsFactory.getString(new String[] { "ASQ---BinTransferApprovalEmailOTP---To" });
+	}
+
+	public int getBinTransferOfflineEmailOTP() {
+		return _settingsFactory.getInt(new String[] { "ASQ---BinTransferOfflineOTP---To" });
 	}
 }

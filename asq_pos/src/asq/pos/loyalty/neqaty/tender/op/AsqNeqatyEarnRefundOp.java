@@ -1,7 +1,6 @@
-/**
- * 
- */
 package asq.pos.loyalty.neqaty.tender.op;
+
+import java.math.BigDecimal;
 
 import javax.inject.Inject;
 import javax.inject.Provider;
@@ -9,10 +8,12 @@ import javax.inject.Provider;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+import com.oracle.shaded.eclipse.persistence.internal.helper.Helper;
+
+import asq.pos.common.AsqValueKeys;
 import asq.pos.loyalty.neqaty.tender.service.AsqNeqatyHelper;
 import asq.pos.loyalty.neqaty.tender.service.AsqNeqatyServiceRequest;
 import asq.pos.loyalty.neqaty.tender.service.AsqNeqatyServiceResponse;
-import asq.pos.loyalty.neqaty.tender.service.AsqValueKeys;
 import asq.pos.loyalty.neqaty.tender.service.IAsqNeqatyService;
 import asq.pos.loyalty.neqaty.tender.service.IAsqNeqatyServiceRequest;
 import asq.pos.loyalty.neqaty.tender.service.NeqatyMethod;
@@ -21,48 +22,105 @@ import dtv.pos.common.ValueKeys;
 import dtv.pos.framework.op.Operation;
 import dtv.pos.iframework.event.IXstEvent;
 import dtv.pos.iframework.op.IOpResponse;
-import dtv.xst.dao.trn.IPosTransaction;
+import dtv.xst.dao.trl.IRetailTransaction;
 import dtv.xst.dao.ttr.ITenderLineItem;
 
-/**
- * @author SA20547171 Void tender for Neqaty
- */
 public class AsqNeqatyEarnRefundOp extends Operation {
 
 	private static final Logger LOG = LogManager.getLogger(AsqNeqatyEarnRefundOp.class);
 
-	private String tenderType;
+	/**
+	 * This class checks if customer is already attached to sale transaction. If
+	 * Yes, and the trx total is greater than 100SAR, STC points added to the
+	 * customer account. If customer not available, prompt cashier with an option to
+	 * add customer or complete the trx without adding points.
+	 */
 
+
+	private String tenderType;
+	
 	@Inject
 	protected Provider<IAsqNeqatyService> asqNeqatyService;
-	
+
 	@Inject
 	AsqNeqatyHelper asqNeqatyHelper;
 
+	/**
+	 * This method handles the customer availability parameter check and points
+	 * calculation for Earn API
+	 * 
+	 * @param
+	 * @return
+	 */
+
 	@Override
 	public IOpResponse handleOpExec(IXstEvent paramIXstEvent) {
-		String custMobileNumber = getScopedValue(AsqValueKeys.ASQ_NEQATY_MOBILE);
-		return refundPoints(custMobileNumber);
+	
+		String custMobileNmbr = _transactionScope.getValue(AsqValueKeys.ASQ_NEQATY_MOBILE);
+	   String transEarnReference = _transactionScope.getValue(AsqValueKeys.ASQ_NEQATY_TRANS_REFERENCE_EARN);
+	   if(custMobileNmbr !=null && transEarnReference != null ) {
+			return refundEarnPoints(custMobileNmbr, transEarnReference);
+	   }
+	return HELPER.completeResponse();
+		}
+
+	/**
+	 * Check for return transaction Do not add points for customer for return or
+	 * exchange transaction
+	 * 
+	 * @param trn
+	 * @return boolean
+	 */
+	public boolean isReturnTransaction(IRetailTransaction trn) {
+
+		if (null != trn && BigDecimal.ZERO.compareTo(trn.getTotal()) > 0) {
+			return true;
+		}
+		return false;
 	}
 
-	private IOpResponse refundPoints(String custMobileNumber) {
-		LOG.debug("Neqaty Inquire OTP Operation service call starts here: ");
+	/**
+	 * Method handles all service errors returned from Earn API
+	 * @param transEarnReference 
+	 * 
+	 * @param asqServiceResponse
+	 * @return ErrorPrompt
+	 */
+
+	private IOpResponse refundEarnPoints(String custMobileNmbr, String transEarnReference) {
 		IAsqNeqatyServiceRequest request = new AsqNeqatyServiceRequest();
 		request.setAuthenticationKey(System.getProperty("asq.neqaty.auth.key"));
-		request.setOperationType("EarnRefund");
-		request.setMsisdn(custMobileNumber);
 		request.setTid(0);
 		request.setMethod(NeqatyMethod.AUTHORIZE);
-		request.setTransactionReference(custMobileNumber);
+		request.setOperationType("EarnRefund");
+
+		request.setMsisdn(custMobileNmbr);
+		request.setTransactionReference(transEarnReference);// transactionreference from the earn auth call response
 		AsqNeqatyServiceResponse response = (AsqNeqatyServiceResponse) asqNeqatyService.get()
 				.callNeqatyService(request);
-		LOG.debug("Neqaty Inquire OTP Operation service response here: ");
+		if (null != response && 0 == response.getResultCode()) {
+			String transactionReference = response.getTransactionReference();
+			//setScopedValue(AsqValueKeys.ASQ_NEQATY_TRANS_REFERENCE,transactionReference);
+			response = confirmEarnPointsTransaction(request, transactionReference);
+		}
+		return validateResponse(response);
+	}
+
+	private AsqNeqatyServiceResponse confirmEarnPointsTransaction(IAsqNeqatyServiceRequest request,
+			String transactionReference) {
+		request.setTransactionReference(transactionReference);
+		request.setMethod(NeqatyMethod.CONFIRM);
+		request.setOperationType(null);
+		return (AsqNeqatyServiceResponse) asqNeqatyService.get().callNeqatyService(request);
+	}
+
+	private IOpResponse validateResponse(AsqNeqatyServiceResponse response) {
 		if (null != response && 0 != response.getResultCode()) {
 			return handleServiceError(response);
 		} else if (null == response) {
 			return technicalErrorScreen("Service has null response");
 		}
-		return HELPER.completeResponse();
+		return this.HELPER.completeResponse();
 	}
 
 	public IOpResponse handleServiceError(AsqNeqatyServiceResponse asqServiceResponse) {
@@ -70,18 +128,19 @@ public class AsqNeqatyEarnRefundOp extends Operation {
 		args[0] = _formattables.getSimpleFormattable(String.valueOf(asqServiceResponse.getResultCode()));
 		args[1] = _formattables.getSimpleFormattable(asqServiceResponse.getResultDescription());
 		String errorConstant = asqNeqatyHelper.mapError(asqServiceResponse.getResultCode());
-		LOG.info("Error From Neqaty Earn Refund OTP Operation : " + asqServiceResponse.getResultCode() + " - "
+		LOG.info("Error From Neqaty Inquire OTP Operation : " + asqServiceResponse.getResultCode() + " - "
 				+ asqServiceResponse.getResultDescription());
-		LOG.info("Error Message Generated By Xstore based on Neqaty Earn Refund OTP Operation Response: " + errorConstant);
+		LOG.info("Error Message Generated By Xstore based on Neqaty Inquire OTP Operation Response: " + errorConstant);
 		return HELPER.getPromptResponse(errorConstant, args);
 	}
 
 	private IOpResponse technicalErrorScreen(String message) {
 		IFormattable[] args = new IFormattable[2];
 		args[1] = _formattables.getSimpleFormattable(message);
-		LOG.info("Neqaty Earn Refund OTP Operation::::: " + message);
+		LOG.info("Neqaty Inquire OTP Operation::::: " + message);
 		return HELPER.getPromptResponse("ASQ_NEQATY_TECHNICAL_ERROR", args);
 	}
+	
 	@Override
 	public void setParameter(String argName, String argValue) {
 		if ("TenderType".equalsIgnoreCase(argName)) {
@@ -92,10 +151,8 @@ public class AsqNeqatyEarnRefundOp extends Operation {
 
 	@Override
 	public boolean isOperationApplicable() {
-		
-		ITenderLineItem tenderLine = getScopedValue(ValueKeys.CURRENT_TENDER_LINE);
-		return (tenderLine.getVoid() && 	tenderLine.getTenderId().equalsIgnoreCase(tenderType));
-	
-	}
 
+		ITenderLineItem tenderLine = getScopedValue(ValueKeys.CURRENT_TENDER_LINE);
+		return (!tenderLine.getVoid() && tenderLine.getTenderId().equalsIgnoreCase(tenderType));
+	}
 }

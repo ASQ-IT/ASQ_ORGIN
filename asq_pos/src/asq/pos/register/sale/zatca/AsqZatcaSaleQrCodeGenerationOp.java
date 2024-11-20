@@ -1,7 +1,7 @@
 package asq.pos.register.sale.zatca;
 
 import java.math.BigDecimal;
-import java.math.RoundingMode;
+import java.math.MathContext;
 import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.GregorianCalendar;
@@ -383,8 +383,9 @@ public class AsqZatcaSaleQrCodeGenerationOp extends Operation {
 				SaleReturnLineItemModel salelineItem = (SaleReturnLineItemModel) lineItem;
 				BigDecimal priceAmount = salelineItem.getNetAmount();
 				if (!salelineItem.getVoid()) {
+					BigDecimal lineExtensionAmount = null;
 					List<ItemAllowanceCharges> listAllowanceChargeType = new ArrayList<ItemAllowanceCharges>();
-					if (salelineItem.getDiscounted() || null != salelineItem.getPrediscountAmount()) {
+					if (salelineItem.getDiscounted() || (null != salelineItem.getRetailPriceModifiers() && salelineItem.getRetailPriceModifiers().size() > 0)) {
 						List<IRetailPriceModifier> priceModelList = salelineItem.getRetailPriceModifiers();
 						String discountPercent = "";
 						for (IRetailPriceModifier priceModel : priceModelList) {
@@ -392,15 +393,20 @@ public class AsqZatcaSaleQrCodeGenerationOp extends Operation {
 							// need to check with multiple discount scenario
 							discountPercent = String.valueOf((priceModel.getPercent().multiply(new BigDecimal(100))).intValue());
 							discountAmount = priceModel.getAmount();
-							discountAmount = discountAmount.divide((taxPerc.add(new BigDecimal(1))), 2, RoundingMode.HALF_UP);
+							discountAmount = discountAmount.divide((taxPerc.add(new BigDecimal(1))), 2, asqZatcaHelper.getSystemRoundingMode());
 							priceAmount = salelineItem.getPreDealAmount();
-							priceAmount = priceAmount.divide((taxPerc.add(new BigDecimal(1))), 2, RoundingMode.HALF_UP);
+							priceAmount = priceAmount.divide((taxPerc.add(new BigDecimal(1))), 2, asqZatcaHelper.getSystemRoundingMode());
 							// Zatca discount calculation handling ends
 						}
 						listAllowanceChargeType.add(new ItemAllowanceCharges(AsqZatcaConstant.ASQ_FALSE, AsqZatcaConstant.ASQ_DISCOUNT, String.valueOf(discountAmount), discountPercent,
 								System.getProperty("dtv.location.CurrencyId"), String.valueOf(priceAmount)));
+
+						lineExtensionAmount = priceAmount.subtract(discountAmount, MathContext.DECIMAL64);
+						lineExtensionAmount = lineExtensionAmount.multiply(salelineItem.getQuantity());
 					}
-					argZatcaInvoiceObj.getInvoiceLine().add(asqZatcaInvoiceGenerationHelper.setInvoiceLineType(salelineItem, listAllowanceChargeType, cbc, cac, priceAmount, taxPerc, taxCategory));
+
+					argZatcaInvoiceObj.getInvoiceLine()
+							.add(asqZatcaInvoiceGenerationHelper.setInvoiceLineType(salelineItem, listAllowanceChargeType, cbc, cac, priceAmount, taxPerc, taxCategory, lineExtensionAmount));
 				}
 			}
 		}

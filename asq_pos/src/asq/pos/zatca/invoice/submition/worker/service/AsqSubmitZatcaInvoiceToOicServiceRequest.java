@@ -11,10 +11,10 @@ public class AsqSubmitZatcaInvoiceToOicServiceRequest extends ServiceRequest imp
 	private String creationDate;
 	private String tillId;
 	private String invoiceHash;
-	private String Username;
+	private String username;
 	private String invoice;
 	private String uuid;
-	private String Password;
+	private String password;
 
 	@Override
 	public String getVatRegNo() {
@@ -67,16 +67,6 @@ public class AsqSubmitZatcaInvoiceToOicServiceRequest extends ServiceRequest imp
 	}
 
 	@Override
-	public String getUsername() {
-		return Username;
-	}
-
-	@Override
-	public void setUsername(String username) {
-		Username = username;
-	}
-
-	@Override
 	public String getInvoice() {
 		return invoice;
 	}
@@ -94,16 +84,6 @@ public class AsqSubmitZatcaInvoiceToOicServiceRequest extends ServiceRequest imp
 	@Override
 	public void setUuid(String uuid) {
 		this.uuid = uuid;
-	}
-
-	@Override
-	public String getPassword() {
-		return Password;
-	}
-
-	@Override
-	public void setPassword(String password) {
-		Password = password;
 	}
 
 	@Override
@@ -126,4 +106,23 @@ public class AsqSubmitZatcaInvoiceToOicServiceRequest extends ServiceRequest imp
 		this.creationDate = creationDate;
 	}
 
+	@Override
+	public String getUsername() {
+		return username;
+	}
+
+	@Override
+	public String getPassword() {
+		return password;
+	}
+
+	@Override
+	public void setUsername(String username) {
+		this.username = username;
+	}
+
+	@Override
+	public void setPassword(String password) {
+		this.password = password;
+	}
 }

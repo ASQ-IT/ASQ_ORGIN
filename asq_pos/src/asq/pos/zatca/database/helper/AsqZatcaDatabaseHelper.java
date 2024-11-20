@@ -88,9 +88,9 @@ public class AsqZatcaDatabaseHelper {
 		return DataFactory.getObjectByQueryNoThrow(ASQ_ZATCA_INVOICES, zatcaInvoices);
 	}
 
-	public boolean updateZatcaInvoiceStatus(AsqZatcaInvoicesQueryResult invoice) {
+	public boolean updateZatcaInvoiceStatus(AsqZatcaInvoicesQueryResult invoice, String argStatus) {
 		Map<String, Object> zatcaInvoices = new HashMap<String, Object>();
-		zatcaInvoices.put("argZatcaStatus", AsqZatcaConstant.ZATCA_STATUS_SUBMITTED);
+		zatcaInvoices.put("argZatcaStatus", argStatus);
 		zatcaInvoices.put("argOrganizationId", invoice.getORGANIZATION_ID());
 		zatcaInvoices.put("argOrgInvoiceid", invoice.getINVOICE_ID());
 		zatcaInvoices.put("argOrgbusinessDate", invoice.getBUSINESS_DATE());

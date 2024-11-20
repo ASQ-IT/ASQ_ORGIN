@@ -22,6 +22,7 @@ public class AsqZatcaTransQrCode extends AbstractDocBuilderField {
 
 	@Override
 	public String getContents(Object paramObject, IDocElementFactory paramIDocElementFactory, Locale paramLocale) {
+		_transactionScope.getTransaction();
 		return _transactionScope.getValue(AsqValueKeys.ASQ_ZATCA_QR_CODE);
 	}
 

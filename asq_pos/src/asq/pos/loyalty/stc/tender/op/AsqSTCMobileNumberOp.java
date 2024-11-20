@@ -5,7 +5,11 @@ package asq.pos.loyalty.stc.tender.op;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.time.ZoneId;
+import java.time.ZonedDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.Date;
+import java.util.TimeZone;
 
 import javax.inject.Inject;
 import javax.inject.Provider;
@@ -84,10 +88,10 @@ public class AsqSTCMobileNumberOp extends AbstractFormOp<AsqSTCMobileNumberEditM
 				LOG.info("STC API Mobile number form execution Customer is Linked to Transaction:");
 				custMobileNumber = trans.getCustomerParty().getTelephoneInformation().get(i).getTelephoneNumber();
 				editModel.setCustMobileNumber(custMobileNumber);
-				setScopedValue(AsqValueKeys.ASQ_MOBILE_NUMBER, editModel.getCustMobileNumber());
+				_transactionScope.setValue(AsqValueKeys.ASQ_MOBILE_NUMBER, custMobileNumber);
 				return super.handleInitialState();
 			} else if(trans.getCustomerParty() == null){
-				setScopedValue(AsqValueKeys.ASQ_MOBILE_NUMBER, editModel.getCustMobileNumber());
+				//no customer linked to transaction prompt
 			}
 		} catch (Exception ex) {
 			LOG.info(
@@ -107,19 +111,22 @@ public class AsqSTCMobileNumberOp extends AbstractFormOp<AsqSTCMobileNumberEditM
 		if (XstDataActionKey.ACCEPT.equals(argAction.getActionKey())) {
 			IRetailTransaction trans = (IRetailTransaction) this._transactionScope.getTransaction();
 			AsqSTCMobileNumberEditModel editModel = this.getModel();
+			if(editModel.getCustMobileNumber() != null){
 			custMobileNumber = editModel.getCustMobileNumber();
+			_transactionScope.setValue(AsqValueKeys.ASQ_MOBILE_NUMBER, custMobileNumber);
 			LOG.debug("STC API Mobile number captured :" + custMobileNumber);
+			}
 			if (custMobileNumber != null && !custMobileNumber.equals("")) {
 				LOG.info("Process of STC tender starts here");
 				if (null != trans.getCustomerParty()
-						&& !(this.getScopedValue(AsqValueKeys.ASQ_MOBILE_NUMBER).equals(custMobileNumber))) {
+						&& !(this._transactionScope.getValue(AsqValueKeys.ASQ_MOBILE_NUMBER).equals(custMobileNumber))) {
 					IParty info = trans.getCustomerParty();
 					info.setTelephone1(custMobileNumber);
-					setScopedValue(AsqValueKeys.ASQ_MOBILE_NUMBER, custMobileNumber);
+					_transactionScope.setValue(AsqValueKeys.ASQ_MOBILE_NUMBER, custMobileNumber);
 					LOG.info(
 							"STC API setting updated customer mobile number to transaction, this will be udpated once the transaciton is completed");
 				}
-			} else if (custMobileNumber == null) {
+			} else if (custMobileNumber == null || custMobileNumber.equals("")) {
 				LOG.debug("STC API customer mobile number field is null :");
 				return super.handleDataAction(argAction);
 			}
@@ -160,22 +167,30 @@ public class AsqSTCMobileNumberOp extends AbstractFormOp<AsqSTCMobileNumberEditM
 		IAsqSTCLoyaltyServiceRequest request = new AsqSTCLoyaltyServiceRequest();
 
 		// Converting SystemDate & Time to Saudi locale 
-		DateTime dateTimeUtc = new DateTime(DateTimeZone.UTC);
-		DateTimeZone timeZone = DateTimeZone.forID("Asia/Riyadh");
-		DateTime dateTimeRiyadh = dateTimeUtc.withZone(timeZone);
-		DateFormat formatter = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss");
-
-		Date requestDate = dateTimeRiyadh.toDate();
-
-		request.setMsisdn(Long.parseLong(custMobileNumber.trim()));
-		request.setBranchId(System.getProperty("asq.stc.branchid"));
-		request.setTerminalId(System.getProperty("asq.stc.terminalid"));
-
+		
+		/*
+		 * DateTime dateTimeUtc = new DateTime(DateTimeZone.UTC); DateTimeZone timeZone
+		 * = DateTimeZone.forID("Asia/Riyadh"); DateTime dateTimeRiyadh =
+		 * dateTimeUtc.withZone(timeZone); DateFormat formatter = new
+		 * SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss"); Date requestDate =
+		 * dateTimeRiyadh.toDate();
+		 */
 		/*
 		 * DateFormat formatter = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss"); Date
 		 * requestDate = DateTime.now().toDate();
 		 */
-		request.setRequestDate(formatter.format(requestDate));
+		 
+		ZoneId ksaZone = ZoneId.of("Asia/Riyadh");
+        // Get the current date and time in KSA
+        ZonedDateTime ksaDateTime = ZonedDateTime.now(ksaZone);
+        // Format the date and time including the time zone offset
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss");
+        String requestDate = ksaDateTime.format(formatter);
+		request.setMsisdn(Long.parseLong(custMobileNumber.trim()));
+		request.setBranchId(System.getProperty("asq.stc.branchid"));
+		request.setTerminalId(System.getProperty("asq.stc.terminalid"));
+		request.setRequestDate(requestDate);
+		LOG.info("Request Date :" +requestDate);
 		request.setPIN(null);
 		request.setAmount(null);
 
@@ -202,7 +217,7 @@ public class AsqSTCMobileNumberOp extends AbstractFormOp<AsqSTCMobileNumberEditM
 	 */
 
 	private IOpResponse validateResponseAndStoreDataInDB(AsqSTCLoyaltyServiceResponse response,
-			IRetailTransaction trans, Date requestDate, String globalID, String earnPoints) {
+			IRetailTransaction trans, String requestDate, String globalID, String earnPoints) {
 		if (null != response && null != response.getErrors() && 0 != response.getErrors().length) {
 			return handleServiceError(response);
 		} else if (null == response) {

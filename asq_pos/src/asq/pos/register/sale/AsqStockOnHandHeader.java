@@ -9,7 +9,6 @@ import dtv.i18n.IFormattable;
 import dtv.pos.common.SysConfigSettingFactory;
 import dtv.pos.framework.ui.listview.CellContent;
 import dtv.pos.framework.ui.listview.ICellDataHandler;
-import dtv.xst.dao.trl.ISaleReturnLineItem;
 
 public class AsqStockOnHandHeader implements ICellDataHandler {
 
@@ -21,13 +20,10 @@ public class AsqStockOnHandHeader implements ICellDataHandler {
 	@Override
 	public CellContent buildCellContent(ListViewColumnType arg0, Object argModel) {
 		IFormattable soh = this._formattables.getSimpleFormattable("_asqSOH");
-		if (argModel instanceof ISaleReturnLineItem) {
 		String value = _settingsFactory.getString(new String[] { "StockOnHold---Enable" });
 		if (value != null && value.equalsIgnoreCase("true")) {
 			return new CellContent(soh.toString());
 		} else
 			return new CellContent();
-	}
-	return new CellContent();
 	}
 }

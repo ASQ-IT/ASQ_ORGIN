@@ -30,8 +30,12 @@ public class AsqNeqatyHelper {
 		case -83:
 		case -99:
 		case -407:
+		case -102:
+			return "ASQ_NEQATY_INVALID_OTP";
 		case -500:
 			return "ASQ_NEQATY_TECHNICAL_ERROR";
+		case -506:
+			return "ASQ_NEQATY_NEQATY_MSISDN_DOESNT_EXIST";
 		case -518:
 			return "ASQ_NEQATY_STORNO_INVALID_REF";
 		case -519:

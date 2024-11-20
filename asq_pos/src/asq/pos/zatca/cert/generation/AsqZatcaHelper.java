@@ -10,15 +10,15 @@ import java.io.InputStreamReader;
 import java.io.StringWriter;
 import java.math.BigDecimal;
 import java.math.MathContext;
+import java.math.RoundingMode;
 import java.net.URISyntaxException;
-import java.nio.file.Files;
-import java.nio.file.Path;
 import java.util.Base64;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
 import java.util.Properties;
 
+import javax.inject.Inject;
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBElement;
 import javax.xml.bind.JAXBException;
@@ -42,6 +42,8 @@ import asq.pos.zatca.AsqZatcaConstant;
 import asq.pos.zatca.cert.generation.service.AsqSubmitZatcaCertServiceResponse;
 import asq.pos.zatca.integration.data.CommandPrompt;
 import asq.pos.zatca.integration.zatca.util.POSUtil;
+import dtv.pos.common.SysConfigSettingFactory;
+import dtv.util.NumberUtils;
 import dtv.xst.dao.trn.IPosTransaction;
 import oasis.names.specification.ubl.schema.xsd.invoice_2.InvoiceType;
 
@@ -49,11 +51,8 @@ public class AsqZatcaHelper {
 
 	private static final Logger LOG = LogManager.getLogger(AsqZatcaHelper.class);
 
-	public void main(String abv[]) throws IOException {
-		AsqZatcaHelper hel = new AsqZatcaHelper();
-		String requestXmlString = Files.readString(Path.of("D:\\ASQ\\ASQ_DEV\\Zatca\\readJSON.json"));
-		hel.convertJSONToPojo(requestXmlString, AsqSubmitZatcaCertServiceResponse.class);
-	}
+	@Inject
+	protected SysConfigSettingFactory sysConfig;
 
 	public String generateInvoiceXML(InvoiceType in) throws JAXBException {
 		JAXBContext jaxbContext = JAXBContext.newInstance(InvoiceType.class);
@@ -307,6 +306,14 @@ public class AsqZatcaHelper {
 
 	public String encodeBase64(byte[] stringTobBeEncoded) {
 		return Base64.getEncoder().encodeToString(stringTobBeEncoded);
+	}
+
+	public RoundingMode getSystemRoundingMode() {
+		RoundingMode mode = NumberUtils.getRoundingModeForName(sysConfig.getString(new String[] { "CurrencyRounding---RoundingMode" }));
+		if (mode == null) {
+			return RoundingMode.HALF_DOWN;
+		}
+		return mode;
 	}
 
 }

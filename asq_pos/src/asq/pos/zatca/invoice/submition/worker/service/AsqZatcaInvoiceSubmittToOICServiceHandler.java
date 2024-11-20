@@ -28,12 +28,14 @@ public class AsqZatcaInvoiceSubmittToOICServiceHandler extends AbstractJaxRsHand
 		Builder requestBuilder = getZatcaBaseRequestHeader();
 		try {
 			String request = asqZatcaHelper.convertTojson(argServiceRequest);
-			System.out.println(request);
+			LOG.debug("We submitting request to Zatca oic webservice : " + request);
 			rawResponse = requestBuilder.post(Entity.json(request));
 			checkForExceptions(rawResponse);
-			return asqZatcaHelper.convertJSONToPojo(rawResponse.readEntity(String.class), AsqSubmitZatcaCertServiceResponse.class);
+			String response = rawResponse.readEntity(String.class);
+			LOG.debug("We have recieved response Zatca webservice : " + response);
+			return asqZatcaHelper.convertJSONToPojo(response, AsqSubmitZatcaCertServiceResponse.class);
 		} catch (Exception ex) {
-			LOG.error("We have reieved exception in calling of Zatca webservice ", ex);
+			LOG.error("We have recieved exception in calling of Zatca webservice ", ex);
 			AsqSubmitZatcaCertServiceResponse arg = new AsqSubmitZatcaCertServiceResponse();
 			AsqZatcaErrorDesc errDesc = new AsqZatcaErrorDesc();
 			if (null != rawResponse && null != rawResponse.getStatusInfo()) {

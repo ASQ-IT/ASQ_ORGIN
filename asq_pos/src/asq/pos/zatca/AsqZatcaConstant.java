@@ -83,6 +83,9 @@ public interface AsqZatcaConstant {
 
 	String ASQ_ZATCA_SECRET_KEY = "secret";
 	String ASQ_ZATCA_TOKEN_KEY = "binarySecurityToken";
+	String ASQ_ZATCA_OIC_DUP_STATUS = "DUPLICATE";
+	String ASQ_ZATCA_OIC_ERR_STATUS = "ERROR";
+	String ASQ_ZATCA_OIC_WAR_STATUS = "WARNING";
 
 	String ASQ_QR_CODE = "QR";
 	String ASQ_UIID_CHAR_TOREP = "::";

@@ -12,18 +12,15 @@ import org.apache.logging.log4j.Logger;
 import asq.pos.loyalty.neqaty.tender.service.AsqNeqatyHelper;
 import asq.pos.loyalty.neqaty.tender.service.AsqNeqatyServiceRequest;
 import asq.pos.loyalty.neqaty.tender.service.AsqNeqatyServiceResponse;
-import asq.pos.loyalty.neqaty.tender.service.AsqValueKeys;
+import asq.pos.common.AsqValueKeys;
 import asq.pos.loyalty.neqaty.tender.service.IAsqNeqatyService;
 import asq.pos.loyalty.neqaty.tender.service.IAsqNeqatyServiceRequest;
 import asq.pos.loyalty.neqaty.tender.service.NeqatyMethod;
 import dtv.i18n.IFormattable;
-import dtv.pos.common.OpChainKey;
-import dtv.pos.common.ValueKeys;
 import dtv.pos.framework.action.type.XstDataActionKey;
 import dtv.pos.framework.op.AbstractFormOp;
 import dtv.pos.iframework.action.IXstDataAction;
 import dtv.pos.iframework.op.IOpResponse;
-import dtv.xst.dao.ttr.ITenderLineItem;
 
 /**
  * @author RA20221457
@@ -33,7 +30,7 @@ public class AsqNeqatyOTPOp extends AbstractFormOp<AsqNeqatyOTPEditModel> {
 
 	private static final Logger LOG = LogManager.getLogger(AsqNeqatyOTPOp.class);
 
-	private String custMobileNumber = "";
+	//private String custMobileNumber = "";
 
 	@Inject
 	protected Provider<IAsqNeqatyService> asqNeqatyService;
@@ -67,7 +64,7 @@ public class AsqNeqatyOTPOp extends AbstractFormOp<AsqNeqatyOTPEditModel> {
 				}
 				String otp = model.getNeqatyOTP();
 				setScopedValue(AsqValueKeys.ASQ_STC_OTP, otp);
-				String custMobileNmbr = getScopedValue(AsqValueKeys.ASQ_MOBILE_NUMBER);
+				String custMobileNmbr = _transactionScope.getValue(AsqValueKeys.ASQ_NEQATY_MOBILE);
 				return submitOTP(otp, custMobileNmbr);
 			}
 		} catch (Exception exception) {
@@ -80,10 +77,10 @@ public class AsqNeqatyOTPOp extends AbstractFormOp<AsqNeqatyOTPEditModel> {
 	private IOpResponse submitOTP(String otp, String custMobileNmbr) {
 		IAsqNeqatyServiceRequest request = new AsqNeqatyServiceRequest();
 		request.setAuthenticationKey(System.getProperty("asq.neqaty.auth.key"));
-		request.setMsisdn(custMobileNumber);
+		request.setMsisdn(custMobileNmbr);
 //		take reference from previous auth method call
-		if (null != getScopedValue(AsqValueKeys.ASQ_NEQATY_TRANS_REFERENCE)) {
-			request.setTransactionReference(getScopedValue(AsqValueKeys.ASQ_NEQATY_TRANS_REFERENCE));
+		if (null != _transactionScope.getValue(AsqValueKeys.ASQ_NEQATY_TRANS_REFERENCE)) {
+			request.setTransactionReference(_transactionScope.getValue(AsqValueKeys.ASQ_NEQATY_TRANS_REFERENCE));
 		}
 		request.setOtp(otp);
 		request.setTid(0);

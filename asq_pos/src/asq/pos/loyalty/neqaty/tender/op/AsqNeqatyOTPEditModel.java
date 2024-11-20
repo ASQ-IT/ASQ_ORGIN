@@ -30,5 +30,10 @@ public class AsqNeqatyOTPEditModel extends BasicEditModel {
 		initializeFieldState();
 	}
 
+	public AsqNeqatyOTPEditModel(String title, String desc) {
+		super(FF.getTranslatable(title), FF.getTranslatable(desc));
+		addField(NEQATY_OTP_FIELD, String.class);
+		initializeFieldState();
 
+	}
 }

@@ -50,16 +50,17 @@ public class AsqSubmittZatcaInvoiceToOICWorker extends AbstractWorker {
 					oicZatcaRequest.setTransactionNo(invoice.getINVOICE_ID());
 
 					Properties zatcaProp = asqZatcaHelper.getCSIDProperties();
-					oicZatcaRequest.setPassword(zatcaProp.getProperty(AsqZatcaConstant.ASQ_ZATCA_TOKEN_KEY));
-					oicZatcaRequest.setUsername(zatcaProp.getProperty(AsqZatcaConstant.ASQ_ZATCA_SECRET_KEY));
+					oicZatcaRequest.setPassword(zatcaProp.getProperty(AsqZatcaConstant.ASQ_ZATCA_SECRET_KEY));
+					oicZatcaRequest.setUsername(zatcaProp.getProperty(AsqZatcaConstant.ASQ_ZATCA_TOKEN_KEY));
 
 					oicZatcaRequest.setVatRegNo(System.getProperty("asq.zatca.company.vat.reg.number"));
 					oicZatcaRequest.setStoreNumber(System.getProperty("dtv.location.storeNumber"));
 
 					AsqSubmitZatcaCertServiceResponse response = (AsqSubmitZatcaCertServiceResponse) zatcaOicService.get().submitInvoiceToOIC(oicZatcaRequest);
-					if (response != null && null != response.getErrors()) {
-						LOG.debug("Successfully submitted the Zatca Invoices to OIC server service with invoice Id : " + oicZatcaRequest.getUuid());
-						zatcaDatabaseHelper.updateZatcaInvoiceStatus(invoice);
+
+					String status = checkForZatcaError(response);
+					if (!AsqZatcaConstant.ZATCA_STATUS_NEW.equalsIgnoreCase(status)) {
+						zatcaDatabaseHelper.updateZatcaInvoiceStatus(invoice, status);
 						LOG.debug("Successfully updated the Zatca Invoices status in the staging Table");
 					}
 				}
@@ -68,6 +69,27 @@ public class AsqSubmittZatcaInvoiceToOICWorker extends AbstractWorker {
 			LOG.error("We have recieved exception in Store to OIC zatca invoice submition", workerExc);
 		}
 		LOG.debug("Ended working on submitting the Zatca Invoices to OIC service ");
+	}
+
+	private String checkForZatcaError(AsqSubmitZatcaCertServiceResponse argRresponse) {
+		if (null != argRresponse) {
+			if (null != argRresponse.getErrors()) {
+				LOG.error("We have recieved error in submiiting the zatca message in OIC server : " + argRresponse.getErrors());
+				return AsqZatcaConstant.ZATCA_STATUS_NEW;
+			} else if (AsqZatcaConstant.ASQ_ZATCA_OIC_ERR_STATUS.equalsIgnoreCase(argRresponse.getStatus())) {
+				LOG.error("We have recieved error status from OIC : " + argRresponse.getStatus());
+				return AsqZatcaConstant.ASQ_ZATCA_OIC_ERR_STATUS;
+			} else if (AsqZatcaConstant.ASQ_ZATCA_OIC_DUP_STATUS.equalsIgnoreCase(argRresponse.getStatus())) {
+				LOG.error("We have recieved DUPLICATE record status from OIC : " + argRresponse.getStatus());
+				return AsqZatcaConstant.ASQ_ZATCA_OIC_DUP_STATUS;
+			} else if (AsqZatcaConstant.ASQ_ZATCA_OIC_WAR_STATUS.equalsIgnoreCase(argRresponse.getStatus())) {
+				LOG.error("We have recieved WARNING record status from OIC : " + argRresponse.getStatus());
+				return AsqZatcaConstant.ASQ_ZATCA_OIC_WAR_STATUS;
+			}
+			LOG.debug("Successfully submitted the Zatca Invoices to OIC server service with invoice Id ");
+			return AsqZatcaConstant.ZATCA_STATUS_SUBMITTED;
+		}
+		return AsqZatcaConstant.ZATCA_STATUS_NEW;
 	}
 
 }

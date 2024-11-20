@@ -5,7 +5,6 @@ import java.io.FilenameFilter;
 import java.io.IOException;
 import java.math.BigDecimal;
 import java.math.BigInteger;
-import java.math.RoundingMode;
 import java.nio.charset.StandardCharsets;
 import java.security.KeyStore;
 import java.security.NoSuchAlgorithmException;
@@ -699,7 +698,7 @@ public class AsqZatcaInvoiceGenerationHelper {
 		TaxAmountType taxAmountType = cbc.createTaxAmountType();
 		RoundingAmountType roundingAmountType = cbc.createRoundingAmountType();
 		if (null != taxAmount) {
-			taxAmountType.setValue(taxAmount.setScale(2, RoundingMode.HALF_UP));
+			taxAmountType.setValue(taxAmount.setScale(2, asqZatcaHelper.getSystemRoundingMode()));
 			taxAmountType.setCurrencyID(currencyID);
 			taxTotalType.setTaxAmount(taxAmountType);
 		}
@@ -1007,7 +1006,7 @@ public class AsqZatcaInvoiceGenerationHelper {
 	 */
 	public InvoiceLineType setInvoiceLineType(SaleReturnLineItemModel lineItem, List<ItemAllowanceCharges> listAllowanceChargeType,
 			oasis.names.specification.ubl.schema.xsd.commonbasiccomponents_2.ObjectFactory cbc, oasis.names.specification.ubl.schema.xsd.commonaggregatecomponents_2.ObjectFactory cac,
-			BigDecimal argPriceAmount, BigDecimal argTaxPerc, String argTaxCategoryID) {
+			BigDecimal argPriceAmount, BigDecimal argTaxPerc, String argTaxCategoryID, BigDecimal lineExtensionAmount) {
 
 		InvoiceLineType invoiceLineType = cac.createInvoiceLineType();
 		InvoicedQuantityType invoicedQuantityType = cbc.createInvoicedQuantityType();
@@ -1019,8 +1018,13 @@ public class AsqZatcaInvoiceGenerationHelper {
 		invoicedQuantityType.setValue(lineItem.getQuantity());
 		lineExtensionAmountType.setCurrencyID(lineItem.getCurrencyId());
 
-		// this should be one unit price
-		lineExtensionAmountType.setValue(lineItem.getNetAmount().abs());
+		// this should be into of Quantity
+		if (null != lineExtensionAmount) {
+			// This is for discount flow
+			lineExtensionAmountType.setValue(lineExtensionAmount);
+		} else {
+			lineExtensionAmountType.setValue(lineItem.getNetAmount().abs());
+		}
 
 		invoiceLineType.setID(invoiceLineTypeID);
 		invoiceLineType.setInvoicedQuantity(invoicedQuantityType);
@@ -1521,7 +1525,7 @@ public class AsqZatcaInvoiceGenerationHelper {
 	}
 
 	public BigDecimal getUnitValue(BigDecimal argGrossValue, BigDecimal argQuantity) {
-		return argGrossValue.divide(argQuantity, 2, RoundingMode.HALF_UP);
+		return argGrossValue.divide(argQuantity, 2, asqZatcaHelper.getSystemRoundingMode());
 	}
 
 }

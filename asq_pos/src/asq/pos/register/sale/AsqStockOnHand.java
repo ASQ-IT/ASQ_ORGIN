@@ -4,7 +4,6 @@ import javax.inject.Inject;
 
 import com.micros.xstore.config.listview.ListViewColumnType;
 
-import asq.pos.common.AsqSysConfigSettingFactory;
 import dtv.pos.common.ConfigurationMgr;
 import dtv.pos.common.SysConfigSettingFactory;
 import dtv.pos.framework.ui.listview.CellContent;
@@ -21,23 +20,20 @@ public class AsqStockOnHand implements ICellDataHandler {
 	private StationState _stationState;
 	@Inject
 	private SysConfigSettingFactory _settingsFactory;
+
 	@Override
 	public CellContent buildCellContent(ListViewColumnType arg0, Object argModel) {
 		String value = _settingsFactory.getString(new String[] { "StockOnHold---Enable" });
 		if (value != null && value.equalsIgnoreCase("true")) {
 			if (argModel instanceof ISaleReturnLineItem) {
 				ISaleReturnLineItem item = (ISaleReturnLineItem) argModel;
-				IStockLedger ledger = this._invStockAdjuster.getStockLedger(item.getItemId(),
-						ConfigurationMgr.getDefaultInventoryLocationId(), "ON_HAND",
-						this._stationState.getRetailLocationId());
-				if(ledger.getUnitcount()!=null) {
-				return new CellContent(ledger.getUnitcount().toString());
-				}
-				else
-				{
+				IStockLedger ledger = this._invStockAdjuster.getStockLedger(item.getItemId(), ConfigurationMgr.getDefaultInventoryLocationId(), "ON_HAND", this._stationState.getRetailLocationId());
+				if (ledger.getUnitcount() != null) {
+					return new CellContent(ledger.getUnitcount().toString());
+				} else {
 					return new CellContent();
 				}
-			} 
+			}
 		}
 		return new CellContent();
 	}

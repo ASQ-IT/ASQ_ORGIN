@@ -3,6 +3,7 @@
  */
 package asq.pos.loyalty.stc.tender.op;
 
+import dtv.pos.common.ValueKeys;
 import dtv.pos.framework.form.BasicEditModel;
 
 /**
