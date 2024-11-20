@@ -8,4 +8,7 @@
     <Setting name="Email---UseSmtpAuth">${dtv.email.smtp.auth}</Setting>
     <Setting name="Location---OvertimeRuleType">WEEKLYOVER40</Setting>
     <Setting name="SendSale---SendTaxType">DESTINATION</Setting>
+    <Setting name="Deals---LineItemDiscount---RoundingMode">HALF_UP</Setting>
+    <Setting name="CurrencyRounding---RoundingMode">HALF_UP</Setting>
+    <Setting name="Discounts---RoundingMode">HALF_UP</Setting>
 </SysConfig>

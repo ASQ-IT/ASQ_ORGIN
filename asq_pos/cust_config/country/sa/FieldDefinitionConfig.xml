@@ -2,7 +2,7 @@
 <FieldSet xmlns="http://micros.com/xstore/config/form/field" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="FormFieldConfig.xsd">
  
    <!-- ASQ Zatca Integration Starts -->
-   <Field name="captureOTP" type="Text" resource="captureOTP" dataFieldRef="ASQ_OTP"/>
+	<Field name="captureOTP" type="Text" resource="captureOTP" dataFieldRef="ASQ_OTP" />
    <Field name="captureOTPLabel" type="Label" text="_captureOTP" />
    <!-- ASQ Zatca Integration Ends -->
    
@@ -19,12 +19,47 @@
    <Field name="custMobileNumberLabel" type="Label" text="_asqPromptmsgEnterMobileNumber" />
    <!-- ASQ Capture Customer Mobile Number Ends -->
    
-	<!-- ASQ Tabby Integration Starts -->
-   <Field name="custMobileNumber" type="Text" resource="custMobileNumber" dataFieldRef="Phone"/>
-   <Field name="custMobileNumberLabel" type="Label" text="_asqPromptmsgEnterMobileNumber" />
+    <!-- ASQ Neqaty Integration Starts -->
+   <Field name="neqatyOTP" type="Text" resource="neqatyOTP" dataFieldRef="ASQ_OTP"/>
+   <Field name="neqatyOTPLabel" type="Label" text="_asqPromptmsgEnterOTP" />
+  <!-- ASQ Neqaty Integration Ends -->
+  
+	<!-- ASQ Planet Integration Starts -->
+    <Field name="asqCustInfoLabel" type="Label" text="_commonCustInfo"/>
+    <Field name="asqCustInfoTaxLabel" type="Label" text="_asqCustInfoTaxLabel"/>
+    
+    <Field name="asqNationalityLabel" type="Label" text="_asqNationalityLabel"/>
+    <Field name="asqNationalityResidenceLabel" type="Label" text="_asqNationalityResidenceLabel"/>
+       
+    <Field name="asqNationality" type="Text" resource="asqNationality" dataFieldRef="Address"/>
+    <Field name="asqNationalityResidence" type="Text" resource="asqNationalityResidence"/>
+      
+     <Field name="asqTaxDocumentLabel" type="Label" text="_asqTaxDocumentLabel"/>
+    <Field name="asqTaxDocumentNumberLabel" type="Label" text="_asqTaxDocumentNumberLabel"/>
+    
+    <Field name="asqTaxDocument" type="Text" resource="asqTaxDocument"/>
+    <Field name="asqTaxDocumentNumber" type="Text" resource="asqTaxDocumentNumber"/>
+      
+     <Field name="asqTaxIssuedByLabel" type="Label" text="_asqTaxIssuedByLabel"/>
+    <Field name="asqExpirationDateLabel" type="Label" text="_asqExpirationDateLabel"/>
+    
+    <Field name="asqTaxIssuedBy" type="Text" resource="asqTaxIssuedBy"/>
+    <Field name="asqExpirationDate" type="Text" resource="asqExpirationDate" dataFieldRef="BirthDate"/>
+    
+     <Field name="asqBirthDate" type="Text" resource="asqBirthDate" dataFieldRef="BirthDate" />
+     <Field name="asqGender" type="ComboBox" resource="gender"/>
+	<!-- ASQ Planet Integration Ends -->
+     <!-- ASQ Mokafaa Integration Starts -->   
+   <Field name="or" type="Label" text="_asqOrLabel" />
    
-   <Field name="custEmailAddress" type="Text" resource="custEmailAddress" dataFieldRef="Email"/>
-   <Field name="custEmailAddressDLabel" type="Label" text="_asqPromptmsgEnterEmailAddress" />
-  <!-- ASQ Tabby Integration Ends -->
+   <Field name="mokafaaloyaltyCICNoLabel" type="Label" text="_asqPromptMokafaaloyaltyCICNoLabel" />
+   <Field name="loyaltyCICNo" type="Text" resource="loyaltyCICNo" dataFieldRef="Numeric"/>
+   
+   <Field name="mokafaaOTP" type="Text" resource="mokafaaOTP" dataFieldRef="ASQ_OTP"/>
+   <Field name="mokafaaLabel" type="Label" text="_asqPromptmsgEnterOTP" />
+   
+   <Field name="mokafaaRedeemPoints" type="Text" resource="mokafaaRedeemPoints" dataFieldRef="Numeric"/>
+   <Field name="mokafaaRedeemPointsLabel" type="Label" text="_asqPromptmsgEnterRedeemPoints" />
+  <!-- ASQ Mokafaa Integration Ends -->
   </FieldSet>
   

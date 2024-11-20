@@ -22,8 +22,8 @@
     <Property key="GetConfigPathPath" value="/xcenter/configpath/GetConfigPath"/>
     <Property key="GetSystemDateTimePath" value="/xcenter/misc/GetSystemDateTime"/>
     <Property key="Timeout" value="30"/>
-    <Property key="ConnectionUserName" value=""/>
-    <Property key="ConnectionPassword" value=""/>
+    <Property key="ConnectionUserName" value="${xcenter.db.user}"/>
+    <Property key="ConnectionPassword" value="${xcenter.db.pwd}"/>
     <Property key="keystore" value="${dtv.util.net.ssl.keyStore}"/>
     <Property key="keystorePassword" value="${dtv.keystore.password}"/>
     <Property key="keyalias" value="xcenter-20240625"/>

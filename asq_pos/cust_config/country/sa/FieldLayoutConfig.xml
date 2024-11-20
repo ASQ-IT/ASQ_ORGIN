@@ -20,6 +20,12 @@
    </FieldLayout>
    <!-- ASQ STC Integration Ends -->
    
+       <!-- ASQ Neqaty Integration Starts -->
+   <FieldLayout name="neqatyOTPLayout" type="SimpleLayout">
+    <Row>
+      <Column start="0" width="100" fieldRef="neqatyOTP" required="true" labeledBy="neqatyOTPLabel" verticalAlignment="Center"/>
+    </Row>
+   </FieldLayout>
    <!-- ASQ Capture Customer Mobile Number Starts -->
    <FieldLayout name="ASQ_MOBILE_NUMBER_LAYOUT" type="SimpleLayout">
 	   	<Row>
@@ -28,15 +34,64 @@
    </FieldLayout>
    <!-- ASQ Capture Customer Mobile Number Ends -->
 
- <!-- ASQ Tabby Integration Starts -->
-   <FieldLayout name="tabbyDetailsLayout" type="SimpleLayout">
+   
+   <!--  ASQ PLanet Tax Integeration -->
+  <FieldLayout name="asqPlanetDetailsLayout" type="ListLayout">
     <Row>
-      <Column start="0" width="100" fieldRef="custMobileNumber" labeledBy="custMobileNumberLabel" verticalAlignment="Center"/>
+      <Column start="0" width="100" fieldRef="asqCustInfoLabel" accessibilityText="_commonCustInfo"/>
+    </Row>
+    <Row>
+      <Column start="10" width="35" fieldRef="firstName" labeledBy="firstNameLabel" />
+      <Column start="55" width="30" fieldRef="lastName" required="true" labeledBy="lastNameLabel" />
+    </Row>
+    <Row>
+      <Column start="10" width="35" fieldRef="custMobileNumber" refreshOnChange="true" labeledBy="custMobileNumberLabel" />
+      <Column start="55" width="30" fieldRef="asqGender" refreshOnChange="true" labeledBy="genderLabel" />
+    </Row>
+    <Row>
+     <Column start="10" width="75" fieldRef="address1" refreshOnChange="true" labeledBy="address1Label" />
     </Row>
      <Row>
-      <Column start="0" width="100" fieldRef="custEmailAddress"  labeledBy="custEmailAddressLabel" verticalAlignment="Center"/>
+      <Column start="10" width="35" fieldRef="asqNationality" refreshOnChange="true" labeledBy="asqNationalityLabel" />
+       <Column start="55" width="30" fieldRef="asqNationalityResidence" refreshOnChange="true" required="true" labeledBy="asqNationalityResidenceLabel" />
+    </Row>
+  </FieldLayout>
+   <FieldLayout name="asqPlanetTaxDetailsLayout" type="ListLayout">
+    <Row>
+      <Column start="0" width="100" fieldRef="asqCustInfoTaxLabel" accessibilityText="_asqCustInfoTaxLabel"/>
+    </Row>
+     <Row>
+      <Column start="10" width="35" fieldRef="asqTaxDocument" labeledBy="asqTaxDocumentLabel"/>
+      <Column start="55" width="30" fieldRef="asqTaxDocumentNumber" required="true" labeledBy="asqTaxDocumentNumberLabel"/>
+    </Row>
+     <Row>
+      <Column start="10" width="35" fieldRef="asqTaxIssuedBy" labeledBy="asqTaxIssuedByLabel"/>
+      <Column start="55" width="30" fieldRef="asqExpirationDate" labeledBy="asqExpirationDateLabel"/>
+    </Row>
+    <Row>
+      <Column start="10" width="35" fieldRef="asqBirthDate" labeledBy="birthDateLabel"/>
+    </Row>
+  </FieldLayout>
+  
+     <!-- ASQ Mokafaa Integration Starts -->
+   
+    <FieldLayout name="mokafaaLoyaltyLayout" type="SimpleLayout">
+    	<Row>
+	      	<Column start="0" width="100" fieldRef="custMobileNumber" labeledBy="custMobileNumberLabel" verticalAlignment="Center"/>
+	   	</Row>
+	   	
+	    <Row>
+	      <Column start="0" width="100" fieldRef="loyaltyCICNo" labeledBy="mokafaaloyaltyCICNoLabel" verticalAlignment="Center"/>
+	    </Row>
+   </FieldLayout>
+   
+   <FieldLayout name="mokafaaOTPLayout" type="SimpleLayout">
+    <Row>
+      <Column start="0" width="100" fieldRef="mokafaaOTP" required="true" labeledBy="mokafaaLabel" verticalAlignment="Center"/>
+    </Row>
+     <Row>
+      <Column start="0" width="100" fieldRef="mokafaaRedeemPoints" required="true" labeledBy="mokafaaRedeemPointsLabel" verticalAlignment="Center"/>
     </Row>
    </FieldLayout>
-   <!-- ASQ Tabby Integration Ends -->
-   
+   <!-- ASQ Mokafaa Integration Ends -->
 </FieldLayoutSet>

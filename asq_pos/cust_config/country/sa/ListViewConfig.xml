@@ -135,16 +135,16 @@
  <Header name="ASQ_NEQATY_REDEEM_OPTIONS_LIST">
     <Row>
       <Column start="0" width="25" translatable="_asqRedeempoints" />
-      <Column start="28" width="40" translatable="_asqAmount" />
-      <Column start="62" width="75" translatable="_asqRedeemCode" />
+      <Column start="26" width="50" translatable="_asqAmount" />
+      <Column start="51" width="90" translatable="_asqRedeemCode" />
     </Row>
     
   </Header>
   <Element name="ASQ_NEQATY_REDEEM_OPTIONS_LIST">
     <Row>
       <Column start="0" width="25" method="getRedeemPoints"/>
-      <Column start="28" width="40" method="getRedeemAmount" />
-      <Column start="62" width="75" method="getRedeemCode"/>
+      <Column start="26" width="50" method="getRedeemAmount" />
+      <Column start="51" width="90" method="getRedeemCode"/>
     </Row>
   </Element>
   </ListView>

@@ -16,11 +16,12 @@ import dtv.xst.dao.com.CodeLocator;
 import dtv.xst.dao.com.ICodeValue;
 
 public class AsqPlanetVatClaimEditModel extends BasicEditModel {
-	
-	 private static final IValueWrapperFactory codeWrapperFactory_ = ValueWrapperFactory.makeWrapperFactory(CodeEnumValueWrapper.class);
-	 
+
+	private static final IValueWrapperFactory codeWrapperFactory_ = ValueWrapperFactory
+			.makeWrapperFactory(CodeEnumValueWrapper.class);
+
 	public static final String ASQ_MOBILE_NUMBER_FIELD = "custMobileNumber";
-    public static final String ASQ_GENDER = "gender";
+	public static final String ASQ_GENDER = "gender";
 	private static final String ASQ_CUSTOMER_FIRST_NAME = "firstName";
 	private static final String ASQ_CUSTOMER_LAST_NAME = "lastName";
 	private static final String ASQ_NATIONAL = "asqNationality";
@@ -45,8 +46,6 @@ public class AsqPlanetVatClaimEditModel extends BasicEditModel {
 	private String asqTaxIssuedBy;
 	private String asqExpirationDate;
 	private String asqBirthDate;
-	
-	String category="";
 
 	public String getAsqTaxDocument() {
 		return asqTaxDocument;
@@ -90,21 +89,17 @@ public class AsqPlanetVatClaimEditModel extends BasicEditModel {
 
 	@SuppressWarnings("unchecked")
 	public AsqPlanetVatClaimEditModel() {
-		super(FF.getTranslatable("_asqCaptureCustMobileNumber&EmailAddressTitle"),
-				FF.getTranslatable("_asqCaptureCustMobileNumber&EmailAddressDescription"));
+		super(FF.getTranslatable("_asqPlanetTaxFreeTitle"), FF.getTranslatable("_asqPlanetTaxFreeDesc"));
 		addField(ASQ_MOBILE_NUMBER_FIELD, String.class);
-		//addField(ASQ_CUSTOMER_EMAIL_FIELD, String.class);
 		addField(ASQ_CUSTOMER_FIRST_NAME, String.class);
 		addField(ASQ_CUSTOMER_LAST_NAME, String.class);
-		addField(ASQ_GENDER, String.class);
-	
-		/*
-		 * List<? extends ICodeValue> types =
-		 * CodeLocator.getCodeValues(ConfigurationMgr.getOrganizationId(), category);
-		 * 
-		 * this.addField(EditModelField.makeFieldDefUnsafe(this,gender,String.class,2,
-		 * null,ICardinality.OPTIONAL, types , null, codeWrapperFactory_, null ) );
-		 */
+		// addField(ASQ_GENDER, String.class);
+
+		List<? extends ICodeValue> types = CodeLocator.getCodeValues(ConfigurationMgr.getOrganizationId(), "GENDER");
+
+		addField(EditModelField.makeFieldDefUnsafe(this, ASQ_GENDER, String.class, 2, null, ICardinality.OPTIONAL,
+				types, null, codeWrapperFactory_, null));
+
 		addField(ASQ_ADDRESS, String.class);
 		addField(ASQ_NATIONAL, String.class);
 		addField(ASQ_NATIONAL_RES, String.class);

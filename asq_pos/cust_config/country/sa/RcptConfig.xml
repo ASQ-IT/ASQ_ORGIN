@@ -1,24 +1,180 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ReceiptDefinitions xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="RcptConfig.xsd">
-  <sections>
-   <section name="footer_cust_copy">
-      <sectionref>legalWarranty</sectionref>
-      <sectionref>soldItemsCount</sectionref>
-      <sectionref>returnedItemsCount</sectionref>
-      <sectionref>LOCAL.ITEMS_COUNT</sectionref>
-      <sectionref>system_mode</sectionref>
-      <row />
-      <sectionref>trans_barcode</sectionref>
-      <row />
-      <sectionref>asq_zatca_qrcode</sectionref>
+
+  <ReceiptCopyRules>
+    <ReceiptCopyRule name="RETAIL_SALE_AR" document="CUSTOMER_AR">
+      <Rule class="dtv.pos.hardware.rcptbuilding.copyrules.TransactionTypeRule" type="RETAIL_SALE" />
+      <Rule class="dtv.pos.hardware.rcptbuilding.copyrules.CanceledTransactionReceiptEnabledRule" />
+    </ReceiptCopyRule>
+     <ReceiptCopyRule name="RETAIL_SALE_AR" document="STORE">
+      <Rule class="dtv.pos.hardware.rcptbuilding.copyrules.TransactionTypeRule" type="RETAIL_SALE" />
+      <Rule class="dtv.pos.hardware.rcptbuilding.copyrules.CanceledTransactionReceiptEnabledRule" />
+    </ReceiptCopyRule>
+  </ReceiptCopyRules>
+  <receipts>
+    <receipt document="CUSTOMER_AR" sectionref="CustomerCopy" email="true" locale="ar_SA" />
+  </receipts>
+  
+<sections>
+	<section name="CustomerCopy">
+		<sectionref>header</sectionref>
+		<sectionref>CUST_COPY_HEADER_DB</sectionref>
+		<sectionref>COUNTRYPACK.SUSPEND_NONFISCAL</sectionref>
+		<sectionref>items</sectionref>
+		<sectionref>totals</sectionref>
+		<sectionref>tax_code_summary</sectionref>
+		<sectionref>tenders</sectionref>
+		<sectionref>change</sectionref>
+		<sectionref>YouSavedMessage</sectionref>
+		<sectionref>TaxExemptInfo</sectionref>
+		<sectionref>SALE_DISCLAIMER_DB</sectionref>
+		<sectionref>CUST_COPY_FOOTER_DB</sectionref>
+		<sectionref>CUST_COPY_FOOTER1_DB</sectionref>
+		<sectionref>CUST_COPY_FOOTER2_DB</sectionref>
+		<sectionref>CUST_COPY_FOOTER3_DB</sectionref>
+		<sectionref>CUST_COPY_FOOTER4_DB</sectionref>
+		<sectionref>CUST_COPY_FOOTER5_DB</sectionref>
+		<sectionref>CUST_COPY_FOOTER_DB1</sectionref> 
+		<!-- <sectionref>DONATION_FOOTER_MESSAGE</sectionref> -->
+		<sectionref>footer_cust_copy</sectionref>
+		<sectionref>LOCAL.CUST_COPY_FOOTER_POST</sectionref>
+		<sectionref>system_mode</sectionref>
+       <sectionref>CustomerCopyLabel</sectionref> 
+		<sectionref>LOCAL.CUST_COPY_FOOTER</sectionref>
+		<sectionref>page_break</sectionref>
+	</section>
+	
+	
+	 <section name="nonchange_tender">
+      <sectionref>currency_tender</sectionref>
+      <sectionref>creditcard_tender</sectionref>
+      <sectionref>loyality_tender</sectionref>
+      <sectionref>travelers_check_tender</sectionref>
+      <sectionref>check_tender</sectionref>
+      <sectionref>account_credit</sectionref>
+      <sectionref>voucher_tender</sectionref>
+      <sectionref>account_tender</sectionref>
+      <sectionref>homeofficecheck_tender</sectionref>
+      <sectionref>coupon_tender</sectionref>
+      <sectionref>nonvoided_foreign_currency_tender</sectionref>
+      <sectionref>misc_tender</sectionref>
+      <sectionref>roomcharge_tender</sectionref>
+      <sectionref>custcopy_nonchange_tender</sectionref>
     </section>
     
-	<section name="asq_zatca_qrcode">
-      <barcode symbology="QR CODE" height="250" width="300" textposition="NONE" >
+    
+     <section name="loyality_tender">
+      <condition class="dtv.pos.docbuilding.conditions.LineTenderTypeCondition" value="LOYALITY" />
+      <row>
         <field>
-          <aggregate class="asq.pos.register.sale.zatca.receipt.AsqZatcaTransQrCode" />
+          <aggregate class="dtv.pos.tender.TenderLineDescriptionDocBuilderField" />
         </field>
-      </barcode>
+        <field method="getAmount" formatter="Money" loc="-3" rtlloc="12" />
+      </row>
     </section>
-  </sections>
+    
+	<section name="footer_cust_copy">
+		<sectionref>legalWarranty</sectionref>
+		<!-- <sectionref>soldItemsCount</sectionref>
+		<sectionref>returnedItemsCount</sectionref> -->
+		<sectionref>LOCAL.ITEMS_COUNT</sectionref>
+		<sectionref>system_mode</sectionref>
+		<row />
+		<!-- <sectionref>trans_barcode</sectionref> -->
+		<row />
+	  <sectionref>asq_planet_id</sectionref>
+	  <row style="STRONGUNDERLINE" align="C" />
+	   <sectionref>asq_zatca_qrcode</sectionref>
+		<sectionref>barcode_footer</sectionref>
+		<row style="STRONGUNDERLINE" align="C" />
+	</section>
+	<!-- <section name="tax_payer">
+	<row>
+			<field text="_simplifiedTaxpayer" style="BOLD" align="R" />
+			<sp/>
+			<field dbRef="CUSTOMER_COPY_FOOTER_LAST::DEFAULT::getTransactionDate">
+			</field>
+			</row>
+	</section>  -->
+	<section name="asq_zatca_qrcode">
+		<barcode symbology="QR CODE" textposition="NONE" height="250" width="300" >
+			<field align="L" formatter="PlainText">
+				<aggregate
+					class="asq.pos.register.sale.zatca.receipt.AsqZatcaTransQrCode" />
+			</field>
+			<row />
+		</barcode>
+	</section> 	
+	<!-- Planet integration changes	start -->
+	<section name="asq_planet_id">
+	<condition method="getStringProperty" method_param="ASQ_PLANET_TAX_ID" comparison="NOT_NULL" />
+	<row />
+	<row>  
+	<field text="_asqPlanetReceipt" loc="-25"/>
+	<field text="_asqPlanetReceipt1" loc="10"/>
+	<field text="_asqPlanetReceipt2" loc="10"/> 
+	<field text="_asqPlanetReceipt3" loc="10"/>
+	<field method="getStringProperty" method_param="ASQ_PLANET_TAX_ID" loc="10" style="BOLD" />
+	<field text="-------------------------------------------------------" loc="10"/>
+	<field text="_asqPlanetReceipt4" loc="10"/>
+	</row>
+	</section>
+	<!-- Planet integration changes	end -->
+    <section name="CUST_COPY_FOOTER_DB1" dbRef="CUSTOMER_COPY_FOOTER_LAST::DEFAULT::getTransactionDate">
+		<row />
+	</section>
+	<section name="CUST_COPY_FOOTER_DB"
+		dbRef="CUSTOMER_COPY_FOOTER::DEFAULT::getTransactionDate">
+		<row />
+	</section>
+	<section name="CUST_COPY_FOOTER1_DB"
+		dbRef="CUSTOMER_COPY_FOOTER1::DEFAULT::getTransactionDate">
+		<row />
+	</section>
+	<section name="CUST_COPY_FOOTER2_DB"
+		dbRef="CUSTOMER_COPY_FOOTER2::DEFAULT::getTransactionDate">
+		<row />
+	</section>
+	<section name="CUST_COPY_FOOTER3_DB"
+		dbRef="CUSTOMER_COPY_FOOTER3::DEFAULT::getTransactionDate">
+		<row />
+	</section>
+	<section name="CUST_COPY_FOOTER4_DB"
+		dbRef="CUSTOMER_COPY_FOOTER4::DEFAULT::getTransactionDate">
+		<row />
+	</section>
+	<section name="CUST_COPY_FOOTER5_DB"
+		dbRef="CUSTOMER_COPY_FOOTER5::DEFAULT::getTransactionDate">
+		<row />
+	</section>
+
+	<section name="headerTop_preLocal">
+		<sectionref>logo</sectionref>
+		<sectionref>invoice_text</sectionref>
+		<row />
+		<sectionref>trans_barcode</sectionref>
+		<!-- <sectionref>transaction_store_location</sectionref> -->
+		<horizontal_rule />
+	</section>
+
+	<section name="invoice_text">
+		<region alignment="C">
+			<field text="_simplifiedTaxInvoicearabic" style="BOLD" />
+		</region>
+		<region alignment="C">
+			<field text="_simplifiedTaxInvoice" style="BOLD" />
+		</region>
+	</section>
+
+	<section name="logo" >
+		<picture
+			filename="../xstoredata/xstore/res/graphics/receipt/logo.bmp"
+			preload="true"  height="2" width="300"/>
+	</section>
+	<section name="barcode_footer">	
+		<picture
+			filename="../xstoredata/xstore/res/graphics/receipt/barcode.bmp"
+			preload="true" />
+	</section>   
+</sections>
 </ReceiptDefinitions>

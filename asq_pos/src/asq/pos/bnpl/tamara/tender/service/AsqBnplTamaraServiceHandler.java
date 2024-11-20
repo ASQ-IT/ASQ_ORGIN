@@ -6,9 +6,15 @@ import javax.ws.rs.client.Invocation.Builder;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 import com.oracle.shaded.fasterxml.jackson.core.JsonProcessingException;
 import com.oracle.shaded.fasterxml.jackson.databind.JsonMappingException;
 
+import asq.pos.bnpl.tabby.tender.service.AsqBnplTabbyErrorDesc;
+import asq.pos.bnpl.tabby.tender.service.AsqSubmitBnplTabbyServiceResponse;
+import asq.pos.bnpl.tamara.tender.op.AsqBnplTamaraTenderOp;
 import asq.pos.zatca.cert.generation.AsqZatcaHelper;
 import asq.pos.zatca.cert.generation.AsqZatcaIntegrationConstants;
 import dtv.service.req.IServiceResponse;
@@ -17,6 +23,8 @@ import dtv.servicex.ServiceType;
 import dtv.servicex.impl.AbstractJaxRsHandler;
 
 public class AsqBnplTamaraServiceHandler extends AbstractJaxRsHandler<AsqSubmitBnplTamraServiceRequest, IServiceResponse> {
+	
+	private static final Logger LOG = LogManager.getLogger(AsqBnplTamaraServiceHandler.class);
 
 	@Inject
 	AsqZatcaHelper asqZatcaHelper;
@@ -59,18 +67,28 @@ public class AsqBnplTamaraServiceHandler extends AbstractJaxRsHandler<AsqSubmitB
 	}
 
 	private IServiceResponse handleResponse(Response argRawResponse) {
+		if (argRawResponse.getStatus() == 200) {
 			try {
-				return (IServiceResponse) asqZatcaHelper.convertJSONToPojo(argRawResponse.readEntity(String.class),AsqSubmitBnplTamraServiceResponse.class);
-			} catch (JsonMappingException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-				return null;
-			} catch (JsonProcessingException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
+				return (IServiceResponse) asqZatcaHelper.convertJSONToPojo(argRawResponse.readEntity(String.class),
+						AsqSubmitBnplTabbyServiceResponse.class);
+			} catch (Exception e) {
+				LOG.error("Tamara Service Exception occured");
 				return null;
 			}
-	
+		} else {
+			try {
+				AsqSubmitBnplTamraServiceResponse asqSubmitBnplTamaraServiceResponse = new AsqSubmitBnplTamraServiceResponse();
+				AsqTamaraErrorDesc errorResponse = asqZatcaHelper.convertJSONToPojo(argRawResponse.readEntity(String.class), AsqTamaraErrorDesc.class);
+				asqSubmitBnplTamaraServiceResponse.setErrors(errorResponse);
+				int errorCode = argRawResponse.getStatus();
+				String errorStatus = Integer.toString(errorCode);
+				asqSubmitBnplTamaraServiceResponse.setStatus(errorStatus);
+				return (IServiceResponse) asqSubmitBnplTamaraServiceResponse;
+			} catch (Exception e) {
+				LOG.error("Tamara Service Exception occured during convertJSONToPojo");
+				return null;
+			}
+		}
 	}
 
 }

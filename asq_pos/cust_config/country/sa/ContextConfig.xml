@@ -11,5 +11,16 @@
   <Context name="STC_OTP_MENU">
     <ParentContext>TEXT_PROMPT_ONLY_EMPTY_MENU</ParentContext>
     <HelpKey>_helpMsgSaleTender</HelpKey>
-  </Context>    
+  </Context> 
+  
+  <!-- PRICE Quotation start-->
+   <Context name="SALE1">
+    <ParentContext>REGISTER_TRANSACTION_LIST</ParentContext>
+    <MenuKey>SALE1</MenuKey>
+    <ListModelKey>CURRENT_TRANSACTION</ListModelKey>
+    <Text1>_contextSale</Text1>
+    <HelpKey>_helpMsgSale</HelpKey>
+    <ComponentGroup ref="BLUE" />
+  </Context>
+  <!-- PRICE Quotation end-->
  </ContextSet>

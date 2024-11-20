@@ -18,6 +18,8 @@
   <bean id="asqNeqatyService" class="asq.pos.loyalty.neqaty.tender.service.AsqNeqatyServiceImpl"/>
   <bean id="asqBnplTabbyServices" class=" asq.pos.bnpl.tabby.tender.service.AsqBnplTabbyServicesImpl" primary="true"/>
 	<bean id="asqPlanetVatClaimServices" class=" asq.pos.planet.vat.claim.service.AsqPlanetVatClaimServicesImpl" primary="true"/>
+   <bean id="asqMokafaaHelper" class="asq.pos.loyalty.mokafaa.tender.service.AsqMokafaaHelper"/>
+  <bean id="asqMokafaaLoyalityTenderService" class="asq.pos.loyalty.mokafaa.tender.service.AsqMokafaaTenderServiceImpl"/>
   
   
   <bean abstract="true" id="AbstractZatcaRestServiceBean">
@@ -197,4 +199,27 @@
 		<property name="servicePath" value="" />
 	</bean>
 	<!-- ASQ Planet Connect Integration - Ends -->
+	<bean abstract="true" id="AbstractMokafaaRestServiceBean">
+    <property name="serviceId" value="ASQ_MOKAFAA_REST" />
+    <property name="exceptionHandler" ref="standardJaxRsExceptionHandler" />
+    <property name="serviceConfigHelper" ref="serviceConfigHelper" />
+    <property name="logEntity" value="false" />
+    <property name="oAuth2" value="false" />
+  </bean> 
+  
+   <bean id="ASQ_MOKFAA_TENDER_AUTH_TOKEN_SERVICE" class="asq.pos.loyalty.mokafaa.tender.service.AsqMokafaaloyaltyServiceHandler" parent="AbstractMokafaaRestServiceBean">
+    <property name="servicePath" value="/loyalty-redemption/oauth2/token" />
+  </bean> 
+  
+   <bean id="ASQ_MOKAFAA_TENDER_TRIGGER_OTP_SERVICE" class="asq.pos.loyalty.mokafaa.tender.service.AsqMokafaaloyaltyServiceHandler" parent="AbstractMokafaaRestServiceBean">
+    <property name="servicePath" value="/blu-loyalty/1.0.0/customer-authorization" />
+  </bean> 
+  
+  <bean id="ASQ_MOKAFAA_TENDER_REDEEM_SERVICE" class="asq.pos.loyalty.mokafaa.tender.service.AsqMokafaaloyaltyServiceHandler" parent="AbstractMokafaaRestServiceBean">
+    <property name="servicePath" value="/blu-loyalty/1.0.0/otp-validation" />
+  </bean>
+  
+  <bean id="ASQ_MOKFAA_TENDER_REFUND_REDEEM_SERVICE" class="asq.pos.loyalty.mokafaa.tender.service.AsqMokafaaloyaltyServiceHandler" parent="AbstractMokafaaRestServiceBean">
+    <property name="servicePath" value="/blu-loyalty/1.0.0/redemption-transaction-reversal" />
+  </bean>
 </beans>

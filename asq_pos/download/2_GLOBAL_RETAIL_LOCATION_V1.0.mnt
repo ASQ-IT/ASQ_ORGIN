@@ -1,1 +1,1 @@
-INSERT|RETAIL_LOCATION|11347|011347|Salama Centre Showroom - Jeddah|Salama Centre Showroom|30500 Bruce Industrial Pkwy|||Jeddah|||SA||||||Store Manager 011347|15|||0|0|0|||||ar_SA|SAR|||011347||||||0||||SA|||
+INSERT|RETAIL_LOCATION|${dtv.location.storeNumber}|0${dtv.location.storeNumber}|Salama Centre Showroom - Jeddah|Salama Centre Showroom|30500 Bruce Industrial Pkwy|||Jeddah|||SA||||||Store Manager 0${dtv.location.storeNumber}|15|||0|0|0|||||ar_SA|SAR|||0${dtv.location.storeNumber}||||||0||||SA|||

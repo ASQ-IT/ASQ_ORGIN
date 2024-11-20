@@ -6,13 +6,12 @@ import java.util.Date;
 import com.oracle.shaded.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.oracle.shaded.fasterxml.jackson.annotation.JsonProperty;
 
+import asq.pos.bnpl.tabby.tender.service.AsqBnplTabbyErrorDesc;
 import asq.pos.loyalty.stc.tender.service.AsqSTCErrorDesc;
 import dtv.service.req.IServiceResponse;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class AsqSubmitBnplTamraServiceResponse implements IServiceResponse{
-	
-/**create session srv response */
 	
 	@JsonProperty("order_id")
     private String order_id;
@@ -35,7 +34,6 @@ public class AsqSubmitBnplTamraServiceResponse implements IServiceResponse{
 	@JsonProperty("checkout_link")
     private String checkout_link;
     
-/** cancel session srv response */		
 	@JsonProperty("order_was_voided")
 	private boolean order_was_voided;
 	
@@ -45,7 +43,6 @@ public class AsqSubmitBnplTamraServiceResponse implements IServiceResponse{
     @JsonProperty("store_code")
     private String store_code;
     
-/** refund srv response */    
     @JsonProperty("comment")
     private String comment;
 
@@ -54,10 +51,6 @@ public class AsqSubmitBnplTamraServiceResponse implements IServiceResponse{
     
     @JsonProperty("capture_id")
     private String capture_id;
-
-/** order detail srv response */    
-//	@JsonProperty("order_id")
-//    private String order_id;
 
     @JsonProperty("order_reference_id")
     private Long order_reference_id;
@@ -108,9 +101,6 @@ public class AsqSubmitBnplTamraServiceResponse implements IServiceResponse{
 	@JsonProperty("discount_amount")
     private AsqBnplTamaraDisAmtObj discount_amount;
     
-//    @JsonProperty("captured_amount")
-//    private AsqBnplTamaraAmountObj captured_amount;
-    
     @JsonProperty("refunded_amount")
     private AsqBnplTamaraAmountObj refunded_amount;
     
@@ -138,38 +128,21 @@ public class AsqSubmitBnplTamraServiceResponse implements IServiceResponse{
 	public void setCheckout_deeplink(String checkout_deeplink) {
 		this.checkout_deeplink = checkout_deeplink;
 	}
-
 	@JsonProperty("wallet_prepaid_amount")
     private AsqBnplTamaraAmountObj wallet_prepaid_amount;
-    
-//    @JsonProperty("transactions")
-//    private Transactions transactions;
     
     @JsonProperty("processing")
     private boolean processing;
     
-//    @JsonProperty("store_code")
-//    private String store_code;
-    
-//    @JsonProperty("additional_data")
-//    private AsqBnplTamaraAddDataObj additional_data;
-    
-//    private ArrayList<Errors> errors;
-//    private String message;
-//    private Object data;
-//    private Object title;
-//    private Object screen_type;
     @JsonProperty("errors")
-	private AsqSTCErrorDesc [] errors;
+	private AsqTamaraErrorDesc  errors;
     
-    public AsqSTCErrorDesc[] getErrors() {
+    public AsqTamaraErrorDesc getErrors() {
 		return errors;
 	}
-	public void setErrors(AsqSTCErrorDesc[] errors) {
+	public void setErrors(AsqTamaraErrorDesc errors) {
 		this.errors = errors;
 	}
-
-
     public String getOrder_id() {
         return order_id;
     }

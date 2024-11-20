@@ -192,41 +192,41 @@
     <!-- ** Application Interfacing ** -->
     <!-- ***************** -->
     <!-- DEBUG: Web service requests/responses via Customer API CWSerenade integration -->
-    <Logger name="com.micros_retail.i11n.v1.cw.customer.service.util.CwWebServiceInvoker" level="warn" />
+    <Logger name="com.micros_retail.i11n.v1.cw.customer.service.util.CwWebServiceInvoker" level="debug" />
     <!-- General logging for Micros-Retail inter-application APIs -->
     <Logger name="com.micros_retail.i11n" level="warn" />
     <!-- General logging for Xstore inter-application Customer APIs -->
-    <Logger name="dtv.xst.crm" level="warn" />
+    <Logger name="dtv.xst.crm" level="debug" />
     <!-- DEBUG: Web service requests/responses via Xstore inter-application APIs -->
     <Logger name="dtv.servicex.impl.WSLoggingHandler" level="debug" />
     <!-- XSTORE-12195 - This is the new way of defining a logger category that uses the WSLoggingHandler. To enable 
       the logger for a specific request type, set its priority level to DEBUG. -->
     <!-- Sub-categories for Relate gift card tender integration -->
-    <Logger name="dtv.servicex.impl.WSLoggingHandler.RELATE_GIFT_CARD_SVC_TRANSACTION_WS" level="info"
+    <Logger name="dtv.servicex.impl.WSLoggingHandler.RELATE_GIFT_CARD_SVC_TRANSACTION_WS" level="debug"
       additivity="false">
       <AppenderRef ref="AUTH.file" />
     </Logger>
-    <Logger name="dtv.servicex.impl.WSLoggingHandler.RELATE_GIFT_CARD_ACTIVATE" level="info"
+    <Logger name="dtv.servicex.impl.WSLoggingHandler.RELATE_GIFT_CARD_ACTIVATE" level="debug"
       additivity="false">
       <AppenderRef ref="AUTH.file" />
     </Logger>
-    <Logger name="dtv.servicex.impl.WSLoggingHandler.RELATE_GIFT_CARD_BALANCE_INQUIRY" level="info"
+    <Logger name="dtv.servicex.impl.WSLoggingHandler.RELATE_GIFT_CARD_BALANCE_INQUIRY" level="debug"
       additivity="false">
       <AppenderRef ref="AUTH.file" />
     </Logger>
-    <Logger name="dtv.servicex.impl.WSLoggingHandler.RELATE_GIFT_CARD_REDEEM" level="info" additivity="false">
+    <Logger name="dtv.servicex.impl.WSLoggingHandler.RELATE_GIFT_CARD_REDEEM" level="debug" additivity="false">
       <AppenderRef ref="AUTH.file" />
     </Logger>
-    <Logger name="dtv.servicex.impl.WSLoggingHandler.RELATE_GIFT_CARD_CASHOUT" level="info" additivity="false">
+    <Logger name="dtv.servicex.impl.WSLoggingHandler.RELATE_GIFT_CARD_CASHOUT" level="debug" additivity="false">
       <AppenderRef ref="AUTH.file" />
     </Logger>
-    <Logger name="dtv.servicex.impl.WSLoggingHandler.RELATE_GIFT_CARD_RELOAD" level="info" additivity="false">
+    <Logger name="dtv.servicex.impl.WSLoggingHandler.RELATE_GIFT_CARD_RELOAD" level="debug" additivity="false">
       <AppenderRef ref="AUTH.file" />
     </Logger>
-    <Logger name="dtv.servicex.impl.WSLoggingHandler.RELATE_GIFT_CARD_VOID" level="info" additivity="false">
+    <Logger name="dtv.servicex.impl.WSLoggingHandler.RELATE_GIFT_CARD_VOID" level="debug" additivity="false">
       <AppenderRef ref="AUTH.file" />
     </Logger>
-    <Logger name="dtv.servicex.impl.WSLoggingHandler.RELATE_GIFT_CARD_REVERSE" level="info" additivity="false">
+    <Logger name="dtv.servicex.impl.WSLoggingHandler.RELATE_GIFT_CARD_REVERSE" level="debug" additivity="false">
       <AppenderRef ref="AUTH.file" />
     </Logger>
     <!-- DEBUG: Requests to Xcenter REST services -->
@@ -238,9 +238,9 @@
     <!-- ** User Interface ** -->
     <!-- ***************** -->
     <!-- DEBUG: Entries in ListViewConfig.xml were chosen for rendering list items -->
-    <Logger name="dtv.pos.framework.ui.listview.config.ViewElementFactory" level="debug" />
-    <!--<Logger name="dtv.pos.framework.ui" level="debug" />-->
-    <Logger name="dtv.pos.ui" level="debug" />
+    <Logger name="dtv.pos.framework.ui.listview.config.ViewElementFactory" level="info" />
+    <!--<Logger name="dtv.pos.framework.ui" level="info" />-->
+    <Logger name="dtv.pos.ui" level="info" />
     <!-- ***************** -->
     <!-- ** State/Performance Profiling ** -->
     <!-- ***************** -->
@@ -313,7 +313,7 @@
     <Logger name="CASHDRAWER_LOG" additivity="false" level="info">
       <AppenderRef ref="CASHDRAWER.file" />
     </Logger>
-    <Logger name="RCPT_LOG" additivity="false" level="info">
+    <Logger name="RCPT_LOG" additivity="false" level="debug">
       <AppenderRef ref="RECEIPT_PRINTER.file" />
     </Logger>
     <Logger name="dtv.hardware.biometric" additivity="false" level="warn">
@@ -374,6 +374,7 @@
     <Logger name="dtv.data2.replication.dtximpl" level="info"/>
     
     <Logger name="asq.pos" level="debug"/>
+    <Logger name="javax.net.ssl" level="debug"/>
 
     <Root level="info">
       <AppenderRef ref="XSTORE.file" />

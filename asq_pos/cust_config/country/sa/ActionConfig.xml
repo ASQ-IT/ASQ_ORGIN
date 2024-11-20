@@ -13,7 +13,7 @@
   	<!-- ASQ Zatca Integration Ends -->
   	
   	 <!-- ASQ STC Integration Starts -->
-	<Action name="SALE::ASQ_TENDER_STC" category="Register" keywords="sale_tender" text="_asqMenuTextSTC" chainKey="ASQ_STC_MOBILE">
+	<Action name="SALE::ASQ_TENDER_STC" category="Register" keywords="sale_tender" text="_asqMenuTextSTC" chainKey="ASQ_TENDER_STC">
     <IconGroup icon="_imageTenderCash" rollIcon="_imageTenderCashRoll" pressIcon="_imageTenderCashPress" disabledIcon="_imageTenderCashDisabled" />
     <VisibilityRule class="dtv.pos.shared.visibilityrules.TenderEnabledCheck" >
       <Parameter name="tender" value="LOCAL_CURRENCY" />
@@ -45,7 +45,7 @@
 	<!-- ASQ Tamara Integration Ends -->
 	
 	<!-- ASQ Neqaty Integration Starts -->
-	<Action name="SALE::ASQ_TENDER_NEQATY" category="Register" keywords="sale_tender" text="_asqMenuTextNeqaty" chainKey="ASQ_TENDER_NEQATY">
+	<Action name="SALE::ASQ_TENDER_NEQATY" category="Register" keywords="sale_tender" text="_asqMenuTextNeqaty" chainKey="ASQ_TENDER_LOY_NEQATY">
 		<IconGroup icon="_imageTenderCash" rollIcon="_imageTenderCashRoll" pressIcon="_imageTenderCashPress" disabledIcon="_imageTenderCashDisabled" />
 		<VisibilityRule class="dtv.pos.shared.visibilityrules.TenderEnabledCheck">
 			<Parameter name="tender" value="LOCAL_CURRENCY" />
@@ -75,6 +75,37 @@
 		<VisibilityRule class="dtv.pos.register.sale.AmountDueVisibilityRule" />
 	</Action>
 	<!-- ASQ Tabby Integration Ends -->
-  	
-  	
+	<!-- ASQ Mokafaa Integration Starts -->
+	<Action name="SALE::ASQ_TENDER_MOKAFAA" category="Register" keywords="sale_tender" text="_asqMenuTextMokafaa" chainKey="ASQ_TENDER_LOY_MOKAFAA">
+		<IconGroup icon="_imageTenderCash" rollIcon="_imageTenderCashRoll" pressIcon="_imageTenderCashPress" disabledIcon="_imageTenderCashDisabled" />
+		<VisibilityRule class="dtv.pos.shared.visibilityrules.TenderEnabledCheck">
+			<Parameter name="tender" value="LOCAL_CURRENCY" />
+		</VisibilityRule>
+		<VisibilityRule class="dtv.pos.shared.visibilityrules.EffectiveTenderAccCheck">
+			<Parameter name="tender" value="LOCAL_CURRENCY" />
+		</VisibilityRule>
+		<VisibilityRule class="dtv.pos.shared.visibilityrules.AvailableLayawayTenderAccCheck">
+			<Parameter name="tender" value="LOCAL_CURRENCY" />
+		</VisibilityRule>
+		<VisibilityRule class="dtv.pos.register.sale.AmountDueVisibilityRule" />
+	</Action>
+	<!-- ASQ Mokafaa Integration Ends -->
+  <!-- Disable tax visibility button start-->
+  <Action name="RETAIL::TAX.CHANGE_LINE_LOCATION" category="Register" keywords="register_extended" relevance="ListItem" text="_menutextChangeItemTaxLocation" chainKey="TAX_ITEM_CHANGE_LOCATION" privilege="CHANGE_TAX_LOCATION">
+    <IconGroup icon="_iconMenuChange" />
+    <VisibilityRule class="asq.pos.tax.visibility.AsqChangeItemTaxLocation" />
+  </Action>
+  <Action name="RETAIL::TAX.CHANGE_LINE_PERCENT" category="Register" keywords="register_extended" relevance="ListItem" text="_changeItemTaxPercent" chainKey="TAX_ITEM_CHANGE_PERCENT" privilege="CHANGE_TAX_BY_PERCENT">
+    <IconGroup icon="_iconMenuChange" />
+    <VisibilityRule class="asq.pos.tax.visibility.AsqChangeItemTaxPercentage" />
+  </Action>
+ <!-- Disable tax visibility button end-->
+ 
+ <!-- PRICE Quotation start-->
+   <Action name="ADMIN::PRINTRECEIPT" category="Anywhere" keywords="login" text="_menutextPrintreceipt" chainKey="SALE_ITEM_START1"/>
+   <Action name="REGISTER::PRINT_RECEIPT" category="Register" keywords="sale_tender" text="_menutextPrintreceipt" chainKey="CHECK_SALE_COMPLETE1">
+   <VisibilityRule class="dtv.pos.shared.visibilityrules.AnySaleReturnLineItemVisibilityRule" />
+   </Action>
+   <Action name="NO_BACK1" category="Register" keywords="sale_tender" text="Back" chainKey="SALE_ITEM_START1"/>
+ <!-- PRICE Quotation end-->
 </ActionSet>

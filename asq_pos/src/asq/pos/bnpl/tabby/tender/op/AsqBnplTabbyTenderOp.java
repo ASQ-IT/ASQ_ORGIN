@@ -24,20 +24,26 @@ import asq.pos.bnpl.tamara.tender.service.AsqTamaraErrorDesc;
 import asq.pos.bnpl.tamara.tender.service.IAsqSubmitBnplTamraServiceRequest;
 import asq.pos.common.AsqValueKeys;
 import asq.pos.loyalty.stc.tender.AsqStcHelper;
+import asq.pos.loyalty.stc.tender.service.AsqSTCErrorDesc;
+import asq.pos.loyalty.stc.tender.service.AsqSTCLoyaltyServiceResponse;
 import asq.pos.zatca.AsqZatcaConstant;
 import dtv.i18n.IFormattable;
 import dtv.pos.common.OpChainKey;
 import dtv.pos.common.TransactionScopeKeys;
 import dtv.pos.framework.action.type.XstDataActionKey;
 import dtv.pos.framework.op.AbstractFormOp;
+import dtv.pos.framework.validation.ValidationResultList;
 import dtv.pos.iframework.action.IXstActionKey;
 import dtv.pos.iframework.action.IXstDataAction;
 import dtv.pos.iframework.op.IOpResponse;
+import dtv.pos.iframework.validation.IValidationResult;
+import dtv.pos.iframework.validation.IValidationResultList;
+import dtv.pos.iframework.validation.SimpleValidationResult;
+import dtv.util.StringUtils;
 import dtv.xst.dao.crm.IParty;
 import dtv.xst.dao.trl.IRetailTransaction;
 import dtv.xst.dao.trl.ISaleReturnLineItem;
 import dtv.xst.dao.trn.IPosTransaction;
-
 
 /**
  * @author RA20221457
@@ -60,7 +66,7 @@ public class AsqBnplTabbyTenderOp extends AbstractFormOp<AsqBnplTabbyEditModel> 
 
 	@Override
 	protected String getFormKey() {
-		return "ASQ_TABBY_DETAILS";
+		return "ASQ_CAP_CUST_MOBILE_NO";
 	}
 
 	private String custMobileNumber = "";
@@ -83,12 +89,12 @@ public class AsqBnplTabbyTenderOp extends AbstractFormOp<AsqBnplTabbyEditModel> 
 					&& trans.getTransactionTypeCode().equalsIgnoreCase("RETAIL_SALE")) {
 				custMobileNumber = trans.getCustomerParty().getTelephoneInformation().get(i).getTelephoneNumber();
 				editModel.setCustMobileNumber(custMobileNumber);
-				setScopedValue(AsqValueKeys.ASQ_MOBILE_NUMBER, editModel.getCustMobileNumber());
+				_transactionScope.setValue(AsqValueKeys.ASQ_MOBILE_NUMBER, editModel.getCustMobileNumber());
 				return super.handleInitialState();
 			}
 		} catch (Exception ex) {
 			LOG.info(
-					"TAMARA API Mobile number form execution exception customer is not available in the transaction and Trans object is null:");
+					"TABBY API Mobile number form execution exception customer is not available in the transaction and Trans object is null:");
 		}
 		return super.handleInitialState();
 	}
@@ -107,19 +113,22 @@ public class AsqBnplTabbyTenderOp extends AbstractFormOp<AsqBnplTabbyEditModel> 
 		if (XstDataActionKey.ACCEPT.equals(argAction.getActionKey())) {
 			IRetailTransaction trans = (IRetailTransaction) this._transactionScope.getTransaction();
 			AsqBnplTabbyEditModel editModel = this.getModel();
-			custMobileNumber = editModel.getCustMobileNumber();
+			if(editModel.getCustMobileNumber() != null){
+				custMobileNumber = editModel.getCustMobileNumber();
+				_transactionScope.setValue(AsqValueKeys.ASQ_MOBILE_NUMBER, custMobileNumber);
+				}
 			LOG.debug("TABBY API Mobile number captured :" + custMobileNumber);
 			if (custMobileNumber != null && !custMobileNumber.equals("")) {
 				LOG.info("Process of TABBY tender starts here");
 				if (null != trans.getCustomerParty()
-						&& !(this.getScopedValue(AsqValueKeys.ASQ_MOBILE_NUMBER).equals(custMobileNumber))) {
+						&& !(this._transactionScope.getValue(AsqValueKeys.ASQ_MOBILE_NUMBER).equals(custMobileNumber))) {
 					IParty info = trans.getCustomerParty();
 					info.setTelephone1(custMobileNumber);
-					setScopedValue(AsqValueKeys.ASQ_MOBILE_NUMBER, custMobileNumber);
+					_transactionScope.setValue(AsqValueKeys.ASQ_MOBILE_NUMBER, custMobileNumber);
 					LOG.info(
 							"TABBY API setting updated customer mobile number to transaction, this will be udpated once the transaciton is completed");
 				}
-			} else if (custMobileNumber == null) {
+			} else if (custMobileNumber == null || custMobileNumber.equals("")) {
 				LOG.debug("TABBY API customer mobile number field is null :");
 				return super.handleDataAction(argAction);
 			}
@@ -154,14 +163,15 @@ public class AsqBnplTabbyTenderOp extends AbstractFormOp<AsqBnplTabbyEditModel> 
 		payment.setOrder(asqBnplTabbyDetailsObj);
 		asqSubmitBnplTabbyServiceRequest.setPayment(payment);
 		asqSubmitBnplTabbyServiceRequest.setMerchant_code(AsqZatcaConstant.ASQ_TABBY_MERCHANT_CODE_DEFAULT);
+		LOG.info("Calling CreateSession API");
 		asqSubmitBnplTabbyServiceResponse = createSession(asqSubmitBnplTabbyServiceRequest);
-		//for testing
-		//asqSubmitBnplTabbyServiceResponse.getConfiguration().getAvailable_products().getInstallments().get(0).getWeb_url();
+		// for testing
+		  LOG.info("Tabby Response Payment Link: " + asqSubmitBnplTabbyServiceResponse.getConfiguration().getAvailable_products().getInstallments().get(0).getWeb_url());
+		LOG.info("Returned from CreateSession API");
 		return validateSessionResponseAndStoreDataInDB(asqSubmitBnplTabbyServiceResponse);
 	}
 
 	private IOpResponse validateSessionResponseAndStoreDataInDB(AsqSubmitBnplTabbyServiceResponse response) {
-
 		if (null != response && null != response.getError()) {
 			return handleServiceError(response);
 		} else if (null == response) {
@@ -175,82 +185,15 @@ public class AsqBnplTabbyTenderOp extends AbstractFormOp<AsqBnplTabbyEditModel> 
 		responseList.put("paymentExpiryDate", response.getPayment().getExpires_at());
 		responseList.put("paymentStatus", response.getPayment().getStatus());
 		LOG.info("TABBY API saving response to DB started");
-		setScopedValue(AsqValueKeys.ASQ_TABBY_PMNT_AMNT, response.getPayment().getAmount());
+		_transactionScope.setValue(AsqValueKeys.ASQ_TABBY_PMNT_AMNT, response.getPayment().getAmount());
 		saveTabbyResponseToDB(trans, responseList);
 		LOG.info("TABBY API saving response to DB successfull");
-		return (IOpResponse) requestPreparerGetNotificationService(response, trans);
-	}
-
-	private IOpResponse requestPreparerGetNotificationService(AsqSubmitBnplTabbyServiceResponse response,
-			IRetailTransaction trans) {
-
-		AsqSubmitBnplTabbyServiceResponse asqSubmitBnplTabbyServiceResponse = new AsqSubmitBnplTabbyServiceResponse();
-		IAsqSubmitBnplTabbyServiceRequest asqSubmitBnplTabbyServiceRequest = new AsqSubmitBnplTabbyServiceRequest();
-		if (response.getError() == null) {
-			asqSubmitBnplTabbyServiceRequest.setId(response.getId());
-			asqSubmitBnplTabbyServiceResponse = notificationRequest(asqSubmitBnplTabbyServiceRequest);
-		} else if (null != response && null != response.getError()) {
-			return handleServiceError(response);
-		}
-		return validateNotificationServiceResponse(asqSubmitBnplTabbyServiceResponse, trans);
-	}
-
-	@SuppressWarnings("null")
-	private IOpResponse validateNotificationServiceResponse(AsqSubmitBnplTabbyServiceResponse response,
-			IRetailTransaction trans) {
-		if (null != response && null != response.getError()) {
-			return handleServiceError(response);
-		} else if (response.getStatus().equalsIgnoreCase("ok")) {
-			return (IOpResponse) requestPreparerRetrievePayment(response, trans);
-		}
-		return HELPER.completeCurrentChainResponse();
-	}
-
-	private IOpResponse requestPreparerRetrievePayment(AsqSubmitBnplTabbyServiceResponse response,
-			IRetailTransaction trans) {
-
-		AsqSubmitBnplTabbyServiceResponse asqSubmitBnplTabbyServiceResponse = new AsqSubmitBnplTabbyServiceResponse();
-		IAsqSubmitBnplTabbyServiceRequest asqSubmitBnplTabbyServiceRequest = new AsqSubmitBnplTabbyServiceRequest();
-		AsqBnplTabbyPaymentObj payment = new AsqBnplTabbyPaymentObj();
-		 AsqBnplTabbyDetailsObj asqBnplTabbyDetailsObj = new AsqBnplTabbyDetailsObj();
-		if (response.getError() == null) {
-	        asqBnplTabbyDetailsObj.setPhone(trans.getCustomerParty().toString());
-	        asqBnplTabbyDetailsObj.setReference_id(Long.toString(trans.getTransactionSequence()));
-	        payment.setAmount(trans.getTotal().toString());
-	        payment.setCurrency(trans.getRetailTransactionLineItems().get(0).getCurrencyId());
-	      //payment.setCurrency("SAR");
-	        payment.setBuyer(asqBnplTabbyDetailsObj);
-	        payment.setOrder(asqBnplTabbyDetailsObj);
-			payment.setId(this._transactionScope.getValue(AsqValueKeys.ASQ_TABBY_PMNT_ID));
-			asqSubmitBnplTabbyServiceRequest.setPayment(payment);
-			asqSubmitBnplTabbyServiceResponse = retrievePayment(asqSubmitBnplTabbyServiceRequest);
-		} else if (null != response && null != response.getError()) {
-			return handleServiceError(response);
-		}
-		return validateRetrievePaymentResponse(asqSubmitBnplTabbyServiceResponse);
-	}
-
-	private IOpResponse validateRetrievePaymentResponse(AsqSubmitBnplTabbyServiceResponse response) {
-		if (null != response && null != response.getError()) {
-			return handleServiceError(response);
-		} else if (response.getStatus().equalsIgnoreCase("CREATED")) {
-			_transactionScope.setValue(AsqValueKeys.ASQ_TABBY_PAYMENT_SUCCESS, true);
-			return this.HELPER.getPromptResponse("ASQ_TABBY_PAYMENT_SUCCESSFULL");
-			// return HELPER.getPromptResponse("ASQ_TABBY_PAYMENT_CREATED"); // need to check this
-		} else if (response.getStatus().equalsIgnoreCase("AUTHORIZED")
-				|| response.getStatus().equalsIgnoreCase("CLOSED")) {
-			_transactionScope.setValue(AsqValueKeys.ASQ_TABBY_PAYMENT_SUCCESS, true);
-			return this.HELPER.getCompleteStackChainResponse(OpChainKey.valueOf("ASQ_TENDER_TABBY"));
-		} else if (response.getStatus().equalsIgnoreCase("REJECTED")) {
-			return HELPER.getPromptResponse("ASQ_TABBY_PAYMENT_REJECTED");
-		} else if (response.getStatus().equalsIgnoreCase("EXPIRED")) {
-			return HELPER.getPromptResponse("ASQ_TABBY_PAYMENT_EXPIRED");
-		}
-		return HELPER.completeResponse();
+		_transactionScope.setValue(AsqValueKeys.TABBY_RESPONSE, response.getId());
+		//return this.HELPER.getPromptResponse("ASQ_TABBY_PAYMENT_WAIT");
+		return this.HELPER.getCompleteStackChainResponse(OpChainKey.valueOf("ASQ_TABBY_PAYMENT"));
 	}
 
 	public void saveTabbyResponseToDB(IPosTransaction originalPosTrx, HashMap<String, String> responseList) {
-
 		IPosTransaction trans = this._transactionScope.getTransaction();
 		if (responseList != null) {
 			trans.setStringProperty("ASQ_TABBY_SESSION_ID", responseList.get("sessionID"));
@@ -264,6 +207,7 @@ public class AsqBnplTabbyTenderOp extends AbstractFormOp<AsqBnplTabbyEditModel> 
 			_transactionScope.setValue(AsqValueKeys.ASQ_TABBY_PMNT_EXPRY_DATE, responseList.get("paymentExpiryDate"));
 			_transactionScope.setValue(AsqValueKeys.ASQ_TABBY_SESSION_ID, responseList.get("sessionID"));
 			_transactionScope.setValue(AsqValueKeys.ASQ_TABBY_PMNT_STATUS, responseList.get("paymentStatus"));
+			LOG.info("Tabby API response values have been successfully updated in Trans properties");
 		}
 	}
 
@@ -271,50 +215,12 @@ public class AsqBnplTabbyTenderOp extends AbstractFormOp<AsqBnplTabbyEditModel> 
 			IAsqSubmitBnplTabbyServiceRequest asqSubmitBnplTabbyServiceRequest) {
 		AsqSubmitBnplTabbyServiceResponse response = new AsqSubmitBnplTabbyServiceResponse();
 		try {
+			LOG.info("Calling createSession API");
 			response = (AsqSubmitBnplTabbyServiceResponse) tabbyService.get()
 					.createSession(asqSubmitBnplTabbyServiceRequest);
 
 		} catch (Exception ex) {
-			ex.printStackTrace();
-		}
-		return response;
-	}
-
-	public AsqSubmitBnplTabbyServiceResponse notificationRequest(
-			IAsqSubmitBnplTabbyServiceRequest asqSubmitBnplTabbyServiceRequest) {
-		AsqSubmitBnplTabbyServiceResponse response = new AsqSubmitBnplTabbyServiceResponse();
-		try {
-			response = (AsqSubmitBnplTabbyServiceResponse) tabbyService.get()
-					.notificationRequest(asqSubmitBnplTabbyServiceRequest);
-
-		} catch (Exception ex) {
-			ex.printStackTrace();
-		}
-		return response;
-	}
-
-	public AsqSubmitBnplTabbyServiceResponse retrievePayment(
-			IAsqSubmitBnplTabbyServiceRequest asqSubmitBnplTabbyServiceRequest) {
-		AsqSubmitBnplTabbyServiceResponse response = new AsqSubmitBnplTabbyServiceResponse();
-		try {
-			response = (AsqSubmitBnplTabbyServiceResponse) tabbyService.get()
-					.retrievePayment(asqSubmitBnplTabbyServiceRequest);
-
-		} catch (Exception ex) {
-			ex.printStackTrace();
-		}
-		return response;
-	}
-
-	public AsqSubmitBnplTabbyServiceResponse refundPayment(
-			IAsqSubmitBnplTabbyServiceRequest asqSubmitBnplTabbyServiceRequest) {
-		AsqSubmitBnplTabbyServiceResponse response = new AsqSubmitBnplTabbyServiceResponse();
-		try {
-			response = (AsqSubmitBnplTabbyServiceResponse) tabbyService.get()
-					.refundPayment(asqSubmitBnplTabbyServiceRequest);
-
-		} catch (Exception ex) {
-			ex.printStackTrace();
+			LOG.info("Error during createSession API");
 		}
 		return response;
 	}
@@ -323,11 +229,11 @@ public class AsqBnplTabbyTenderOp extends AbstractFormOp<AsqBnplTabbyEditModel> 
 			IAsqSubmitBnplTabbyServiceRequest asqSubmitBnplTabbyServiceRequest) {
 		AsqSubmitBnplTabbyServiceResponse response = new AsqSubmitBnplTabbyServiceResponse();
 		try {
+			LOG.info("Calling cancelSession API");
 			response = (AsqSubmitBnplTabbyServiceResponse) tabbyService.get()
 					.cancelSession(asqSubmitBnplTabbyServiceRequest);
-
 		} catch (Exception ex) {
-			ex.printStackTrace();
+			LOG.info("Error during createSession API");
 		}
 		return response;
 	}
@@ -358,9 +264,25 @@ public class AsqBnplTabbyTenderOp extends AbstractFormOp<AsqBnplTabbyEditModel> 
 		AsqBnplTabbyErrorDesc error = asqServiceResponse.getError();
 		args[0] = _formattables.getSimpleFormattable(error.getErrorType());
 		args[1] = _formattables.getSimpleFormattable(error.getError());
+		String errorConstant = asqStcHelper.mapTabbyErrors(asqServiceResponse.getStatus());
 		LOG.info("Error From TABBY API::::: " + args[0] + " - " + args[1]);
 		LOG.info("Error Message Generated By Xstore based on TABBY API Response::::: " + error.getErrorType());
-		return HELPER.getPromptResponse(error.getErrorType(), args);
+		return HELPER.getPromptResponse(errorConstant, args);
 	}
+	
+	/**
+	 * This method handles form validation of mobile number field
+	 * 
+	 * @param argModel
+	 * @return validationResultList
+	 */
 
+	protected IValidationResultList validateForm(AsqBnplTabbyEditModel argModel) {
+		ValidationResultList validationResultList = new ValidationResultList();
+		if (StringUtils.isEmpty(argModel.getCustMobileNumber()) && argModel.getCustMobileNumber() == null) {
+			IValidationResult idResult = SimpleValidationResult.getFailed("_asqMobileNumberFieldExceptionMessage");
+			validationResultList.add(idResult);
+		}
+		return (IValidationResultList) validationResultList;
+	}
 }

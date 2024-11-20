@@ -1,14 +1,32 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <SysConfig xmlns="http://micros.com/xstore/config/settings">
 
+<!-- ASQ STC Points calculation - Starts -->
 	<Setting name="STCCustomerEarnPoints---AddSTCPointsToCustomerOnTender">true</Setting>
 	<Setting name="STCCustomerEarnPoints---PointsCalculation">100</Setting>
+<!-- ASQ STC Points calculation- Ends -->
 
-
-	<Setting name="PlanetTaxFree---MerchantIdNumber">17519</Setting>
-	<Setting name="PlanetTaxFree---TerminalNumber">22044</Setting>
-	<Setting name="PlanetTaxFree---Type">RECEIPT</Setting>
-     <!-- StockOnHand enable/ disable configuration -->
+    <Setting name="ASQ---PlanetTaxFree---MerchantIdNumber">17519</Setting>
+    <Setting name="ASQ---PlanetTaxFree---TerminalNumber">22044</Setting>
+    <Setting name="ASQ---PlanetTaxFree---Type">RECEIPT</Setting>
+    <!-- StockOnHand enable/ disable configuration -->
     <Setting name="StockOnHold---Enable">true</Setting>
+    
+    <Setting name="ASQ---ItemReturn---EmailApproval">true</Setting>    <Setting name="ASQ---ReturnApprovalEmailOTP---To">sandeepreddy.gagireddy@wipro.com</Setting>
+    <Setting name="ASQ---ReturnOfflineOTP---To">628387</Setting>
+    <Setting name="Email---TestingModeAddressFilter">@oracle.com, @micros.com, @asqgroup.com, @wipro.com</Setting>
+    <Setting name="Email---Receipt---From">pos.notifiy@asqgroup.com</Setting>
+	<!-- Disable tax button -->
+	<Setting name="Tax---DisableChangeTaxAmount">true</Setting>
+	<Setting name="Tax---DisableChangeTaxItemLocation">true</Setting>
+	<Setting name="Tax---DisableChangeItemTaxPercentage">true</Setting>
+	<Setting name="CustomerRequiredOnLogin">true</Setting>
+	<Setting name="OpenClose---AllowUserChangeBusinessDate">false</Setting>
+	<Setting name="OpenClose---PreferCurrentSystemDayOpen">false</Setting>
+    <!-- ASQ Bin Transfer Email & OTP - Starts -->	
+	<Setting name="ASQ---BinTransfer---EmailApproval">true</Setting>
+	<Setting name="ASQ---BinTransferApprovalEmailOTP---To">raisunnissa.begum1@wipro.com</Setting>
+    <Setting name="ASQ---BinTransferOfflineOTP---To">628387</Setting>
+	<!-- ASQ Bin Transfer Email & OTP - Ends -->	
 
 </SysConfig>

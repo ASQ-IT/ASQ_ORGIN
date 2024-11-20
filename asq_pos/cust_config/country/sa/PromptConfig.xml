@@ -34,21 +34,21 @@
 	<!-- ASQ Zatca Integration Ends -->
 	
 	<!-- ASQ STC Integration Error Prompts Starts -->
-	
+
 	<Prompt name="ASQ_STC_OTP" type="Text" title="_asqSTCOTPScreen" message="_asqSTCPromptToCaptureOTPMessage">
 		<DataField ref="ASQ_OTP" />
 	</Prompt>
-	<Prompt name="ASQ_STC_CUSTOMER_UNAVAILABLE" type="NotifyYesNo" title="_asqSTCCustomerNotFoundError" message="_asqSTCCustomerNotFoundMessage">
-		<Action ref="YES" text="_asqAddNew"/>
-		<Action ref="NO" text="_asqContinue"/>
+	<Prompt name="ASQ_STC_CUSTOMER_UNAVAILABLE" type="NotifyCancel" title="_asqSTCCustomerNotFoundError" message="_asqSTCCustomerNotFoundMessage">
+		<Action ref="YES" text="_asqAddNew" />
+		<Action ref="NO" text="_asqContinue" />
 	</Prompt>
-	<Prompt name="ASQ_STC_INVALID_MOBILE_ERROR" type="Notify" title="_asqStcMobileNumberErrorTitle" message="_asqPromptmsgInvalidMobileNumber">
+	<Prompt name="ASQ_STC_INVALID_MOBILE_ERROR" type="NotifyCancel" title="_asqStcMobileNumberErrorTitle" message="_asqPromptmsgInvalidMobileNumber">
 		<Action ref="CANCEL_BACK" />
 	</Prompt>
-	<Prompt name="ASQ_STC_WRONG_MOBILE_ERROR" type="Notify" title="_asqStcMobileNumberErrorTitle" message="_asqPromptmsgWrongMobileNumberError">
-		<Action ref="CANCEL_BACK" />
+	<Prompt name="ASQ_STC_WRONG_MOBILE_ERROR" type="NotifyCancel" title="_asqStcMobileNumberErrorTitle" message="_asqPromptmsgWrongMobileNumberError">
+	 <Action ref="CANCEL_BACK" />
 	</Prompt>
-	<Prompt name="ASQ_STC_NOTALLOWED_MOBILE_ERROR" type="Notify" title="_asqStcMobileNumberErrorTitle" message="_asqPromptmsgLandlineNumberNotAllowedError">
+	<Prompt name="ASQ_STC_NOTALLOWED_MOBILE_ERROR" type="NotifyCancel" title="_asqStcMobileNumberErrorTitle" message="_asqPromptmsgLandlineNumberNotAllowedError">
 		<Action ref="CANCEL_BACK" />
 	</Prompt>
 	<Prompt name="ASQ_STC_NON_STC_CUST_ERROR" type="Text" Notify="_asqStcMobileNumberErrorTitle" message="_asqPromptmsgNonSTCCustomerError">
@@ -57,16 +57,16 @@
 	<Prompt name="ASQ_STC_REDEMTION_NOTALLOWED_ERROR" type="Notify" title="_asqStcRedemptionErrorTitle" message="_asqPromptmsgRedemptionNotAllowedError">
 		<Action ref="CANCEL_BACK" />
 	</Prompt>
-	<Prompt name="ASQ_STC_PIN_INVALID_ERROR" type="Notify" title="_asqStcOTPErrorTitle" message="_asqPromptmsgPINInvalidError">
+	<Prompt name="ASQ_STC_PIN_INVALID_ERROR" type="NotifyCancel" title="_asqStcOTPErrorTitle" message="_asqPromptmsgPINInvalidError">
 		<Action ref="CANCEL_BACK" />
 	</Prompt>
-	<Prompt name="ASQ_STC_AMOUNT_INVALID_ERROR" type="Notify" title="_asqStcAmountErrorTitle" message="_asqPromptmsgAmountInvalidError">
+	<Prompt name="ASQ_STC_AMOUNT_INVALID_ERROR" type="NotifyCancel" title="_asqStcAmountErrorTitle" message="_asqPromptmsgAmountInvalidError">
 		<Action ref="CANCEL_BACK" />
 	</Prompt>
-	<Prompt name="ASQ_STC_REDEMPTION_EXCEEDED_ERROR" type="Notify" title="_asqStcAmountErrorTitle" message="_asqPromptmsgRedemptionExceededError">
+	<Prompt name="ASQ_STC_REDEMPTION_EXCEEDED_ERROR" type="NotifyCancel" title="_asqStcAmountErrorTitle" message="_asqPromptmsgRedemptionExceededError">
 		<Action ref="CANCEL_BACK" />
 	</Prompt>
-	<Prompt name="ASQ_STC_INSUFFICIENT_BALANCE_ERROR" type="Notify" title="_asqStcAmountErrorTitle" message="_asqPromptmsgInsufficientBalanceError">
+	<Prompt name="ASQ_STC_INSUFFICIENT_BALANCE_ERROR" type="NotifyCancel" title="_asqStcAmountErrorTitle" message="_asqPromptmsgInsufficientBalanceError">
 		<Action ref="CANCEL_BACK" />
 	</Prompt>
 	<Prompt name="ASQ_STC_OTP_USED_ERROR" type="Notify" title="_asqStcOTPErrorTitle" message="_asqPromptmsgOTPAlreadyUsedError">
@@ -100,7 +100,7 @@
 		<Action ref="CANCEL_BACK" />
 	</Prompt>
 	<Prompt name="ASQ_STC_AMOUNT_ERROR" type="Notify" title="_asqStcAmountErrorTitle" message="_asqPromptmsgAmountError">
-	<Action ref="CANCEL_BACK" />
+		<Action ref="CANCEL_BACK" />
 	</Prompt>
 	<Prompt name="ASQ_STC_AMOUNT_LESS_ERROR" type="Notify" title="_asqStcAmountErrorTitle" message="_asqPromptmsgAmountLessError">
 		<Action ref="CANCEL_BACK" />
@@ -129,37 +129,77 @@
 	<!-- ASQ STC Integration Prompts Ends -->
 	
 	<!-- ASQ TAMARA Integration Prompts Starts -->
-	<Prompt name="ASQ_TAMARA_REFUND_INITIATE" type="NotifyYesNo" title="_asqTamaraRefundInitiatePromptTitle" message="_asqTamraRefundInitiatePromptYesOrNo">
+	<Prompt name="ASQ_TAMARA_REFUND_INITIATE" type="NotifyYesNo" title="_asqTamaraPromptTitle" message="_asqTamraRefundInitiatePromptYesOrNo">
 		<Action ref="YES" />
 		<Action ref="NO" />
 	</Prompt>
 
-	<Prompt name="ASQ_TAMARA_CANCEL_SESSION" type="NotifyYesNo" title="_asqInitiateCancelPromptTitle" message="_asqInitiateCancelTransactionPromptYesOrNo">
+	<Prompt name="ASQ_TAMARA_CANCEL_SESSION" type="NotifyYesNo" title="_asqTamaraPromptTitle" message="_asqInitiateCancelTransactionPromptYesOrNo">
 		<Action ref="YES" />
 		<Action ref="NO" />
 	</Prompt>
-	<Prompt name="ASQ_TAMARA_PAYMENT_SUCCESSFULL" type="Notify" title="_asqTamaraPaymentSuccessfullPromptTitle" message="_asqTamaraPaymentSuccessfullMessage">
+	<Prompt name="ASQ_TAMARA_PAYMENT_SUCCESSFULL" type="Notify" title="_asqTamaraPromptTitle" message="_asqTamaraPaymentSuccessfullMessage">
 		<Action chainKey="ASQ_TENDER_TAMARA" text="_ok" keyStroke="Enter" />
 	</Prompt>
-
+	<Prompt name="ASQ_TAMARA_PAYMENT_LINK_EXPIRED" type="NotifyCancel" title="_asqTamaraPromptTitle" message="_asqTamaraPaymentExpiredMessage">
+		<Action ref="CANCEL" />
+	</Prompt>
+	<Prompt name="ASQ_TAMARA_BAD_REQUEST" type="Notify" title="_asqTamaraErrorPromptTitle" message="_asqTamarapromptmsgBadRqstError">
+		<Action ref="CANCEL_BACK" />
+	</Prompt>
+	<Prompt name="ASQ_TAMARA_AUTHENTICATION_ERROR" type="Notify" title="_asqTamaraErrorPromptTitle" message="_asqTamarapromptmsgAuthenticationError">
+		<Action ref="CANCEL_BACK" />
+	</Prompt>
+	<Prompt name="ASQ_TAMARA_FORBIDDEN_ERROR" type="Notify" title="_asqTamaraErrorPromptTitle" message="_asqTamarapromptmsgForbiddenError">
+		<Action ref="CANCEL_BACK" />
+	</Prompt>
+	<Prompt name="ASQ_TAMARA_NOT_FOUND_ERROR" type="Notify" title="_asqTamaraErrorPromptTitle" message="_asqTamarapromptmsgForbiddenError">
+		<Action ref="CANCEL_BACK" />
+	</Prompt>
+	<Prompt name="ASQ_TAMARA_REFUND_ERROR" type="Notify" title="_asqTamaraErrorPromptTitle" message="_asqTamarapromptmsgRefundError">
+		<Action ref="CANCEL_BACK" />
+	</Prompt>
+	<Prompt name="ASQ_TABBY_TECHNICAL_ERROR" type="Notify" title="_asqTamaraErrorPromptTitle" message="_asqTamarapromptmsgTechnicalError">
+		<Action ref="CANCEL_BACK" />
+	</Prompt>
 	<!-- ASQ TAMARA Integration Prompts Ends -->
 
 	<!-- ASQ TABBY Integration Prompts Starts -->
-	<Prompt name="ASQ_TABBY_PAYMENT_CREATED" type="Notify" title="_asqTabbyPaymentCreatedPromptTitle" message="_asqTabbyPaymentCreatedMessage">
+	<Prompt name="ASQ_TABBY_BAD_REQUEST" type="Notify" title="_asqTabbyErrorPromptTitle" message="_asqTabbypromptmsgBadRqstError">
 		<Action ref="CANCEL_BACK" />
 	</Prompt>
-	<Prompt name="ASQ_TABBY_PAYMENT_EXPIRED" type="Notify" title="_asqTabbyPaymentExpiredPromptTitle" message="_asqTabbyPaymentExpiredMessage">
+	<Prompt name="ASQ_TABBY_AUTHENTICATION_ERROR" type="Notify" title="_asqTabbyErrorPromptTitle" message="_asqTabbypromptmsgAuthenticationError">
 		<Action ref="CANCEL_BACK" />
 	</Prompt>
-	<Prompt name="ASQ_TABBY_PAYMENT_REJECTED" type="Notify" title="_asqTabbyPaymentRejectedPromptTitle" message="_asqTabbyPaymentRejectedMessage">
+	<Prompt name="ASQ_TABBY_FORBIDDEN_ERROR" type="Notify" title="_asqTabbyErrorPromptTitle" message="_asqTabbypromptmsgForbiddenError">
 		<Action ref="CANCEL_BACK" />
 	</Prompt>
-	<Prompt name="ASQ_TABBY_PAYMENT_SUCCESSFULL" type="Notify" title="_asqTabbyPaymentSuccessfullPromptTitle" message="_asqTabbyPaymentSuccessfullMessage">
+	<Prompt name="ASQ_TABBY_NOT_FOUND_ERROR" type="Notify" title="_asqTabbyErrorPromptTitle" message="_asqTabbypromptmsgForbiddenError">
+		<Action ref="CANCEL_BACK" />
+	</Prompt>
+	<Prompt name="ASQ_TABBY_REFUND_ERROR" type="Notify" title="_asqTabbyErrorPromptTitle" message="_asqTabbypromptmsgRefundError">
+		<Action ref="CANCEL_BACK" />
+	</Prompt>
+	<Prompt name="ASQ_TABBY_TECHNICAL_ERROR" type="Notify" title="_asqTabbyErrorPromptTitle" message="_asqTabbypromptmsgTechnicalError">
+		<Action ref="CANCEL_BACK" />
+	</Prompt>
+	<Prompt name="ASQ_TABBY_PAYMENT_CREATED" type="Notify" title="_asqTabbyPromptTitle" message="_asqTabbyPaymentCreatedMessage">
+		<Action ref="CANCEL_BACK" />
+	</Prompt>
+	<Prompt name="ASQ_TABBY_PAYMENT_EXPIRED" type="Notify" title="_asqTabbyPromptTitle" message="_asqTabbyPaymentExpiredMessage">
+		<Action ref="CANCEL_BACK" />
+	</Prompt>
+	<Prompt name="ASQ_TABBY_PAYMENT_REJECTED" type="Notify" title="_asqTabbyPromptTitle" message="_asqTabbyPaymentRejectedMessage">
+		<Action ref="CANCEL_BACK" />
+	</Prompt>
+	<Prompt name="ASQ_TABBY_PAYMENT_SUCCESSFULL" type="Notify" title="_asqTabbyPromptTitle" message="_asqTabbyPaymentSuccessfullMessage">
 		<Action chainKey="ASQ_TENDER_TABBY" text="_ok" keyStroke="Enter" />
 	</Prompt>
-
-
+	<Prompt name="ASQ_TABBY_PAYMENT_WAIT" type="NotifyOkCancel" title="_asqTabbyPromptTitle" message="_asqTabbyPaymentWaitMessage">
+		<Action chainKey="ASQ_TABBY_PAYMENT" text="Cancel" keyStroke="Enter" />
+	</Prompt>
 	<!-- ASQ TABBY Integration Prompts Ends -->
+
 	<!-- ASQ TOLA Work Starts -->
     <Prompt name="ASQ_TOLA_QTY_SOH_ERROR" type="NotifyCancel" title="_weight" message="_tolaItemQtyValidationError">
 	    <IconGroup icon="_imagePromptItemWeight" />
@@ -172,13 +212,13 @@
     </Prompt>
     <!-- ASQ TOLA Work Ends -->
 	
+	<!-- ASQ Neqaty Integration - starts-->
 	<Prompt name="ASQ_NEQATY_REDEEM_OPTIONS_LIST" type="List" title="_asqRedemptionListTitle" message="_asqRedemptionListSelect">
     <ListViewType dtype="String">ASQ_NEQATY_REDEEM_OPTIONS_LIST</ListViewType>
      <DataSelection selectionMode="UNSELECTABLE" />
     <Action ref="YES_ENTER" />
     <Action ref="CANCEL_BACK" />
   </Prompt>	
-	<!-- ASQ Neqaty Integration - starts-->
 	<Prompt name="ASQ_NEQATY_TECHNICAL_ERROR" type="Notify" title="_asqNeqErrorTitle" message="_asqpromptmsgTechnicalError">
 		<Action ref="CANCEL_BACK" />
 	</Prompt>
@@ -267,13 +307,63 @@
 	<Prompt name="ASQ_NEQATY_INVALID_OTP" type="Notify" title="_asqNeqatySuccessTitle" message="_asqNeqatyinvalidOtp">
 		<Action ref="CANCEL_BACK" />
 	</Prompt>
-	<Prompt name="ASQ_NEQATY_NO_POINTS" type="Notify" title="_asqNeqatySuccessTitle" message="_asqNeqatyNoPoints" />
-
-
-	<Prompt name="ASQ_PLANET_TECHNICAL_ERROR" type="Notify" title="_asqPlanetErrorTitle" message="_asqpromptmsgTechnicalError">
+	<Prompt name="ASQ_NEQATY_NO_POINTS" type="Notify" title="_asqNeqatySuccessTitle" message="_asqNeqatyNoPoints">
 		<Action ref="CANCEL_BACK" />
 	</Prompt>
-	<Prompt name="ASQ_PLANET_REGISTER_ERROR" type="Notify" title="_asqPlanetErrorTitle" message="_asqpromptmsgDataError">
+	
+	<Prompt name="ASQ_PLANET_TECHNICAL_ERROR" type="Notify" title="_asqPlanetErrorTitle" message="_asqPlanetmsgTechnicalError" >
+	<Action dataKey="CONTINUE" text="_continue" keyStroke="Enter" />
+	</Prompt>
+	
+	<Prompt name="ASQ_PLANET_SUCCESS" type="Notify" title="_asqPlanetSuccessTitle" message="_asqpromptmsgSuccess" >
+	<Action dataKey="CONTINUE" text="_continue" keyStroke="Enter" />
+	</Prompt>
+	
+	<Prompt name="ASQ_PLANET_REGISTER_ERROR" type="Notify" title="_asqPlanetErrorTitle" message="_asqpromptPlantDataError">
 		<Action ref="CANCEL_BACK" />
 	</Prompt>
+	
+	<Prompt name="ASQ_RETURN_OTP_ERROR" type="Notify" title="_asqCaptureReturnOTPTitle" message="_asqCaptureReturnOTPError">
+		 <Action dataKey="BACK" text="_back" keyStroke="Escape" />
+	</Prompt>
+	
+		<!-- ASQ Mokafaa Integration Prompts Starts -->
+	<Prompt name="ASQ_MOKAFAA_REDEEM_SUCCESS" type="Notify" title="_asqMokafaaSuccessTitle" message="_asqMokafaaSuccessText">
+		<Action dataKey="CONTINUE" text="_continue" keyStroke="Enter" />
+	</Prompt>
+	<Prompt name="VALIDATION_FAILED" type="Notify" title="_asqValidationFailedTitle" message="_asqValidationFailedText" ><Action ref="CANCEL_BACK" /></Prompt>
+	<Prompt name="STORE_IS_INVALID" type="Notify" title="_asqStoreIsInvalidTitle" message="_asqStoreIsInvalidText"><Action ref="CANCEL_BACK" /></Prompt>
+	<Prompt name="DUPLICATE_MOBILE_NUMBER" type="Notify" title="_asqDuplicateMobileNumberTitle" message="_asqDuplicateMobileNumberText"><Action ref="CANCEL_BACK" /></Prompt>
+	<Prompt name="USER_DOES_NOT_EXIST" type="Notify" title="_asqUserDoesNotExistTitle" message="_asqUserDoesNotExistText" ><Action ref="CANCEL_BACK" /></Prompt>
+	<Prompt name="GENERAL_API_ERROR" type="Notify" title="_asqGeneralApiErrorTitle" message="_asqGeneralApiErrorText"><Action ref="CANCEL_BACK" /></Prompt>
+	<Prompt name="LOWER_THAN_THE_MINIMUM_BALANCE" type="Notify" title="_asqLowerThanTheMinimumBalanceTitle" message="_asqLowerThanTheMinimumBalanceText"><Action ref="CANCEL_BACK" /></Prompt>
+	<Prompt name="OTP_IS_STILL_VALID" type="Notify"	title="_asqOtpIsStillValidTitle" message="_asqOtpIsStillValidText">
+	<Action dataKey="CONTINUE" text="_continue" keyStroke="Enter" />
+	</Prompt>
+	<Prompt name="GENERAL_REEDEM_ERROR" type="Notify" title="_asqTransactionFailedText" message="_asqGeneralReedemError" />
+	<Prompt name="BALANCE_INSUFFICIENT" type="Notify" title="_asqBalanceInsufficientTitle" message="_asqBalanceInsufficientText"><Action ref="CANCEL_BACK" /></Prompt>
+	<Prompt name="INVALID_OTP" type="Notify" title="_asqInvalidOtpTitle" message="_asqInvalidOtpText" />
+	<Prompt name="OTP_EXPIRED" type="Notify" title="_asqOtpExpiredTitle" message="_asqOtpExpiredText"><Action ref="CANCEL_BACK" /></Prompt>
+	<Prompt name="TRANSACTION_FAILED" type="Notify" title="_asqTransactionFailedTitle" message="_asqTransactionFailedText"><Action ref="CANCEL_BACK" /></Prompt>
+	<Prompt name="TIME_EXCEEDED" type="Notify" title="_asqTimeExceededTitle" message="_asqTimeExceededText"><Action ref="CANCEL_BACK" /></Prompt>	
+	<Prompt name="ASQ_MOKAFAA_REDEEM_REFUND_SUCCESS" type="Notify" title="_asqMokafaaRefundSuccessTitle" message="_asqMokafaaRefundSuccessText">
+	<Action dataKey="CONTINUE" text="_continue" keyStroke="Enter" />
+	</Prompt>
+	<!-- ASQ Mokafaa Integration Prompts Ends -->
+	
+   <!-- PRICE Quotation start-->
+	<Prompt name="PRINT_RECEIPTS1" type="Notify" title="_salecompletetitle" message="_emailReceiptsMessage">
+	    <Action ref="NO_BACK1" />    
+	    <Action ref="NOPRINT_RECEIPTS" />
+	    <Action ref="PRINT_ONLY" />
+	    <Action ref="EMAIL_ONLY" />
+	    <Action ref="PRINT_EMAIL" />
+    </Prompt>
+  <!-- PRICE Quotation end-->
+	<!-- ASQ Bin Transfer chnages - Starts -->
+	<Prompt name="ASQ_BIN_TRANSFER_OTP_ERROR" type="Notify" title="_asqCaptureBinTransferOTPTitle" message="_asqCaptureBinTransferOTPError">
+		 <Action dataKey="BACK" text="_back" keyStroke="Escape" />
+	</Prompt>
+	<!-- ASQ Bin Transfer chnages - End -->
+	
 </PromptSet>

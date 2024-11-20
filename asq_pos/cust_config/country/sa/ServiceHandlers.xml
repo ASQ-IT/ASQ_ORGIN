@@ -72,4 +72,18 @@
 			<ConnectTimeout dtype="Integer">${asq.pos.planet.uri.timeout}</ConnectTimeout>
 		</Parameters>
 	</Service>
+	
+  <Service name="ASQ_MOKAFAA_REST">
+    <Parameters dtype="Map">
+      <TargetUri dtype="String">${asq.mokafaa.redeem.uri}</TargetUri>
+      <ConnectTimeout dtype="Integer">${asq.mokafaa.redeem.uri.connection.timeout}</ConnectTimeout>
+    </Parameters>
+  </Service>
+  
+   <Service name="MOKAFAT_REST">
+    <Parameters dtype="Map">
+      <TargetUri dtype="String">${asq.zatca.certificate.registration.uri}</TargetUri>
+      <ConnectTimeout dtype="Integer">${asq.zatca.certificate.registration.connection.timeout}</ConnectTimeout>
+    </Parameters>
+  </Service>
 </Services>

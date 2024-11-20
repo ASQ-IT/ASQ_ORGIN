@@ -26,7 +26,9 @@
 	  	<!-- Neqaty Integration Starts -->
 	    <MenuOption ref="SALE::ASQ_TENDER_NEQATY" />
 	    <!-- Neqaty Integration Ends -->
-		
+		<!-- Mokafaa Integration Starts -->
+	    <MenuOption ref="SALE::ASQ_TENDER_MOKAFAA" />
+		<!-- Mokafaa Integration Ends -->
 	    <MenuOption ref="SALE::TENDER_CREDIT_CARD" />
 	    <MenuOption ref="SALE::TENDER_EWALLET" />
 	    <MenuOption ref="SALE::TENDER_PAYMENT_BY_LINK" />
@@ -52,4 +54,42 @@
 	    <MenuOption ref="RETAIL::CHECK_SALE_COMPLETE" />
   </MenuItem>
     
+  <!-- PRICE Quotation start-->
+     <MenuItem name="?LOGIN?" text="_menuLoginCommon" category="Login" keywords="universal,login,back_office,report_customer,report_inventory,report_employee,report_till,report_system,report">
+    <MenuOption ref="EMPLOYEE::CLOCK_IN_OUT" />
+
+    <MenuOption ref="EMPLOYEE::VIEW_SCHEDULE_AND_TIME_OPTIONS" />
+
+    <MenuOption ref="EMPLOYEE::CHANGE_PASSWORD" />
+
+    <SubMenu ref="ADMIN::REPRINT_OPTIONS"/>
+    <SubMenu ref="BALANCE_INQUIRY::REGISTER_OPTIONS" />
+    <MenuOption ref="ADMIN::PRINTRECEIPT" />
+    <MenuOption>
+      <Action ref="ADMIN::TRAINING_MODE_ENTER" />
+      <Action ref="ADMIN::TRAINING_MODE_EXIT" />
+    </MenuOption>
+    <MenuOption ref="ASSOCIATE_TASKS::MY_TASKS_LOGIN" />
+    <SubMenu text="_itemFind" keyStroke="F9" sticky="false">
+      <MenuOption ref="ADMIN::PRICE_INQUIRY" />
+      <MenuOption ref="ADMIN::SEARCH_FOR_ITEM" />
+    </SubMenu>
+    <MenuOption ref="ADMIN::REGISTER_OPTIONS" />
+    <MenuOption ref="RETAIL::REPORT.FLASH_SALES" />
+  </MenuItem>
+  
+  <MenuItem name="SALE1" text="_menuSale" category="Retail" keywords="universal,sale,register_extended,register_all">
+    <SubMenu actionRef="RETAIL::MENU.MODIFY_LINE" sticky="false">
+      <MenuOptions ref="RETAIL::CHANGE_LINE1" />
+    </SubMenu>
+    <SubMenu ref="RETAIL::ADD_DISCOUNT" />
+    <MenuOption ref="REGISTER::PRINT_RECEIPT" />
+  </MenuItem>
+  
+   <MenuItem name="RETAIL::CHANGE_LINE1" actionRef="RETAIL::MENU.MODIFY_LINE" sticky="false" category="Retail" keywords="universal,register_extended">
+    <MenuOption ref="RETAIL::CHANGE_LINE_QUANTITY" />
+    <MenuOption ref="RETAIL::CHANGE_LINE_PRICE" />
+    <MenuOption ref="RETAIL::VOID_LINE" />
+  </MenuItem>
+  <!-- PRICE Quotation end-->
 </MenuSet>
