@@ -33,9 +33,10 @@ public class AsqPlanetVatClaimServicesImpl implements IAsqPlanetVatClaimServices
 	@Override
 	public IServiceResponse cancelVatClaim(IAsqPlanetVatClaimServiceRequest argRequest) throws ServiceException {
 		try {
+			AsqPlanetVatClaimServiceResponse asqPlanetVatClaimServiceResponse = (AsqPlanetVatClaimServiceResponse)getAuthToken(argRequest);
+			argRequest.setToken(asqPlanetVatClaimServiceResponse.getAccess_token());
 			IServiceHandler<IAsqPlanetVatClaimServiceRequest, IServiceResponse> serviceHandler = _serviceHandlerFactory.getServiceHandler(PLANET_VAT_CLAIM_CANCEL_SRV);
-			IServiceResponse response = serviceHandler.handleService(argRequest, PLANET_VAT_CLAIM_CANCEL_SRV);
-			return response;
+			return serviceHandler.handleService(argRequest, PLANET_VAT_CLAIM_CANCEL_SRV);
 		} catch (ServiceException ex) {
 			throw ex;
 		} catch (Exception ex) {

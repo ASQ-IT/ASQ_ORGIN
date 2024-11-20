@@ -39,6 +39,12 @@ public interface IAsqPlanetVatClaimServiceRequest extends IServiceRequest{
 		 public void setShopper(AsqPlanetVatClaimShopperObj shopper);
 		 
 		 public void setToken(String token);
+		 
+		 public void setTagNumber(String tagNumber);
 
+		 public String getTagNumber();
 
+		public void setNote(String retailLocationId);
+		
+		public String getNote();
 }

@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import com.oracle.shaded.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.oracle.shaded.fasterxml.jackson.annotation.JsonProperty;
 
+import asq.pos.zatca.cert.generation.AsqZatcaErrorDesc;
 import asq.retail.xstore.countrypack.common.taxfree.fintrax.op.AsqPlanetLineItemData;
 import dtv.service.req.IServiceResponse;
 
@@ -50,7 +51,8 @@ public class AsqPlanetVatClaimServiceResponse implements IServiceResponse{
 	     @JsonProperty("tagNumber")
 		 private String tagNumber;
 		 
-
+	  
+	     private AsqPlanetVatClaimErrorDesc error;
 
 		 // Getter Methods 
 		 
@@ -162,5 +164,17 @@ public class AsqPlanetVatClaimServiceResponse implements IServiceResponse{
 		public void setTagNumber(String tagNumber) {
 			this.tagNumber = tagNumber;
 		}
+		
+		 public AsqPlanetVatClaimErrorDesc getError() {
+			  return error;
+			 }
+
+			 // Setter Methods 
+			 
+
+			public void setError(AsqPlanetVatClaimErrorDesc error) {
+				this.error = error;
+			}
+
 		 
 	}

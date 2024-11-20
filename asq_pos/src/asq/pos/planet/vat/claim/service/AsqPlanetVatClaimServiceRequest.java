@@ -16,13 +16,23 @@ public class AsqPlanetVatClaimServiceRequest extends ServiceRequest implements I
 	 AsqPlanetVatClaimOrderObj order;
 	 AsqPlanetVatClaimShopperObj shopper;
 	 private String token;
+	 private String tagNumber;
+	 private String note;
 
 
 	 // Getter Methods 
 	 
 	 
 
-	 public boolean getIssueTaxRefundTag() {
+	 public String getTagNumber() {
+		return tagNumber;
+	}
+
+	public void setTagNumber(String tagNumber) {
+		this.tagNumber = tagNumber;
+	}
+
+	public boolean getIssueTaxRefundTag() {
 	  return issueTaxRefundTag;
 	 }
 
@@ -95,4 +105,13 @@ public class AsqPlanetVatClaimServiceRequest extends ServiceRequest implements I
 		public void setToken(String token) {
 			this.token = token;
 		}
+
+		public String getNote() {
+			return note;
+		}
+
+		public void setNote(String note) {
+			this.note = note;
+		}
+
 }
