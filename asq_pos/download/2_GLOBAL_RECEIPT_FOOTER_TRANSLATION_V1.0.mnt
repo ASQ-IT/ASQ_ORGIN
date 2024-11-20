@@ -1,0 +1,6 @@
+INSERT|TRANSLATION|DEFAULT|+RECEIPT_TEXT_CUSTOMER_COPY_FOOTER|• Return is 3 days and exchange is 7 days, provided that the original invoice is present.|*|*|
+INSERT|TRANSLATION|DEFAULT|+RECEIPT_TEXT_CUSTOMER_COPY_FOOTER1|• During the offer period, return is 1 day and exchange is 3 days, provided that the original invoice is present|*|*|
+INSERT|TRANSLATION|DEFAULT|+RECEIPT_TEXT_CUSTOMER_COPY_FOOTER2|• Special mixtures (which are installed) cannot be exchanged or returned|*|*|
+INSERT|TRANSLATION|DEFAULT|+RECEIPT_TEXT_CUSTOMER_COPY_FOOTER3|• Special mixtures (formulated according to customer request) and used products cannot be exchanged or returned.|*|*|
+INSERT|TRANSLATION|DEFAULT|+RECEIPT_TEXT_CUSTOMER_COPY_FOOTER4|• Cash and network purchases are returned in cash, and credit card purchases are returned to the customer’s account through the bank.|*|*|
+INSERT|TRANSLATION|DEFAULT|+RECEIPT_TEXT_CUSTOMER_COPY_FOOTER5| •Packaged products are not returned after being opened|*|*|

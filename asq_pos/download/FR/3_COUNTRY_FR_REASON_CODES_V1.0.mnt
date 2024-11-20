@@ -1,0 +1,17 @@
+INSERT|TRANSLATION|FR|+PAYMENT_REVERSAL_AR_PR_2|Compte incorrect|*|*|
+INSERT|TRANSLATION|FR|+PAYMENT_REVERSAL_AR_PR_3|Montant incorrect|*|*|
+INSERT|TRANSLATION|FR|+PAYMENT_REVERSAL_AR_PR_4|Facture incorrecte|*|*|
+INSERT|TRANSLATION|FR|+PAYMENT_REVERSAL_COMMENT|Autre - Saisir des commentaires|*|*|
+INSERT|TRANSLATION|FR|+PAYMENT_REVERSAL_PRX|Contrepassation immédiate.|*|*|
+INSERT|TRANSLATION|FR|+NO_SALE_NS5|Paiement de prime/bonus 1|*|*|
+INSERT|TRANSLATION|FR|+NO_SALE_NS4|Sortie de petite caisse|*|*|
+INSERT|TRANSLATION|FR|+NO_SALE_NS3|Entrée de petite caisse|*|*|
+INSERT|TRANSLATION|FR|+NO_SALE_NS2|Chèque d'employé encaissé|*|*|
+INSERT|TRANSLATION|FR|+NO_SALE_NS1|Echange d'espèces|*|*|
+INSERT|TRANSLATION|FR|+TAX_CHANGE_TC3|Exonéré de taxe|*|*|
+INSERT|TRANSLATION|FR|+TAX_CHANGE_TC2|Autre motif non répertorié|*|*|
+INSERT|TRANSLATION|FR|+TAX_CHANGE_TC1|Site d'imposition non référencé|*|*|
+INSERT|TRANSLATION|FR|+PRICE_CHANGE_PC4|Ajustement pour article endommagé|*|*|
+INSERT|TRANSLATION|FR|+PRICE_CHANGE_PC3|Garantie du meilleur prix|*|*|
+INSERT|TRANSLATION|FR|+PRICE_CHANGE_PC2|Discrétion des superviseurs|*|*|
+INSERT|TRANSLATION|FR|+PRICE_CHANGE_PC1|Etiquette incorrecte|*|*|

@@ -1,0 +1,38 @@
+#set ($subject = "Bin Transfer Approval OTP")
+Please find the Bin Transfer details below
+<html>
+  <head>
+  <style>
+    th, td {
+      padding: 5px;
+    }
+    th {
+      font-weight: normal;
+      text-align: left;
+    }
+  </style>
+  </head>
+  <body>
+  <br>
+  <br>
+  #if($thisStore)
+    Store Name: $thisStore<br>
+  #end
+   #if($itemId)
+    Item ID: $itemId<br>
+  #end
+   #if($documentID)
+    Document ID: $documentID<br>
+  #end
+   #if($quantity)
+    quantity: $quantity<br>
+  #end
+  <br>
+   #if($otp)
+    <b> Please find the approval OTP for Bin Transfer from DAMAGED To ON_HAND: $otp </b><br>
+  #end
+  <br>
+  <u>Bin Transfer Approval OTP</u>
+  <br>
+  </body>
+</html>
