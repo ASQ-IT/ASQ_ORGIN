@@ -158,6 +158,7 @@ public class AsqBnplTabbyTenderOp extends AbstractFormOp<AsqBnplTabbyEditModel> 
 		asqBnplTabbyDetailsObj.setReference_id(Long.toString(trans.getTransactionSequence()));
 		payment.setAmount(trans.getTotal().toString());
 		payment.setCurrency(trans.getRetailTransactionLineItems().get(0).getCurrencyId());
+		LOG.error("Currency :", trans.getRetailTransactionLineItems().get(0).getCurrencyId());
 		//payment.setCurrency("SAR");
 		payment.setBuyer(asqBnplTabbyDetailsObj);
 		payment.setOrder(asqBnplTabbyDetailsObj);
@@ -189,7 +190,6 @@ public class AsqBnplTabbyTenderOp extends AbstractFormOp<AsqBnplTabbyEditModel> 
 		saveTabbyResponseToDB(trans, responseList);
 		LOG.info("TABBY API saving response to DB successfull");
 		_transactionScope.setValue(AsqValueKeys.TABBY_RESPONSE, response.getId());
-		//return this.HELPER.getPromptResponse("ASQ_TABBY_PAYMENT_WAIT");
 		return this.HELPER.getCompleteStackChainResponse(OpChainKey.valueOf("ASQ_TABBY_PAYMENT"));
 	}
 

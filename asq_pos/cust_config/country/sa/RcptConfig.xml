@@ -10,11 +10,31 @@
       <Rule class="dtv.pos.hardware.rcptbuilding.copyrules.TransactionTypeRule" type="RETAIL_SALE" />
       <Rule class="dtv.pos.hardware.rcptbuilding.copyrules.CanceledTransactionReceiptEnabledRule" />
     </ReceiptCopyRule>
+    
+    <!-- PRICE Quotation start-->
+     <ReceiptCopyRule name="RAIN_CHECK2" document="ASQ_STORE_COPY">
+      <Rule class="dtv.pos.hardware.rcptbuilding.copyrules.TransactionTypeRule" type="RAIN_CHECK" />
+         <Rule class="dtv.pos.hardware.rcptbuilding.copyrules.CanceledTransactionReceiptEnabledRule" />
+      <Rule class="asq.pos.hardware.rcptbuilder.copyrule.AsqTransactionTypeRuleForPriceQotation" />
+    </ReceiptCopyRule> 
+     <ReceiptCopyRule name="RAIN_CHECK1" document="ASQ_CUSTOMER_COPY">
+      <Rule class="dtv.pos.hardware.rcptbuilding.copyrules.TransactionTypeRule" type="RAIN_CHECK" />
+      <Rule class="dtv.pos.hardware.rcptbuilding.copyrules.CanceledTransactionReceiptEnabledRule" />
+      <Rule class="asq.pos.hardware.rcptbuilder.copyrule.AsqTransactionTypeRuleForPriceQotation" />
+    </ReceiptCopyRule> 
+     <ReceiptCopyRule name="RAIN_CHECK" document="RAIN_CHECK">
+      <Rule class="dtv.pos.hardware.rcptbuilding.copyrules.TransactionTypeRule" type="RAIN_CHECK" />
+      <Rule class="asq.pos.hardware.rcptbuilder.copyrule.AsqTransactionTypeRuleForPriceQotation" inverted="true" />
+    </ReceiptCopyRule>
+    <!-- PRICE Quotation start-->
   </ReceiptCopyRules>
-  <receipts>
-    <receipt document="CUSTOMER_AR" sectionref="CustomerCopy" email="true" locale="ar_SA" />
-  </receipts>
   
+  <!-- PRICE Quotation start-->
+    <receipts>
+    <receipt document="ASQ_CUSTOMER_COPY" sectionref="CustomerCopy" email="true" />
+     <receipt document="ASQ_STORE_COPY" sectionref="StoreCopy" />
+  </receipts>
+  <!-- PRICE Quotation end-->
 <sections>
 	<section name="CustomerCopy">
 		<sectionref>header</sectionref>
@@ -44,7 +64,7 @@
 		<sectionref>page_break</sectionref>
 	</section>
 	
-	
+	<!-- new tender visibility on receipt start -->
 	 <section name="nonchange_tender">
       <sectionref>currency_tender</sectionref>
       <sectionref>creditcard_tender</sectionref>
@@ -62,6 +82,22 @@
       <sectionref>custcopy_nonchange_tender</sectionref>
     </section>
     
+    <section name="storecopy_nonchange_tender">
+      <sectionref>currency_tender</sectionref>
+      <sectionref>storecopy_creditcard_tender</sectionref>
+      <sectionref>loyality_tender</sectionref>
+      <sectionref>travelers_check_tender</sectionref>
+      <sectionref>check_tender</sectionref>
+      <sectionref>account_credit</sectionref>
+      <sectionref>voucher_tender</sectionref>
+      <sectionref>account_tender</sectionref>
+      <sectionref>homeofficecheck_tender</sectionref>
+      <sectionref>coupon_tender</sectionref>
+      <sectionref>nonvoided_foreign_currency_tender</sectionref>
+      <sectionref>misc_tender</sectionref>
+      <sectionref>storecopy_roomcharge_tender</sectionref>
+      <sectionref>nonchange_tender_signature</sectionref>
+    </section>
     
      <section name="loyality_tender">
       <condition class="dtv.pos.docbuilding.conditions.LineTenderTypeCondition" value="LOYALITY" />
@@ -72,6 +108,7 @@
         <field method="getAmount" formatter="Money" loc="-3" rtlloc="12" />
       </row>
     </section>
+    <!-- new tender visibility on receipt end --> 
     
 	<section name="footer_cust_copy">
 		<sectionref>legalWarranty</sectionref>

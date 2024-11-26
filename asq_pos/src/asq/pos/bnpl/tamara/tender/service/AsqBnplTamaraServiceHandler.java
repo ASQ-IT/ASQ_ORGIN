@@ -70,7 +70,7 @@ public class AsqBnplTamaraServiceHandler extends AbstractJaxRsHandler<AsqSubmitB
 		if (argRawResponse.getStatus() == 200) {
 			try {
 				return (IServiceResponse) asqZatcaHelper.convertJSONToPojo(argRawResponse.readEntity(String.class),
-						AsqSubmitBnplTabbyServiceResponse.class);
+						AsqSubmitBnplTamraServiceResponse.class);
 			} catch (Exception e) {
 				LOG.error("Tamara Service Exception occured");
 				return null;

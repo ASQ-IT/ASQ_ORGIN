@@ -92,4 +92,37 @@
     <MenuOption ref="RETAIL::VOID_LINE" />
   </MenuItem>
   <!-- PRICE Quotation end-->
+  <!-- INVENTORY_ADJUSTMENT VISIBILITY start-->
+  <MenuItem name="INVENTORY::OPTIONS" actionRef="INVENTORY::OPTIONS" keywords="universal,inventory,report_inventory">
+    <!-- <MenuOption ref="INVENTORY_ADJUSTMENT" /> -->
+    <SubMenu actionRef="INVENTORY_COUNT::OPTIONS">
+      <MenuOption ref="INVENTORY_COUNT::SEARCH" />      
+      <MenuOption ref="INVENTORY_COUNT::MAINTAIN_STORE_LAYOUT" />
+    </SubMenu>
+    <MenuOption ref="INVENTORY_REPLENISHMENT" />
+    <MenuOption ref="INVENTORY::SEARCH_FOR_ITEM" />
+    <MenuOption ref="INVENTORY::ITEM_TRANSFER" />
+    <SubMenu text="_inventoryLocationOptsMenuText" actionRef="INVENTORY::LOCATION_BASED_INVENTORY">
+      <MenuOption ref="INVENTORY::LOCATION_SEARCH" />
+      <MenuOption ref="INVENTORY::MOVEMENT_PENDING_RECONCILIATION" />
+    </SubMenu>
+    <MenuOption ref="BACK_OFFICE::PRICE_INQUIRY" />
+    <MenuOption ref="SHELF_LABEL::PRINT_LABELS" />
+    <MenuOption ref="RECEIVING" />
+    <MenuOption ref="EXCHANGE::EXCHANGE_SERIAL_NUMBER" />
+    <MenuOption ref="SHIPPING" />
+  </MenuItem>
+  <!-- INVENTORY_ADJUSTMENT VISIBILITY end-->
+   
+  <!-- Post void Visibility Start-->
+	<MenuItem name="TILL::TILL_OPTIONS" actionRef="TILL::TILL_OPTIONS" displayType="LIST" text="_tillOptionsSubMenuText" category="Admin" keywords="back_office">
+	<MenuOption ref="TILL::CHANGE_TILL_FLOAT" />
+	<MenuOption ref="ADMIN::FOREIGN_CURRENCY_MAINTENANCE" />
+	<MenuOption ref="TILL::NO_SALE" />
+	<MenuOption ref="TILL::PAID_IN" />
+	<MenuOption ref="TILL::PAID_OUT" />
+	<!-- <MenuOption ref="ADMIN::POST_VOID" /> -->
+	<MenuOption ref="TENDER_EXCHANGE" />
+	</MenuItem>
+  <!-- Post void Visibility End-->
 </MenuSet>

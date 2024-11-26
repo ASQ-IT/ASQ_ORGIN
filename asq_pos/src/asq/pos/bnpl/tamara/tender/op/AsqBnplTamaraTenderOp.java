@@ -267,7 +267,7 @@ public class AsqBnplTamaraTenderOp extends AbstractFormOp<AsqBnplTamaraEditModel
 	public void saveTamaraResponseToDB(IPosTransaction originalPosTrx, HashMap<String, String> responseList) {
 
 		IPosTransaction trans = this._transactionScope.getTransaction();
-		if (responseList != null) {
+		if (responseList != null && trans !=null) {
 			trans.setStringProperty("ASQ_TAMARA_ORDERID", responseList.get("orderID"));
 			trans.setStringProperty("ASQ_TAMARA_CHECKOUTID", responseList.get("checkoutID"));
 			_transactionScope.setValue(AsqValueKeys.ASQ_TAMARA_ORDERID, responseList.get("orderID"));

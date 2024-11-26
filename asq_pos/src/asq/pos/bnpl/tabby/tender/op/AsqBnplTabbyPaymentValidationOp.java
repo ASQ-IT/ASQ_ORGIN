@@ -66,7 +66,17 @@ public class AsqBnplTabbyPaymentValidationOp extends Operation{
 			return handleServiceError(response);
 		} else if (response.getStatus().equalsIgnoreCase("ok")) {
 			LOG.info("Calling requestPreparerRetrievePayment API to check the payment status");
-			return (IOpResponse) requestPreparerRetrievePayment(response, trans);
+			if (getScopedValue(AsqValueKeys.ASQ_TAMARA_CUSTOMER_PAYMENT_CONFIRMATION) != null) {
+				return (IOpResponse) requestPreparerRetrievePayment(response, trans);
+			} else {
+				try {
+					Thread.sleep(10000);
+					setScopedValue(AsqValueKeys.ASQ_TAMARA_CUSTOMER_PAYMENT_CONFIRMATION, true);
+				} catch (InterruptedException e) {
+					LOG.error("Exception during confirmation sleep cycle :" + e);
+				}
+				return HELPER.getPromptResponse("ASQ_TABBY_PAYMENT_WAIT");
+			}
 		}
 		return HELPER.completeCurrentChainResponse();
 	}

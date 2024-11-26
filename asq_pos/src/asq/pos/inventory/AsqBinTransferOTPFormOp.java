@@ -57,15 +57,18 @@ public class AsqBinTransferOTPFormOp extends AbstractFormOp<AsqNeqatyOTPEditMode
 				return super.handleDataAction(argAction);
 			}
 			int enteredOTP = Integer.parseInt(model.getNeqatyOTP());
-			int actualOTP = getScopedValue(AsqValueKeys.ASQ_BIN_TRANSFER_OTP);
-			if (enteredOTP == actualOTP || enteredOTP == _sysConfig.getBinTransferOfflineEmailOTP()) {
-				if (enteredOTP == actualOTP || enteredOTP == _sysConfig.getReturnOfflineEmailOTP()) {
-					return HELPER.completeResponse();
-				} else {
-					setOpState(SHOWING_ERROR_PROMPT);
-					return HELPER.getPromptResponse("ASQ_BIN_TRANSFER_OTP_ERROR");
-				}
+			boolean emailReturnOtp = getScopedValue(AsqValueKeys.ASQ_RETURN_OFFLINE);
+			if (Boolean.TRUE.equals(emailReturnOtp) && enteredOTP == _sysConfig.getBinTransferOfflineEmailOTP()) {
+				return HELPER.completeResponse();
 			}
+			int actualOTP = getScopedValue(AsqValueKeys.ASQ_BIN_TRANSFER_OTP);
+			if (enteredOTP == actualOTP) {
+				return HELPER.completeResponse();
+			} else {
+				setOpState(SHOWING_ERROR_PROMPT);
+				return HELPER.getPromptResponse("ASQ_BIN_TRANSFER_OTP_ERROR");
+			}
+
 		} catch (Exception exception) {
 			LOG.error("Exception from Bin Transfer OTP form in Handling Data Action :" + exception);
 		}

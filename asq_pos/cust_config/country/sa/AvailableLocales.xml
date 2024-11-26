@@ -12,4 +12,5 @@
 -->
 <Root dtype="List" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="AvailableLocales.xsd"  xmlns="http://micros.com/xstore/config/availablelocales">
 	<Entry dtype="String">ar_SA</Entry>
+	<Entry dtype="String">en_US</Entry>
 </Root>

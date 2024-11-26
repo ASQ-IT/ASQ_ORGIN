@@ -133,7 +133,6 @@
 		<Action ref="YES" />
 		<Action ref="NO" />
 	</Prompt>
-
 	<Prompt name="ASQ_TAMARA_CANCEL_SESSION" type="NotifyYesNo" title="_asqTamaraPromptTitle" message="_asqInitiateCancelTransactionPromptYesOrNo">
 		<Action ref="YES" />
 		<Action ref="NO" />
@@ -161,6 +160,10 @@
 	</Prompt>
 	<Prompt name="ASQ_TABBY_TECHNICAL_ERROR" type="Notify" title="_asqTamaraErrorPromptTitle" message="_asqTamarapromptmsgTechnicalError">
 		<Action ref="CANCEL_BACK" />
+	</Prompt>
+	<Prompt name="ASQ_TAMARA_PAYMENT_WAIT" type="NotifyYesCancel" title="_asqTamaraPromptTitle" message="_asqTamaraPaymentWaitMessage">
+		<Action chainKey="ASQ_TAMARA_PAYMENT_CANCEL" text="Cancel" keyStroke="Enter" />
+		<Action chainKey="ASQ_TAMARA_PAYMENT" text="Continue" keyStroke="Enter" />
 	</Prompt>
 	<!-- ASQ TAMARA Integration Prompts Ends -->
 
@@ -195,8 +198,9 @@
 	<Prompt name="ASQ_TABBY_PAYMENT_SUCCESSFULL" type="Notify" title="_asqTabbyPromptTitle" message="_asqTabbyPaymentSuccessfullMessage">
 		<Action chainKey="ASQ_TENDER_TABBY" text="_ok" keyStroke="Enter" />
 	</Prompt>
-	<Prompt name="ASQ_TABBY_PAYMENT_WAIT" type="NotifyOkCancel" title="_asqTabbyPromptTitle" message="_asqTabbyPaymentWaitMessage">
-		<Action chainKey="ASQ_TABBY_PAYMENT" text="Cancel" keyStroke="Enter" />
+	<Prompt name="ASQ_TABBY_PAYMENT_WAIT" type="NotifyOkCancel" title="_asqTabbyPromptTitle" message="_asqTamaraPaymentWaitMessage">
+		<Action chainKey="ASQ_TABBY_PAYMENT" text="Continue" keyStroke="Enter" />
+		<Action chainKey="ASQ_TABBY_PAYMENT_CANCEL" text="Cancel" keyStroke="Enter" />
 	</Prompt>
 	<!-- ASQ TABBY Integration Prompts Ends -->
 

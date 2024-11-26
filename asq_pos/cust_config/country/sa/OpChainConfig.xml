@@ -183,11 +183,23 @@
 	<OpChain name="ASQ_TAMARA_MOBILE">
 		<Op class="asq.pos.bnpl.tamara.tender.op.AsqBnplTamaraTenderOp"/>
 	</OpChain>
-	<OpChain name="ASQ_TAMARA_PAYMENT" rollbackLevel="10" >
-		<Op class="asq.pos.bnpl.tamara.tender.op.AsqBnplTamaraPaymentValidationOp" longRunning="true" >
-			<Parameter name="LongRunningMessage" value= "_asqPaymentProcessingMessage" />
+<!--ASQ BNPL TAMARA Service Starts-->
+	<OpChain name="ASQ_TAMARA_MOBILE" >
+		<Op class="asq.pos.bnpl.tamara.tender.op.AsqBnplTamaraTenderOp" longRunning="true">
+		<Parameter name="LongRunningMessage" value= "_asqPaymentInitiateMessage" />
 		</Op>
 	</OpChain>
+	<OpChain name="ASQ_TAMARA_PAYMENT">
+		<Op class="asq.pos.bnpl.tamara.tender.op.AsqBnplTamaraPaymentValidationOp" longRunning="true">
+		<Parameter name="LongRunningMessage" value= "_asqPaymentProcessingMessage" />
+		</Op>
+	</OpChain>
+	<OpChain name="ASQ_TAMARA_PAYMENT_CANCEL">
+		<Op class="asq.pos.bnpl.tamara.tender.op.AsqBnplTamaraPaymentCancelOp" longRunning="true">
+		<Parameter name="LongRunningMessage" value= "_asqPaymentCancellingMessage" />
+		</Op>
+	</OpChain>
+	
 	<OpChain name="ASQ_TENDER_TAMARA" signal="TransactionModified" contextKey="SALE_TENDER_EMPTY_MENU_OPTION" rollbackLevel="10">
 		<Op class="dtv.pos.tender.CreateTenderLineItemOp">
 			<Parameter name="TenderStatus" value="Tender" />
@@ -251,26 +263,29 @@
 
 	<!--ASQ BNPL TABBY Service Starts -->
 	<OpChain name="ASQ_TABBY_MOBILE">
-		<Op class="asq.pos.bnpl.tabby.tender.op.AsqBnplTabbyTenderOp" longRunning="true" >
+		<Op class="asq.pos.bnpl.tabby.tender.op.AsqBnplTabbyTenderOp" longRunning="true">
+		<Parameter name="LongRunningMessage" value= "_asqPaymentInitiateMessage" />
 		</Op>
 	</OpChain>
-	<OpChain name="ASQ_TABBY_PAYMENT" rollbackLevel="10">
-		<Op class="asq.pos.bnpl.tabby.tender.op.AsqBnplTabbyPaymentValidationOp" longRunning="true" >
+	<OpChain name="ASQ_TABBY_PAYMENT">
+		<Op class="asq.pos.bnpl.tabby.tender.op.AsqBnplTabbyPaymentValidationOp" longRunning="true">
 		<Parameter name="LongRunningMessage" value= "_asqPaymentProcessingMessage" />
 		</Op>
 	</OpChain>
-	<OpChain name="ASQ_TENDER_TABBY" signal="TransactionModified" contextKey="SALE_TENDER_EMPTY_MENU_OPTION" rollbackLevel="10">
+	<OpChain name="ASQ_TABBY_PAYMENT_CANCEL">
+		<Op class="asq.pos.bnpl.tabby.tender.op.AsqBnplTabbyPaymentCancelOp" longRunning="true">
+		<Parameter name="LongRunningMessage" value= "_asqPaymentCancellingMessage" />
+		</Op>
+	</OpChain>
+	<OpChain name="ASQ_TENDER_TABBY" signal="TransactionModified" contextKey="SALE_TENDER_EMPTY_MENU_OPTION">
 		<Op class="dtv.pos.tender.CreateTenderLineItemOp">
 			<Parameter name="TenderStatus" value="Tender" />
 			<Parameter name="TenderId" value="TABBY" />
 		</Op>
-		<PromptOp
-			class="dtv.pos.tender.PromptCustAsscRequiredForTenderOp" />
+		<PromptOp class="dtv.pos.tender.PromptCustAsscRequiredForTenderOp" />
 		<Op class="asq.pos.loyalty.AsqAddLoyaltyTenderOp" />
-		<Op
-			class="dtv.pos.tender.rounding.UpdateTransactionRoundedAmountOp" />
-		<OpChainRoute chainKey="CHECK_SALE_COMPLETE"
-			chainType="START" />
+		<Op class="dtv.pos.tender.rounding.UpdateTransactionRoundedAmountOp" />
+		<OpChainRoute chainKey="CHECK_SALE_COMPLETE" chainType="START" />
 	</OpChain>
 	<!--ASQ BNPL TABBY Service Ends-->
 
@@ -453,8 +468,8 @@
     <OpChainRoute chainKey="SALE_COMPLETE_FINISH.pre.1" />
     <OpChainRoute chainKey="SALE_COMPLETE_FINISH.local" />
     <!-- Inventory must be processed before the transaction is persisted!! -->
-    <WorkerOp workersBean="saleCompleteInventoryWorkers" />
-    <WorkerOp workersBean="completeSaleTransWorkers" />
+   <!--  <WorkerOp workersBean="saleCompleteInventoryWorkers" />-->
+    <WorkerOp workersBean="completeSaleTransWorkers" /> 
     <Op class="dtv.pos.tender.creditcard.PrepareImprintCreditCardOp" />
     <Op class="dtv.pos.customer.account.op.AddCustomerAccountRcptSourcesOp" />
     <Op class="dtv.pos.register.giftreceipt.GroupGiftReceiptsOp" />
@@ -538,20 +553,32 @@
     <ValidationOp validationsBean="sessionTenderAmountRules" />
   <!--   <PromptOp class="dtv.pos.register.returns.PromptCreditVoucherOp" />    --> 
   </OpChain>
+    
+  <OpChain name="EMAIL_RECEIPTS1" contextKey="EMAIL_RECEIPT_MENU">
+    <Op class="oracle.retail.xstore.countrypack.common.op.EmailAddressWithDeliveryMethodsPromptOp" />
+    <Op class="dtv.pos.customer.email.PromptUpdateCustAcctWithEmailOp" />
+    <OpChainRoute chainKey="SALE_COMPLETE1" />
+  </OpChain>
+   <OpChain name="PRINT_EMAIL_RECEIPTS1" contextKey="EMAIL_RECEIPT_MENU">
+    <Op class="dtv.pos.customer.email.EmailAddressPromptOp" />
+    <Op class="dtv.pos.customer.email.PromptUpdateCustAcctWithEmailOp" />
+    <OpChainRoute chainKey="SALE_COMPLETE1" />
+  </OpChain>
   <!-- PRICE Quotation end-->
-	<!-- ASQ Bin Transfer Starts-->
-	<OpChain name="ITEM_TRANSFER_SAVE" signal="InventoryOperationsComplete,TransactionComplete">
+  
+  <!-- ASQ Bin Transfer Starts-->
+  <OpChain name="ITEM_TRANSFER_SAVE" signal="InventoryOperationsComplete,TransactionComplete">
 		<PromptOp class="dtv.pos.inventory.CheckPromptYesNo" key="ITEM_TRANSFER_SAVE" />
 		<Op class="dtv.pos.inventory.movement.CreateItemTransferDocumentOp" />
 		<OpChainRoute chainKey="ASQ_BIN_TRANSFER_OTP" condition="asq.pos.inventory.AsqBinTransferAllowedCheck"/>
 		<WorkerOp workersBean="saveItemTransferWorkers" />
 		<Op class="dtv.pos.inventory.movement.PrintItemTransferReportOp" />
 		<Op class="dtv.pos.framework.op.OpChainRollbackOp" />
-	</OpChain>
-	<OpChain name="ASQ_BIN_TRANSFER_OTP">
+   </OpChain>
+   <OpChain name="ASQ_BIN_TRANSFER_OTP">
 		<Op class="asq.pos.inventory.AsqBinTransferEmailFormOp" longRunning="true"/>
 		<Op class="asq.pos.inventory.AsqBinTransferOTPFormOp"/>
-	</OpChain>
-	<!-- ASQ Bin Transfer Ends-->
+   </OpChain>
+   <!-- ASQ Bin Transfer Ends-->
 	
 </OpChainSet>
