@@ -3,6 +3,9 @@ package asq.pos.loyalty.stc.earn.op;
 import java.math.BigDecimal;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.time.ZoneId;
+import java.time.ZonedDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.Date;
 
 import javax.inject.Inject;
@@ -136,20 +139,6 @@ public class AsqSTCEarnPointsOp extends Operation {
 		return false;
 	}
 	
-	@Override
-	public void setParameter(String argName, String argValue) {
-		if ("TenderType".equalsIgnoreCase(argName)) {
-			tenderType = argValue;
-		}
-		super.setParameter(argName, argValue);
-	}
-
-	@Override
-	public boolean isOperationApplicable() {
-		ITenderLineItem tenderLine = getScopedValue(ValueKeys.CURRENT_TENDER_LINE);
-		return (!tenderLine.getVoid() && tenderLine.getTenderId().equalsIgnoreCase(tenderType));
-	}
-
 	/**
 	 * Method handles all service errors returned from Earn API
 	 * 
@@ -172,13 +161,17 @@ public class AsqSTCEarnPointsOp extends Operation {
 		String custMobileNmbr = null;
 		IAsqSTCLoyaltyServiceRequest request = new AsqSTCLoyaltyServiceRequest();
 		LOG.info("STC request preparation for Earn API Starts here : ");
-		if (getScopedValue(AsqValueKeys.ASQ_MOBILE_NUMBER) != null) {
+		//if (getScopedValue(AsqValueKeys.ASQ_MOBILE_NUMBER) != null) {
 			custMobileNmbr = _transactionScope.getValue(AsqValueKeys.ASQ_MOBILE_NUMBER);
-		}
+		//}
 		request.setMsisdn(Long.parseLong(custMobileNmbr.trim()));
 		request.setBranchId(System.getProperty("asq.stc.branchid"));
 		request.setTerminalId(System.getProperty("asq.stc.terminalid"));
-		request.setRequestDate(DateTime.now().toString());
+		ZoneId ksaZone = ZoneId.of("Asia/Riyadh");
+		ZonedDateTime ksaDateTime = ZonedDateTime.now(ksaZone);
+		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss");
+		String requestDate = ksaDateTime.format(formatter);
+		request.setRequestDate(requestDate);
 		request.setPIN(null);
 		request.setAmount(calcltdSTCPntsForEarnAPI.intValue());
 		LOG.info("STC request preparation for Earn API call Ends here : ");
@@ -187,6 +180,17 @@ public class AsqSTCEarnPointsOp extends Operation {
 //		asqStcHelper.saveSTCResponseToDB(trans, globalID, requestDate);
 		request.setGlobalId(globalID);
 		LOG.info("Sending request to Earn API: " + request.toString());
-		return (AsqSTCLoyaltyServiceResponse) _asqSTCLoyalityTenderService.get().earnReward(request);
+		AsqSTCLoyaltyServiceResponse response = (AsqSTCLoyaltyServiceResponse) _asqSTCLoyalityTenderService.get().earnReward(request);
+		LOG.info("STC API Earn Reward Response :" +response);
+		return (AsqSTCLoyaltyServiceResponse) validateEarnResponseAndStoreDataInDB(response);
+		//return response;
 	}
+
+	
+	  private IOpResponse validateEarnResponseAndStoreDataInDB(AsqSTCLoyaltyServiceResponse response) {
+	  response.getDescription().equalsIgnoreCase("success"); return
+	  HELPER.getPromptResponse("ASQ_STC_SUCCESSFULL_EARN_REWARD"); }
+	 
+	
+	
 }

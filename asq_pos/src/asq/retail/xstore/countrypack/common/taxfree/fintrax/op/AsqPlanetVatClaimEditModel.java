@@ -1,5 +1,6 @@
 package asq.retail.xstore.countrypack.common.taxfree.fintrax.op;
 
+import java.util.Date;
 import java.util.List;
 
 import dtv.pos.common.ConfigurationMgr;
@@ -45,7 +46,7 @@ public class AsqPlanetVatClaimEditModel extends BasicEditModel {
 	private String asqTaxDocumentNumber;
 	private String asqTaxIssuedBy;
 	private String asqExpirationDate;
-	private String asqBirthDate;
+	private Date asqBirthDate;
 
 	public String getAsqTaxDocument() {
 		return asqTaxDocument;
@@ -103,11 +104,16 @@ public class AsqPlanetVatClaimEditModel extends BasicEditModel {
 		addField(ASQ_ADDRESS, String.class);
 		addField(ASQ_NATIONAL, String.class);
 		addField(ASQ_NATIONAL_RES, String.class);
-		addField(ASQ_TAX_DOC, String.class);
+		
+		List<? extends ICodeValue> docTypes = CodeLocator.getCodeValues(ConfigurationMgr.getOrganizationId(), "PLANET_DOC");
+		
+		addField(EditModelField.makeFieldDefUnsafe(this, ASQ_TAX_DOC, String.class, 2, null, ICardinality.OPTIONAL,
+				docTypes, null, codeWrapperFactory_, null));
+		
 		addField(ASQ_TAX_DOC_NBR, String.class);
 		addField(ASQ_TAX_ISSUE, String.class);
 		addField(ASQ_EXP_DATE, String.class);
-		addField(ASQ_BIRTH_DATE, String.class);
+		addField(ASQ_BIRTH_DATE, Date.class);
 		initializeFieldState();
 	}
 
@@ -151,11 +157,11 @@ public class AsqPlanetVatClaimEditModel extends BasicEditModel {
 		this.address1 = address1;
 	}
 
-	public String getAsqBirthDate() {
+	public Date getAsqBirthDate() {
 		return asqBirthDate;
 	}
 
-	public void setAsqBirthDate(String asqBirthDate) {
+	public void setAsqBirthDate(Date asqBirthDate) {
 		this.asqBirthDate = asqBirthDate;
 	}
 

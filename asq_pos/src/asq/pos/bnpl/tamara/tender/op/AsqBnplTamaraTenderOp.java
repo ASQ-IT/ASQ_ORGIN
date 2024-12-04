@@ -42,7 +42,6 @@ import dtv.xst.dao.crm.IParty;
 import dtv.xst.dao.trl.IRetailTransaction;
 import dtv.xst.dao.trl.ISaleReturnLineItem;
 import dtv.xst.dao.trn.IPosTransaction;
-import dtv.xst.dao.trn.IPosTransactionProperty;
 import dtv.xst.dao.trn.PosTransactionPropertyId;
 
 public class AsqBnplTamaraTenderOp extends AbstractFormOp<AsqBnplTamaraEditModel> {
@@ -289,5 +288,4 @@ public class AsqBnplTamaraTenderOp extends AbstractFormOp<AsqBnplTamaraEditModel
 		}
 		return response;
 	}
-
 }

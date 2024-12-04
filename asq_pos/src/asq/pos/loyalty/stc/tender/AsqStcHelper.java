@@ -4,6 +4,9 @@ import java.math.BigDecimal;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
+import java.time.ZoneId;
+import java.time.ZonedDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
@@ -33,14 +36,13 @@ import dtv.pos.common.OpExecutionException;
 import dtv.pos.framework.scope.TransactionScope;
 import dtv.xst.dao.trl.IRetailTransaction;
 import dtv.xst.dao.trl.ISaleReturnLineItem;
-import dtv.xst.dao.trn.IPosTransactionProperty;
 import oracle.dss.dataView.datacache.Map;
 import java.util.Calendar;
 
 public class AsqStcHelper {
 
 	private static final Logger LOG = LogManager.getLogger(AsqStcHelper.class);
-	
+
 	private static int systemCycle = 0;
 
 	/**
@@ -72,6 +74,7 @@ public class AsqStcHelper {
 		} catch (Exception exception) {
 			LOG.error("Exception caught in converting response object to json:", exception);
 		}
+		LOG.info("STC convertTojson earn :" + result);
 		return result;
 	}
 
@@ -90,6 +93,15 @@ public class AsqStcHelper {
 			return objectMapper.readValue(argJSONResponse, arObjectToConvert);
 		}
 		return null;
+	}
+
+	public String getCurrentDateTime() {
+		ZoneId ksaZone = ZoneId.of("Asia/Riyadh");
+		// Get the current date and time in KSA
+		ZonedDateTime ksaDateTime = ZonedDateTime.now(ksaZone);
+		// Format the date and time including the time zone offset
+		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss");
+		return ksaDateTime.format(formatter);
 	}
 
 	/**
@@ -132,6 +144,10 @@ public class AsqStcHelper {
 			return "ASQ_STC_REDEMPTION_NOTFOUND_ERROR";
 		case "1040":
 			return "ASQ_STC_REDEMPTION_REVERESED_ERROR";
+		case "2310":
+		case "1":
+		case "1109":
+		case "1050":
 		case "2311":
 			return "ASQ_STC_TECHNICAL_ERROR";
 		case "1020":
@@ -158,6 +174,8 @@ public class AsqStcHelper {
 			return "ASQ_STC_REWARD_AMOUNT_GREATER_ERROR";
 		case "1044":
 			return "ASQ_STC_REWARD_AMOUNT_GREATER_2_ERROR";
+		case "SSLHANDSHAKE":
+			return "ASQ_STC_HAND_SHAKE_ERROR";
 		default:
 			return "ASQ_STC_TECHNICAL_ERROR";
 		}
@@ -183,14 +201,14 @@ public class AsqStcHelper {
 		LOG.info("STC API Generated Global ID:" + globalId);
 		return globalId;
 	}
-	
+
 	/**
 	 * This method counts the expire session time for Tabby API
 	 * 
 	 * @param
 	 * @return results after completing the timecycle
 	 */
-	
+
 	public boolean checkForTimeExpiration(Long timeDelay, Long timeCycle) throws InterruptedException {
 		while (timeCycle > systemCycle) {
 			Thread.sleep(timeDelay);
@@ -200,7 +218,7 @@ public class AsqStcHelper {
 		systemCycle = 0;
 		return false;
 	}
-	
+
 	/**
 	 * This method maps all errors received from Tamara/Tabby API
 	 * 
@@ -224,7 +242,7 @@ public class AsqStcHelper {
 			return "ASQ_TABBY_TECHNICAL_ERROR";
 		}
 	}
-	
+
 	/**
 	 * This method maps all errors received from Tamara/Tabby API
 	 * 

@@ -9,6 +9,7 @@
     
     <ActionGroup name="DEFAULT">
       <Action ref="CANCEL_BACK" />
+      <Action dataKey="CONTINUE" text="_skip" keyStroke="F4" />
       <Action ref="ACCEPT" />
     </ActionGroup>
   </Form>

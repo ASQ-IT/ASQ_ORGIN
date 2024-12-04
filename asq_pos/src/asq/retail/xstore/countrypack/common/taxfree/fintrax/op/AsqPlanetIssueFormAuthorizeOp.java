@@ -1,8 +1,5 @@
 package asq.retail.xstore.countrypack.common.taxfree.fintrax.op;
 
-import java.math.BigDecimal;
-import java.math.MathContext;
-import java.math.RoundingMode;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
@@ -25,9 +22,11 @@ import dtv.i18n.IFormattable;
 import dtv.pos.common.CommonHelper;
 import dtv.pos.framework.action.type.XstDataActionKey;
 import dtv.pos.framework.op.AbstractFormOp;
+import dtv.pos.framework.op.OpState;
 import dtv.pos.iframework.action.IXstActionKey;
 import dtv.pos.iframework.action.IXstDataAction;
 import dtv.pos.iframework.op.IOpResponse;
+import dtv.pos.iframework.op.IOpState;
 import dtv.pos.iframework.validation.IValidationResultList;
 
 import dtv.xst.dao.trl.ISaleReturnLineItem;
@@ -36,6 +35,8 @@ import dtv.xst.dao.trn.IPosTransaction;
 
 public class AsqPlanetIssueFormAuthorizeOp extends AbstractFormOp<AsqPlanetVatClaimEditModel> {
 	private static final Logger LOG = LogManager.getLogger(AsqPlanetIssueFormAuthorizeOp.class);
+	
+	protected final IOpState SHOWING_ERROR_PROMPT = new OpState("SHOWING_ERROR_PROMPT");
 	public static final String ASQ_GENDER = "gender";
 	@Inject
 	protected Provider<IAsqPlanetVatClaimServices> planetService;
@@ -65,6 +66,14 @@ public class AsqPlanetIssueFormAuthorizeOp extends AbstractFormOp<AsqPlanetVatCl
 			IXstActionKey actionKey = argAction.getActionKey();
 			if (actionKey == XstDataActionKey.ACCEPT) {
 				LOG.debug("Process of registering the Tax Details");
+				
+				if (getOpState() == SHOWING_ERROR_PROMPT) {
+
+				//	model.revertChanges();
+
+					setOpState(null);
+					return null;
+				}
 
 				if (!results.isValid()) {
 					return super.handleDataAction(argAction);
@@ -88,10 +97,12 @@ public class AsqPlanetIssueFormAuthorizeOp extends AbstractFormOp<AsqPlanetVatCl
 				asqPlanetVatClaimShopperObj.setFirstName(model.getFirstName());
 				asqPlanetVatClaimShopperObj.setLastName(model.getFirstName());
 
+				if(model.getGender() != null) {
 				if (model.getGender().equalsIgnoreCase("M")) {
 					asqPlanetVatClaimShopperObj.setGender("MALE");
 				} else if (model.getGender().equalsIgnoreCase("F")) {
 					asqPlanetVatClaimShopperObj.setGender("FEMALE");
+				}
 				}
 
 				asqPlanetVatClaimShopperObj.setNationality(model.getAsqNationality());
@@ -109,8 +120,7 @@ public class AsqPlanetIssueFormAuthorizeOp extends AbstractFormOp<AsqPlanetVatCl
 				if (model.getAsqExpirationDate() != null) {
 					asqPlanetVatClaimShopperIdDocObj.setExpirationDate(formatter.format(model.getAsqExpirationDate()));
 				}
-
-				asqPlanetVatClaimShopperIdDocObj2.setDate(model.getAsqBirthDate());
+				
 				if (model.getAsqBirthDate() != null) {
 					asqPlanetVatClaimShopperIdDocObj2.setDate(formatter.format(model.getAsqBirthDate()));
 				}
@@ -152,7 +162,8 @@ public class AsqPlanetIssueFormAuthorizeOp extends AbstractFormOp<AsqPlanetVatCl
 				line.setCode(argSaleLine.getItem().getItemId());
 				line.setDescription(argSaleLine.getItemDescription());
 				line.setGrossAmount(argSaleLine.getGrossAmount());
-				line.setMerchandiseGroup(argSaleLine.getItem().getMerchLevel1Id());
+				 //line.setMerchandiseGroup(argSaleLine.getItem().getMerchLevel1Id());
+				line.setMerchandiseGroup(_sysConfig.getPlanetMerchantIdItem());
 				line.setNetAmount(argSaleLine.getNetAmount());
 				line.setQuantity(argSaleLine.getQuantity());
 				line.setUnitPrice(argSaleLine.getUnitPrice());
@@ -164,7 +175,7 @@ public class AsqPlanetIssueFormAuthorizeOp extends AbstractFormOp<AsqPlanetVatCl
 					line.setTaxRefundEligible(true); // fasle for no vat
 					line.setVatAmount(_commonHelper.roundCurrency(vatRate.getTaxAmount()));
 					
-					line.setVatCode(vatRate.getTaxGroupId());
+					line.setVatCode("5");
 					line.setVatRate(null); // Need to check
 				}
 
@@ -183,19 +194,25 @@ public class AsqPlanetIssueFormAuthorizeOp extends AbstractFormOp<AsqPlanetVatCl
 
 		if (null == response) {
 			return technicalErrorScreen("Planet API::::: Service has null response");
-		} else if (response.getTaxRefundResponse() != null) {
+		} 
+	
+		else if (response.getTaxRefundResponse() != null) {
 			originalPosTrx.setStringProperty(AsqZatcaConstant.ASQ_PLANET_TAX_ID,
 					response.getTaxRefundResponse().getTaxRefundTagNumber());
 			return HELPER.getPromptResponse("ASQ_PLANET_SUCCESS");
 		}
-		else if (response.getError()!= null) {
+		else if (response.getError()!= null){
+			setOpState(SHOWING_ERROR_PROMPT);
 			IFormattable[] args = new IFormattable[2];
 			String message = response.getError().getMessage();
 			args[0] = _formattables.getSimpleFormattable(message);
-			LOG.info("STC REDEEM API::::: " + message);
+			LOG.info("Planet REDEEM API::::: " + message);
 			
-			return HELPER.getPromptResponse("ASQ_PLANET_TECHNICAL_ERROR", args);
+			return HELPER.getPromptResponse("ASQ_PLANET_RESPONSE_ERROR", args);
 		}
+		if ( null == response.getStatus()) {
+			return technicalErrorScreen("Planet API::::: Service has null response");
+		} 
 		return HELPER.completeResponse();
 	}
 

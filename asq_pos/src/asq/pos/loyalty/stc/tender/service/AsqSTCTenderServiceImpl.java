@@ -31,6 +31,7 @@ public class AsqSTCTenderServiceImpl implements IAsqSTCLoyaltyTenderService {
 	private static final ServiceType<IAsqSTCLoyaltyServiceRequest, IServiceResponse> ASQ_STC_TENDER_REDEEM_SERVICE = new ServiceType<IAsqSTCLoyaltyServiceRequest, IServiceResponse>("ASQ_STC_TENDER_REDEEM_SERVICE");
 	private static final ServiceType<IAsqSTCLoyaltyServiceRequest, IServiceResponse> ASQ_STC_TENDER_TRIGGER_OTP_SERVICE = new ServiceType<IAsqSTCLoyaltyServiceRequest, IServiceResponse>("ASQ_STC_TENDER_TRIGGER_OTP_SERVICE");
 	private static final ServiceType<IAsqSTCLoyaltyServiceRequest, IServiceResponse> ASQ_STC_EARN_REWARD_SERVICE = new ServiceType<IAsqSTCLoyaltyServiceRequest, IServiceResponse>("ASQ_STC_EARN_REWARD_SERVICE");
+	private static final ServiceType<IAsqSTCLoyaltyServiceRequest, IServiceResponse> ASQ_STC_REFUND_REDEEM_SERVICE = new ServiceType<IAsqSTCLoyaltyServiceRequest, IServiceResponse>("ASQ_STC_REFUND_REDEEM_SERVICE");
 	
 	/**
 	 * This method submits STC API OTP request
@@ -81,7 +82,7 @@ public class AsqSTCTenderServiceImpl implements IAsqSTCLoyaltyTenderService {
 	public IServiceResponse earnReward(IAsqSTCLoyaltyServiceRequest argRequest) throws ServiceException {
 		
 		try {
-			IServiceHandler<IAsqSTCLoyaltyServiceRequest, IServiceResponse> serviceHandler = _serviceHandlerFactory.getServiceHandler(ASQ_STC_TENDER_TRIGGER_OTP_SERVICE);
+			IServiceHandler<IAsqSTCLoyaltyServiceRequest, IServiceResponse> serviceHandler = _serviceHandlerFactory.getServiceHandler(ASQ_STC_EARN_REWARD_SERVICE);
 			LOG.info("STC API Earn Reward Service call starts here:");
 			IServiceResponse response = serviceHandler.handleService(argRequest,ASQ_STC_EARN_REWARD_SERVICE);
 			return response;
@@ -91,6 +92,22 @@ public class AsqSTCTenderServiceImpl implements IAsqSTCLoyaltyTenderService {
 			throw new ServiceException(ex);
 		}
 	}
+	
+	@Override
+	public IServiceResponse refundRedeem(IAsqSTCLoyaltyServiceRequest argRequest) throws ServiceException {
+		
+		try {
+			IServiceHandler<IAsqSTCLoyaltyServiceRequest, IServiceResponse> serviceHandler = _serviceHandlerFactory.getServiceHandler(ASQ_STC_REFUND_REDEEM_SERVICE);
+			LOG.info("STC API TriggerOTPRequest Service call starts here:");
+			IServiceResponse response = serviceHandler.handleService(argRequest,ASQ_STC_REFUND_REDEEM_SERVICE);
+			return response;
+		} catch (ServiceException ex) {
+			throw ex;
+		} catch (Exception ex) {
+			throw new ServiceException(ex);
+		}
+	}
+	
 }
 
 	

@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Hardware xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../../../../pos/config/dtv/res/config/HardwareConfig.xsd">
+  <PlaySounds dtype="Boolean">false</PlaySounds>
+  <ForceDrawerClose dtype="Boolean">false</ForceDrawerClose>
+  <ShowPrinterDialog dtype="Boolean">false</ShowPrinterDialog>
+<!-- ASQ Hardware Config Changes Starts -->
+  <Device type="POSPrinter" use="RECEIPT">
+    <name dtype="String">ASQPOSPrinter</name>
+  </Device>
+  <Device type="POSPrinter" use="RECEIPT_BACKUP">
+    <name dtype="String">ASQPOSPrinter</name>
+  </Device>
+  <Device type="Scanner" use="BARCODE_SCANNER">
+    <name dtype="String">ASQZebraScannerUSB</name>
+  </Device>
+    <Device type="CashDrawer" use="CASHDRAWER">
+    <name dtype="String">ASQCashDrawer</name>
+  </Device>
+  <Device type="CustomerDisplay" use="CUST_DISPLAY">
+    <name dtype="String">ASQLineDisplay</name>
+  </Device>
+  <Device type="Scanner" use="BARCODE_SCANNER">
+    <name dtype="String">ASQZebraScannerUSB</name>
+  </Device>
+<!-- ASQ Hardware Config Changes ends -->  
+
+  <!--<Device type="POSPrinter" use="REPORT">
+    <name dtype="String">Generic-ReportPrinter-Laser</name>
+  </Device>
+  <Device type="POSPrinter" use="FLASH_SALES">
+    <name dtype="String">Generic-Printer-Laser</name>
+  </Device>
+
+  <Device type="PinPad" use="MAIN_PINPAD">
+    <name dtype="String">Virtual-PINPad-Swing</name>
+    <impl dtype="Class">dtv.hardware.ppad.DtvDukptPinPad</impl>
+  </Device>
+
+  <Device type="SignatureCapture" use="SIG_CAP">
+    <name dtype="String">Virtual-SigCap-Swing</name>
+    <width dtype="Integer">480</width>
+    <height dtype="Integer">320</height>
+  </Device>-->
+    
+</Hardware>

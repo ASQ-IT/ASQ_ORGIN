@@ -5,6 +5,8 @@ package asq.retail.xstore.countrypack.common.taxfree.fintrax.op;
 
 import java.math.BigDecimal;
 
+import com.oracle.shaded.fasterxml.jackson.annotation.JsonProperty;
+
 import oracle.retail.xstore.countrypack.common.taxfree.fintrax.auth.json.PlanetLineItemData;
 
 /**
@@ -20,6 +22,7 @@ public class AsqPlanetLineItemData extends PlanetLineItemData {
 	private boolean taxRefundEligible;
 	private Number vatAmount;
 	private String vatCode;
+ 	 private String discountAmount;
 
 	public String getCode() {
 		return code;
@@ -76,6 +79,18 @@ public class AsqPlanetLineItemData extends PlanetLineItemData {
 	public void setVatCode(String vatCode) {
 		this.vatCode = vatCode;
 	}
+	
+  
+
+		 
+	  
+	     public String getDiscountAmount() {
+			return discountAmount;
+		}
+
+		public void setDiscountAmount(String discountAmount) {
+			this.discountAmount = discountAmount;
+		}
 
 
 

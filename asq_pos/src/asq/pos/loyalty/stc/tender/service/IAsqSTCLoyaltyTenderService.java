@@ -11,5 +11,7 @@ public interface IAsqSTCLoyaltyTenderService extends IService {
 	IServiceResponse triggerOTPRequest(IAsqSTCLoyaltyServiceRequest paramAsqSTCLoyalityRequest)throws ServiceException;
 	
 	IServiceResponse earnReward(IAsqSTCLoyaltyServiceRequest argRequest)throws ServiceException;
+	
+	IServiceResponse refundRedeem(IAsqSTCLoyaltyServiceRequest argRequest) throws ServiceException;
 
 }

@@ -7,6 +7,7 @@
 <!-- ASQ STC Points calculation- Ends -->
 
     <Setting name="ASQ---PlanetTaxFree---MerchantIdNumber">17519</Setting>
+    <Setting name="ASQ---PlanetTaxFree---MerchantIdItem">105</Setting>
     <Setting name="ASQ---PlanetTaxFree---TerminalNumber">22044</Setting>
     <Setting name="ASQ---PlanetTaxFree---Type">RECEIPT</Setting>
     <!-- StockOnHand enable/ disable configuration -->
@@ -29,4 +30,11 @@
     <Setting name="ASQ---BinTransferOfflineOTP---To">628387</Setting>
 	<!-- ASQ Bin Transfer Email & OTP - Ends -->	
 
+    <Setting name="ItemReturn---CrossBorderReturnsEnabled">false</Setting>
+    <Setting name="ItemReturn---CrossChannelReturnsEnabled">false</Setting>
+    <Setting name="ItemReturn---CrossLegalEntityReturnsEnabled">true</Setting>
+    <Setting name="ItemReturn---CrossStateReturnsEnabled">true</Setting>
+    <Setting name="ItemReturn---CrossStoreReturnsEnabled">true</Setting>
+    <Setting name="ItemReturn---CrossTaxLocationReturnsEnabled">true</Setting>
+    <Setting name="Footer_disclaimer---Enable">true</Setting>
 </SysConfig>

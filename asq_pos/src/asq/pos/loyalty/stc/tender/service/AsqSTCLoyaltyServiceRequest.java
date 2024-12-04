@@ -16,7 +16,21 @@ public class AsqSTCLoyaltyServiceRequest extends ServiceRequest implements IAsqS
 	Integer Amount;
 	String transactionId;
 	String globalId;
+	String RefRequestId;
+	String RefRequestDate;
 	
+	public String getRefRequestId() {
+		return RefRequestId;
+	}
+	public void setRefRequestId(String refRequestId) {
+		RefRequestId = refRequestId;
+	}
+	public String getRefRequestDate() {
+		return RefRequestDate;
+	}
+	public void setRefRequestDate(String refRequestDate) {
+		RefRequestDate = refRequestDate;
+	}
 	public String getGlobalId() {
 		return globalId;
 	}

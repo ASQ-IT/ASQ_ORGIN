@@ -205,13 +205,10 @@
 			<Parameter name="TenderStatus" value="Tender" />
 			<Parameter name="TenderId" value="TAMARA" />
 		</Op>
-		<PromptOp
-			class="dtv.pos.tender.PromptCustAsscRequiredForTenderOp" />
+		<PromptOp class="dtv.pos.tender.PromptCustAsscRequiredForTenderOp" />
 		<Op class="asq.pos.loyalty.AsqAddLoyaltyTenderOp" />
-		<Op
-			class="dtv.pos.tender.rounding.UpdateTransactionRoundedAmountOp" />
-		<OpChainRoute chainKey="CHECK_SALE_COMPLETE"
-			chainType="START" />
+		<Op class="dtv.pos.tender.rounding.UpdateTransactionRoundedAmountOp" />
+		<OpChainRoute chainKey="CHECK_SALE_COMPLETE" chainType="START" />
 	</OpChain>
 	<OpChain name="VOID_TENDER" signal="TransactionModified"
 		contextKey="SALE_TENDER_EMPTY_MENU_OPTION">
@@ -219,6 +216,9 @@
 			class="dtv.pos.tender.modifytender.PromptTendersToVoidOp">
 			<Parameter name="disallowNonVoidableTenders" value="true" />
 		</PromptOp>
+		<Op class="asq.pos.loyalty.stc.tender.op.AsqSTCRefundRedeemOp">
+			<Parameter name="TenderType" value="STC" />
+		</Op>
 		<Op class="asq.pos.bnpl.tamara.tender.op.AsqBnplTamaraRefundOp">
 			<Parameter name="TenderType" value="TAMARA" />
 		</Op>

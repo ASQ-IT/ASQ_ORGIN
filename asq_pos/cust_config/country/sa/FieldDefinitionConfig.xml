@@ -37,7 +37,7 @@
      <Field name="asqTaxDocumentLabel" type="Label" text="_asqTaxDocumentLabel"/>
     <Field name="asqTaxDocumentNumberLabel" type="Label" text="_asqTaxDocumentNumberLabel"/>
     
-    <Field name="asqTaxDocument" type="Text" resource="asqTaxDocument"/>
+    <Field name="asqTaxDocument" type="ComboBox" resource="asqTaxDocument"/>
     <Field name="asqTaxDocumentNumber" type="Text" resource="asqTaxDocumentNumber"/>
       
      <Field name="asqTaxIssuedByLabel" type="Label" text="_asqTaxIssuedByLabel"/>
@@ -46,6 +46,7 @@
     <Field name="asqTaxIssuedBy" type="Text" resource="asqTaxIssuedBy"/>
     <Field name="asqExpirationDate" type="Text" resource="asqExpirationDate" dataFieldRef="BirthDate"/>
     
+    <Field name="asqbirthDateLabel" type="Label" text="_asqbirthDateLabel" />
      <Field name="asqBirthDate" type="Text" resource="asqBirthDate" dataFieldRef="BirthDate" />
      <Field name="asqGender" type="ComboBox" resource="gender"/>
 	<!-- ASQ Planet Integration Ends -->

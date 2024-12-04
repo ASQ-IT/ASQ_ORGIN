@@ -20,5 +20,8 @@ public interface IAsqSTCLoyaltyServiceRequest extends IServiceRequest {
 	public void setTransactionId(String transactionId);
 	public String getGlobalId();
 	public void setGlobalId(String globalId);
-	
+	public String getRefRequestId();
+	public void setRefRequestId(String refRequestId);
+	public String getRefRequestDate();
+	public void setRefRequestDate(String refRequestDate);
 }

@@ -20,7 +20,6 @@ import dtv.pos.framework.op.Operation;
 import dtv.pos.iframework.event.IXstEvent;
 import dtv.pos.iframework.op.IOpResponse;
 import dtv.xst.dao.trn.IPosTransaction;
-import dtv.xst.dao.trn.IPosTransactionProperty;
 import dtv.xst.dao.ttr.ITenderLineItem;
 
 /**

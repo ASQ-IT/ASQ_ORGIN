@@ -10,7 +10,6 @@ import javax.inject.Inject;
 import javax.inject.Provider;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-
 import asq.pos.bnpl.tabby.tender.service.AsqBnplTabbyPaymentObj;
 import asq.pos.bnpl.tabby.tender.service.AsqSubmitBnplTabbyServiceRequest;
 import asq.pos.bnpl.tabby.tender.service.AsqSubmitBnplTabbyServiceResponse;
@@ -35,7 +34,6 @@ import dtv.xst.dao.trl.IRetailTransaction;
 import dtv.xst.dao.trl.IRetailTransactionLineItem;
 import dtv.xst.dao.trl.ISaleReturnLineItem;
 import dtv.xst.dao.trn.IPosTransaction;
-import dtv.xst.dao.trn.IPosTransactionProperty;
 import dtv.xst.dao.ttr.ITenderLineItem;
 import dtv.pos.framework.action.XstDefaultAction;
 

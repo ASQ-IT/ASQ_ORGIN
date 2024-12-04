@@ -16,6 +16,9 @@ public final class AsqValueKeys {
 	public static final ValueKey<String> ASQ_MOBILE_NUMBER = new ValueKey<String>(String.class, "ASQ_MOBILE_NUMBER");
 	public static final ValueKey<String> ASQ_STC_OTP = new ValueKey<String>(String.class, "ASQ_STC_OTP");
 	public static final ValueKey<BigDecimal> ASQ_STC_PNT_RDMPTN = new ValueKey<BigDecimal>(BigDecimal.class, "ASQ_STC_PNT_RDMPTN");
+	public static final ValueKey<String> ASQ_STC_REF_REQUEST_ID = new ValueKey<String>(String.class, "ASQ_STC_REF_REQUEST_ID");
+	public static final ValueKey<String> ASQ_STC_REF_REQUEST_DATE = new ValueKey<String>(String.class, "ASQ_STC_REF_REQUEST_DATE");
+	public static final ValueKey<String> STC_SUCCESS_REFUND_REDEEM_RESPONSE = new ValueKey<String>(String.class, "STC_SUCCESS_REFUND_REDEEM_RESPONSE");
 
 	public static final ValueKey<String> TAMARA_RESPONSE = new ValueKey<String>(String.class, "TAMARA_RESPONSE");
 	public static final ValueKey<String> ASQ_TAMARA_ORDERID = new ValueKey<String>(String.class, "ASQ_TAMARA_ORDERID");

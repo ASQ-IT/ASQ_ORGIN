@@ -92,4 +92,9 @@ public class AsqConfigurationMgr extends ConfigurationMgr {
 	public int getBinTransferOfflineEmailOTP() {
 		return _settingsFactory.getInt(new String[] { "ASQ---BinTransferOfflineOTP---To" });
 	}
+
+	public String getPlanetMerchantIdItem() {
+		// TODO Auto-generated method stub
+		return _settingsFactory.getString(new String[] {"ASQ---PlanetTaxFree---MerchantIdItem"});
+	}
 }

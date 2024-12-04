@@ -50,9 +50,9 @@ public class AsqPlanetVatClaimServiceResponse implements IServiceResponse{
 	     
 	     @JsonProperty("tagNumber")
 		 private String tagNumber;
-		 
-	  
-	     private AsqPlanetVatClaimErrorDesc error;
+	     
+
+		private AsqPlanetVatClaimErrorDesc error;
 
 		 // Getter Methods 
 		 

@@ -126,6 +126,18 @@
 	<Prompt name="ASQ_STC_REWARD_AMOUNT_GREATER_2_ERROR" type="Notify" title="_asqStcRewardErrorTitle" message="_asqPromptmsgRewardAmountGreaterError2">
 		<Action ref="CANCEL_BACK" />
 	</Prompt>
+	<Prompt name="ASQ_STC_HAND_SHAKE_ERROR" type="Notify" title="_asqPromptmsgSSLhandShakeErrorTitle" message="_asqPromptmsgSSLhandShakeError">
+		<Action ref="CANCEL_BACK" />
+	</Prompt>
+	<Prompt name="ASQ_STC_SUCCESSFULL_EARN_REWARD" type="Notify" title="_asqStcEarnRewardTitle" message="_asqPromptmsgSuccessfullEarnReward">
+		<Action ref="CANCEL_BACK" />
+	</Prompt>
+	<Prompt name="ASQ_STC_SUCCESSFULL_REDEEM_REFUND" type="NotifyOkCancel" title="_asqStcRefundRedeemTitle" message="_asqPromptmsgSuccessfullRefundRedeem">
+		<Action ref="ACCEPT_ENTER" />
+	</Prompt>
+	<Prompt name="ASQ_STC_REDEMPTION_CANCEL_NOT_ALLOWED" type="Notify" title="_asqStcRedemptionCancelNotAllowedErrorTitle" message="_asqStcRedemptionCancelNotAllowedError">
+		<Action ref="CANCEL_BACK" />
+	</Prompt>
 	<!-- ASQ STC Integration Prompts Ends -->
 	
 	<!-- ASQ TAMARA Integration Prompts Starts -->
@@ -315,9 +327,11 @@
 		<Action ref="CANCEL_BACK" />
 	</Prompt>
 	
-	<Prompt name="ASQ_PLANET_TECHNICAL_ERROR" type="Notify" title="_asqPlanetErrorTitle" message="_asqPlanetmsgTechnicalError" >
-	<Action dataKey="CONTINUE" text="_continue" keyStroke="Enter" />
-	</Prompt>
+	<Prompt name="ASQ_PLANET_TECHNICAL_ERROR" type="Notify" title="_asqPlanetErrorTitle" message="_asqPlanetmsgTechnicalError">
+	<Action ref="CANCEL_BACK" />
+   </Prompt>
+   
+   	<Prompt name="ASQ_PLANET_RESPONSE_ERROR" type="Notify" title="_asqPlanetErrorTitle" message="_asqPlanetmsgTechnicalError" />
 	
 	<Prompt name="ASQ_PLANET_SUCCESS" type="Notify" title="_asqPlanetSuccessTitle" message="_asqpromptmsgSuccess" >
 	<Action dataKey="CONTINUE" text="_continue" keyStroke="Enter" />
@@ -366,7 +380,8 @@
   <!-- PRICE Quotation end-->
 	<!-- ASQ Bin Transfer chnages - Starts -->
 	<Prompt name="ASQ_BIN_TRANSFER_OTP_ERROR" type="Notify" title="_asqCaptureBinTransferOTPTitle" message="_asqCaptureBinTransferOTPError">
-		 <Action dataKey="BACK" text="_back" keyStroke="Escape" />
+		<!-- <Action dataKey="BACK" text="_back" keyStroke="Escape" /> -->
+		 <Action ref="CANCEL_BACK" />
 	</Prompt>
 	<!-- ASQ Bin Transfer chnages - End -->
 	

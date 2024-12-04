@@ -6,6 +6,7 @@ import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
 import java.util.Base64;
 import javax.inject.Inject;
+import javax.net.ssl.SSLHandshakeException;
 import javax.ws.rs.client.Entity;
 import javax.ws.rs.client.Invocation.Builder;
 import javax.ws.rs.core.Response;
@@ -19,9 +20,9 @@ import dtv.servicex.ServiceType;
 import dtv.servicex.impl.AbstractJaxRsHandler;
 
 public class AsqSTCloyaltyServiceHandler extends AbstractJaxRsHandler<IAsqSTCLoyaltyServiceRequest, IServiceResponse> {
-	
+
 	private static final Logger LOG = LogManager.getLogger(AsqSTCloyaltyServiceHandler.class);
-	
+
 	/**
 	 * This class handles STC API service calls
 	 * 
@@ -38,7 +39,7 @@ public class AsqSTCloyaltyServiceHandler extends AbstractJaxRsHandler<IAsqSTCLoy
 	 * @param request object
 	 * @return response result
 	 */
-	
+
 	@Override
 	public IServiceResponse handleService(IAsqSTCLoyaltyServiceRequest argServiceRequest,
 			ServiceType<IAsqSTCLoyaltyServiceRequest, IServiceResponse> argServiceType) {
@@ -49,7 +50,7 @@ public class AsqSTCloyaltyServiceHandler extends AbstractJaxRsHandler<IAsqSTCLoy
 			String authUsernamePassword = System.getProperty("asq.stc.auth.username") + ":"
 					+ System.getProperty("asq.stc.auth.password");
 			String authToken = Base64.getEncoder().encodeToString(authUsernamePassword.getBytes());
-			LOG.debug("STC API AuthToken for request: :" +authToken);
+			LOG.debug("STC API AuthToken for request: :" + authToken);
 			String globalId = argServiceRequest.getGlobalId();
 			argServiceRequest.setGlobalId(null);
 			HttpClient httpClient = HttpClient.newHttpClient();
@@ -58,12 +59,26 @@ public class AsqSTCloyaltyServiceHandler extends AbstractJaxRsHandler<IAsqSTCLoy
 					.header("X-Secret-Token", secretToken).header("GlobalId", globalId);
 			builder.uri(URI.create(getEndpointAddress() + getServicePath()));
 			LOG.debug("STC API Posting request starts here:");
+			if(argServiceRequest.getRefRequestId()!=null) {
+				builder.PUT(HttpRequest.BodyPublishers.ofString(asqStcHelper.convertTojson(argServiceRequest)));
+			}
+			else {
 			builder.POST(HttpRequest.BodyPublishers.ofString(asqStcHelper.convertTojson(argServiceRequest)));
+			}
 			HttpRequest httpRequest = builder.build();
 			rawResponse = httpClient.send(httpRequest, HttpResponse.BodyHandlers.ofString());
-			LOG.debug("STC API returning response :" +rawResponse);
-			//checkForExceptions(rawResponse);
+			LOG.debug("STC API returning response :" + rawResponse.body());
+			// checkForExceptions(rawResponse);
 			return asqStcHelper.convertJSONToPojo(rawResponse.body(), AsqSTCLoyaltyServiceResponse.class);
+		} catch (SSLHandshakeException ex) {
+			LOG.error("WE have recieved a SSL handshake Certificate exception in STC service call ", ex);
+			AsqSTCLoyaltyServiceResponse response = new AsqSTCLoyaltyServiceResponse();
+			AsqSTCErrorDesc errDesc = new AsqSTCErrorDesc();
+			errDesc.setCode("SSLHANDSHAKE");
+			errDesc.setDescription("WE have recieved a SSL handshake Certificate exception in STC service call");
+			response.setErrors(new AsqSTCErrorDesc[] { errDesc });
+			return response;
+
 		} catch (Exception ex) {
 			LOG.error("WE have recieved a exception in STC we service call ", ex);
 			if (200 != rawResponse.statusCode()) {

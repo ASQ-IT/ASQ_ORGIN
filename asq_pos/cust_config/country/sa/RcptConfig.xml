@@ -10,7 +10,6 @@
       <Rule class="dtv.pos.hardware.rcptbuilding.copyrules.TransactionTypeRule" type="RETAIL_SALE" />
       <Rule class="dtv.pos.hardware.rcptbuilding.copyrules.CanceledTransactionReceiptEnabledRule" />
     </ReceiptCopyRule>
-    
     <!-- PRICE Quotation start-->
      <ReceiptCopyRule name="RAIN_CHECK2" document="ASQ_STORE_COPY">
       <Rule class="dtv.pos.hardware.rcptbuilding.copyrules.TransactionTypeRule" type="RAIN_CHECK" />
@@ -47,15 +46,7 @@
 		<sectionref>change</sectionref>
 		<sectionref>YouSavedMessage</sectionref>
 		<sectionref>TaxExemptInfo</sectionref>
-		<sectionref>SALE_DISCLAIMER_DB</sectionref>
-		<sectionref>CUST_COPY_FOOTER_DB</sectionref>
-		<sectionref>CUST_COPY_FOOTER1_DB</sectionref>
-		<sectionref>CUST_COPY_FOOTER2_DB</sectionref>
-		<sectionref>CUST_COPY_FOOTER3_DB</sectionref>
-		<sectionref>CUST_COPY_FOOTER4_DB</sectionref>
-		<sectionref>CUST_COPY_FOOTER5_DB</sectionref>
-		<sectionref>CUST_COPY_FOOTER_DB1</sectionref> 
-		<!-- <sectionref>DONATION_FOOTER_MESSAGE</sectionref> -->
+	    <sectionref>Footer_page_disclaimer</sectionref>
 		<sectionref>footer_cust_copy</sectionref>
 		<sectionref>LOCAL.CUST_COPY_FOOTER_POST</sectionref>
 		<sectionref>system_mode</sectionref>
@@ -108,44 +99,35 @@
         <field method="getAmount" formatter="Money" loc="-3" rtlloc="12" />
       </row>
     </section>
-    <!-- new tender visibility on receipt end --> 
-    
+    <!-- new tender visibility on receipt end -->
+     <section name="header">
+      <sectionref>headerTop</sectionref>
+      <sectionref>CUSTOMER_INFO</sectionref>
+      <sectionref>system_mode</sectionref>
+      <sectionref>return_header</sectionref>
+      </section>
 	<section name="footer_cust_copy">
 		<sectionref>legalWarranty</sectionref>
-		<!-- <sectionref>soldItemsCount</sectionref>
-		<sectionref>returnedItemsCount</sectionref> -->
+		<!-- <sectionref>soldItemsCount</sectionref> <sectionref>returnedItemsCount</sectionref> -->
 		<sectionref>LOCAL.ITEMS_COUNT</sectionref>
 		<sectionref>system_mode</sectionref>
-		<row />
-		<!-- <sectionref>trans_barcode</sectionref> -->
-		<row />
-	  <sectionref>asq_planet_id</sectionref>
-	  <row style="STRONGUNDERLINE" align="C" />
-	   <sectionref>asq_zatca_qrcode</sectionref>
+		<sectionref>asq_planet_id</sectionref>
+		<row style="STRONGUNDERLINE" align="C" />
 		<sectionref>barcode_footer</sectionref>
+		<sectionref>asq_zatca_qrcode</sectionref>
 		<row style="STRONGUNDERLINE" align="C" />
 	</section>
-	<!-- <section name="tax_payer">
-	<row>
-			<field text="_simplifiedTaxpayer" style="BOLD" align="R" />
-			<sp/>
-			<field dbRef="CUSTOMER_COPY_FOOTER_LAST::DEFAULT::getTransactionDate">
-			</field>
-			</row>
-	</section>  -->
 	<section name="asq_zatca_qrcode">
-		<barcode symbology="QR CODE" textposition="NONE" height="250" width="300" >
-			<field align="L" formatter="PlainText">
+		<barcode symbology="QR CODE" textposition="NONE" height="350" width="400" >
+			<field align="C" formatter="PlainText">
 				<aggregate
 					class="asq.pos.register.sale.zatca.receipt.AsqZatcaTransQrCode" />
 			</field>
-			<row />
 		</barcode>
 	</section> 	
 	<!-- Planet integration changes	start -->
 	<section name="asq_planet_id">
 	<condition method="getStringProperty" method_param="ASQ_PLANET_TAX_ID" comparison="NOT_NULL" />
-	<row />
 	<row>  
 	<field text="_asqPlanetReceipt" loc="-25"/>
 	<field text="_asqPlanetReceipt1" loc="10"/>
@@ -157,6 +139,18 @@
 	</row>
 	</section>
 	<!-- Planet integration changes	end -->
+	
+	<section name="Footer_page_disclaimer">
+	    <condition class="asq.pos.docbuilder.condition.AsqFooterPageCondition" />
+	  	<sectionref>CUST_COPY_FOOTER_DB</sectionref>
+		<sectionref>CUST_COPY_FOOTER1_DB</sectionref>
+		<sectionref>CUST_COPY_FOOTER2_DB</sectionref>
+		<sectionref>CUST_COPY_FOOTER3_DB</sectionref>
+		<sectionref>CUST_COPY_FOOTER4_DB</sectionref>
+		<sectionref>CUST_COPY_FOOTER5_DB</sectionref>
+		<!-- <sectionref>CUST_COPY_FOOTER_DB1</sectionref> -->
+	</section>
+	
     <section name="CUST_COPY_FOOTER_DB1" dbRef="CUSTOMER_COPY_FOOTER_LAST::DEFAULT::getTransactionDate">
 		<row />
 	</section>
@@ -182,13 +176,10 @@
 	</section>
 	<section name="CUST_COPY_FOOTER5_DB"
 		dbRef="CUSTOMER_COPY_FOOTER5::DEFAULT::getTransactionDate">
-		<row />
 	</section>
-
 	<section name="headerTop_preLocal">
 		<sectionref>logo</sectionref>
 		<sectionref>invoice_text</sectionref>
-		<row />
 		<sectionref>trans_barcode</sectionref>
 		<!-- <sectionref>transaction_store_location</sectionref> -->
 		<horizontal_rule />
@@ -206,7 +197,7 @@
 	<section name="logo" >
 		<picture
 			filename="../xstoredata/xstore/res/graphics/receipt/logo.bmp"
-			preload="true"  height="2" width="300"/>
+			preload="true" />
 	</section>
 	<section name="barcode_footer">	
 		<picture

@@ -81,7 +81,6 @@ public class AsqSTCTenderOp extends AbstractFormOp<AsqSTCTenderOTPEditModel> {
 		try {
 			if (XstDataActionKey.ACCEPT.equals(argAction.getActionKey())) {
 				AsqSTCTenderOTPEditModel model = getModel();
-				System.out.println();
 				if ((model.getStcOTP() != null) && (model.getStcRedeemPoints() != null)
 						&& (!model.getStcRedeemPoints().equals(""))) {
 					LOG.debug("Process of STC Redemption points Tender starts here :" + model.getStcOTP());
@@ -163,10 +162,7 @@ public class AsqSTCTenderOp extends AbstractFormOp<AsqSTCTenderOTPEditModel> {
 		request.setMsisdn(Long.parseLong(custMobileNmbr.trim()));
 		request.setBranchId(System.getProperty("asq.stc.branchid"));
 		request.setTerminalId(System.getProperty("asq.stc.terminalid"));
-		ZoneId ksaZone = ZoneId.of("Asia/Riyadh");
-		ZonedDateTime ksaDateTime = ZonedDateTime.now(ksaZone);
-		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss");
-		String requestDate = ksaDateTime.format(formatter);
+		String requestDate = asqStcHelper.getCurrentDateTime();
 		request.setRequestDate(requestDate);
 		request.setPIN(Integer.parseInt(otp));
 		request.setAmount(amount);
@@ -185,9 +181,12 @@ public class AsqSTCTenderOp extends AbstractFormOp<AsqSTCTenderOTPEditModel> {
 			return technicalErrorScreen("STC REDEEM API::::: Service has null response");
 		}
 		IRetailTransaction trans = (IRetailTransaction) this._transactionScope.getTransaction();
-		LOG.info("STC REDEEM API saving response to DB started");
+		LOG.info("STC REDEEM API saving response Property started");
 		saveSTCResponseToDB(trans, globalID, requestDate, earnPoints);
-		LOG.info("STC REDEEM API saving response to DB successfull");
+		LOG.info("STC REDEEM API saving response to Property successfull");
+		// details required for reverse the transaction adding to transaction scope
+		_transactionScope.setValue(AsqValueKeys.ASQ_STC_REF_REQUEST_ID, globalID);
+		_transactionScope.setValue(AsqValueKeys.ASQ_STC_REF_REQUEST_DATE, requestDate);
 		return this.HELPER.getCompleteStackChainResponse(OpChainKey.valueOf("ASQ_TENDER_LOY_STC"));
 	}
 

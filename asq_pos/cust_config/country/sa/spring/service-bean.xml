@@ -82,6 +82,9 @@
    <bean id="ASQ_STC_EARN_REWARD_SERVICE" class="asq.pos.loyalty.stc.tender.service.AsqSTCloyaltyServiceHandler" parent="AbstractSTCRestServiceBean">
     <property name="servicePath" value="/api/v1/earn/reward" />
   </bean> 
+  <bean id="ASQ_STC_REFUND_REDEEM_SERVICE" class="asq.pos.loyalty.stc.tender.service.AsqSTCloyaltyServiceHandler" parent="AbstractSTCRestServiceBean">
+    <property name="servicePath" value="/api/v1/redemption/reverse" />
+  </bean> 
   
   <bean abstract="true" id="AbstractBnplTamaraRestServiceBean">
     <property name="serviceId" value="TAMARA_REST" />

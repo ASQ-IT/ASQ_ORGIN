@@ -157,9 +157,9 @@ public class AsqBnplTabbyTenderOp extends AbstractFormOp<AsqBnplTabbyEditModel> 
 		asqBnplTabbyDetailsObj.setPhone(custMobileNumber);
 		asqBnplTabbyDetailsObj.setReference_id(Long.toString(trans.getTransactionSequence()));
 		payment.setAmount(trans.getTotal().toString());
-		payment.setCurrency(trans.getRetailTransactionLineItems().get(0).getCurrencyId());
+		//payment.setCurrency(trans.getRetailTransactionLineItems().get(0).getCurrencyId());
 		LOG.error("Currency :", trans.getRetailTransactionLineItems().get(0).getCurrencyId());
-		//payment.setCurrency("SAR");
+		payment.setCurrency("SAR");
 		payment.setBuyer(asqBnplTabbyDetailsObj);
 		payment.setOrder(asqBnplTabbyDetailsObj);
 		asqSubmitBnplTabbyServiceRequest.setPayment(payment);
@@ -170,6 +170,7 @@ public class AsqBnplTabbyTenderOp extends AbstractFormOp<AsqBnplTabbyEditModel> 
 		  LOG.info("Tabby Response Payment Link: " + asqSubmitBnplTabbyServiceResponse.getConfiguration().getAvailable_products().getInstallments().get(0).getWeb_url());
 		LOG.info("Returned from CreateSession API");
 		return validateSessionResponseAndStoreDataInDB(asqSubmitBnplTabbyServiceResponse);
+	
 	}
 
 	private IOpResponse validateSessionResponseAndStoreDataInDB(AsqSubmitBnplTabbyServiceResponse response) {
