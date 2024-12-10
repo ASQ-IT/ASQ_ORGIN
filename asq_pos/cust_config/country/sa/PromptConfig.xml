@@ -138,6 +138,9 @@
 	<Prompt name="ASQ_STC_REDEMPTION_CANCEL_NOT_ALLOWED" type="Notify" title="_asqStcRedemptionCancelNotAllowedErrorTitle" message="_asqStcRedemptionCancelNotAllowedError">
 		<Action ref="CANCEL_BACK" />
 	</Prompt>
+	<Prompt name="ASQ_SUCCESSFULL_POINTS_REDEMPTION" type="Notify" title="_asqStcSuccessPromptTitle" message="_asqSTCPaymentSuccessfullMessage">
+		<Action chainKey="ASQ_TENDER_LOY_STC" text="_ok" keyStroke="Enter" />
+	</Prompt>
 	<!-- ASQ STC Integration Prompts Ends -->
 	
 	<!-- ASQ TAMARA Integration Prompts Starts -->
@@ -155,7 +158,7 @@
 	<Prompt name="ASQ_TAMARA_PAYMENT_LINK_EXPIRED" type="NotifyCancel" title="_asqTamaraPromptTitle" message="_asqTamaraPaymentExpiredMessage">
 		<Action ref="CANCEL" />
 	</Prompt>
-	<Prompt name="ASQ_TAMARA_BAD_REQUEST" type="Notify" title="_asqTamaraErrorPromptTitle" message="_asqTamarapromptmsgBadRqstError">
+	<Prompt name="ASQ_TAMARA_INVALID_MOBILE_NUMBER" type="Notify" title="_asqTamaraErrorPromptTitle" message="_asqTamarapromptmsgBadRqstError">
 		<Action ref="CANCEL_BACK" />
 	</Prompt>
 	<Prompt name="ASQ_TAMARA_AUTHENTICATION_ERROR" type="Notify" title="_asqTamaraErrorPromptTitle" message="_asqTamarapromptmsgAuthenticationError">
@@ -170,12 +173,15 @@
 	<Prompt name="ASQ_TAMARA_REFUND_ERROR" type="Notify" title="_asqTamaraErrorPromptTitle" message="_asqTamarapromptmsgRefundError">
 		<Action ref="CANCEL_BACK" />
 	</Prompt>
-	<Prompt name="ASQ_TABBY_TECHNICAL_ERROR" type="Notify" title="_asqTamaraErrorPromptTitle" message="_asqTamarapromptmsgTechnicalError">
+	<Prompt name="ASQ_TAMARA_TECHNICAL_ERROR" type="Notify" title="_asqTamaraErrorPromptTitle" message="_asqTamarapromptmsgTechnicalError">
 		<Action ref="CANCEL_BACK" />
 	</Prompt>
 	<Prompt name="ASQ_TAMARA_PAYMENT_WAIT" type="NotifyYesCancel" title="_asqTamaraPromptTitle" message="_asqTamaraPaymentWaitMessage">
 		<Action chainKey="ASQ_TAMARA_PAYMENT_CANCEL" text="Cancel" keyStroke="Enter" />
 		<Action chainKey="ASQ_TAMARA_PAYMENT" text="Continue" keyStroke="Enter" />
+	</Prompt>
+	<Prompt name="ASQ_TAMARA_MOBILE_NUMBER_ERROR" type="Notify" title="_asqTamaraErrorPromptTitle" message="_asqTamarapromptmsgMobileError">
+		<Action ref="CANCEL_BACK" />
 	</Prompt>
 	<!-- ASQ TAMARA Integration Prompts Ends -->
 
@@ -214,7 +220,17 @@
 		<Action chainKey="ASQ_TABBY_PAYMENT" text="Continue" keyStroke="Enter" />
 		<Action chainKey="ASQ_TABBY_PAYMENT_CANCEL" text="Cancel" keyStroke="Enter" />
 	</Prompt>
+	<Prompt name="ASQ_BNPL_SSL_ERROR" type="Notify" title="_asqTabbyPromptTitle" message="_asqCertificateExpiryMessage">
+		<Action ref="CANCEL_BACK" />
+	</Prompt>
+	<Prompt name="ASQ_TABBY_MOBILE_NUMBER_ERROR" type="Notify" title="_asqTabbyPromptTitle" message="_asqTabbyPromptmsgMobileError">
+		<Action ref="CANCEL_BACK" />
+	</Prompt>
+		<Prompt name="ASQ_TABBY_TOO_MANY_REQUEST_ERROR" type="Notify" title="_asqTabbyPromptTitle" message="_asqTabbypromptMsgRqstError">
+		<Action ref="CANCEL_BACK" />
+	</Prompt>
 	<!-- ASQ TABBY Integration Prompts Ends -->
+
 
 	<!-- ASQ TOLA Work Starts -->
     <Prompt name="ASQ_TOLA_QTY_SOH_ERROR" type="NotifyCancel" title="_weight" message="_tolaItemQtyValidationError">
@@ -320,11 +336,13 @@
 	<Prompt name="ASQ_NEQATY_TRANS_DATA_NOT_FOUND" type="Notify" title="_asqNeqatySuccessTitle" message="_asqNeqatyTransDataNotFound">
 		<Action ref="CANCEL_BACK" />
 	</Prompt>
-	<Prompt name="ASQ_NEQATY_INVALID_OTP" type="Notify" title="_asqNeqatySuccessTitle" message="_asqNeqatyinvalidOtp">
-		<Action ref="CANCEL_BACK" />
-	</Prompt>
+	<Prompt name="ASQ_NEQATY_INVALID_OTP" type="Notify" title="_asqNeqatySuccessTitle" message="_asqNeqatyinvalidOtp" />
 	<Prompt name="ASQ_NEQATY_NO_POINTS" type="Notify" title="_asqNeqatySuccessTitle" message="_asqNeqatyNoPoints">
 		<Action ref="CANCEL_BACK" />
+	</Prompt>
+	
+	<Prompt name="ASQ_NEQATY_REFUND_SUCCESS" type="Notify" title="_asqNeqatySuccessTitle" message="_asqNeqatyRefundText" >
+	<Action dataKey="CONTINUE" text="_continue" keyStroke="Enter" />
 	</Prompt>
 	
 	<Prompt name="ASQ_PLANET_TECHNICAL_ERROR" type="Notify" title="_asqPlanetErrorTitle" message="_asqPlanetmsgTechnicalError">
@@ -377,12 +395,22 @@
 	    <Action ref="EMAIL_ONLY" />
 	    <Action ref="PRINT_EMAIL" />
     </Prompt>
-  <!-- PRICE Quotation end-->
+   <!-- PRICE Quotation end-->
+  
 	<!-- ASQ Bin Transfer chnages - Starts -->
 	<Prompt name="ASQ_BIN_TRANSFER_OTP_ERROR" type="Notify" title="_asqCaptureBinTransferOTPTitle" message="_asqCaptureBinTransferOTPError">
 		<!-- <Action dataKey="BACK" text="_back" keyStroke="Escape" /> -->
 		 <Action ref="CANCEL_BACK" />
 	</Prompt>
+    <Prompt name="ASQ_BIN_TRANSFER_SUCCESS" type="Notify" title="_asqCaptureBinTransferSuccessTitle" message="_asqCaptureBinTransferOTPSuccess">
+		<Action dataKey="CONTINUE" text="_continue" keyStroke="Enter" />
+	</Prompt>
 	<!-- ASQ Bin Transfer chnages - End -->
 	
+	<!-- Loyality redeem  start -->
+	<Prompt name="PROMPT_ASQ_LOTALITY" type="NotifyYesNo" title="_prompAsqLoyalityTitle" message="_asqloyalitymsg" >
+	<Action ref="YES" />
+	<Action ref="NO" />
+	</Prompt>
+	<!-- Loyality redeem  End -->
 </PromptSet>

@@ -86,10 +86,9 @@ public class AsqSTCRefundRedeemOp extends Operation{
 		IRetailTransaction trans = (IRetailTransaction) this._transactionScope.getTransaction();
 		custMobileNumber = _transactionScope.getValue(AsqValueKeys.ASQ_MOBILE_NUMBER);
 		LOG.info("STC API Trigger OTP service call starts here: ");
-		
-		  if (isRefundRedeem) { 
-			  return this.HELPER.completeResponse(); 
-		  }
+		if (isRefundRedeem) {
+			return this.HELPER.completeResponse();
+		}
 		return refundRedeemRequestPreparer(custMobileNumber);
 	}
 
@@ -111,7 +110,6 @@ public class AsqSTCRefundRedeemOp extends Operation{
 		request.setMsisdn(Long.parseLong(custMobileNumber.trim()));
 		request.setBranchId(System.getProperty("asq.stc.branchid"));
 		request.setTerminalId(System.getProperty("asq.stc.terminalid"));
-		//redeem info from previous call
 		request.setRefRequestId(_transactionScope.getValue(AsqValueKeys.ASQ_STC_REF_REQUEST_ID));
 		request.setRefRequestDate(_transactionScope.getValue(AsqValueKeys.ASQ_STC_REF_REQUEST_DATE));
 		request.setPIN(null);

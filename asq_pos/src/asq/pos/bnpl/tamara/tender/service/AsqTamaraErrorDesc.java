@@ -1,7 +1,9 @@
 package asq.pos.bnpl.tamara.tender.service;
 
+import com.oracle.shaded.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.oracle.shaded.fasterxml.jackson.annotation.JsonProperty;
 
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class AsqTamaraErrorDesc {
 	
 	/**

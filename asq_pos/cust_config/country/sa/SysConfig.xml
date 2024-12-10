@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <SysConfig xmlns="http://micros.com/xstore/config/settings">
 
-<!-- ASQ STC Points calculation - Starts -->
+	<!-- ASQ STC Points calculation - Starts -->
 	<Setting name="STCCustomerEarnPoints---AddSTCPointsToCustomerOnTender">true</Setting>
 	<Setting name="STCCustomerEarnPoints---PointsCalculation">100</Setting>
-<!-- ASQ STC Points calculation- Ends -->
+	<!-- ASQ STC Points calculation- Ends -->
 
     <Setting name="ASQ---PlanetTaxFree---MerchantIdNumber">17519</Setting>
     <Setting name="ASQ---PlanetTaxFree---MerchantIdItem">105</Setting>

@@ -1,17 +1,8 @@
 package asq.pos.loyalty.stc.tender;
 
-import java.math.BigDecimal;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.time.ZonedDateTime;
 import java.time.format.DateTimeFormatter;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map.Entry;
 import java.util.Random;
 
 import javax.inject.Inject;
@@ -28,16 +19,7 @@ import com.oracle.shaded.fasterxml.jackson.databind.JsonMappingException;
 import com.oracle.shaded.fasterxml.jackson.databind.MapperFeature;
 import com.oracle.shaded.fasterxml.jackson.databind.ObjectMapper;
 
-import asq.pos.bnpl.tamara.tender.service.AsqSubmitBnplTamraServiceResponse;
-import asq.pos.zatca.AsqZatcaConstant;
-import dtv.data2.access.DataFactory;
-import dtv.data2.access.exception.PersistenceException;
-import dtv.pos.common.OpExecutionException;
 import dtv.pos.framework.scope.TransactionScope;
-import dtv.xst.dao.trl.IRetailTransaction;
-import dtv.xst.dao.trl.ISaleReturnLineItem;
-import oracle.dss.dataView.datacache.Map;
-import java.util.Calendar;
 
 public class AsqStcHelper {
 
@@ -88,6 +70,7 @@ public class AsqStcHelper {
 	public <T> T convertJSONToPojo(String argJSONResponse, Class<T> arObjectToConvert)
 			throws JsonMappingException, JsonProcessingException {
 		if (argJSONResponse != null) {
+			System.out.println();
 			ObjectMapper objectMapper = new ObjectMapper();
 			LOG.info("STC API Helper method convertJSONToPojo values:");
 			return objectMapper.readValue(argJSONResponse, arObjectToConvert);
@@ -97,9 +80,7 @@ public class AsqStcHelper {
 
 	public String getCurrentDateTime() {
 		ZoneId ksaZone = ZoneId.of("Asia/Riyadh");
-		// Get the current date and time in KSA
 		ZonedDateTime ksaDateTime = ZonedDateTime.now(ksaZone);
-		// Format the date and time including the time zone offset
 		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss");
 		return ksaDateTime.format(formatter);
 	}
@@ -238,6 +219,10 @@ public class AsqStcHelper {
 			return "ASQ_TABBY_NOT_FOUND_ERROR";
 		case "409":
 			return "ASQ_TABBY_REFUND_ERROR";
+		case "SSL":
+			return "ASQ_BNPL_SSL_ERROR";
+		case "too_many_requests":
+			return "ASQ_TABBY_TOO_MANY_REQUEST_ERROR";
 		default:
 			return "ASQ_TABBY_TECHNICAL_ERROR";
 		}
@@ -253,7 +238,7 @@ public class AsqStcHelper {
 	public String mapTamaraErrors(String code) {
 		switch (code) {
 		case "400":
-			return "ASQ_TAMARA_BAD_REQUEST";
+			return "ASQ_TAMARA_INVALID_MOBILE_NUMBER";
 		case "401":
 			return "ASQ_TAMARA_AUTHENTICATION_ERROR";
 		case "403":
@@ -262,6 +247,8 @@ public class AsqStcHelper {
 			return "ASQ_TAMARA_NOT_FOUND_ERROR";
 		case "409":
 			return "ASQ_TAMARA_REFUND_ERROR";
+		case "SSL":
+			return "ASQ_BNPL_SSL_ERROR";
 		default:
 			return "ASQ_TAMARA_TECHNICAL_ERROR";
 		}

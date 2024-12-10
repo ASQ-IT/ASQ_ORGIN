@@ -83,8 +83,10 @@ public class AsqZatcaSaleQrCodeGenerationOp extends Operation {
 	public IOpResponse handleOpExec(IXstEvent paramIXstEvent) {
 		IRetailTransaction currentSaleTrans = _transactionScope.getTransaction(TransactionType.RETAIL_SALE);
 		try {
-			String generatedQRcode = genZatacaInvoiceAndQRcode(currentSaleTrans);
-			_transactionScope.setValue(AsqValueKeys.ASQ_ZATCA_QR_CODE, generatedQRcode);
+			if (null != currentSaleTrans && !(AsqZatcaConstant.ASQ_ZATCA_RAIN_CHECK.equalsIgnoreCase(currentSaleTrans.getTransactionTypeCode()))) {
+				String generatedQRcode = genZatacaInvoiceAndQRcode(currentSaleTrans);
+				_transactionScope.setValue(AsqValueKeys.ASQ_ZATCA_QR_CODE, generatedQRcode);
+			}
 		} catch (Exception e) {
 			logger.error("We have recieved Exception in genearting Zatca invoice and QR code for the current transaction  ", e);
 		}
@@ -126,16 +128,15 @@ public class AsqZatcaSaleQrCodeGenerationOp extends Operation {
 
 		oasis.names.specification.ubl.schema.xsd.commonaggregatecomponents_2.ObjectFactory cac = asqZatcaHelper
 				.getZatcaOjectFactory(oasis.names.specification.ubl.schema.xsd.commonaggregatecomponents_2.ObjectFactory.class);
-		oasis.names.specification.ubl.schema.xsd.commonbasiccomponents_2.ObjectFactory cbc = asqZatcaHelper
-				.getZatcaOjectFactory(oasis.names.specification.ubl.schema.xsd.commonbasiccomponents_2.ObjectFactory.class);
+		oasis.names.specification.ubl.schema.xsd.commonbasiccomponents_2.ObjectFactory cbc = asqZatcaHelper.getZatcaOjectFactory(oasis.names.specification.ubl.schema.xsd.commonbasiccomponents_2.ObjectFactory.class);
 
 		poulateXMLInvoiceType(currentSaleTrans, zatcaInvoiceObj, cbc, cac, addDocQR, xmlIrnValue, xmlUUID, invoiceIssueDate, invoiceIssueTime, nextICV);
 
 		String intialTransInvoice = asqZatcaHelper.generateInvoiceXML(zatcaInvoiceObj);
 
 		logger.debug(" ---------------------------Generate QR Starts---------------------- ");
-		HashQRData data = asqZatcaInvoiceGenerationHelper.getHashAndQR(AsqZatcaConstant.companyLegalName, AsqZatcaConstant.companyVatNumber, invoiceIssueDate, invoiceIssueTime, payableAmount,
-				vatTotal, intialTransInvoice, AsqZatcaConstant.keySecret, AsqZatcaConstant.keyAlg, addDocQR, xmlUUID, xmlIrnValue, signatureData, nextICV, currentSaleTrans.getCreateDate());
+		HashQRData data = asqZatcaInvoiceGenerationHelper.getHashAndQR(AsqZatcaConstant.companyLegalName, AsqZatcaConstant.companyVatNumber, invoiceIssueDate, invoiceIssueTime, payableAmount, vatTotal,
+				intialTransInvoice, AsqZatcaConstant.keySecret, AsqZatcaConstant.keyAlg, addDocQR, xmlUUID, xmlIrnValue, signatureData, nextICV, currentSaleTrans.getCreateDate());
 
 		if (data.isCertificateExpired()) {
 			logger.error("*******Certificate Expired************");
@@ -153,18 +154,17 @@ public class AsqZatcaSaleQrCodeGenerationOp extends Operation {
 		}
 
 		zatcaInvoiceObj.getAdditionalDocumentReference().add(asqZatcaInvoiceGenerationHelper.setDocumentReferenceType("QR", StringUtils.EMPTY, cbc, cac, data.getQR()));
-		zatcaInvoiceObj.getSignature()
-				.add(asqZatcaInvoiceGenerationHelper.setSignatureType(System.getProperty("asq.pos.invoice.referencedSignatureID"), System.getProperty("asq.pos.invoice.extensionURI"), cbc, cac));
+		zatcaInvoiceObj.getSignature().add(asqZatcaInvoiceGenerationHelper.setSignatureType(System.getProperty("asq.pos.invoice.referencedSignatureID"), System.getProperty("asq.pos.invoice.extensionURI"), cbc, cac));
 
 		UBLExtensionsType ublExtensionsType = asqZatcaHelper.getZatcaOjectFactory(oasis.names.specification.ubl.schema.xsd.commonextensioncomponents_2.ObjectFactory.class).createUBLExtensionsType();
 		ublExtensionsType.getUBLExtension()
 				.add(asqZatcaInvoiceGenerationHelper.getUBLExtension(System.getProperty("asq.pos.invoice.extensionURI"), System.getProperty("asq.pos.invoice.signatureInformationID"),
 						System.getProperty("asq.pos.invoice.referencedSignatureID"),
-						new String[] { System.getProperty("asq.pos.invoice.transformsAlgorithm"), System.getProperty("asq.pos.invoice.transformsAlgorithm"),
-								System.getProperty("asq.pos.invoice.transformsAlgorithm"), System.getProperty("asq.pos.invoice.transformsAlgorithm") },
+						new String[] { System.getProperty("asq.pos.invoice.transformsAlgorithm"), System.getProperty("asq.pos.invoice.transformsAlgorithm"), System.getProperty("asq.pos.invoice.transformsAlgorithm"),
+								System.getProperty("asq.pos.invoice.transformsAlgorithm") },
 						// createTransformTypeXPath
-						new String[] { System.getProperty("asq.pos.invoice.xpathTagUBLExtensions"), System.getProperty("asq.pos.invoice.xpathTagSignature"),
-								System.getProperty("asq.pos.invoice.xpathTagAdditionalDocRef"), StringUtils.EMPTY },
+						new String[] { System.getProperty("asq.pos.invoice.xpathTagUBLExtensions"), System.getProperty("asq.pos.invoice.xpathTagSignature"), System.getProperty("asq.pos.invoice.xpathTagAdditionalDocRef"),
+								StringUtils.EMPTY },
 						cbc, signatureData));
 
 		zatcaInvoiceObj.setUBLExtensions(ublExtensionsType);
@@ -181,8 +181,8 @@ public class AsqZatcaSaleQrCodeGenerationOp extends Operation {
 	}
 
 	private void poulateXMLInvoiceType(IRetailTransaction currentSaleTrans, InvoiceType argZatcaInvoiceObj, oasis.names.specification.ubl.schema.xsd.commonbasiccomponents_2.ObjectFactory cbc,
-			oasis.names.specification.ubl.schema.xsd.commonaggregatecomponents_2.ObjectFactory cac, AdditionalDocumentReference addDocQR, String xmlIrnValue, String xmlUUID,
-			XMLGregorianCalendar invoiceIssueDate, XMLGregorianCalendar invoiceIssueTime, Long nextICV) throws ParseException, DatatypeConfigurationException {
+			oasis.names.specification.ubl.schema.xsd.commonaggregatecomponents_2.ObjectFactory cac, AdditionalDocumentReference addDocQR, String xmlIrnValue, String xmlUUID, XMLGregorianCalendar invoiceIssueDate,
+			XMLGregorianCalendar invoiceIssueTime, Long nextICV) throws ParseException, DatatypeConfigurationException {
 
 		// setting Profile ID
 		ProfileIDType profileID = cbc.createProfileIDType();
@@ -286,8 +286,7 @@ public class AsqZatcaSaleQrCodeGenerationOp extends Operation {
 
 		for (AdditionalDocumentReference docRef : docList) {
 			if (!AsqZatcaConstant.ASQ_QR_CODE.equalsIgnoreCase(docRef.getId())) {
-				argZatcaInvoiceObj.getAdditionalDocumentReference()
-						.add(asqZatcaInvoiceGenerationHelper.setDocumentReferenceType(docRef.getId(), docRef.getUUID(), cbc, cac, docRef.getEmbeddedDocumentBinaryObject()));
+				argZatcaInvoiceObj.getAdditionalDocumentReference().add(asqZatcaInvoiceGenerationHelper.setDocumentReferenceType(docRef.getId(), docRef.getUUID(), cbc, cac, docRef.getEmbeddedDocumentBinaryObject()));
 			}
 		}
 
@@ -346,8 +345,7 @@ public class AsqZatcaSaleQrCodeGenerationOp extends Operation {
 				}
 			}
 		}
-		argZatcaInvoiceObj.getTaxTotal()
-				.add(asqZatcaInvoiceGenerationHelper.setTaxTotalType(System.getProperty("dtv.location.CurrencyId"), currentSaleTrans.getTaxAmount().abs(), null, taxSubtotalTypes, cbc, cac));
+		argZatcaInvoiceObj.getTaxTotal().add(asqZatcaInvoiceGenerationHelper.setTaxTotalType(System.getProperty("dtv.location.CurrencyId"), currentSaleTrans.getTaxAmount().abs(), null, taxSubtotalTypes, cbc, cac));
 
 		// Need to set AllowanceTotalAmount for transaction level discount
 		BigDecimal discountAmount = new BigDecimal(0);
@@ -358,10 +356,10 @@ public class AsqZatcaSaleQrCodeGenerationOp extends Operation {
 		 * if (disc instanceof DiscountLineItemModel) { DiscountLineItemModel model =
 		 * (DiscountLineItemModel) disc; discountAmount =
 		 * discountAmount.add(model.getAmount()); } }
-		 * 
+		 *
 		 * discountAmount = discountAmount.divide((taxPerc.add(new BigDecimal(1))), 2,
 		 * RoundingMode.HALF_UP);
-		 * 
+		 *
 		 * argZatcaInvoiceObj.getAllowanceCharge()
 		 * .add(asqZatcaInvoiceGenerationHelper.setAllowanceChargeType(AsqZatcaConstant.
 		 * ASQ_FALSE, AsqZatcaConstant.ASQ_DISCOUNT,
@@ -374,8 +372,8 @@ public class AsqZatcaSaleQrCodeGenerationOp extends Operation {
 		 * String.valueOf(asqZatcaHelper.getFormatttedBigDecimalValue(taxPerc)),
 		 * AsqZatcaConstant.ZATCA_TAXCATEGORY_SCHEMEID, cbc, cac)); }
 		 */
-		argZatcaInvoiceObj.setLegalMonetaryTotal(asqZatcaInvoiceGenerationHelper.setMonetaryTotalType(System.getProperty("dtv.location.CurrencyId"), taxableValue, taxableValue,
-				currentSaleTrans.getTotal().abs(), String.valueOf(discountAmount), String.valueOf(new BigDecimal(0)), currentSaleTrans.getTotal().abs(), String.valueOf(new BigDecimal(0)), cbc, cac));
+		argZatcaInvoiceObj.setLegalMonetaryTotal(asqZatcaInvoiceGenerationHelper.setMonetaryTotalType(System.getProperty("dtv.location.CurrencyId"), taxableValue, taxableValue, currentSaleTrans.getTotal().abs(),
+				String.valueOf(discountAmount), String.valueOf(new BigDecimal(0)), currentSaleTrans.getTotal().abs(), String.valueOf(new BigDecimal(0)), cbc, cac));
 
 		for (IRetailTransactionLineItem lineItem : currentSaleTrans.getSaleLineItems()) {
 			if (lineItem instanceof SaleReturnLineItemModel) {
@@ -405,8 +403,7 @@ public class AsqZatcaSaleQrCodeGenerationOp extends Operation {
 						lineExtensionAmount = lineExtensionAmount.multiply(salelineItem.getQuantity());
 					}
 
-					argZatcaInvoiceObj.getInvoiceLine()
-							.add(asqZatcaInvoiceGenerationHelper.setInvoiceLineType(salelineItem, listAllowanceChargeType, cbc, cac, priceAmount, taxPerc, taxCategory, lineExtensionAmount));
+					argZatcaInvoiceObj.getInvoiceLine().add(asqZatcaInvoiceGenerationHelper.setInvoiceLineType(salelineItem, listAllowanceChargeType, cbc, cac, priceAmount, taxPerc, taxCategory, lineExtensionAmount));
 				}
 			}
 		}

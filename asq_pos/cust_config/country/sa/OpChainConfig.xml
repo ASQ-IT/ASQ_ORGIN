@@ -580,5 +580,17 @@
 		<Op class="asq.pos.inventory.AsqBinTransferOTPFormOp"/>
    </OpChain>
    <!-- ASQ Bin Transfer Ends-->
-	
+   
+   <!-- Loyalty redeem  start -->
+   <OpChain name="ASQ_LOYALITY">
+		<PromptOp class="asq.pos.loyalty.AsqPromptLoyalty" />
+   </OpChain>
+   <!-- Loyalty redeem  end -->
+  
+  <!-- ASQ Disable Label Printing - Start -->
+  <OpChain name="SHIPPING_PROCESS_SHIPMENT">
+    <Op class="dtv.pos.inventory.ship.label.PromptTrackingNumberOp" />
+  </OpChain>
+  <!-- ASQ Disable Label Printing - End -->
 </OpChainSet>
+

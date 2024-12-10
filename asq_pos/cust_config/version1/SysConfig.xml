@@ -11,4 +11,8 @@
     <Setting name="Deals---LineItemDiscount---RoundingMode">HALF_UP</Setting>
     <Setting name="CurrencyRounding---RoundingMode">HALF_UP</Setting>
     <Setting name="Discounts---RoundingMode">HALF_UP</Setting>
+    <Setting name="LocationBasedInventory---QuantityUnavailableAction">PROHIBIT</Setting>
+    <Setting name="ItemReturn---MaxDaysAfterPurchase">3</Setting>
+    <Setting name="MixedTransactionSettings---AllowSaleItemTypeInMixedTransaction---RETURN">false</Setting>
+    <Setting name="ForceItemScan">false</Setting>
 </SysConfig>

@@ -10,6 +10,7 @@ import org.apache.logging.log4j.Logger;
 
 import asq.pos.common.AsqConfigurationMgr;
 import asq.pos.common.AsqValueKeys;
+import asq.pos.loyalty.neqaty.gen.NeqatyWSAPIRedeemOption;
 import asq.pos.loyalty.neqaty.tender.service.AsqNeqatyHelper;
 import asq.pos.loyalty.neqaty.tender.service.AsqNeqatyServiceRequest;
 import asq.pos.loyalty.neqaty.tender.service.AsqNeqatyServiceResponse;
@@ -64,7 +65,12 @@ public class AsqNeqatyEarnPointsOp extends Operation {
 		if (null != txn && (txn.getCustomerParty() != null)) {
 			isCustomerPresent = true;//Check transaction customer
 		}
-		if (isCustomerPresent && isCustomerRequired && !isReturnTransaction(txn) && txn.getSubtotal().compareTo(valueForCalculation) > 0) {
+		NeqatyWSAPIRedeemOption reedem = getScopedValue(AsqValueKeys.ASQ_NEQATY_REDEEM_POINTS);
+		BigDecimal neqatyTotal = BigDecimal.ZERO;
+		if(reedem !=null ) {
+			neqatyTotal =BigDecimal.valueOf(reedem.getRedeemAmount());
+		}
+		if (isCustomerPresent && isCustomerRequired && !isReturnTransaction(txn) && neqatyTotal.compareTo(valueForCalculation) > 0) {
 				Byte calcltdNeqatyPntsForEarnAPI = (txn.getSubtotal().divide(valueForCalculation)).byteValue();
 				LOG.info("Neqaty Points calculated Earn Service API call Starts here : " + calcltdNeqatyPntsForEarnAPI);
 				if ( _transactionScope.getValue(AsqValueKeys.ASQ_NEQATY_MOBILE)!=null) {
@@ -72,24 +78,7 @@ public class AsqNeqatyEarnPointsOp extends Operation {
 				}
 				return earnPoints(custMobileNmbr, calcltdNeqatyPntsForEarnAPI.doubleValue());
 			}
-			/*
-				 * else { return this.HELPER.completeResponse(); }
-				 */
-		 
-		/*
-			 * else if ((txn.getSubtotal().compareTo(valueForCalculation) == 1) &&
-			 * (!isCustomerPresent)) { if (paramIXstEvent != null) { XstDataAction key =
-			 * (XstDataAction) (paramIXstEvent); if
-			 * (XstDataActionKey.NO.equals(key.getActionKey())) { LOG.info(
-			 * "Neqaty Earn Reward API Customer Mobile Number Screen Cashier selected NO to complete the transaction"
-			 * ); return this.HELPER.completeResponse(); } else if (paramIXstEvent != null)
-			 * { if (XstDataActionKey.YES.equals(key.getActionKey())) { LOG.
-			 * info("Neqaty Earn Reward API Cashier selected YES to link customer to the transaction"
-			 * ); return this.HELPER.getCompleteStackChainResponse(OpChainKey.valueOf(
-			 * "CUST_ASSOCIATION")); } } } return
-			 * HELPER.getPromptResponse("ASQ_Neqaty_CUSTOMER_UNAVAILABLE",
-			 * _formattables.getSimpleFormattable(AsqZatcaConstant.CUSTOMER_UNAVAILABLE)); }
-			 */
+
 		return this.HELPER.completeResponse();
 	}
 

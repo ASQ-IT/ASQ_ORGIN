@@ -31,6 +31,7 @@ import dtv.pos.iframework.event.IXstEventType;
 import dtv.pos.iframework.op.IOpResponse;
 import dtv.pos.iframework.op.IReversibleOp;
 import dtv.xst.dao.crm.IParty;
+import dtv.xst.dao.crm.IPartyTelephone;
 import dtv.xst.dao.trl.IRetailTransaction;
 import dtv.xst.dao.trn.IPosTransaction;
 
@@ -69,7 +70,16 @@ public class AsqNeqatyMobileNumberOp extends AsqNeqatyAbstractMobileNumberOp
 			if (trans != null && trans.getCustomerParty() != null)// Transactions Typecode condition to be included
 			{
 				LOG.info("Neqaty API Mobile number form execution Customer is Linked to Transaction:");
-				custMobileNumber = trans.getCustomerParty().getTelephoneInformation().get(0).getTelephoneNumber();
+				List<IPartyTelephone> custMobileType = trans.getCustomerParty().getTelephoneInformation();
+				
+				
+				for(IPartyTelephone custMobile:custMobileType) {
+					if(custMobile.getTelephoneType().equalsIgnoreCase("MOBILE")) {
+						custMobileNumber = custMobile.getTelephoneNumber();
+						break;
+					}
+				}
+				//custMobileNumber = trans.getCustomerParty().getTelephoneInformation().get(0).getTelephoneNumber();
 				editModel.setCustMobileNumber(custMobileNumber);
 				setScopedValue(AsqValueKeys.ASQ_NEQATY_MOBILE, editModel.getCustMobileNumber());
 				return super.handleInitialState();
@@ -94,7 +104,7 @@ public class AsqNeqatyMobileNumberOp extends AsqNeqatyAbstractMobileNumberOp
 					LOG.debug("Process of Neqaty tender starts here");
 					if (null != trans.getCustomerParty()) {
 						IParty info = trans.getCustomerParty();
-						info.setTelephone1(custMobileNumber);
+						info.setTelephone3(custMobileNumber);
 						LOG.debug(
 								"Neqaty API setting updated customer mobile number to transaction, this will be udpated once the transaciton is completed");
 					}

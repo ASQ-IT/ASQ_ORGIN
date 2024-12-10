@@ -12,10 +12,10 @@
    <!-- ASQ STC Integration Starts -->
    <FieldLayout name="stcOTPLayout" type="SimpleLayout">
     <Row>
-      <Column start="0" width="100" fieldRef="stcOTP" required="true" labeledBy="stcOTPLabel" verticalAlignment="Center"/>
+			<Column start="0" width="100" fieldRef="stcOTP" required="true" refreshOnChange="true" labeledBy="stcOTPLabel" verticalAlignment="Center" />
     </Row>
      <Row>
-      <Column start="0" width="100" fieldRef="stcRedeemPoints" labeledBy="stcRedeemPointsLabel" verticalAlignment="Center"/>
+			<Column start="0" width="100" fieldRef="stcRedeemPoints" required="true" refreshOnChange="true" labeledBy="stcRedeemPointsLabel" verticalAlignment="Center" />
     </Row>
    </FieldLayout>
    <!-- ASQ STC Integration Ends -->
@@ -29,7 +29,7 @@
    <!-- ASQ Capture Customer Mobile Number Starts -->
    <FieldLayout name="ASQ_MOBILE_NUMBER_LAYOUT" type="SimpleLayout">
 	   	<Row>
-	      	<Column start="0" width="100" fieldRef="custMobileNumber" required="true" labeledBy="custMobileNumberLabel" verticalAlignment="Center"/>
+			<Column start="0" width="100" fieldRef="custMobileNumber" required="true" refreshOnChange="true" labeledBy="custMobileNumberLabel" verticalAlignment="Center" />
 	   	</Row>
    </FieldLayout>
    <!-- ASQ Capture Customer Mobile Number Ends -->
@@ -94,4 +94,71 @@
     </Row>
    </FieldLayout>
    <!-- ASQ Mokafaa Integration Ends -->
+	<!-- ASQ STC Customer Maintenance Changes - Starts-->
+	<FieldLayout name="customerNameLayout" type="ListLayout">
+    <Row>
+      <Column start="0" width="25" fieldRef="firstName" refreshOnChange="true" labeledBy="firstNameShortLabel" />
+      <Column start="25" width="10" fieldRef="middleName" refreshOnChange="true" labeledBy="middleNameLabel" />
+      <Column start="35" width="25" fieldRef="lastName" refreshOnChange="true" labeledBy="lastNameLabel" />
+      <Column start="70" width="30" fieldRef="organizationName" refreshOnChange="true" fieldSubmitPriority="2" labeledBy="organizationNameLabel" />
+    </Row>
+  </FieldLayout>
+  
+	<FieldLayout name="custContactInformationLayout" type="ListLayout">
+   <Row>      
+      <Column start="0" width="35" fieldRef="customerContactInformationLabel" fontRef="formContentHeader" accessibilityText="_customerContactInformation"/>
+      <Column start="37" width="13" fieldRef="okToContact" horizontalAlignment="Center"/>
+      <Column start="87" width="13" fieldRef="okToContact" horizontalAlignment="Center"/>
+    </Row>
+    <Row>
+      <Column start="0" width="35" fieldRef="telephone1" refreshOnChange="true" labeledBy="telephone1Label" />
+      <Column start="37" width="13" fieldRef="telephone1Contact" horizontalAlignment="Center" refreshOnChange="true" />
+      <Column start="50" width="35" fieldRef="telephone2" refreshOnChange="true" labeledBy="telephone2Label" />
+      <Column start="87" width="13" fieldRef="telephone2Contact" horizontalAlignment="Center" refreshOnChange="true" />
+    </Row>
+    <Row>
+      <Column start="0" width="35" fieldRef="telephone3" refreshOnChange="true"  required="true" labeledBy="telephone3Label" />
+      <Column start="37" width="13" fieldRef="telephone3Contact" horizontalAlignment="Center" refreshOnChange="true" />
+      <Column start="50" width="35" fieldRef="emailAddress" refreshOnChange="true" labeledBy="emailAddressLabel" />
+      <Column start="87" width="13" fieldRef="emailContact" horizontalAlignment="Center" refreshOnChange="true" />
+    </Row>
+    <Row>
+      <Column start="50" width="35" fieldRef="emailRcptsLabel" horizontalAlignment="Right" />
+      <Column start="87" width="13" fieldRef="emailRcpts" horizontalAlignment="Center" refreshOnChange="true" />
+    </Row>
+  </FieldLayout>
+  <!-- ASQ STC Customer Maintenance Changes - Ends-->
+  
+  <!-- ASQ STC Customer Search Changes - Starts-->
+  <FieldLayout name="customerSearchLayout" type="SimpleLayout">
+    <Row>
+      <Column fieldRef="telephoneSearch" accessibilityText="_formPhoneNumberLabel" required="true" labeledBy="telephoneLabel" />
+    </Row>
+    <Row>
+      <Column fieldRef="asqlastName" labeledBy="lastNameLabel" />
+    </Row>
+    <Row>
+      <Column fieldRef="firstName" labeledBy="firstNameLabel" />
+    </Row>
+    <Row>
+      <Column fieldRef="city" labeledBy="cityLabel" />
+    </Row>
+    <Row>
+      <Column fieldRef="state" labeledBy="stateLabel" />
+    </Row>
+    <Row>   
+      <Column />   
+      <Column fieldRef="country" horizontalAlignment="Right" />      
+    </Row>
+    <Row>
+      <Column fieldRef="postalCode" refreshOnChange="true" labeledBy="postalCodeLabel" />
+    </Row>
+    <Row>
+      <Column fieldRef="customerIdInput" labeledBy="customerIdInputLabel" />
+    </Row>
+    <Row>
+      <Column fieldRef="county" visibilityGroup="countyVisibility" labeledBy="countyLabel" />
+    </Row>
+  </FieldLayout>
+  <!-- ASQ STC Customer Search Changes - Ends-->
 </FieldLayoutSet>

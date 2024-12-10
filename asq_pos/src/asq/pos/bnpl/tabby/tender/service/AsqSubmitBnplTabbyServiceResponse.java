@@ -118,9 +118,11 @@ public class AsqSubmitBnplTabbyServiceResponse implements IServiceResponse{
 	
 	@JsonProperty("errors")
 	private AsqBnplTabbyErrorDesc error;
+	
+	/*
+	 * @JsonProperty("errors") private AsqBnplTabbyErrorDesc [] errors;
+	 */
     
-   
-
     public String getId() {
         return id;
     }
@@ -400,5 +402,9 @@ public class AsqSubmitBnplTabbyServiceResponse implements IServiceResponse{
 	public void setIs_ipqs_requested(boolean is_ipqs_requested) {
 		this.is_ipqs_requested = is_ipqs_requested;
 	}
+	/*
+	 * public void setErrors(AsqBnplTabbyErrorDesc[] errors) { this.errors = errors;
+	 * }
+	 */
 
 }

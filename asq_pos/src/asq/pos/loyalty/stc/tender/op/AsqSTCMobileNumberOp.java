@@ -19,6 +19,7 @@ import org.apache.logging.log4j.Logger;
 import org.joda.time.DateTime;
 import org.joda.time.DateTimeZone;
 
+import asq.pos.bnpl.tamara.tender.op.AsqBnplTamaraEditModel;
 import asq.pos.common.AsqValueKeys;
 import asq.pos.loyalty.stc.tender.AsqStcHelper;
 import asq.pos.loyalty.stc.tender.service.AsqSTCErrorDesc;
@@ -38,6 +39,7 @@ import dtv.pos.iframework.validation.IValidationResultList;
 import dtv.pos.iframework.validation.SimpleValidationResult;
 import dtv.util.StringUtils;
 import dtv.xst.dao.crm.IParty;
+import dtv.xst.dao.crm.impl.PartyModel;
 import dtv.xst.dao.trl.IRetailTransaction;
 
 /**
@@ -77,21 +79,17 @@ public class AsqSTCMobileNumberOp extends AbstractFormOp<AsqSTCMobileNumberEditM
 	 * @param
 	 * @return
 	 */
-
 	protected IOpResponse handleInitialState() {
 		AsqSTCMobileNumberEditModel editModel = getModel();
-		int i = 0;
 		try {
 			IRetailTransaction trans = (IRetailTransaction) this._transactionScope.getTransaction();
-			if (trans != null && trans.getCustomerParty() != null)// Transactions Typecode condition to be included
-			{
+			if (trans != null && trans.getCustomerParty() != null && trans.getTransactionTypeCode().equalsIgnoreCase("RETAIL_SALE")){
 				LOG.info("STC API Mobile number form execution Customer is Linked to Transaction:");
-				custMobileNumber = trans.getCustomerParty().getTelephoneInformation().get(i).getTelephoneNumber();
+				IParty argParty = trans.getCustomerParty();
+				custMobileNumber = argParty.getTelephone3();
 				editModel.setCustMobileNumber(custMobileNumber);
 				_transactionScope.setValue(AsqValueKeys.ASQ_MOBILE_NUMBER, custMobileNumber);
 				return super.handleInitialState();
-			} else if(trans.getCustomerParty() == null){
-				//no customer linked to transaction prompt
 			}
 		} catch (Exception ex) {
 			LOG.info(
@@ -106,22 +104,25 @@ public class AsqSTCMobileNumberOp extends AbstractFormOp<AsqSTCMobileNumberEditM
 	 * @param
 	 * @return
 	 */
-
 	protected IOpResponse handleDataAction(IXstDataAction argAction) {
 		if (XstDataActionKey.ACCEPT.equals(argAction.getActionKey())) {
 			IRetailTransaction trans = (IRetailTransaction) this._transactionScope.getTransaction();
 			AsqSTCMobileNumberEditModel editModel = this.getModel();
-			if(editModel.getCustMobileNumber() != null){
-			custMobileNumber = editModel.getCustMobileNumber();
-			_transactionScope.setValue(AsqValueKeys.ASQ_MOBILE_NUMBER, custMobileNumber);
-			LOG.debug("STC API Mobile number captured :" + custMobileNumber);
+			IValidationResultList results = validateForm(editModel);
+			if (!results.isValid()) {
+				return super.handleDataAction(argAction);
+			}
+			if (editModel.getCustMobileNumber() != null) {
+				custMobileNumber = editModel.getCustMobileNumber();
+				_transactionScope.setValue(AsqValueKeys.ASQ_MOBILE_NUMBER, custMobileNumber);
+				LOG.debug("STC API Mobile number captured :" + custMobileNumber);
 			}
 			if (custMobileNumber != null && !custMobileNumber.equals("")) {
 				LOG.info("Process of STC tender starts here");
-				if (null != trans.getCustomerParty()
-						&& !(this._transactionScope.getValue(AsqValueKeys.ASQ_MOBILE_NUMBER).equals(custMobileNumber))) {
+				if (null != trans.getCustomerParty() && !(this._transactionScope
+						.getValue(AsqValueKeys.ASQ_MOBILE_NUMBER).equals(custMobileNumber))) {
 					IParty info = trans.getCustomerParty();
-					info.setTelephone1(custMobileNumber);
+					info.setTelephone3(custMobileNumber);
 					_transactionScope.setValue(AsqValueKeys.ASQ_MOBILE_NUMBER, custMobileNumber);
 					LOG.info(
 							"STC API setting updated customer mobile number to transaction, this will be udpated once the transaciton is completed");
@@ -134,24 +135,8 @@ public class AsqSTCMobileNumberOp extends AbstractFormOp<AsqSTCMobileNumberEditM
 			return requestPreparerForTriggerOTP(trans);
 
 		}
-		LOG.info("Action key is not equal to ACCEPT, rolling back to Sale Screen :" +argAction.getActionKey());
-		return this.HELPER.getOpChainRollBackRequest() ;
-	}
-
-	/**
-	 * This method handles form validation of mobile number field
-	 * 
-	 * @param argModel
-	 * @return validationResultList
-	 */
-
-	protected IValidationResultList validateForm(AsqSTCMobileNumberEditModel argModel) {
-		ValidationResultList validationResultList = new ValidationResultList();
-		if (StringUtils.isEmpty(argModel.getCustMobileNumber()) && argModel.getCustMobileNumber() == null) {
-			IValidationResult idResult = SimpleValidationResult.getFailed("_asqMobileNumberFieldExceptionMessage");
-			validationResultList.add(idResult);
-		}
-		return (IValidationResultList) validationResultList;
+		LOG.info("Action key is not equal to ACCEPT, rolling back to Sale Screen :" + argAction.getActionKey());
+		return this.HELPER.getOpChainRollBackRequest();
 	}
 
 	/**
@@ -161,39 +146,20 @@ public class AsqSTCMobileNumberOp extends AbstractFormOp<AsqSTCMobileNumberEditM
 	 * @param trans
 	 * @return triggerOTPRequest submission to STC Service Handler
 	 */
-
 	private IOpResponse requestPreparerForTriggerOTP(IRetailTransaction trans) {
 
 		IAsqSTCLoyaltyServiceRequest request = new AsqSTCLoyaltyServiceRequest();
-
-		// Converting SystemDate & Time to Saudi locale 
-		
-		/*
-		 * DateTime dateTimeUtc = new DateTime(DateTimeZone.UTC); DateTimeZone timeZone
-		 * = DateTimeZone.forID("Asia/Riyadh"); DateTime dateTimeRiyadh =
-		 * dateTimeUtc.withZone(timeZone); DateFormat formatter = new
-		 * SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss"); Date requestDate =
-		 * dateTimeRiyadh.toDate();
-		 */
-		/*
-		 * DateFormat formatter = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss"); Date
-		 * requestDate = DateTime.now().toDate();
-		 */
-		 
 		ZoneId ksaZone = ZoneId.of("Asia/Riyadh");
-        // Get the current date and time in KSA
-        ZonedDateTime ksaDateTime = ZonedDateTime.now(ksaZone);
-        // Format the date and time including the time zone offset
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss");
-        String requestDate = ksaDateTime.format(formatter);
+		ZonedDateTime ksaDateTime = ZonedDateTime.now(ksaZone);
+		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss");
+		String requestDate = ksaDateTime.format(formatter);
 		request.setMsisdn(Long.parseLong(custMobileNumber.trim()));
 		request.setBranchId(System.getProperty("asq.stc.branchid"));
 		request.setTerminalId(System.getProperty("asq.stc.terminalid"));
 		request.setRequestDate(requestDate);
-		LOG.info("Request Date :" +requestDate);
+		LOG.info("Request Date :" + requestDate);
 		request.setPIN(null);
 		request.setAmount(null);
-
 		LOG.info("STC API Generate GlobalID method calling from ASQSTCHelper");
 		String globalID = asqStcHelper.generateGlobalId();
 		LOG.info("STC API Generate GlobalID generated:" + globalID);
@@ -202,7 +168,6 @@ public class AsqSTCMobileNumberOp extends AbstractFormOp<AsqSTCMobileNumberEditM
 		AsqSTCLoyaltyServiceResponse response = (AsqSTCLoyaltyServiceResponse) _asqSTCLoyalityTenderService.get()
 				.triggerOTPRequest(request);
 		LOG.info("STC API Trigger OTP returns service response here: ");
-
 		return validateResponseAndStoreDataInDB(response, trans, requestDate, globalID, null);
 	}
 
@@ -215,7 +180,6 @@ public class AsqSTCMobileNumberOp extends AbstractFormOp<AsqSTCMobileNumberEditM
 	 * @param asqServiceResponse
 	 * @return Error Prompts
 	 */
-
 	private IOpResponse validateResponseAndStoreDataInDB(AsqSTCLoyaltyServiceResponse response,
 			IRetailTransaction trans, String requestDate, String globalID, String earnPoints) {
 		if (null != response && null != response.getErrors() && 0 != response.getErrors().length) {
@@ -223,9 +187,6 @@ public class AsqSTCMobileNumberOp extends AbstractFormOp<AsqSTCMobileNumberEditM
 		} else if (null == response) {
 			return technicalErrorScreen("Service has null response");
 		}
-		LOG.info("STC API saving response to DB started");
-		//asqStcHelper.saveSTCResponseToDB(trans, globalID, requestDate, earnPoints);
-		LOG.info("STC API saving response to DB successfull");
 		return this.HELPER.getCompleteStackChainResponse(OpChainKey.valueOf("ASQ_STC_OTP"));
 	}
 
@@ -235,7 +196,6 @@ public class AsqSTCMobileNumberOp extends AbstractFormOp<AsqSTCMobileNumberEditM
 	 * @param asqServiceResponse
 	 * @return Error Prompts
 	 */
-
 	public IOpResponse handleServiceError(AsqSTCLoyaltyServiceResponse asqServiceResponse) {
 		IFormattable[] args = new IFormattable[2];
 		AsqSTCErrorDesc error = asqServiceResponse.getErrors()[0];
@@ -253,12 +213,10 @@ public class AsqSTCMobileNumberOp extends AbstractFormOp<AsqSTCMobileNumberEditM
 	 * @param asqServiceResponse
 	 * @return Error Prompts
 	 */
-
 	private IOpResponse technicalErrorScreen(String message) {
 		IFormattable[] args = new IFormattable[2];
 		args[1] = _formattables.getSimpleFormattable(message);
 		LOG.info("STC OTP API::::: " + message);
 		return HELPER.getPromptResponse("ASQ_STC_TECHNICAL_ERROR", args);
 	}
-
 }

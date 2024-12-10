@@ -3,6 +3,8 @@
  */
 package asq.pos.loyalty.mokafaa.tender.op;
 
+import java.util.List;
+
 import javax.inject.Inject;
 import javax.inject.Provider;
 
@@ -30,6 +32,7 @@ import dtv.pos.iframework.validation.IValidationResultList;
 import dtv.pos.iframework.validation.SimpleValidationResult;
 import dtv.util.StringUtils;
 import dtv.xst.dao.crm.IParty;
+import dtv.xst.dao.crm.IPartyTelephone;
 import dtv.xst.dao.trl.IRetailTransaction;
 
 /**
@@ -76,13 +79,21 @@ public class AsqMokafaaMobileNumberOp extends AbstractFormOp<AsqMokafaaMobileNum
 	@Override
 	protected IOpResponse handleInitialState() {
 		AsqMokafaaMobileNumberEditModel editModel = getModel();
-		int i = 0;
 		try {
 			IRetailTransaction trans = (IRetailTransaction) this._transactionScope.getTransaction();
 			if (trans != null && trans.getCustomerParty() != null)// Transactions Typecode condition to be included
 			{
 				LOG.info("Mokafaa API Mobile number form execution Customer is Linked to Transaction:");
-				custMobileNumber = trans.getCustomerParty().getTelephoneInformation().get(i).getTelephoneNumber();
+				List<IPartyTelephone> custMobileType = trans.getCustomerParty().getTelephoneInformation();
+			
+				
+			for(IPartyTelephone custMobile:custMobileType) {
+				if(custMobile.getTelephoneType().equalsIgnoreCase("MOBILE")) {
+					custMobileNumber = custMobile.getTelephoneNumber();
+					break;
+				}
+			}
+			//	custMobileNumber = trans.getCustomerParty().getTelephoneInformation().get(i).getTelephoneNumber();
 				editModel.setCustMobileNumber(custMobileNumber);
 				setScopedValue(AsqValueKeys.ASQ_MOBILE_NUMBER, editModel.getCustMobileNumber());
 				return super.handleInitialState();
@@ -115,7 +126,7 @@ public class AsqMokafaaMobileNumberOp extends AbstractFormOp<AsqMokafaaMobileNum
 				if (null != trans.getCustomerParty()
 						&& !(this.getScopedValue(AsqValueKeys.ASQ_MOBILE_NUMBER).equals(custMobileNumber))) {
 					IParty info = trans.getCustomerParty();
-					info.setTelephone1(custMobileNumber);
+					info.setTelephone3(custMobileNumber);
 					LOG.info(
 							"Mokafaa API setting updated customer mobile number to transaction, this will be udpated once the transaciton is completed");
 				}

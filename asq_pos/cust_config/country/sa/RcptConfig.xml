@@ -29,8 +29,8 @@
   </ReceiptCopyRules>
   
   <!-- PRICE Quotation start-->
-    <receipts>
-    <receipt document="ASQ_CUSTOMER_COPY" sectionref="CustomerCopy" email="true" />
+  <receipts>
+     <receipt document="ASQ_CUSTOMER_COPY" sectionref="CustomerCopy" email="true" />
      <receipt document="ASQ_STORE_COPY" sectionref="StoreCopy" />
   </receipts>
   <!-- PRICE Quotation end-->
@@ -50,7 +50,7 @@
 		<sectionref>footer_cust_copy</sectionref>
 		<sectionref>LOCAL.CUST_COPY_FOOTER_POST</sectionref>
 		<sectionref>system_mode</sectionref>
-       <sectionref>CustomerCopyLabel</sectionref> 
+        <sectionref>CustomerCopyLabel</sectionref> 
 		<sectionref>LOCAL.CUST_COPY_FOOTER</sectionref>
 		<sectionref>page_break</sectionref>
 	</section>

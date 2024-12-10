@@ -5,7 +5,9 @@ import java.util.HashMap;
 
 import javax.inject.Inject;
 
+import asq.pos.common.AsqConstant;
 import asq.pos.common.AsqValueKeys;
+import dtv.data2.access.IPersistable;
 import dtv.i18n.FormatterType;
 import dtv.i18n.IFormattable;
 import dtv.pos.common.ValueKeys;
@@ -17,7 +19,9 @@ import dtv.pos.item.barcode.ItemWeightEntryMethodCode;
 import dtv.pos.register.sale.PromptForItemWeightOp;
 import dtv.util.ArrayUtils;
 import dtv.xst.dao.inv.IStockLedger;
+import dtv.xst.dao.inv.impl.StockLedgerModel;
 import dtv.xst.dao.itm.IItem;
+import dtv.xst.dao.itm.IItemOptions;
 import dtv.xst.dao.trl.ISaleReturnLineItem;
 import oracle.retail.xstore.inv.impl.InventoryStockAdjuster;
 
@@ -60,8 +64,7 @@ public class ASQPromptForItemWeightOp extends PromptForItemWeightOp {
 		IItem item = getScopedValue(ValueKeys.CURRENT_ITEM);
 		IItem superInventoriedItem = getSuperParentItem(item);
 		if (null != superInventoriedItem) {
-			return (IFormattable[]) ArrayUtils.insert((Object[]) args,
-					this._formattables.getSimpleFormattable(superInventoriedItem.getOptions().getUnitOfMeasureCode(), FormatterType.UNIT_OF_MEASURE_NAME), 0);
+			return (IFormattable[]) ArrayUtils.insert((Object[]) args, this._formattables.getSimpleFormattable(superInventoriedItem.getOptions().getUnitOfMeasureCode(), FormatterType.UNIT_OF_MEASURE_NAME), 0);
 		} else {
 			return (IFormattable[]) ArrayUtils.insert((Object[]) args, this._formattables.getSimpleFormattable(item.getOptions().getUnitOfMeasureCode(), FormatterType.UNIT_OF_MEASURE_NAME), 0);
 		}
@@ -74,14 +77,33 @@ public class ASQPromptForItemWeightOp extends PromptForItemWeightOp {
 		IItem superInventoriedItem = getSuperParentItem(lineItem.getItem());
 		if (null != superInventoriedItem) {
 			IStockLedger ledger = stockAdjuster.getStockLedger(superInventoriedItem.getItemId(), "DEFAULT", "ON_HAND", _stationState.getRetailLocationId());
-			IOpResponse errorResponse = validateTolaQuantitySOH(ledger, enteredWeight, lineItem);
+			HashMap<String, BigDecimal> tolaWeight = _transactionScope.getValue(AsqValueKeys.ASQ_TOLA_WEIGHT);
+			if (null == tolaWeight) {
+				tolaWeight = new HashMap<String, BigDecimal>();
+			}
+
+			IOpResponse errorResponse = validateTolaQuantitySOH(ledger, enteredWeight, lineItem, tolaWeight);
 			if (errorResponse != null) {
 				return errorResponse;
 			}
+
 			BigDecimal qty = ledger.getUnitcount();
-			qty = qty.subtract(enteredWeight);
+			qty = qty.subtract(tolaWeight.get(superInventoriedItem.getItemId()));
 			ledger.setUnitcount(qty);
-			ledger.setStringProperty("Last_Weight_Entered_", String.valueOf(qty));
+			ledger.setStringProperty(AsqConstant.ASQ_LAST_TOLA_WEIGHT_ENT, String.valueOf(qty));
+
+			// remove the existing Persistables
+			if (null != _transactionHelper.getPersistables()) {
+				IPersistable[] transPersist = _transactionHelper.getPersistables().getObjects();
+				for (IPersistable ledgerPers : transPersist) {
+					if (ledgerPers instanceof StockLedgerModel) {
+						StockLedgerModel led = (StockLedgerModel) ledgerPers;
+						if (led.getItemId().equalsIgnoreCase(superInventoriedItem.getItemId())) {
+							_transactionHelper.getPersistables().removeObject(led);
+						}
+					}
+				}
+			}
 			_transactionHelper.addPersistable(ledger);
 		} else {
 			lineItem.setQuantity(enteredWeight);
@@ -102,21 +124,23 @@ public class ASQPromptForItemWeightOp extends PromptForItemWeightOp {
 		return itemTola;
 	}
 
-	public IOpResponse validateTolaQuantitySOH(IStockLedger ledger, BigDecimal argEnteredWeight, ISaleReturnLineItem lineItem) {
-		HashMap<String, BigDecimal> tolaWeight = _transactionScope.getValue(AsqValueKeys.ASQ_TOLA_WEIGHT);
+	public IOpResponse validateTolaQuantitySOH(IStockLedger ledger, BigDecimal argEnteredWeight, ISaleReturnLineItem lineItem, HashMap<String, BigDecimal> tolaWeight) {
 
-		String measureCode = lineItem.getItem().getItemOptions().get(0).getUnitOfMeasureCode();
+		IItemOptions itemToMaeasure = lineItem.getItem().getItemOptions().get(0);
+		String measureCode = itemToMaeasure.getUnitOfMeasureCode();
+		BigDecimal maxUnitCount = new BigDecimal(itemToMaeasure.getStringProperty(AsqConstant.ASQ_TOLA_MAX_WEIGHT, "0"));
+		BigDecimal minUnitCount = new BigDecimal(itemToMaeasure.getStringProperty(AsqConstant.ASQ_TOLA_MIN_WEIGHT, "0"));
 
 		IFormattable formatMeasureCode = this._formattables.getSimpleFormattable(measureCode);
 		IFormattable formatWeight = this._formattables.getSimpleFormattable(String.valueOf(argEnteredWeight));
 		IFormattable[] args = new IFormattable[] { formatWeight, formatMeasureCode };
 
-		if (measureCode.equalsIgnoreCase("TOLA") && (argEnteredWeight.compareTo(new BigDecimal(13)) == 1 || argEnteredWeight.compareTo(new BigDecimal(11)) == -1)) {
-			return this.HELPER.getPromptResponse("ASQ_TOLA_WEIGHT_RANGE_ERROR", args);
-		} else if (measureCode.equalsIgnoreCase("HTOLA") && (argEnteredWeight.compareTo(new BigDecimal(7)) == 1 || argEnteredWeight.compareTo(new BigDecimal(5)) == -1)) {
-			return this.HELPER.getPromptResponse("ASQ_TOLA_WEIGHT_RANGE_ERROR", args);
-		} else if (measureCode.equalsIgnoreCase("QTOLA") && (argEnteredWeight.compareTo(new BigDecimal(4)) == 1 || argEnteredWeight.compareTo(new BigDecimal(2)) == -1)) {
-			return this.HELPER.getPromptResponse("ASQ_TOLA_WEIGHT_RANGE_ERROR", args);
+		if (measureCode.equalsIgnoreCase(AsqConstant.ASQ_TOLA) && (argEnteredWeight.compareTo(maxUnitCount) == 1 || argEnteredWeight.compareTo(minUnitCount) == -1)) {
+			return this.HELPER.getPromptResponse(AsqConstant.ASQ_TOLA_WEIGHT_RANGE_ERROR, args);
+		} else if (measureCode.equalsIgnoreCase(AsqConstant.ASQ_HTOLA) && (argEnteredWeight.compareTo(maxUnitCount) == 1 || argEnteredWeight.compareTo(minUnitCount) == -1)) {
+			return this.HELPER.getPromptResponse(AsqConstant.ASQ_TOLA_WEIGHT_RANGE_ERROR, args);
+		} else if (measureCode.equalsIgnoreCase(AsqConstant.ASQ_QTOLA) && (argEnteredWeight.compareTo(maxUnitCount) == 1 || argEnteredWeight.compareTo(minUnitCount) == -1)) {
+			return this.HELPER.getPromptResponse(AsqConstant.ASQ_TOLA_WEIGHT_RANGE_ERROR, args);
 		}
 
 		BigDecimal calulatedWeight = new BigDecimal(0);
@@ -124,13 +148,12 @@ public class ASQPromptForItemWeightOp extends PromptForItemWeightOp {
 			calulatedWeight = tolaWeight.get(ledger.getItemId());
 			calulatedWeight = calulatedWeight.add(argEnteredWeight);
 		} else {
-			tolaWeight = new HashMap<String, BigDecimal>();
 			calulatedWeight = argEnteredWeight;
 		}
 		if (ledger.getUnitcount().subtract(calulatedWeight).floatValue() < 0) {
 			IFormattable sohUnit = this._formattables.getSimpleFormattable(String.valueOf(ledger.getUnitcount()));
 			args = new IFormattable[] { formatWeight, sohUnit };
-			return this.HELPER.getPromptResponse("ASQ_TOLA_QTY_SOH_ERROR", args);
+			return this.HELPER.getPromptResponse(AsqConstant.ASQ_TOLA_QTY_SOH_ERROR, args);
 		}
 		tolaWeight.put(ledger.getItemId(), calulatedWeight);
 		_transactionScope.setValue(AsqValueKeys.ASQ_TOLA_WEIGHT, tolaWeight);

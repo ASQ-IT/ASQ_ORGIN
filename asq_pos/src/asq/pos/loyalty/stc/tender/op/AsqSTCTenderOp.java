@@ -81,6 +81,10 @@ public class AsqSTCTenderOp extends AbstractFormOp<AsqSTCTenderOTPEditModel> {
 		try {
 			if (XstDataActionKey.ACCEPT.equals(argAction.getActionKey())) {
 				AsqSTCTenderOTPEditModel model = getModel();
+				IValidationResultList results = validateForm(model);
+				if (!results.isValid()) {
+					return super.handleDataAction(argAction);
+				}
 				if ((model.getStcOTP() != null) && (model.getStcRedeemPoints() != null)
 						&& (!model.getStcRedeemPoints().equals(""))) {
 					LOG.debug("Process of STC Redemption points Tender starts here :" + model.getStcOTP());
@@ -102,9 +106,7 @@ public class AsqSTCTenderOp extends AbstractFormOp<AsqSTCTenderOTPEditModel> {
 								_formattables.getSimpleFormattable("_asqSTCEnteredZeroPointValueMessage"));
 					}
 					amount = trxRoundedAmount.intValue();
-				} else if (model.getStcOTP() == null) {
-					return super.handleDataAction(argAction);
-				}
+				} 
 				String otp = model.getStcOTP();
 				setScopedValue(AsqValueKeys.ASQ_STC_OTP, otp);
 				String custMobileNmbr = _transactionScope.getValue(AsqValueKeys.ASQ_MOBILE_NUMBER);
@@ -129,11 +131,15 @@ public class AsqSTCTenderOp extends AbstractFormOp<AsqSTCTenderOTPEditModel> {
 		AsqSTCTenderOTPEditModel editModel = getModel();
 		try {
 			IRetailTransaction trans = (IRetailTransaction) this._transactionScope.getTransaction();
-			if (trans != null) {
-				BigDecimal roundedAmount = trans.getSubtotal();
+			BigDecimal compareZero = new BigDecimal("0.00");
+			BigDecimal roundedAmount = trans.getSubtotal();
+			if (trans != null && trans.getAmountTendered().equals(compareZero)) {
 				editModel.setStcRedeemPoints(roundedAmount.setScale(0, RoundingMode.UP).toString());
-				return super.handleInitialState();
+			} else {
+				BigDecimal clcltdAmnt = roundedAmount.subtract(trans.getAmountTendered());
+				editModel.setStcRedeemPoints(clcltdAmnt.setScale(0, RoundingMode.UP).toString());
 			}
+			return super.handleInitialState();
 		} catch (Exception ex) {
 			LOG.info("STC OTP API amount auto populate exception and Trans object is null:");
 		}
@@ -146,15 +152,6 @@ public class AsqSTCTenderOp extends AbstractFormOp<AsqSTCTenderOTPEditModel> {
 	 * @param argModel
 	 * @return validationResultList
 	 */
-
-	protected IValidationResultList validateForm(AsqSTCTenderOTPEditModel argModel) {
-		ValidationResultList validationResultList = new ValidationResultList();
-		if (StringUtils.isEmpty(argModel.getStcOTP()) && argModel.getStcOTP() == null) {
-			IValidationResult idResult = SimpleValidationResult.getFailed("_asqOTPFieldExceptionMessage");
-			validationResultList.add(idResult);
-		}
-		return (IValidationResultList) validationResultList;
-	}
 
 	private IOpResponse requestPreparerForRedeemPoints(String otp, String custMobileNmbr, int amount) {
 
@@ -187,7 +184,8 @@ public class AsqSTCTenderOp extends AbstractFormOp<AsqSTCTenderOTPEditModel> {
 		// details required for reverse the transaction adding to transaction scope
 		_transactionScope.setValue(AsqValueKeys.ASQ_STC_REF_REQUEST_ID, globalID);
 		_transactionScope.setValue(AsqValueKeys.ASQ_STC_REF_REQUEST_DATE, requestDate);
-		return this.HELPER.getCompleteStackChainResponse(OpChainKey.valueOf("ASQ_TENDER_LOY_STC"));
+		return this.HELPER.getPromptResponse("ASQ_SUCCESSFULL_POINTS_REDEMPTION");       
+		//return this.HELPER.getCompleteStackChainResponse(OpChainKey.valueOf("ASQ_TENDER_LOY_STC"));
 	}
 
 	/**

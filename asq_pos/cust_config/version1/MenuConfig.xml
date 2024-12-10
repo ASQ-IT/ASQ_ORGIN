@@ -28,4 +28,31 @@
     <MenuOption ref="SALE::CHANGE_TENDER_AMOUNT" />
     <MenuOption ref="RETAIL::CHECK_SALE_COMPLETE" />
   </MenuItem>
+  
+  <!-- Loyality redeem  start -->
+  <MenuItem name="RETAIL::EXTENDED_TRANS" text="_accountOptionsMenuText" sticky="false" category="Retail" keywords="universal,sale,register_extended,register_all">
+    <SubMenu ref="ORDER::MENU" />
+    <SubMenu actionRef="SEND_SALE::MENU.OPTIONS">
+      <MenuOption ref="SEND_SALE" />
+      <MenuOption ref="SEND_SALE::EDIT" />
+    </SubMenu>
+    <!-- ASQ Disabled layouts starts -->
+    <!-- <MenuOption ref="LAYAWAY" /> 
+  			<MenuOption>
+      			<Action ref="SPECIAL_ORDER" />
+      			<Action ref="SPECIAL_ORDER::MINIMAL" />
+   		 </MenuOption> 
+  		 <MenuOption ref="WORK_ORDER" /> 
+		 <SubMenu text="_warrantyMenuAction">
+		      <MenuOption ref="SALE::ADD_WARRANTY" />
+		      <MenuOption ref="RETAIL::CHANGE_WARRANTY_CUSTOMER" />
+		 </SubMenu>
+    	<MenuOption ref="PRESALE" />
+    	<MenuOption ref="ONHOLD" />
+    	<MenuOption ref="LOCALORDER" />   
+    <MenuOption ref="SALE::XCOMMERCE" /> --> 
+    <!-- ASQ Disabled layouts ends -->
+    <MenuOption ref="SALE::ASQLOYALITY" />
+  </MenuItem>
+  <!-- Loyality redeem  end -->
 </MenuSet>

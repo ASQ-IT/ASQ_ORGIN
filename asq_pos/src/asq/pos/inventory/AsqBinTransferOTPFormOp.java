@@ -63,7 +63,8 @@ public class AsqBinTransferOTPFormOp extends AbstractFormOp<AsqNeqatyOTPEditMode
 			}
 			int actualOTP = getScopedValue(AsqValueKeys.ASQ_BIN_TRANSFER_OTP);
 			if (enteredOTP == actualOTP) {
-				return HELPER.completeResponse();
+				return HELPER.getPromptResponse("ASQ_BIN_TRANSFER_SUCCESS");
+				//return HELPER.completeResponse();
 			} else {
 				setOpState(SHOWING_ERROR_PROMPT);
 				return HELPER.getPromptResponse("ASQ_BIN_TRANSFER_OTP_ERROR");

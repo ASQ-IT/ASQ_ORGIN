@@ -58,6 +58,7 @@ public class AsqBnplTamaraTenderOp extends AbstractFormOp<AsqBnplTamaraEditModel
 
 	@Inject
 	AsqStcHelper asqStcHelper;
+	private String custMobileNumber = "";
 
 	@Inject
 	protected StationState _stationState;
@@ -71,8 +72,6 @@ public class AsqBnplTamaraTenderOp extends AbstractFormOp<AsqBnplTamaraEditModel
 	protected String getFormKey() {
 		return "ASQ_CAP_CUST_MOBILE_NO";
 	}
-
-	private String custMobileNumber = "";
 
 	/**
 	 * This method handles the data operation after submitting the mobile number and
@@ -88,17 +87,26 @@ public class AsqBnplTamaraTenderOp extends AbstractFormOp<AsqBnplTamaraEditModel
 		if (XstDataActionKey.ACCEPT.equals(argAction.getActionKey())) {
 			IRetailTransaction trans = (IRetailTransaction) this._transactionScope.getTransaction();
 			AsqBnplTamaraEditModel editModel = this.getModel();
-			if(editModel.getCustMobileNumber() != null){
+			IValidationResultList results = validateForm(editModel);
+			if (!results.isValid()) {
+				return super.handleDataAction(argAction);
+			}
+			if (editModel.getCustMobileNumber() != null) {
 				custMobileNumber = editModel.getCustMobileNumber();
-				_transactionScope.setValue(AsqValueKeys.ASQ_MOBILE_NUMBER, custMobileNumber);
-				LOG.debug("TAMARA API Mobile number captured :" + custMobileNumber);
+				if (custMobileNumber.length() <= 14 && custMobileNumber.length()>= 9) {
+					_transactionScope.setValue(AsqValueKeys.ASQ_MOBILE_NUMBER, custMobileNumber);
+					LOG.debug("TAMARA API Mobile number captured :" + custMobileNumber);
 				}
+				else {
+					return HELPER.getPromptResponse("ASQ_TAMARA_MOBILE_NUMBER_ERROR");
+				}
+			}
 			if (custMobileNumber != null && !custMobileNumber.equals("")) {
 				LOG.info("Process of TAMARA tender starts here");
 				if (null != trans.getCustomerParty()
 						&& !(this._transactionScope.getValue(AsqValueKeys.ASQ_MOBILE_NUMBER).equals(custMobileNumber))) {
 					IParty info = trans.getCustomerParty();
-					info.setTelephone1(custMobileNumber);
+					info.setTelephone3(custMobileNumber);
 					_transactionScope.setValue(AsqValueKeys.ASQ_MOBILE_NUMBER, custMobileNumber);
 					LOG.info(
 							"TAMARA API setting updated customer mobile number to transaction, this will be udpated once the transaciton is completed");
@@ -122,17 +130,15 @@ public class AsqBnplTamaraTenderOp extends AbstractFormOp<AsqBnplTamaraEditModel
 	 */
 
 	protected IOpResponse handleInitialState() {
-
-		String custMobileNumber = "";
-		int i = 0;
 		AsqBnplTamaraEditModel editModel = getModel();
 		try {
 			IRetailTransaction trans = (IRetailTransaction) this._transactionScope.getTransaction();
-			if (trans != null && trans.getCustomerParty() != null)// Transactions Typecode condition to be included
-			{
-				custMobileNumber = trans.getCustomerParty().getTelephoneInformation().get(i).getTelephoneNumber();
+			if (trans != null && trans.getCustomerParty() != null && trans.getTransactionTypeCode().equalsIgnoreCase("RETAIL_SALE")) {
+				LOG.info("TAMARA API Mobile number form execution Customer is Linked to Transaction:");
+				IParty argParty = trans.getCustomerParty();
+				custMobileNumber = argParty.getTelephone3();
 				editModel.setCustMobileNumber(custMobileNumber);
-				_transactionScope.setValue(AsqValueKeys.ASQ_MOBILE_NUMBER, editModel.getCustMobileNumber());
+				_transactionScope.setValue(AsqValueKeys.ASQ_MOBILE_NUMBER, custMobileNumber);
 				return super.handleInitialState();
 			}
 		} catch (Exception ex) {
@@ -180,12 +186,17 @@ public class AsqBnplTamaraTenderOp extends AbstractFormOp<AsqBnplTamaraEditModel
 		asqSubmitBnplTamraServiceRequest.setPhone_number(custMobileNumber);
 		asqSubmitBnplTamraServiceRequest.setOrder_reference_id(Long.toString(trans.getTransactionSequence()));
 		asqSubmitBnplTamraServiceResponse = createInStoreCheckoutSession(asqSubmitBnplTamraServiceRequest);
+		String paymentLink = asqSubmitBnplTamraServiceResponse.getCheckout_deeplink();
+		String orderId = asqSubmitBnplTamraServiceResponse.getOrder_id();
+		String checkOutId = asqSubmitBnplTamraServiceResponse.getCheckout_deeplink();
 		System.out.println("CheckoutID: " + asqSubmitBnplTamraServiceResponse.getCheckout_id());
 		System.out.println("OrderID: " + asqSubmitBnplTamraServiceResponse.getOrder_id());
 		System.out.println("CheckoutLink: " + asqSubmitBnplTamraServiceResponse.getCheckout_deeplink());
+		if((paymentLink != null)||(orderId != null)||(checkOutId !=null)) {
 		LOG.info("TAMARA API response PaymentLink: " + asqSubmitBnplTamraServiceResponse.getCheckout_deeplink());
 		LOG.info("TAMARA API response CheckoutID: " +asqSubmitBnplTamraServiceResponse.getCheckout_id());
 		LOG.info("TAMARA API response OrderID: " +asqSubmitBnplTamraServiceResponse.getOrder_id());
+		}
 		return validateCheckoutSessionResponseAndStoreDataInDB(asqSubmitBnplTamraServiceResponse);
 	}
 
@@ -231,27 +242,11 @@ public class AsqBnplTamaraTenderOp extends AbstractFormOp<AsqBnplTamaraEditModel
 	public IOpResponse handleServiceError(AsqSubmitBnplTamraServiceResponse asqServiceResponse) {
 		IFormattable[] args = new IFormattable[1];
 		AsqTamaraErrorDesc error = asqServiceResponse.getErrors();
-		args[0] = _formattables.getSimpleFormattable(error.getMessage());
+		args[0] = _formattables.getSimpleFormattable(error.getError());
 		String errorConstant = asqStcHelper.mapTamaraErrors(asqServiceResponse.getStatus());
-		LOG.info("Error From TABBY API::::: " + args[0]);
+		LOG.info("Error From TAMARA API::::: " + args[0]);
 		LOG.info("Error Message Generated By Xstore based on TAMARA API Response::::: " + error.getMessage());
 		return HELPER.getPromptResponse(errorConstant, args);
-	}
-
-	/**
-	 * This method handles form validation of mobile number field
-	 * 
-	 * @param argModel
-	 * @return validationResultList
-	 */
-
-	protected IValidationResultList validateForm(AsqBnplTamaraEditModel argModel) {
-		ValidationResultList validationResultList = new ValidationResultList();
-		if (StringUtils.isEmpty(argModel.getCustMobileNumber()) && argModel.getCustMobileNumber() == null) {
-			IValidationResult idResult = SimpleValidationResult.getFailed("_asqMobileNumberFieldExceptionMessage");
-			validationResultList.add(idResult);
-		}
-		return (IValidationResultList) validationResultList;
 	}
 
 	/**

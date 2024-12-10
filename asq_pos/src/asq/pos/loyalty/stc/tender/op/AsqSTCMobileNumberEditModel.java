@@ -36,5 +36,4 @@ public class AsqSTCMobileNumberEditModel extends BasicEditModel {
 		addField(STC_MOBILE_FIELD, String.class);
 		initializeFieldState();
 	}
-
 }

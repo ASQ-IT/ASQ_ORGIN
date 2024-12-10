@@ -50,6 +50,7 @@
      <Field name="asqBirthDate" type="Text" resource="asqBirthDate" dataFieldRef="BirthDate" />
      <Field name="asqGender" type="ComboBox" resource="gender"/>
 	<!-- ASQ Planet Integration Ends -->
+	
      <!-- ASQ Mokafaa Integration Starts -->   
    <Field name="or" type="Label" text="_asqOrLabel" />
    
@@ -62,5 +63,10 @@
    <Field name="mokafaaRedeemPoints" type="Text" resource="mokafaaRedeemPoints" dataFieldRef="Numeric"/>
    <Field name="mokafaaRedeemPointsLabel" type="Label" text="_asqPromptmsgEnterRedeemPoints" />
   <!-- ASQ Mokafaa Integration Ends -->
+  
+   <Field name="lastName" type="ComboBox" resource="lastName" />
+   <Field name="lastNameLabel" type="Label" text="_lastNameLabel" />
+    <Field name="asqlastName" type="Text" resource="lastName" />
+  
   </FieldSet>
   

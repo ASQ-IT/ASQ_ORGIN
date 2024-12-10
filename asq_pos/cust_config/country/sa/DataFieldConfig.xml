@@ -5,7 +5,8 @@
     <Parameter name="maximumIntegerDigits" value="6" />
   </DataField>
 <DataField name="Phone" editFormat="PhoneEntry">
-    <EditPattern dtype="String"><![CDATA[#########]]></EditPattern>
-    <Parameter name="maxCharacters" value="9" />
+    <EditPattern dtype="String"><![CDATA[############]]></EditPattern>
+    <Parameter name="maxCharacters" value="12" />
+     <Parameter name="regexPolicy" value="^[9-12*#]$"/>
   </DataField>
 </DataFields>

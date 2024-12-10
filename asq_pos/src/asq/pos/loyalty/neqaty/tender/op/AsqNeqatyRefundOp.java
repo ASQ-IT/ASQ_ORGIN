@@ -81,7 +81,8 @@ public class AsqNeqatyRefundOp extends Operation {
 		} else if (null == response) {
 			return technicalErrorScreen("Service has null response");
 		}
-		return HELPER.completeResponse();
+		return HELPER.getPromptResponse("ASQ_NEQATY_REFUND_SUCCESS");
+		//return HELPER.completeResponse();
 	}
 
 	public IOpResponse handleServiceError(AsqNeqatyServiceResponse asqServiceResponse) {

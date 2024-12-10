@@ -14,6 +14,7 @@ import asq.pos.loyalty.mokafaa.tender.service.AsqMokafaaLoyaltyServiceRequest;
 import asq.pos.loyalty.mokafaa.tender.service.AsqMokafaaLoyaltyServiceResponse;
 import asq.pos.loyalty.mokafaa.tender.service.IAsqMokafaaLoyaltyServiceRequest;
 import asq.pos.loyalty.mokafaa.tender.service.IAsqMokafaaLoyaltyTenderService;
+import asq.pos.zatca.AsqZatcaConstant;
 import dtv.i18n.IFormattable;
 import dtv.pos.common.OpChainKey;
 import dtv.pos.framework.action.type.XstDataActionKey;
@@ -27,6 +28,7 @@ import dtv.pos.iframework.validation.IValidationResult;
 import dtv.pos.iframework.validation.IValidationResultList;
 import dtv.pos.iframework.validation.SimpleValidationResult;
 import dtv.util.StringUtils;
+import dtv.xst.dao.trl.IRetailTransaction;
 import dtv.xst.dao.trn.IPosTransaction;
 
 public class AsqMokafaaOTPOp extends AbstractFormOp<AsqMokafaaTenderOTPEditModel> {
@@ -176,12 +178,19 @@ public class AsqMokafaaOTPOp extends AbstractFormOp<AsqMokafaaTenderOTPEditModel
 			if (null != response.getTransactionID()) {
 				_transactionScope.setValue(AsqValueKeys.ASQ_MOKAFAA_REDEEM_TRANSACTION_ID, response.getTransactionID());
 			}
-			IPosTransaction trans = _transactionScope.getTransaction();
-			trans.setTotal(trans.getTotal().subtract(getScopedValue(AsqValueKeys.ASQ_MOKAFAA_AMOUNT)));
+			IRetailTransaction trans = (IRetailTransaction) _transactionScope.getTransaction();
+			saveMokafaResponseToDB(trans, _transactionScope.getValue(AsqValueKeys.ASQ_MOKAFAA_REDEEM_TRANSACTION_ID));
+			//trans.setTotal(trans.getTotal().subtract(getScopedValue(AsqValueKeys.ASQ_MOKAFAA_AMOUNT)));
 			return HELPER.getPromptResponse("ASQ_MOKAFAA_REDEEM_SUCCESS");
 		} else {
 			return technicalErrorScreen("Service has null response");
 		}
+	}
+	
+	private void saveMokafaResponseToDB(IRetailTransaction trans, long value) {
+			trans.setDecimalProperty(AsqZatcaConstant.ASQ_MOKAFA_TRX_ID,
+				new BigDecimal(value));
+		
 	}
 
 	private IOpResponse unauthorizedError(AsqMokafaaLoyaltyServiceResponse response) {
