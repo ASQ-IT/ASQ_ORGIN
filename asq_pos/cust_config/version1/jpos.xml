@@ -94,6 +94,30 @@
         <prop name="TransmitRetryTime" type="String" value="100"/>
         <prop name="DirectIOEventTimeout" type="String" value="5000"/>
         <prop name="epson.trace.detail.info" type="String" value="0"/>
+		
+		<!-- Oracle Retail properties -->
+		<prop name="dtvCharacterSet" type="Integer" value="437" />
+		<prop name="dtvFrankingPadLines" type="Integer" value="0" />
+		<prop name="dtvFrankingPadSpaces" type="Integer" value="12" />
+		<prop name="dtvHorizontalRuleCharDouble" type="String" value="_" />
+		<prop name="dtvHorizontalRuleCharHigh" type="String" value="-" />
+		<prop name="dtvHorizontalRuleCharMid" type="String" value="-" />
+		<prop name="dtvHorizontalRuleCharNormal" type="String" value="\u0020" />
+		<prop name="dtvHorizontalRuleCharStrong" type="String" value="_" />
+		<prop name="dtvHorizontalRuleFormattingDouble" type="String" value="\u001B|uC" />
+		<prop name="dtvHorizontalRuleFormattingHigh" type="String" value="\u001B|bC" />
+		<prop name="dtvHorizontalRuleFormattingMid" type="String" value="\u001B|bC" />
+		<prop name="dtvHorizontalRuleFormattingNormal" type="String" value="\u001B|uC" />
+		<prop name="dtvHorizontalRuleFormattingStrong" type="String" value="\u001B|bC" />
+		<prop name="dtvRcptLetterQuality" type="Boolean" value="true" />
+		<prop name="dtvRcptPaperCutFeedAfter" type="Integer" value="0" />
+		<prop name="dtvRcptPaperCutFeedBefore" type="Integer" value="4" />
+		<prop name="dtvSignatureScaleWidth" type="Integer" value="450" />
+		<prop name="dtvcert" type="Boolean" value="true" />
+		
+		<prop name="ArabicClassName" type="String" value="jp.co.epson.uposcommon.arabic.ArabicSorter12"/>
+
+ 
     </JposEntry>
 		
 	<JposEntry logicalName="ASQCashDrawer">
@@ -151,6 +175,14 @@
         <prop name="OpenWaitTimeout" type="String" value="5000"/>
         <prop name="EPurasSupport" type="String" value="TRUE"/>
         <prop name="TransmitRetryTime" type="String" value="100"/>
+		<!-- Oracle Retail properties -->
+		<prop name="dtvCashdrawerOpenWaitSeconds" type="Integer" value="1" />
+		<prop name="dtvDrawerId" type="String" value="1" />
+		<prop name="dtvcert" type="Boolean" value="true" />
+		<prop name="dtvBeepTimeout" type="Integer" value="30000" />
+		<prop name="dtvBeepFrequency" type="Integer" value="1000" />
+		<prop name="dtvBeepDuration" type="Integer" value="1000" />
+		<prop name="dtvBeepDelay" type="Integer" value="1000" />
     </JposEntry>
 	
 	<JposEntry logicalName="ASQLineDisplay">
@@ -171,6 +203,8 @@
         <prop name="sleep" type="String" value="800"/>
         <prop name="Language" type="String" value="English"/>
         <prop name="encoding" type="String" value="cp437"/>
+		<!-- Oracle Retail properties -->
+		<prop name="dtvcert" type="Boolean" value="true" />
 	</JposEntry>
 	
 	<!--Scanner type, default="ALL", valid values : "SNAPI", "SSI", "USBIBMHID", "NIXMODB", "USBIBMTT", "SSI_BT", "USBOPOS" -->
@@ -182,6 +216,8 @@
         <prop name="ScannerType" value="ALL"/>
         <prop name="ExclusiveClaimLevel" value="0" />
         <prop name="ClearQueueOnRelease" value="0"/>
+		<!-- Oracle Retail properties -->
+		<prop name="dtvcert" type="Boolean" value="true" />
     </JposEntry>
 	
    <!-- ASQ JPOS entry ends -->

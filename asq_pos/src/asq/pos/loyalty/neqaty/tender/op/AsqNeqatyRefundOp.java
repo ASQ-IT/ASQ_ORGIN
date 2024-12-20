@@ -42,8 +42,11 @@ public class AsqNeqatyRefundOp extends Operation {
 
 	@Override
 	public IOpResponse handleOpExec(IXstEvent paramIXstEvent) {
-		String custMobileNmbr = _transactionScope.getValue(AsqValueKeys.ASQ_NEQATY_MOBILE);
-		return refundPoints(custMobileNmbr);
+		if (paramIXstEvent == null) {
+			String custMobileNmbr = _transactionScope.getValue(AsqValueKeys.ASQ_NEQATY_MOBILE);
+			return refundPoints(custMobileNmbr);
+		}
+		return HELPER.completeResponse();
 	}
 
 	private IOpResponse refundPoints(String custMobileNumber) {

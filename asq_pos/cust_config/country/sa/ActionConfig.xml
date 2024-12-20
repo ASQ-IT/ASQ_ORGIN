@@ -29,7 +29,7 @@
   	 <!-- ASQ STC Integration Ends -->
   	 
 	<!-- ASQ Tamara Integration Starts -->
-  	 <Action name="SALE::ASQ_TENDER_TAMARA" category="Register" keywords="sale_tender" text="_asqMenuTextTamara" chainKey="ASQ_TAMARA_MOBILE">
+  	 <Action name="SALE::ASQ_TENDER_TAMARA" category="Register" keywords="sale_tender" text="_asqMenuTextTamara" chainKey="ASQ_TENDER_TAMARA">
     	<IconGroup icon="_imageTenderCash" rollIcon="_imageTenderCashRoll" pressIcon="_imageTenderCashPress" disabledIcon="_imageTenderCashDisabled" />
     	<VisibilityRule class="dtv.pos.shared.visibilityrules.TenderEnabledCheck" >
       		<Parameter name="tender" value="LOCAL_CURRENCY" />
@@ -61,7 +61,7 @@
 	<!-- ASQ Neqaty Integration Ends -->
 	
 	<!-- ASQ Tabby Integration Starts -->
-	<Action name="SALE::ASQ_TENDER_TABBY" category="Register" keywords="sale_tender" text="_asqMenuTextTabby" chainKey="ASQ_TABBY_MOBILE">
+	<Action name="SALE::ASQ_TENDER_TABBY" category="Register" keywords="sale_tender" text="_asqMenuTextTabby" chainKey="ASQ_TENDER_TABBY">
 		<IconGroup icon="_imageTenderCash" rollIcon="_imageTenderCashRoll" pressIcon="_imageTenderCashPress" disabledIcon="_imageTenderCashDisabled" />
 		<VisibilityRule class="dtv.pos.shared.visibilityrules.TenderEnabledCheck">
 			<Parameter name="tender" value="LOCAL_CURRENCY" />
@@ -107,5 +107,9 @@
    <VisibilityRule class="dtv.pos.shared.visibilityrules.AnySaleReturnLineItemVisibilityRule" />
    </Action>
    <Action name="NO_BACK1" category="Register" keywords="sale_tender" text="Back" chainKey="SALE_ITEM_START1"/>
+  <Action name="PRINT_PDF" category="Register" keywords="login" text="Invoice pdf" chainKey="COUNTRYPACK.CREATE_INVOICE.PRINT_INVOICE">
+  </Action>
+   <Action name="EMAIL_ONLY_PDF" category="Register" keywords="login" text="Email Invoice pdf" chainKey="ASQ_PRICEQT_PRINT_EMAIL_RECEIPTS">
+  </Action>
  <!-- PRICE Quotation end-->
 </ActionSet>

@@ -47,7 +47,7 @@ public class AsqBnplTamaraPaymentValidationOp extends Operation {
 			} catch (InterruptedException e) {
 				LOG.error("Exception during confirmation sleep cycle :" + e);
 			}
-			return HELPER.getPromptResponse("ASQ_TAMARA_PAYMENT_WAIT");
+			return HELPER.getCompletePromptResponse("ASQ_TAMARA_PAYMENT_WAIT");
 		}
 	}
 
@@ -75,10 +75,10 @@ public class AsqBnplTamaraPaymentValidationOp extends Operation {
 
 		} else if (null != _transactionScope.getValue(AsqValueKeys.ASQ_TAMARA_PAYMENT_SUCCESS)) {
 			LOG.info("Successful Execution of GETOrderDetails API calling payment successful prompt");
-			return this.HELPER.getPromptResponse("ASQ_TAMARA_PAYMENT_SUCCESSFULL");
+			return this.HELPER.getCompletePromptResponse("ASQ_TAMARA_PAYMENT_SUCCESSFULL");
 		} else if (null != _transactionScope.getValue(AsqValueKeys.ASQ_TAMARA_PAYMENT_EXPIRED)) {
 			LOG.info("GETOrderDetails API calling payment expired/timeout prompt");
-			return this.HELPER.getPromptResponse("ASQ_TAMARA_PAYMENT_LINK_EXPIRED");
+			return this.HELPER.getCompletePromptResponse("ASQ_TAMARA_PAYMENT_LINK_EXPIRED");
 		}
 		return HELPER.completeCurrentChainResponse();
 	}

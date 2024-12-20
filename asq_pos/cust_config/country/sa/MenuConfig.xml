@@ -84,6 +84,7 @@
     </SubMenu>
     <SubMenu ref="RETAIL::ADD_DISCOUNT" />
     <MenuOption ref="REGISTER::PRINT_RECEIPT" />
+    <SubMenu ref="RETAIL::CUSTOMER_OPTIONS" sticky="false" />
   </MenuItem>
   
    <MenuItem name="RETAIL::CHANGE_LINE1" actionRef="RETAIL::MENU.MODIFY_LINE" sticky="false" category="Retail" keywords="universal,register_extended">

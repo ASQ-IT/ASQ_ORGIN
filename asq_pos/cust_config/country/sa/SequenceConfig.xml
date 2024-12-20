@@ -11,5 +11,15 @@
       <ValueIncrement dtype="Integer">1</ValueIncrement>
     </SequencePart>
   </Sequence>
-
+   <!-- PRICE Quotation Start-->
+  <Sequence name="asqQutInvoiceseq">
+    <SequenceType dtype="String">NUMERIC</SequenceType>
+     <FileName dtype="String">asqQutInvoiceseq.seq</FileName> 
+    <SequencePart partType="NEXT_NUMBER" padLength="9">
+      <InitialValue dtype="Long">1</InitialValue>
+      <MaximumValue dtype="EncodedLong">9999999</MaximumValue>
+      <ValueIncrement dtype="Integer">1</ValueIncrement>
+    </SequencePart>
+  </Sequence>
+ <!-- PRICE Quotation end-->
 </SequenceSet>

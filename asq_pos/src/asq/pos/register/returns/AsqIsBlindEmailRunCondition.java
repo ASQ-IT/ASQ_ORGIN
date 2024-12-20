@@ -6,9 +6,13 @@ package asq.pos.register.returns;
 import javax.inject.Inject;
 
 import asq.pos.common.AsqConfigurationMgr;
+import asq.pos.common.AsqValueKeys;
+import dtv.pos.common.ValueKeys;
 import dtv.pos.framework.op.AbstractRunCondition;
 import dtv.pos.framework.scope.TransactionScope;
+import dtv.pos.framework.scope.ValueKey;
 import dtv.pos.register.returns.ReturnType;
+import dtv.xst.dao.trl.IRetailTransaction;
 import dtv.xst.dao.trl.ISaleReturnLineItem;
 import dtv.xst.dao.trn.IPosTransaction;
 
@@ -28,7 +32,6 @@ public class AsqIsBlindEmailRunCondition extends AbstractRunCondition {
 	protected boolean shouldRunImpl() {
 		if (_sysConfig.isBlindReturnEmailApproved()) {
 			IPosTransaction trans = _transactionScope.getTransaction();
-
 			for (ISaleReturnLineItem line : trans.getLineItems(ISaleReturnLineItem.class)) {
 				if (!line.getVoid() && line.getReturn() && (ReturnType.BLIND.matches(line.getReturnTypeCode())
 						|| ReturnType.UNVERIFIED.matches(line.getReturnTypeCode()))) {

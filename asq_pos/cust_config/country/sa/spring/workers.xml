@@ -53,5 +53,14 @@
       </list>
     </property>
   </bean>
-
+  <!-- PRICE Quotation Start-->
+   <bean id="asqInvoiceemailRcptsWorkers" parent="workerList">
+    <property name="workers">
+      <list>
+        <ref bean="asqInvoiceemailRcptsWorker" />
+      </list>
+    </property>
+  </bean>
+  <bean id="asqInvoiceemailRcptsWorker" class="asq.pos.customer.email.AsqEmailRcptWorker" scope="prototype" />
+  <!-- PRICE Quotation End-->
 </beans>

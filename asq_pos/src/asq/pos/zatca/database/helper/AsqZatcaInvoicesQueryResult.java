@@ -42,7 +42,7 @@ public class AsqZatcaInvoicesQueryResult extends AbstractQueryResult {
 
 	@Override
 	protected IObjectId getObjectIdImpl() {
-		return null;
+		return super.getObjectId();
 	}
 
 	public long getORGANIZATION_ID() {

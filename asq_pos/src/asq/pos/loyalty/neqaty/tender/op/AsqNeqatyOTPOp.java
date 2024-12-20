@@ -63,7 +63,6 @@ public class AsqNeqatyOTPOp extends AbstractFormOp<AsqNeqatyOTPEditModel> {
 
 		try {
 			if (XstDataActionKey.ACCEPT.equals(argAction.getActionKey())) {
-				
 				AsqNeqatyOTPEditModel model = getModel();
 				if (model.getNeqatyOTP() == null) {
 					return super.handleDataAction(argAction);
@@ -81,8 +80,8 @@ public class AsqNeqatyOTPOp extends AbstractFormOp<AsqNeqatyOTPEditModel> {
 				return submitOTP(otp, custMobileNmbr);
 			}
 		} catch (Exception exception) {
-			LOG.error("Exception from STC_OTP form in Handling Data Action :" + exception);
-			return technicalErrorScreen("Exception from STC_OTP form in Handling Data Action :" + exception);
+			LOG.error("Exception from Neqaty_OTP form in Handling Data Action :" + exception);
+			return technicalErrorScreen("Exception from Neqaty_OTP form in Handling Data Action :" + exception);
 		}
 		return HELPER.completeResponse();
 	}
@@ -102,6 +101,14 @@ public class AsqNeqatyOTPOp extends AbstractFormOp<AsqNeqatyOTPEditModel> {
 				.callNeqatyService(request);
 		return validateResponse(response);
 	}
+	
+	private void saveNeqatyResponseToDB(IRetailTransaction trans, String value) {
+		if(value !=null ) {
+			trans.setStringProperty(AsqZatcaConstant.ASQ_NEQATY_TRX_ID,
+					value);
+		}
+		
+	}
 
 	private IOpResponse validateResponse(AsqNeqatyServiceResponse response) {
 		if (null != response && 0 != response.getResultCode()) {
@@ -109,19 +116,9 @@ public class AsqNeqatyOTPOp extends AbstractFormOp<AsqNeqatyOTPEditModel> {
 		} else if (null == response) {
 			return technicalErrorScreen("Service has null response");
 		}
-		
 		IRetailTransaction trans = (IRetailTransaction) _transactionScope.getTransaction();
 		saveNeqatyResponseToDB(trans, _transactionScope.getValue(AsqValueKeys.ASQ_NEQATY_TRANS_REFERENCE));
-		//LOG.info("Neqaty REDEEM API saving response to DB successfull");
 		return HELPER.completeResponse();
-	}
-
-	private void saveNeqatyResponseToDB(IRetailTransaction trans, String value) {
-		if(value !=null ) {
-			trans.setStringProperty(AsqZatcaConstant.ASQ_NEQATY_TRX_ID,
-					value);
-		}
-		
 	}
 
 	public IOpResponse handleServiceError(AsqNeqatyServiceResponse asqServiceResponse) {

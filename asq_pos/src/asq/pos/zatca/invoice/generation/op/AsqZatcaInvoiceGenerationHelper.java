@@ -54,6 +54,7 @@ import asq.pos.zatca.invoice.models.ItemAllowanceCharges;
 import asq.pos.zatca.invoice.models.OutboundInvoice;
 import asq.pos.zatca.invoice.models.SignatureData;
 import asq.pos.zatca.invoice.models.TaxSubtotal;
+import dtv.i18n.FormattableFactory;
 import dtv.pos.customer.ICustomerHelper;
 import dtv.util.StringUtils;
 import dtv.util.sequence.SequenceFactory;
@@ -141,6 +142,9 @@ public class AsqZatcaInvoiceGenerationHelper {
 	@Inject
 	ICustomerHelper customerHelper;
 
+	@Inject
+	FormattableFactory formattableFactory;
+
 	private static final Logger logger = LogManager.getLogger(AsqZatcaInvoiceGenerationHelper.class);
 	final String QR = "QR";
 	final String EmptyString = "";
@@ -152,7 +156,7 @@ public class AsqZatcaInvoiceGenerationHelper {
 	/**
 	 * Removing and replacing the Unicode and backslash character from the input
 	 * invoice JSON
-	 * 
+	 *
 	 * @param argInputInvoice
 	 * @return
 	 * @throws ASQException
@@ -172,7 +176,7 @@ public class AsqZatcaInvoiceGenerationHelper {
 	/**
 	 * This method creates a new out bound JSON invoice after validating the
 	 * required fields and throws exception if empty
-	 * 
+	 *
 	 * @param argInputInvoiceData
 	 * @return
 	 * @throws ASQException
@@ -216,7 +220,7 @@ public class AsqZatcaInvoiceGenerationHelper {
 	}
 
 	/**
-	 * 
+	 *
 	 * @param invoiceData
 	 * @param invoiceXmlString
 	 * @return
@@ -261,8 +265,8 @@ public class AsqZatcaInvoiceGenerationHelper {
 		SignatureData signatureData = new SignatureData();
 
 		logger.debug(" ---------------------------Generate QR Starts---------------------- ");
-		HashQRData data = getHashAndQR(sellerName, sellerVATRegNumber, invoiceIssueTime, invoiceIssueDate, payableAmount, vatTotal, invoiceXmlString, AsqZatcaConstant.keySecret,
-				AsqZatcaConstant.keyAlg, addDocQR, xmlUUID, xmlIrnValue, signatureData, nextICV, argTransactionDate);
+		HashQRData data = getHashAndQR(sellerName, sellerVATRegNumber, invoiceIssueTime, invoiceIssueDate, payableAmount, vatTotal, invoiceXmlString, AsqZatcaConstant.keySecret, AsqZatcaConstant.keyAlg, addDocQR,
+				xmlUUID, xmlIrnValue, signatureData, nextICV, argTransactionDate);
 
 		if (data.isCertificateExpired()) {
 			logger.error("*******Certificate Expired************");
@@ -280,21 +284,19 @@ public class AsqZatcaInvoiceGenerationHelper {
 		}
 		oasis.names.specification.ubl.schema.xsd.commonaggregatecomponents_2.ObjectFactory cac = asqZatcaHelper
 				.getZatcaOjectFactory(oasis.names.specification.ubl.schema.xsd.commonaggregatecomponents_2.ObjectFactory.class);
-		oasis.names.specification.ubl.schema.xsd.commonbasiccomponents_2.ObjectFactory cbc = asqZatcaHelper
-				.getZatcaOjectFactory(oasis.names.specification.ubl.schema.xsd.commonbasiccomponents_2.ObjectFactory.class);
+		oasis.names.specification.ubl.schema.xsd.commonbasiccomponents_2.ObjectFactory cbc = asqZatcaHelper.getZatcaOjectFactory(oasis.names.specification.ubl.schema.xsd.commonbasiccomponents_2.ObjectFactory.class);
 
 		invoiceData.getAdditionalDocumentReference().add(setDocumentReferenceType(QR, EmptyString, cbc, cac, data.getQR()));
 		invoiceData.getSignature().add(setSignatureType(System.getProperty("asq.pos.invoice.referencedSignatureID"), System.getProperty("asq.pos.invoice.extensionURI"), cbc, cac));
 
 		UBLExtensionsType ublExtensionsType = asqZatcaHelper.getZatcaOjectFactory(oasis.names.specification.ubl.schema.xsd.commonextensioncomponents_2.ObjectFactory.class).createUBLExtensionsType();
 		ublExtensionsType.getUBLExtension()
-				.add(getUBLExtension(System.getProperty("asq.pos.invoice.extensionURI"), System.getProperty("asq.pos.invoice.signatureInformationID"),
-						System.getProperty("asq.pos.invoice.referencedSignatureID"),
-						new String[] { System.getProperty("asq.pos.invoice.transformsAlgorithm"), System.getProperty("asq.pos.invoice.transformsAlgorithm"),
-								System.getProperty("asq.pos.invoice.transformsAlgorithm"), System.getProperty("asq.pos.invoice.transformsAlgorithm") },
+				.add(getUBLExtension(System.getProperty("asq.pos.invoice.extensionURI"), System.getProperty("asq.pos.invoice.signatureInformationID"), System.getProperty("asq.pos.invoice.referencedSignatureID"),
+						new String[] { System.getProperty("asq.pos.invoice.transformsAlgorithm"), System.getProperty("asq.pos.invoice.transformsAlgorithm"), System.getProperty("asq.pos.invoice.transformsAlgorithm"),
+								System.getProperty("asq.pos.invoice.transformsAlgorithm") },
 						// createTransformTypeXPath
-						new String[] { System.getProperty("asq.pos.invoice.xpathTagUBLExtensions"), System.getProperty("asq.pos.invoice.xpathTagSignature"),
-								System.getProperty("asq.pos.invoice.xpathTagAdditionalDocRef"), EmptyString },
+						new String[] { System.getProperty("asq.pos.invoice.xpathTagUBLExtensions"), System.getProperty("asq.pos.invoice.xpathTagSignature"), System.getProperty("asq.pos.invoice.xpathTagAdditionalDocRef"),
+								EmptyString },
 						cbc, signatureData));
 
 		invoiceData.setUBLExtensions(ublExtensionsType);
@@ -309,7 +311,7 @@ public class AsqZatcaInvoiceGenerationHelper {
 	}
 
 	/**
-	 * 
+	 *
 	 * @param id
 	 * @param uuid
 	 * @param cbc
@@ -350,7 +352,7 @@ public class AsqZatcaInvoiceGenerationHelper {
 	}
 
 	/**
-	 * 
+	 *
 	 * @param id
 	 * @param signMethod
 	 * @param cbc
@@ -371,20 +373,19 @@ public class AsqZatcaInvoiceGenerationHelper {
 
 	/**
 	 * In this method we setup the store address and it zatca information
-	 * 
+	 *
 	 * @param cbc
 	 * @param cac
 	 * @return
 	 */
-	public PartyType setPartyType(oasis.names.specification.ubl.schema.xsd.commonbasiccomponents_2.ObjectFactory cbc,
-			oasis.names.specification.ubl.schema.xsd.commonaggregatecomponents_2.ObjectFactory cac) {
+	public PartyType setPartyType(oasis.names.specification.ubl.schema.xsd.commonbasiccomponents_2.ObjectFactory cbc, oasis.names.specification.ubl.schema.xsd.commonaggregatecomponents_2.ObjectFactory cac) {
 
 		PartyType partyType = cac.createPartyType();
 
 		// setting store party PartyIdentification
 		PartyIdentificationType partyIdentificationType = cac.createPartyIdentificationType();
 		IDType idType = cbc.createIDType();
-		idType.setSchemeID("CRN");
+		idType.setSchemeID(AsqZatcaConstant.ZATCA_CRN_ID_VAL);
 		idType.setValue(AsqZatcaConstant.companyCRNNumber);
 		partyIdentificationType.setID(idType);
 		partyType.getPartyIdentification().add(partyIdentificationType);
@@ -437,12 +438,12 @@ public class AsqZatcaInvoiceGenerationHelper {
 		PartyTaxSchemeType partyTaxSchemeType = cac.createPartyTaxSchemeType();
 
 		CompanyIDType companyIDType = cbc.createCompanyIDType();
-		companyIDType.setValue(System.getProperty("asq.zatca.company.vat.reg.number"));
+		companyIDType.setValue(AsqZatcaConstant.companyVatNumber);
 		partyTaxSchemeType.setCompanyID(companyIDType);
 
 		TaxSchemeType taxSchemeType = cac.createTaxSchemeType();
 		IDType taxIdType = cbc.createIDType();
-		taxIdType.setValue("VAT");
+		taxIdType.setValue(AsqZatcaConstant.ZATCA_TAXSCHEME_ID_VAL);
 		taxSchemeType.setID(taxIdType);
 		partyTaxSchemeType.setTaxScheme(taxSchemeType);
 
@@ -452,7 +453,7 @@ public class AsqZatcaInvoiceGenerationHelper {
 		// Setting Zatca Customer Reg Name
 		PartyLegalEntityType partyLegalEntityType = cac.createPartyLegalEntityType();
 		RegistrationNameType registrationNameType = cbc.createRegistrationNameType();
-		registrationNameType.setValue(System.getProperty("asq.zatca.company.legalenity.name"));
+		registrationNameType.setValue(AsqZatcaConstant.companyLegalName);
 		partyLegalEntityType.setRegistrationName(registrationNameType);
 		partyType.getPartyLegalEntity().add(partyLegalEntityType);
 
@@ -460,7 +461,7 @@ public class AsqZatcaInvoiceGenerationHelper {
 	}
 
 	/**
-	 * 
+	 *
 	 * @param id
 	 * @param schemaType
 	 * @param streetName
@@ -486,7 +487,7 @@ public class AsqZatcaInvoiceGenerationHelper {
 
 		PartyIdentificationType partyIdentificationType = cac.createPartyIdentificationType();
 		IDType idType = cbc.createIDType();
-		idType.setSchemeID("CRN");
+		idType.setSchemeID(AsqZatcaConstant.ZATCA_CRN_ID_VAL);
 		idType.setValue(party.getCustomerId());
 		partyIdentificationType.setID(idType);
 		partyType.getPartyIdentification().add(partyIdentificationType);
@@ -558,7 +559,7 @@ public class AsqZatcaInvoiceGenerationHelper {
 		PartyTaxSchemeType partyTaxSchemeType = cac.createPartyTaxSchemeType();
 		TaxSchemeType taxSchemeType = cac.createTaxSchemeType();
 		IDType taxIdType = cbc.createIDType();
-		taxIdType.setValue("VAT");
+		taxIdType.setValue(AsqZatcaConstant.ZATCA_TAXSCHEME_ID_VAL);
 		taxSchemeType.setID(taxIdType);
 		partyTaxSchemeType.setTaxScheme(taxSchemeType);
 		partyType.getPartyTaxScheme().add(partyTaxSchemeType);
@@ -576,7 +577,7 @@ public class AsqZatcaInvoiceGenerationHelper {
 	}
 
 	/**
-	 * 
+	 *
 	 * @param actualDeliveryDate
 	 * @param latestDeliveryDate
 	 * @param cbc
@@ -586,9 +587,8 @@ public class AsqZatcaInvoiceGenerationHelper {
 	 * @return deliveryType
 	 */
 
-	public DeliveryType setDeliveryType(XMLGregorianCalendar actualDeliveryDate, XMLGregorianCalendar latestDeliveryDate,
-			oasis.names.specification.ubl.schema.xsd.commonbasiccomponents_2.ObjectFactory cbc, oasis.names.specification.ubl.schema.xsd.commonaggregatecomponents_2.ObjectFactory cac)
-			throws DatatypeConfigurationException, ParseException {
+	public DeliveryType setDeliveryType(XMLGregorianCalendar actualDeliveryDate, XMLGregorianCalendar latestDeliveryDate, oasis.names.specification.ubl.schema.xsd.commonbasiccomponents_2.ObjectFactory cbc,
+			oasis.names.specification.ubl.schema.xsd.commonaggregatecomponents_2.ObjectFactory cac) throws DatatypeConfigurationException, ParseException {
 		DeliveryType deliveryType = cac.createDeliveryType();
 		if (null != actualDeliveryDate) {
 			ActualDeliveryDateType actualDeliveryDateType = cbc.createActualDeliveryDateType();
@@ -603,7 +603,7 @@ public class AsqZatcaInvoiceGenerationHelper {
 	}
 
 	/**
-	 * 
+	 *
 	 * @param PaymentMeansCode
 	 * @param creditDebitReason
 	 * @param cbc
@@ -628,7 +628,7 @@ public class AsqZatcaInvoiceGenerationHelper {
 	}
 
 	/**
-	 * 
+	 *
 	 * @param chargeIndicator
 	 * @param allowanceChargeReason
 	 * @param currencyID
@@ -644,9 +644,9 @@ public class AsqZatcaInvoiceGenerationHelper {
 	 * @param cac
 	 * @return
 	 */
-	public AllowanceChargeType setAllowanceChargeType(String chargeIndicator, String allowanceChargeReason, String currencyID, String amount, String taxCategoryId, String categorySchemeAgencyID,
-			String schemeAgencyID, String taxCategorySchemeID, String taxSchemeIDValue, String Percent, String taxSchemeID,
-			oasis.names.specification.ubl.schema.xsd.commonbasiccomponents_2.ObjectFactory cbc, oasis.names.specification.ubl.schema.xsd.commonaggregatecomponents_2.ObjectFactory cac) {
+	public AllowanceChargeType setAllowanceChargeType(String chargeIndicator, String allowanceChargeReason, String currencyID, String amount, String taxCategoryId, String categorySchemeAgencyID, String schemeAgencyID,
+			String taxCategorySchemeID, String taxSchemeIDValue, String Percent, String taxSchemeID, oasis.names.specification.ubl.schema.xsd.commonbasiccomponents_2.ObjectFactory cbc,
+			oasis.names.specification.ubl.schema.xsd.commonaggregatecomponents_2.ObjectFactory cac) {
 		AllowanceChargeType allowanceChargeType = cac.createAllowanceChargeType();
 		TaxCategoryType taxCategoryType = cac.createTaxCategoryType();
 		TaxSchemeType taxSchemeType = cac.createTaxSchemeType();
@@ -682,7 +682,7 @@ public class AsqZatcaInvoiceGenerationHelper {
 	}
 
 	/**
-	 * 
+	 *
 	 * @param currencyID
 	 * @param taxAmount
 	 * @param roundingAmount
@@ -719,7 +719,7 @@ public class AsqZatcaInvoiceGenerationHelper {
 	}
 
 	/**
-	 * 
+	 *
 	 * @param taxCategorySchemeID
 	 * @param taxCategorySchemeAgencyID
 	 * @param taxCategoryID
@@ -733,9 +733,9 @@ public class AsqZatcaInvoiceGenerationHelper {
 	 * @param cac
 	 * @return
 	 */
-	public TaxCategoryType setTaxCategoryType(String taxCategorySchemeID[], String taxCategorySchemeAgencyID[], String taxCategoryID[], BigDecimal taxPercent[], String taxSchemeID[],
-			String taxSchemeValue[], String taxSchemeAgencyID[], String taxExemptionReasonCode, String taxExemptionReason,
-			oasis.names.specification.ubl.schema.xsd.commonbasiccomponents_2.ObjectFactory cbc, oasis.names.specification.ubl.schema.xsd.commonaggregatecomponents_2.ObjectFactory cac) {
+	public TaxCategoryType setTaxCategoryType(String taxCategorySchemeID[], String taxCategorySchemeAgencyID[], String taxCategoryID[], BigDecimal taxPercent[], String taxSchemeID[], String taxSchemeValue[],
+			String taxSchemeAgencyID[], String taxExemptionReasonCode, String taxExemptionReason, oasis.names.specification.ubl.schema.xsd.commonbasiccomponents_2.ObjectFactory cbc,
+			oasis.names.specification.ubl.schema.xsd.commonaggregatecomponents_2.ObjectFactory cac) {
 
 		TaxCategoryType taxCategoryType = cac.createTaxCategoryType();
 		for (int i = 0; i < taxCategorySchemeID.length; i++) {
@@ -777,7 +777,7 @@ public class AsqZatcaInvoiceGenerationHelper {
 	}
 
 	/**
-	 * 
+	 *
 	 * @param currencyID
 	 * @param taxAmount
 	 * @param taxableAmount
@@ -806,7 +806,7 @@ public class AsqZatcaInvoiceGenerationHelper {
 	}
 
 	/**
-	 * 
+	 *
 	 * @param currencyID
 	 * @param lineExtensionAmount
 	 * @param taxExclusiveAmount
@@ -819,8 +819,8 @@ public class AsqZatcaInvoiceGenerationHelper {
 	 * @param cac
 	 * @return
 	 */
-	public MonetaryTotalType setMonetaryTotalType(String currencyID, BigDecimal lineExtensionAmount, BigDecimal taxExclusiveAmount, BigDecimal taxInclusiveAmount, String allowanceTotalAmount,
-			String prepaidAmount, BigDecimal payableAmount, String payableRoundingAmount, oasis.names.specification.ubl.schema.xsd.commonbasiccomponents_2.ObjectFactory cbc,
+	public MonetaryTotalType setMonetaryTotalType(String currencyID, BigDecimal lineExtensionAmount, BigDecimal taxExclusiveAmount, BigDecimal taxInclusiveAmount, String allowanceTotalAmount, String prepaidAmount,
+			BigDecimal payableAmount, String payableRoundingAmount, oasis.names.specification.ubl.schema.xsd.commonbasiccomponents_2.ObjectFactory cbc,
 			oasis.names.specification.ubl.schema.xsd.commonaggregatecomponents_2.ObjectFactory cac) {
 
 		MonetaryTotalType monetaryTotalType = cac.createMonetaryTotalType();
@@ -862,7 +862,7 @@ public class AsqZatcaInvoiceGenerationHelper {
 	}
 
 	/**
-	 * 
+	 *
 	 * @param chargeIndicator
 	 * @param allowanceChargeReason
 	 * @param amount
@@ -916,7 +916,7 @@ public class AsqZatcaInvoiceGenerationHelper {
 	}
 
 	/**
-	 * 
+	 *
 	 * @param currencyID
 	 * @param priceAmount
 	 * @param listAllowanceChargeType
@@ -924,8 +924,8 @@ public class AsqZatcaInvoiceGenerationHelper {
 	 * @param cac
 	 * @return
 	 */
-	public PriceType setPriceType(String currencyID, BigDecimal priceAmount, List<AllowanceChargeType> listAllowanceChargeType,
-			oasis.names.specification.ubl.schema.xsd.commonbasiccomponents_2.ObjectFactory cbc, oasis.names.specification.ubl.schema.xsd.commonaggregatecomponents_2.ObjectFactory cac) {
+	public PriceType setPriceType(String currencyID, BigDecimal priceAmount, List<AllowanceChargeType> listAllowanceChargeType, oasis.names.specification.ubl.schema.xsd.commonbasiccomponents_2.ObjectFactory cbc,
+			oasis.names.specification.ubl.schema.xsd.commonaggregatecomponents_2.ObjectFactory cac) {
 		PriceType priceType = cac.createPriceType();
 		PriceAmountType priceAmountType = cbc.createPriceAmountType();
 
@@ -939,7 +939,7 @@ public class AsqZatcaInvoiceGenerationHelper {
 	}
 
 	/**
-	 * 
+	 *
 	 * @param taxSchemeValue
 	 * @param taxSchemeAgencyID
 	 * @param cbc
@@ -964,7 +964,7 @@ public class AsqZatcaInvoiceGenerationHelper {
 	}
 
 	/**
-	 * 
+	 *
 	 * @param classifiedTaxCategoryID
 	 * @param itemName
 	 * @param percentValue
@@ -973,8 +973,8 @@ public class AsqZatcaInvoiceGenerationHelper {
 	 * @param cac
 	 * @return
 	 */
-	public ItemType setItemType(String classifiedTaxCategoryID, String itemName, BigDecimal percentValue, TaxSchemeType taxSchemeType,
-			oasis.names.specification.ubl.schema.xsd.commonbasiccomponents_2.ObjectFactory cbc, oasis.names.specification.ubl.schema.xsd.commonaggregatecomponents_2.ObjectFactory cac) {
+	public ItemType setItemType(String classifiedTaxCategoryID, String itemName, BigDecimal percentValue, TaxSchemeType taxSchemeType, oasis.names.specification.ubl.schema.xsd.commonbasiccomponents_2.ObjectFactory cbc,
+			oasis.names.specification.ubl.schema.xsd.commonaggregatecomponents_2.ObjectFactory cac) {
 
 		ItemType itemType = cac.createItemType();
 		TaxCategoryType taxCategoryType = cac.createTaxCategoryType();
@@ -997,16 +997,15 @@ public class AsqZatcaInvoiceGenerationHelper {
 	}
 
 	/**
-	 * 
+	 *
 	 * @param lineItem
 	 * @param listAllowanceChargeType
 	 * @param cbc
 	 * @param cac
 	 * @return
 	 */
-	public InvoiceLineType setInvoiceLineType(SaleReturnLineItemModel lineItem, List<ItemAllowanceCharges> listAllowanceChargeType,
-			oasis.names.specification.ubl.schema.xsd.commonbasiccomponents_2.ObjectFactory cbc, oasis.names.specification.ubl.schema.xsd.commonaggregatecomponents_2.ObjectFactory cac,
-			BigDecimal argPriceAmount, BigDecimal argTaxPerc, String argTaxCategoryID, BigDecimal lineExtensionAmount) {
+	public InvoiceLineType setInvoiceLineType(SaleReturnLineItemModel lineItem, List<ItemAllowanceCharges> listAllowanceChargeType, oasis.names.specification.ubl.schema.xsd.commonbasiccomponents_2.ObjectFactory cbc,
+			oasis.names.specification.ubl.schema.xsd.commonaggregatecomponents_2.ObjectFactory cac, BigDecimal argPriceAmount, BigDecimal argTaxPerc, String argTaxCategoryID, BigDecimal lineExtensionAmount) {
 
 		InvoiceLineType invoiceLineType = cac.createInvoiceLineType();
 		InvoicedQuantityType invoicedQuantityType = cbc.createInvoicedQuantityType();
@@ -1054,13 +1053,13 @@ public class AsqZatcaInvoiceGenerationHelper {
 	}
 
 	/**
-	 * 
+	 *
 	 * @param invoiceLineType
 	 * @param lineItem
 	 * @param cac
 	 */
-	private void mapAllowanceCharges(InvoiceLineType invoiceLineType, List<ItemAllowanceCharges> listAllowanceChargeType,
-			oasis.names.specification.ubl.schema.xsd.commonbasiccomponents_2.ObjectFactory cbc, oasis.names.specification.ubl.schema.xsd.commonaggregatecomponents_2.ObjectFactory cac) {
+	private void mapAllowanceCharges(InvoiceLineType invoiceLineType, List<ItemAllowanceCharges> listAllowanceChargeType, oasis.names.specification.ubl.schema.xsd.commonbasiccomponents_2.ObjectFactory cbc,
+			oasis.names.specification.ubl.schema.xsd.commonaggregatecomponents_2.ObjectFactory cac) {
 		if (null != listAllowanceChargeType) {
 			for (ItemAllowanceCharges allowanceCharge : listAllowanceChargeType) {
 				AllowanceChargeType allowanceChargeType = cac.createAllowanceChargeType();
@@ -1077,7 +1076,7 @@ public class AsqZatcaInvoiceGenerationHelper {
 	}
 
 	/**
-	 * 
+	 *
 	 * @param allowanceChargeType
 	 * @param allowanceCharge
 	 */
@@ -1091,7 +1090,7 @@ public class AsqZatcaInvoiceGenerationHelper {
 	}
 
 	/**
-	 * 
+	 *
 	 * @param allowanceChargeType
 	 * @param allowanceCharge
 	 */
@@ -1107,7 +1106,7 @@ public class AsqZatcaInvoiceGenerationHelper {
 	}
 
 	/**
-	 * 
+	 *
 	 * @param allowanceChargeType
 	 * @param allowanceCharge
 	 * @param cbc
@@ -1122,13 +1121,12 @@ public class AsqZatcaInvoiceGenerationHelper {
 	}
 
 	/**
-	 * 
+	 *
 	 * @param allowanceChargeType
 	 * @param allowanceCharge
 	 * @param cbc
 	 */
-	private void mapAllowanceChargeReason(AllowanceChargeType allowanceChargeType, ItemAllowanceCharges allowanceCharge,
-			oasis.names.specification.ubl.schema.xsd.commonbasiccomponents_2.ObjectFactory cbc) {
+	private void mapAllowanceChargeReason(AllowanceChargeType allowanceChargeType, ItemAllowanceCharges allowanceCharge, oasis.names.specification.ubl.schema.xsd.commonbasiccomponents_2.ObjectFactory cbc) {
 		AllowanceChargeReasonType allowanceChargeReasonType = cbc.createAllowanceChargeReasonType();
 		if (null != allowanceCharge.getItemAllowanceChargeReason()) {
 			allowanceChargeReasonType.setValue(allowanceCharge.getItemAllowanceChargeReason());
@@ -1137,13 +1135,12 @@ public class AsqZatcaInvoiceGenerationHelper {
 	}
 
 	/**
-	 * 
+	 *
 	 * @param allowanceChargeType
 	 * @param allowanceCharge
 	 * @param cbc
 	 */
-	private void mapChargeIndicatore(AllowanceChargeType allowanceChargeType, ItemAllowanceCharges allowanceCharge,
-			oasis.names.specification.ubl.schema.xsd.commonbasiccomponents_2.ObjectFactory cbc) {
+	private void mapChargeIndicatore(AllowanceChargeType allowanceChargeType, ItemAllowanceCharges allowanceCharge, oasis.names.specification.ubl.schema.xsd.commonbasiccomponents_2.ObjectFactory cbc) {
 		ChargeIndicatorType chargeIndicatorType = cbc.createChargeIndicatorType();
 		if (null != allowanceCharge.getItemAllowanceChargeIndicator()) {
 			chargeIndicatorType.setValue(Boolean.valueOf(allowanceCharge.getItemAllowanceChargeIndicator()));
@@ -1152,7 +1149,7 @@ public class AsqZatcaInvoiceGenerationHelper {
 	}
 
 	/**
-	 * 
+	 *
 	 * @param sellerName
 	 * @param vatNumber
 	 * @param invoiceTimeStamp
@@ -1168,9 +1165,8 @@ public class AsqZatcaInvoiceGenerationHelper {
 	 * @throws ASQException
 	 * @throws Exception
 	 */
-	public HashQRData getHashAndQR(String sellerName, String vatNumber, XMLGregorianCalendar invoiceIssueDate, XMLGregorianCalendar invoiceIssueTimeStamp, String invoiceTotal, String vatTotal,
-			String xmlData, String keySecret, String keyAlias, AdditionalDocumentReference addDocQR, String xmlUUID, String xmlIrnValue, SignatureData signatureData, Long nextICV,
-			Date transactionDate) throws ASQException, Exception {
+	public HashQRData getHashAndQR(String sellerName, String vatNumber, XMLGregorianCalendar invoiceIssueDate, XMLGregorianCalendar invoiceIssueTimeStamp, String invoiceTotal, String vatTotal, String xmlData,
+			String keySecret, String keyAlias, AdditionalDocumentReference addDocQR, String xmlUUID, String xmlIrnValue, SignatureData signatureData, Long nextICV, Date transactionDate) throws ASQException, Exception {
 
 		String xml = SmartHubUtil.removeNewlineAndWhiteSpaces(xmlData);
 		logger.debug("**********Initial XML Generated : " + xml);
@@ -1228,7 +1224,7 @@ public class AsqZatcaInvoiceGenerationHelper {
 	}
 
 	/**
-	 * 
+	 *
 	 * @param extensionURI
 	 * @param signatureInformationID
 	 * @param referencedSignatureID
@@ -1250,8 +1246,8 @@ public class AsqZatcaInvoiceGenerationHelper {
 	 * @throws SAXException
 	 */
 	public UBLExtensionType getUBLExtension(String extensionURI, String signatureInformationID, String referencedSignatureID, String[] transformsAlgorithm, String[] xpath,
-			oasis.names.specification.ubl.schema.xsd.commonbasiccomponents_2.ObjectFactory cbc, SignatureData signatureData) throws JAXBException, IOException, NoSuchAlgorithmException,
-			ParseException, DatatypeConfigurationException, InvalidCanonicalizerException, CanonicalizationException, ParserConfigurationException, TransformerException, SAXException {
+			oasis.names.specification.ubl.schema.xsd.commonbasiccomponents_2.ObjectFactory cbc, SignatureData signatureData) throws JAXBException, IOException, NoSuchAlgorithmException, ParseException,
+			DatatypeConfigurationException, InvalidCanonicalizerException, CanonicalizationException, ParserConfigurationException, TransformerException, SAXException {
 
 		oasis.names.specification.ubl.schema.xsd.commonextensioncomponents_2.ObjectFactory ext = asqZatcaHelper
 				.getZatcaOjectFactory(oasis.names.specification.ubl.schema.xsd.commonextensioncomponents_2.ObjectFactory.class);
@@ -1363,7 +1359,7 @@ public class AsqZatcaInvoiceGenerationHelper {
 	}
 
 	/**
-	 * 
+	 *
 	 * @param customerPartyType
 	 * @param buyerPhoneNumber
 	 * @param cbc
@@ -1383,7 +1379,7 @@ public class AsqZatcaInvoiceGenerationHelper {
 	}
 
 	/**
-	 * 
+	 *
 	 * @param totalTaxValue
 	 * @param currencyId
 	 * @param cbc
@@ -1402,7 +1398,7 @@ public class AsqZatcaInvoiceGenerationHelper {
 	}
 
 	/**
-	 * 
+	 *
 	 * @param taxSubTotals
 	 * @param cbc
 	 * @param cac
@@ -1414,17 +1410,17 @@ public class AsqZatcaInvoiceGenerationHelper {
 		List<TaxSubtotalType> taxSubtotalTypes = new ArrayList<>();
 		for (TaxSubtotal taxSubTotal : taxSubTotals) {
 			taxSubtotalTypes.add(setTaxSubtotalType(taxSubTotal.getCurrency(), new BigDecimal(taxSubTotal.getTaxAmount()), new BigDecimal(taxSubTotal.getTaxableAmount()),
-					setTaxCategoryType(new String[] { taxSubTotal.getTaxCategorySchemeID() }, new String[] { taxSubTotal.getTaxCategorySchemeAgencyID() },
-							new String[] { taxSubTotal.getTaxCategoryID() }, new BigDecimal[] { new BigDecimal(taxSubTotal.getTaxCategoryPercent()) },
-							new String[] { taxSubTotal.getTaxCategoryTaxSchemeSchemeID() }, new String[] { taxSubTotal.getTaxCategoryTaxSchemeID() },
-							new String[] { taxSubTotal.getTaxCategoryTaxSchemeSchemeAgencyID() }, taxSubTotal.getTaxExemptionReasonCode(), taxSubTotal.getTaxExemptionReason(), cbc, cac),
+					setTaxCategoryType(new String[] { taxSubTotal.getTaxCategorySchemeID() }, new String[] { taxSubTotal.getTaxCategorySchemeAgencyID() }, new String[] { taxSubTotal.getTaxCategoryID() },
+							new BigDecimal[] { new BigDecimal(taxSubTotal.getTaxCategoryPercent()) }, new String[] { taxSubTotal.getTaxCategoryTaxSchemeSchemeID() },
+							new String[] { taxSubTotal.getTaxCategoryTaxSchemeID() }, new String[] { taxSubTotal.getTaxCategoryTaxSchemeSchemeAgencyID() }, taxSubTotal.getTaxExemptionReasonCode(),
+							taxSubTotal.getTaxExemptionReason(), cbc, cac),
 					cbc, cac));
 		}
 		return taxSubtotalTypes;
 	}
 
 	/**
-	 * 
+	 *
 	 * @param originalInvoiceNumbers
 	 * @return
 	 */
@@ -1441,7 +1437,7 @@ public class AsqZatcaInvoiceGenerationHelper {
 	}
 
 	/**
-	 * 
+	 *
 	 * @param in
 	 * @param argQRCode
 	 * @param signatureData
@@ -1468,7 +1464,7 @@ public class AsqZatcaInvoiceGenerationHelper {
 	}
 
 	/**
-	 * 
+	 *
 	 * @param signatureData
 	 * @param argQRCode
 	 * @param signatureData1
@@ -1490,7 +1486,7 @@ public class AsqZatcaInvoiceGenerationHelper {
 
 	/**
 	 * This method converts the sample invoice XML to InvoiceType object
-	 * 
+	 *
 	 * @param argSampleInvoice
 	 * @return
 	 * @throws JAXBException
@@ -1506,7 +1502,7 @@ public class AsqZatcaInvoiceGenerationHelper {
 
 	/**
 	 * This method help in having the file from a location with filtered file types
-	 * 
+	 *
 	 * @param argLocation
 	 * @param argFileFilters
 	 * @return

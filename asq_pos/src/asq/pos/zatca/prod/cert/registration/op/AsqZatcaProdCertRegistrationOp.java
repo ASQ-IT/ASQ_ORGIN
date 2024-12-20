@@ -57,7 +57,6 @@ public class AsqZatcaProdCertRegistrationOp extends Operation {
 	public AsqSubmitZatcaCertServiceResponse generateProductionCertPCSID() throws IOException {
 		Properties csidProperties = asqZatcaHelper.getCSIDProperties();
 		if ("true".equalsIgnoreCase(csidProperties.getProperty("isComplianceCheck"))) {
-			// ZATCA Req
 			IAsqSubmitZatcaCertServiceRequest productionRequest = new AsqSubmitZatcaCertServiceRequest();
 			productionRequest.setCompliance_request_id(csidProperties.getProperty("complianceRequestID"));
 			return (AsqSubmitZatcaCertServiceResponse) zatcaService.get().submitCSIDSForRegistration(productionRequest);

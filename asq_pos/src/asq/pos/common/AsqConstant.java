@@ -13,4 +13,10 @@ public interface AsqConstant {
 	String ASQ_TOLA_WEIGHT_RANGE_ERROR = "ASQ_TOLA_WEIGHT_RANGE_ERROR";
 	String ASQ_TOLA_QTY_SOH_ERROR = "ASQ_TOLA_QTY_SOH_ERROR";
 
+	// Register Close Receiving Validation rule
+	String ASQ_RECEIVING_REG_CLOSE_MSG = "_asqShippingIsInProgressValidation";
+	String ASQ_RECEIVING_REG_CLOSE_QRY = "ASQ_IN_PROGRESS_RECEIVING";
+
+	String ASQ_GET_EMPLOYEE_COMM_NETSALE_QRY = "ASQ_EMPLOYEE_COMMISSION_QUERY";
+
 }

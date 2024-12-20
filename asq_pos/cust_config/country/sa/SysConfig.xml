@@ -37,4 +37,9 @@
     <Setting name="ItemReturn---CrossStoreReturnsEnabled">true</Setting>
     <Setting name="ItemReturn---CrossTaxLocationReturnsEnabled">true</Setting>
     <Setting name="Footer_disclaimer---Enable">true</Setting>
+    <!-- PRICE Quotation Start-->
+    <Setting name="InvoiceConfig---EnableInvoicing">true</Setting>
+    <Setting name="TaxFreeConfig---Enabled">true</Setting>
+    <!-- PRICE Quotation end-->
+     <Setting name="ASQ---StoreTransferApprovalEmailOTP---To">sandeepreddy.gagireddy@wipro.com</Setting>
 </SysConfig>

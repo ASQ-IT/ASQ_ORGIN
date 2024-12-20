@@ -152,9 +152,7 @@
 		<Action ref="YES" />
 		<Action ref="NO" />
 	</Prompt>
-	<Prompt name="ASQ_TAMARA_PAYMENT_SUCCESSFULL" type="Notify" title="_asqTamaraPromptTitle" message="_asqTamaraPaymentSuccessfullMessage">
-		<Action chainKey="ASQ_TENDER_TAMARA" text="_ok" keyStroke="Enter" />
-	</Prompt>
+	<Prompt name="ASQ_TAMARA_PAYMENT_SUCCESSFULL" type="Notify" title="_asqTamaraPromptTitle" message="_asqTamaraPaymentSuccessfullMessage"></Prompt>
 	<Prompt name="ASQ_TAMARA_PAYMENT_LINK_EXPIRED" type="NotifyCancel" title="_asqTamaraPromptTitle" message="_asqTamaraPaymentExpiredMessage">
 		<Action ref="CANCEL" />
 	</Prompt>
@@ -176,9 +174,9 @@
 	<Prompt name="ASQ_TAMARA_TECHNICAL_ERROR" type="Notify" title="_asqTamaraErrorPromptTitle" message="_asqTamarapromptmsgTechnicalError">
 		<Action ref="CANCEL_BACK" />
 	</Prompt>
-	<Prompt name="ASQ_TAMARA_PAYMENT_WAIT" type="NotifyYesCancel" title="_asqTamaraPromptTitle" message="_asqTamaraPaymentWaitMessage">
-		<Action chainKey="ASQ_TAMARA_PAYMENT_CANCEL" text="Cancel" keyStroke="Enter" />
-		<Action chainKey="ASQ_TAMARA_PAYMENT" text="Continue" keyStroke="Enter" />
+	<Prompt name="ASQ_TAMARA_PAYMENT_WAIT" type="Notify" title="_asqTamaraPromptTitle" message="_asqTamaraPaymentWaitMessage">
+		<Action chainKey="ASQ_TAMARA_PAYMENT_CANCEL" text="Cancel"  keyStroke="Enter" />
+		<Action chainKey="ASQ_TAMARA_PAYMENT" text="Continue" chainType="STACK" keyStroke="Enter" />
 	</Prompt>
 	<Prompt name="ASQ_TAMARA_MOBILE_NUMBER_ERROR" type="Notify" title="_asqTamaraErrorPromptTitle" message="_asqTamarapromptmsgMobileError">
 		<Action ref="CANCEL_BACK" />
@@ -213,12 +211,10 @@
 	<Prompt name="ASQ_TABBY_PAYMENT_REJECTED" type="Notify" title="_asqTabbyPromptTitle" message="_asqTabbyPaymentRejectedMessage">
 		<Action ref="CANCEL_BACK" />
 	</Prompt>
-	<Prompt name="ASQ_TABBY_PAYMENT_SUCCESSFULL" type="Notify" title="_asqTabbyPromptTitle" message="_asqTabbyPaymentSuccessfullMessage">
-		<Action chainKey="ASQ_TENDER_TABBY" text="_ok" keyStroke="Enter" />
-	</Prompt>
+	<Prompt name="ASQ_TABBY_PAYMENT_SUCCESSFULL" type="Notify" title="_asqTabbyPromptTitle" message="_asqTabbyPaymentSuccessfullMessage"></Prompt>
 	<Prompt name="ASQ_TABBY_PAYMENT_WAIT" type="NotifyOkCancel" title="_asqTabbyPromptTitle" message="_asqTamaraPaymentWaitMessage">
-		<Action chainKey="ASQ_TABBY_PAYMENT" text="Continue" keyStroke="Enter" />
 		<Action chainKey="ASQ_TABBY_PAYMENT_CANCEL" text="Cancel" keyStroke="Enter" />
+		<Action chainKey="ASQ_TABBY_PAYMENT" text="Continue" chainType="STACK" keyStroke="Enter" />
 	</Prompt>
 	<Prompt name="ASQ_BNPL_SSL_ERROR" type="Notify" title="_asqTabbyPromptTitle" message="_asqCertificateExpiryMessage">
 		<Action ref="CANCEL_BACK" />
@@ -254,8 +250,8 @@
 	<Prompt name="ASQ_NEQATY_TECHNICAL_ERROR" type="Notify" title="_asqNeqErrorTitle" message="_asqpromptmsgTechnicalError">
 		<Action ref="CANCEL_BACK" />
 	</Prompt>
-	<Prompt name="ASQ_NEQATY_TECHNICAL_ERROR" type="Notify" title="_asqNeqatyTechnicalErrorTitle" message="_asqNeqatyTechnicalError">
-		<Action ref="CANCEL_BACK" />
+	<Prompt name="ASQ_NEQATY_EARN_ERROR" type="Notify" title="_asqNeqatyTechnicalErrorTitle" message="_asqNeqatyTechnicalError">
+		<Action dataKey="CONTINUE" text="_continue" keyStroke="Enter" />
 	</Prompt>
 	<Prompt name="ASQ_NEQATY_REDEEM_SUCCESS" type="Notify" title="_asqNeqatySuccessTitle" message="_asqNeqatySuccessText">
 		<Action ref="CANCEL_BACK" />
@@ -337,9 +333,7 @@
 		<Action ref="CANCEL_BACK" />
 	</Prompt>
 	<Prompt name="ASQ_NEQATY_INVALID_OTP" type="Notify" title="_asqNeqatySuccessTitle" message="_asqNeqatyinvalidOtp" />
-	<Prompt name="ASQ_NEQATY_NO_POINTS" type="Notify" title="_asqNeqatySuccessTitle" message="_asqNeqatyNoPoints">
-		<Action ref="CANCEL_BACK" />
-	</Prompt>
+	<Prompt name="ASQ_NEQATY_NO_POINTS" type="Notify" title="_asqNeqatySuccessTitle" message="_asqNeqatyNoPoints" />
 	
 	<Prompt name="ASQ_NEQATY_REFUND_SUCCESS" type="Notify" title="_asqNeqatySuccessTitle" message="_asqNeqatyRefundText" >
 	<Action dataKey="CONTINUE" text="_continue" keyStroke="Enter" />
@@ -349,7 +343,7 @@
 	<Action ref="CANCEL_BACK" />
    </Prompt>
    
-   	<Prompt name="ASQ_PLANET_RESPONSE_ERROR" type="Notify" title="_asqPlanetErrorTitle" message="_asqPlanetmsgTechnicalError" />
+   	<Prompt name="ASQ_PLANET_RESPONSE_ERROR" type="Notify" title="_asqPlanetErrorTitle" message="_asqPlanetmsgResponseError" />
 	
 	<Prompt name="ASQ_PLANET_SUCCESS" type="Notify" title="_asqPlanetSuccessTitle" message="_asqpromptmsgSuccess" >
 	<Action dataKey="CONTINUE" text="_continue" keyStroke="Enter" />
@@ -391,9 +385,8 @@
 	<Prompt name="PRINT_RECEIPTS1" type="Notify" title="_salecompletetitle" message="_emailReceiptsMessage">
 	    <Action ref="NO_BACK1" />    
 	    <Action ref="NOPRINT_RECEIPTS" />
-	    <Action ref="PRINT_ONLY" />
-	    <Action ref="EMAIL_ONLY" />
-	    <Action ref="PRINT_EMAIL" />
+	    <Action ref="PRINT_PDF" />
+	    <Action ref="EMAIL_ONLY_PDF" />
     </Prompt>
    <!-- PRICE Quotation end-->
   
@@ -413,4 +406,10 @@
 	<Action ref="NO" />
 	</Prompt>
 	<!-- Loyality redeem  End -->
+	
+	<!-- ASQ Store Transfer  -->
+	<Prompt name="ASQ_STORE_OTP_ERROR" type="Notify" title="_asqCaptureShipOTPTitle" message="_asqCaptureShipOTPError">
+		 <Action dataKey="BACK" text="_back" keyStroke="Escape" />
+	</Prompt>
+	
 </PromptSet>

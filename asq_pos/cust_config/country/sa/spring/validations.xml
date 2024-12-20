@@ -23,4 +23,8 @@
 		</property>
 	</bean>
 	<!-- ZeroPriceVlidation End -->
+	
+	<!-- Register Close Receiving Validation rule Start -->
+	<bean id="closeWorkstationRule" class="asq.pos.systemcycle.workstation.AsqValidateCloseWorkstationRule" scope="prototype" />
+	<!-- Register Close Receiving Validation rule Ends -->
 </beans>

@@ -75,7 +75,7 @@ public class AsqBnplTabbyPaymentValidationOp extends Operation{
 				} catch (InterruptedException e) {
 					LOG.error("Exception during confirmation sleep cycle :" + e);
 				}
-				return HELPER.getPromptResponse("ASQ_TABBY_PAYMENT_WAIT");
+				return HELPER.getCompletePromptResponse("ASQ_TABBY_PAYMENT_WAIT");
 			}
 		}
 		return HELPER.completeCurrentChainResponse();
@@ -91,8 +91,8 @@ public class AsqBnplTabbyPaymentValidationOp extends Operation{
 	        asqBnplTabbyDetailsObj.setPhone(_transactionScope.getValue(AsqValueKeys.ASQ_MOBILE_NUMBER));
 	        asqBnplTabbyDetailsObj.setReference_id(Long.toString(trans.getTransactionSequence()));
 	        payment.setAmount(trans.getTotal().toString());
-	        payment.setCurrency(trans.getRetailTransactionLineItems().get(0).getCurrencyId());
-	        //payment.setCurrency("SAR");
+	        //payment.setCurrency(trans.getRetailTransactionLineItems().get(0).getCurrencyId());
+	        payment.setCurrency("SAR");
 	        payment.setBuyer(asqBnplTabbyDetailsObj);
 	        payment.setOrder(asqBnplTabbyDetailsObj);
 			payment.setId(this._transactionScope.getValue(AsqValueKeys.ASQ_TABBY_PMNT_ID));
@@ -115,11 +115,11 @@ public class AsqBnplTabbyPaymentValidationOp extends Operation{
 				return handleServiceError(response);
 			} else if (null != _transactionScope.getValue(AsqValueKeys.ASQ_TABBY_PAYMENT_SUCCESS)) {
 				LOG.info("Successful Execution of Retrieve API calling payment successful prompt");
-				return this.HELPER.getPromptResponse("ASQ_TABBY_PAYMENT_SUCCESSFULL");
+				return this.HELPER.getCompletePromptResponse("ASQ_TABBY_PAYMENT_SUCCESSFULL");
 			}
 			else if (null != _transactionScope.getValue(AsqValueKeys.ASQ_TABBY_PAYMENT_EXPIRED)) {
 				LOG.info("Retrieve API calling payment expired/timeout prompt");
-				return this.HELPER.getPromptResponse("ASQ_TABBY_PAYMENT_EXPIRED");
+				return this.HELPER.getCompletePromptResponse("ASQ_TABBY_PAYMENT_EXPIRED");
 			}
 			return HELPER.completeCurrentChainResponse();
 		}

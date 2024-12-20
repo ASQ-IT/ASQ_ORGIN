@@ -1,5 +1,6 @@
 package asq.retail.xstore.countrypack.common.taxfree.fintrax.op;
 
+import java.math.BigDecimal;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
@@ -28,7 +29,7 @@ import dtv.pos.iframework.action.IXstDataAction;
 import dtv.pos.iframework.op.IOpResponse;
 import dtv.pos.iframework.op.IOpState;
 import dtv.pos.iframework.validation.IValidationResultList;
-
+import dtv.xst.dao.trl.IRetailPriceModifier;
 import dtv.xst.dao.trl.ISaleReturnLineItem;
 import dtv.xst.dao.trl.ISaleTaxModifier;
 import dtv.xst.dao.trn.IPosTransaction;
@@ -162,6 +163,18 @@ public class AsqPlanetIssueFormAuthorizeOp extends AbstractFormOp<AsqPlanetVatCl
 				line.setCode(argSaleLine.getItem().getItemId());
 				line.setDescription(argSaleLine.getItemDescription());
 				line.setGrossAmount(argSaleLine.getGrossAmount());
+				List<IRetailPriceModifier> discountRates = argSaleLine.getRetailPriceModifiers();
+				BigDecimal discamount=BigDecimal.ZERO;
+				for (IRetailPriceModifier discountRate : discountRates) {
+					if(!discountRate.getVoid() && discountRate.getExtendedAmount()!=null) {
+					discamount=discamount.add(discountRate.getExtendedAmount());
+					}
+				
+				}
+				if(discamount.compareTo(BigDecimal.ZERO)>0) {
+				//line.setDiscountAmount(discamount);
+				line.setGrossAmount(argSaleLine.getGrossAmount().subtract(discamount));
+				}
 				 //line.setMerchandiseGroup(argSaleLine.getItem().getMerchLevel1Id());
 				line.setMerchandiseGroup(_sysConfig.getPlanetMerchantIdItem());
 				line.setNetAmount(argSaleLine.getNetAmount());

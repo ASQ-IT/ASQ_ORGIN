@@ -115,16 +115,29 @@
 		<row style="STRONGUNDERLINE" align="C" />
 		<sectionref>barcode_footer</sectionref>
 		<sectionref>asq_zatca_qrcode</sectionref>
+		<sectionref>asq_emp_commission</sectionref>
 		<row style="STRONGUNDERLINE" align="C" />
 	</section>
+	<!-- Asq Zatca rcpt changes start -->
 	<section name="asq_zatca_qrcode">
-		<barcode symbology="QR CODE" textposition="NONE" height="350" width="400" >
+		<barcode symbology="QR CODE" textposition="NONE" height="250" width="300">
 			<field align="C" formatter="PlainText">
 				<aggregate
 					class="asq.pos.register.sale.zatca.receipt.AsqZatcaTransQrCode" />
 			</field>
 		</barcode>
 	</section> 	
+	<!-- Asq Zatca rcpt changes ends -->
+	<!-- Asq employee commission changes start -->
+	<section name="asq_emp_commission">
+	  <row>
+        <field>
+          <aggregate class="asq.pos.store.close.receipt.AsqEmployeeCommissionDocBuilderField" />
+        </field>
+      </row>
+	</section> 	
+	<!-- Asq employee commission changes ends -->
+	
 	<!-- Planet integration changes	start -->
 	<section name="asq_planet_id">
 	<condition method="getStringProperty" method_param="ASQ_PLANET_TAX_ID" comparison="NOT_NULL" />

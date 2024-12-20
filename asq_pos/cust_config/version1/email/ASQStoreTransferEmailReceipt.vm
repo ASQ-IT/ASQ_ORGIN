@@ -1,0 +1,49 @@
+#set ($subject = "Store Transfer Approval OTP")
+Please find the Store Transfer details below
+<html>
+  <head>
+  <style>
+    th, td {
+      padding: 5px;
+    }
+    th {
+      font-weight: normal;
+      text-align: left;
+    }
+  </style>
+  </head>
+  <body>
+  <br>
+  <br>
+     #if($documentType)
+    Document Type: $documentType<br>
+  #end
+   #if($documentID)
+    Document ID: $documentID<br>
+  #end
+   #if($destStore)
+    Destination Store Transfer Details : $destStore<br>
+  #end
+  <br>
+   #if($otp)
+    <b> Please find the approval OTP for Store Transfer to : $otp </b><br>
+  #end
+  <br>
+  <u>Store Transfer Item Details</u>
+  <br>
+   <table>
+    <tr>
+      <th>Item</th>
+      <th>Description</th>
+      <th>Quantity</th>
+    </tr>
+  #foreach( $item in $orderItems )
+    <tr>
+      <td>$item.ItemId</td>
+      <td>$item.Description</td>
+      <td>$item.Quantity</td>
+    </tr>
+  #end
+  </table>
+  </body>
+</html>

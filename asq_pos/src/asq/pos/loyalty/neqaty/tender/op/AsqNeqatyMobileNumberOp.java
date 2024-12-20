@@ -71,15 +71,13 @@ public class AsqNeqatyMobileNumberOp extends AsqNeqatyAbstractMobileNumberOp
 			{
 				LOG.info("Neqaty API Mobile number form execution Customer is Linked to Transaction:");
 				List<IPartyTelephone> custMobileType = trans.getCustomerParty().getTelephoneInformation();
-				
-				
-				for(IPartyTelephone custMobile:custMobileType) {
-					if(custMobile.getTelephoneType().equalsIgnoreCase("MOBILE")) {
+
+				for (IPartyTelephone custMobile : custMobileType) {
+					if (custMobile.getTelephoneType().equalsIgnoreCase("MOBILE")) {
 						custMobileNumber = custMobile.getTelephoneNumber();
 						break;
 					}
 				}
-				//custMobileNumber = trans.getCustomerParty().getTelephoneInformation().get(0).getTelephoneNumber();
 				editModel.setCustMobileNumber(custMobileNumber);
 				setScopedValue(AsqValueKeys.ASQ_NEQATY_MOBILE, editModel.getCustMobileNumber());
 				return super.handleInitialState();
@@ -96,6 +94,13 @@ public class AsqNeqatyMobileNumberOp extends AsqNeqatyAbstractMobileNumberOp
 
 		try {
 			if (XstDataActionKey.ACCEPT.equals(argAction.getActionKey())) {
+
+				if (getOpState() == SHOWING_ERROR_PROMPT) {
+
+					setOpState(null);
+					return null;
+				}
+
 				IRetailTransaction trans = (IRetailTransaction) this._transactionScope.getTransaction();
 				AsqNeqatyMobileNumberEditModel editModel = this.getModel();
 				custMobileNumber = editModel.getCustMobileNumber();
@@ -104,6 +109,7 @@ public class AsqNeqatyMobileNumberOp extends AsqNeqatyAbstractMobileNumberOp
 					LOG.debug("Process of Neqaty tender starts here");
 					if (null != trans.getCustomerParty()) {
 						IParty info = trans.getCustomerParty();
+						// Mobile number field
 						info.setTelephone3(custMobileNumber);
 						LOG.debug(
 								"Neqaty API setting updated customer mobile number to transaction, this will be udpated once the transaciton is completed");
@@ -125,6 +131,7 @@ public class AsqNeqatyMobileNumberOp extends AsqNeqatyAbstractMobileNumberOp
 						.valueOf(((NeqatyWSAPIRedeemOption) argAction.getData()).getRedeemAmount());
 				if (trxSubTotal.compareTo(redemptionValueBigDec) < 0
 						|| trxAmountDueTotal.compareTo(redemptionValueBigDec) < 0) {
+					setOpState(SHOWING_ERROR_PROMPT);
 					return HELPER.getPromptResponse("ASQ_NEQATY_NO_POINTS");
 				}
 				setScopedValue(AsqValueKeys.ASQ_NEQATY_REDEEM_POINTS, (NeqatyWSAPIRedeemOption) argAction.getData());

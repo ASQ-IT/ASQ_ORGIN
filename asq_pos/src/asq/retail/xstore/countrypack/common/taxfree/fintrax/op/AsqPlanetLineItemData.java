@@ -22,7 +22,7 @@ public class AsqPlanetLineItemData extends PlanetLineItemData {
 	private boolean taxRefundEligible;
 	private Number vatAmount;
 	private String vatCode;
- 	 private String discountAmount;
+ 	 private Number discountAmount;
 
 	public String getCode() {
 		return code;
@@ -84,11 +84,11 @@ public class AsqPlanetLineItemData extends PlanetLineItemData {
 
 		 
 	  
-	     public String getDiscountAmount() {
+	     public Number getDiscountAmount() {
 			return discountAmount;
 		}
 
-		public void setDiscountAmount(String discountAmount) {
+		public void setDiscountAmount(Number discountAmount) {
 			this.discountAmount = discountAmount;
 		}
 

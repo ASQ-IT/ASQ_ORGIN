@@ -14,22 +14,17 @@ import asq.pos.loyalty.mokafaa.tender.service.AsqMokafaaLoyaltyServiceRequest;
 import asq.pos.loyalty.mokafaa.tender.service.AsqMokafaaLoyaltyServiceResponse;
 import asq.pos.loyalty.mokafaa.tender.service.IAsqMokafaaLoyaltyServiceRequest;
 import asq.pos.loyalty.mokafaa.tender.service.IAsqMokafaaLoyaltyTenderService;
-import asq.pos.zatca.AsqZatcaConstant;
 import dtv.i18n.IFormattable;
-import dtv.pos.common.OpChainKey;
 import dtv.pos.framework.action.type.XstDataActionKey;
 import dtv.pos.framework.op.AbstractFormOp;
 import dtv.pos.framework.op.OpState;
-import dtv.pos.framework.validation.ValidationResultList;
 import dtv.pos.iframework.action.IXstDataAction;
 import dtv.pos.iframework.op.IOpResponse;
 import dtv.pos.iframework.op.IOpState;
-import dtv.pos.iframework.validation.IValidationResult;
 import dtv.pos.iframework.validation.IValidationResultList;
-import dtv.pos.iframework.validation.SimpleValidationResult;
-import dtv.util.StringUtils;
 import dtv.xst.dao.trl.IRetailTransaction;
 import dtv.xst.dao.trn.IPosTransaction;
+import asq.pos.zatca.AsqZatcaConstant;
 
 public class AsqMokafaaOTPOp extends AbstractFormOp<AsqMokafaaTenderOTPEditModel> {
 
@@ -188,10 +183,9 @@ public class AsqMokafaaOTPOp extends AbstractFormOp<AsqMokafaaTenderOTPEditModel
 	}
 	
 	private void saveMokafaResponseToDB(IRetailTransaction trans, long value) {
-			trans.setDecimalProperty(AsqZatcaConstant.ASQ_MOKAFA_TRX_ID,
-				new BigDecimal(value));
-		
+		trans.setDecimalProperty(AsqZatcaConstant.ASQ_MOKAFA_TRX_ID, new BigDecimal(value));
 	}
+	
 
 	private IOpResponse unauthorizedError(AsqMokafaaLoyaltyServiceResponse response) {
 		IFormattable[] args = new IFormattable[2];

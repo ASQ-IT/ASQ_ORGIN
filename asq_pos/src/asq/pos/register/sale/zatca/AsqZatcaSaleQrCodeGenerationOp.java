@@ -27,6 +27,7 @@ import asq.pos.zatca.invoice.models.AdditionalDocumentReference;
 import asq.pos.zatca.invoice.models.HashQRData;
 import asq.pos.zatca.invoice.models.ItemAllowanceCharges;
 import asq.pos.zatca.invoice.models.SignatureData;
+import dtv.i18n.FormattableFactory;
 import dtv.pos.common.TransactionType;
 import dtv.pos.framework.op.Operation;
 import dtv.pos.iframework.event.IXstEvent;
@@ -78,6 +79,9 @@ public class AsqZatcaSaleQrCodeGenerationOp extends Operation {
 
 	@Inject
 	TenderHelper tenderHelper;
+
+	@Inject
+	FormattableFactory formattableFactory;
 
 	@Override
 	public IOpResponse handleOpExec(IXstEvent paramIXstEvent) {

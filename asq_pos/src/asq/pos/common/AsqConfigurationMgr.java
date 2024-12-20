@@ -97,4 +97,9 @@ public class AsqConfigurationMgr extends ConfigurationMgr {
 		// TODO Auto-generated method stub
 		return _settingsFactory.getString(new String[] {"ASQ---PlanetTaxFree---MerchantIdItem"});
 	}
+
+	public String getstoreTransferApprovalEmailOTP() {
+		// TODO Auto-generated method stub
+		return _settingsFactory.getString(new String[] { "ASQ---StoreTransferApprovalEmailOTP---To"  });
+	}
 }

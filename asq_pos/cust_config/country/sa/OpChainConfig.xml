@@ -65,10 +65,6 @@
 		<Op class="asq.pos.loyalty.neqaty.tender.op.AsqNeqatyOTPOp"
 			longRunning="true" />
 	</OpChain>
-	<OpChain name="ASQ_NEQATY_REDEEM_OPTION">
-		<Op class="asq.pos.loyalty.neqaty.tender.op.AsqNeqatyRedeemOp"
-			longRunning="true" />
-	</OpChain>
 	<OpChain name="ASQ_TENDER_LOY_NEQATY"
 		signal="TransactionModified"
 		contextKey="SALE_TENDER_EMPTY_MENU_OPTION">
@@ -81,8 +77,6 @@
 		<Op
 			class="dtv.pos.tender.rounding.UpdateTransactionRoundedAmountOp" />
 		<!--ASQ Neqaty Integration Earn points - Starts -->
-		<Op
-			class="asq.pos.loyalty.neqaty.tender.op.AsqNeqatyEarnPointsOp" />
 		<OpChainRoute chainKey="CHECK_SALE_COMPLETE"
 			chainType="START" />
 	</OpChain>
@@ -180,10 +174,6 @@
 	</OpChain>
 
 	<!--ASQ BNPL TAMARA Service Starts -->
-	<OpChain name="ASQ_TAMARA_MOBILE">
-		<Op class="asq.pos.bnpl.tamara.tender.op.AsqBnplTamaraTenderOp"/>
-	</OpChain>
-<!--ASQ BNPL TAMARA Service Starts-->
 	<OpChain name="ASQ_TAMARA_MOBILE" >
 		<Op class="asq.pos.bnpl.tamara.tender.op.AsqBnplTamaraTenderOp" longRunning="true">
 		<Parameter name="LongRunningMessage" value= "_asqPaymentInitiateMessage" />
@@ -200,12 +190,12 @@
 		</Op>
 	</OpChain>
 	
-	<OpChain name="ASQ_TENDER_TAMARA" signal="TransactionModified" contextKey="SALE_TENDER_EMPTY_MENU_OPTION" rollbackLevel="10">
+	<OpChain name="ASQ_TENDER_TAMARA" signal="TransactionModified" contextKey="SALE_TENDER_EMPTY_MENU_OPTION">
 		<Op class="dtv.pos.tender.CreateTenderLineItemOp">
 			<Parameter name="TenderStatus" value="Tender" />
 			<Parameter name="TenderId" value="TAMARA" />
 		</Op>
-		<PromptOp class="dtv.pos.tender.PromptCustAsscRequiredForTenderOp" />
+	 	<OpChainRoute chainKey="ASQ_TAMARA_MOBILE"/>
 		<Op class="asq.pos.loyalty.AsqAddLoyaltyTenderOp" />
 		<Op class="dtv.pos.tender.rounding.UpdateTransactionRoundedAmountOp" />
 		<OpChainRoute chainKey="CHECK_SALE_COMPLETE" chainType="START" />
@@ -230,9 +220,6 @@
 		</Op>
 		<Op class="asq.pos.loyalty.mokafaa.tender.op.AsqMokafaaRefundOp">
 			<Parameter name="TenderType" value="MOKAFAT" />
-		</Op>
-		<Op class="asq.pos.loyalty.neqaty.tender.op.AsqNeqatyEarnRefundOp">
-			<Parameter name="TenderType" value="NEQATI" />
 		</Op>
 		<OpChainRoute chainKey="GUEST_LOOKUP" />
 		<OpChainRoute chainKey="VOID_ROOM_CHARGE" />
@@ -282,7 +269,7 @@
 			<Parameter name="TenderStatus" value="Tender" />
 			<Parameter name="TenderId" value="TABBY" />
 		</Op>
-		<PromptOp class="dtv.pos.tender.PromptCustAsscRequiredForTenderOp" />
+		<OpChainRoute chainKey="ASQ_TABBY_MOBILE"/>
 		<Op class="asq.pos.loyalty.AsqAddLoyaltyTenderOp" />
 		<Op class="dtv.pos.tender.rounding.UpdateTransactionRoundedAmountOp" />
 		<OpChainRoute chainKey="CHECK_SALE_COMPLETE" chainType="START" />
@@ -458,7 +445,7 @@
     <OpChainRoute chainKey="VALIDATE_EXT_TAX_INTEGRATION" />
     <OpChainRoute chainKey="SALE_COMPLETE_BEFORE_FINISH.ERECEIPT" />
     <OpChainRoute chainKey="SALE_COMPLETE_BEFORE_FINISH.local" />
-    <OpChainRoute chainKey="SALE_COMPLETE_ISSUE_DOCUMENT" />
+    <!-- <OpChainRoute chainKey="SALE_COMPLETE_ISSUE_DOCUMENT" /> -->
     <OpChainRoute chainKey="SALE_COMPLETE_FINISH1" chainType="START" />
   </OpChain>
   
@@ -516,10 +503,10 @@
     <Op class="dtv.pos.hardware.op.BuildTenderFrankingsOp" />
     <Op class="dtv.pos.hardware.op.FrankTendersOp" />
     <OpChainRoute chainKey="COUNTRYPACK.EINVOICE.PREPARE_EMAIL_INVOICE" />
-    <OpChainRoute chainKey="SALE_COMPLETE_FINISH.EMAIL_RECEIPTS" />
+    <OpChainRoute chainKey="SALE_COMPLETE_FINISH.EMAIL_RECEIPTS_ASQINVOICE" />
     <OpChainRoute chainKey="SALE_COMPLETE_FINISH.selfcheckout" />
-    <Op class="dtv.pos.hardware.op.PrintRcptsOp" breakpoint="true" />
-    <OpChainRoute chainKey="PRINT_DOCUMENTS" />
+   <!--  <Op class="dtv.pos.hardware.op.PrintRcptsOp" breakpoint="true" /> -->
+   <!--  <OpChainRoute chainKey="PRINT_DOCUMENTS" /> -->
     <OpChainRoute chainKey="PRINT_WARRANTIES" />
     <WorkerOp workersBean="saveRcptsWorkers" />
     <Op class="dtv.pos.hardware.op.WaitForRcptPrintOp" required="false" />
@@ -554,15 +541,98 @@
   <!--   <PromptOp class="dtv.pos.register.returns.PromptCreditVoucherOp" />    --> 
   </OpChain>
     
-  <OpChain name="EMAIL_RECEIPTS1" contextKey="EMAIL_RECEIPT_MENU">
+ <OpChain name="EMAIL_RECEIPTS1" contextKey="EMAIL_RECEIPT_MENU">
+    <OpChainRoute chainKey="COUNTRYPACK.CREATE_INVOICE.PRINT_INVOICE_EMAIL_PRICE_QUOTATION" />
     <Op class="oracle.retail.xstore.countrypack.common.op.EmailAddressWithDeliveryMethodsPromptOp" />
     <Op class="dtv.pos.customer.email.PromptUpdateCustAcctWithEmailOp" />
     <OpChainRoute chainKey="SALE_COMPLETE1" />
   </OpChain>
-   <OpChain name="PRINT_EMAIL_RECEIPTS1" contextKey="EMAIL_RECEIPT_MENU">
+   <OpChain name="ASQ_PRICEQT_PRINT_EMAIL_RECEIPTS" contextKey="EMAIL_RECEIPT_MENU">
+    <OpChainRoute chainKey="COUNTRYPACK.CREATE_INVOICE.PRINT_INVOICE_EMAIL_PRICE_QUOTATION" />
     <Op class="dtv.pos.customer.email.EmailAddressPromptOp" />
-    <Op class="dtv.pos.customer.email.PromptUpdateCustAcctWithEmailOp" />
+    <Op class="dtv.pos.customer.email.PromptUpdateCustAcctWithEmailOp" /> 
     <OpChainRoute chainKey="SALE_COMPLETE1" />
+    </OpChain>
+    
+     <OpChain name="COUNTRYPACK.CREATE_INVOICE.PRINT_INVOICE">
+    <WorkerOp workersBean="invoiceStoreOpenSequenceResetWorker" />
+    <WorkerOp workersBean="invoiceWorkstationOpenSequenceWorker" />
+    <OpChainRoute chainKey="COUNTRYPACK.TAXFREE_UPDATE_CONFIG_IMPL" />
+     <ValidationOp validationsBean="countryPack.validateInvoiceItems" />
+    <Op class="oracle.retail.xstore.countrypack.common.invoice.op.ClearInvoiceCustomerOp" />
+    <PromptOp class="oracle.retail.xstore.countrypack.common.invoice.op.InvoiceCheckMixedSaleReturnItemsTransOp" />
+    <ValidationOp validationsBean="countryPack.validateReturnsOnInvoiceRequest" />
+    <Op class="oracle.retail.xstore.countrypack.common.invoice.op.InvoiceSetCreditNoteCustomerOp" />
+     <Op class="oracle.retail.xstore.countrypack.common.invoice.op.InvoiceEnsureCustomerAssignedOp">
+      <Parameter name="CHAIN_KEY" value="COUNTRYPACK.INVOICE_CUST_ASSOCIATION" />
+    </Op> 
+    <Op class="oracle.retail.xstore.countrypack.common.invoice.op.InvoiceCustomerSummaryOp" breakpoint="true" >
+      <Parameter name="CHAIN_KEY" value="COUNTRYPACK.INVOICE_CUST_ASSOCIATION" />
+    </Op>
+    <Op class="oracle.retail.xstore.countrypack.common.invoice.op.InvoiceIssueSetValueOp" >
+      <Parameter name="Value" value="true" />
+    </Op>
+   <Op class="oracle.retail.xstore.countrypack.common.invoice.op.CreateInvoiceBeanOp" longRunning="true" />
+    <Op class="dtv.pos.reporting.LoadReportOp">
+      <Parameter name="reportName" value="COUNTRYPACK.INVOICE" />
+    </Op>
+    <Op class="oracle.retail.xstore.countrypack.common.invoice.op.SetInvoiceBeanAsReportDataSourceOp" />
+    <OpChainRoute chainKey="COUNTRYPACK.CREATE_INVOICE.PRINT_INVOICE.local" />
+    <Op class="oracle.retail.xstore.countrypack.common.invoice.op.InvoiceFillReportNoUiOp" />
+    <OpChainRoute chainKey="COUNTRYPACK.SELECT_PRINTER" condition="oracle.retail.xstore.countrypack.common.invoice.einvoice.condition.InvoicePrintRunCondition" />
+    <OpChainRoute chainKey="COUNTRYPACK.INVOICE_PRINT_IMPL" condition="oracle.retail.xstore.countrypack.common.invoice.einvoice.condition.InvoicePrintRunCondition" />
+     <Op class="asq.retail.xstore.countrypack.common.invoice.op.AsqCreateInvoiceOp" /> 
+    <OpChainRoute chainKey="SALE_COMPLETE1" /> 
+  </OpChain>
+  
+    <OpChain name="COUNTRYPACK.INVOICE_CUST_ASSOCIATION">
+    <Op class="oracle.retail.xstore.countrypack.common.invoice.op.InvoiceCustomerSearchOp" required="true" breakpoint="true">
+      <Parameter name="RESULTS_PROMPT" value="CUSTOMER_LIST_REGISTER" />
+      <Parameter name="PrimaryOnly" value="true" />
+      <Parameter name="AddCustomerChain" value="ADD_NEW_CUST_ASSOC" />
+      <Parameter name="EditCustomerChain" value="CUST_ASSOCIATION_EDIT" />
+    </Op>
+    <OpChainRoute chainKey="COUNTRYPACK.INVOICE_CUST_ASSOCIATION.pre" />
+    <Op class="oracle.retail.xstore.countrypack.common.invoice.op.InvoiceCheckTransTaxExemptionPromptOp" />
+    <Op class="oracle.retail.xstore.countrypack.common.invoice.op.InvoiceSetCustomerOp" />
+    <OpChainRoute chainKey="COUNTRYPACK.INVOICE_CUST_ASSOCIATION.post" />
+  </OpChain>
+    <OpChain name="COUNTRYPACK.CREATE_INVOICE.PRINT_INVOICE_EMAIL_PRICE_QUOTATION">
+    <WorkerOp workersBean="invoiceStoreOpenSequenceResetWorker" />
+    <WorkerOp workersBean="invoiceWorkstationOpenSequenceWorker" />
+    <OpChainRoute chainKey="COUNTRYPACK.TAXFREE_UPDATE_CONFIG_IMPL" />
+     <ValidationOp validationsBean="countryPack.validateInvoiceItems" />
+    <Op class="oracle.retail.xstore.countrypack.common.invoice.op.ClearInvoiceCustomerOp" />
+    <PromptOp class="oracle.retail.xstore.countrypack.common.invoice.op.InvoiceCheckMixedSaleReturnItemsTransOp" />
+    <ValidationOp validationsBean="countryPack.validateReturnsOnInvoiceRequest" />
+    <Op class="oracle.retail.xstore.countrypack.common.invoice.op.InvoiceSetCreditNoteCustomerOp" />
+     <Op class="oracle.retail.xstore.countrypack.common.invoice.op.InvoiceEnsureCustomerAssignedOp">
+      <Parameter name="CHAIN_KEY" value="COUNTRYPACK.INVOICE_CUST_ASSOCIATION" />
+    </Op> 
+    <Op class="oracle.retail.xstore.countrypack.common.invoice.op.InvoiceCustomerSummaryOp" breakpoint="true" >
+      <Parameter name="CHAIN_KEY" value="COUNTRYPACK.INVOICE_CUST_ASSOCIATION" />
+    </Op>
+    <Op class="oracle.retail.xstore.countrypack.common.invoice.op.InvoiceIssueSetValueOp" >
+      <Parameter name="Value" value="true" />
+    </Op>
+   <Op class="oracle.retail.xstore.countrypack.common.invoice.op.CreateInvoiceBeanOp" longRunning="true" />
+    <Op class="dtv.pos.reporting.LoadReportOp">
+      <Parameter name="reportName" value="COUNTRYPACK.INVOICE" />
+    </Op>
+    <Op class="oracle.retail.xstore.countrypack.common.invoice.op.SetInvoiceBeanAsReportDataSourceOp" />
+    <OpChainRoute chainKey="COUNTRYPACK.CREATE_INVOICE.PRINT_INVOICE.local" />
+    <Op class="oracle.retail.xstore.countrypack.common.invoice.op.InvoiceFillReportNoUiOp" />
+    <Op class="asq.retail.xstore.countrypack.common.invoice.op.AsqCreateInvoiceOp" /> 
+  </OpChain>  
+   <OpChain name="COUNTRYPACK.EINVOICE.PREPARE_EMAIL_INVOICE">
+    <Op class="asq.retail.xstore.countrypack.common.invoice.einvoice.op.AsqEinvoiceEmailPrepareOp" >
+      <Parameter name="emailableReportId" value="INVOICE" />
+      <Parameter name="emailableReportId" value="CREDIT_NOTE" />
+      <Parameter name="emailableReportId" value="EINVOICE_PDF_RESPONSE" />
+    </Op>
+  </OpChain>
+   <OpChain name="SALE_COMPLETE_FINISH.EMAIL_RECEIPTS_ASQINVOICE" >
+      <WorkerOp workersBean="asqInvoiceemailRcptsWorkers" />
   </OpChain>
   <!-- PRICE Quotation end-->
   
@@ -592,5 +662,47 @@
     <Op class="dtv.pos.inventory.ship.label.PromptTrackingNumberOp" />
   </OpChain>
   <!-- ASQ Disable Label Printing - End -->
+  <OpChain name="SAVE_EXIT_SHIPPING" signal="InventoryOperationsComplete,TransactionComplete">
+    <PromptOp class="dtv.pos.inventory.ship.op.PromptForShipNowOp" />
+    <OpChainRoute chainKey="ASQ_SHIP_TRANSFER_OTP" condition="asq.pos.inventory.ship.op.AsqShipTransferAllowedCheck"/>
+    <PromptOp class="dtv.pos.inventory.ship.op.PromptForCloseShippingDocumentOp" />
+    <OpChainRoute chainKey="SHIPPING_PROCESS_SHIPMENT" condition="dtv.pos.inventory.ship.op.HaveItemsShipped" />
+    <WorkerOp workersBean="saveShippingWorkers" />
+    <OpChainRoute chainKey="PRINT_PACKING_SLIP" condition="dtv.pos.inventory.ship.op.HaveItemsShipped" />
+    <OpChainRoute chainKey="SHIPPING" chainType="START" />
+  </OpChain>
+	
+   <OpChain name="ASQ_SHIP_TRANSFER_OTP">
+		<Op class="asq.pos.inventory.ship.op.AsqStoreTransferEmailFormOp" longRunning="true"/>
+		<Op class="asq.pos.inventory.ship.op.AsqStoreTransferOTPFormOp"/>
+   </OpChain>
+	
+<!-- Customer Validation Before tender -->	
+  <OpChain name="PRE_TENDERING.3" >
+    <Op class="asq.pos.tender.customer.check.AsqCustomerCheckOp" />
+  </OpChain>
+  
+  <!--Earn Points to Neqaty for all tenders  -->
+   <OpChain name="SALE_COMPLETE_START">
+   	<Op class="asq.pos.loyalty.neqaty.tender.op.AsqNeqatyEarnPointsOp" />
+    <OpChainRoute chainKey="CHECK_FOR_REFUND" />
+    <OpChainRoute chainKey="CHECK_FOR_CHANGE" />
+    <OpChainRoute chainKey="SALE_COMPLETE_POST_TENDER" />
+    <OpChainRoute chainKey="BEFORE_COMPLETE_SALE" />
+  </OpChain>
+  
+  <OpChain name="PRE_RETURN_VERIFICATION">
+   <Op class="asq.pos.register.returns.verification.AsqOriginalReturnOp" />
+    <OpChainRoute chainKey="PRE_RETURN_VERIFICATION.local.pre" />
+    <OpChainRoute chainKey="PRE_RETURN_VERIFICATION.local.invoice" />
+    <OpChainRoute chainKey="DISPLAY_RETURN_INFO_TAB_MESSAGE" />
+    <OpChainRoute chainKey="VALIDATE_RETURN_INFO" />
+    <PromptOp class="dtv.pos.register.returns.CheckTransactionMissingDataOp" />
+    <PromptOp class="dtv.pos.register.returns.PromptReturnSecurityOp" />
+    <OpChainRoute chainKey="RETURN_PRORATION_VERIFIED" />
+    <Op class="dtv.pos.register.returns.verification.DisplayReturnOriginalTransOp" />
+    <OpChainRoute chainKey="VERIFIED_RETURN_START.local.invoice" />
+    <OpChainRoute chainKey="VERIFIED_RETURN" chainType="START" />
+  </OpChain>
 </OpChainSet>
 

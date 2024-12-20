@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xmlns:mvc="http://www.springframework.org/schema/mvc" xmlns:context="http://www.springframework.org/schema/context"
+  xmlns:util="http://www.springframework.org/schema/util"
+  xmlns:task="http://www.springframework.org/schema/task"
+  xsi:schemaLocation="
+        http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc.xsd
+        http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd
+        http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util.xsd
+        http://www.springframework.org/schema/task http://www.springframework.org/schema/task/spring-task.xsd"
+  default-init-method="init">
+
+  <!-- Spring beans that are singletons or framework beans can be defined in this file. Any realm-specific beans 
+    (validations, services, workers, etc) should be defined in their relevant Spring file that should be in the same 
+    directory as this file. -->
+
+<!-- ASQ Customer search screen Phone number to map with customer maintenance screen Mobile number - Starts -->
+  <context:annotation-config />
+  <beans profile="xstore">
+	<bean id="customerHelper" class="asq.pos.customer.AsqCustomerHelper">
+		<property name="DefaultCustomerGroup" value="DEFAULT" />
+		<property name="EmployeeCustomerGroup" value="EMPLOYEE" />
+	</bean>
+	<bean id="asqCommissionCal" class="asq.pos.employee.commission.AsqEmployeeCommissionCalculator"/>
+	
+</beans>
+<!-- ASQ Customer search screen Phone number to map with customer maintenance screen Mobile number - Ends -->
+</beans>

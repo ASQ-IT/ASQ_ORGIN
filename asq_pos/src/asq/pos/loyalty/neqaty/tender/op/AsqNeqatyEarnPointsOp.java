@@ -10,19 +10,25 @@ import org.apache.logging.log4j.Logger;
 
 import asq.pos.common.AsqConfigurationMgr;
 import asq.pos.common.AsqValueKeys;
-import asq.pos.loyalty.neqaty.gen.NeqatyWSAPIRedeemOption;
+
+import dtv.xst.dao.ttr.ITenderLineItem;
 import asq.pos.loyalty.neqaty.tender.service.AsqNeqatyHelper;
 import asq.pos.loyalty.neqaty.tender.service.AsqNeqatyServiceRequest;
 import asq.pos.loyalty.neqaty.tender.service.AsqNeqatyServiceResponse;
 import asq.pos.loyalty.neqaty.tender.service.IAsqNeqatyService;
 import asq.pos.loyalty.neqaty.tender.service.IAsqNeqatyServiceRequest;
 import asq.pos.loyalty.neqaty.tender.service.NeqatyMethod;
+import asq.pos.zatca.AsqZatcaConstant;
 import dtv.i18n.IFormattable;
 import dtv.pos.common.TransactionType;
+import dtv.pos.common.ValueKeys;
 import dtv.pos.framework.op.Operation;
+import dtv.pos.framework.scope.ValueKey;
 import dtv.pos.iframework.event.IXstEvent;
 import dtv.pos.iframework.op.IOpResponse;
 import dtv.xst.dao.trl.IRetailTransaction;
+import dtv.xst.dao.trl.IRetailTransactionLineItem;
+import dtv.xst.dao.trn.IPosTransaction;
 
 public class AsqNeqatyEarnPointsOp extends Operation {
 
@@ -49,7 +55,6 @@ public class AsqNeqatyEarnPointsOp extends Operation {
 	 * @return
 	 */
 
-	@SuppressWarnings("unused")
 	@Override
 	public IOpResponse handleOpExec(IXstEvent paramIXstEvent) {
 
@@ -58,26 +63,58 @@ public class AsqNeqatyEarnPointsOp extends Operation {
 		String custMobileNmbr = "";
 		boolean isCustomerRequired = AsqConfigurationMgr.getSTCCustomerAvailable();
 		LOG.info("Neqaty Earn API customer availability parameter : " + isCustomerRequired);
-		int pointsForCalculation = AsqConfigurationMgr.getSTCPointsCalculation();
-		LOG.info("Neqaty Earn API Point calculation value parameter : " + pointsForCalculation);
-		BigDecimal valueForCalculation = new BigDecimal(pointsForCalculation);
-		
-		if (null != txn && (txn.getCustomerParty() != null)) {
-			isCustomerPresent = true;//Check transaction customer
-		}
-		NeqatyWSAPIRedeemOption reedem = getScopedValue(AsqValueKeys.ASQ_NEQATY_REDEEM_POINTS);
-		BigDecimal neqatyTotal = BigDecimal.ZERO;
-		if(reedem !=null ) {
-			neqatyTotal =BigDecimal.valueOf(reedem.getRedeemAmount());
-		}
-		if (isCustomerPresent && isCustomerRequired && !isReturnTransaction(txn) && neqatyTotal.compareTo(valueForCalculation) > 0) {
-				Byte calcltdNeqatyPntsForEarnAPI = (txn.getSubtotal().divide(valueForCalculation)).byteValue();
-				LOG.info("Neqaty Points calculated Earn Service API call Starts here : " + calcltdNeqatyPntsForEarnAPI);
-				if ( _transactionScope.getValue(AsqValueKeys.ASQ_NEQATY_MOBILE)!=null) {
-					custMobileNmbr =  _transactionScope.getValue(AsqValueKeys.ASQ_NEQATY_MOBILE);
+		/*
+		 * int pointsForCalculation = AsqConfigurationMgr.getSTCPointsCalculation();
+		 * LOG.info("Neqaty Earn API Point calculation value parameter : " +
+		 * pointsForCalculation); BigDecimal valueForCalculation = new
+		 * BigDecimal(pointsForCalculation);
+		 */
+		BigDecimal earnAmount = BigDecimal.ZERO;
+		if (txn.getAmountTendered() != null && txn.getAmountTendered().compareTo(BigDecimal.ZERO) > 0) {
+			earnAmount = txn.getSubtotal();
+			for (IRetailTransactionLineItem tenderLineItem : txn.getTenderLineItems()) {
+				if (((ITenderLineItem) tenderLineItem).getTenderId().equalsIgnoreCase("NEQATI")
+						&& !((ITenderLineItem) tenderLineItem).getVoid()) {
+					earnAmount = txn.getSubtotal().subtract(((ITenderLineItem) tenderLineItem).getAmount());
 				}
-				return earnPoints(custMobileNmbr, calcltdNeqatyPntsForEarnAPI.doubleValue());
 			}
+		}
+		if (txn.getCustomerParty() != null) {
+			custMobileNmbr = txn.getCustomerParty().getTelephone3();
+			isCustomerPresent = true;// Check transaction customer
+		}
+
+		if (isCustomerPresent && isCustomerRequired && !isReturnTransaction(txn)
+				&& earnAmount.compareTo(BigDecimal.ZERO) > 0) {
+
+			LOG.info("Neqaty Points calculated Earn Service API call Starts here : ");
+			if (_transactionScope.getValue(AsqValueKeys.ASQ_NEQATY_MOBILE) != null) {
+				custMobileNmbr = _transactionScope.getValue(AsqValueKeys.ASQ_NEQATY_MOBILE);
+			}
+			return earnPoints(custMobileNmbr, earnAmount.doubleValue(), txn);
+		}
+
+		else if (isCustomerPresent && isCustomerRequired && isReturnTransaction(txn)
+				&& earnAmount.compareTo(BigDecimal.ZERO) <= 0) {
+			IRetailTransaction rtrans = _transactionScope.getValue(ValueKeys.CURRENT_ORIGINAL_TRANSACTION);
+			if (rtrans != null && rtrans.getStringProperty(AsqZatcaConstant.ASQ_NEQATY_EARN_TRN) != null) {
+				for (IRetailTransactionLineItem tenderLineItem : rtrans.getTenderLineItems()) {
+					if (((ITenderLineItem) tenderLineItem).getTenderId().equalsIgnoreCase("NEQATI")
+							&& !((ITenderLineItem) tenderLineItem).getVoid()) {
+						earnAmount = rtrans.getSubtotal().subtract(((ITenderLineItem) tenderLineItem).getAmount());
+					}
+				}
+				if (txn.getSubtotal().abs().compareTo(earnAmount) > 0) {
+					LOG.info("Neqaty Points calculated Earn Service API call Starts here : ");
+					return refundEarnPoints(custMobileNmbr, rtrans.getStringProperty(AsqZatcaConstant.ASQ_NEQATY_EARN_TRN), earnAmount.abs().doubleValue());
+				} else {
+					LOG.info("Neqaty Points calculated Earn Service API call Starts here : ");
+					return refundEarnPoints(custMobileNmbr, rtrans.getStringProperty(AsqZatcaConstant.ASQ_NEQATY_EARN_TRN), txn.getSubtotal().abs().doubleValue());
+				}
+
+			}
+
+		}
 
 		return this.HELPER.completeResponse();
 	}
@@ -91,20 +128,20 @@ public class AsqNeqatyEarnPointsOp extends Operation {
 	 */
 	public boolean isReturnTransaction(IRetailTransaction trn) {
 
-		if (null != trn && BigDecimal.ZERO.compareTo(trn.getTotal()) > 0) {
-			return true;
-		}
-		return false;
+		return null != trn && BigDecimal.ZERO.compareTo(trn.getTotal()) > 0;
+
 	}
 
 	/**
 	 * Method handles all service errors returned from Earn API
 	 * 
+	 * @param txn
+	 * 
 	 * @param asqServiceResponse
 	 * @return ErrorPrompt
 	 */
 
-	private IOpResponse earnPoints(String custMobileNmbr, double amount) {
+	private IOpResponse earnPoints(String custMobileNmbr, double amount, IRetailTransaction txn) {
 		IAsqNeqatyServiceRequest request = new AsqNeqatyServiceRequest();
 		request.setAuthenticationKey(System.getProperty("asq.neqaty.auth.key"));
 		request.setTid(0);
@@ -118,7 +155,36 @@ public class AsqNeqatyEarnPointsOp extends Operation {
 				.callNeqatyService(request);
 		if (null != response && 0 == response.getResultCode()) {
 			String transactionReference = response.getTransactionReference();
-			_transactionScope.setValue(AsqValueKeys.ASQ_NEQATY_TRANS_REFERENCE_EARN, transactionReference);
+			txn.setStringProperty(AsqZatcaConstant.ASQ_NEQATY_EARN_TRN, transactionReference);
+			response = confirmEarnPointsTransaction(request, transactionReference);
+		}
+		return validateResponse(response);
+	}
+
+	/**
+	 * Method handles all service errors returned from Earn API
+	 * 
+	 * @param transEarnReference
+	 * 
+	 * @param asqServiceResponse
+	 * @return ErrorPrompt
+	 */
+
+	private IOpResponse refundEarnPoints(String custMobileNmbr, String transEarnReference, double amount) {
+		IAsqNeqatyServiceRequest request = new AsqNeqatyServiceRequest();
+		request.setAuthenticationKey(System.getProperty("asq.neqaty.auth.key"));
+		request.setTid(0);
+		request.setAmount(amount);
+		request.setMethod(NeqatyMethod.AUTHORIZE);
+		request.setOperationType("EarnRefund");
+
+		request.setMsisdn(custMobileNmbr);
+		request.setTransactionReference(transEarnReference);// transactionreference from the earn auth call response
+		AsqNeqatyServiceResponse response = (AsqNeqatyServiceResponse) asqNeqatyService.get()
+				.callNeqatyService(request);
+		if (null != response && 0 == response.getResultCode()) {
+			String transactionReference = response.getTransactionReference();
+			// setScopedValue(AsqValueKeys.ASQ_NEQATY_TRANS_REFERENCE,transactionReference);
 			response = confirmEarnPointsTransaction(request, transactionReference);
 		}
 		return validateResponse(response);
@@ -128,36 +194,41 @@ public class AsqNeqatyEarnPointsOp extends Operation {
 			String transactionReference) {
 		request.setTransactionReference(transactionReference);
 		request.setMethod(NeqatyMethod.CONFIRM);
-
-		request.setAmount(0);
 		request.setOperationType(null);
+		// request.setAmount(0);
 		return (AsqNeqatyServiceResponse) asqNeqatyService.get().callNeqatyService(request);
 	}
 
 	private IOpResponse validateResponse(AsqNeqatyServiceResponse response) {
-		if (null != response && 0 != response.getResultCode()) {
-			return handleServiceError(response);
-		} else if (null == response) {
+		/*
+		 * if (null != response && 0 != response.getResultCode()) { return
+		 * handleServiceError(response); }
+		 */
+		if (null == response) {
 			return technicalErrorScreen("Service has null response");
 		}
 		return HELPER.completeResponse();
 	}
 
-	public IOpResponse handleServiceError(AsqNeqatyServiceResponse asqServiceResponse) {
-		IFormattable[] args = new IFormattable[2];
-		args[0] = _formattables.getSimpleFormattable(String.valueOf(asqServiceResponse.getResultCode()));
-		args[1] = _formattables.getSimpleFormattable(asqServiceResponse.getResultDescription());
-		String errorConstant = asqNeqatyHelper.mapError(asqServiceResponse.getResultCode());
-		LOG.info("Error From Neqaty Inquire OTP Operation : " + asqServiceResponse.getResultCode() + " - "
-				+ asqServiceResponse.getResultDescription());
-		LOG.info("Error Message Generated By Xstore based on Neqaty Inquire OTP Operation Response: " + errorConstant);
-		return HELPER.getPromptResponse(errorConstant, args);
-	}
+	/*
+	 * public IOpResponse handleServiceError(AsqNeqatyServiceResponse
+	 * asqServiceResponse) { IFormattable[] args = new IFormattable[2]; args[0] =
+	 * _formattables.getSimpleFormattable(String.valueOf(asqServiceResponse.
+	 * getResultCode())); args[1] =
+	 * _formattables.getSimpleFormattable(asqServiceResponse.getResultDescription())
+	 * ; String errorConstant =
+	 * asqNeqatyHelper.mapError(asqServiceResponse.getResultCode());
+	 * LOG.info("Error From Neqaty Inquire OTP Operation : " +
+	 * asqServiceResponse.getResultCode() + " - " +
+	 * asqServiceResponse.getResultDescription()); LOG.
+	 * info("Error Message Generated By Xstore based on Neqaty Inquire OTP Operation Response: "
+	 * + errorConstant); return HELPER.getPromptResponse(errorConstant, args); }
+	 */
 
 	private IOpResponse technicalErrorScreen(String message) {
 		IFormattable[] args = new IFormattable[2];
 		args[1] = _formattables.getSimpleFormattable(message);
-		LOG.info("Neqaty Inquire OTP Operation::::: " + message);
-		return HELPER.getPromptResponse("ASQ_NEQATY_TECHNICAL_ERROR", args);
+		LOG.info("Neqaty Earn Operation::::: " + message);
+		return HELPER.getPromptResponse("ASQ_NEQATY_EARN_ERROR", args);
 	}
 }

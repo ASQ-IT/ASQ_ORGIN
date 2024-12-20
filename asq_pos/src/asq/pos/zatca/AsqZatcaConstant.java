@@ -68,6 +68,7 @@ public interface AsqZatcaConstant {
 
 	String ZATCA_TAXCATEGORY_ID_VAL = "S";
 	String ZATCA_TAXSCHEME_ID_VAL = "VAT";
+	String ZATCA_CRN_ID_VAL = "CRN";
 
 	// These value will remain constant
 	String companyLegalName = System.getProperty("asq.zatca.company.legalenity.name");
@@ -99,9 +100,9 @@ public interface AsqZatcaConstant {
 	String ASQ_FALSE = "false";
 	String ASQ_DISCOUNT = "Discount";
 	String ASQ_PLANET_TAX_ID = "PLANET_TAX_ID";
-
 	String ASQ_ZATCA_RAIN_CHECK = "RAIN_CHECK";
 
 	String ASQ_NEQATY_TRX_ID = "ASQ_NEQATY_TRX_ID";
 	String ASQ_MOKAFA_TRX_ID = "ASQ_MOKAFA_TRX_ID";
+	String ASQ_NEQATY_EARN_TRN="ASQ_NEQATY_EARN_TRN";
 }

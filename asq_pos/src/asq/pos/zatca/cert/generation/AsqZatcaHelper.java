@@ -107,7 +107,7 @@ public class AsqZatcaHelper {
 
 	/**
 	 * This Method helps in running the command in the window
-	 * 
+	 *
 	 * @param command
 	 * @throws IOException
 	 */
@@ -118,7 +118,7 @@ public class AsqZatcaHelper {
 		BufferedReader br = new BufferedReader(new InputStreamReader(process.getErrorStream()));
 		String readLine;
 		while ((readLine = br.readLine()) != null) {
-			System.out.println(readLine);
+			LOG.debug("Zatca CMD command runs with message : " + readLine);
 		}
 		br.close();
 		LOG.debug("Process running command Ends");
@@ -127,7 +127,7 @@ public class AsqZatcaHelper {
 	/**
 	 * This method creates the PrivateKey, publickey and .csr file in the configure
 	 * location
-	 * 
+	 *
 	 * @param otp
 	 * @return
 	 * @throws IOException
@@ -178,7 +178,7 @@ public class AsqZatcaHelper {
 
 	/**
 	 * This method reads and write the prop in the location
-	 * 
+	 *
 	 * @param asqSubmitZatcaCertServiceResponse
 	 * @throws URISyntaxException
 	 * @throws IOException
@@ -296,8 +296,7 @@ public class AsqZatcaHelper {
 	}
 
 	public XMLGregorianCalendar getZatcaIssueDate(GregorianCalendar argdate) throws DatatypeConfigurationException {
-		return DatatypeFactory.newInstance().newXMLGregorianCalendarDate(argdate.get(Calendar.YEAR), argdate.get(Calendar.MONTH) + 1, argdate.get(Calendar.DAY_OF_MONTH),
-				DatatypeConstants.FIELD_UNDEFINED);
+		return DatatypeFactory.newInstance().newXMLGregorianCalendarDate(argdate.get(Calendar.YEAR), argdate.get(Calendar.MONTH) + 1, argdate.get(Calendar.DAY_OF_MONTH), DatatypeConstants.FIELD_UNDEFINED);
 	}
 
 	public XMLGregorianCalendar getZatcaIssueTime(GregorianCalendar argdate) throws DatatypeConfigurationException {
