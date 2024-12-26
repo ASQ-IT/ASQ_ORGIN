@@ -1,7 +1,5 @@
 package asq.pos.common;
 
-import javax.mail.internet.InternetAddress;
-
 import dtv.pos.common.ConfigurationMgr;
 import dtv.pos.common.SysConfigSettingFactory;
 
@@ -9,24 +7,20 @@ import dtv.pos.common.SysConfigSettingFactory;
  * This class extends Xstore Standard Configuration Manager to check the
  * customer availability parameter and Value for calculating the points for Earn
  * API to customer
- * 
+ *
  * @author RA20221457
  */
 public class AsqConfigurationMgr extends ConfigurationMgr {
 
-	   private static SysConfigSettingFactory _settingsFactory;
+	private static SysConfigSettingFactory _settingsFactory;
 
 	/**
 	 * Parameter to check the customer availability
-	 * 
+	 *
 	 * @return true/false
 	 */
 	public static boolean getSTCCustomerAvailable() {
-		String value = _settingsFactory.getString(new String[] { "STCCustomerEarnPoints---AddSTCPointsToCustomerOnTender" });
-		if (value != null && value.equalsIgnoreCase("true")) {
-			return true;
-		}
-		return false;
+		return _settingsFactory.getBoolean(new String[] { "STCCustomerEarnPoints---AddSTCPointsToCustomerOnTender" });
 	}
 
 	static void setConfigSettingFactory(AsqSysConfigSettingFactory argFactory) {
@@ -34,50 +28,50 @@ public class AsqConfigurationMgr extends ConfigurationMgr {
 	}
 
 	/**
-	 * Parameter to calculate the Earn points
-	 * 
-	 * @return value for calculation
+	 * Parameter to Add the Earn points
+	 *
+	 * @return true/false
 	 */
-	public static int getSTCPointsCalculation() {
-		return _settingsFactory.getInt(new String[] { "STCCustomerEarnPoints---PointsCalculation" });
+	public static boolean getSTCLoyaltyEarnEnable() {
+		return _settingsFactory.getBoolean(new String[] { "STCCustomerEarnPoints---Enable" });
 	}
-	
+
 	/**
 	 * Planet Tax Merchant
 	 */
 	public String getPlanetMerchantIdNumber() {
-		return _settingsFactory.getString(new String[] {"ASQ---PlanetTaxFree---MerchantIdNumber"});
+		return _settingsFactory.getString(new String[] { "ASQ---PlanetTaxFree---MerchantIdNumber" });
 	}
-	
+
 	/**
 	 * Planet Tax Terminal
 	 */
-	public  String getPlanetTerminalNumber() {
-		return _settingsFactory.getString(new String[] {"ASQ---PlanetTaxFree---TerminalNumber"});
+	public String getPlanetTerminalNumber() {
+		return _settingsFactory.getString(new String[] { "ASQ---PlanetTaxFree---TerminalNumber" });
 	}
-	
+
 	/**
 	 * Planet Tax Doc Type
 	 */
 	public String getPlanetType() {
-		return _settingsFactory.getString(new String[] {"ASQ---PlanetTaxFree---Type"});
+		return _settingsFactory.getString(new String[] { "ASQ---PlanetTaxFree---Type" });
 	}
 
 	/**
 	 * Blind Return Email Approval
 	 */
 	public boolean isBlindReturnEmailApproved() {
-		return _settingsFactory.getBoolean(new String[] {"ASQ---ItemReturn---EmailApproval"});
+		return _settingsFactory.getBoolean(new String[] { "ASQ---ItemReturn---EmailApproval" });
 	}
 
 	public String getReturnApprovalEmailOTP() {
-		return _settingsFactory.getString(new String[] {"ASQ---ReturnApprovalEmailOTP---To"});
+		return _settingsFactory.getString(new String[] { "ASQ---ReturnApprovalEmailOTP---To" });
 	}
-	
+
 	public int getReturnOfflineEmailOTP() {
-		return _settingsFactory.getInt(new String[] {"ASQ---ReturnOfflineOTP---To"});
+		return _settingsFactory.getInt(new String[] { "ASQ---ReturnOfflineOTP---To" });
 	}
-	
+
 	/**
 	 * Bin Transfer Email Approval
 	 */
@@ -94,12 +88,14 @@ public class AsqConfigurationMgr extends ConfigurationMgr {
 	}
 
 	public String getPlanetMerchantIdItem() {
-		// TODO Auto-generated method stub
-		return _settingsFactory.getString(new String[] {"ASQ---PlanetTaxFree---MerchantIdItem"});
+		return _settingsFactory.getString(new String[] { "ASQ---PlanetTaxFree---MerchantIdItem" });
 	}
 
 	public String getstoreTransferApprovalEmailOTP() {
-		// TODO Auto-generated method stub
-		return _settingsFactory.getString(new String[] { "ASQ---StoreTransferApprovalEmailOTP---To"  });
+		return _settingsFactory.getString(new String[] { "ASQ---StoreTransferApprovalEmailOTP---To" });
+	}
+
+	public boolean getasqNqeatyLoyaltySystem() {
+		return _settingsFactory.getBoolean(new String[] { "ASQ---NEQATY---LoyaltySystem" });
 	}
 }

@@ -58,6 +58,7 @@ import org.etsi.uri._01903.v1_3.SignedPropertiesType;
 import org.etsi.uri._01903.v1_3.SignedSignaturePropertiesType;
 import org.json.simple.JSONObject;
 import org.python.icu.math.BigDecimal;
+import org.python.jline.internal.Log;
 import org.w3c.dom.Document;
 import org.xml.sax.InputSource;
 
@@ -79,7 +80,7 @@ public class SmartHubUtil {
 
 	/**
 	 * This method converts File to Base64 encoding
-	 * 
+	 *
 	 * @param file
 	 * @throws IOException
 	 * @return
@@ -96,7 +97,7 @@ public class SmartHubUtil {
 
 	/**
 	 * This method decodes Base64 encoding to File
-	 * 
+	 *
 	 * @param file
 	 * @throws IOException
 	 * @return
@@ -142,7 +143,7 @@ public class SmartHubUtil {
 
 	/**
 	 * This method converts XML file to XML document
-	 * 
+	 *
 	 * @param file
 	 * @throws IOException
 	 * @return null
@@ -163,7 +164,7 @@ public class SmartHubUtil {
 
 	/**
 	 * This method gets XML String
-	 * 
+	 *
 	 * @param xmlDocument
 	 * @return xmlString
 	 */
@@ -193,7 +194,7 @@ public class SmartHubUtil {
 
 	/**
 	 * This method writes XML to file
-	 * 
+	 *
 	 * @param fileName
 	 * @param xmlDocument
 	 * @throws ParserConfigurationException
@@ -232,7 +233,7 @@ public class SmartHubUtil {
 
 	/**
 	 * This method writes InvoiceJSON
-	 * 
+	 *
 	 * @param fileName
 	 * @param OutboundInvoice
 	 * @throws ParserConfigurationException
@@ -271,7 +272,7 @@ public class SmartHubUtil {
 
 	/**
 	 * This method et key store, params jks certificate and key secret
-	 * 
+	 *
 	 * @param certificateFilePath
 	 * @param keySecret
 	 * @throws KeyStoreException
@@ -283,8 +284,7 @@ public class SmartHubUtil {
 	 * @return keystore
 	 */
 
-	public static KeyStore getKeyStore(String certificateFilePath, String keySecret)
-			throws KeyStoreException, NoSuchAlgorithmException, CertificateException, FileNotFoundException, IOException, ASQException {
+	public static KeyStore getKeyStore(String certificateFilePath, String keySecret) throws KeyStoreException, NoSuchAlgorithmException, CertificateException, FileNotFoundException, IOException, ASQException {
 		KeyStore keystore = KeyStore.getInstance("JKS");
 		logger.info("****** Loading KeyStore........ *********");
 		try {
@@ -328,8 +328,8 @@ public class SmartHubUtil {
 	}
 
 	// generate QR code
-	public static String generateQRCode(String sellerName, String vatNumber, XMLGregorianCalendar invoiceTimeStamp, XMLGregorianCalendar invoiceDate, String invoiceTotal, String vatTotal,
-			String argHashedXML, String signatureECDA, byte[] publicKeyECDA, byte[] signatureCSID) throws DecoderException {
+	public static String generateQRCode(String sellerName, String vatNumber, XMLGregorianCalendar invoiceTimeStamp, XMLGregorianCalendar invoiceDate, String invoiceTotal, String vatTotal, String argHashedXML,
+			String signatureECDA, byte[] publicKeyECDA, byte[] signatureCSID) throws DecoderException {
 
 		QRCode qrCode = new QRCode(sellerName, vatNumber, invoiceTimeStamp, invoiceDate, invoiceTotal, vatTotal, argHashedXML, signatureECDA, publicKeyECDA, signatureCSID);
 		String hexString = qrCode.getHexString(qrCode);
@@ -352,7 +352,7 @@ public class SmartHubUtil {
 	 * ).getPath()); String inputFilePath = jarFile.getParent() + File.separator +
 	 * fileName; // String inputFilePath = fileName; FileInputStream inStream = new
 	 * FileInputStream(new File(inputFilePath));
-	 * 
+	 *
 	 * prop.load(inStream); // load a properties file from class path, inside static
 	 * method // prop.load(SmartHubUtil.class.getClassLoader().getResourceAsStream(
 	 * "app.properties")); } catch (IOException ex) { ex.printStackTrace(); } catch
@@ -460,20 +460,12 @@ public class SmartHubUtil {
 
 	public static JAXBElement<UBLDocumentSignaturesType> getUBLDocumentSignaturesXML(UBLDocumentSignaturesType in) throws JAXBException {
 		JAXBContext jaxbContext = JAXBContext.newInstance(UBLDocumentSignaturesType.class);
-		// JAXBContext jaxbContext = JAXBContext.newInstance(
-		// new
-		// oasis.names.specification.ubl.schema.xsd.commonsignaturecomponents_2.ObjectFactory().getClass().getPackage().getName()
-		// + ":" + new
-		// oasis.names.specification.ubl.schema.xsd.signatureaggregatecomponents_2.ObjectFactory().getClass().getPackage().getName()
-		// + ":" + new
-		// oasis.names.specification.ubl.schema.xsd.signaturebasiccomponents_2.ObjectFactory().getClass().getPackage().getName()
-		// );
 		Marshaller jaxbMarshaller = jaxbContext.createMarshaller();
 
 		jaxbMarshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true);
 		jaxbMarshaller.setProperty("com.sun.xml.bind.marshaller.NamespacePrefixMapper", new NamespaceMapper());
-		JAXBElement<UBLDocumentSignaturesType> jaxbElement = new JAXBElement<UBLDocumentSignaturesType>(
-				new QName("urn:oasis:names:specification:ubl:schema:xsd:CommonSignatureComponents-2", "UBLDocumentSignatures"), UBLDocumentSignaturesType.class, in);
+		JAXBElement<UBLDocumentSignaturesType> jaxbElement = new JAXBElement<UBLDocumentSignaturesType>(new QName("urn:oasis:names:specification:ubl:schema:xsd:CommonSignatureComponents-2", "UBLDocumentSignatures"),
+				UBLDocumentSignaturesType.class, in);
 
 		// NEED TO CLEAN
 		StringWriter sw = new StringWriter();
@@ -485,20 +477,12 @@ public class SmartHubUtil {
 
 	public static String getUBLDocumentSignaturesXML(UBLDocumentSignaturesType in, String a) throws JAXBException {
 		JAXBContext jaxbContext = JAXBContext.newInstance(UBLDocumentSignaturesType.class);
-		// JAXBContext jaxbContext = JAXBContext.newInstance(
-		// new
-		// oasis.names.specification.ubl.schema.xsd.commonsignaturecomponents_2.ObjectFactory().getClass().getPackage().getName()
-		// + ":" + new
-		// oasis.names.specification.ubl.schema.xsd.signatureaggregatecomponents_2.ObjectFactory().getClass().getPackage().getName()
-		// + ":" + new
-		// oasis.names.specification.ubl.schema.xsd.signaturebasiccomponents_2.ObjectFactory().getClass().getPackage().getName()
-		// );
 		Marshaller jaxbMarshaller = jaxbContext.createMarshaller();
 
 		jaxbMarshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true);
 		jaxbMarshaller.setProperty("com.sun.xml.internal.bind.namespacePrefixMapper", new NamespaceMapper());
-		JAXBElement<UBLDocumentSignaturesType> jaxbElement = new JAXBElement<UBLDocumentSignaturesType>(
-				new QName("urn:oasis:names:specification:ubl:schema:xsd:CommonSignatureComponents-2", "UBLDocumentSignatures"), UBLDocumentSignaturesType.class, in);
+		JAXBElement<UBLDocumentSignaturesType> jaxbElement = new JAXBElement<UBLDocumentSignaturesType>(new QName("urn:oasis:names:specification:ubl:schema:xsd:CommonSignatureComponents-2", "UBLDocumentSignatures"),
+				UBLDocumentSignaturesType.class, in);
 
 		// NEED TO CLEAN
 		StringWriter sw = new StringWriter();
@@ -517,8 +501,6 @@ public class SmartHubUtil {
 		csidCertificate = csidCertificate.trim();
 		byte[] decodedCertificate = Base64.decodeBase64(csidCertificate.getBytes());
 
-		// byte[] decodedCertificate =
-		// Base64.decodeBase64(Files.readAllBytes(Paths.get(certFilePath)));
 		CertificateFactory certificateFactory;
 		Certificate certificate = null;
 
@@ -526,9 +508,8 @@ public class SmartHubUtil {
 			certificateFactory = CertificateFactory.getInstance("X.509");
 			certificate = certificateFactory.generateCertificate(new ByteArrayInputStream(decodedCertificate));
 		} catch (CertificateException e) {
-			e.printStackTrace();
+			Log.error("Got Zataca certificate error ", e);
 		}
-
 		X509Certificate x509Certificate = (X509Certificate) certificate;
 		return x509Certificate;
 	}
@@ -619,7 +600,7 @@ public class SmartHubUtil {
 
 	/**
 	 * Removing XML declaration ,line separator and characters
-	 * 
+	 *
 	 * @param xml
 	 * @return
 	 */

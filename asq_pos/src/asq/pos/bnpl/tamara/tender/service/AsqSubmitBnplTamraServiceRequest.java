@@ -1,6 +1,7 @@
 package asq.pos.bnpl.tamara.tender.service;
 
 import java.util.ArrayList;
+import java.util.Locale;
 
 import com.oracle.shaded.fasterxml.jackson.annotation.JsonInclude;
 
@@ -18,8 +19,17 @@ public class AsqSubmitBnplTamraServiceRequest extends ServiceRequest implements 
     private String comment;
     private String store_code;
     private String checkout_id;
+    private Locale locale; 
 
-    public AsqBnplTamaraAmountObj getTotal_amount() {
+    public Locale getLocale() {
+		return locale;
+	}
+
+	public void setLocale(Locale locale) {
+		this.locale = locale;
+	}
+
+	public AsqBnplTamaraAmountObj getTotal_amount() {
         return total_amount;
     }
 
@@ -76,13 +86,15 @@ public class AsqSubmitBnplTamraServiceRequest extends ServiceRequest implements 
 		this.comment = comment;
 	}
 
-	public String getStore_code() {
-		return store_code;
-	}
-
-	public void setStore_code(String store_code) {
-		this.store_code = store_code;
-	}
+	
+	  public String getStore_code() { 
+		  return store_code; 
+		  }
+	  
+	  public void setStore_code(String store_code) {
+		  this.store_code = store_code;
+	  }
+	 
 
 	public String getCheckout_id() {
 		return checkout_id;
@@ -91,4 +103,5 @@ public class AsqSubmitBnplTamraServiceRequest extends ServiceRequest implements 
 	public void setCheckout_id(String checkout_id) {
 		this.checkout_id = checkout_id;
 	}
+
 }

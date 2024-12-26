@@ -40,7 +40,6 @@ import com.oracle.shaded.fasterxml.jackson.databind.ObjectMapper;
 
 import asq.pos.zatca.AsqZatcaConstant;
 import asq.pos.zatca.cert.generation.service.AsqSubmitZatcaCertServiceResponse;
-import asq.pos.zatca.integration.data.CommandPrompt;
 import asq.pos.zatca.integration.zatca.util.POSUtil;
 import dtv.pos.common.SysConfigSettingFactory;
 import dtv.util.NumberUtils;
@@ -113,6 +112,7 @@ public class AsqZatcaHelper {
 	 */
 	public void runCommand(String command) throws IOException {
 		LOG.debug("Process running command Starts");
+		LOG.debug("Zatca Running command : " + command);
 		Runtime runtime = Runtime.getRuntime();
 		Process process = runtime.exec("cmd /c " + command);
 		BufferedReader br = new BufferedReader(new InputStreamReader(process.getErrorStream()));
@@ -212,25 +212,26 @@ public class AsqZatcaHelper {
 		return jarFile.getParent() + File.separator + path;
 	}
 
-	public boolean getJKSCert() {
+	public boolean getJKSCert() throws IOException {
 		String path = System.getProperty("asq.zatca.certificate.work.dir");
+		String certProp = System.getProperty("asq.zatca.company.cert.prop");
 		// Converting cert to p12 file.
 		String command = "openssl pkcs12 -export -in " + path + "asq_pos_csid.cer -inkey " + path + "PrivateKey.pem -name pos_csr -out " + path + "cert-and-key.p12 -password pass:27934968";
-		CommandPrompt.runCommand(command);
+		runCommand(command);
 
 		// Creating empty JKS file if its not already available// have to make this
 		// parameterized.
-		command = "keytool -genkey -alias pos_csr -keyalg EC -keysize 256 -sigalg SHA256withECDSA  -dname CN=EA123456789,OU=RiyadBranch,O=Jerir,L=,ST=,C=SA -validity 365 -storetype JKS  -keypass 27934968 -keystore "
-				+ path + "pos_csr.jks -storepass 27934968";
-		CommandPrompt.runCommand(command);
+		command = "keytool -genkey -alias pos_csr -keyalg EC -keysize 256 -sigalg SHA256withECDSA  -dname " + certProp + " -validity 365 -storetype JKS  -keypass 27934968 -keystore " + path
+				+ "pos_csr.jks -storepass 27934968";
+		runCommand(command);
 
 		// Deleting the cert from JKS if its already exist
-		command = "keytool -delete -alias pos_csr -keystore resources/pos_csr.jks -storepass 27934968";
-		CommandPrompt.runCommand(command);
+		command = "keytool -delete -alias pos_csr -keystore " + path + "pos_csr.jks -storepass 27934968";
+		runCommand(command);
 
 		// Adding newly generated cert to the JKS
-		command = "keytool -v -importkeystore -srckeystore resources/cert-and-key.p12 -srcstoretype PKCS12 -srcstorepass 27934968 -destkeystore resources/pos_csr.jks -deststoretype JKS -storepass 27934968";
-		CommandPrompt.runCommand(command);
+		command = "keytool -v -importkeystore -srckeystore " + path + "cert-and-key.p12 -srcstoretype PKCS12 -srcstorepass 27934968 -destkeystore " + path + "pos_csr.jks -deststoretype JKS -storepass 27934968";
+		runCommand(command);
 		return true;
 	}
 
@@ -245,27 +246,6 @@ public class AsqZatcaHelper {
 		FileWriter writer = new FileWriter(csidCertificateFilePath);
 		writer.write(certificate);
 		writer.close();
-	}
-
-	public boolean getProdCertOnBoarding() {
-		String path = System.getProperty("asq.zatca.certificate.work.dir");
-		// Converting cert to p12 file.
-		String command = "openssl pkcs12 -export -in " + path + "asq_pos_csid.cer -inkey " + path + "PrivateKey.pem -name pos_csr -out " + path + "cert-and-key.p12 -password pass:27934968";
-		CommandPrompt.runCommand(command);
-
-		// Creating empty JKS file if its not already available
-		// Read the attributes from cnf file
-		command = "keytool -genkey -alias pos_csr -keyalg EC -keysize 256 -sigalg SHA256withECDSA  -dname CN=atg.altayer.com,OU=RiyadBranch,O=NibrasAlArabiaCompanyLimited,L=Riyadh,ST=Riyadh,C=SA -validity 365 -storetype JKS  -keypass 27934968 -keystore resources/pos_csr.jks -storepass 27934968";
-		CommandPrompt.runCommand(command);
-
-		// Deleting the cert from JKS if its already exist
-		command = "keytool -delete -alias pos_csr -keystore resources/pos_csr.jks -storepass 27934968";
-		CommandPrompt.runCommand(command);
-
-		// Adding newly generated cert to the JKS
-		command = "keytool -v -importkeystore -srckeystore resources/cert-and-key.p12 -srcstoretype PKCS12 -srcstorepass 27934968 -destkeystore resources/pos_csr.jks -deststoretype JKS -storepass 27934968";
-		CommandPrompt.runCommand(command);
-		return true;
 	}
 
 	public String getZatcaAuthToken() throws IOException {
@@ -313,6 +293,17 @@ public class AsqZatcaHelper {
 			return RoundingMode.HALF_DOWN;
 		}
 		return mode;
+	}
+
+	public int getDiscountPercentage(BigDecimal netAmount, BigDecimal discountAmount) {
+		return discountAmount.divide(netAmount, 2, getSystemRoundingMode()).scaleByPowerOfTen(2).intValue();
+	}
+
+	public BigDecimal getAbsoluteValue(BigDecimal argValue) {
+		if (argValue != null) {
+			argValue.abs();
+		}
+		return argValue;
 	}
 
 }

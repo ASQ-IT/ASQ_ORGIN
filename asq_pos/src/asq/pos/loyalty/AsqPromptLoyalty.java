@@ -15,7 +15,7 @@ public class AsqPromptLoyalty extends AbstractPromptOp {
 	@Override
 	public IOpResponse handlePromptResponse(IXstEvent var1) {
 		if (var1.getName().equalsIgnoreCase("Yes")) {
-			_transactionScope.setValue(AsqValueKeys.ASQ_LOALITY, true);
+			_transactionScope.setValue(AsqValueKeys.ASQ_LOYALTY, true);
 			return HELPER.completeResponse();
 		}
 		return HELPER.completeResponse();

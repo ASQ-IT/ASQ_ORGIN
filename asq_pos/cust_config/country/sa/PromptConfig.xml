@@ -129,17 +129,13 @@
 	<Prompt name="ASQ_STC_HAND_SHAKE_ERROR" type="Notify" title="_asqPromptmsgSSLhandShakeErrorTitle" message="_asqPromptmsgSSLhandShakeError">
 		<Action ref="CANCEL_BACK" />
 	</Prompt>
-	<Prompt name="ASQ_STC_SUCCESSFULL_EARN_REWARD" type="Notify" title="_asqStcEarnRewardTitle" message="_asqPromptmsgSuccessfullEarnReward">
-		<Action ref="CANCEL_BACK" />
-	</Prompt>
-	<Prompt name="ASQ_STC_SUCCESSFULL_REDEEM_REFUND" type="NotifyOkCancel" title="_asqStcRefundRedeemTitle" message="_asqPromptmsgSuccessfullRefundRedeem">
-		<Action ref="ACCEPT_ENTER" />
+	<Prompt name="ASQ_STC_SUCCESSFULL_EARN_REWARD" type="Notify" title="_asqStcEarnRewardTitle" message="_asqPromptmsgSuccessfullEarnReward"></Prompt>
+	<Prompt name="ASQ_STC_SUCCESSFULL_REDEEM_REFUND" type="Notify" title="_asqStcRefundRedeemTitle" message="_asqPromptmsgSuccessfullRefundRedeem">
 	</Prompt>
 	<Prompt name="ASQ_STC_REDEMPTION_CANCEL_NOT_ALLOWED" type="Notify" title="_asqStcRedemptionCancelNotAllowedErrorTitle" message="_asqStcRedemptionCancelNotAllowedError">
 		<Action ref="CANCEL_BACK" />
 	</Prompt>
 	<Prompt name="ASQ_SUCCESSFULL_POINTS_REDEMPTION" type="Notify" title="_asqStcSuccessPromptTitle" message="_asqSTCPaymentSuccessfullMessage">
-		<Action chainKey="ASQ_TENDER_LOY_STC" text="_ok" keyStroke="Enter" />
 	</Prompt>
 	<!-- ASQ STC Integration Prompts Ends -->
 	
@@ -225,8 +221,8 @@
 		<Prompt name="ASQ_TABBY_TOO_MANY_REQUEST_ERROR" type="Notify" title="_asqTabbyPromptTitle" message="_asqTabbypromptMsgRqstError">
 		<Action ref="CANCEL_BACK" />
 	</Prompt>
+	<Prompt name="ASQ_VOID_SUCCESSFULL" type="Notify" title="_asqRefundSuccessPromptTitle" message="_asqpromptVoidSuccess"></Prompt>
 	<!-- ASQ TABBY Integration Prompts Ends -->
-
 
 	<!-- ASQ TOLA Work Starts -->
     <Prompt name="ASQ_TOLA_QTY_SOH_ERROR" type="NotifyCancel" title="_weight" message="_tolaItemQtyValidationError">
@@ -396,7 +392,7 @@
 		 <Action ref="CANCEL_BACK" />
 	</Prompt>
     <Prompt name="ASQ_BIN_TRANSFER_SUCCESS" type="Notify" title="_asqCaptureBinTransferSuccessTitle" message="_asqCaptureBinTransferOTPSuccess">
-		<Action dataKey="CONTINUE" text="_continue" keyStroke="Enter" />
+		<Action dataKey="CANCEL_BACK" text="_ok" keyStroke="Enter"/>
 	</Prompt>
 	<!-- ASQ Bin Transfer chnages - End -->
 	

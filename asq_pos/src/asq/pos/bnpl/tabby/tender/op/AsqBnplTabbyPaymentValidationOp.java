@@ -91,8 +91,8 @@ public class AsqBnplTabbyPaymentValidationOp extends Operation{
 	        asqBnplTabbyDetailsObj.setPhone(_transactionScope.getValue(AsqValueKeys.ASQ_MOBILE_NUMBER));
 	        asqBnplTabbyDetailsObj.setReference_id(Long.toString(trans.getTransactionSequence()));
 	        payment.setAmount(trans.getTotal().toString());
-	        //payment.setCurrency(trans.getRetailTransactionLineItems().get(0).getCurrencyId());
-	        payment.setCurrency("SAR");
+	        payment.setCurrency(trans.getRetailTransactionLineItems().get(0).getCurrencyId());
+	        //payment.setCurrency("SAR");
 	        payment.setBuyer(asqBnplTabbyDetailsObj);
 	        payment.setOrder(asqBnplTabbyDetailsObj);
 			payment.setId(this._transactionScope.getValue(AsqValueKeys.ASQ_TABBY_PMNT_ID));

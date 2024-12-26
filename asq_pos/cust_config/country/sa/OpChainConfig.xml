@@ -45,11 +45,9 @@
 			<Parameter name="TenderStatus" value="Tender" />
 			<Parameter name="TenderId" value="STC" />
 		</Op>
-		<!-- <OpChainRoute chainKey="ASQ_TENDER_STC" />-->
+		 <OpChainRoute chainKey="ASQ_TENDER_STC" />
 		<Op class="asq.pos.loyalty.AsqAddLoyaltyTenderOp" />
 		<Op class="dtv.pos.tender.rounding.UpdateTransactionRoundedAmountOp" />
-		<!--ASQ STC Integration Earn points - Starts-->
-		<Op class="asq.pos.loyalty.stc.earn.op.AsqSTCEarnPointsOp" />
 		<OpChainRoute chainKey="CHECK_SALE_COMPLETE" chainType="START" />
 	</OpChain>
 	<!-- ASQ STC Integratin Service Ends-->
@@ -443,7 +441,7 @@
     <OpChainRoute chainKey="VOUCHER_TRANSFORMATION" />
     <OpChainRoute chainKey="SALE_COMPLETE_VALIDATE.local" />
     <OpChainRoute chainKey="VALIDATE_EXT_TAX_INTEGRATION" />
-    <OpChainRoute chainKey="SALE_COMPLETE_BEFORE_FINISH.ERECEIPT" />
+   <!-- <OpChainRoute chainKey="SALE_COMPLETE_BEFORE_FINISH.ERECEIPT" />-->
     <OpChainRoute chainKey="SALE_COMPLETE_BEFORE_FINISH.local" />
     <!-- <OpChainRoute chainKey="SALE_COMPLETE_ISSUE_DOCUMENT" /> -->
     <OpChainRoute chainKey="SALE_COMPLETE_FINISH1" chainType="START" />
@@ -557,7 +555,6 @@
      <OpChain name="COUNTRYPACK.CREATE_INVOICE.PRINT_INVOICE">
     <WorkerOp workersBean="invoiceStoreOpenSequenceResetWorker" />
     <WorkerOp workersBean="invoiceWorkstationOpenSequenceWorker" />
-    <OpChainRoute chainKey="COUNTRYPACK.TAXFREE_UPDATE_CONFIG_IMPL" />
      <ValidationOp validationsBean="countryPack.validateInvoiceItems" />
     <Op class="oracle.retail.xstore.countrypack.common.invoice.op.ClearInvoiceCustomerOp" />
     <PromptOp class="oracle.retail.xstore.countrypack.common.invoice.op.InvoiceCheckMixedSaleReturnItemsTransOp" />
@@ -600,7 +597,6 @@
     <OpChain name="COUNTRYPACK.CREATE_INVOICE.PRINT_INVOICE_EMAIL_PRICE_QUOTATION">
     <WorkerOp workersBean="invoiceStoreOpenSequenceResetWorker" />
     <WorkerOp workersBean="invoiceWorkstationOpenSequenceWorker" />
-    <OpChainRoute chainKey="COUNTRYPACK.TAXFREE_UPDATE_CONFIG_IMPL" />
      <ValidationOp validationsBean="countryPack.validateInvoiceItems" />
     <Op class="oracle.retail.xstore.countrypack.common.invoice.op.ClearInvoiceCustomerOp" />
     <PromptOp class="oracle.retail.xstore.countrypack.common.invoice.op.InvoiceCheckMixedSaleReturnItemsTransOp" />
@@ -624,14 +620,15 @@
     <Op class="oracle.retail.xstore.countrypack.common.invoice.op.InvoiceFillReportNoUiOp" />
     <Op class="asq.retail.xstore.countrypack.common.invoice.op.AsqCreateInvoiceOp" /> 
   </OpChain>  
-   <OpChain name="COUNTRYPACK.EINVOICE.PREPARE_EMAIL_INVOICE">
-    <Op class="asq.retail.xstore.countrypack.common.invoice.einvoice.op.AsqEinvoiceEmailPrepareOp" >
+  <OpChain name="COUNTRYPACK.EINVOICE.PREPARE_EMAIL_INVOICE">
+    <Op class="oracle.retail.xstore.countrypack.common.invoice.einvoice.op.EInvoiceEmailPrepareOp" >
       <Parameter name="emailableReportId" value="INVOICE" />
       <Parameter name="emailableReportId" value="CREDIT_NOTE" />
       <Parameter name="emailableReportId" value="EINVOICE_PDF_RESPONSE" />
     </Op>
   </OpChain>
-   <OpChain name="SALE_COMPLETE_FINISH.EMAIL_RECEIPTS_ASQINVOICE" >
+  
+  <OpChain name="SALE_COMPLETE_FINISH.EMAIL_RECEIPTS_ASQINVOICE" >
       <WorkerOp workersBean="asqInvoiceemailRcptsWorkers" />
   </OpChain>
   <!-- PRICE Quotation end-->
@@ -682,14 +679,15 @@
     <Op class="asq.pos.tender.customer.check.AsqCustomerCheckOp" />
   </OpChain>
   
-  <!--Earn Points to Neqaty for all tenders  -->
+   <!--Earn Points to Neqaty & STC for all tenders  -->
    <OpChain name="SALE_COMPLETE_START">
    	<Op class="asq.pos.loyalty.neqaty.tender.op.AsqNeqatyEarnPointsOp" />
-    <OpChainRoute chainKey="CHECK_FOR_REFUND" />
-    <OpChainRoute chainKey="CHECK_FOR_CHANGE" />
-    <OpChainRoute chainKey="SALE_COMPLETE_POST_TENDER" />
-    <OpChainRoute chainKey="BEFORE_COMPLETE_SALE" />
-  </OpChain>
+	<Op class="asq.pos.loyalty.stc.earn.op.AsqSTCEarnPointsOp" />
+		<OpChainRoute chainKey="CHECK_FOR_REFUND" />
+		<OpChainRoute chainKey="CHECK_FOR_CHANGE" />
+		<OpChainRoute chainKey="SALE_COMPLETE_POST_TENDER" />
+		<OpChainRoute chainKey="BEFORE_COMPLETE_SALE" />
+	</OpChain>
   
   <OpChain name="PRE_RETURN_VERIFICATION">
    <Op class="asq.pos.register.returns.verification.AsqOriginalReturnOp" />

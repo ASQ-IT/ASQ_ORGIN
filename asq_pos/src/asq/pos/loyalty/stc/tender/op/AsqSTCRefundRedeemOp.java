@@ -85,11 +85,7 @@ public class AsqSTCRefundRedeemOp extends Operation{
 	public IOpResponse handleOpExec(IXstEvent arg0) {
 		IRetailTransaction trans = (IRetailTransaction) this._transactionScope.getTransaction();
 		custMobileNumber = _transactionScope.getValue(AsqValueKeys.ASQ_MOBILE_NUMBER);
-		LOG.info("STC API Trigger OTP service call starts here: ");
-		if (isRefundRedeem) {
-			return this.HELPER.completeResponse();
-		}
-		return refundRedeemRequestPreparer(custMobileNumber);
+		return stcVoidRefundRedeem(custMobileNumber);
 	}
 
 	
@@ -101,7 +97,8 @@ public class AsqSTCRefundRedeemOp extends Operation{
 	 * @return refund redeem submission to STC Service Handler
 	 */
 
-	private IOpResponse refundRedeemRequestPreparer(String custMobileNumber) {
+	@SuppressWarnings("unused")
+	private IOpResponse stcVoidRefundRedeem(String custMobileNumber) {
 
 		IAsqSTCLoyaltyServiceRequest request = new AsqSTCLoyaltyServiceRequest();
         String requestDate = asqStcHelper.getCurrentDateTime();
@@ -121,8 +118,17 @@ public class AsqSTCRefundRedeemOp extends Operation{
 		LOG.info("STC API trigger OTP request is prepared :" + request);
 		AsqSTCLoyaltyServiceResponse response = (AsqSTCLoyaltyServiceResponse) _asqSTCLoyalityTenderService.get()
 				.refundRedeem(request);
-		LOG.info("STC API Trigger OTP returns service response here: ");
-		return validateResponseAndStoreDataInDB(response, requestDate, globalID);
+		  if(response.getDescription().equalsIgnoreCase("Success")) { 
+			  return this.HELPER.getCompletePromptResponse("ASQ_VOID_SUCCESSFULL"); 
+			  }
+		 if (null != response && null != response.getErrors()) {
+			return handleServiceError(response);
+		} else if (null == response) {
+			return technicalErrorScreen("TAMARA API::::: Service has null response");
+		}
+		LOG.debug("STC refund service Ends here: ");
+		
+		return HELPER.completeResponse();
 	}
 
 	/**
@@ -145,7 +151,7 @@ public class AsqSTCRefundRedeemOp extends Operation{
 		}
 		 if(response.getDescription().equalsIgnoreCase("SUCCESS")) {
 			 isRefundRedeem = true;
-			 return this.HELPER.getPromptResponse("ASQ_STC_SUCCESSFULL_REDEEM_REFUND");
+			 return this.HELPER.getCompletePromptResponse("ASQ_STC_SUCCESSFULL_REDEEM_REFUND");
 		}
 		return HELPER.completeResponse();
 	}

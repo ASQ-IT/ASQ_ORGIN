@@ -184,8 +184,7 @@ public class AsqSTCTenderOp extends AbstractFormOp<AsqSTCTenderOTPEditModel> {
 		// details required for reverse the transaction adding to transaction scope
 		_transactionScope.setValue(AsqValueKeys.ASQ_STC_REF_REQUEST_ID, globalID);
 		_transactionScope.setValue(AsqValueKeys.ASQ_STC_REF_REQUEST_DATE, requestDate);
-		return this.HELPER.getPromptResponse("ASQ_SUCCESSFULL_POINTS_REDEMPTION");       
-		//return this.HELPER.getCompleteStackChainResponse(OpChainKey.valueOf("ASQ_TENDER_LOY_STC"));
+		return this.HELPER.getCompletePromptResponse("ASQ_SUCCESSFULL_POINTS_REDEMPTION");       
 	}
 
 	/**
@@ -216,7 +215,7 @@ public class AsqSTCTenderOp extends AbstractFormOp<AsqSTCTenderOTPEditModel> {
 			originalPosTrx.addPosTransactionProperty(newTrxProps);
 			newTrxProps.setPropertyCode(AsqZatcaConstant.STC_SUCCESS_EARN_RESPONSE);
 		} else {
-			newTrxProps.setPropertyCode(AsqZatcaConstant.STC_SUCCESS_REDEEM_RESPONSE);
+			newTrxProps.setPropertyCode(AsqZatcaConstant.ASQ_STC_SUCCESS_REDEEM_RESPONSE);
 			originalPosTrx.addPosTransactionProperty(newTrxProps);
 		}
 	}

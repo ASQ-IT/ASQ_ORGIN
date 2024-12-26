@@ -9,25 +9,29 @@ package asq.pos.bnpl.tamara.tender.service;
  */
 public class AsqBnplTamaraDisAmtObj {
 	
-		private String name;
+		private String currency;
 		
-		private AsqBnplTamaraAmountObj amount;
+		private Number amount;
 	 
-		public String getName() {
-			return name;
+
+
+		public String getCurrency() {
+			return currency;
 		}
-	 
-		public void setName(String name) {
-			this.name = name;
+
+		public void setCurrency(String currency) {
+			this.currency = currency;
 		}
-	 
-		public AsqBnplTamaraAmountObj getAmount() {
+
+		public Number getAmount() {
 			return amount;
 		}
-	 
-		public void setAmount(AsqBnplTamaraAmountObj amount) {
+
+		public void setAmount(Number amount) {
 			this.amount = amount;
 		}
+	 
+
 		
 	}
 

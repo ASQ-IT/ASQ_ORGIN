@@ -52,7 +52,7 @@ public final class AsqValueKeys {
 	public static final ValueKey<String> ASQ_NEQATY_TRANS_REFERENCE_EARN = new ValueKey<>(String.class, "ASQ_NEQATY_TRANS_REFERENCE_EARN");
 	public static final ValueKey<Boolean> ASQ_RETURN_OFFLINE = new ValueKey<Boolean>(Boolean.class, "ASQ_RETURN_OFFLINE");
 	public static final ValueKey<Integer> ASQ_BIN_TRANSFER_OTP = new ValueKey<Integer>(Integer.class, "ASQ_BIN_TRANSFER_OTP");
-	public static final ValueKey<Boolean> ASQ_LOALITY = new ValueKey<Boolean>(Boolean.class, "ASQ_LOALITY");
+	public static final ValueKey<Boolean> ASQ_LOYALTY = new ValueKey<Boolean>(Boolean.class, "ASQ_LOYALTY");
 
 	public static final ValueKey<Integer> ASQ_STORE_TRANSFER_OTP = new ValueKey<Integer>(Integer.class, "ASQ_STORE_TRANSFER_OTP");
 

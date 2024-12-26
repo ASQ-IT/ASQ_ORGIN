@@ -79,23 +79,23 @@ MX|GUA|Guanajuato
 MX|GRO|Guerrero
 MX|HID|Hidalgo
 MX|JAL|Jalisco
-MX|MEX|México
-MX|MIC|Michoacán de Ocampo
+MX|MEX|MÃ©xico
+MX|MIC|MichoacÃ¡n de Ocampo
 MX|MOR|Morelos
 MX|NAY|Nayarit
-MX|NLE|Nuevo León
+MX|NLE|Nuevo LeÃ³n
 MX|OAX|Oaxaca
 MX|PUE|Puebla
-MX|QUE|Querétaro
+MX|QUE|QuerÃ©taro
 MX|ROO|Quintana Roo
-MX|SLP|San Luis Potosí
+MX|SLP|San Luis PotosÃ­
 MX|SIN|Sinaloa
 MX|SON|Sonora
 MX|TAB|Tabasco
 MX|TAM|Tamaulipas
 MX|TLA|Tlaxcala
 MX|VER|Veracruz
-MX|YUC|Yucatán
+MX|YUC|YucatÃ¡n
 MX|ZAC|Zacatecas
 IT|AG|Agrigento
 IT|AL|Alessandria
@@ -129,7 +129,7 @@ IT|CS|Cosenza
 IT|CT|Catania
 IT|CZ|Catanzaro
 IT|EN|Enna
-IT|FC|Forlì-Cesena
+IT|FC|ForlÃ¬-Cesena
 IT|FE|Ferrara
 IT|FG|Foggia
 IT|FI|Firenze
@@ -210,7 +210,7 @@ IT|VT|Viterbo
 IT|VV|Vibo Valentia
 DE|BB|Brandenburg
 DE|BE|Berlin
-DE|BW|Baden-Württemberg
+DE|BW|Baden-WÃ¼rttemberg
 DE|BY|Bavaria
 DE|HB|Bremen
 DE|HE|Hessen
@@ -223,39 +223,39 @@ DE|SH|Schleswig-Holstein
 DE|SL|Saarland
 DE|SN|Sachsen
 DE|ST|Sachsen-Anhalt
-DE|TH|Thüringen
-ES|C|A Coruña
-ES|VI|Álava
+DE|TH|ThÃ¼ringen
+ES|C|A CoruÃ±a
+ES|VI|Ã�lava
 ES|AB|Albacete
 ES|A|Alicante
-ES|AL|Almería
+ES|AL|AlmerÃ­a
 ES|O|Asturias
-ES|AV|Ávila
+ES|AV|Ã�vila
 ES|BA|Badajoz
 ES|PM|Balears
 ES|B|Barcelona
 ES|BU|Burgos
-ES|CC|Cáceres
-ES|CA|Cádiz
+ES|CC|CÃ¡ceres
+ES|CA|CÃ¡diz
 ES|S|Cantabria
-ES|CS|Castellón
+ES|CS|CastellÃ³n
 ES|CR|Ciudad Real
-ES|CO|Córdoba
+ES|CO|CÃ³rdoba
 ES|CU|Cuenca
 ES|GI|Girona
 ES|GR|Granada
 ES|GU|Guadalajara
-ES|SS|Guipúzcoa
+ES|SS|GuipÃºzcoa
 ES|H|Huelva
 ES|HU|Huesca
-ES|J|Jaén
+ES|J|JaÃ©n
 ES|LO|La Rioja
 ES|GC|Las Palmas
-ES|LE|León
+ES|LE|LeÃ³n
 ES|L|Lleida
 ES|LU|Lugo
 ES|M|Madrid
-ES|MA|Málaga
+ES|MA|MÃ¡laga
 ES|MU|Murcia
 ES|NA|Navarra
 ES|OR|Ourense
@@ -402,7 +402,7 @@ FR|09|Ariege
 FR|10|Aube
 FR|11|Aude
 FR|12|Aveyron
-FR|13|Bouches-du-Rhône
+FR|13|Bouches-du-RhÃ´ne
 FR|14|Calvados
 FR|15|Cantal
 FR|16|Charente
@@ -491,18 +491,18 @@ FR|97|D.O.M.-T.O.M.
 PT|01|Aveiro
 PT|02|Beja
 PT|03|Braga
-PT|04|Bragança
+PT|04|BraganÃ§a
 PT|05|Castelo Branco
 PT|06|Coimbra
-PT|07|Évora
+PT|07|Ã‰vora
 PT|08|Faro
 PT|09|Guarda
 PT|10|Leiria
 PT|11|Lisbona
 PT|12|Portalegre
 PT|13|Porto
-PT|14|Santarém
-PT|15|Setúbal
+PT|14|SantarÃ©m
+PT|15|SetÃºbal
 PT|16|Viana do Castelo
 PT|17|Vila Real
 PT|18|Viseu
@@ -511,51 +511,51 @@ PT|30|Madera
 BR|AC|Acre
 BR|AL|Alagoas
 BR|AM|Amazonas
-BR|AP|Amapá
+BR|AP|AmapÃ¡
 BR|BA|Bahia
-BR|CE|Ceará
+BR|CE|CearÃ¡
 BR|DF|Distrito Federal
-BR|ES|Espírito Santo
-BR|GO|Goiás
-BR|MA|Maranhão
+BR|ES|EspÃ­rito Santo
+BR|GO|GoiÃ¡s
+BR|MA|MaranhÃ£o
 BR|MG|Minas Gerais
 BR|MS|Mato Grosso do Sul
 BR|MT|Mato Grosso
-BR|PA|Pará
-BR|PB|Paraíba
+BR|PA|ParÃ¡
+BR|PB|ParaÃ­ba
 BR|PE|Pernambuco
-BR|PI|Piauí
-BR|PR|Paraná
+BR|PI|PiauÃ­
+BR|PR|ParanÃ¡
 BR|RJ|Rio de Janeiro
 BR|RN|Rio Grande do Norte
-BR|RO|Rondônia
+BR|RO|RondÃ´nia
 BR|RR|Roraima
 BR|RS|Rio Grande do Sul
 BR|SC|Santa Catarina
 BR|SE|Sergipe
-BR|SP|São Paulo
+BR|SP|SÃ£o Paulo
 BR|TO|Tocantins
 SE|AB|Stockholm
-SE|AC|Västerbotten
+SE|AC|VÃ¤sterbotten
 SE|BD|Norrbotten
 SE|C|Uppsala
-SE|D|Sædermanland
-SE|E|Östergætland
-SE|F|Jænkæping
+SE|D|SÃ¦dermanland
+SE|E|Ã–stergÃ¦tland
+SE|F|JÃ¦nkÃ¦ping
 SE|G|Kronoberg
 SE|H|Kalmar
 SE|I|Gotland
 SE|K|Blekinge
-SE|M|Skåne
+SE|M|SkÃ¥ne
 SE|N|Halland
-SE|O|Västra Gætaland
-SE|S|Värmland
-SE|T|Örebro
-SE|U|Västmanland
+SE|O|VÃ¤stra GÃ¦taland
+SE|S|VÃ¤rmland
+SE|T|Ã–rebro
+SE|U|VÃ¤stmanland
 SE|W|Dalarna
-SE|X|Gävleborg
-SE|Y|Västernorrland
-SE|Z|Jämtland
+SE|X|GÃ¤vleborg
+SE|Y|VÃ¤sternorrland
+SE|Z|JÃ¤mtland
 AT|B|Burgenland
 AT|K|Carinthia
 AT|NOE|Lower Austria
@@ -565,20 +565,20 @@ AT|ST|Styria
 AT|T|Tyrol
 AT|V|Vorarlberg
 AT|W|Vienna
-PL|02|Dolnośląskie
+PL|02|DolnoÅ›lÄ…skie
 PL|04|Kujawsko-pomorskie
 PL|06|Lubelskie
 PL|08|Lubuskie
-PL|10|Łódzkie
-PL|12|Małopolskie
+PL|10|Å�Ã³dzkie
+PL|12|MaÅ‚opolskie
 PL|14|Mazowieckie
 PL|16|Opolskie
 PL|18|Podkarpackie
 PL|20|Podlaskie
 PL|22|Pomorskie
-PL|24|Śląskie
-PL|26|Świętokrzyskie
-PL|28|Warmińsko-mazurskie
+PL|24|ÅšlÄ…skie
+PL|26|ÅšwiÄ™tokrzyskie
+PL|28|WarmiÅ„sko-mazurskie
 PL|30|Wielkopolskie
 PL|32|Zachodniopomorskie
 BE|VAN|Antwerp
@@ -587,11 +587,11 @@ BE|VBR|Flemish Brabant
 BE|VLI|Limburg 
 BE|VWV|West Flanders
 BE|WHT|Hainaut
-BE|WLG|Liège 
+BE|WLG|LiÃ¨ge 
 BE|WLX|Luxembourg
 BE|WNA|Namur 
 BE|WBR|Walloon Brabant
-CH|ZH|Zürich 
+CH|ZH|ZÃ¼rich 
 CH|BE|Bern 
 CH|LU|Luzern
 CH|UR|Uri 
@@ -614,7 +614,7 @@ CH|TG|Thurgau
 CH|TI|Ticino 
 CH|VD|Vaud 
 CH|VS|Valais 
-CH|NE|Neuchâtel 
+CH|NE|NeuchÃ¢tel 
 CH|GE|Geneva 
 CH|JU|Jura
 AU|ACT|Australian Capital Territory
@@ -767,22 +767,22 @@ IN|TR|Tripura
 IN|UP|Uttar Pradesh 
 IN|UT|Uttarakhand 
 IN|WB|West Bengal
-CL|AI|Aisén del General Carlos Ibañez del Campo
+CL|AI|AisÃ©n del General Carlos IbaÃ±ez del Campo
 CL|AN|Antofagasta
 CL|AP|Arica y Parinacota
-CL|AR|La Araucanía
+CL|AR|La AraucanÃ­a
 CL|AT|Atacama
-CL|BI|Biobío
+CL|BI|BiobÃ­o
 CL|CO|Coquimbo
 CL|LI|Libertador General Bernardo O'Higgins
 CL|LL|Los Lagos
-CL|LR|Los Ríos
+CL|LR|Los RÃ­os
 CL|MA|Magallanes
 CL|ML|Maule
-CL|NB|Ñuble
-CL|RM|Región Metropolitana de Santiago
-CL|TA|Tarapacá
-CL|VS|Valparaíso
+CL|NB|Ã‘uble
+CL|RM|RegiÃ³n Metropolitana de Santiago
+CL|TA|TarapacÃ¡
+CL|VS|ValparaÃ­so
 IE|C|Cork
 IE|CE|Clare
 IE|CN|Cavan
@@ -814,3 +814,16 @@ SG|02|North East
 SG|03|North West
 SG|04|South East
 SG|05|South West
+SA|01|Ar Riyad
+SA|02|Makkah al Mukarramah  
+SA|03|Al Madinah al Munawwarah
+SA|04|Ash Sharqiyah
+SA|05|Al Qasim
+SA|06|Hail
+SA|07|Tabuk 
+SA|08|Al Hudud ash Shamaliyah
+SA|09|Jazan
+SA|10|Najran
+SA|11|Al Bahah
+SA|12|Al Jawf
+SA|14|Asir

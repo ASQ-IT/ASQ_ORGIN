@@ -108,7 +108,6 @@
       </section>
 	<section name="footer_cust_copy">
 		<sectionref>legalWarranty</sectionref>
-		<!-- <sectionref>soldItemsCount</sectionref> <sectionref>returnedItemsCount</sectionref> -->
 		<sectionref>LOCAL.ITEMS_COUNT</sectionref>
 		<sectionref>system_mode</sectionref>
 		<sectionref>asq_planet_id</sectionref>

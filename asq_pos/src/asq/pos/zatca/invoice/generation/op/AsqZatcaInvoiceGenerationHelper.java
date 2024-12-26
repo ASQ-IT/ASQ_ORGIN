@@ -700,8 +700,11 @@ public class AsqZatcaInvoiceGenerationHelper {
 		if (null != taxAmount) {
 			taxAmountType.setValue(taxAmount.setScale(2, asqZatcaHelper.getSystemRoundingMode()));
 			taxAmountType.setCurrencyID(currencyID);
-			taxTotalType.setTaxAmount(taxAmountType);
+		} else {
+			taxAmountType.setValue(new BigDecimal(0));
+			taxAmountType.setCurrencyID(currencyID);
 		}
+		taxTotalType.setTaxAmount(taxAmountType);
 
 		if (taxSubtotalTypes != null) {
 			for (TaxSubtotalType taxSubtotalType : taxSubtotalTypes) {
@@ -1022,7 +1025,7 @@ public class AsqZatcaInvoiceGenerationHelper {
 			// This is for discount flow
 			lineExtensionAmountType.setValue(lineExtensionAmount);
 		} else {
-			lineExtensionAmountType.setValue(lineItem.getNetAmount().abs());
+			lineExtensionAmountType.setValue(asqZatcaHelper.getAbsoluteValue(lineItem.getNetAmount()));
 		}
 
 		invoiceLineType.setID(invoiceLineTypeID);
@@ -1034,13 +1037,16 @@ public class AsqZatcaInvoiceGenerationHelper {
 		}
 
 		if (null != lineItem.getCurrencyId() && null != lineItem.getTaxModifiers()) {
-			invoiceLineType.getTaxTotal().add(setTaxTotalType(lineItem.getCurrencyId(), lineItem.getVatAmount().abs(), lineItem.getExtendedAmount().abs(), null, cbc, cac));
+			invoiceLineType.getTaxTotal()
+					.add(setTaxTotalType(lineItem.getCurrencyId(), asqZatcaHelper.getAbsoluteValue(lineItem.getVatAmount()), asqZatcaHelper.getAbsoluteValue(lineItem.getExtendedAmount()), null, cbc, cac));
 		}
 
 		invoiceLineType.setItem(setItemType(AsqZatcaConstant.ZATCA_TAXCATEGORY_ID_VAL, lineItem.getItemDescription(), asqZatcaHelper.getFormatttedBigDecimalValue(argTaxPerc),
 				setTaxSchemeType(argTaxCategoryID, AsqZatcaConstant.ZATCA_SCHEME_AGENCYID, AsqZatcaConstant.ZATCA_TAXSCHEME_SCHEMEID, cbc, cac), cbc, cac));
+		// Unit Price
+		argPriceAmount = argPriceAmount.divide(lineItem.getQuantity(), 3, asqZatcaHelper.getSystemRoundingMode());
 
-		invoiceLineType.setPrice(setPriceType(lineItem.getCurrencyId(), argPriceAmount.abs(), null, cbc, cac));
+		invoiceLineType.setPrice(setPriceType(lineItem.getCurrencyId(), asqZatcaHelper.getAbsoluteValue(argPriceAmount), null, cbc, cac));
 
 		// if (null != lineItem.getNotes() && lineItem.getNotes().length > 0) {
 		// for (String note : lineItem.getNotes()) {

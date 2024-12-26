@@ -44,6 +44,7 @@ public class AsqBnplTamaraServiceHandler
 									System.getProperty("asq.bnpl.tender.tamara.token"))
 							.header("Accept-Version", "V2");
 					rawResponse = requestBuilder.post(Entity.json(asqZatcaHelper.convertTojson(argServiceRequest)));
+					//LOG.info(", getServiceId(), requestBuilder, requestBuilder, requestBuilder, requestBuilder, argServiceRequest, argServiceType, rawResponse, requestBuilder).readEntity(String.class)
 				} else if (argServiceType.getServiceHandlerId().equalsIgnoreCase("BNPL_TAMARA_ORDER_DETAIL_SRV")) {
 					Builder requestBuilder = this.getBaseWebTarget()
 							.resolveTemplate("order_id", argServiceRequest.getOrder_id()).request()

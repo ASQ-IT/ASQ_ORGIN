@@ -3,7 +3,7 @@
 
 	<!-- ASQ STC Points calculation - Starts -->
 	<Setting name="STCCustomerEarnPoints---AddSTCPointsToCustomerOnTender">true</Setting>
-	<Setting name="STCCustomerEarnPoints---PointsCalculation">100</Setting>
+	<Setting name="STCCustomerEarnPoints---Enable">true</Setting>
 	<!-- ASQ STC Points calculation- Ends -->
 
     <Setting name="ASQ---PlanetTaxFree---MerchantIdNumber">17519</Setting>
@@ -41,5 +41,7 @@
     <Setting name="InvoiceConfig---EnableInvoicing">true</Setting>
     <Setting name="TaxFreeConfig---Enabled">true</Setting>
     <!-- PRICE Quotation end-->
-     <Setting name="ASQ---StoreTransferApprovalEmailOTP---To">sandeepreddy.gagireddy@wipro.com</Setting>
+    <Setting name="ASQ---StoreTransferApprovalEmailOTP---To">sandeepreddy.gagireddy@wipro.com</Setting>
+     
+    <Setting name="ASQ---NEQATY---LoyaltySystem">false</Setting>
 </SysConfig>

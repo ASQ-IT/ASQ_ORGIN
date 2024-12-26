@@ -147,26 +147,24 @@ public class AsqSTCMobileNumberOp extends AbstractFormOp<AsqSTCMobileNumberEditM
 	 * @return triggerOTPRequest submission to STC Service Handler
 	 */
 	private IOpResponse requestPreparerForTriggerOTP(IRetailTransaction trans) {
-
-		IAsqSTCLoyaltyServiceRequest request = new AsqSTCLoyaltyServiceRequest();
-		ZoneId ksaZone = ZoneId.of("Asia/Riyadh");
-		ZonedDateTime ksaDateTime = ZonedDateTime.now(ksaZone);
-		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss");
-		String requestDate = ksaDateTime.format(formatter);
-		request.setMsisdn(Long.parseLong(custMobileNumber.trim()));
-		request.setBranchId(System.getProperty("asq.stc.branchid"));
-		request.setTerminalId(System.getProperty("asq.stc.terminalid"));
-		request.setRequestDate(requestDate);
-		LOG.info("Request Date :" + requestDate);
-		request.setPIN(null);
-		request.setAmount(null);
-		LOG.info("STC API Generate GlobalID method calling from ASQSTCHelper");
-		String globalID = asqStcHelper.generateGlobalId();
-		LOG.info("STC API Generate GlobalID generated:" + globalID);
-		request.setGlobalId(globalID);
-		LOG.info("STC API trigger OTP request is prepared :" + request);
-		AsqSTCLoyaltyServiceResponse response = (AsqSTCLoyaltyServiceResponse) _asqSTCLoyalityTenderService.get()
-				.triggerOTPRequest(request);
+		
+		 IAsqSTCLoyaltyServiceRequest request = new AsqSTCLoyaltyServiceRequest();
+		  ZoneId ksaZone = ZoneId.of("Asia/Riyadh"); ZonedDateTime ksaDateTime =
+		  ZonedDateTime.now(ksaZone); DateTimeFormatter formatter =
+		  DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss"); String requestDate =
+		  ksaDateTime.format(formatter);
+		  request.setMsisdn(Long.parseLong(custMobileNumber.trim()));
+		  request.setBranchId(System.getProperty("asq.stc.branchid"));
+		  request.setTerminalId(System.getProperty("asq.stc.terminalid"));
+		  request.setRequestDate(requestDate); LOG.info("Request Date :" +
+		  requestDate); request.setPIN(null); request.setAmount(null);
+		  LOG.info("STC API Generate GlobalID method calling from ASQSTCHelper");
+		  String globalID = asqStcHelper.generateGlobalId();
+		  LOG.info("STC API Generate GlobalID generated:" + globalID);
+		  request.setGlobalId(globalID);
+		  LOG.info("STC API trigger OTP request is prepared :" + request);
+		AsqSTCLoyaltyServiceResponse response = (AsqSTCLoyaltyServiceResponse) _asqSTCLoyalityTenderService.get().triggerOTPRequest(request);
+		//AsqSTCLoyaltyServiceResponse response = (AsqSTCLoyaltyServiceResponse) _asqSTCLoyalityTenderService.get().earnReward(request);
 		LOG.info("STC API Trigger OTP returns service response here: ");
 		return validateResponseAndStoreDataInDB(response, trans, requestDate, globalID, null);
 	}

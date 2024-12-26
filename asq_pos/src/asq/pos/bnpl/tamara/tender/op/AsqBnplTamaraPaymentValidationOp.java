@@ -134,7 +134,7 @@ public class AsqBnplTamaraPaymentValidationOp extends Operation {
 					}
 				}
 				if (!success) {
-					Thread.sleep(10000);
+					Thread.sleep(30000);
 				}
 			} catch (Exception ex) {
 				LOG.debug("Exception during calling getOrderDetails method to check payment status");

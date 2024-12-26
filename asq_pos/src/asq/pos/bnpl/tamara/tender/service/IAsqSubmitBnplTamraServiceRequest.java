@@ -1,6 +1,7 @@
 package asq.pos.bnpl.tamara.tender.service;
 
 import java.util.ArrayList;
+import java.util.Locale;
 
 import dtv.service.req.IServiceRequest;
 
@@ -37,4 +38,9 @@ public interface IAsqSubmitBnplTamraServiceRequest extends IServiceRequest {
 		public String getCheckout_id();
 
 		public void setCheckout_id(String checkout_id);
+		
+		public void setAdditional_data(AsqBnplTamaraAddDataObj storeData);
+		
+		public void setLocale(Locale loc);
+	
 }

@@ -160,7 +160,8 @@ public class AsqBnplTabbyTenderOp extends AbstractFormOp<AsqBnplTabbyEditModel> 
 		payment.setAmount(trans.getTotal().toString());
 		payment.setCurrency(trans.getRetailTransactionLineItems().get(0).getCurrencyId());
 		LOG.error("Currency :" + trans.getRetailTransactionLineItems().get(0).getCurrencyId());
-		// payment.setCurrency("SAR");
+		//payment.setCurrency("SAR");
+		//Need to update item details
 		payment.setBuyer(asqBnplTabbyDetailsObj);
 		payment.setOrder(asqBnplTabbyDetailsObj);
 		asqSubmitBnplTabbyServiceRequest.setPayment(payment);

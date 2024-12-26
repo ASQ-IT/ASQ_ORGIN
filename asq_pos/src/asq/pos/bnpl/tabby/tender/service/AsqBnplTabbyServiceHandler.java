@@ -9,10 +9,8 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-
 import com.oracle.shaded.fasterxml.jackson.core.JsonProcessingException;
 import com.oracle.shaded.fasterxml.jackson.databind.JsonMappingException;
-
 import asq.pos.bnpl.tabby.tender.op.AsqBnplTabbyTenderOp;
 import asq.pos.loyalty.stc.tender.service.AsqSTCErrorDesc;
 import asq.pos.loyalty.stc.tender.service.AsqSTCLoyaltyServiceResponse;
@@ -44,8 +42,11 @@ public class AsqBnplTabbyServiceHandler
 							.header(AsqZatcaIntegrationConstants.Authorization,
 									System.getProperty("asq.bnpl.tender.tabby.public.key"))
 							.header("Accept-Version", "V2");
-					rawResponse = requestBuilder.post(Entity.json(asqZatcaHelper.convertTojson(argServiceRequest)));
-					LOG.info("Tabby Create Session Response :" +rawResponse.getEntity());
+					//rawResponse = requestBuilder.post(Entity.json(asqZatcaHelper.convertTojson(argServiceRequest)));
+					String requestBody=asqZatcaHelper.convertTojson(argServiceRequest);
+					LOG.info("Tabby Create Session Request Body :" +requestBody);
+					rawResponse = requestBuilder.post(Entity.json(requestBody));
+					LOG.info("Tabby Create Session Response Body :" +rawResponse.getEntity());
 				} else if (argServiceType.getServiceHandlerId().equalsIgnoreCase("BNPL_TABBY_NOTIFICATION_SRV")) {
 					Builder requestBuilder = this.getBaseWebTarget()
 							.resolveTemplate("session_id", argServiceRequest.getId()).request()
@@ -72,7 +73,11 @@ public class AsqBnplTabbyServiceHandler
 									System.getProperty("asq.bnpl.tender.tabby.secret.key"))
 							.header("Accept-Version", "V2");
 					argServiceRequest.getPayment().setId(null);
-					rawResponse = requestBuilder.post(Entity.json(asqZatcaHelper.convertTojson(argServiceRequest)));
+				//	rawResponse = requestBuilder.post(Entity.json(asqZatcaHelper.convertTojson(argServiceRequest)));
+					String requestBody=asqZatcaHelper.convertTojson(argServiceRequest);
+					LOG.info("Tabby Refund Session Request Body :" +requestBody);
+					rawResponse = requestBuilder.post(Entity.json(requestBody));
+					LOG.info("Tabby Refund Session Response Body:" +rawResponse.getEntity());
 				} else {
 					Builder requestBuilder = this.getBaseWebTarget()
 							.resolveTemplate("session_id", argServiceRequest.getId()).request()
@@ -81,7 +86,11 @@ public class AsqBnplTabbyServiceHandler
 									System.getProperty("asq.bnpl.tender.tabby.secret.key"))
 							.header("Accept-Version", "V2");
 					argServiceRequest.setId(null);
-					rawResponse = requestBuilder.post(Entity.json(asqZatcaHelper.convertTojson(argServiceRequest)));
+				//	rawResponse = requestBuilder.post(Entity.json(asqZatcaHelper.convertTojson(argServiceRequest)));
+					String requestBody=asqZatcaHelper.convertTojson(argServiceRequest);
+					LOG.info("Tabby Cance Session Request Body :" +requestBody);
+					rawResponse = requestBuilder.post(Entity.json(requestBody));
+					LOG.info("Tabby Cancel Session Response Body:" +rawResponse.getEntity());
 				}
 				checkForExceptions(rawResponse);
 			} catch (Exception ex) {

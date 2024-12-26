@@ -1,17 +1,22 @@
 package asq.pos.bnpl.tamara.tender.op;
 
+import java.math.BigDecimal;
+import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
-import java.util.Map.Entry;
+import java.util.Locale;
+
 import javax.inject.Inject;
 import javax.inject.Provider;
+
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import asq.pos.bnpl.tabby.tender.service.AsqBnplTabbyErrorDesc;
-import asq.pos.bnpl.tabby.tender.service.AsqSubmitBnplTabbyServiceResponse;
+import asq.pos.bnpl.tamara.tender.service.AsqBnplTamaraAddDataObj;
 import asq.pos.bnpl.tamara.tender.service.AsqBnplTamaraAmountObj;
+import asq.pos.bnpl.tamara.tender.service.AsqBnplTamaraDisAmtObj;
 import asq.pos.bnpl.tamara.tender.service.AsqBnplTamaraItemObj;
 import asq.pos.bnpl.tamara.tender.service.AsqSubmitBnplTamraServiceRequest;
 import asq.pos.bnpl.tamara.tender.service.AsqSubmitBnplTamraServiceResponse;
@@ -20,29 +25,24 @@ import asq.pos.bnpl.tamara.tender.service.IAsqBnplTamaraServices;
 import asq.pos.bnpl.tamara.tender.service.IAsqSubmitBnplTamraServiceRequest;
 import asq.pos.common.AsqValueKeys;
 import asq.pos.loyalty.stc.tender.AsqStcHelper;
-import asq.pos.loyalty.stc.tender.service.AsqSTCErrorDesc;
-import asq.pos.zatca.AsqZatcaConstant;
 import dtv.data2.access.DataFactory;
-import dtv.data2.access.exception.PersistenceException;
+import dtv.i18n.FormattableFactory;
 import dtv.i18n.IFormattable;
+import dtv.i18n.TranslationHelper;
 import dtv.pos.common.OpChainKey;
-import dtv.pos.common.OpExecutionException;
 import dtv.pos.framework.action.type.XstDataActionKey;
 import dtv.pos.framework.op.AbstractFormOp;
-import dtv.pos.framework.validation.ValidationResultList;
 import dtv.pos.iframework.action.IXstDataAction;
 import dtv.pos.iframework.op.IOpResponse;
 import dtv.pos.iframework.security.StationState;
-import dtv.pos.iframework.ui.model.IStationModel;
-import dtv.pos.iframework.validation.IValidationResult;
 import dtv.pos.iframework.validation.IValidationResultList;
-import dtv.pos.iframework.validation.SimpleValidationResult;
-import dtv.util.StringUtils;
 import dtv.xst.dao.crm.IParty;
+import dtv.xst.dao.itm.MerchandiseHierarchyId;
+import dtv.xst.dao.itm.impl.MerchandiseHierarchyModel;
+import dtv.xst.dao.trl.IRetailPriceModifier;
 import dtv.xst.dao.trl.IRetailTransaction;
 import dtv.xst.dao.trl.ISaleReturnLineItem;
 import dtv.xst.dao.trn.IPosTransaction;
-import dtv.xst.dao.trn.PosTransactionPropertyId;
 
 public class AsqBnplTamaraTenderOp extends AbstractFormOp<AsqBnplTamaraEditModel> {
 
@@ -63,6 +63,9 @@ public class AsqBnplTamaraTenderOp extends AbstractFormOp<AsqBnplTamaraEditModel
 	@Inject
 	protected StationState _stationState;
 
+	@Inject
+	protected FormattableFactory FF;
+
 	@Override
 	protected AsqBnplTamaraEditModel createModel() {
 		return new AsqBnplTamaraEditModel();
@@ -76,7 +79,7 @@ public class AsqBnplTamaraTenderOp extends AbstractFormOp<AsqBnplTamaraEditModel
 	/**
 	 * This method handles the data operation after submitting the mobile number and
 	 * calls request preparer
-	 * 
+	 *
 	 * @param
 	 * @return
 	 */
@@ -93,23 +96,20 @@ public class AsqBnplTamaraTenderOp extends AbstractFormOp<AsqBnplTamaraEditModel
 			}
 			if (editModel.getCustMobileNumber() != null) {
 				custMobileNumber = editModel.getCustMobileNumber();
-				if (custMobileNumber.length() <= 14 && custMobileNumber.length()>= 9) {
+				if (custMobileNumber.length() <= 14 && custMobileNumber.length() >= 9) {
 					_transactionScope.setValue(AsqValueKeys.ASQ_MOBILE_NUMBER, custMobileNumber);
 					LOG.debug("TAMARA API Mobile number captured :" + custMobileNumber);
-				}
-				else {
+				} else {
 					return HELPER.getPromptResponse("ASQ_TAMARA_MOBILE_NUMBER_ERROR");
 				}
 			}
 			if (custMobileNumber != null && !custMobileNumber.equals("")) {
 				LOG.info("Process of TAMARA tender starts here");
-				if (null != trans.getCustomerParty()
-						&& !(this._transactionScope.getValue(AsqValueKeys.ASQ_MOBILE_NUMBER).equals(custMobileNumber))) {
+				if (null != trans.getCustomerParty() && !(this._transactionScope.getValue(AsqValueKeys.ASQ_MOBILE_NUMBER).equals(custMobileNumber))) {
 					IParty info = trans.getCustomerParty();
 					info.setTelephone3(custMobileNumber);
 					_transactionScope.setValue(AsqValueKeys.ASQ_MOBILE_NUMBER, custMobileNumber);
-					LOG.info(
-							"TAMARA API setting updated customer mobile number to transaction, this will be udpated once the transaciton is completed");
+					LOG.info("TAMARA API setting updated customer mobile number to transaction, this will be udpated once the transaciton is completed");
 				}
 			} else if (custMobileNumber == null || custMobileNumber.equals("")) {
 				LOG.debug("TAMARA API customer mobile number field is null :");
@@ -124,11 +124,12 @@ public class AsqBnplTamaraTenderOp extends AbstractFormOp<AsqBnplTamaraEditModel
 
 	/**
 	 * This method checks whether customer is linked to transaction or not
-	 * 
+	 *
 	 * @param
 	 * @return
 	 */
 
+	@Override
 	protected IOpResponse handleInitialState() {
 		AsqBnplTamaraEditModel editModel = getModel();
 		try {
@@ -142,8 +143,7 @@ public class AsqBnplTamaraTenderOp extends AbstractFormOp<AsqBnplTamaraEditModel
 				return super.handleInitialState();
 			}
 		} catch (Exception ex) {
-			LOG.info(
-					"TAMARA API Mobile number form execution exception customer is not available in the transaction and Trans object is null:");
+			LOG.info("TAMARA API Mobile number form execution exception customer is not available in the transaction and Trans object is null:");
 		}
 		return super.handleInitialState();
 	}
@@ -151,7 +151,7 @@ public class AsqBnplTamaraTenderOp extends AbstractFormOp<AsqBnplTamaraEditModel
 	/**
 	 * This method implements the requestPreparerStoreCheckOutSession method for
 	 * preparing the request attributes
-	 * 
+	 *
 	 * @param trans
 	 * @return requestPreparerStoreCheckOutSession submission to TAMARA Service
 	 *         Handler
@@ -164,19 +164,43 @@ public class AsqBnplTamaraTenderOp extends AbstractFormOp<AsqBnplTamaraEditModel
 		AsqBnplTamaraAmountObj asqBnplTamaraAmountObj = new AsqBnplTamaraAmountObj();
 		asqBnplTamaraAmountObj.setAmount(trans.getTotal());
 		asqBnplTamaraAmountObj.setCurrency(trans.getRetailTransactionLineItems().get(0).getCurrencyId());
-		//asqBnplTamaraAmountObj.setCurrency("SAR");
 		List<ISaleReturnLineItem> saleItemList = trans.getLineItems(ISaleReturnLineItem.class);
-		ArrayList<AsqBnplTamaraItemObj> itemList = new ArrayList<AsqBnplTamaraItemObj>();
+		ArrayList<AsqBnplTamaraItemObj> itemList = new ArrayList<>();
 		for (ISaleReturnLineItem lineItem : saleItemList) {
 			AsqBnplTamaraItemObj asqBnplTamaraItemObj = new AsqBnplTamaraItemObj();
 			AsqBnplTamaraAmountObj itemTotalAmnt = new AsqBnplTamaraAmountObj();
-			asqBnplTamaraItemObj.setType(AsqZatcaConstant.ASQ_TAMARA_STORE_TYPE_DEFAULT);
+			AsqBnplTamaraDisAmtObj itemDiscAmnt = new AsqBnplTamaraDisAmtObj();
+			// Change to MerchITemType code for Catogery.
+			asqBnplTamaraItemObj.setType(lineItem.getItem().getItemTypeCode());
+			if (lineItem.getMerchLevel1Id() != null) {
+				MerchandiseHierarchyId id = new MerchandiseHierarchyId();
+
+				id.setHierarchyId(lineItem.getMerchLevel1Id());
+				MerchandiseHierarchyModel result = DataFactory.getObjectByIdNoThrow(id);
+				if (result != null) {
+					String desc = TranslationHelper.translate(Locale.getDefault(), result.getDescription());
+					asqBnplTamaraItemObj.setType(desc);
+				}
+
+			}
 			asqBnplTamaraItemObj.setSku(lineItem.getItemId());
 			asqBnplTamaraItemObj.setName(lineItem.getItemDescription());
 			asqBnplTamaraItemObj.setReference_id(lineItem.getLineItemSequence());
 			asqBnplTamaraItemObj.setQuantity(lineItem.getQuantity());
-			itemTotalAmnt.setAmount(lineItem.getBaseUnitPrice());
-			//itemTotalAmnt.setCurrency("SAR");
+
+			List<IRetailPriceModifier> discountRates = lineItem.getRetailPriceModifiers();
+			BigDecimal discamount = BigDecimal.ZERO;
+			for (IRetailPriceModifier discountRate : discountRates) {
+				if (!discountRate.getVoid() && discountRate.getExtendedAmount() != null) {
+					discamount = discamount.add(discountRate.getExtendedAmount());
+				}
+			}
+
+			itemDiscAmnt.setAmount(discamount);
+			itemDiscAmnt.setCurrency(trans.getRetailTransactionLineItems().get(0).getCurrencyId());
+			asqBnplTamaraItemObj.setDiscount_amount(itemDiscAmnt);
+
+			itemTotalAmnt.setAmount(lineItem.getGrossAmount());
 			itemTotalAmnt.setCurrency(trans.getRetailTransactionLineItems().get(0).getCurrencyId());
 			asqBnplTamaraItemObj.setTotal_amount(itemTotalAmnt);
 			itemList.add(asqBnplTamaraItemObj);
@@ -184,21 +208,34 @@ public class AsqBnplTamaraTenderOp extends AbstractFormOp<AsqBnplTamaraEditModel
 		asqSubmitBnplTamraServiceRequest.setTotal_amount(asqBnplTamaraAmountObj);
 		asqSubmitBnplTamraServiceRequest.setItems(itemList);
 		asqSubmitBnplTamraServiceRequest.setPhone_number(custMobileNumber);
-		asqSubmitBnplTamraServiceRequest.setOrder_reference_id(Long.toString(trans.getTransactionSequence()));
+
+		LocalTime time = LocalTime.now();
+		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("HH:mm");
+		String timeString = time.format(formatter);
+		asqSubmitBnplTamraServiceRequest.setOrder_reference_id(Long.toString(trans.getRetailLocationId()).concat("-").concat(Long.toString(trans.getTransactionSequence())).concat("-").concat(timeString));
+
+		AsqBnplTamaraAddDataObj storeData = new AsqBnplTamaraAddDataObj();
+		storeData.setStore_code(Long.toString(trans.getRetailLocationId()));
+		asqSubmitBnplTamraServiceRequest.setAdditional_data(storeData);
+
+		asqSubmitBnplTamraServiceRequest.setLocale(Locale.getDefault());
+
 		asqSubmitBnplTamraServiceResponse = createInStoreCheckoutSession(asqSubmitBnplTamraServiceRequest);
-		String paymentLink = asqSubmitBnplTamraServiceResponse.getCheckout_deeplink();
-		String orderId = asqSubmitBnplTamraServiceResponse.getOrder_id();
-		String checkOutId = asqSubmitBnplTamraServiceResponse.getCheckout_deeplink();
 		System.out.println("CheckoutID: " + asqSubmitBnplTamraServiceResponse.getCheckout_id());
 		System.out.println("OrderID: " + asqSubmitBnplTamraServiceResponse.getOrder_id());
 		System.out.println("CheckoutLink: " + asqSubmitBnplTamraServiceResponse.getCheckout_deeplink());
-		if((paymentLink != null)||(orderId != null)||(checkOutId !=null)) {
 		LOG.info("TAMARA API response PaymentLink: " + asqSubmitBnplTamraServiceResponse.getCheckout_deeplink());
-		LOG.info("TAMARA API response CheckoutID: " +asqSubmitBnplTamraServiceResponse.getCheckout_id());
-		LOG.info("TAMARA API response OrderID: " +asqSubmitBnplTamraServiceResponse.getOrder_id());
-		}
+		LOG.info("TAMARA API response CheckoutID: " + asqSubmitBnplTamraServiceResponse.getCheckout_id());
+		LOG.info("TAMARA API response OrderID: " + asqSubmitBnplTamraServiceResponse.getOrder_id());
 		return validateCheckoutSessionResponseAndStoreDataInDB(asqSubmitBnplTamraServiceResponse);
 	}
+
+	/**
+	 * This method return Technical Error
+	 *
+	 * @param argModel
+	 * @return Error
+	 */
 
 	private IOpResponse validateCheckoutSessionResponseAndStoreDataInDB(AsqSubmitBnplTamraServiceResponse response) {
 		if (null != response && null != response.getErrors()) {
@@ -206,7 +243,7 @@ public class AsqBnplTamaraTenderOp extends AbstractFormOp<AsqBnplTamaraEditModel
 		} else if (null == response) {
 			return technicalErrorScreen("TAMARA API::::: Service has null response");
 		}
-		IPosTransaction trans = (IPosTransaction) this._transactionScope.getTransaction();
+		IPosTransaction trans = this._transactionScope.getTransaction();
 		HashMap<String, String> responseList = new HashMap<String, String>();
 		String orderID = response.getOrder_id();
 		responseList.put("checkoutID", response.getCheckout_id());
@@ -220,7 +257,7 @@ public class AsqBnplTamaraTenderOp extends AbstractFormOp<AsqBnplTamaraEditModel
 
 	/**
 	 * This method return Technical Error
-	 * 
+	 *
 	 * @param argModel
 	 * @return Error
 	 */
@@ -234,7 +271,7 @@ public class AsqBnplTamaraTenderOp extends AbstractFormOp<AsqBnplTamaraEditModel
 
 	/**
 	 * This method handles the TAMARA service errors
-	 * 
+	 *
 	 * @param asqServiceResponse
 	 * @return Error Prompts
 	 */
@@ -252,7 +289,7 @@ public class AsqBnplTamaraTenderOp extends AbstractFormOp<AsqBnplTamaraEditModel
 	/**
 	 * This method saves the response of TAMARA API like checkoutID and orderID to
 	 * TRN_TRNS_P table for other TAMARA API calls
-	 * 
+	 *
 	 * @throws Database persistent Exception
 	 * @param IRetailTransaction originalPosTrx, String checkoutID, String orderID
 	 * @return
@@ -261,7 +298,7 @@ public class AsqBnplTamaraTenderOp extends AbstractFormOp<AsqBnplTamaraEditModel
 	public void saveTamaraResponseToDB(IPosTransaction originalPosTrx, HashMap<String, String> responseList) {
 
 		IPosTransaction trans = this._transactionScope.getTransaction();
-		if (responseList != null && trans !=null) {
+		if (responseList != null && trans != null) {
 			trans.setStringProperty("ASQ_TAMARA_ORDERID", responseList.get("orderID"));
 			trans.setStringProperty("ASQ_TAMARA_CHECKOUTID", responseList.get("checkoutID"));
 			_transactionScope.setValue(AsqValueKeys.ASQ_TAMARA_ORDERID, responseList.get("orderID"));
@@ -270,13 +307,11 @@ public class AsqBnplTamaraTenderOp extends AbstractFormOp<AsqBnplTamaraEditModel
 		}
 	}
 
-	public AsqSubmitBnplTamraServiceResponse createInStoreCheckoutSession(
-			IAsqSubmitBnplTamraServiceRequest asqSubmitBnplTamraServiceRequest) {
+	public AsqSubmitBnplTamraServiceResponse createInStoreCheckoutSession(IAsqSubmitBnplTamraServiceRequest asqSubmitBnplTamraServiceRequest) {
 		AsqSubmitBnplTamraServiceResponse response = new AsqSubmitBnplTamraServiceResponse();
 		try {
 			LOG.info("Calling CreateInStoreCheckoutSession API");
-			response = (AsqSubmitBnplTamraServiceResponse) tamaraService.get()
-					.createInStoreCheckoutSession(asqSubmitBnplTamraServiceRequest);
+			response = (AsqSubmitBnplTamraServiceResponse) tamaraService.get().createInStoreCheckoutSession(asqSubmitBnplTamraServiceRequest);
 			LOG.info("Returned from CreateInStoreCheckoutSession API");
 		} catch (Exception ex) {
 			LOG.debug("Exception during calling createInStoreCheckoutSession to start payment");

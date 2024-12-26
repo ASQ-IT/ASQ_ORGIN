@@ -2,6 +2,26 @@
 <InputTypeList xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="InputConfig.xsd">
 
   <!-- ASQ Input Config Changes Starts-->
+  
+ <InputType name="TRAN_SCAN">
+    <Event dtype="Class">dtv.hardware.events.TransactionScanEvent</Event>
+    <Type dtype="String">INPUT_RECEIPT</Type>
+    <InputRuleList>
+      <InputRule RuleType="ScannerSourceRule"/>
+      <InputRule RuleType="SymbologyRule">
+        <Parameter name="symbology" value="Code 93"/>
+        <Parameter name="symbology" value="Code93"/>
+      </InputRule>
+      <InputRule RuleType="LengthRule">
+        <Parameter name="length" value="23"/>
+      </InputRule>
+      <InputRule RuleType="RangeRule">
+        <Parameter name="range_start" value="T"/>
+        <Parameter name="range_end" value="T"/>
+      </InputRule>
+    </InputRuleList>
+  </InputType>
+  
   <InputType name="GIFT_CERT">
     <Event dtype="Class">dtv.hardware.events.VoucherEvent</Event>
     <Type dtype="String">GIFT_CERTIFICATE</Type>

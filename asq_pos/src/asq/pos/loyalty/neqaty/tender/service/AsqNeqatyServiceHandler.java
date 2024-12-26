@@ -15,14 +15,12 @@ import asq.pos.loyalty.neqaty.gen.ObjectFactory;
 import dtv.servicex.ServiceType;
 import dtv.servicex.impl.AbstractJaxWsHandler;
 
-public class AsqNeqatyServiceHandler
-		extends AbstractJaxWsHandler<NeqatyWSAPIPortType, IAsqNeqatyServiceRequest, AsqNeqatyServiceResponse> {
+public class AsqNeqatyServiceHandler extends AbstractJaxWsHandler<NeqatyWSAPIPortType, IAsqNeqatyServiceRequest, AsqNeqatyServiceResponse> {
 
 	private static final Logger LOG = LogManager.getLogger(AsqNeqatyServiceHandler.class);
 
 	@Override
-	public AsqNeqatyServiceResponse handleService(IAsqNeqatyServiceRequest argServiceRequest,
-			ServiceType<IAsqNeqatyServiceRequest, AsqNeqatyServiceResponse> paramServiceType) {
+	public AsqNeqatyServiceResponse handleService(IAsqNeqatyServiceRequest argServiceRequest, ServiceType<IAsqNeqatyServiceRequest, AsqNeqatyServiceResponse> paramServiceType) {
 
 		AsqNeqatyServiceResponse response = null;
 		try {
@@ -36,8 +34,7 @@ public class AsqNeqatyServiceHandler
 
 			switch (argServiceRequest.getMethod()) {
 			case AUTHORIZE:
-				servicePort.authorize(getAuthorizeRequest(argServiceRequest), resultCode, resultDescription, token,
-						transactionReference, optionsData);
+				servicePort.authorize(getAuthorizeRequest(argServiceRequest), resultCode, resultDescription, token, transactionReference, optionsData);
 				break;
 			case CONFIRM:
 				servicePort.confirm(getConfirmRequest(argServiceRequest), resultCode, resultDescription, optionsData);
@@ -48,9 +45,6 @@ public class AsqNeqatyServiceHandler
 			}
 			response = mapToNeqatyResponse(resultCode, resultDescription, token, transactionReference, optionsData);
 		} catch (Exception ex) {
-			for (StackTraceElement stack : ex.getStackTrace()) {
-				System.out.println(stack.toString());
-			}
 			LOG.error("Exception In Neqaty ", ex);
 		}
 		return response;
@@ -59,14 +53,12 @@ public class AsqNeqatyServiceHandler
 	private AuthorizeRequest getAuthorizeRequest(IAsqNeqatyServiceRequest argServiceRequest) {
 		ObjectFactory factory = new ObjectFactory();
 		AuthorizeRequest requestPayload = factory.createAuthorizeRequest();
-		requestPayload.setAuthenticationKey(
-				factory.createAuthorizeRequestAuthenticationKey(argServiceRequest.getAuthenticationKey()));
+		requestPayload.setAuthenticationKey(factory.createAuthorizeRequestAuthenticationKey(argServiceRequest.getAuthenticationKey()));
 		requestPayload.setMsisdn(factory.createAuthorizeRequestMsisdn(argServiceRequest.getMsisdn()));
-		requestPayload
-				.setOperationType(factory.createAuthorizeRequestOperationType(argServiceRequest.getOperationType()));
+		requestPayload.setOperationType(factory.createAuthorizeRequestOperationType(argServiceRequest.getOperationType()));
 
 		requestPayload.setTid(factory.createAuthorizeRequestTid(argServiceRequest.getTid()));
-		
+
 		if (-1 != argServiceRequest.getToken()) {
 			requestPayload.setToken(argServiceRequest.getToken());
 		}
@@ -76,14 +68,13 @@ public class AsqNeqatyServiceHandler
 		if (0 != argServiceRequest.getRedeemCode()) {
 			requestPayload.setRedeemCode(argServiceRequest.getRedeemCode());
 		}
-		
+
 		if (0 != argServiceRequest.getAmount()) {
 			requestPayload.setAmount(argServiceRequest.getAmount());
 		}
 
 		if (null != argServiceRequest.getTransactionReference()) {
-			requestPayload.setTransactionReference(
-					factory.createConfirmRequestTransactionReference(argServiceRequest.getTransactionReference()));
+			requestPayload.setTransactionReference(factory.createConfirmRequestTransactionReference(argServiceRequest.getTransactionReference()));
 		}
 		return requestPayload;
 	}
@@ -91,15 +82,13 @@ public class AsqNeqatyServiceHandler
 	private ConfirmRequest getConfirmRequest(IAsqNeqatyServiceRequest argServiceRequest) {
 		ObjectFactory factory = new ObjectFactory();
 		ConfirmRequest request = factory.createConfirmRequest();
-		request.setAuthenticationKey(
-				factory.createConfirmRequestAuthenticationKey(argServiceRequest.getAuthenticationKey()));
+		request.setAuthenticationKey(factory.createConfirmRequestAuthenticationKey(argServiceRequest.getAuthenticationKey()));
 		request.setMsisdn(factory.createConfirmRequestMsisdn(argServiceRequest.getMsisdn()));
 
 		if (!StringUtils.isBlank(argServiceRequest.getOtp())) {
 			request.setOneTimePassword(factory.createConfirmRequestOneTimePassword(argServiceRequest.getOtp()));
 		}
-		request.setTransactionReference(
-				factory.createConfirmRequestTransactionReference(argServiceRequest.getTransactionReference()));
+		request.setTransactionReference(factory.createConfirmRequestTransactionReference(argServiceRequest.getTransactionReference()));
 
 		request.setTid(factory.createConfirmRequestTid(argServiceRequest.getTid()));
 		return request;
@@ -108,19 +97,17 @@ public class AsqNeqatyServiceHandler
 	private AbortRequest getAbortRequest(IAsqNeqatyServiceRequest argServiceRequest) {
 		ObjectFactory factory = new ObjectFactory();
 		AbortRequest request = factory.createAbortRequest();
-		request.setAuthenticationKey(
-				factory.createAbortRequestAuthenticationKey(argServiceRequest.getAuthenticationKey()));
+		request.setAuthenticationKey(factory.createAbortRequestAuthenticationKey(argServiceRequest.getAuthenticationKey()));
 		request.setMsisdn(factory.createAbortRequestMsisdn(argServiceRequest.getMsisdn()));
 
-		request.setTransactionReference(
-				factory.createAbortRequestTransactionReference(argServiceRequest.getTransactionReference()));
+		request.setTransactionReference(factory.createAbortRequestTransactionReference(argServiceRequest.getTransactionReference()));
 
 		request.setTid(factory.createAbortRequestTid(argServiceRequest.getTid()));
 		return request;
 	}
 
-	private AsqNeqatyServiceResponse mapToNeqatyResponse(Holder<Integer> resultCode, Holder<String> resultDescription,
-			Holder<Integer> token, Holder<String> transactionReference, Holder<NeqatyWSAPIOptionsData> optionsData) {
+	private AsqNeqatyServiceResponse mapToNeqatyResponse(Holder<Integer> resultCode, Holder<String> resultDescription, Holder<Integer> token, Holder<String> transactionReference,
+			Holder<NeqatyWSAPIOptionsData> optionsData) {
 
 		AsqNeqatyServiceResponse responseNeqaty = new AsqNeqatyServiceResponse();
 		if (null != resultCode.value) {

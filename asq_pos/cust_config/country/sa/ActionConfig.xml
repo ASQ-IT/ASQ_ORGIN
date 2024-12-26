@@ -13,7 +13,7 @@
   	<!-- ASQ Zatca Integration Ends -->
   	
   	 <!-- ASQ STC Integration Starts -->
-	<Action name="SALE::ASQ_TENDER_STC" category="Register" keywords="sale_tender" text="_asqMenuTextSTC" chainKey="ASQ_TENDER_STC">
+	<Action name="SALE::ASQ_TENDER_STC" category="Register" keywords="sale_tender" text="_asqMenuTextSTC" chainKey="ASQ_TENDER_LOY_STC">
     <IconGroup icon="_imageTenderCash" rollIcon="_imageTenderCashRoll" pressIcon="_imageTenderCashPress" disabledIcon="_imageTenderCashDisabled" />
     <VisibilityRule class="dtv.pos.shared.visibilityrules.TenderEnabledCheck" >
       <Parameter name="tender" value="LOCAL_CURRENCY" />

@@ -15,6 +15,7 @@ public class AsqBnplTamaraItemObj {
    // private BigDecimal amount;
 
 	private AsqBnplTamaraAmountObj total_amount;
+	private AsqBnplTamaraDisAmtObj discount_amount;
 
     public int getReference_id() {
         return reference_id;
@@ -72,4 +73,11 @@ public class AsqBnplTamaraItemObj {
         this.total_amount = total_amount;
     }
 
+	public AsqBnplTamaraDisAmtObj getDiscount_amount() {
+		return discount_amount;
+	}
+
+	public void setDiscount_amount(AsqBnplTamaraDisAmtObj discount_amount) {
+		this.discount_amount = discount_amount;
+	}
 }

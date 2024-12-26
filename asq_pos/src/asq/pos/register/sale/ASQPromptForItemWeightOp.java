@@ -116,9 +116,12 @@ public class ASQPromptForItemWeightOp extends PromptForItemWeightOp {
 
 	public IItem getSuperParentItem(IItem item) {
 		IItem itemTola = null;
-		if (null != item.getItemOptions() && item.getItemOptions().size() > 0 && item.getItemOptions().get(0).getUnitOfMeasureCode().contains("TOLA")) {
-			if (null != item.getParentItem() && null != item.getParentItem().getParentItem()) {
-				itemTola = item.getParentItem().getParentItem();
+		if (null != item.getItemOptions() && item.getItemOptions().size() > 0) {
+			String measureCode = item.getItemOptions().get(0).getUnitOfMeasureCode();
+			if (AsqConstant.ASQ_TOLA.equalsIgnoreCase(measureCode)) {
+				if (null != item.getParentItem() && null != item.getParentItem().getParentItem()) {
+					itemTola = item.getParentItem().getParentItem();
+				}
 			}
 		}
 		return itemTola;
