@@ -13,7 +13,7 @@
     <!-- StockOnHand enable/ disable configuration -->
     <Setting name="StockOnHold---Enable">true</Setting>
     
-    <Setting name="ASQ---ItemReturn---EmailApproval">true</Setting>    <Setting name="ASQ---ReturnApprovalEmailOTP---To">sandeepreddy.gagireddy@wipro.com</Setting>
+    <Setting name="ASQ---ItemReturn---EmailApproval">true</Setting>    <Setting name="ASQ---ReturnApprovalEmailOTP---To">atul.sharma28@wipro.com</Setting>
     <Setting name="ASQ---ReturnOfflineOTP---To">628387</Setting>
     <Setting name="Email---TestingModeAddressFilter">@oracle.com, @micros.com, @asqgroup.com, @wipro.com</Setting>
     <Setting name="Email---Receipt---From">pos.notifiy@asqgroup.com</Setting>
@@ -26,7 +26,7 @@
 	<Setting name="OpenClose---PreferCurrentSystemDayOpen">false</Setting>
     <!-- ASQ Bin Transfer Email & OTP - Starts -->	
 	<Setting name="ASQ---BinTransfer---EmailApproval">true</Setting>
-	<Setting name="ASQ---BinTransferApprovalEmailOTP---To">raisunnissa.begum1@wipro.com</Setting>
+	<Setting name="ASQ---BinTransferApprovalEmailOTP---To">atul.sharma28@wipro.com</Setting>
     <Setting name="ASQ---BinTransferOfflineOTP---To">628387</Setting>
 	<!-- ASQ Bin Transfer Email & OTP - Ends -->	
 
@@ -41,7 +41,7 @@
     <Setting name="InvoiceConfig---EnableInvoicing">true</Setting>
     <Setting name="TaxFreeConfig---Enabled">true</Setting>
     <!-- PRICE Quotation end-->
-    <Setting name="ASQ---StoreTransferApprovalEmailOTP---To">sandeepreddy.gagireddy@wipro.com</Setting>
+    <Setting name="ASQ---StoreTransferApprovalEmailOTP---To">atul.sharma28@wipro.com</Setting>
      
     <Setting name="ASQ---NEQATY---LoyaltySystem">false</Setting>
 </SysConfig>

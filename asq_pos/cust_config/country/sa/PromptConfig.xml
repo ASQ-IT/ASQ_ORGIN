@@ -42,8 +42,8 @@
 		<Action ref="YES" text="_asqAddNew" />
 		<Action ref="NO" text="_asqContinue" />
 	</Prompt>
-	<Prompt name="ASQ_STC_INVALID_MOBILE_ERROR" type="NotifyCancel" title="_asqStcMobileNumberErrorTitle" message="_asqPromptmsgInvalidMobileNumber">
-		<Action ref="CANCEL_BACK" />
+	<Prompt name="ASQ_STC_INVALID_MOBILE_ERROR" type="Notify" title="_asqStcMobileNumberErrorTitle" message="_asqPromptmsgInvalidMobileNumber">
+		<Action dataKey="CONTINUE" text="_continue" keyStroke="Enter" />
 	</Prompt>
 	<Prompt name="ASQ_STC_WRONG_MOBILE_ERROR" type="NotifyCancel" title="_asqStcMobileNumberErrorTitle" message="_asqPromptmsgWrongMobileNumberError">
 	 <Action ref="CANCEL_BACK" />

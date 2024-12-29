@@ -53,8 +53,15 @@ public class AsqSubmitBnplTamraServiceResponse implements IServiceResponse{
     private String capture_id;
 
     @JsonProperty("order_reference_id")
-    private Long order_reference_id;
+    private String order_reference_id;
     
+    public String getOrder_reference_id() {
+		return order_reference_id;
+	}
+	public void setOrder_reference_id(String order_reference_id) {
+		this.order_reference_id = order_reference_id;
+	}
+
     @JsonProperty("order_number")
     private String order_number;
     
@@ -240,13 +247,6 @@ public class AsqSubmitBnplTamraServiceResponse implements IServiceResponse{
 		this.capture_id = capture_id;
 	}
 
-	public Long getOrder_reference_id() {
-		return order_reference_id;
-	}
-
-	public void setOrder_reference_id(Long order_reference_id) {
-		this.order_reference_id = order_reference_id;
-	}
 
 	public String getOrder_number() {
 		return order_number;

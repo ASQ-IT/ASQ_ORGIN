@@ -25,7 +25,7 @@ public class AsqHelper {
 	public IValidationResult isReceivingInProgress() {
 		Map<String, Object> asqRecievingInProgress = new HashMap<String, Object>();
 		List<AsqRecievingQueryResult> results = DataFactory.getObjectByQueryNoThrow(ASQ_IN_PROGRESS_RECEIVING, asqRecievingInProgress);
-		if (null != results) {
+		if (null != results && !results.isEmpty()) {
 			StringBuilder shipingDoc = new StringBuilder();
 			StringBuilder shipingOty = new StringBuilder();
 			for (int i = 0; i < results.size(); i++) {

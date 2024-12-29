@@ -57,7 +57,13 @@ public class AsqSTCEarnPointsOp extends Operation {
 
 	@Override
 	public IOpResponse handleOpExec(IXstEvent paramIXstEvent) {
+		if (paramIXstEvent == null) {
+			return stcLoayalityEarn();
+		}
+		return HELPER.completeResponse();
+	}
 
+	private IOpResponse stcLoayalityEarn() {
 		IRetailTransaction txn = _transactionScope.getTransaction(TransactionType.RETAIL_SALE);
 		boolean isCustomerPresent = false;
 		String custMobileNmbr = "";

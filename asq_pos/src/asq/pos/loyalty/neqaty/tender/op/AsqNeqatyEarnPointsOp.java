@@ -56,7 +56,10 @@ public class AsqNeqatyEarnPointsOp extends Operation {
 	 */
 	@Override
 	public IOpResponse handleOpExec(IXstEvent paramIXstEvent) {
-		return neqatyLoyalty();
+		if (paramIXstEvent == null) {
+			return neqatyLoyalty();
+		}
+		return HELPER.completeResponse();
 	}
 
 	private IOpResponse neqatyLoyalty() {

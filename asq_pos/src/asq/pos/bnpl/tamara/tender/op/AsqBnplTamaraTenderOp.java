@@ -196,9 +196,11 @@ public class AsqBnplTamaraTenderOp extends AbstractFormOp<AsqBnplTamaraEditModel
 				}
 			}
 
-			itemDiscAmnt.setAmount(discamount);
-			itemDiscAmnt.setCurrency(trans.getRetailTransactionLineItems().get(0).getCurrencyId());
-			asqBnplTamaraItemObj.setDiscount_amount(itemDiscAmnt);
+			/*
+			 * itemDiscAmnt.setAmount(discamount);
+			 * itemDiscAmnt.setCurrency(trans.getRetailTransactionLineItems().get(0).
+			 * getCurrencyId()); asqBnplTamaraItemObj.setDiscount_amount(itemDiscAmnt);
+			 */
 
 			itemTotalAmnt.setAmount(lineItem.getGrossAmount());
 			itemTotalAmnt.setCurrency(trans.getRetailTransactionLineItems().get(0).getCurrencyId());

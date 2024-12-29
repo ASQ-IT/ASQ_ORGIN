@@ -1,17 +1,20 @@
-/**
- * 
- */
 package asq.pos.bnpl.tamara.tender.service;
+
+import com.oracle.shaded.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 /**
  * @author RA20221457
  *
  */
+
+@JsonIgnoreProperties(ignoreUnknown =true)
 public class AsqBnplTamaraDisAmtObj {
 	
 		private String currency;
 		
-		private Number amount;
+		//private Number amount;
+		
+		private String name;
 	 
 
 
@@ -23,12 +26,18 @@ public class AsqBnplTamaraDisAmtObj {
 			this.currency = currency;
 		}
 
-		public Number getAmount() {
-			return amount;
+		/*
+		 * public Number getAmount() { return amount; }
+		 * 
+		 * public void setAmount(Number amount) { this.amount = amount; }
+		 */
+
+		public String getName() {
+			return name;
 		}
 
-		public void setAmount(Number amount) {
-			this.amount = amount;
+		public void setName(String name) {
+			this.name = name;
 		}
 	 
 

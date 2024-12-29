@@ -114,9 +114,9 @@
 		<row style="STRONGUNDERLINE" align="C" />
 		<sectionref>barcode_footer</sectionref>
 		<sectionref>asq_zatca_qrcode</sectionref>
-		<sectionref>asq_emp_commission</sectionref>
 		<row style="STRONGUNDERLINE" align="C" />
 	</section>
+	
 	<!-- Asq Zatca rcpt changes start -->
 	<section name="asq_zatca_qrcode">
 		<barcode symbology="QR CODE" textposition="NONE" height="250" width="300">
@@ -127,13 +127,12 @@
 		</barcode>
 	</section> 	
 	<!-- Asq Zatca rcpt changes ends -->
+	
 	<!-- Asq employee commission changes start -->
 	<section name="asq_emp_commission">
-	  <row>
         <field>
           <aggregate class="asq.pos.store.close.receipt.AsqEmployeeCommissionDocBuilderField" />
         </field>
-      </row>
 	</section> 	
 	<!-- Asq employee commission changes ends -->
 	
@@ -215,6 +214,6 @@
 		<picture
 			filename="../xstoredata/xstore/res/graphics/receipt/barcode.bmp"
 			preload="true" />
-	</section>   
+	</section>	   
 </sections>
 </ReceiptDefinitions>
