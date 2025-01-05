@@ -7,41 +7,27 @@ import com.oracle.shaded.fasterxml.jackson.annotation.JsonIgnoreProperties;
  *
  */
 
-@JsonIgnoreProperties(ignoreUnknown =true)
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class AsqBnplTamaraDisAmtObj {
-	
-		private String currency;
-		
-		//private Number amount;
-		
-		private String name;
-	 
 
+	private String currency;
 
-		public String getCurrency() {
-			return currency;
-		}
+	private Number amount;
 
-		public void setCurrency(String currency) {
-			this.currency = currency;
-		}
-
-		/*
-		 * public Number getAmount() { return amount; }
-		 * 
-		 * public void setAmount(Number amount) { this.amount = amount; }
-		 */
-
-		public String getName() {
-			return name;
-		}
-
-		public void setName(String name) {
-			this.name = name;
-		}
-	 
-
-		
+	public String getCurrency() {
+		return currency;
 	}
 
+	public void setCurrency(String currency) {
+		this.currency = currency;
+	}
 
+	public Number getAmount() {
+		return amount;
+	}
+
+	public void setAmount(Number amount) {
+		this.amount = amount;
+	}
+
+}

@@ -38,7 +38,7 @@ public interface IAsqSubmitBnplTamraServiceRequest extends IServiceRequest {
 		public String getCheckout_id();
 
 		public void setCheckout_id(String checkout_id);
-		
+
 		public void setAdditional_data(AsqBnplTamaraAddDataObj storeData);
 		
 		public void setLocale(Locale loc);

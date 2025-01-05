@@ -1,1 +1,9 @@
-INSERT|RETAIL_LOCATION|${dtv.location.storeNumber}|0${dtv.location.storeNumber}|Salama Centre Showroom - Jeddah|Salama Centre Showroom|30500 Bruce Industrial Pkwy|||Jeddah|||SA||||||Store Manager 0${dtv.location.storeNumber}|15|||0|0|0|||||ar_SA|SAR|||0${dtv.location.storeNumber}||||||0||||SA|||
+INSERT|RETAIL_LOCATION|11401|11401|Hilton Al-Madinah Showroom|Hilton Al-Madinah Showroom| Al-Madinah ||| Al-Madinah |Al-Medina|41311|SA||||||Store Manager 11401|15|||0|0|0|||||ar_SA|SAR||0|81-KSA-011401||||||0||||SA||
+INSERT|RETAIL_LOCATION|11101|11101|Abraj Al-Bait 1 Showroom|Abraj Al-Bait 1 Showroom|Al-Bait |||Al-Bait |Al-Bait |21442|SA||||||Store Manager 11101|15|||0|0|0|||||ar_SA|SAR||0|81-KSA-011101||||||0||||SA||
+INSERT|RETAIL_LOCATION|11399|11399|Main Warehouse - Jeddah|Main Warehouse - Jeddah|Jeddah|||Jeddah|Jeddah|21955|SA||||||Store Manager 11399|15|||0|0|0|||||ar_SA|SAR||0|81-KSA-011399||||||0||||SA||
+INSERT|RETAIL_LOCATION|11397|11397|Damaged Warehouse - Jeddah|Damaged Warehouse - Jeddah|Jeddah|||Jeddah|Jeddah|21955|SA||||||Store Manager 11397|15|||0|0|0|||||ar_SA|SAR||0|81-KSA-011397||||||0||||SA||
+INSERT|RETAIL_LOCATION|211201|211201|Al-Tahlia Showroom - Jeddah|Al-Tahlia Showroom - Jeddah|Jeddah|||Makkah|Jeddah|21442|SA||||||Store Manager 211201|15|||0|0|0|||||ar_SA|SAR||0|81-KSA-0211201||||||0||||SA||
+INSERT|RETAIL_LOCATION|211199|211199|Main Warehouse Makkah - Makkah|Main Warehouse Makkah - Makkah|Jeddah|||Makkah|Jeddah|21955|SA||||||Store Manager 211199|15|||0|0|0|||||ar_SA|SAR||0|81-KSA-0211199||||||0||||SA||
+INSERT|RETAIL_LOCATION|211196|211196|Damage Warehouse - Makkah|Damage Warehouse - Makkah|Jeddah|||Makkah|Jeddah|21955|SA||||||Store Manager 211196|15|||0|0|0|||||ar_SA|SAR||0|81-KSA-0211196||||||0||||SA||
+INSERT|RETAIL_LOCATION|11347|11347|Salama Centre Showroom - Jeddah|Salama Centre Showroom - Jeddah|Jeddah|||Jeddah|Jeddah|41311|SA||||||Store Manager 11347|15|||0|0|0|||||ar_SA|SAR||0|81-KSA-011347||||||0||||SA||
+

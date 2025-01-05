@@ -130,9 +130,11 @@
 	
 	<!-- Asq employee commission changes start -->
 	<section name="asq_emp_commission">
-        <field>
+	<row>
+        <field style="BOLD">
           <aggregate class="asq.pos.store.close.receipt.AsqEmployeeCommissionDocBuilderField" />
         </field>
+        </row>
 	</section> 	
 	<!-- Asq employee commission changes ends -->
 	
@@ -214,6 +216,75 @@
 		<picture
 			filename="../xstoredata/xstore/res/graphics/receipt/barcode.bmp"
 			preload="true" />
-	</section>	   
+	</section>
+
+	<!--ASQ Commission starts -->
+	<section name="SYSTEM_CYCLE">
+		<horizontal_rule />
+		<sectionref>training</sectionref>
+		<row>
+			<field text="_store" />
+			<sp />
+			<field method="getRetailLocationId" formatter="Numeric" />
+			<field text="_registerColon" loc="22" />
+			<sp />
+			<field method="getWorkstationId" formatter="Numeric" />
+		</row>
+		<row>
+			<field text="_date" />
+			<sp />
+			<field method="getTransactionDate" formatter="DateShort" />
+			<field text="_trantime" loc="22" />
+			<sp />
+			<field method="getBeginDateTimestamp" formatter="TimeShort" />
+		</row>
+		<row />
+		<row>
+			<field text="_cashier" />
+			<sp />
+			<field method="getOperatorParty.getEmployeeId" />
+		</row>
+		<!-- 24/7 Add the last 4 digit of the session id -->
+		<row>
+			<condition method="getTransactionTypeCode"
+				comparison="EQUAL" value="WORKSTATION_CLOSE" />
+			<field text="_sessionid" />
+			<sp />
+			<field method="getSessionId" formatter="Last4" />
+		</row>
+		<row>
+			<condition method="getTransactionTypeCode"
+				comparison="EQUAL" value="WORKSTATION_COMPLETE_REM_CLOSE" />
+			<field text="_sessionid" />
+			<sp />
+			<field method="getSessionId" formatter="Last4" />
+		</row>
+		<row />
+		<row align="C" charsize="X2HW">
+			<field text="*******************" style="BOLD" />
+		</row>
+		<row align="C" charsize="X2HW">
+			<field style="BOLD">
+				<aggregate
+					class="dtv.pos.systemcycle.common.SystemCycleReceiptBannerDocBuilderField" />
+			</field>
+		</row>
+		<sectionref>asq_emp_commission</sectionref>
+		<row align="C" charsize="X2HW">
+			<condition method="getTransactionTypeCode"
+				comparison="EQUAL" value="WORKSTATION_COMPLETE_REM_CLOSE" />
+			<field text="_registerColon" style="BOLD" />
+			<sp />
+			<field method="getStringProperty"
+				method_param="remoteWorkstationId" style="BOLD" />
+		</row>
+		<row align="C" charsize="X2HW">
+			<field text="*******************" style="BOLD" />
+		</row>
+		<sectionref>training</sectionref>
+		<sectionref>page_break</sectionref>
+	</section>
+	<!--ASQ Commission ends -->
+	   
 </sections>
 </ReceiptDefinitions>

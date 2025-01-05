@@ -1,3 +1,1 @@
-INSERT|INV_LOCATION|${dtv.location.storeNumber}|DEFAULT|${dtv.location.storeNumber}|1|1|
-INSERT|INV_LOCATION|${dtv.location.storeNumber}|11106|11106|1|1|
-INSERT|INV_LOCATION|${dtv.location.storeNumber}|11104|11104|1|1|
+INSERT|INV_LOCATION|${dtv.location.storeNumber}|DEFAULT|11347|1|1|

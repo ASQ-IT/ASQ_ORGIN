@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<LogDefinitions xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="LogConfig.xsd">
+  <!-- ***************************************************** -->
+  <!-- ** ROUTING RULES -->
+  <!-- ***************************************************** -->
+  
+  <!-- ***************************************************** -->
+  <!-- ** SECTIONS -->
+  <!-- ***************************************************** -->
+  <sections>
+  
+   <section name="inventory_doc_common">
+      <xml><![CDATA[
+        <?iterator method="getNotes"?>
+        <Note>
+          <NoteID>#{getNoteId}</NoteID>
+          <CreatorPartyID>#{getCreatorParty.getPartyId}</CreatorPartyID>
+          <CreationTimestamp>#{getNoteDatetimestamp}[datetime]</CreationTimestamp>
+          <NoteText>#{getNote}</NoteText>
+        </Note>
+        <?_iterator?>
+      
+        <?iterator method="getShipments"?>
+        <Shipment>
+          <ShipmentSequence>#{getShipmentSequence}</ShipmentSequence>
+          <ExpectedDeliveryDate>#{getExpectedDeliveryDate}[datetime]</ExpectedDeliveryDate>
+          <ActualDeliveryDate>#{getActualDeliveryDate}[datetime]</ActualDeliveryDate>
+          <ExpectedShipDate>#{getExpectedShipDate}[datetime]</ExpectedShipDate>
+          <ActualShipDate>#{getActualShipDate}[datetime]</ActualShipDate>
+          <DestinationPartyID>#{getDestinationParty.getPartyId}</DestinationPartyID>
+          <!-- Added for Alternate Party Id -->
+           <?condition method="getDestinationParty.getPartyId" comparison="NOT_NULL"?>
+          <DestinationAlternatePartyID>#{getDestinationParty.getCustomerId}</DestinationAlternatePartyID>
+          <?_condition?>          
+           <?condition method="getDestinationRetailLocation" comparison="NOT_NULL"?>
+          <DestinationRetailLocationID>#{getDestinationRetailLocation.getRetailLocationId}</DestinationRetailLocationID>
+          <?_condition?>
+         <!-- Added Alternate store number -->
+          <?condition method="getDestinationRetailLocation" comparison="NOT_NULL"?>
+          <DestinationAlternateRetailLocationID>#{getDestinationRetailLocation.getAlternateStoreNbr}</DestinationAlternateRetailLocationID>
+          <?_condition?>
+          <?condition method="getDestinationRetailLocation" comparison="IS_NULL"?>
+          <DestinationRetailLocationID>#{getDestinationRetailLocationId}</DestinationRetailLocationID>
+          <?_condition?>
+          <DestinationName>#{getDestinationName}</DestinationName>
+          <ShippingCarrier>#{getShippingCarrier}</ShippingCarrier>
+          <ShippingMethod>#{getShippingMethod}</ShippingMethod>
+          <TrackingNumber>#{getTrackingNumber}</TrackingNumber>
+          <StatusCode>#{getShipmentStatusCode}</StatusCode>
+          
+          <?call method="getAddress"?>
+          <?sectionref name="address_common"?>
+          <?_call?>
+
+        </Shipment>
+        <?_iterator?>
+          
+        <?iterator method="getCartons"?>
+        <Carton>
+          <CartonID>#{getCartonId}</CartonID>
+          <StatusCode>#{getCartonStatusCode}</StatusCode>
+          
+          <?iterator method="getLineItems"?>
+          <?sectionref name="lineitem"?>
+          <?_iterator?>
+        </Carton>
+        <?_iterator?>
+      ]]></xml>
+    </section>
+
+  </sections>
+</LogDefinitions>

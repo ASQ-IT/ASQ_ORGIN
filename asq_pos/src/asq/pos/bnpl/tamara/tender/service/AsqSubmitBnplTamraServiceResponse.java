@@ -55,14 +55,7 @@ public class AsqSubmitBnplTamraServiceResponse implements IServiceResponse{
     @JsonProperty("order_reference_id")
     private String order_reference_id;
     
-    public String getOrder_reference_id() {
-		return order_reference_id;
-	}
-	public void setOrder_reference_id(String order_reference_id) {
-		this.order_reference_id = order_reference_id;
-	}
-
-    @JsonProperty("order_number")
+	@JsonProperty("order_number")
     private String order_number;
     
     @JsonProperty("description")
@@ -98,15 +91,8 @@ public class AsqSubmitBnplTamraServiceResponse implements IServiceResponse{
     @JsonProperty("tax_amount")
     private AsqBnplTamaraAmountObj tax_amount;
     
-    public AsqBnplTamaraDisAmtObj getDiscount_amount() {
-		return discount_amount;
-	}
-	public void setDiscount_amount(AsqBnplTamaraDisAmtObj discount_amount) {
-		this.discount_amount = discount_amount;
-	}
-
 	@JsonProperty("discount_amount")
-    private AsqBnplTamaraDisAmtObj discount_amount;
+    private AsqBnplTamaraTraDisAmtObj discount_amount;
     
     @JsonProperty("refunded_amount")
     private AsqBnplTamaraAmountObj refunded_amount;
@@ -246,6 +232,7 @@ public class AsqSubmitBnplTamraServiceResponse implements IServiceResponse{
 	public void setCapture_id(String capture_id) {
 		this.capture_id = capture_id;
 	}
+
 
 
 	public String getOrder_number() {
@@ -421,5 +408,18 @@ public class AsqSubmitBnplTamraServiceResponse implements IServiceResponse{
 	}
 	public void setCheckout_link(String checkout_link) {
 		this.checkout_link = checkout_link;
+	}
+	
+    public String getOrder_reference_id() {
+		return order_reference_id;
+	}
+	public void setOrder_reference_id(String order_reference_id) {
+		this.order_reference_id = order_reference_id;
+	}
+	public AsqBnplTamaraTraDisAmtObj getDiscount_amount() {
+		return discount_amount;
+	}
+	public void setDiscount_amount(AsqBnplTamaraTraDisAmtObj discount_amount) {
+		this.discount_amount = discount_amount;
 	}
 }
