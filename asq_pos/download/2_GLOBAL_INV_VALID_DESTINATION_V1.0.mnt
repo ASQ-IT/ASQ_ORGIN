@@ -1,0 +1,901 @@
+INSERT|INV_VALID_DESTINATIONS|RECEIVING|RETURN_TO_VENDOR|11347|PARTY|11399|Main Warehouse - Jeddah|30|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|SHIPPING|RETURN_TO_VENDOR|11347|PARTY|11399|Main Warehouse - Jeddah|20|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|SHIPPING|DAMAGED_RETURN|11347|PARTY|11397|Damaged Warehouse - Jeddah|20|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|RECEIVING|DAMAGED_RETURN|11347|PARTY|11397|Damaged Warehouse - Jeddah|30|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|RECEIVING|RETURN_TO_VENDOR|11101|PARTY|11399|Main Warehouse - Jeddah|30|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|SHIPPING|RETURN_TO_VENDOR|11101|PARTY|11399|Main Warehouse - Jeddah|20|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|SHIPPING|DAMAGED_RETURN|11101|PARTY|11397|Damaged Warehouse - Jeddah|20|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|RECEIVING|DAMAGED_RETURN|11101|PARTY|11397|Damaged Warehouse - Jeddah|30|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|RECEIVING|RETURN_TO_VENDOR|11102|PARTY|11399|Main Warehouse - Jeddah|30|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|SHIPPING|RETURN_TO_VENDOR|11102|PARTY|11399|Main Warehouse - Jeddah|20|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|SHIPPING|DAMAGED_RETURN|11102|PARTY|11397|Damaged Warehouse - Jeddah|20|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|RECEIVING|DAMAGED_RETURN|11102|PARTY|11397|Damaged Warehouse - Jeddah|30|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|RECEIVING|RETURN_TO_VENDOR|11103|PARTY|11399|Main Warehouse - Jeddah|30|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|SHIPPING|RETURN_TO_VENDOR|11103|PARTY|11399|Main Warehouse - Jeddah|20|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|SHIPPING|DAMAGED_RETURN|11103|PARTY|11397|Damaged Warehouse - Jeddah|20|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|RECEIVING|DAMAGED_RETURN|11103|PARTY|11397|Damaged Warehouse - Jeddah|30|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|RECEIVING|RETURN_TO_VENDOR|11104|PARTY|11399|Main Warehouse - Jeddah|30|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|SHIPPING|RETURN_TO_VENDOR|11104|PARTY|11399|Main Warehouse - Jeddah|20|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|SHIPPING|DAMAGED_RETURN|11104|PARTY|11397|Damaged Warehouse - Jeddah|20|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|RECEIVING|DAMAGED_RETURN|11104|PARTY|11397|Damaged Warehouse - Jeddah|30|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|RECEIVING|RETURN_TO_VENDOR|11105|PARTY|11399|Main Warehouse - Jeddah|30|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|SHIPPING|RETURN_TO_VENDOR|11105|PARTY|11399|Main Warehouse - Jeddah|20|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|SHIPPING|DAMAGED_RETURN|11105|PARTY|11397|Damaged Warehouse - Jeddah|20|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|RECEIVING|DAMAGED_RETURN|11105|PARTY|11397|Damaged Warehouse - Jeddah|30|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|RECEIVING|RETURN_TO_VENDOR|11106|PARTY|11399|Main Warehouse - Jeddah|30|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|SHIPPING|RETURN_TO_VENDOR|11106|PARTY|11399|Main Warehouse - Jeddah|20|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|SHIPPING|DAMAGED_RETURN|11106|PARTY|11397|Damaged Warehouse - Jeddah|20|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|RECEIVING|DAMAGED_RETURN|11106|PARTY|11397|Damaged Warehouse - Jeddah|30|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|RECEIVING|RETURN_TO_VENDOR|11107|PARTY|11399|Main Warehouse - Jeddah|30|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|SHIPPING|RETURN_TO_VENDOR|11107|PARTY|11399|Main Warehouse - Jeddah|20|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|SHIPPING|DAMAGED_RETURN|11107|PARTY|11397|Damaged Warehouse - Jeddah|20|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|RECEIVING|DAMAGED_RETURN|11107|PARTY|11397|Damaged Warehouse - Jeddah|30|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|RECEIVING|RETURN_TO_VENDOR|11108|PARTY|11399|Main Warehouse - Jeddah|30|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|SHIPPING|RETURN_TO_VENDOR|11108|PARTY|11399|Main Warehouse - Jeddah|20|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|SHIPPING|DAMAGED_RETURN|11108|PARTY|11397|Damaged Warehouse - Jeddah|20|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|RECEIVING|DAMAGED_RETURN|11108|PARTY|11397|Damaged Warehouse - Jeddah|30|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|RECEIVING|RETURN_TO_VENDOR|11110|PARTY|11399|Main Warehouse - Jeddah|30|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|SHIPPING|RETURN_TO_VENDOR|11110|PARTY|11399|Main Warehouse - Jeddah|20|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|SHIPPING|DAMAGED_RETURN|11110|PARTY|11397|Damaged Warehouse - Jeddah|20|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|RECEIVING|DAMAGED_RETURN|11110|PARTY|11397|Damaged Warehouse - Jeddah|30|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|RECEIVING|RETURN_TO_VENDOR|11111|PARTY|11399|Main Warehouse - Jeddah|30|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|SHIPPING|RETURN_TO_VENDOR|11111|PARTY|11399|Main Warehouse - Jeddah|20|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|SHIPPING|DAMAGED_RETURN|11111|PARTY|11397|Damaged Warehouse - Jeddah|20|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|RECEIVING|DAMAGED_RETURN|11111|PARTY|11397|Damaged Warehouse - Jeddah|30|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|RECEIVING|RETURN_TO_VENDOR|11112|PARTY|11399|Main Warehouse - Jeddah|30|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|SHIPPING|RETURN_TO_VENDOR|11112|PARTY|11399|Main Warehouse - Jeddah|20|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|SHIPPING|DAMAGED_RETURN|11112|PARTY|11397|Damaged Warehouse - Jeddah|20|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|RECEIVING|DAMAGED_RETURN|11112|PARTY|11397|Damaged Warehouse - Jeddah|30|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|RECEIVING|RETURN_TO_VENDOR|11113|PARTY|11399|Main Warehouse - Jeddah|30|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|SHIPPING|RETURN_TO_VENDOR|11113|PARTY|11399|Main Warehouse - Jeddah|20|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|SHIPPING|DAMAGED_RETURN|11113|PARTY|11397|Damaged Warehouse - Jeddah|20|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|RECEIVING|DAMAGED_RETURN|11113|PARTY|11397|Damaged Warehouse - Jeddah|30|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|RECEIVING|RETURN_TO_VENDOR|11114|PARTY|11399|Main Warehouse - Jeddah|30|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|SHIPPING|RETURN_TO_VENDOR|11114|PARTY|11399|Main Warehouse - Jeddah|20|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|SHIPPING|DAMAGED_RETURN|11114|PARTY|11397|Damaged Warehouse - Jeddah|20|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|RECEIVING|DAMAGED_RETURN|11114|PARTY|11397|Damaged Warehouse - Jeddah|30|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|RECEIVING|RETURN_TO_VENDOR|11116|PARTY|11399|Main Warehouse - Jeddah|30|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|SHIPPING|RETURN_TO_VENDOR|11116|PARTY|11399|Main Warehouse - Jeddah|20|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|SHIPPING|DAMAGED_RETURN|11116|PARTY|11397|Damaged Warehouse - Jeddah|20|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|RECEIVING|DAMAGED_RETURN|11116|PARTY|11397|Damaged Warehouse - Jeddah|30|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|RECEIVING|RETURN_TO_VENDOR|11119|PARTY|11399|Main Warehouse - Jeddah|30|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|SHIPPING|RETURN_TO_VENDOR|11119|PARTY|11399|Main Warehouse - Jeddah|20|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|SHIPPING|DAMAGED_RETURN|11119|PARTY|11397|Damaged Warehouse - Jeddah|20|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|RECEIVING|DAMAGED_RETURN|11119|PARTY|11397|Damaged Warehouse - Jeddah|30|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|RECEIVING|RETURN_TO_VENDOR|11120|PARTY|11399|Main Warehouse - Jeddah|30|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|SHIPPING|RETURN_TO_VENDOR|11120|PARTY|11399|Main Warehouse - Jeddah|20|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|SHIPPING|DAMAGED_RETURN|11120|PARTY|11397|Damaged Warehouse - Jeddah|20|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|RECEIVING|DAMAGED_RETURN|11120|PARTY|11397|Damaged Warehouse - Jeddah|30|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|RECEIVING|RETURN_TO_VENDOR|11121|PARTY|11399|Main Warehouse - Jeddah|30|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|SHIPPING|RETURN_TO_VENDOR|11121|PARTY|11399|Main Warehouse - Jeddah|20|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|SHIPPING|DAMAGED_RETURN|11121|PARTY|11397|Damaged Warehouse - Jeddah|20|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|RECEIVING|DAMAGED_RETURN|11121|PARTY|11397|Damaged Warehouse - Jeddah|30|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|RECEIVING|RETURN_TO_VENDOR|11123|PARTY|11399|Main Warehouse - Jeddah|30|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|SHIPPING|RETURN_TO_VENDOR|11123|PARTY|11399|Main Warehouse - Jeddah|20|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|SHIPPING|DAMAGED_RETURN|11123|PARTY|11397|Damaged Warehouse - Jeddah|20|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|RECEIVING|DAMAGED_RETURN|11123|PARTY|11397|Damaged Warehouse - Jeddah|30|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|RECEIVING|RETURN_TO_VENDOR|11126|PARTY|11399|Main Warehouse - Jeddah|30|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|SHIPPING|RETURN_TO_VENDOR|11126|PARTY|11399|Main Warehouse - Jeddah|20|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|SHIPPING|DAMAGED_RETURN|11126|PARTY|11397|Damaged Warehouse - Jeddah|20|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|RECEIVING|DAMAGED_RETURN|11126|PARTY|11397|Damaged Warehouse - Jeddah|30|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|RECEIVING|RETURN_TO_VENDOR|11129|PARTY|11399|Main Warehouse - Jeddah|30|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|SHIPPING|RETURN_TO_VENDOR|11129|PARTY|11399|Main Warehouse - Jeddah|20|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|SHIPPING|DAMAGED_RETURN|11129|PARTY|11397|Damaged Warehouse - Jeddah|20|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|RECEIVING|DAMAGED_RETURN|11129|PARTY|11397|Damaged Warehouse - Jeddah|30|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|RECEIVING|RETURN_TO_VENDOR|11130|PARTY|11399|Main Warehouse - Jeddah|30|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|SHIPPING|RETURN_TO_VENDOR|11130|PARTY|11399|Main Warehouse - Jeddah|20|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|SHIPPING|DAMAGED_RETURN|11130|PARTY|11397|Damaged Warehouse - Jeddah|20|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|RECEIVING|DAMAGED_RETURN|11130|PARTY|11397|Damaged Warehouse - Jeddah|30|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|RECEIVING|RETURN_TO_VENDOR|11131|PARTY|11399|Main Warehouse - Jeddah|30|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|SHIPPING|RETURN_TO_VENDOR|11131|PARTY|11399|Main Warehouse - Jeddah|20|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|SHIPPING|DAMAGED_RETURN|11131|PARTY|11397|Damaged Warehouse - Jeddah|20|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|RECEIVING|DAMAGED_RETURN|11131|PARTY|11397|Damaged Warehouse - Jeddah|30|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|RECEIVING|RETURN_TO_VENDOR|11132|PARTY|11399|Main Warehouse - Jeddah|30|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|SHIPPING|RETURN_TO_VENDOR|11132|PARTY|11399|Main Warehouse - Jeddah|20|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|SHIPPING|DAMAGED_RETURN|11132|PARTY|11397|Damaged Warehouse - Jeddah|20|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|RECEIVING|DAMAGED_RETURN|11132|PARTY|11397|Damaged Warehouse - Jeddah|30|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|RECEIVING|RETURN_TO_VENDOR|11201|PARTY|11399|Main Warehouse - Jeddah|30|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|SHIPPING|RETURN_TO_VENDOR|11201|PARTY|11399|Main Warehouse - Jeddah|20|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|SHIPPING|DAMAGED_RETURN|11201|PARTY|11397|Damaged Warehouse - Jeddah|20|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|RECEIVING|DAMAGED_RETURN|11201|PARTY|11397|Damaged Warehouse - Jeddah|30|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|RECEIVING|RETURN_TO_VENDOR|11202|PARTY|11399|Main Warehouse - Jeddah|30|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|SHIPPING|RETURN_TO_VENDOR|11202|PARTY|11399|Main Warehouse - Jeddah|20|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|SHIPPING|DAMAGED_RETURN|11202|PARTY|11397|Damaged Warehouse - Jeddah|20|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|RECEIVING|DAMAGED_RETURN|11202|PARTY|11397|Damaged Warehouse - Jeddah|30|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|RECEIVING|RETURN_TO_VENDOR|11203|PARTY|11399|Main Warehouse - Jeddah|30|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|SHIPPING|RETURN_TO_VENDOR|11203|PARTY|11399|Main Warehouse - Jeddah|20|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|SHIPPING|DAMAGED_RETURN|11203|PARTY|11397|Damaged Warehouse - Jeddah|20|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|RECEIVING|DAMAGED_RETURN|11203|PARTY|11397|Damaged Warehouse - Jeddah|30|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|RECEIVING|RETURN_TO_VENDOR|11205|PARTY|11399|Main Warehouse - Jeddah|30|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|SHIPPING|RETURN_TO_VENDOR|11205|PARTY|11399|Main Warehouse - Jeddah|20|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|SHIPPING|DAMAGED_RETURN|11205|PARTY|11397|Damaged Warehouse - Jeddah|20|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|RECEIVING|DAMAGED_RETURN|11205|PARTY|11397|Damaged Warehouse - Jeddah|30|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|RECEIVING|RETURN_TO_VENDOR|11207|PARTY|11399|Main Warehouse - Jeddah|30|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|SHIPPING|RETURN_TO_VENDOR|11207|PARTY|11399|Main Warehouse - Jeddah|20|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|SHIPPING|DAMAGED_RETURN|11207|PARTY|11397|Damaged Warehouse - Jeddah|20|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|RECEIVING|DAMAGED_RETURN|11207|PARTY|11397|Damaged Warehouse - Jeddah|30|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|RECEIVING|RETURN_TO_VENDOR|11209|PARTY|11399|Main Warehouse - Jeddah|30|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|SHIPPING|RETURN_TO_VENDOR|11209|PARTY|11399|Main Warehouse - Jeddah|20|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|SHIPPING|DAMAGED_RETURN|11209|PARTY|11397|Damaged Warehouse - Jeddah|20|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|RECEIVING|DAMAGED_RETURN|11209|PARTY|11397|Damaged Warehouse - Jeddah|30|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|RECEIVING|RETURN_TO_VENDOR|11210|PARTY|11399|Main Warehouse - Jeddah|30|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|SHIPPING|RETURN_TO_VENDOR|11210|PARTY|11399|Main Warehouse - Jeddah|20|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|SHIPPING|DAMAGED_RETURN|11210|PARTY|11397|Damaged Warehouse - Jeddah|20|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|RECEIVING|DAMAGED_RETURN|11210|PARTY|11397|Damaged Warehouse - Jeddah|30|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|RECEIVING|RETURN_TO_VENDOR|11211|PARTY|11399|Main Warehouse - Jeddah|30|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|SHIPPING|RETURN_TO_VENDOR|11211|PARTY|11399|Main Warehouse - Jeddah|20|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|SHIPPING|DAMAGED_RETURN|11211|PARTY|11397|Damaged Warehouse - Jeddah|20|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|RECEIVING|DAMAGED_RETURN|11211|PARTY|11397|Damaged Warehouse - Jeddah|30|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|RECEIVING|RETURN_TO_VENDOR|11212|PARTY|11399|Main Warehouse - Jeddah|30|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|SHIPPING|RETURN_TO_VENDOR|11212|PARTY|11399|Main Warehouse - Jeddah|20|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|SHIPPING|DAMAGED_RETURN|11212|PARTY|11397|Damaged Warehouse - Jeddah|20|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|RECEIVING|DAMAGED_RETURN|11212|PARTY|11397|Damaged Warehouse - Jeddah|30|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|RECEIVING|RETURN_TO_VENDOR|11213|PARTY|11399|Main Warehouse - Jeddah|30|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|SHIPPING|RETURN_TO_VENDOR|11213|PARTY|11399|Main Warehouse - Jeddah|20|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|SHIPPING|DAMAGED_RETURN|11213|PARTY|11397|Damaged Warehouse - Jeddah|20|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|RECEIVING|DAMAGED_RETURN|11213|PARTY|11397|Damaged Warehouse - Jeddah|30|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|RECEIVING|RETURN_TO_VENDOR|11214|PARTY|11399|Main Warehouse - Jeddah|30|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|SHIPPING|RETURN_TO_VENDOR|11214|PARTY|11399|Main Warehouse - Jeddah|20|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|SHIPPING|DAMAGED_RETURN|11214|PARTY|11397|Damaged Warehouse - Jeddah|20|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|RECEIVING|DAMAGED_RETURN|11214|PARTY|11397|Damaged Warehouse - Jeddah|30|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|RECEIVING|RETURN_TO_VENDOR|11215|PARTY|11399|Main Warehouse - Jeddah|30|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|SHIPPING|RETURN_TO_VENDOR|11215|PARTY|11399|Main Warehouse - Jeddah|20|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|SHIPPING|DAMAGED_RETURN|11215|PARTY|11397|Damaged Warehouse - Jeddah|20|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|RECEIVING|DAMAGED_RETURN|11215|PARTY|11397|Damaged Warehouse - Jeddah|30|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|RECEIVING|RETURN_TO_VENDOR|11302|PARTY|11399|Main Warehouse - Jeddah|30|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|SHIPPING|RETURN_TO_VENDOR|11302|PARTY|11399|Main Warehouse - Jeddah|20|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|SHIPPING|DAMAGED_RETURN|11302|PARTY|11397|Damaged Warehouse - Jeddah|20|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|RECEIVING|DAMAGED_RETURN|11302|PARTY|11397|Damaged Warehouse - Jeddah|30|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|RECEIVING|RETURN_TO_VENDOR|11304|PARTY|11399|Main Warehouse - Jeddah|30|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|SHIPPING|RETURN_TO_VENDOR|11304|PARTY|11399|Main Warehouse - Jeddah|20|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|SHIPPING|DAMAGED_RETURN|11304|PARTY|11397|Damaged Warehouse - Jeddah|20|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|RECEIVING|DAMAGED_RETURN|11304|PARTY|11397|Damaged Warehouse - Jeddah|30|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|RECEIVING|RETURN_TO_VENDOR|11305|PARTY|11399|Main Warehouse - Jeddah|30|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|SHIPPING|RETURN_TO_VENDOR|11305|PARTY|11399|Main Warehouse - Jeddah|20|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|SHIPPING|DAMAGED_RETURN|11305|PARTY|11397|Damaged Warehouse - Jeddah|20|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|RECEIVING|DAMAGED_RETURN|11305|PARTY|11397|Damaged Warehouse - Jeddah|30|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|RECEIVING|RETURN_TO_VENDOR|11306|PARTY|11399|Main Warehouse - Jeddah|30|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|SHIPPING|RETURN_TO_VENDOR|11306|PARTY|11399|Main Warehouse - Jeddah|20|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|SHIPPING|DAMAGED_RETURN|11306|PARTY|11397|Damaged Warehouse - Jeddah|20|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|RECEIVING|DAMAGED_RETURN|11306|PARTY|11397|Damaged Warehouse - Jeddah|30|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|RECEIVING|RETURN_TO_VENDOR|11307|PARTY|11399|Main Warehouse - Jeddah|30|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|SHIPPING|RETURN_TO_VENDOR|11307|PARTY|11399|Main Warehouse - Jeddah|20|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|SHIPPING|DAMAGED_RETURN|11307|PARTY|11397|Damaged Warehouse - Jeddah|20|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|RECEIVING|DAMAGED_RETURN|11307|PARTY|11397|Damaged Warehouse - Jeddah|30|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|RECEIVING|RETURN_TO_VENDOR|11309|PARTY|11399|Main Warehouse - Jeddah|30|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|SHIPPING|RETURN_TO_VENDOR|11309|PARTY|11399|Main Warehouse - Jeddah|20|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|SHIPPING|DAMAGED_RETURN|11309|PARTY|11397|Damaged Warehouse - Jeddah|20|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|RECEIVING|DAMAGED_RETURN|11309|PARTY|11397|Damaged Warehouse - Jeddah|30|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|RECEIVING|RETURN_TO_VENDOR|11311|PARTY|11399|Main Warehouse - Jeddah|30|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|SHIPPING|RETURN_TO_VENDOR|11311|PARTY|11399|Main Warehouse - Jeddah|20|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|SHIPPING|DAMAGED_RETURN|11311|PARTY|11397|Damaged Warehouse - Jeddah|20|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|RECEIVING|DAMAGED_RETURN|11311|PARTY|11397|Damaged Warehouse - Jeddah|30|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|RECEIVING|RETURN_TO_VENDOR|11312|PARTY|11399|Main Warehouse - Jeddah|30|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|SHIPPING|RETURN_TO_VENDOR|11312|PARTY|11399|Main Warehouse - Jeddah|20|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|SHIPPING|DAMAGED_RETURN|11312|PARTY|11397|Damaged Warehouse - Jeddah|20|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|RECEIVING|DAMAGED_RETURN|11312|PARTY|11397|Damaged Warehouse - Jeddah|30|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|RECEIVING|RETURN_TO_VENDOR|11313|PARTY|11399|Main Warehouse - Jeddah|30|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|SHIPPING|RETURN_TO_VENDOR|11313|PARTY|11399|Main Warehouse - Jeddah|20|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|SHIPPING|DAMAGED_RETURN|11313|PARTY|11397|Damaged Warehouse - Jeddah|20|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|RECEIVING|DAMAGED_RETURN|11313|PARTY|11397|Damaged Warehouse - Jeddah|30|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|RECEIVING|RETURN_TO_VENDOR|11314|PARTY|11399|Main Warehouse - Jeddah|30|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|SHIPPING|RETURN_TO_VENDOR|11314|PARTY|11399|Main Warehouse - Jeddah|20|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|SHIPPING|DAMAGED_RETURN|11314|PARTY|11397|Damaged Warehouse - Jeddah|20|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|RECEIVING|DAMAGED_RETURN|11314|PARTY|11397|Damaged Warehouse - Jeddah|30|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|RECEIVING|RETURN_TO_VENDOR|11315|PARTY|11399|Main Warehouse - Jeddah|30|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|SHIPPING|RETURN_TO_VENDOR|11315|PARTY|11399|Main Warehouse - Jeddah|20|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|SHIPPING|DAMAGED_RETURN|11315|PARTY|11397|Damaged Warehouse - Jeddah|20|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|RECEIVING|DAMAGED_RETURN|11315|PARTY|11397|Damaged Warehouse - Jeddah|30|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|RECEIVING|RETURN_TO_VENDOR|11317|PARTY|11399|Main Warehouse - Jeddah|30|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|SHIPPING|RETURN_TO_VENDOR|11317|PARTY|11399|Main Warehouse - Jeddah|20|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|SHIPPING|DAMAGED_RETURN|11317|PARTY|11397|Damaged Warehouse - Jeddah|20|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|RECEIVING|DAMAGED_RETURN|11317|PARTY|11397|Damaged Warehouse - Jeddah|30|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|RECEIVING|RETURN_TO_VENDOR|11318|PARTY|11399|Main Warehouse - Jeddah|30|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|SHIPPING|RETURN_TO_VENDOR|11318|PARTY|11399|Main Warehouse - Jeddah|20|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|SHIPPING|DAMAGED_RETURN|11318|PARTY|11397|Damaged Warehouse - Jeddah|20|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|RECEIVING|DAMAGED_RETURN|11318|PARTY|11397|Damaged Warehouse - Jeddah|30|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|RECEIVING|RETURN_TO_VENDOR|11319|PARTY|11399|Main Warehouse - Jeddah|30|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|SHIPPING|RETURN_TO_VENDOR|11319|PARTY|11399|Main Warehouse - Jeddah|20|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|SHIPPING|DAMAGED_RETURN|11319|PARTY|11397|Damaged Warehouse - Jeddah|20|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|RECEIVING|DAMAGED_RETURN|11319|PARTY|11397|Damaged Warehouse - Jeddah|30|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|RECEIVING|RETURN_TO_VENDOR|11320|PARTY|11399|Main Warehouse - Jeddah|30|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|SHIPPING|RETURN_TO_VENDOR|11320|PARTY|11399|Main Warehouse - Jeddah|20|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|SHIPPING|DAMAGED_RETURN|11320|PARTY|11397|Damaged Warehouse - Jeddah|20|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|RECEIVING|DAMAGED_RETURN|11320|PARTY|11397|Damaged Warehouse - Jeddah|30|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|RECEIVING|RETURN_TO_VENDOR|11321|PARTY|11399|Main Warehouse - Jeddah|30|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|SHIPPING|RETURN_TO_VENDOR|11321|PARTY|11399|Main Warehouse - Jeddah|20|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|SHIPPING|DAMAGED_RETURN|11321|PARTY|11397|Damaged Warehouse - Jeddah|20|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|RECEIVING|DAMAGED_RETURN|11321|PARTY|11397|Damaged Warehouse - Jeddah|30|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|RECEIVING|RETURN_TO_VENDOR|11322|PARTY|11399|Main Warehouse - Jeddah|30|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|SHIPPING|RETURN_TO_VENDOR|11322|PARTY|11399|Main Warehouse - Jeddah|20|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|SHIPPING|DAMAGED_RETURN|11322|PARTY|11397|Damaged Warehouse - Jeddah|20|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|RECEIVING|DAMAGED_RETURN|11322|PARTY|11397|Damaged Warehouse - Jeddah|30|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|RECEIVING|RETURN_TO_VENDOR|11323|PARTY|11399|Main Warehouse - Jeddah|30|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|SHIPPING|RETURN_TO_VENDOR|11323|PARTY|11399|Main Warehouse - Jeddah|20|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|SHIPPING|DAMAGED_RETURN|11323|PARTY|11397|Damaged Warehouse - Jeddah|20|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|RECEIVING|DAMAGED_RETURN|11323|PARTY|11397|Damaged Warehouse - Jeddah|30|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|RECEIVING|RETURN_TO_VENDOR|11324|PARTY|11399|Main Warehouse - Jeddah|30|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|SHIPPING|RETURN_TO_VENDOR|11324|PARTY|11399|Main Warehouse - Jeddah|20|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|SHIPPING|DAMAGED_RETURN|11324|PARTY|11397|Damaged Warehouse - Jeddah|20|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|RECEIVING|DAMAGED_RETURN|11324|PARTY|11397|Damaged Warehouse - Jeddah|30|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|RECEIVING|RETURN_TO_VENDOR|11325|PARTY|11399|Main Warehouse - Jeddah|30|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|SHIPPING|RETURN_TO_VENDOR|11325|PARTY|11399|Main Warehouse - Jeddah|20|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|SHIPPING|DAMAGED_RETURN|11325|PARTY|11397|Damaged Warehouse - Jeddah|20|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|RECEIVING|DAMAGED_RETURN|11325|PARTY|11397|Damaged Warehouse - Jeddah|30|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|RECEIVING|RETURN_TO_VENDOR|11327|PARTY|11399|Main Warehouse - Jeddah|30|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|SHIPPING|RETURN_TO_VENDOR|11327|PARTY|11399|Main Warehouse - Jeddah|20|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|SHIPPING|DAMAGED_RETURN|11327|PARTY|11397|Damaged Warehouse - Jeddah|20|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|RECEIVING|DAMAGED_RETURN|11327|PARTY|11397|Damaged Warehouse - Jeddah|30|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|RECEIVING|RETURN_TO_VENDOR|11328|PARTY|11399|Main Warehouse - Jeddah|30|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|SHIPPING|RETURN_TO_VENDOR|11328|PARTY|11399|Main Warehouse - Jeddah|20|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|SHIPPING|DAMAGED_RETURN|11328|PARTY|11397|Damaged Warehouse - Jeddah|20|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|RECEIVING|DAMAGED_RETURN|11328|PARTY|11397|Damaged Warehouse - Jeddah|30|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|RECEIVING|RETURN_TO_VENDOR|11329|PARTY|11399|Main Warehouse - Jeddah|30|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|SHIPPING|RETURN_TO_VENDOR|11329|PARTY|11399|Main Warehouse - Jeddah|20|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|SHIPPING|DAMAGED_RETURN|11329|PARTY|11397|Damaged Warehouse - Jeddah|20|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|RECEIVING|DAMAGED_RETURN|11329|PARTY|11397|Damaged Warehouse - Jeddah|30|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|RECEIVING|RETURN_TO_VENDOR|11330|PARTY|11399|Main Warehouse - Jeddah|30|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|SHIPPING|RETURN_TO_VENDOR|11330|PARTY|11399|Main Warehouse - Jeddah|20|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|SHIPPING|DAMAGED_RETURN|11330|PARTY|11397|Damaged Warehouse - Jeddah|20|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|RECEIVING|DAMAGED_RETURN|11330|PARTY|11397|Damaged Warehouse - Jeddah|30|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|RECEIVING|RETURN_TO_VENDOR|11331|PARTY|11399|Main Warehouse - Jeddah|30|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|SHIPPING|RETURN_TO_VENDOR|11331|PARTY|11399|Main Warehouse - Jeddah|20|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|SHIPPING|DAMAGED_RETURN|11331|PARTY|11397|Damaged Warehouse - Jeddah|20|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|RECEIVING|DAMAGED_RETURN|11331|PARTY|11397|Damaged Warehouse - Jeddah|30|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|RECEIVING|RETURN_TO_VENDOR|11332|PARTY|11399|Main Warehouse - Jeddah|30|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|SHIPPING|RETURN_TO_VENDOR|11332|PARTY|11399|Main Warehouse - Jeddah|20|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|SHIPPING|DAMAGED_RETURN|11332|PARTY|11397|Damaged Warehouse - Jeddah|20|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|RECEIVING|DAMAGED_RETURN|11332|PARTY|11397|Damaged Warehouse - Jeddah|30|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|RECEIVING|RETURN_TO_VENDOR|11333|PARTY|11399|Main Warehouse - Jeddah|30|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|SHIPPING|RETURN_TO_VENDOR|11333|PARTY|11399|Main Warehouse - Jeddah|20|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|SHIPPING|DAMAGED_RETURN|11333|PARTY|11397|Damaged Warehouse - Jeddah|20|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|RECEIVING|DAMAGED_RETURN|11333|PARTY|11397|Damaged Warehouse - Jeddah|30|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|RECEIVING|RETURN_TO_VENDOR|11335|PARTY|11399|Main Warehouse - Jeddah|30|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|SHIPPING|RETURN_TO_VENDOR|11335|PARTY|11399|Main Warehouse - Jeddah|20|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|SHIPPING|DAMAGED_RETURN|11335|PARTY|11397|Damaged Warehouse - Jeddah|20|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|RECEIVING|DAMAGED_RETURN|11335|PARTY|11397|Damaged Warehouse - Jeddah|30|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|RECEIVING|RETURN_TO_VENDOR|11336|PARTY|11399|Main Warehouse - Jeddah|30|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|SHIPPING|RETURN_TO_VENDOR|11336|PARTY|11399|Main Warehouse - Jeddah|20|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|SHIPPING|DAMAGED_RETURN|11336|PARTY|11397|Damaged Warehouse - Jeddah|20|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|RECEIVING|DAMAGED_RETURN|11336|PARTY|11397|Damaged Warehouse - Jeddah|30|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|RECEIVING|RETURN_TO_VENDOR|11338|PARTY|11399|Main Warehouse - Jeddah|30|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|SHIPPING|RETURN_TO_VENDOR|11338|PARTY|11399|Main Warehouse - Jeddah|20|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|SHIPPING|DAMAGED_RETURN|11338|PARTY|11397|Damaged Warehouse - Jeddah|20|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|RECEIVING|DAMAGED_RETURN|11338|PARTY|11397|Damaged Warehouse - Jeddah|30|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|RECEIVING|RETURN_TO_VENDOR|11339|PARTY|11399|Main Warehouse - Jeddah|30|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|SHIPPING|RETURN_TO_VENDOR|11339|PARTY|11399|Main Warehouse - Jeddah|20|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|SHIPPING|DAMAGED_RETURN|11339|PARTY|11397|Damaged Warehouse - Jeddah|20|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|RECEIVING|DAMAGED_RETURN|11339|PARTY|11397|Damaged Warehouse - Jeddah|30|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|RECEIVING|RETURN_TO_VENDOR|11340|PARTY|11399|Main Warehouse - Jeddah|30|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|SHIPPING|RETURN_TO_VENDOR|11340|PARTY|11399|Main Warehouse - Jeddah|20|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|SHIPPING|DAMAGED_RETURN|11340|PARTY|11397|Damaged Warehouse - Jeddah|20|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|RECEIVING|DAMAGED_RETURN|11340|PARTY|11397|Damaged Warehouse - Jeddah|30|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|RECEIVING|RETURN_TO_VENDOR|11341|PARTY|11399|Main Warehouse - Jeddah|30|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|SHIPPING|RETURN_TO_VENDOR|11341|PARTY|11399|Main Warehouse - Jeddah|20|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|SHIPPING|DAMAGED_RETURN|11341|PARTY|11397|Damaged Warehouse - Jeddah|20|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|RECEIVING|DAMAGED_RETURN|11341|PARTY|11397|Damaged Warehouse - Jeddah|30|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|RECEIVING|RETURN_TO_VENDOR|11342|PARTY|11399|Main Warehouse - Jeddah|30|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|SHIPPING|RETURN_TO_VENDOR|11342|PARTY|11399|Main Warehouse - Jeddah|20|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|SHIPPING|DAMAGED_RETURN|11342|PARTY|11397|Damaged Warehouse - Jeddah|20|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|RECEIVING|DAMAGED_RETURN|11342|PARTY|11397|Damaged Warehouse - Jeddah|30|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|RECEIVING|RETURN_TO_VENDOR|11344|PARTY|11399|Main Warehouse - Jeddah|30|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|SHIPPING|RETURN_TO_VENDOR|11344|PARTY|11399|Main Warehouse - Jeddah|20|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|SHIPPING|DAMAGED_RETURN|11344|PARTY|11397|Damaged Warehouse - Jeddah|20|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|RECEIVING|DAMAGED_RETURN|11344|PARTY|11397|Damaged Warehouse - Jeddah|30|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|RECEIVING|RETURN_TO_VENDOR|11345|PARTY|11399|Main Warehouse - Jeddah|30|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|SHIPPING|RETURN_TO_VENDOR|11345|PARTY|11399|Main Warehouse - Jeddah|20|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|SHIPPING|DAMAGED_RETURN|11345|PARTY|11397|Damaged Warehouse - Jeddah|20|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|RECEIVING|DAMAGED_RETURN|11345|PARTY|11397|Damaged Warehouse - Jeddah|30|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|RECEIVING|RETURN_TO_VENDOR|11346|PARTY|11399|Main Warehouse - Jeddah|30|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|SHIPPING|RETURN_TO_VENDOR|11346|PARTY|11399|Main Warehouse - Jeddah|20|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|SHIPPING|DAMAGED_RETURN|11346|PARTY|11397|Damaged Warehouse - Jeddah|20|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|RECEIVING|DAMAGED_RETURN|11346|PARTY|11397|Damaged Warehouse - Jeddah|30|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|RECEIVING|RETURN_TO_VENDOR|11347|PARTY|11399|Main Warehouse - Jeddah|30|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|SHIPPING|RETURN_TO_VENDOR|11347|PARTY|11399|Main Warehouse - Jeddah|20|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|SHIPPING|DAMAGED_RETURN|11347|PARTY|11397|Damaged Warehouse - Jeddah|20|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|RECEIVING|DAMAGED_RETURN|11347|PARTY|11397|Damaged Warehouse - Jeddah|30|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|RECEIVING|RETURN_TO_VENDOR|13101|PARTY|11399|Main Warehouse - Jeddah|30|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|SHIPPING|RETURN_TO_VENDOR|13101|PARTY|11399|Main Warehouse - Jeddah|20|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|SHIPPING|DAMAGED_RETURN|13101|PARTY|11397|Damaged Warehouse - Jeddah|20|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|RECEIVING|DAMAGED_RETURN|13101|PARTY|11397|Damaged Warehouse - Jeddah|30|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|RECEIVING|RETURN_TO_VENDOR|13102|PARTY|11399|Main Warehouse - Jeddah|30|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|SHIPPING|RETURN_TO_VENDOR|13102|PARTY|11399|Main Warehouse - Jeddah|20|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|SHIPPING|DAMAGED_RETURN|13102|PARTY|11397|Damaged Warehouse - Jeddah|20|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|RECEIVING|DAMAGED_RETURN|13102|PARTY|11397|Damaged Warehouse - Jeddah|30|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|RECEIVING|RETURN_TO_VENDOR|13103|PARTY|11399|Main Warehouse - Jeddah|30|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|SHIPPING|RETURN_TO_VENDOR|13103|PARTY|11399|Main Warehouse - Jeddah|20|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|SHIPPING|DAMAGED_RETURN|13103|PARTY|11397|Damaged Warehouse - Jeddah|20|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|RECEIVING|DAMAGED_RETURN|13103|PARTY|11397|Damaged Warehouse - Jeddah|30|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|RECEIVING|RETURN_TO_VENDOR|13104|PARTY|11399|Main Warehouse - Jeddah|30|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|SHIPPING|RETURN_TO_VENDOR|13104|PARTY|11399|Main Warehouse - Jeddah|20|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|SHIPPING|DAMAGED_RETURN|13104|PARTY|11397|Damaged Warehouse - Jeddah|20|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|RECEIVING|DAMAGED_RETURN|13104|PARTY|11397|Damaged Warehouse - Jeddah|30|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|RECEIVING|RETURN_TO_VENDOR|13105|PARTY|11399|Main Warehouse - Jeddah|30|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|SHIPPING|RETURN_TO_VENDOR|13105|PARTY|11399|Main Warehouse - Jeddah|20|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|SHIPPING|DAMAGED_RETURN|13105|PARTY|11397|Damaged Warehouse - Jeddah|20|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|RECEIVING|DAMAGED_RETURN|13105|PARTY|11397|Damaged Warehouse - Jeddah|30|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|RECEIVING|RETURN_TO_VENDOR|13106|PARTY|11399|Main Warehouse - Jeddah|30|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|SHIPPING|RETURN_TO_VENDOR|13106|PARTY|11399|Main Warehouse - Jeddah|20|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|SHIPPING|DAMAGED_RETURN|13106|PARTY|11397|Damaged Warehouse - Jeddah|20|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|RECEIVING|DAMAGED_RETURN|13106|PARTY|11397|Damaged Warehouse - Jeddah|30|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|RECEIVING|RETURN_TO_VENDOR|13107|PARTY|11399|Main Warehouse - Jeddah|30|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|SHIPPING|RETURN_TO_VENDOR|13107|PARTY|11399|Main Warehouse - Jeddah|20|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|SHIPPING|DAMAGED_RETURN|13107|PARTY|11397|Damaged Warehouse - Jeddah|20|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|RECEIVING|DAMAGED_RETURN|13107|PARTY|11397|Damaged Warehouse - Jeddah|30|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|RECEIVING|RETURN_TO_VENDOR|13108|PARTY|11399|Main Warehouse - Jeddah|30|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|SHIPPING|RETURN_TO_VENDOR|13108|PARTY|11399|Main Warehouse - Jeddah|20|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|SHIPPING|DAMAGED_RETURN|13108|PARTY|11397|Damaged Warehouse - Jeddah|20|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|RECEIVING|DAMAGED_RETURN|13108|PARTY|11397|Damaged Warehouse - Jeddah|30|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|RECEIVING|RETURN_TO_VENDOR|13109|PARTY|11399|Main Warehouse - Jeddah|30|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|SHIPPING|RETURN_TO_VENDOR|13109|PARTY|11399|Main Warehouse - Jeddah|20|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|SHIPPING|DAMAGED_RETURN|13109|PARTY|11397|Damaged Warehouse - Jeddah|20|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|RECEIVING|DAMAGED_RETURN|13109|PARTY|11397|Damaged Warehouse - Jeddah|30|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|RECEIVING|RETURN_TO_VENDOR|13110|PARTY|11399|Main Warehouse - Jeddah|30|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|SHIPPING|RETURN_TO_VENDOR|13110|PARTY|11399|Main Warehouse - Jeddah|20|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|SHIPPING|DAMAGED_RETURN|13110|PARTY|11397|Damaged Warehouse - Jeddah|20|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|RECEIVING|DAMAGED_RETURN|13110|PARTY|11397|Damaged Warehouse - Jeddah|30|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|RECEIVING|RETURN_TO_VENDOR|13201|PARTY|11399|Main Warehouse - Jeddah|30|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|SHIPPING|RETURN_TO_VENDOR|13201|PARTY|11399|Main Warehouse - Jeddah|20|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|SHIPPING|DAMAGED_RETURN|13201|PARTY|11397|Damaged Warehouse - Jeddah|20|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|RECEIVING|DAMAGED_RETURN|13201|PARTY|11397|Damaged Warehouse - Jeddah|30|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|RECEIVING|RETURN_TO_VENDOR|13301|PARTY|11399|Main Warehouse - Jeddah|30|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|SHIPPING|RETURN_TO_VENDOR|13301|PARTY|11399|Main Warehouse - Jeddah|20|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|SHIPPING|DAMAGED_RETURN|13301|PARTY|11397|Damaged Warehouse - Jeddah|20|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|RECEIVING|DAMAGED_RETURN|13301|PARTY|11397|Damaged Warehouse - Jeddah|30|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|RECEIVING|RETURN_TO_VENDOR|13302|PARTY|11399|Main Warehouse - Jeddah|30|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|SHIPPING|RETURN_TO_VENDOR|13302|PARTY|11399|Main Warehouse - Jeddah|20|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|SHIPPING|DAMAGED_RETURN|13302|PARTY|11397|Damaged Warehouse - Jeddah|20|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|RECEIVING|DAMAGED_RETURN|13302|PARTY|11397|Damaged Warehouse - Jeddah|30|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|RECEIVING|RETURN_TO_VENDOR|13303|PARTY|11399|Main Warehouse - Jeddah|30|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|SHIPPING|RETURN_TO_VENDOR|13303|PARTY|11399|Main Warehouse - Jeddah|20|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|SHIPPING|DAMAGED_RETURN|13303|PARTY|11397|Damaged Warehouse - Jeddah|20|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|RECEIVING|DAMAGED_RETURN|13303|PARTY|11397|Damaged Warehouse - Jeddah|30|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|RECEIVING|RETURN_TO_VENDOR|13304|PARTY|11399|Main Warehouse - Jeddah|30|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|SHIPPING|RETURN_TO_VENDOR|13304|PARTY|11399|Main Warehouse - Jeddah|20|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|SHIPPING|DAMAGED_RETURN|13304|PARTY|11397|Damaged Warehouse - Jeddah|20|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|RECEIVING|DAMAGED_RETURN|13304|PARTY|11397|Damaged Warehouse - Jeddah|30|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|RECEIVING|RETURN_TO_VENDOR|13305|PARTY|11399|Main Warehouse - Jeddah|30|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|SHIPPING|RETURN_TO_VENDOR|13305|PARTY|11399|Main Warehouse - Jeddah|20|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|SHIPPING|DAMAGED_RETURN|13305|PARTY|11397|Damaged Warehouse - Jeddah|20|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|RECEIVING|DAMAGED_RETURN|13305|PARTY|11397|Damaged Warehouse - Jeddah|30|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|RECEIVING|RETURN_TO_VENDOR|13306|PARTY|11399|Main Warehouse - Jeddah|30|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|SHIPPING|RETURN_TO_VENDOR|13306|PARTY|11399|Main Warehouse - Jeddah|20|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|SHIPPING|DAMAGED_RETURN|13306|PARTY|11397|Damaged Warehouse - Jeddah|20|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|RECEIVING|DAMAGED_RETURN|13306|PARTY|11397|Damaged Warehouse - Jeddah|30|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|RECEIVING|RETURN_TO_VENDOR|13307|PARTY|11399|Main Warehouse - Jeddah|30|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|SHIPPING|RETURN_TO_VENDOR|13307|PARTY|11399|Main Warehouse - Jeddah|20|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|SHIPPING|DAMAGED_RETURN|13307|PARTY|11397|Damaged Warehouse - Jeddah|20|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|RECEIVING|DAMAGED_RETURN|13307|PARTY|11397|Damaged Warehouse - Jeddah|30|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|RECEIVING|RETURN_TO_VENDOR|13308|PARTY|11399|Main Warehouse - Jeddah|30|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|SHIPPING|RETURN_TO_VENDOR|13308|PARTY|11399|Main Warehouse - Jeddah|20|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|SHIPPING|DAMAGED_RETURN|13308|PARTY|11397|Damaged Warehouse - Jeddah|20|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|RECEIVING|DAMAGED_RETURN|13308|PARTY|11397|Damaged Warehouse - Jeddah|30|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|RECEIVING|RETURN_TO_VENDOR|13309|PARTY|11399|Main Warehouse - Jeddah|30|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|SHIPPING|RETURN_TO_VENDOR|13309|PARTY|11399|Main Warehouse - Jeddah|20|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|SHIPPING|DAMAGED_RETURN|13309|PARTY|11397|Damaged Warehouse - Jeddah|20|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|RECEIVING|DAMAGED_RETURN|13309|PARTY|11397|Damaged Warehouse - Jeddah|30|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|RECEIVING|RETURN_TO_VENDOR|13401|PARTY|11399|Main Warehouse - Jeddah|30|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|SHIPPING|RETURN_TO_VENDOR|13401|PARTY|11399|Main Warehouse - Jeddah|20|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|SHIPPING|DAMAGED_RETURN|13401|PARTY|11397|Damaged Warehouse - Jeddah|20|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|RECEIVING|DAMAGED_RETURN|13401|PARTY|11397|Damaged Warehouse - Jeddah|30|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|RECEIVING|RETURN_TO_VENDOR|13402|PARTY|11399|Main Warehouse - Jeddah|30|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|SHIPPING|RETURN_TO_VENDOR|13402|PARTY|11399|Main Warehouse - Jeddah|20|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|SHIPPING|DAMAGED_RETURN|13402|PARTY|11397|Damaged Warehouse - Jeddah|20|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|RECEIVING|DAMAGED_RETURN|13402|PARTY|11397|Damaged Warehouse - Jeddah|30|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|RECEIVING|RETURN_TO_VENDOR|13403|PARTY|11399|Main Warehouse - Jeddah|30|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|SHIPPING|RETURN_TO_VENDOR|13403|PARTY|11399|Main Warehouse - Jeddah|20|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|SHIPPING|DAMAGED_RETURN|13403|PARTY|11397|Damaged Warehouse - Jeddah|20|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|RECEIVING|DAMAGED_RETURN|13403|PARTY|11397|Damaged Warehouse - Jeddah|30|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|RECEIVING|RETURN_TO_VENDOR|13404|PARTY|11399|Main Warehouse - Jeddah|30|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|SHIPPING|RETURN_TO_VENDOR|13404|PARTY|11399|Main Warehouse - Jeddah|20|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|SHIPPING|DAMAGED_RETURN|13404|PARTY|11397|Damaged Warehouse - Jeddah|20|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|RECEIVING|DAMAGED_RETURN|13404|PARTY|11397|Damaged Warehouse - Jeddah|30|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|RECEIVING|RETURN_TO_VENDOR|13405|PARTY|11399|Main Warehouse - Jeddah|30|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|SHIPPING|RETURN_TO_VENDOR|13405|PARTY|11399|Main Warehouse - Jeddah|20|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|SHIPPING|DAMAGED_RETURN|13405|PARTY|11397|Damaged Warehouse - Jeddah|20|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|RECEIVING|DAMAGED_RETURN|13405|PARTY|11397|Damaged Warehouse - Jeddah|30|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|RECEIVING|RETURN_TO_VENDOR|13501|PARTY|11399|Main Warehouse - Jeddah|30|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|SHIPPING|RETURN_TO_VENDOR|13501|PARTY|11399|Main Warehouse - Jeddah|20|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|SHIPPING|DAMAGED_RETURN|13501|PARTY|11397|Damaged Warehouse - Jeddah|20|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|RECEIVING|DAMAGED_RETURN|13501|PARTY|11397|Damaged Warehouse - Jeddah|30|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|RECEIVING|RETURN_TO_VENDOR|13502|PARTY|11399|Main Warehouse - Jeddah|30|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|SHIPPING|RETURN_TO_VENDOR|13502|PARTY|11399|Main Warehouse - Jeddah|20|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|SHIPPING|DAMAGED_RETURN|13502|PARTY|11397|Damaged Warehouse - Jeddah|20|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|RECEIVING|DAMAGED_RETURN|13502|PARTY|11397|Damaged Warehouse - Jeddah|30|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|RECEIVING|RETURN_TO_VENDOR|13503|PARTY|11399|Main Warehouse - Jeddah|30|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|SHIPPING|RETURN_TO_VENDOR|13503|PARTY|11399|Main Warehouse - Jeddah|20|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|SHIPPING|DAMAGED_RETURN|13503|PARTY|11397|Damaged Warehouse - Jeddah|20|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|RECEIVING|DAMAGED_RETURN|13503|PARTY|11397|Damaged Warehouse - Jeddah|30|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|RECEIVING|RETURN_TO_VENDOR|13505|PARTY|11399|Main Warehouse - Jeddah|30|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|SHIPPING|RETURN_TO_VENDOR|13505|PARTY|11399|Main Warehouse - Jeddah|20|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|SHIPPING|DAMAGED_RETURN|13505|PARTY|11397|Damaged Warehouse - Jeddah|20|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|RECEIVING|DAMAGED_RETURN|13505|PARTY|11397|Damaged Warehouse - Jeddah|30|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|RECEIVING|RETURN_TO_VENDOR|13506|PARTY|11399|Main Warehouse - Jeddah|30|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|SHIPPING|RETURN_TO_VENDOR|13506|PARTY|11399|Main Warehouse - Jeddah|20|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|SHIPPING|DAMAGED_RETURN|13506|PARTY|11397|Damaged Warehouse - Jeddah|20|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|RECEIVING|DAMAGED_RETURN|13506|PARTY|11397|Damaged Warehouse - Jeddah|30|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|RECEIVING|RETURN_TO_VENDOR|13507|PARTY|11399|Main Warehouse - Jeddah|30|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|SHIPPING|RETURN_TO_VENDOR|13507|PARTY|11399|Main Warehouse - Jeddah|20|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|SHIPPING|DAMAGED_RETURN|13507|PARTY|11397|Damaged Warehouse - Jeddah|20|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|RECEIVING|DAMAGED_RETURN|13507|PARTY|11397|Damaged Warehouse - Jeddah|30|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|RECEIVING|RETURN_TO_VENDOR|13508|PARTY|11399|Main Warehouse - Jeddah|30|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|SHIPPING|RETURN_TO_VENDOR|13508|PARTY|11399|Main Warehouse - Jeddah|20|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|SHIPPING|DAMAGED_RETURN|13508|PARTY|11397|Damaged Warehouse - Jeddah|20|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|RECEIVING|DAMAGED_RETURN|13508|PARTY|11397|Damaged Warehouse - Jeddah|30|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|RECEIVING|RETURN_TO_VENDOR|13601|PARTY|11399|Main Warehouse - Jeddah|30|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|SHIPPING|RETURN_TO_VENDOR|13601|PARTY|11399|Main Warehouse - Jeddah|20|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|SHIPPING|DAMAGED_RETURN|13601|PARTY|11397|Damaged Warehouse - Jeddah|20|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|RECEIVING|DAMAGED_RETURN|13601|PARTY|11397|Damaged Warehouse - Jeddah|30|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|RECEIVING|RETURN_TO_VENDOR|13602|PARTY|11399|Main Warehouse - Jeddah|30|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|SHIPPING|RETURN_TO_VENDOR|13602|PARTY|11399|Main Warehouse - Jeddah|20|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|SHIPPING|DAMAGED_RETURN|13602|PARTY|11397|Damaged Warehouse - Jeddah|20|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|RECEIVING|DAMAGED_RETURN|13602|PARTY|11397|Damaged Warehouse - Jeddah|30|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|RECEIVING|RETURN_TO_VENDOR|13604|PARTY|11399|Main Warehouse - Jeddah|30|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|SHIPPING|RETURN_TO_VENDOR|13604|PARTY|11399|Main Warehouse - Jeddah|20|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|SHIPPING|DAMAGED_RETURN|13604|PARTY|11397|Damaged Warehouse - Jeddah|20|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|RECEIVING|DAMAGED_RETURN|13604|PARTY|11397|Damaged Warehouse - Jeddah|30|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|RECEIVING|RETURN_TO_VENDOR|13605|PARTY|11399|Main Warehouse - Jeddah|30|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|SHIPPING|RETURN_TO_VENDOR|13605|PARTY|11399|Main Warehouse - Jeddah|20|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|SHIPPING|DAMAGED_RETURN|13605|PARTY|11397|Damaged Warehouse - Jeddah|20|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|RECEIVING|DAMAGED_RETURN|13605|PARTY|11397|Damaged Warehouse - Jeddah|30|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|RECEIVING|RETURN_TO_VENDOR|13606|PARTY|11399|Main Warehouse - Jeddah|30|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|SHIPPING|RETURN_TO_VENDOR|13606|PARTY|11399|Main Warehouse - Jeddah|20|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|SHIPPING|DAMAGED_RETURN|13606|PARTY|11397|Damaged Warehouse - Jeddah|20|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|RECEIVING|DAMAGED_RETURN|13606|PARTY|11397|Damaged Warehouse - Jeddah|30|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|RECEIVING|RETURN_TO_VENDOR|13607|PARTY|11399|Main Warehouse - Jeddah|30|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|SHIPPING|RETURN_TO_VENDOR|13607|PARTY|11399|Main Warehouse - Jeddah|20|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|SHIPPING|DAMAGED_RETURN|13607|PARTY|11397|Damaged Warehouse - Jeddah|20|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|RECEIVING|DAMAGED_RETURN|13607|PARTY|11397|Damaged Warehouse - Jeddah|30|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|RECEIVING|RETURN_TO_VENDOR|13608|PARTY|11399|Main Warehouse - Jeddah|30|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|SHIPPING|RETURN_TO_VENDOR|13608|PARTY|11399|Main Warehouse - Jeddah|20|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|SHIPPING|DAMAGED_RETURN|13608|PARTY|11397|Damaged Warehouse - Jeddah|20|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|RECEIVING|DAMAGED_RETURN|13608|PARTY|11397|Damaged Warehouse - Jeddah|30|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|RECEIVING|RETURN_TO_VENDOR|12115|PARTY|11499|Main Warehouse - Al-Madinah|30|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|SHIPPING|RETURN_TO_VENDOR|12115|PARTY|11499|Main Warehouse - Al-Madinah|20|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|SHIPPING|DAMAGED_RETURN|12115|PARTY|11497|Damaged Warehouse - Al-Madinah|20|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|RECEIVING|DAMAGED_RETURN|12115|PARTY|11497|Damaged Warehouse - Al-Madinah|30|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|RECEIVING|RETURN_TO_VENDOR|211201|PARTY|211199|Main Warehouse Makkah - Makkah|30|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|SHIPPING|RETURN_TO_VENDOR|211201|PARTY|211199|Main Warehouse Makkah - Makkah|20|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|SHIPPING|DAMAGED_RETURN|211201|PARTY|211196|Damage Warehouse - Makkah|20|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|RECEIVING|DAMAGED_RETURN|211201|PARTY|211196|Damage Warehouse - Makkah|30|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|RECEIVING|RETURN_TO_VENDOR|11318|PARTY|11399|Main Warehouse - Jeddah|30|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|SHIPPING|RETURN_TO_VENDOR|11318|PARTY|11399|Main Warehouse - Jeddah|20|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|SHIPPING|DAMAGED_RETURN|11318|PARTY|11397|Damaged Warehouse - Jeddah|20|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|RECEIVING|DAMAGED_RETURN|11318|PARTY|11397|Damaged Warehouse - Jeddah|30|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|RECEIVING|STORE_TRANSFER|11318|PARTY|011101|Abraj Al-Bait 1 Showroom - Makkah||||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|RECEIVING|STORE_TRANSFER|11318|PARTY|011102|Abraj Al-Bait 2 Showroom - Makkah||||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|RECEIVING|STORE_TRANSFER|11318|PARTY|011103|Abraj Al-Bait 4 Showroom - Makkah||||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|RECEIVING|STORE_TRANSFER|11318|PARTY|014108|Al-Ahsa Mall Showroom - Eastern||||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|RECEIVING|STORE_TRANSFER|11318|PARTY|011307|Al-Andalus Mall Showroom - Jeddah||||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|RECEIVING|STORE_TRANSFER|11318|PARTY|012119|Al-Badeeah Mall 2 Showroom - Al-Riyadh||||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|RECEIVING|STORE_TRANSFER|11318|PARTY|011501|Al-Danah Mall Showroom - Yanbu||||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|RECEIVING|STORE_TRANSFER|11318|PARTY|011107|Al-Diyafa Showroom - Makkah||||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|RECEIVING|STORE_TRANSFER|11318|PARTY|013401|Al-Baha Showroom - Al-Baha||||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|RECEIVING|STORE_TRANSFER|11318|PARTY|014111|Al-Qosaibi Al-Khobar Showroom - Eastern||||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|RECEIVING|STORE_TRANSFER|11318|PARTY|011106|Al-Hijaz Mall Showroom - Makkah||||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|RECEIVING|STORE_TRANSFER|11318|PARTY|011108|Al-Hijrah Showroom - Makkah||||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|RECEIVING|STORE_TRANSFER|11318|PARTY|012201|Al-Hudaithi Mall Showroom - Al-Kharj||||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|RECEIVING|STORE_TRANSFER|11318|PARTY|015301|Al-Jouf Plaza Showroom? - Al-Jouf||||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|RECEIVING|STORE_TRANSFER|11318|PARTY|014106|Al-Khafji Showroom - Eastern||||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|RECEIVING|STORE_TRANSFER|11318|PARTY|011403|Al-Madinah Al-Dowali Showroom - Al-Madinah||||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|RECEIVING|STORE_TRANSFER|11318|PARTY|012115|Al-Majmaah Showroom - Al-Qassim||||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|RECEIVING|STORE_TRANSFER|11318|PARTY|012118|Al-Naseem Showroom - Al-Riyadh||||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|RECEIVING|STORE_TRANSFER|11318|PARTY|012105|Al-Olaya Alaam Showroom - Al-Riyadh||||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|RECEIVING|STORE_TRANSFER|11318|PARTY|014109|Al-Othaim Al-Hofuf Showroom - Eastern||||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|RECEIVING|STORE_TRANSFER|11318|PARTY|012117|Al-Othaim Al-Rabwa Showroom - Al-Riyadh||||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|RECEIVING|STORE_TRANSFER|11318|PARTY|012301|Buraidah Showroom - Al-Qassim||||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|RECEIVING|STORE_TRANSFER|11318|PARTY|012110|Al-Othaim Mall Showroom - Al-Riyadh||||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|RECEIVING|STORE_TRANSFER|11318|PARTY|012174|Al-Qasr Mall Showroom - Al-Riyadh||||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|RECEIVING|STORE_TRANSFER|11318|PARTY|014101|Al-Rashid Mall 1 Showroom - Eastern||||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|RECEIVING|STORE_TRANSFER|11318|PARTY|011405|Al-Rashid Mega Mall Showroom - Al-Madinah||||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|RECEIVING|STORE_TRANSFER|11318|PARTY|011311|Al-Safaa Showroom - Jeddah||||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|RECEIVING|STORE_TRANSFER|11318|PARTY|011114|Al-Sharaya Showroom - Makkah||||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|RECEIVING|STORE_TRANSFER|11318|PARTY|012101|Al-Steen Showroom - Al-Riyadh||||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|RECEIVING|STORE_TRANSFER|11318|PARTY|011304|Al-Tahlia Almasi Showroom - Jeddah||||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|RECEIVING|STORE_TRANSFER|11318|PARTY|011315|Mandarin Avenue Showroom - Jeddah||||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|RECEIVING|STORE_TRANSFER|11318|PARTY|011309|Arab Mall Showroom - Jeddah||||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|RECEIVING|STORE_TRANSFER|11318|PARTY|013502|Asdaf Mall Showroom - Khamis Mushait||||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|RECEIVING|STORE_TRANSFER|11318|PARTY|011314|Aziz Mall Showroom - Jeddah||||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|RECEIVING|STORE_TRANSFER|11318|PARTY|013402|Baljorshi Mall Showroom - Baljorshi||||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|RECEIVING|STORE_TRANSFER|11318|PARTY|014112|City Mall Al-Qatif Showroom - Eastern||||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|RECEIVING|STORE_TRANSFER|11318|PARTY|011110|Dana Center Showroom - Makkah||||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|RECEIVING|STORE_TRANSFER|11318|PARTY|011402|Dar Al-Taqwa Showroom - Al-Madinah||||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|RECEIVING|STORE_TRANSFER|11318|PARTY|014105|Dareen Mall Showroom - Eastern||||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|RECEIVING|STORE_TRANSFER|11318|PARTY|014113|Dhahran Mall 2 Showroom - Eastern||||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|RECEIVING|STORE_TRANSFER|11318|PARTY|011404|Diyar Al-Madinah Showroom - Al-Madinah||||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|RECEIVING|STORE_TRANSFER|11318|PARTY|014107|Hafir Al-Batin Showroom - Al-Qassim||||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|RECEIVING|STORE_TRANSFER|11318|PARTY|011305|Heraa Mall Showroom - Jeddah||||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|RECEIVING|STORE_TRANSFER|11318|PARTY|011401|Hilton Al-Madinah Showroom - Al-Madinah||||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|RECEIVING|STORE_TRANSFER|11318|PARTY|011112|Jabal Omar 1 Showroom - Makkah||||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|RECEIVING|STORE_TRANSFER|11318|PARTY|011113|Jabal Omar 2 Showroom - Makkah||||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|RECEIVING|STORE_TRANSFER|11318|PARTY|013503|Khamis Avenue Showroom - Khamis Mushait||||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|RECEIVING|STORE_TRANSFER|11318|PARTY|013501|Khamis Mushait Showroom - Khamis Mushait||||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|RECEIVING|STORE_TRANSFER|11318|PARTY|012104|Kingdom Center Showroom - Al-Riyadh||||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|RECEIVING|STORE_TRANSFER|11318|PARTY|011105|Makkah Anas Showroom - Makkah||||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|RECEIVING|STORE_TRANSFER|11318|PARTY|011104|Makkah Ehsan Showroom - Makkah||||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|RECEIVING|STORE_TRANSFER|11318|PARTY|011111|Makkah Mall Showroom - Makkah||||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|RECEIVING|STORE_TRANSFER|11318|PARTY|012120|Marina Mall Showroom - Al-Riyadh||||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|RECEIVING|STORE_TRANSFER|11318|PARTY|013104|Mahayil Aseer Showroom - Abha||||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|RECEIVING|STORE_TRANSFER|11318|PARTY|012108|Panorama Mall Showroom - Al-Riyadh||||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|RECEIVING|STORE_TRANSFER|11318|PARTY|011306|Red Sea Mall Showroom - Jeddah||||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|RECEIVING|STORE_TRANSFER|11318|PARTY|015201|Hail Al-Tamami Showroom - Hail||||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|RECEIVING|STORE_TRANSFER|11318|PARTY|011202|Taif 2 Showroom - Taif||||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|RECEIVING|STORE_TRANSFER|11318|PARTY|011201|Taif 1 Showroom - Taif||||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|RECEIVING|STORE_TRANSFER|11318|PARTY|011203|Taif 3 Showroom - Taif||||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|RECEIVING|STORE_TRANSFER|11318|PARTY|012102|Al-Thalatheen Showroom - Al-Riyadh||||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|RECEIVING|STORE_TRANSFER|11318|PARTY|014102|Venecia Mall Showroom - Eastern||||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|RECEIVING|STORE_TRANSFER|11318|PARTY|011502|Yanbu Mall Showroom - Yanbu||||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|RECEIVING|STORE_TRANSFER|11318|PARTY|011312|Al-Salam Mall Showroom - Jeddah||||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|RECEIVING|STORE_TRANSFER|11318|PARTY|011406|Al-Noor Mall Showroom - Al-Madinah||||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|RECEIVING|STORE_TRANSFER|11318|PARTY|012114|Al-Salam Mall Showroom - Al-Riyadh||||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|RECEIVING|STORE_TRANSFER|11318|PARTY|012116|King Abdullah Street Showroom - Al-Riyadh||||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|RECEIVING|STORE_TRANSFER|11318|PARTY|012121|Gallery Mall Showroom - Al-Riyadh||||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|RECEIVING|STORE_TRANSFER|11318|PARTY|012304|Al-Amry Buraidah Showroom - Al-Qassim||||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|RECEIVING|STORE_TRANSFER|11318|PARTY|012305|Deira Mall Rass Showroom - Al-Qassim||||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|RECEIVING|STORE_TRANSFER|11318|PARTY|013105|New Abha Showroom - Abha||||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|RECEIVING|STORE_TRANSFER|11318|PARTY|014103|Amwaj Mall Showroom - Eastern||||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|RECEIVING|STORE_TRANSFER|11318|PARTY|014110|Jubail Royal Authority Showroom - Eastern||||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|RECEIVING|STORE_TRANSFER|11318|PARTY|013301|Kadi Mall Showroom - Jazan||||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|RECEIVING|STORE_TRANSFER|11318|PARTY|012122|Dove Plaza Showroom - Al-Riyadh||||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|RECEIVING|STORE_TRANSFER|11318|PARTY|012123|New Tahlia Showroom - Al-Riyadh||||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|RECEIVING|STORE_TRANSFER|11318|PARTY|011317|Al-Tahlia Boutique Showroom - Jeddah||||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|RECEIVING|STORE_TRANSFER|11318|PARTY|012124|Al-Nakheel Mall Showroom - Al-Riyadh||||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|RECEIVING|STORE_TRANSFER|11318|PARTY|012125|Talaa Mall Showroom - Al-Riyadh||||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|RECEIVING|STORE_TRANSFER|11318|PARTY|011320|Al-Samer Showroom – Jeddah||||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|RECEIVING|STORE_TRANSFER|11318|PARTY|011116|Souq Al-Qawafel Showroom - Makkah||||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|RECEIVING|STORE_TRANSFER|11318|PARTY|011205|Besha Showroom - Taif||||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|RECEIVING|STORE_TRANSFER|11318|PARTY|011321|Al-Fayha Showroom – Jeddah||||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|RECEIVING|STORE_TRANSFER|11318|PARTY|011319|Haifaa Mall Showroom – Jeddah||||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|RECEIVING|STORE_TRANSFER|11318|PARTY|011322|Al-Ajaweed Showroom – Jeddah||||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|RECEIVING|STORE_TRANSFER|11318|PARTY|011323|Bandar Mall Showroom – Al-Qunfudhah||||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|RECEIVING|STORE_TRANSFER|11318|PARTY|011324|King Faisal Street Showroom – Jeddah||||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|RECEIVING|STORE_TRANSFER|11318|PARTY|013106|Namas Mall Showroom - Abha||||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|RECEIVING|STORE_TRANSFER|11318|PARTY|014116|Al-Nairyah Showroom - Eastern||||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|RECEIVING|STORE_TRANSFER|11318|PARTY|012128|Hayat Mall Showroom -  Al-Riyadh||||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|RECEIVING|STORE_TRANSFER|11318|PARTY|011410|Azizia Showroom - Al-Madinah||||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|RECEIVING|STORE_TRANSFER|11318|PARTY|012129|Al-Dawadmi Showroom - Al-Riyadh||||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|RECEIVING|STORE_TRANSFER|11318|PARTY|011411|Al-Manar Mall Showroom - Al-Madinah||||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|RECEIVING|STORE_TRANSFER|11318|PARTY|012130|Al-Muzahmiya Mall Showroom - Al-Riyadh||||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|RECEIVING|STORE_TRANSFER|11318|PARTY|014122|Leen Mall Rafha Showroom - Rafha||||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|RECEIVING|STORE_TRANSFER|11318|PARTY|013107|Al-Bsateen Mall Showroom - Abha||||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|RECEIVING|STORE_TRANSFER|11318|PARTY|011119|Al-Steen Showroom - Makkah||||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|RECEIVING|STORE_TRANSFER|11318|PARTY|014115|Hafir Al-Batin 2 Showroom - Al-Qassim||||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|RECEIVING|STORE_TRANSFER|11318|PARTY|014118|Al-Jubail Mall Showroom - Eastern||||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|RECEIVING|STORE_TRANSFER|11318|PARTY|011207|Joury Mall Showroom - Taif||||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|RECEIVING|STORE_TRANSFER|11318|PARTY|012131|Ghornatah Mall Showroom - Al-Riyadh||||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|RECEIVING|STORE_TRANSFER|11318|PARTY|012306|Al-Nakheel Mall Showroom - Al-Qassim||||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|RECEIVING|STORE_TRANSFER|11318|PARTY|011121|Dar El-Tawheed Showroom - Makkah||||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|RECEIVING|STORE_TRANSFER|11318|PARTY|012132|Wadi Laban Showroom - Al-Riyadh||||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|RECEIVING|STORE_TRANSFER|11318|PARTY|013506|Al-Shebli Showroom - Khamis Mushait||||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|RECEIVING|STORE_TRANSFER|11318|PARTY|015103|Olayaa Showroom - Tabuk||||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|RECEIVING|STORE_TRANSFER|11318|PARTY|011209|Al-Majardah  Showroom - Taif||||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|RECEIVING|STORE_TRANSFER|11318|PARTY|011413|Al-Hijrah Showroom - Al-Madinah||||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|RECEIVING|STORE_TRANSFER|11318|PARTY|011414|Sultana Street Showroom - Al-Madinah||||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|RECEIVING|STORE_TRANSFER|11318|PARTY|012139|Al-Zulfi Showroom - Al-Qassim||||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|RECEIVING|STORE_TRANSFER|11318|PARTY|014125|Al-Jalaweyah Showroom - Eastern||||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|RECEIVING|STORE_TRANSFER|11318|PARTY|012135|Wadi Al-dwaser Showroom - Al-Riyadh||||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|RECEIVING|STORE_TRANSFER|11318|PARTY|011210|Sabt Al-Alaya Showroom – Taif||||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|RECEIVING|STORE_TRANSFER|11318|PARTY|012308|Al-Mashaghel Street Showroom - Al-Qassim||||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|RECEIVING|STORE_TRANSFER|11318|PARTY|013305|Khayalh Mall Showroom - Jazan||||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|RECEIVING|STORE_TRANSFER|11318|PARTY|011327|Yasmeen Mall Showroom – Jeddah||||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|RECEIVING|STORE_TRANSFER|11318|PARTY|012307|Unaizah Al-Sowyan - Al-Qassim||||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|RECEIVING|STORE_TRANSFER|11318|PARTY|015203|Grand Mall Showroom - Hail||||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|RECEIVING|STORE_TRANSFER|11318|PARTY|012202|Al-Kharj 2 Showroom - Al-Kharj||||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|RECEIVING|STORE_TRANSFER|11318|PARTY|011123|Al-Shawqiyah Showroom - Makkah||||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|RECEIVING|STORE_TRANSFER|11318|PARTY|015402|Al-Othaim Mall Showroom -Arar||||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|RECEIVING|STORE_TRANSFER|11318|PARTY|012127|Al-Hamra Mall Showroom - Al-Riyadh||||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|RECEIVING|STORE_TRANSFER|11318|PARTY|012140|Al-Shifa Plaza Showroom - Al-Riyadh||||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|RECEIVING|STORE_TRANSFER|11318|PARTY|012137|Salman Al-Farisi Showroom - Al-Riyadh||||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|RECEIVING|STORE_TRANSFER|11318|PARTY|011126|Makkah Mall Boutique Showroom - Makkah||||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|RECEIVING|STORE_TRANSFER|11318|PARTY|012141|Al-Nakheel Mall Boutique Showroom - Al-Riyadh||||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|RECEIVING|STORE_TRANSFER|11318|PARTY|011328|Al-Mahmal Center Showroom – Jeddah||||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|RECEIVING|STORE_TRANSFER|11318|PARTY|011329|Al-Salam Mall Boutique Showroom - Jeddah||||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|RECEIVING|STORE_TRANSFER|11318|PARTY|011330|Aziz Mall Boutique Showroom - Jeddah||||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|RECEIVING|STORE_TRANSFER|11318|PARTY|011331|Arab Mall Boutique Showroom - Jeddah||||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|RECEIVING|STORE_TRANSFER|11318|PARTY|011416|Al-Noor Mall Boutique Showroom - Al-Madinah||||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|RECEIVING|STORE_TRANSFER|11318|PARTY|013109|Al-Rashid Mall Showroom - Abha||||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|RECEIVING|STORE_TRANSFER|11318|PARTY|013604|Hayat Mall Showroom - Najran||||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|RECEIVING|STORE_TRANSFER|11318|PARTY|015104|Tabuk Park Showroom - Tabuk||||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|RECEIVING|STORE_TRANSFER|11318|PARTY|014126|Al-Othaim Dammam Showroom - Eastern||||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|RECEIVING|STORE_TRANSFER|11318|PARTY|012146|Al-Rawabi Al-Riyadh Showroom - Al-Riyadh||||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|RECEIVING|STORE_TRANSFER|11318|PARTY|012142|Wajehat Al-Riyadh Showroom - Al-Riyadh||||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|RECEIVING|STORE_TRANSFER|11318|PARTY|014129|Marina Mall Showroom – Eastern||||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|RECEIVING|STORE_TRANSFER|11318|PARTY|012309|Emam Bukhari Road Showroom - Al-Qassim||||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|RECEIVING|STORE_TRANSFER|11318|PARTY|012148|Arqah Showroom - Al-Riyadh||||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|RECEIVING|STORE_TRANSFER|11318|PARTY|011335|Moj Plaza Showroom - Jeddah||||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|RECEIVING|STORE_TRANSFER|11318|PARTY|012154|Yarmouk Center Showroom - Al-Riyadh||||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|RECEIVING|STORE_TRANSFER|11318|PARTY|012147|Al-Azizia Showroom - Al-Riyadh||||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|RECEIVING|STORE_TRANSFER|11318|PARTY|011336|Hamdanya Showroom - Jeddah||||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|RECEIVING|STORE_TRANSFER|11318|PARTY|012153|Al-Sahafa Plaza Showroom - Al-Riyadh||||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|RECEIVING|STORE_TRANSFER|11318|PARTY|014130|Al-Nakheel Mall Showroom - Eastern||||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|RECEIVING|STORE_TRANSFER|11318|PARTY|013306|Yasmeen Aboaresh Showroom - Jazan||||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|RECEIVING|STORE_TRANSFER|11318|PARTY|011417|Aswaq Al-Othaim Showroom - Al-Madinah||||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|RECEIVING|STORE_TRANSFER|11318|PARTY|011130|Al-Majaz Mall Showroom - Makkah||||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|RECEIVING|STORE_TRANSFER|11318|PARTY|012312|Al-Othaim Unaizah Showroom - Al-Qassim||||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|RECEIVING|STORE_TRANSFER|11318|PARTY|012157|Telal Al-Masharef Showroom - Al-Riyadh||||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|RECEIVING|STORE_TRANSFER|11318|PARTY|011418|Alia Mall Showroom - Al-Madinah||||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|RECEIVING|STORE_TRANSFER|11318|PARTY|011129|Dkakeen Bakka Showroom - Makkah||||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|RECEIVING|STORE_TRANSFER|11318|PARTY|013606|Al-Fakhriah Plaza Showroom - Najran||||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|RECEIVING|STORE_TRANSFER|11318|PARTY|013605|City Center Showroom - Najran||||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|RECEIVING|STORE_TRANSFER|11318|PARTY|012158|Park Avenue Showroom - Al-Riyadh||||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|RECEIVING|STORE_TRANSFER|11318|PARTY|011338|Jeddah Park Showroom - Jeddah||||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|RECEIVING|STORE_TRANSFER|11318|PARTY|013507|Mujan Park Showroom - Khamis Mushait||||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|RECEIVING|STORE_TRANSFER|11318|PARTY|011419|Dar Al-Taqwa 2 Showroom - Al-Madinah||||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|RECEIVING|STORE_TRANSFER|11318|PARTY|013307|Azzan Plaza Showroom - Jazan||||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|RECEIVING|STORE_TRANSFER|11318|PARTY|012163|Al-Rawda Showroom - Al-Riyadh||||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|RECEIVING|STORE_TRANSFER|11318|PARTY|011211|The Park Mall Showroom - Taif||||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|RECEIVING|STORE_TRANSFER|11318|PARTY|013403|Al-Baha Mall Showroom - Al-Baha||||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|RECEIVING|STORE_TRANSFER|11318|PARTY|012169|Executive Terminal 1 Showroom - Al-Riyadh||||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|RECEIVING|STORE_TRANSFER|11318|PARTY|012170|Executive Terminal 5 Showroom - Al-Riyadh||||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|RECEIVING|STORE_TRANSFER|11318|PARTY|012162|The View Showroom - Al-Riyadh||||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|RECEIVING|STORE_TRANSFER|11318|PARTY|011339|Executive Showroom - Jeddah||||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|RECEIVING|STORE_TRANSFER|11318|PARTY|012175|Al-Yarmook 2 Showroom - Al-Riyadh||||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|RECEIVING|STORE_TRANSFER|11318|PARTY|013308|Al-Borhan Mall Showroom - Jazan||||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|RECEIVING|STORE_TRANSFER|11318|PARTY|014127|Al-Othaim Hafir Al-Batin Showroom - Al-Qassim||||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|RECEIVING|STORE_TRANSFER|11318|PARTY|012172|Meem Plaza Showroom - Al-Riyadh||||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|RECEIVING|STORE_TRANSFER|11318|PARTY|012171|Al-Takhassusi Showroom - Al-Riyadh||||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|RECEIVING|STORE_TRANSFER|11318|PARTY|013309|Al-Rashid Mall Showroom - Jazan||||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|RECEIVING|STORE_TRANSFER|11318|PARTY|012155|Alia Plaza Showroom - Al-Riyadh||||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|RECEIVING|STORE_TRANSFER|11318|PARTY|013508|Boulevard Showroom - Khamis Mushait||||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|RECEIVING|STORE_TRANSFER|11318|PARTY|011340|The Village Mall Showroom - Jeddah||||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|RECEIVING|STORE_TRANSFER|11318|PARTY|013607|Najran Park Showroom - Najran||||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|RECEIVING|STORE_TRANSFER|11318|PARTY|014139|Al Faisaliah Plaza Showroom - Eastern||||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|RECEIVING|STORE_TRANSFER|11318|PARTY|011421|Taiba Center Showroom - Al-Madinah||||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|RECEIVING|STORE_TRANSFER|11318|PARTY|015106|Tabuk Boulevard Showroom - Tabuk||||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|RECEIVING|STORE_TRANSFER|11318|PARTY|014133|Tamimi Plaza Mall Showroom - Eastern||||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|RECEIVING|STORE_TRANSFER|11318|PARTY|014132|Riviera Avenue Mall Showroom - Eastern||||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|RECEIVING|STORE_TRANSFER|11318|PARTY|014136|Al Hayat Plaza Mall Showroom - Eastern||||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|RECEIVING|STORE_TRANSFER|11318|PARTY|014137|Al Shaikh Avenue Mall Showroom - Eastern||||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|RECEIVING|STORE_TRANSFER|11318|PARTY|014138|Al Azizia Plaza Showroom - Eastern||||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|RECEIVING|STORE_TRANSFER|11318|PARTY|012177|Narsis Hotel Showroom - Al-Riyadh||||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|RECEIVING|STORE_TRANSFER|11318|PARTY|012180|Hteen Showroom - Al-Riyadh||||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|RECEIVING|STORE_TRANSFER|11318|PARTY|012181|Al Aqeq Showroom - Al-Riyadh||||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|RECEIVING|STORE_TRANSFER|11318|PARTY|011344|Al-Zahraa Plaza Showroom - Jeddah||||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|RECEIVING|STORE_TRANSFER|11318|PARTY|012178|Al Ghadeer Showroom - Al-Riyadh||||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|RECEIVING|STORE_TRANSFER|11318|PARTY|012179|Al Maethar Showroom - Al-Riyadh||||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|RECEIVING|STORE_TRANSFER|11318|PARTY|012183|Al Waha Plaza Showroom - Al-Riyadh||||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|RECEIVING|STORE_TRANSFER|11318|PARTY|013608|Najran King Saud Road Showroom - Najran||||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|RECEIVING|STORE_TRANSFER|11318|PARTY|012184|Al Oroba Showroom - Al-Riyadh||||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|RECEIVING|STORE_TRANSFER|11318|PARTY|012203|Al Kharj Plaza Showroom - Al-Kharj||||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|RECEIVING|STORE_TRANSFER|11318|PARTY|012187|Rawabi Onaizah Street Showroom - Al-Riyadh||||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|RECEIVING|STORE_TRANSFER|11318|PARTY|012182|Garnata 2 Showroom - Al-Riyadh||||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|RECEIVING|STORE_TRANSFER|11318|PARTY|012173|Termithi Street Showroom - Al-Riyadh||||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|RECEIVING|STORE_TRANSFER|11318|PARTY|012189|Tald Plaza Showroom - Al-Riyadh||||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|RECEIVING|STORE_TRANSFER|11318|PARTY|012190|The Gate Showroom - Al-Riyadh||||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|RECEIVING|STORE_TRANSFER|11318|PARTY|011132|Al-Shawqiyah 2 Showroom - Makkah||||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|RECEIVING|STORE_TRANSFER|11318|PARTY|011345|Cornish Center Showroom - Jeddah||||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|RECEIVING|STORE_TRANSFER|11318|PARTY|011213|Shahar Showroom - Taif||||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|RECEIVING|STORE_TRANSFER|11318|PARTY|012191|Souq Hijab Showroom - Al-Riyadh||||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|RECEIVING|STORE_TRANSFER|11318|PARTY|011346|Hamdanya 2 Showroom - Jeddah||||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|RECEIVING|STORE_TRANSFER|11318|PARTY|015204|Barzan Market Showroom – Hail||||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|RECEIVING|STORE_TRANSFER|11318|PARTY|013110|Ravala Plaza Showroom – Abha||||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|RECEIVING|STORE_TRANSFER|11318|PARTY|011214|Boulevard Besha Showroom – Taif||||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|RECEIVING|STORE_TRANSFER|11318|PARTY|011215|Al-Shifa Street Showroom – Taif||||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|RECEIVING|STORE_TRANSFER|11318|PARTY|012185|Al Malqa Showroom - Al-Riyadh||||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|RECEIVING|STORE_TRANSFER|11318|PARTY|011423|Sari Showroom - Al-Madinah||||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|RECEIVING|STORE_TRANSFER|11318|PARTY|012205|Sania Khurais Showroom - Al-Riyadh||||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|RECEIVING|STORE_TRANSFER|11318|PARTY|014140|Al Mubarraz Town Center Showroom - Eastern||||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|RECEIVING|STORE_TRANSFER|11318|PARTY|011341|U - Walk Showroom - Jeddah||||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|RECEIVING|STORE_TRANSFER|11318|PARTY|012204|Al-Jenadriyah Plaza Showroom - Al-Riyadh||||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|RECEIVING|STORE_TRANSFER|11318|PARTY|013405|Diamond Avenue Showroom - Al-Baha||||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|RECEIVING|STORE_TRANSFER|11318|PARTY|011347|Salama Centre Showroom - Jeddah||||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|RECEIVING|STORE_TRANSFER|11318|PARTY|012207|Al-Moursalat Showroom - Al-Riyadh||||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|SHIPPING|STORE_TRANSFER|11318|PARTY|011101|Abraj Al-Bait 1 Showroom - Makkah||||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|SHIPPING|STORE_TRANSFER|11318|PARTY|011102|Abraj Al-Bait 2 Showroom - Makkah||||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|SHIPPING|STORE_TRANSFER|11318|PARTY|011103|Abraj Al-Bait 4 Showroom - Makkah||||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|SHIPPING|STORE_TRANSFER|11318|PARTY|014108|Al-Ahsa Mall Showroom - Eastern||||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|SHIPPING|STORE_TRANSFER|11318|PARTY|011307|Al-Andalus Mall Showroom - Jeddah||||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|SHIPPING|STORE_TRANSFER|11318|PARTY|012119|Al-Badeeah Mall 2 Showroom - Al-Riyadh||||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|SHIPPING|STORE_TRANSFER|11318|PARTY|011501|Al-Danah Mall Showroom - Yanbu||||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|SHIPPING|STORE_TRANSFER|11318|PARTY|011107|Al-Diyafa Showroom - Makkah||||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|SHIPPING|STORE_TRANSFER|11318|PARTY|013401|Al-Baha Showroom - Al-Baha||||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|SHIPPING|STORE_TRANSFER|11318|PARTY|014111|Al-Qosaibi Al-Khobar Showroom - Eastern||||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|SHIPPING|STORE_TRANSFER|11318|PARTY|011106|Al-Hijaz Mall Showroom - Makkah||||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|SHIPPING|STORE_TRANSFER|11318|PARTY|011108|Al-Hijrah Showroom - Makkah||||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|SHIPPING|STORE_TRANSFER|11318|PARTY|012201|Al-Hudaithi Mall Showroom - Al-Kharj||||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|SHIPPING|STORE_TRANSFER|11318|PARTY|015301|Al-Jouf Plaza Showroom? - Al-Jouf||||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|SHIPPING|STORE_TRANSFER|11318|PARTY|014106|Al-Khafji Showroom - Eastern||||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|SHIPPING|STORE_TRANSFER|11318|PARTY|011403|Al-Madinah Al-Dowali Showroom - Al-Madinah||||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|SHIPPING|STORE_TRANSFER|11318|PARTY|012115|Al-Majmaah Showroom - Al-Qassim||||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|SHIPPING|STORE_TRANSFER|11318|PARTY|012118|Al-Naseem Showroom - Al-Riyadh||||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|SHIPPING|STORE_TRANSFER|11318|PARTY|012105|Al-Olaya Alaam Showroom - Al-Riyadh||||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|SHIPPING|STORE_TRANSFER|11318|PARTY|014109|Al-Othaim Al-Hofuf Showroom - Eastern||||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|SHIPPING|STORE_TRANSFER|11318|PARTY|012117|Al-Othaim Al-Rabwa Showroom - Al-Riyadh||||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|SHIPPING|STORE_TRANSFER|11318|PARTY|012301|Buraidah Showroom - Al-Qassim||||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|SHIPPING|STORE_TRANSFER|11318|PARTY|012110|Al-Othaim Mall Showroom - Al-Riyadh||||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|SHIPPING|STORE_TRANSFER|11318|PARTY|012174|Al-Qasr Mall Showroom - Al-Riyadh||||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|SHIPPING|STORE_TRANSFER|11318|PARTY|014101|Al-Rashid Mall 1 Showroom - Eastern||||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|SHIPPING|STORE_TRANSFER|11318|PARTY|011405|Al-Rashid Mega Mall Showroom - Al-Madinah||||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|SHIPPING|STORE_TRANSFER|11318|PARTY|011311|Al-Safaa Showroom - Jeddah||||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|SHIPPING|STORE_TRANSFER|11318|PARTY|011114|Al-Sharaya Showroom - Makkah||||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|SHIPPING|STORE_TRANSFER|11318|PARTY|012101|Al-Steen Showroom - Al-Riyadh||||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|SHIPPING|STORE_TRANSFER|11318|PARTY|011304|Al-Tahlia Almasi Showroom - Jeddah||||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|SHIPPING|STORE_TRANSFER|11318|PARTY|011315|Mandarin Avenue Showroom - Jeddah||||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|SHIPPING|STORE_TRANSFER|11318|PARTY|011309|Arab Mall Showroom - Jeddah||||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|SHIPPING|STORE_TRANSFER|11318|PARTY|013502|Asdaf Mall Showroom - Khamis Mushait||||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|SHIPPING|STORE_TRANSFER|11318|PARTY|011314|Aziz Mall Showroom - Jeddah||||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|SHIPPING|STORE_TRANSFER|11318|PARTY|013402|Baljorshi Mall Showroom - Baljorshi||||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|SHIPPING|STORE_TRANSFER|11318|PARTY|014112|City Mall Al-Qatif Showroom - Eastern||||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|SHIPPING|STORE_TRANSFER|11318|PARTY|011110|Dana Center Showroom - Makkah||||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|SHIPPING|STORE_TRANSFER|11318|PARTY|011402|Dar Al-Taqwa Showroom - Al-Madinah||||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|SHIPPING|STORE_TRANSFER|11318|PARTY|014105|Dareen Mall Showroom - Eastern||||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|SHIPPING|STORE_TRANSFER|11318|PARTY|014113|Dhahran Mall 2 Showroom - Eastern||||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|SHIPPING|STORE_TRANSFER|11318|PARTY|011404|Diyar Al-Madinah Showroom - Al-Madinah||||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|SHIPPING|STORE_TRANSFER|11318|PARTY|014107|Hafir Al-Batin Showroom - Al-Qassim||||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|SHIPPING|STORE_TRANSFER|11318|PARTY|011305|Heraa Mall Showroom - Jeddah||||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|SHIPPING|STORE_TRANSFER|11318|PARTY|011401|Hilton Al-Madinah Showroom - Al-Madinah||||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|SHIPPING|STORE_TRANSFER|11318|PARTY|011112|Jabal Omar 1 Showroom - Makkah||||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|SHIPPING|STORE_TRANSFER|11318|PARTY|011113|Jabal Omar 2 Showroom - Makkah||||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|SHIPPING|STORE_TRANSFER|11318|PARTY|013503|Khamis Avenue Showroom - Khamis Mushait||||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|SHIPPING|STORE_TRANSFER|11318|PARTY|013501|Khamis Mushait Showroom - Khamis Mushait||||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|SHIPPING|STORE_TRANSFER|11318|PARTY|012104|Kingdom Center Showroom - Al-Riyadh||||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|SHIPPING|STORE_TRANSFER|11318|PARTY|011105|Makkah Anas Showroom - Makkah||||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|SHIPPING|STORE_TRANSFER|11318|PARTY|011104|Makkah Ehsan Showroom - Makkah||||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|SHIPPING|STORE_TRANSFER|11318|PARTY|011111|Makkah Mall Showroom - Makkah||||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|SHIPPING|STORE_TRANSFER|11318|PARTY|012120|Marina Mall Showroom - Al-Riyadh||||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|SHIPPING|STORE_TRANSFER|11318|PARTY|013104|Mahayil Aseer Showroom - Abha||||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|SHIPPING|STORE_TRANSFER|11318|PARTY|012108|Panorama Mall Showroom - Al-Riyadh||||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|SHIPPING|STORE_TRANSFER|11318|PARTY|011306|Red Sea Mall Showroom - Jeddah||||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|SHIPPING|STORE_TRANSFER|11318|PARTY|015201|Hail Al-Tamami Showroom - Hail||||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|SHIPPING|STORE_TRANSFER|11318|PARTY|011202|Taif 2 Showroom - Taif||||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|SHIPPING|STORE_TRANSFER|11318|PARTY|011201|Taif 1 Showroom - Taif||||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|SHIPPING|STORE_TRANSFER|11318|PARTY|011203|Taif 3 Showroom - Taif||||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|SHIPPING|STORE_TRANSFER|11318|PARTY|012102|Al-Thalatheen Showroom - Al-Riyadh||||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|SHIPPING|STORE_TRANSFER|11318|PARTY|014102|Venecia Mall Showroom - Eastern||||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|SHIPPING|STORE_TRANSFER|11318|PARTY|011502|Yanbu Mall Showroom - Yanbu||||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|SHIPPING|STORE_TRANSFER|11318|PARTY|011312|Al-Salam Mall Showroom - Jeddah||||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|SHIPPING|STORE_TRANSFER|11318|PARTY|011406|Al-Noor Mall Showroom - Al-Madinah||||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|SHIPPING|STORE_TRANSFER|11318|PARTY|012114|Al-Salam Mall Showroom - Al-Riyadh||||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|SHIPPING|STORE_TRANSFER|11318|PARTY|012116|King Abdullah Street Showroom - Al-Riyadh||||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|SHIPPING|STORE_TRANSFER|11318|PARTY|012121|Gallery Mall Showroom - Al-Riyadh||||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|SHIPPING|STORE_TRANSFER|11318|PARTY|012304|Al-Amry Buraidah Showroom - Al-Qassim||||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|SHIPPING|STORE_TRANSFER|11318|PARTY|012305|Deira Mall Rass Showroom - Al-Qassim||||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|SHIPPING|STORE_TRANSFER|11318|PARTY|013105|New Abha Showroom - Abha||||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|SHIPPING|STORE_TRANSFER|11318|PARTY|014103|Amwaj Mall Showroom - Eastern||||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|SHIPPING|STORE_TRANSFER|11318|PARTY|014110|Jubail Royal Authority Showroom - Eastern||||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|SHIPPING|STORE_TRANSFER|11318|PARTY|013301|Kadi Mall Showroom - Jazan||||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|SHIPPING|STORE_TRANSFER|11318|PARTY|012122|Dove Plaza Showroom - Al-Riyadh||||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|SHIPPING|STORE_TRANSFER|11318|PARTY|012123|New Tahlia Showroom - Al-Riyadh||||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|SHIPPING|STORE_TRANSFER|11318|PARTY|011317|Al-Tahlia Boutique Showroom - Jeddah||||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|SHIPPING|STORE_TRANSFER|11318|PARTY|012124|Al-Nakheel Mall Showroom - Al-Riyadh||||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|SHIPPING|STORE_TRANSFER|11318|PARTY|012125|Talaa Mall Showroom - Al-Riyadh||||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|SHIPPING|STORE_TRANSFER|11318|PARTY|011320|Al-Samer Showroom – Jeddah||||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|SHIPPING|STORE_TRANSFER|11318|PARTY|011116|Souq Al-Qawafel Showroom - Makkah||||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|SHIPPING|STORE_TRANSFER|11318|PARTY|011205|Besha Showroom - Taif||||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|SHIPPING|STORE_TRANSFER|11318|PARTY|011321|Al-Fayha Showroom – Jeddah||||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|SHIPPING|STORE_TRANSFER|11318|PARTY|011319|Haifaa Mall Showroom – Jeddah||||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|SHIPPING|STORE_TRANSFER|11318|PARTY|011322|Al-Ajaweed Showroom – Jeddah||||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|SHIPPING|STORE_TRANSFER|11318|PARTY|011323|Bandar Mall Showroom – Al-Qunfudhah||||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|SHIPPING|STORE_TRANSFER|11318|PARTY|011324|King Faisal Street Showroom – Jeddah||||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|SHIPPING|STORE_TRANSFER|11318|PARTY|013106|Namas Mall Showroom - Abha||||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|SHIPPING|STORE_TRANSFER|11318|PARTY|014116|Al-Nairyah Showroom - Eastern||||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|SHIPPING|STORE_TRANSFER|11318|PARTY|012128|Hayat Mall Showroom -  Al-Riyadh||||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|SHIPPING|STORE_TRANSFER|11318|PARTY|011410|Azizia Showroom - Al-Madinah||||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|SHIPPING|STORE_TRANSFER|11318|PARTY|012129|Al-Dawadmi Showroom - Al-Riyadh||||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|SHIPPING|STORE_TRANSFER|11318|PARTY|011411|Al-Manar Mall Showroom - Al-Madinah||||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|SHIPPING|STORE_TRANSFER|11318|PARTY|012130|Al-Muzahmiya Mall Showroom - Al-Riyadh||||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|SHIPPING|STORE_TRANSFER|11318|PARTY|014122|Leen Mall Rafha Showroom - Rafha||||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|SHIPPING|STORE_TRANSFER|11318|PARTY|013107|Al-Bsateen Mall Showroom - Abha||||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|SHIPPING|STORE_TRANSFER|11318|PARTY|011119|Al-Steen Showroom - Makkah||||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|SHIPPING|STORE_TRANSFER|11318|PARTY|014115|Hafir Al-Batin 2 Showroom - Al-Qassim||||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|SHIPPING|STORE_TRANSFER|11318|PARTY|014118|Al-Jubail Mall Showroom - Eastern||||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|SHIPPING|STORE_TRANSFER|11318|PARTY|011207|Joury Mall Showroom - Taif||||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|SHIPPING|STORE_TRANSFER|11318|PARTY|012131|Ghornatah Mall Showroom - Al-Riyadh||||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|SHIPPING|STORE_TRANSFER|11318|PARTY|012306|Al-Nakheel Mall Showroom - Al-Qassim||||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|SHIPPING|STORE_TRANSFER|11318|PARTY|011121|Dar El-Tawheed Showroom - Makkah||||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|SHIPPING|STORE_TRANSFER|11318|PARTY|012132|Wadi Laban Showroom - Al-Riyadh||||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|SHIPPING|STORE_TRANSFER|11318|PARTY|013506|Al-Shebli Showroom - Khamis Mushait||||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|SHIPPING|STORE_TRANSFER|11318|PARTY|015103|Olayaa Showroom - Tabuk||||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|SHIPPING|STORE_TRANSFER|11318|PARTY|011209|Al-Majardah  Showroom - Taif||||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|SHIPPING|STORE_TRANSFER|11318|PARTY|011413|Al-Hijrah Showroom - Al-Madinah||||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|SHIPPING|STORE_TRANSFER|11318|PARTY|011414|Sultana Street Showroom - Al-Madinah||||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|SHIPPING|STORE_TRANSFER|11318|PARTY|012139|Al-Zulfi Showroom - Al-Qassim||||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|SHIPPING|STORE_TRANSFER|11318|PARTY|014125|Al-Jalaweyah Showroom - Eastern||||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|SHIPPING|STORE_TRANSFER|11318|PARTY|012135|Wadi Al-dwaser Showroom - Al-Riyadh||||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|SHIPPING|STORE_TRANSFER|11318|PARTY|011210|Sabt Al-Alaya Showroom – Taif||||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|SHIPPING|STORE_TRANSFER|11318|PARTY|012308|Al-Mashaghel Street Showroom - Al-Qassim||||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|SHIPPING|STORE_TRANSFER|11318|PARTY|013305|Khayalh Mall Showroom - Jazan||||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|SHIPPING|STORE_TRANSFER|11318|PARTY|011327|Yasmeen Mall Showroom – Jeddah||||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|SHIPPING|STORE_TRANSFER|11318|PARTY|012307|Unaizah Al-Sowyan - Al-Qassim||||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|SHIPPING|STORE_TRANSFER|11318|PARTY|015203|Grand Mall Showroom - Hail||||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|SHIPPING|STORE_TRANSFER|11318|PARTY|012202|Al-Kharj 2 Showroom - Al-Kharj||||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|SHIPPING|STORE_TRANSFER|11318|PARTY|011123|Al-Shawqiyah Showroom - Makkah||||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|SHIPPING|STORE_TRANSFER|11318|PARTY|015402|Al-Othaim Mall Showroom -Arar||||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|SHIPPING|STORE_TRANSFER|11318|PARTY|012127|Al-Hamra Mall Showroom - Al-Riyadh||||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|SHIPPING|STORE_TRANSFER|11318|PARTY|012140|Al-Shifa Plaza Showroom - Al-Riyadh||||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|SHIPPING|STORE_TRANSFER|11318|PARTY|012137|Salman Al-Farisi Showroom - Al-Riyadh||||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|SHIPPING|STORE_TRANSFER|11318|PARTY|011126|Makkah Mall Boutique Showroom - Makkah||||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|SHIPPING|STORE_TRANSFER|11318|PARTY|012141|Al-Nakheel Mall Boutique Showroom - Al-Riyadh||||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|SHIPPING|STORE_TRANSFER|11318|PARTY|011328|Al-Mahmal Center Showroom – Jeddah||||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|SHIPPING|STORE_TRANSFER|11318|PARTY|011329|Al-Salam Mall Boutique Showroom - Jeddah||||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|SHIPPING|STORE_TRANSFER|11318|PARTY|011330|Aziz Mall Boutique Showroom - Jeddah||||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|SHIPPING|STORE_TRANSFER|11318|PARTY|011331|Arab Mall Boutique Showroom - Jeddah||||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|SHIPPING|STORE_TRANSFER|11318|PARTY|011416|Al-Noor Mall Boutique Showroom - Al-Madinah||||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|SHIPPING|STORE_TRANSFER|11318|PARTY|013109|Al-Rashid Mall Showroom - Abha||||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|SHIPPING|STORE_TRANSFER|11318|PARTY|013604|Hayat Mall Showroom - Najran||||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|SHIPPING|STORE_TRANSFER|11318|PARTY|015104|Tabuk Park Showroom - Tabuk||||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|SHIPPING|STORE_TRANSFER|11318|PARTY|014126|Al-Othaim Dammam Showroom - Eastern||||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|SHIPPING|STORE_TRANSFER|11318|PARTY|012146|Al-Rawabi Al-Riyadh Showroom - Al-Riyadh||||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|SHIPPING|STORE_TRANSFER|11318|PARTY|012142|Wajehat Al-Riyadh Showroom - Al-Riyadh||||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|SHIPPING|STORE_TRANSFER|11318|PARTY|014129|Marina Mall Showroom – Eastern||||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|SHIPPING|STORE_TRANSFER|11318|PARTY|012309|Emam Bukhari Road Showroom - Al-Qassim||||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|SHIPPING|STORE_TRANSFER|11318|PARTY|012148|Arqah Showroom - Al-Riyadh||||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|SHIPPING|STORE_TRANSFER|11318|PARTY|011335|Moj Plaza Showroom - Jeddah||||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|SHIPPING|STORE_TRANSFER|11318|PARTY|012154|Yarmouk Center Showroom - Al-Riyadh||||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|SHIPPING|STORE_TRANSFER|11318|PARTY|012147|Al-Azizia Showroom - Al-Riyadh||||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|SHIPPING|STORE_TRANSFER|11318|PARTY|011336|Hamdanya Showroom - Jeddah||||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|SHIPPING|STORE_TRANSFER|11318|PARTY|012153|Al-Sahafa Plaza Showroom - Al-Riyadh||||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|SHIPPING|STORE_TRANSFER|11318|PARTY|014130|Al-Nakheel Mall Showroom - Eastern||||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|SHIPPING|STORE_TRANSFER|11318|PARTY|013306|Yasmeen Aboaresh Showroom - Jazan||||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|SHIPPING|STORE_TRANSFER|11318|PARTY|011417|Aswaq Al-Othaim Showroom - Al-Madinah||||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|SHIPPING|STORE_TRANSFER|11318|PARTY|011130|Al-Majaz Mall Showroom - Makkah||||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|SHIPPING|STORE_TRANSFER|11318|PARTY|012312|Al-Othaim Unaizah Showroom - Al-Qassim||||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|SHIPPING|STORE_TRANSFER|11318|PARTY|012157|Telal Al-Masharef Showroom - Al-Riyadh||||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|SHIPPING|STORE_TRANSFER|11318|PARTY|011418|Alia Mall Showroom - Al-Madinah||||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|SHIPPING|STORE_TRANSFER|11318|PARTY|011129|Dkakeen Bakka Showroom - Makkah||||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|SHIPPING|STORE_TRANSFER|11318|PARTY|013606|Al-Fakhriah Plaza Showroom - Najran||||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|SHIPPING|STORE_TRANSFER|11318|PARTY|013605|City Center Showroom - Najran||||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|SHIPPING|STORE_TRANSFER|11318|PARTY|012158|Park Avenue Showroom - Al-Riyadh||||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|SHIPPING|STORE_TRANSFER|11318|PARTY|011338|Jeddah Park Showroom - Jeddah||||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|SHIPPING|STORE_TRANSFER|11318|PARTY|013507|Mujan Park Showroom - Khamis Mushait||||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|SHIPPING|STORE_TRANSFER|11318|PARTY|011419|Dar Al-Taqwa 2 Showroom - Al-Madinah||||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|SHIPPING|STORE_TRANSFER|11318|PARTY|013307|Azzan Plaza Showroom - Jazan||||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|SHIPPING|STORE_TRANSFER|11318|PARTY|012163|Al-Rawda Showroom - Al-Riyadh||||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|SHIPPING|STORE_TRANSFER|11318|PARTY|011211|The Park Mall Showroom - Taif||||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|SHIPPING|STORE_TRANSFER|11318|PARTY|013403|Al-Baha Mall Showroom - Al-Baha||||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|SHIPPING|STORE_TRANSFER|11318|PARTY|012169|Executive Terminal 1 Showroom - Al-Riyadh||||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|SHIPPING|STORE_TRANSFER|11318|PARTY|012170|Executive Terminal 5 Showroom - Al-Riyadh||||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|SHIPPING|STORE_TRANSFER|11318|PARTY|012162|The View Showroom - Al-Riyadh||||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|SHIPPING|STORE_TRANSFER|11318|PARTY|011339|Executive Showroom - Jeddah||||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|SHIPPING|STORE_TRANSFER|11318|PARTY|012175|Al-Yarmook 2 Showroom - Al-Riyadh||||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|SHIPPING|STORE_TRANSFER|11318|PARTY|013308|Al-Borhan Mall Showroom - Jazan||||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|SHIPPING|STORE_TRANSFER|11318|PARTY|014127|Al-Othaim Hafir Al-Batin Showroom - Al-Qassim||||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|SHIPPING|STORE_TRANSFER|11318|PARTY|012172|Meem Plaza Showroom - Al-Riyadh||||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|SHIPPING|STORE_TRANSFER|11318|PARTY|012171|Al-Takhassusi Showroom - Al-Riyadh||||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|SHIPPING|STORE_TRANSFER|11318|PARTY|013309|Al-Rashid Mall Showroom - Jazan||||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|SHIPPING|STORE_TRANSFER|11318|PARTY|012155|Alia Plaza Showroom - Al-Riyadh||||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|SHIPPING|STORE_TRANSFER|11318|PARTY|013508|Boulevard Showroom - Khamis Mushait||||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|SHIPPING|STORE_TRANSFER|11318|PARTY|011340|The Village Mall Showroom - Jeddah||||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|SHIPPING|STORE_TRANSFER|11318|PARTY|013607|Najran Park Showroom - Najran||||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|SHIPPING|STORE_TRANSFER|11318|PARTY|014139|Al Faisaliah Plaza Showroom - Eastern||||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|SHIPPING|STORE_TRANSFER|11318|PARTY|011421|Taiba Center Showroom - Al-Madinah||||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|SHIPPING|STORE_TRANSFER|11318|PARTY|015106|Tabuk Boulevard Showroom - Tabuk||||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|SHIPPING|STORE_TRANSFER|11318|PARTY|014133|Tamimi Plaza Mall Showroom - Eastern||||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|SHIPPING|STORE_TRANSFER|11318|PARTY|014132|Riviera Avenue Mall Showroom - Eastern||||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|SHIPPING|STORE_TRANSFER|11318|PARTY|014136|Al Hayat Plaza Mall Showroom - Eastern||||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|SHIPPING|STORE_TRANSFER|11318|PARTY|014137|Al Shaikh Avenue Mall Showroom - Eastern||||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|SHIPPING|STORE_TRANSFER|11318|PARTY|014138|Al Azizia Plaza Showroom - Eastern||||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|SHIPPING|STORE_TRANSFER|11318|PARTY|012177|Narsis Hotel Showroom - Al-Riyadh||||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|SHIPPING|STORE_TRANSFER|11318|PARTY|012180|Hteen Showroom - Al-Riyadh||||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|SHIPPING|STORE_TRANSFER|11318|PARTY|012181|Al Aqeq Showroom - Al-Riyadh||||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|SHIPPING|STORE_TRANSFER|11318|PARTY|011344|Al-Zahraa Plaza Showroom - Jeddah||||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|SHIPPING|STORE_TRANSFER|11318|PARTY|012178|Al Ghadeer Showroom - Al-Riyadh||||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|SHIPPING|STORE_TRANSFER|11318|PARTY|012179|Al Maethar Showroom - Al-Riyadh||||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|SHIPPING|STORE_TRANSFER|11318|PARTY|012183|Al Waha Plaza Showroom - Al-Riyadh||||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|SHIPPING|STORE_TRANSFER|11318|PARTY|013608|Najran King Saud Road Showroom - Najran||||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|SHIPPING|STORE_TRANSFER|11318|PARTY|012184|Al Oroba Showroom - Al-Riyadh||||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|SHIPPING|STORE_TRANSFER|11318|PARTY|012203|Al Kharj Plaza Showroom - Al-Kharj||||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|SHIPPING|STORE_TRANSFER|11318|PARTY|012187|Rawabi Onaizah Street Showroom - Al-Riyadh||||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|SHIPPING|STORE_TRANSFER|11318|PARTY|012182|Garnata 2 Showroom - Al-Riyadh||||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|SHIPPING|STORE_TRANSFER|11318|PARTY|012173|Termithi Street Showroom - Al-Riyadh||||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|SHIPPING|STORE_TRANSFER|11318|PARTY|012189|Tald Plaza Showroom - Al-Riyadh||||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|SHIPPING|STORE_TRANSFER|11318|PARTY|012190|The Gate Showroom - Al-Riyadh||||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|SHIPPING|STORE_TRANSFER|11318|PARTY|011132|Al-Shawqiyah 2 Showroom - Makkah||||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|SHIPPING|STORE_TRANSFER|11318|PARTY|011345|Cornish Center Showroom - Jeddah||||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|SHIPPING|STORE_TRANSFER|11318|PARTY|011213|Shahar Showroom - Taif||||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|SHIPPING|STORE_TRANSFER|11318|PARTY|012191|Souq Hijab Showroom - Al-Riyadh||||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|SHIPPING|STORE_TRANSFER|11318|PARTY|011346|Hamdanya 2 Showroom - Jeddah||||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|SHIPPING|STORE_TRANSFER|11318|PARTY|015204|Barzan Market Showroom – Hail||||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|SHIPPING|STORE_TRANSFER|11318|PARTY|013110|Ravala Plaza Showroom – Abha||||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|SHIPPING|STORE_TRANSFER|11318|PARTY|011214|Boulevard Besha Showroom – Taif||||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|SHIPPING|STORE_TRANSFER|11318|PARTY|011215|Al-Shifa Street Showroom – Taif||||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|SHIPPING|STORE_TRANSFER|11318|PARTY|012185|Al Malqa Showroom - Al-Riyadh||||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|SHIPPING|STORE_TRANSFER|11318|PARTY|011423|Sari Showroom - Al-Madinah||||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|SHIPPING|STORE_TRANSFER|11318|PARTY|012205|Sania Khurais Showroom - Al-Riyadh||||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|SHIPPING|STORE_TRANSFER|11318|PARTY|014140|Al Mubarraz Town Center Showroom - Eastern||||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|SHIPPING|STORE_TRANSFER|11318|PARTY|011341|U - Walk Showroom - Jeddah||||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|SHIPPING|STORE_TRANSFER|11318|PARTY|012204|Al-Jenadriyah Plaza Showroom - Al-Riyadh||||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|SHIPPING|STORE_TRANSFER|11318|PARTY|013405|Diamond Avenue Showroom - Al-Baha||||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|SHIPPING|STORE_TRANSFER|11318|PARTY|011347|Salama Centre Showroom - Jeddah||||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|SHIPPING|STORE_TRANSFER|11318|PARTY|012207|Al-Moursalat Showroom - Al-Riyadh||||||||||||||||||||||||||||||||||||||
+

@@ -1,0 +1,392 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ComponentPropertySets xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="ComponentPropertySetConfig.xsd" xmlns="http://micros.com/xstore/config/componentproperty">
+  <ComponentPropertySet name="TABBED_PANE_DEFAULT">
+    <ComponentID>MessageAreaTabs</ComponentID>
+    <ComponentProperty>
+      <Property>tab1</Property>
+      <Value>MESSAGE_AREA</Value>
+    </ComponentProperty>
+    <ComponentProperty>
+      <Property>tab2</Property>
+      <Value>ASSOCIATE_TASKS</Value>
+    </ComponentProperty>
+    <ComponentProperty>
+      <Property>tab3</Property>
+      <Value>SALES_GOAL</Value>
+    </ComponentProperty>
+    <ComponentProperty>
+      <Property>tab4</Property>
+      <Value>EMPLOYEE_MESSAGES</Value>
+    </ComponentProperty>
+    <ComponentProperty>
+      <Property>tab5</Property>
+      <Value>NUMERIC_KEYPAD</Value>
+    </ComponentProperty>
+  </ComponentPropertySet>
+  
+  <ComponentPropertySet name="TABBED_PANE_TRANSACTION">
+    <ComponentID>MessageAreaTabs</ComponentID>
+    <ComponentProperty>
+      <Property>tab1</Property>
+      <Value>MESSAGE_AREA</Value>
+    </ComponentProperty>
+    <ComponentProperty>
+      <Property>tab2</Property>
+      <Value>TRANSACTION_COUPONS</Value>
+    </ComponentProperty>
+    <ComponentProperty>
+      <Property>tab3</Property>
+      <Value>RELATED_ITEMS</Value>
+    </ComponentProperty>
+    <ComponentProperty>
+      <Property>tab4</Property>
+      <Value>NUMERIC_KEYPAD</Value>
+    </ComponentProperty>    
+    <ComponentProperty>
+      <Property>tab5</Property>
+      <Value>CUSTOMER_INFO</Value>
+    </ComponentProperty>    
+  </ComponentPropertySet>
+  
+  <ComponentPropertySet name="TABBED_PANE_TENDER">
+    <ComponentID>MessageAreaTabs</ComponentID>
+    <ComponentProperty>
+      <Property>tab1</Property>
+      <Value>MESSAGE_AREA</Value>
+    </ComponentProperty>
+    <ComponentProperty>
+      <Property>tab2</Property>
+      <Value>TRANSACTION_COUPONS</Value>
+    </ComponentProperty>  
+    <ComponentProperty>
+      <Property>tab3</Property>
+      <Value>CUSTOMER_INFO</Value>
+    </ComponentProperty>
+    <ComponentProperty>
+      <Property>tab4</Property>
+      <Value>NUMERIC_KEYPAD</Value>
+    </ComponentProperty>  
+  </ComponentPropertySet>
+
+  <ComponentPropertySet name="TABBED_PANE_TILL">
+    <ComponentID>MessageAreaTabs</ComponentID>
+    <ComponentProperty>
+      <Property>tab1</Property>
+      <Value>MESSAGE_AREA</Value>
+    </ComponentProperty>
+    <ComponentProperty>
+      <Property>tab2</Property>
+      <Value>NUMERIC_KEYPAD</Value>
+    </ComponentProperty>  
+  </ComponentPropertySet>
+
+  <!-- =================================== -->
+  <!-- =   Tabs Component Property Sets  = -->
+  <!-- =================================== -->
+
+  <ComponentPropertySet name="MESSAGE_AREA" >
+    <ComponentProperty>
+      <Property>tab</Property>
+      <ComplexValue>
+          <Name>MESSAGE_AREA</Name>
+          <Type>ItemMessageView</Type>
+      </ComplexValue>
+    </ComponentProperty>
+    <ComponentProperty>
+      <Property>tabTitle</Property>
+      <Value>_infoTabTitle</Value>
+    </ComponentProperty>
+    <ComponentProperty>
+      <Property>tabIcon</Property>
+      <ComplexValue>
+        <Icon>_imageInfoTab</Icon>
+        <Scale>false</Scale>
+      </ComplexValue>
+    </ComponentProperty>
+  </ComponentPropertySet>
+  
+  <ComponentPropertySet name="ASSOCIATE_TASKS" >
+    <ComponentProperty>
+      <Property>tab</Property>
+      <ComplexValue>
+        <Name>ASSOCIATE_TASKS</Name>
+        <Type>TaskTabView</Type>
+        <ComponentID>ASSOCIATE_TASKS</ComponentID>
+      </ComplexValue>
+    </ComponentProperty>
+    <ComponentProperty>
+      <Property>tabTitle</Property>
+      <Value>_tasksTabTitle</Value>
+    </ComponentProperty>
+    <ComponentProperty>
+      <Property>tabIcon</Property>
+      <ComplexValue>
+        <Icon>_imageTasksTab</Icon>
+        <Scale>false</Scale>
+      </ComplexValue>
+    </ComponentProperty>
+  </ComponentPropertySet>
+  
+  <ComponentPropertySet name="SALES_GOAL" >
+    <ComponentProperty>
+      <Property>tab</Property>
+      <ComplexValue>
+        <Name>SALES_GOAL</Name>
+        <Type>SalesGoalInfoView</Type>
+        <ComponentID>SALES_GOAL</ComponentID>
+      </ComplexValue>
+    </ComponentProperty>
+    <ComponentProperty>
+      <Property>tabTitle</Property>
+      <Value>_goalsTabTitle</Value>
+    </ComponentProperty>
+    <ComponentProperty>
+      <Property>tabIcon</Property>
+      <ComplexValue>
+        <Icon>_imageSalesGoalTab</Icon>
+        <Scale>false</Scale>
+      </ComplexValue>
+    </ComponentProperty>
+  </ComponentPropertySet>
+
+  <ComponentPropertySet name="EMPLOYEE_MESSAGES">
+    <ComponentProperty>
+      <Property>tab</Property>
+      <ComplexValue>
+        <Name>EMPLOYEE_MESSAGES</Name>
+        <Type>EmployeeMessageView</Type>
+        <ComponentID>EMPLOYEE_MESSAGES</ComponentID>
+      </ComplexValue>
+    </ComponentProperty>
+    <ComponentProperty>
+      <Property>tabTitle</Property>
+      <Value>_messagesTabTitle</Value>
+    </ComponentProperty>
+    <ComponentProperty>
+      <Property>tabIcon</Property>
+      <ComplexValue>
+        <Icon>_imageMessagesTab</Icon>
+        <Scale>false</Scale>
+      </ComplexValue>
+    </ComponentProperty>
+  </ComponentPropertySet>
+  
+  <ComponentPropertySet name="RELATED_ITEMS">
+    <ComponentProperty>
+      <Property>tab</Property>
+      <ComplexValue>
+        <Name>RELATED_ITEMS</Name>
+        <Type>EmployeeMessageView</Type>
+      <ComponentID>RELATED_ITEMS</ComponentID>
+      </ComplexValue>
+    </ComponentProperty>
+    <ComponentProperty>
+      <Property>tabTitle</Property>
+      <Value>_itemResultRelatedItems</Value>
+    </ComponentProperty>
+    <ComponentProperty>
+      <Property>tabIcon</Property>
+      <ComplexValue>
+        <Icon>_imageAttachedItem</Icon>
+        <Scale>false</Scale>
+      </ComplexValue>
+    </ComponentProperty>
+  </ComponentPropertySet>
+  
+  <ComponentPropertySet name="NUMERIC_KEYPAD" >
+    <ComponentProperty>
+      <Property>tab</Property>
+      <ComplexValue>
+        <Name>NUMERIC_KEYPAD</Name>
+        <Type>NumericKeypad</Type>
+      </ComplexValue>
+    </ComponentProperty>
+    <ComponentProperty>
+      <Property>tabTitle</Property>
+      <Value>_keypadTabTitle</Value>
+    </ComponentProperty>
+    <ComponentProperty>
+      <Property>tabIcon</Property>
+      <ComplexValue>
+        <Icon>_imageNumberTab</Icon>
+        <Scale>false</Scale>
+      </ComplexValue>
+    </ComponentProperty>
+  </ComponentPropertySet>
+  
+  <ComponentPropertySet name="TRANSACTION_COUPONS" >
+    <ComponentProperty>
+      <Property>tab</Property>
+      <ComplexValue>
+        <Name>TRANSACTION_COUPONS</Name>
+        <Type>TransactionCouponsView</Type>
+        <ComponentID>TRANSACTION_COUPONS</ComponentID>
+      </ComplexValue>
+    </ComponentProperty>
+    <ComponentProperty>
+      <Property>tabTitle</Property>
+      <Value>_couponsTabTitle</Value>
+    </ComponentProperty>
+    <ComponentProperty>
+      <Property>tabIcon</Property>
+      <ComplexValue>
+        <Icon>_imageCouponsTab</Icon>
+        <Scale>false</Scale>
+      </ComplexValue>
+    </ComponentProperty>
+  </ComponentPropertySet>
+  
+  <ComponentPropertySet name="ACTIVITY_STREAM" >
+    <ComponentProperty>
+      <Property>tab</Property>
+      <ComplexValue>
+        <Name>ACTIVITY_STREAM</Name>
+        <Type>ActivityStreamView</Type>
+        <ComponentID>ACTIVITY_STREAM</ComponentID>
+      </ComplexValue>
+    </ComponentProperty>
+    <ComponentProperty>
+      <Property>tabTitle</Property>
+      <Value>_activityStreamTabTitle</Value>
+    </ComponentProperty>
+    <ComponentProperty>
+      <Property>tabIcon</Property>
+      <ComplexValue>
+        <Icon>_imageActivityStreamTab</Icon>
+        <Scale>false</Scale>
+      </ComplexValue>
+    </ComponentProperty>
+  </ComponentPropertySet>
+    
+  <ComponentPropertySet name="EMPLOYEE_SCHEDULE" >
+    <ComponentProperty>
+      <Property>tab</Property>
+      <ComplexValue>
+        <Name>EMPLOYEE_SCHEDULE</Name>
+        <Type>EmployeeScheduleView</Type>
+        <ComponentID>EMPLOYEE_SCHEDULE</ComponentID>
+      </ComplexValue>
+    </ComponentProperty>
+    <ComponentProperty>
+      <Property>tabTitle</Property>
+      <Value>_employeeScheduleTabTitle</Value>
+    </ComponentProperty>
+    <ComponentProperty>
+      <Property>tabIcon</Property>
+      <ComplexValue>
+        <Icon>_imageEmployeeScheduleTab</Icon>
+        <Scale>false</Scale>
+      </ComplexValue>
+    </ComponentProperty>
+  </ComponentPropertySet>
+  
+  <ComponentPropertySet name="QUICK_LAUNCH" >
+    <ComponentProperty>
+      <Property>tab</Property>
+      <ComplexValue>
+        <Name>QUICK_LAUNCH</Name>
+        <Type>QuickLaunchView</Type>
+      </ComplexValue>
+    </ComponentProperty>
+    <ComponentProperty>
+      <Property>tabTitle</Property>
+      <Value>_quickLaunchTabTitle</Value>
+    </ComponentProperty>
+    <ComponentProperty>
+      <Property>tabIcon</Property>
+      <ComplexValue>
+        <Icon>_imageQuickLaunchTab</Icon>
+        <Scale>false</Scale>
+      </ComplexValue>
+    </ComponentProperty>
+  </ComponentPropertySet>
+  
+  <ComponentPropertySet name="QUICK_ITEMS" >
+    <ComponentProperty>
+      <Property>tab</Property>
+      <ComplexValue>
+        <Name>QUICK_ITEMS</Name>
+        <Type>QuickItemsView</Type>
+      </ComplexValue>
+    </ComponentProperty>
+    <ComponentProperty>
+      <Property>tabTitle</Property>
+      <Value>_quickItemsTabTitle</Value>
+    </ComponentProperty>
+    <ComponentProperty>
+      <Property>tabIcon</Property>
+      <ComplexValue>
+        <Icon>_imageQuickItemsTab</Icon>
+        <Scale>false</Scale>
+      </ComplexValue>
+    </ComponentProperty>
+  </ComponentPropertySet>
+  
+  <ComponentPropertySet name="URL_NAVIGATOR" >
+    <ComponentProperty>
+      <Property>tab</Property>
+      <ComplexValue>
+        <Name>URL_NAVIGATOR</Name>
+        <Type>URLNavigatorView</Type>
+        <ComponentParameter name="setURL">
+          <param_value>http://www.oracle.com</param_value>
+        </ComponentParameter>
+      </ComplexValue>
+    </ComponentProperty>
+    <ComponentProperty>
+      <Property>tabTitle</Property>
+      <Value>_urlNavigatorTabTitle</Value>
+    </ComponentProperty>
+    <ComponentProperty>
+      <Property>tabIcon</Property>
+      <ComplexValue>
+        <Icon>_imageURLNavigatorTab</Icon>
+        <Scale>false</Scale>
+      </ComplexValue>
+    </ComponentProperty>
+  </ComponentPropertySet>
+    
+  <ComponentPropertySet name="AIRSIDE_MESSAGES" >
+    <ComponentProperty>
+      <Property>tab</Property>
+      <ComplexValue>
+        <Name>AIRSIDE_MESSAGES</Name>
+        <Type>InfoListView</Type>
+        <ComponentID>AIRSIDE_MESSAGES</ComponentID>
+      </ComplexValue>
+    </ComponentProperty>
+    <ComponentProperty>
+      <Property>tabTitle</Property>
+      <Value>_airsideTabTitle</Value>
+    </ComponentProperty>
+    <ComponentProperty>
+      <Property>tabIcon</Property>
+      <ComplexValue>
+        <Icon>_imageAirsideTab</Icon>
+        <Scale>false</Scale>
+      </ComplexValue>
+    </ComponentProperty>
+  </ComponentPropertySet>
+  
+  <ComponentPropertySet name="CUSTOMER_INFO" >
+    <ComponentProperty>
+      <Property>tab</Property>
+      <ComplexValue>
+        <Name>CUSTOMER_INFO</Name>
+        <Type>CustomerInfoView</Type>
+        <ComponentID>CUSTOMER_INFO</ComponentID>
+      </ComplexValue>
+    </ComponentProperty>
+    <ComponentProperty>
+      <Property>tabTitle</Property>
+      <Value>_customerInfoTabTitle</Value>
+    </ComponentProperty>
+    <ComponentProperty>
+      <Property>tabIcon</Property>
+      <ComplexValue>
+        <Icon>_imageCustomerInfoTab</Icon>
+        <Scale>false</Scale>
+      </ComplexValue>
+    </ComponentProperty>
+  </ComponentPropertySet>
+</ComponentPropertySets>
