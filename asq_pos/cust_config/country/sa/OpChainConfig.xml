@@ -50,7 +50,7 @@
 		<Op class="dtv.pos.tender.rounding.UpdateTransactionRoundedAmountOp" />
 		<OpChainRoute chainKey="CHECK_SALE_COMPLETE" chainType="START" />
 	</OpChain>
-	<!-- ASQ STC Integratin Service Ends-->
+	<!-- ASQ STC Integration Service Ends-->
 
 	<!-- ASQ Neqaty Integration Service Starts -->
 	<OpChain name="ASQ_TENDER_NEQATY">

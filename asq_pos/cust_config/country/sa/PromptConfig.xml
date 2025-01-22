@@ -137,6 +137,7 @@
 	</Prompt>
 	<Prompt name="ASQ_SUCCESSFULL_POINTS_REDEMPTION" type="Notify" title="_asqStcSuccessPromptTitle" message="_asqSTCPaymentSuccessfullMessage">
 	</Prompt>
+	<Prompt name="ASQ_VOID_SUCCESSFULL" type="Notify" title="_asqStcSuccessPromptTitle" message="_asqpromptVoidSuccess"></Prompt>
 	<!-- ASQ STC Integration Prompts Ends -->
 	
 	<!-- ASQ TAMARA Integration Prompts Starts -->
@@ -176,6 +177,9 @@
 	</Prompt>
 	<Prompt name="ASQ_TAMARA_MOBILE_NUMBER_ERROR" type="Notify" title="_asqTamaraErrorPromptTitle" message="_asqTamarapromptmsgMobileError">
 		<Action ref="CANCEL_BACK" />
+	</Prompt>
+	<Prompt name="ASQ_TAMARA_PAYMENT_DECLINED" type="NotifyCancel" title="_asqTamaraPromptTitle" message="_asqTamaraPaymentDeclinedMessage">
+		<Action ref="CANCEL" />
 	</Prompt>
 	<!-- ASQ TAMARA Integration Prompts Ends -->
 
@@ -222,6 +226,10 @@
 		<Action ref="CANCEL_BACK" />
 	</Prompt>
 	<Prompt name="ASQ_VOID_SUCCESSFULL" type="Notify" title="_asqRefundSuccessPromptTitle" message="_asqpromptVoidSuccess"></Prompt>
+	<Prompt name="ASQ_UNKNOWN_HOST" type="Notify" title="_asqErrorPromptTitle" message="_asqpromptUnknownHostError">
+		<Action ref="CANCEL_BACK" />
+	</Prompt>
+	
 	<!-- ASQ TABBY Integration Prompts Ends -->
 
 	<!-- ASQ TOLA Work Starts -->
@@ -249,6 +257,12 @@
 	<Prompt name="ASQ_NEQATY_EARN_ERROR" type="Notify" title="_asqNeqatyTechnicalErrorTitle" message="_asqNeqatyTechnicalError">
 		<Action dataKey="CONTINUE" text="_continue" keyStroke="Enter" />
 	</Prompt>
+	<Prompt name="ASQ_NEQATY_EARN_SUCCESS" type="Notify" title="_asqNeqatySuccessTitle" message="_asqNeqatyPointsSuccess">
+		<Action dataKey="CONTINUE" text="_continue" keyStroke="Enter" />
+	</Prompt>
+	<Prompt name="ASQ_NEQATY_REDDEM_POINTS_SUCCESS" type="Notify" title="_asqNeqatySuccessTitle" message="_asqNeqatyRefundEarnedSuccess">
+	<Action dataKey="CONTINUE" text="_continue" keyStroke="Enter" />
+	</Prompt>
 	<Prompt name="ASQ_NEQATY_REDEEM_SUCCESS" type="Notify" title="_asqNeqatySuccessTitle" message="_asqNeqatySuccessText">
 		<Action ref="CANCEL_BACK" />
 	</Prompt>
@@ -260,6 +274,9 @@
 	</Prompt>
 	<Prompt name="ASQ_NEQATY_INVALID_MSISDN" type="Notify" title="_asqNeqatySuccessTitle" message="_asqNeqatyInvalidMsisdn">
 		<Action ref="CANCEL_BACK" />
+	</Prompt>
+	<Prompt name="ASQ_NEQATY_INVALID_MSISDN_POINTS" type="Notify" title="_asqNeqatySuccessTitle" message="_asqNeqatyInvalidMsisdnPoints">
+			<Action dataKey="CONTINUE" text="_continue" keyStroke="Enter" />
 	</Prompt>
 	<Prompt name="ASQ_NEQATY_APP_BLOCKED" type="Notify" title="_asqNeqatySuccessTitle" message="_asqNeqatyAppBlocked">
 		<Action ref="CANCEL_BACK" />
@@ -329,12 +346,14 @@
 		<Action ref="CANCEL_BACK" />
 	</Prompt>
 	<Prompt name="ASQ_NEQATY_INVALID_OTP" type="Notify" title="_asqNeqatySuccessTitle" message="_asqNeqatyinvalidOtp" />
+
 	<Prompt name="ASQ_NEQATY_NO_POINTS" type="Notify" title="_asqNeqatySuccessTitle" message="_asqNeqatyNoPoints" />
 	
-	<Prompt name="ASQ_NEQATY_REFUND_SUCCESS" type="Notify" title="_asqNeqatySuccessTitle" message="_asqNeqatyRefundText" >
-	<Action dataKey="CONTINUE" text="_continue" keyStroke="Enter" />
+	<Prompt name="ASQ_NEQATY_REFUND_SUCCESS" type="Notify" title="_asqNeqatySuccessTitle" message="_asqNeqatyRefundText">
+	<Action dataKey="CONTINUE" text="_continue" keyStroke="Enter"/>
 	</Prompt>
-	
+	<!-- ASQ Neqaty Integration - Ends-->	
+
 	<Prompt name="ASQ_PLANET_TECHNICAL_ERROR" type="Notify" title="_asqPlanetErrorTitle" message="_asqPlanetmsgTechnicalError">
 	<Action ref="CANCEL_BACK" />
    </Prompt>
@@ -394,10 +413,13 @@
     <Prompt name="ASQ_BIN_TRANSFER_SUCCESS" type="Notify" title="_asqCaptureBinTransferSuccessTitle" message="_asqCaptureBinTransferOTPSuccess">
 		<Action dataKey="CANCEL_BACK" text="_ok" keyStroke="Enter"/>
 	</Prompt>
+	<Prompt name="ASQ_BIN_TRANSFER_QTY_UNAVAILABLE" type="Notify" title="_asqBinTransferErrorTitle" message="_asqBinTransferQtyUnavailable">
+		<Action dataKey="CANCEL_BACK" text="_ok" keyStroke="Enter"/>
+	</Prompt>
 	<!-- ASQ Bin Transfer chnages - End -->
 	
 	<!-- Loyality redeem  start -->
-	<Prompt name="PROMPT_ASQ_LOTALITY" type="NotifyYesNo" title="_prompAsqLoyalityTitle" message="_asqloyalitymsg" >
+	<Prompt name="PROMPT_ASQ_LOYALTY" type="NotifyYesNo" title="_prompAsqLoyaltyTitle" message="_asqloyaltymsg" >
 	<Action ref="YES" />
 	<Action ref="NO" />
 	</Prompt>

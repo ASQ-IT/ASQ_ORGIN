@@ -26,6 +26,7 @@ public final class AsqValueKeys {
 	public static final ValueKey<String> ASQ_TAMARA_CHECKOUTID = new ValueKey<String>(String.class, "ASQ_TAMARA_CHECKOUTID");
 	public static final ValueKey<Boolean> ASQ_TAMARA_PAYMENT_SUCCESS = new ValueKey<Boolean>(Boolean.class, "ASQ_TAMARA_PAYMENT_SUCCESS");
 	public static final ValueKey<Boolean> ASQ_TAMARA_PAYMENT_EXPIRED = new ValueKey<Boolean>(Boolean.class, "ASQ_TAMARA_PAYMENT_EXPIRED");
+	public static final ValueKey<Boolean> ASQ_TAMARA_PAYMENT_DECLINED = new ValueKey<Boolean>(Boolean.class, "ASQ_TAMARA_PAYMENT_EXPIRED");
 	public static final ValueKey<Boolean> ASQ_TAMARA_CUSTOMER_PAYMENT_CONFIRMATION = new ValueKey<Boolean>(Boolean.class, "ASQ_TAMARA_CUSTOMER_PAYMENT_CONFIRMATION");
 
 	public static final ValueKey<String> ASQ_NEQATY_MOBILE = new ValueKey(String.class, "ASQ_NEQATY_MOBILE");

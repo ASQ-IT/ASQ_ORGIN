@@ -19,4 +19,62 @@
   </bean>
   
  <!-- ASQ Neqaty Integration - Ends -->
+ 
+  <!--  ASQ related Items - Start -->
+ <bean id="htmlContentBuilderLocator" class="org.springframework.beans.factory.config.ServiceLocatorFactoryBean">
+    <property name="serviceLocatorInterface" value="dtv.pos.framework.html.ContentBuilderLocator" />
+    <property name="serviceMappings">
+      <props>
+        <prop key="EMPLOYEE_MESSAGES">employeeMessageContentBuilder</prop>
+        <prop key="RELATED_ITEMS">asqRelatedItemsContentBuilder</prop>
+        <prop key="SALES_GOAL">salesGoalContentBuilder</prop>
+        <prop key="ASSOCIATE_TASKS">employeeTaskContentBuilder</prop>
+        <prop key="TRANSACTION_COUPONS">transactionCouponContentBuilder</prop>
+        <prop key="MESSAGE_AREA">messageAreaContentBuilder</prop>
+        <prop key="AIRSIDE_MESSAGES">airsideMessageAreaContentBuilder</prop>
+        <prop key="ORDER_WORKLIST">orderWorklistContentBuilder</prop>
+        <prop key="ORDER_DASHBOARD">orderDashboardContentBuilder</prop>
+        <prop key="ASSOCIATED_ITEMS">associatedItemsContentBuilder</prop>
+        <prop key="EMPLOYEE_SCHEDULE">employeeScheduleContentBuilder</prop>
+        <prop key="ACTIVITY_STREAM">activityStreamContentBuilder</prop>
+        <prop key="CUSTOMER_INFO">customerInfoContentBuilder</prop>
+        <prop key="QUICK_ITEMS">quickItemsContentBuilder</prop>
+        <prop key="QUICK_LAUNCH">quickLaunchContentBuilder</prop>
+      </props>
+    </property>
+  </bean>
+   <bean id="infoListBuilderLocator" class="org.springframework.beans.factory.config.ServiceLocatorFactoryBean">
+    <property name="serviceLocatorInterface" value="dtv.pos.framework.info.InfoListBuilderLocator" />
+    <property name="serviceMappings">
+      <props>
+        <prop key="EMPLOYEE_MESSAGES">employeeMessageContentBuilder</prop>
+        <prop key="RELATED_ITEMS">asqRelatedItemsContentBuilder</prop>
+        <prop key="SALES_GOAL">salesGoalContentBuilder</prop>
+        <prop key="ASSOCIATE_TASKS">employeeTaskContentBuilder</prop>
+        <prop key="TRANSACTION_COUPONS">transactionCouponContentBuilder</prop>
+        <prop key="ORDER_WORKLIST">orderWorklistContentBuilder</prop>
+        <prop key="EMPLOYEE_SCHEDULE">employeeScheduleContentBuilder</prop>
+        <prop key="ACTIVITY_STREAM">activityStreamContentBuilder</prop>
+        <prop key="AIRSIDE_MESSAGES">airsideMessageAreaContentBuilder</prop>
+        <prop key="ASSOCIATED_ITEMS">associatedItemsContentBuilder</prop>
+      </props>
+    </property>    
+  </bean>
+   <bean id="asqRelatedItemsHtmlContentInfo" class="dtv.pos.framework.html.ContentInfo" init-method="init">
+    <constructor-arg value="RELATED_ITEMS" />
+    <property name="transactionBased" value="true" />
+    <property name="refreshSignals">
+       <list>
+        <value>TransactionModified</value>
+      </list>
+    </property>
+  </bean>
+  
+    <bean id="asqRelatedItemsContentBuilder" class="asq.pos.html.AsqRelatedItemsContentBuilder" scope="transaction" />
+    
+   <bean id="listViewRule_ASQ_RELATED_ITEM" class="asq.pos.query.AsqRelatedItemListViewRule" scope="workstation">
+    <property name="viewElementType" value="ASQ_RELATED_ITEM" />
+  </bean>
+  
+  <!--  ASQ related Items - End -->
 </beans>

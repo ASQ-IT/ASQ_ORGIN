@@ -105,11 +105,13 @@ public class AsqBnplTamaraTenderOp extends AbstractFormOp<AsqBnplTamaraEditModel
 			}
 			if (custMobileNumber != null && !custMobileNumber.equals("")) {
 				LOG.info("Process of TAMARA tender starts here");
-				if (null != trans.getCustomerParty() && !(this._transactionScope.getValue(AsqValueKeys.ASQ_MOBILE_NUMBER).equals(custMobileNumber))) {
+				if (null != trans.getCustomerParty() && !(this._transactionScope
+						.getValue(AsqValueKeys.ASQ_MOBILE_NUMBER).equals(custMobileNumber))) {
 					IParty info = trans.getCustomerParty();
 					info.setTelephone3(custMobileNumber);
 					_transactionScope.setValue(AsqValueKeys.ASQ_MOBILE_NUMBER, custMobileNumber);
-					LOG.info("TAMARA API setting updated customer mobile number to transaction, this will be udpated once the transaciton is completed");
+					LOG.info(
+							"TAMARA API setting updated customer mobile number to transaction, this will be udpated once the transaciton is completed");
 				}
 			} else if (custMobileNumber == null || custMobileNumber.equals("")) {
 				LOG.debug("TAMARA API customer mobile number field is null :");
@@ -134,7 +136,8 @@ public class AsqBnplTamaraTenderOp extends AbstractFormOp<AsqBnplTamaraEditModel
 		AsqBnplTamaraEditModel editModel = getModel();
 		try {
 			IRetailTransaction trans = (IRetailTransaction) this._transactionScope.getTransaction();
-			if (trans != null && trans.getCustomerParty() != null && trans.getTransactionTypeCode().equalsIgnoreCase("RETAIL_SALE")) {
+			if (trans != null && trans.getCustomerParty() != null
+					&& trans.getTransactionTypeCode().equalsIgnoreCase("RETAIL_SALE")) {
 				LOG.info("TAMARA API Mobile number form execution Customer is Linked to Transaction:");
 				IParty argParty = trans.getCustomerParty();
 				custMobileNumber = argParty.getTelephone3();
@@ -143,7 +146,8 @@ public class AsqBnplTamaraTenderOp extends AbstractFormOp<AsqBnplTamaraEditModel
 				return super.handleInitialState();
 			}
 		} catch (Exception ex) {
-			LOG.info("TAMARA API Mobile number form execution exception customer is not available in the transaction and Trans object is null:");
+			LOG.info(
+					"TAMARA API Mobile number form execution exception customer is not available in the transaction and Trans object is null:");
 		}
 		return super.handleInitialState();
 	}
@@ -163,6 +167,7 @@ public class AsqBnplTamaraTenderOp extends AbstractFormOp<AsqBnplTamaraEditModel
 		IAsqSubmitBnplTamraServiceRequest asqSubmitBnplTamraServiceRequest = new AsqSubmitBnplTamraServiceRequest();
 		AsqBnplTamaraAmountObj asqBnplTamaraAmountObj = new AsqBnplTamaraAmountObj();
 		asqBnplTamaraAmountObj.setAmount(trans.getTotal());
+		//asqBnplTamaraAmountObj.setCurrency("SAR");
 		asqBnplTamaraAmountObj.setCurrency(trans.getRetailTransactionLineItems().get(0).getCurrencyId());
 		List<ISaleReturnLineItem> saleItemList = trans.getLineItems(ISaleReturnLineItem.class);
 		ArrayList<AsqBnplTamaraItemObj> itemList = new ArrayList<>();
@@ -170,24 +175,21 @@ public class AsqBnplTamaraTenderOp extends AbstractFormOp<AsqBnplTamaraEditModel
 			AsqBnplTamaraItemObj asqBnplTamaraItemObj = new AsqBnplTamaraItemObj();
 			AsqBnplTamaraAmountObj itemTotalAmnt = new AsqBnplTamaraAmountObj();
 			AsqBnplTamaraDisAmtObj itemDiscAmnt = new AsqBnplTamaraDisAmtObj();
-			// Change to MerchITemType code for Catogery.
+			// Change to MerchITemType code for Category.
 			asqBnplTamaraItemObj.setType(lineItem.getItem().getItemTypeCode());
 			if (lineItem.getMerchLevel1Id() != null) {
 				MerchandiseHierarchyId id = new MerchandiseHierarchyId();
-
 				id.setHierarchyId(lineItem.getMerchLevel1Id());
 				MerchandiseHierarchyModel result = DataFactory.getObjectByIdNoThrow(id);
 				if (result != null) {
 					String desc = TranslationHelper.translate(Locale.getDefault(), result.getDescription());
 					asqBnplTamaraItemObj.setType(desc);
 				}
-
 			}
 			asqBnplTamaraItemObj.setSku(lineItem.getItemId());
 			asqBnplTamaraItemObj.setName(lineItem.getItemDescription());
 			asqBnplTamaraItemObj.setReference_id(lineItem.getLineItemSequence());
 			asqBnplTamaraItemObj.setQuantity(lineItem.getQuantity());
-
 			List<IRetailPriceModifier> discountRates = lineItem.getRetailPriceModifiers();
 			BigDecimal discamount = BigDecimal.ZERO;
 			for (IRetailPriceModifier discountRate : discountRates) {
@@ -195,12 +197,10 @@ public class AsqBnplTamaraTenderOp extends AbstractFormOp<AsqBnplTamaraEditModel
 					discamount = discamount.add(discountRate.getExtendedAmount());
 				}
 			}
-
-			
-			  itemDiscAmnt.setAmount(discamount);
-			  itemDiscAmnt.setCurrency(trans.getRetailTransactionLineItems().get(0).
-			  getCurrencyId()); asqBnplTamaraItemObj.setDiscount_amount(itemDiscAmnt);
-			 
+			itemDiscAmnt.setAmount(discamount);
+			//itemDiscAmnt.setCurrency("SAR");
+			itemDiscAmnt.setCurrency(trans.getRetailTransactionLineItems().get(0).getCurrencyId());
+			asqBnplTamaraItemObj.setDiscount_amount(itemDiscAmnt);
 			itemTotalAmnt.setAmount(lineItem.getGrossAmount());
 			itemTotalAmnt.setCurrency(trans.getRetailTransactionLineItems().get(0).getCurrencyId());
 			asqBnplTamaraItemObj.setTotal_amount(itemTotalAmnt);
@@ -209,18 +209,15 @@ public class AsqBnplTamaraTenderOp extends AbstractFormOp<AsqBnplTamaraEditModel
 		asqSubmitBnplTamraServiceRequest.setTotal_amount(asqBnplTamaraAmountObj);
 		asqSubmitBnplTamraServiceRequest.setItems(itemList);
 		asqSubmitBnplTamraServiceRequest.setPhone_number(custMobileNumber);
-
 		LocalTime time = LocalTime.now();
 		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("HH:mm");
 		String timeString = time.format(formatter);
-		asqSubmitBnplTamraServiceRequest.setOrder_reference_id(Long.toString(trans.getRetailLocationId()).concat("-").concat(Long.toString(trans.getTransactionSequence())).concat("-").concat(timeString));
-
+		asqSubmitBnplTamraServiceRequest.setOrder_reference_id(Long.toString(trans.getRetailLocationId()).concat("-")
+				.concat(Long.toString(trans.getTransactionSequence())).concat("-").concat(timeString));
 		AsqBnplTamaraAddDataObj storeData = new AsqBnplTamaraAddDataObj();
 		storeData.setStore_code(Long.toString(trans.getRetailLocationId()));
 		asqSubmitBnplTamraServiceRequest.setAdditional_data(storeData);
-
-		asqSubmitBnplTamraServiceRequest.setLocale(Locale.getDefault());
-
+		asqSubmitBnplTamraServiceRequest.setLocale(System.getProperty("asq.bnpl.tender.locale"));
 		asqSubmitBnplTamraServiceResponse = createInStoreCheckoutSession(asqSubmitBnplTamraServiceRequest);
 		System.out.println("CheckoutID: " + asqSubmitBnplTamraServiceResponse.getCheckout_id());
 		System.out.println("OrderID: " + asqSubmitBnplTamraServiceResponse.getOrder_id());
@@ -308,11 +305,13 @@ public class AsqBnplTamaraTenderOp extends AbstractFormOp<AsqBnplTamaraEditModel
 		}
 	}
 
-	public AsqSubmitBnplTamraServiceResponse createInStoreCheckoutSession(IAsqSubmitBnplTamraServiceRequest asqSubmitBnplTamraServiceRequest) {
+	public AsqSubmitBnplTamraServiceResponse createInStoreCheckoutSession(
+			IAsqSubmitBnplTamraServiceRequest asqSubmitBnplTamraServiceRequest) {
 		AsqSubmitBnplTamraServiceResponse response = new AsqSubmitBnplTamraServiceResponse();
 		try {
 			LOG.info("Calling CreateInStoreCheckoutSession API");
-			response = (AsqSubmitBnplTamraServiceResponse) tamaraService.get().createInStoreCheckoutSession(asqSubmitBnplTamraServiceRequest);
+			response = (AsqSubmitBnplTamraServiceResponse) tamaraService.get()
+					.createInStoreCheckoutSession(asqSubmitBnplTamraServiceRequest);
 			LOG.info("Returned from CreateInStoreCheckoutSession API");
 		} catch (Exception ex) {
 			LOG.debug("Exception during calling createInStoreCheckoutSession to start payment");

@@ -6,10 +6,8 @@ import javax.ws.rs.client.Invocation.Builder;
 import javax.ws.rs.core.Form;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
-
 import com.oracle.shaded.fasterxml.jackson.core.JsonProcessingException;
 import com.oracle.shaded.fasterxml.jackson.databind.JsonMappingException;
-
 import asq.pos.zatca.cert.generation.AsqZatcaErrorDesc;
 import asq.pos.zatca.cert.generation.AsqZatcaHelper;
 import asq.pos.zatca.cert.generation.AsqZatcaIntegrationConstants;
@@ -22,6 +20,7 @@ import dtv.servicex.impl.AbstractJaxRsHandler;
 public class AsqPlanetVatClaimServiceHandler
 		extends AbstractJaxRsHandler<AsqPlanetVatClaimServiceRequest, IServiceResponse> {
 
+	private  String error = "Error";
 	@Inject
 	AsqZatcaHelper asqZatcaHelper;
 
@@ -57,6 +56,7 @@ public class AsqPlanetVatClaimServiceHandler
 			} catch (Exception ex) {
 				RetryServiceType retryType = new RetryServiceType(argServiceType.getServiceHandlerId());
 				String retryRequest = argServiceRequest.toString();
+				error = ex.getCause().getLocalizedMessage();
 				queueForRetry(retryType, retryRequest);
 			}
 			return handleResponse(rawResponse);
@@ -67,7 +67,8 @@ public class AsqPlanetVatClaimServiceHandler
 	}
 
 	private IServiceResponse handleResponse(Response argRawResponse) {
-		if (argRawResponse.getStatus() == 200) {
+		if (argRawResponse != null && argRawResponse.getStatus() == 200) {
+
 			try {
 				return asqZatcaHelper.convertJSONToPojo(argRawResponse.readEntity(String.class),
 						AsqPlanetVatClaimServiceResponse.class);
@@ -76,19 +77,27 @@ public class AsqPlanetVatClaimServiceHandler
 				return null;
 			}
 		}
-			else {
+		else if (argRawResponse == null){
+			AsqPlanetVatClaimServiceResponse asqPlanetVatClaimServiceResponse = new AsqPlanetVatClaimServiceResponse();
+			AsqPlanetVatClaimErrorDesc errorResponse = new AsqPlanetVatClaimErrorDesc();
+			errorResponse.setMessage(error);
+			asqPlanetVatClaimServiceResponse.setError(errorResponse);
+			return asqPlanetVatClaimServiceResponse;
+		}
+		else {
 
-				try {  
-					AsqPlanetVatClaimServiceResponse asqPlanetVatClaimServiceResponse = new AsqPlanetVatClaimServiceResponse();
-					AsqPlanetVatClaimErrorDesc errorResponse = asqZatcaHelper.convertJSONToPojo(argRawResponse.readEntity(String.class),AsqPlanetVatClaimErrorDesc.class);
-					asqPlanetVatClaimServiceResponse.setError(errorResponse);
-					return asqPlanetVatClaimServiceResponse;
-				}catch(Exception e) {
-					e.printStackTrace();
-					return null;
-				}
-			
+			try {
+				AsqPlanetVatClaimServiceResponse asqPlanetVatClaimServiceResponse = new AsqPlanetVatClaimServiceResponse();
+				AsqPlanetVatClaimErrorDesc errorResponse = asqZatcaHelper
+						.convertJSONToPojo(argRawResponse.readEntity(String.class), AsqPlanetVatClaimErrorDesc.class);
+				asqPlanetVatClaimServiceResponse.setError(errorResponse);
+				return asqPlanetVatClaimServiceResponse;
+			} catch (Exception e) {
+				e.printStackTrace();
+				return null;
 			}
+
+		}
 	}
 
 	private String getPlanetAuthToken() throws JsonMappingException, JsonProcessingException {

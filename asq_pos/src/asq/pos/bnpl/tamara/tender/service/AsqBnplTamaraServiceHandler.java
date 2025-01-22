@@ -43,8 +43,10 @@ public class AsqBnplTamaraServiceHandler
 							.header(AsqZatcaIntegrationConstants.Authorization,
 									System.getProperty("asq.bnpl.tender.tamara.token"))
 							.header("Accept-Version", "V2");
-					rawResponse = requestBuilder.post(Entity.json(asqZatcaHelper.convertTojson(argServiceRequest)));
-					//LOG.info(", getServiceId(), requestBuilder, requestBuilder, requestBuilder, requestBuilder, argServiceRequest, argServiceType, rawResponse, requestBuilder).readEntity(String.class)
+					String requestBody=asqZatcaHelper.convertTojson(argServiceRequest);
+					LOG.info("Tamara Create Session Request Body :" +requestBody);
+					rawResponse = requestBuilder.post(Entity.json(requestBody));
+					LOG.info("Tamara Create Session Response Body :" +rawResponse.getEntity());
 				} else if (argServiceType.getServiceHandlerId().equalsIgnoreCase("BNPL_TAMARA_ORDER_DETAIL_SRV")) {
 					Builder requestBuilder = this.getBaseWebTarget()
 							.resolveTemplate("order_id", argServiceRequest.getOrder_id()).request()
@@ -61,7 +63,9 @@ public class AsqBnplTamaraServiceHandler
 									System.getProperty("asq.bnpl.tender.tamara.token"))
 							.header("Accept-Version", "V2");
 					argServiceRequest.setOrder_id(null);
-					rawResponse = requestBuilder.post(Entity.json(asqZatcaHelper.convertTojson(argServiceRequest)));
+					String requestBody=asqZatcaHelper.convertTojson(argServiceRequest);
+					LOG.info("Tamara Create Session Request Body :" +requestBody);
+					rawResponse = requestBuilder.post(Entity.json(requestBody));
 				} else {
 					Builder requestBuilder = this.getBaseWebTarget()
 							.resolveTemplate("checkoutId", argServiceRequest.getCheckout_id()).request()
@@ -70,7 +74,10 @@ public class AsqBnplTamaraServiceHandler
 									System.getProperty("asq.bnpl.tender.tamara.token"))
 							.header("Accept-Version", "V2");
 					argServiceRequest.setCheckout_id(null);
-					rawResponse = requestBuilder.post(Entity.json(asqZatcaHelper.convertTojson(argServiceRequest)));
+					String requestBody=asqZatcaHelper.convertTojson(argServiceRequest);
+					LOG.info("Tamara Create Session Request Body :" +requestBody);
+					rawResponse = requestBuilder.post(Entity.json(requestBody));
+					LOG.info("Tamara Create Session Response Body :" +rawResponse.getEntity());
 				}
 				checkForExceptions(rawResponse);
 			} catch (Exception ex) {
@@ -82,7 +89,16 @@ public class AsqBnplTamaraServiceHandler
 					asqSubmitBnplTamaraServiceResponse.setErrors(errorResponse);
 					asqSubmitBnplTamaraServiceResponse.setStatus("SSL");
 					return (IServiceResponse) asqSubmitBnplTamaraServiceResponse;
-				} else {
+				}else if(null != ex.getCause() && ex.getCause().getMessage() != null
+						&&	ex.getLocalizedMessage().contains("UnknownHostException")) {
+					AsqSubmitBnplTamraServiceResponse asqSubmitBnplTamaraServiceResponse = new AsqSubmitBnplTamraServiceResponse();
+					AsqTamaraErrorDesc errorResponse = new AsqTamaraErrorDesc();
+						errorResponse.setStatus("UNKNOWN HOST");
+						asqSubmitBnplTamaraServiceResponse.setErrors(errorResponse);
+						asqSubmitBnplTamaraServiceResponse.setStatus("UNKNOWN HOST");
+						return (IServiceResponse) asqSubmitBnplTamaraServiceResponse;
+					}
+				else {
 					RetryServiceType retryType = new RetryServiceType(argServiceType.getServiceHandlerId());
 					String retryRequest = argServiceRequest.toString();
 					queueForRetry(retryType, retryRequest);

@@ -35,14 +35,12 @@ public class AsqBnplTabbyServiceHandler
 		Response rawResponse = null;
 		try {
 			try {
-
 				if (argServiceType.getServiceHandlerId().equalsIgnoreCase("BNPL_TABBY_CREATE_SESSION_SRV")) {
 					Builder requestBuilder = this.getBaseWebTarget().request(MediaType.APPLICATION_JSON)
 							.header("Content-Type", "application/json")
 							.header(AsqZatcaIntegrationConstants.Authorization,
 									System.getProperty("asq.bnpl.tender.tabby.public.key"))
 							.header("Accept-Version", "V2");
-					//rawResponse = requestBuilder.post(Entity.json(asqZatcaHelper.convertTojson(argServiceRequest)));
 					String requestBody=asqZatcaHelper.convertTojson(argServiceRequest);
 					LOG.info("Tabby Create Session Request Body :" +requestBody);
 					rawResponse = requestBuilder.post(Entity.json(requestBody));
@@ -73,7 +71,6 @@ public class AsqBnplTabbyServiceHandler
 									System.getProperty("asq.bnpl.tender.tabby.secret.key"))
 							.header("Accept-Version", "V2");
 					argServiceRequest.getPayment().setId(null);
-				//	rawResponse = requestBuilder.post(Entity.json(asqZatcaHelper.convertTojson(argServiceRequest)));
 					String requestBody=asqZatcaHelper.convertTojson(argServiceRequest);
 					LOG.info("Tabby Refund Session Request Body :" +requestBody);
 					rawResponse = requestBuilder.post(Entity.json(requestBody));
@@ -86,7 +83,6 @@ public class AsqBnplTabbyServiceHandler
 									System.getProperty("asq.bnpl.tender.tabby.secret.key"))
 							.header("Accept-Version", "V2");
 					argServiceRequest.setId(null);
-				//	rawResponse = requestBuilder.post(Entity.json(asqZatcaHelper.convertTojson(argServiceRequest)));
 					String requestBody=asqZatcaHelper.convertTojson(argServiceRequest);
 					LOG.info("Tabby Cance Session Request Body :" +requestBody);
 					rawResponse = requestBuilder.post(Entity.json(requestBody));
@@ -102,7 +98,16 @@ public class AsqBnplTabbyServiceHandler
 					asqSubmitBnplTabbyServiceResponse.setError(errorResponse);
 					asqSubmitBnplTabbyServiceResponse.setStatus("SSL");
 					return (IServiceResponse) asqSubmitBnplTabbyServiceResponse;
-				} else {
+				}else if(null != ex.getCause() && ex.getCause().getMessage() != null
+					&&	ex.getLocalizedMessage().contains("UnknownHostException")) {
+					AsqSubmitBnplTabbyServiceResponse asqSubmitBnplTabbyServiceResponse = new AsqSubmitBnplTabbyServiceResponse();
+					AsqBnplTabbyErrorDesc errorResponse = new AsqBnplTabbyErrorDesc();
+					errorResponse.setStatus("UNKNOWN HOST");
+					asqSubmitBnplTabbyServiceResponse.setError(errorResponse);
+					asqSubmitBnplTabbyServiceResponse.setStatus("UNKNOWN HOST");
+					return (IServiceResponse) asqSubmitBnplTabbyServiceResponse;
+				}
+				else {
 					RetryServiceType retryType = new RetryServiceType(argServiceType.getServiceHandlerId());
 					String retryRequest = argServiceRequest.toString();
 					queueForRetry(retryType, retryRequest);

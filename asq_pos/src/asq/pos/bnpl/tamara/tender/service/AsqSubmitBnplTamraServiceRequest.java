@@ -19,13 +19,13 @@ public class AsqSubmitBnplTamraServiceRequest extends ServiceRequest implements 
     private String comment;
     private String store_code;
     private String checkout_id;
-    private Locale locale; 
+    private String locale; 
 
-    public Locale getLocale() {
+    public String getLocale() {
 		return locale;
 	}
 
-	public void setLocale(Locale locale) {
+	public void setLocale(String locale) {
 		this.locale = locale;
 	}
 

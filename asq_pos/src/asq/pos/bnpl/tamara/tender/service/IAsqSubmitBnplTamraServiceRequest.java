@@ -41,6 +41,8 @@ public interface IAsqSubmitBnplTamraServiceRequest extends IServiceRequest {
 
 		public void setAdditional_data(AsqBnplTamaraAddDataObj storeData);
 		
-		public void setLocale(Locale loc);
+		public void setLocale(String loc);
+		
+		public String getLocale();
 	
 }

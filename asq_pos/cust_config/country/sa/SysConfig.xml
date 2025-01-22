@@ -44,4 +44,10 @@
     <Setting name="ASQ---StoreTransferApprovalEmailOTP---To">atul.sharma28@wipro.com</Setting>
      
     <Setting name="ASQ---NEQATY---LoyaltySystem">false</Setting>
+    
+    <!-- ASQ UAT change - Disable Store Count Summary during Store close -->
+    <Setting name="TillAccountability---StoreSafeEndCountAtStoreCloseRequired">false</Setting>
+   
+    <!-- ASQ UAT change - Restrict Negetive Quantity everywhere in Xstore -->
+   <Setting name="LocationBasedInventory---QuantityUnavailableAction">PROHIBIT</Setting>
 </SysConfig>

@@ -20,11 +20,13 @@ public class AsqEmployeeCommissionCalculator {
 
 		StringBuilder employee = new StringBuilder("Employee Commission \n");
 		for (AsqEmpCommissionQueryResult result : results) {
-			employee.append("Epmloyee Name").append(result.getEmployee_name()).append(" ID ").append(result.getEmployee_id());
+			employee.append("Employee Name  ").append(result.getEmployee_name());
 			employee.append("\n");
-			employee.append("Epmloyee Net Sale : ").append(result.getNet_amt());
+			employee.append("ID : ").append(result.getEmployee_id());
 			employee.append("\n");
-			employee.append("Epmloyee Commission : ").append(result.getPerc_amt());
+			employee.append("Employee Net Sale : ").append(result.getNet_amt());
+			employee.append("\n");
+			employee.append("Employee Commission : ").append(result.getPerc_amt());
 			employee.append("\n");
 		}
 		return employee.toString();

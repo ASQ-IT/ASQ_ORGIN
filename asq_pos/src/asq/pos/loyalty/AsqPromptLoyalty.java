@@ -9,13 +9,17 @@ public class AsqPromptLoyalty extends AbstractPromptOp {
 
 	@Override
 	public String getDefaultPromptKey() {
-		return "PROMPT_ASQ_LOTALITY";
+		return "PROMPT_ASQ_LOYALTY";
 	}
 
 	@Override
 	public IOpResponse handlePromptResponse(IXstEvent var1) {
 		if (var1.getName().equalsIgnoreCase("Yes")) {
 			_transactionScope.setValue(AsqValueKeys.ASQ_LOYALTY, true);
+			return HELPER.completeResponse();
+		}
+		if (var1.getName().equalsIgnoreCase("No")) {
+			_transactionScope.setValue(AsqValueKeys.ASQ_LOYALTY, false);
 			return HELPER.completeResponse();
 		}
 		return HELPER.completeResponse();

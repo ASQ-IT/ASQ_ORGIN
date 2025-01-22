@@ -3,6 +3,9 @@
  */
 package asq.pos.bnpl.tabby.tender.op;
 
+import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
+
 import javax.inject.Inject;
 import javax.inject.Provider;
 
@@ -12,6 +15,7 @@ import org.python.antlr.PythonParser.return_stmt_return;
 
 import asq.pos.bnpl.tabby.tender.service.AsqBnplTabbyDetailsObj;
 import asq.pos.bnpl.tabby.tender.service.AsqBnplTabbyErrorDesc;
+import asq.pos.bnpl.tabby.tender.service.AsqBnplTabbyOrderDetailsObj;
 import asq.pos.bnpl.tabby.tender.service.AsqBnplTabbyPaymentObj;
 import asq.pos.bnpl.tabby.tender.service.AsqSubmitBnplTabbyServiceRequest;
 import asq.pos.bnpl.tabby.tender.service.AsqSubmitBnplTabbyServiceResponse;
@@ -87,14 +91,19 @@ public class AsqBnplTabbyPaymentValidationOp extends Operation{
 		IAsqSubmitBnplTabbyServiceRequest asqSubmitBnplTabbyServiceRequest = new AsqSubmitBnplTabbyServiceRequest();
 		AsqBnplTabbyPaymentObj payment = new AsqBnplTabbyPaymentObj();
 		 AsqBnplTabbyDetailsObj asqBnplTabbyDetailsObj = new AsqBnplTabbyDetailsObj();
+		 AsqBnplTabbyOrderDetailsObj asqBnplTabbyOrderDetailsObj = new AsqBnplTabbyOrderDetailsObj();
 		if (response.getError() == null) {
 	        asqBnplTabbyDetailsObj.setPhone(_transactionScope.getValue(AsqValueKeys.ASQ_MOBILE_NUMBER));
-	        asqBnplTabbyDetailsObj.setReference_id(Long.toString(trans.getTransactionSequence()));
-	        payment.setAmount(trans.getTotal().toString());
+	        LocalTime time = LocalTime.now();
+			DateTimeFormatter formatter = DateTimeFormatter.ofPattern("HH:mm");
+			String timeString = time.format(formatter);
+	        asqBnplTabbyOrderDetailsObj.setReference_id(Long.toString(trans.getRetailLocationId()).concat("-")
+					.concat(Long.toString(trans.getTransactionSequence())).concat("-").concat(timeString));
+			payment.setAmount(trans.getTotal().toString());
 	        payment.setCurrency(trans.getRetailTransactionLineItems().get(0).getCurrencyId());
-	        //payment.setCurrency("SAR");
+	       // payment.setCurrency("SAR");
 	        payment.setBuyer(asqBnplTabbyDetailsObj);
-	        payment.setOrder(asqBnplTabbyDetailsObj);
+	        payment.setOrder(asqBnplTabbyOrderDetailsObj);
 			payment.setId(this._transactionScope.getValue(AsqValueKeys.ASQ_TABBY_PMNT_ID));
 			asqSubmitBnplTabbyServiceRequest.setPayment(payment);
 

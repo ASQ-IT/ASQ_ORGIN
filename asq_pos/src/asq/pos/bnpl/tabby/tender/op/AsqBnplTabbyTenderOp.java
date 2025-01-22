@@ -1,46 +1,47 @@
 package asq.pos.bnpl.tabby.tender.op;
 
+import java.math.BigDecimal;
+import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Locale;
+
 import javax.inject.Inject;
 import javax.inject.Provider;
+
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import asq.pos.bnpl.tabby.tender.op.AsqBnplTabbyEditModel;
+
+import asq.pos.bnpl.tabby.tender.service.AsqBnplTabbyAmountObj;
 import asq.pos.bnpl.tabby.tender.service.AsqBnplTabbyDetailsObj;
+import asq.pos.bnpl.tabby.tender.service.AsqBnplTabbyDisAmtObj;
 import asq.pos.bnpl.tabby.tender.service.AsqBnplTabbyErrorDesc;
+import asq.pos.bnpl.tabby.tender.service.AsqBnplTabbyItemsObj;
+import asq.pos.bnpl.tabby.tender.service.AsqBnplTabbyOrderDetailsObj;
 import asq.pos.bnpl.tabby.tender.service.AsqBnplTabbyPaymentObj;
 import asq.pos.bnpl.tabby.tender.service.AsqSubmitBnplTabbyServiceRequest;
 import asq.pos.bnpl.tabby.tender.service.AsqSubmitBnplTabbyServiceResponse;
 import asq.pos.bnpl.tabby.tender.service.IAsqBnplTabbyServices;
 import asq.pos.bnpl.tabby.tender.service.IAsqSubmitBnplTabbyServiceRequest;
-import asq.pos.bnpl.tamara.tender.op.AsqBnplTamaraEditModel;
-import asq.pos.bnpl.tamara.tender.service.AsqBnplTamaraAmountObj;
-import asq.pos.bnpl.tamara.tender.service.AsqBnplTamaraItemObj;
-import asq.pos.bnpl.tamara.tender.service.AsqSubmitBnplTamraServiceRequest;
-import asq.pos.bnpl.tamara.tender.service.AsqSubmitBnplTamraServiceResponse;
-import asq.pos.bnpl.tamara.tender.service.AsqTamaraErrorDesc;
-import asq.pos.bnpl.tamara.tender.service.IAsqSubmitBnplTamraServiceRequest;
+import asq.pos.bnpl.tamara.tender.service.AsqBnplTamaraDisAmtObj;
 import asq.pos.common.AsqValueKeys;
 import asq.pos.loyalty.stc.tender.AsqStcHelper;
-import asq.pos.loyalty.stc.tender.service.AsqSTCErrorDesc;
-import asq.pos.loyalty.stc.tender.service.AsqSTCLoyaltyServiceResponse;
 import asq.pos.zatca.AsqZatcaConstant;
+import dtv.data2.access.DataFactory;
 import dtv.i18n.IFormattable;
+import dtv.i18n.TranslationHelper;
 import dtv.pos.common.OpChainKey;
-import dtv.pos.common.TransactionScopeKeys;
 import dtv.pos.framework.action.type.XstDataActionKey;
 import dtv.pos.framework.op.AbstractFormOp;
-import dtv.pos.framework.validation.ValidationResultList;
-import dtv.pos.iframework.action.IXstActionKey;
 import dtv.pos.iframework.action.IXstDataAction;
 import dtv.pos.iframework.op.IOpResponse;
-import dtv.pos.iframework.validation.IValidationResult;
 import dtv.pos.iframework.validation.IValidationResultList;
-import dtv.pos.iframework.validation.SimpleValidationResult;
-import dtv.util.StringUtils;
 import dtv.xst.dao.crm.IParty;
+import dtv.xst.dao.itm.MerchandiseHierarchyId;
+import dtv.xst.dao.itm.impl.MerchandiseHierarchyModel;
+import dtv.xst.dao.trl.IRetailPriceModifier;
 import dtv.xst.dao.trl.IRetailTransaction;
 import dtv.xst.dao.trl.ISaleReturnLineItem;
 import dtv.xst.dao.trn.IPosTransaction;
@@ -81,7 +82,8 @@ public class AsqBnplTabbyTenderOp extends AbstractFormOp<AsqBnplTabbyEditModel> 
 		AsqBnplTabbyEditModel editModel = getModel();
 		try {
 			IRetailTransaction trans = (IRetailTransaction) this._transactionScope.getTransaction();
-			if (trans != null && trans.getCustomerParty() != null && trans.getTransactionTypeCode().equalsIgnoreCase("RETAIL_SALE")) {
+			if (trans != null && trans.getCustomerParty() != null
+					&& trans.getTransactionTypeCode().equalsIgnoreCase("RETAIL_SALE")) {
 				LOG.info("TABBY API Mobile number form execution Customer is Linked to Transaction:");
 				IParty argParty = trans.getCustomerParty();
 				custMobileNumber = argParty.getTelephone3();
@@ -114,17 +116,21 @@ public class AsqBnplTabbyTenderOp extends AbstractFormOp<AsqBnplTabbyEditModel> 
 			if (!results.isValid()) {
 				return super.handleDataAction(argAction);
 			}
-			if(editModel.getCustMobileNumber() != null){
+			if (editModel.getCustMobileNumber() != null) {
 				custMobileNumber = editModel.getCustMobileNumber();
-				_transactionScope.setValue(AsqValueKeys.ASQ_MOBILE_NUMBER, custMobileNumber);
+				if (custMobileNumber.length() <= 14 && custMobileNumber.length() >= 9) {
+					_transactionScope.setValue(AsqValueKeys.ASQ_MOBILE_NUMBER, custMobileNumber);
+				} else {
+					return HELPER.getPromptResponse("ASQ_TAMARA_MOBILE_NUMBER_ERROR");
 				}
+			}
 			LOG.debug("TABBY API Mobile number captured :" + custMobileNumber);
 			if (custMobileNumber != null && !custMobileNumber.equals("")) {
 				LOG.info("Process of TABBY tender starts here");
-				if (null != trans.getCustomerParty()
-						&& !(this._transactionScope.getValue(AsqValueKeys.ASQ_MOBILE_NUMBER).equals(custMobileNumber))) {
+				if (null != trans.getCustomerParty() && !(this._transactionScope
+						.getValue(AsqValueKeys.ASQ_MOBILE_NUMBER).equals(custMobileNumber))) {
 					IParty info = trans.getCustomerParty();
-					info.setTelephone1(custMobileNumber);
+					info.setTelephone3(custMobileNumber);
 					_transactionScope.setValue(AsqValueKeys.ASQ_MOBILE_NUMBER, custMobileNumber);
 					LOG.info(
 							"TABBY API setting updated customer mobile number to transaction, this will be udpated once the transaciton is completed");
@@ -155,35 +161,84 @@ public class AsqBnplTabbyTenderOp extends AbstractFormOp<AsqBnplTabbyEditModel> 
 		IAsqSubmitBnplTabbyServiceRequest asqSubmitBnplTabbyServiceRequest = new AsqSubmitBnplTabbyServiceRequest();
 		AsqBnplTabbyPaymentObj payment = new AsqBnplTabbyPaymentObj();
 		AsqBnplTabbyDetailsObj asqBnplTabbyDetailsObj = new AsqBnplTabbyDetailsObj();
+		AsqBnplTabbyOrderDetailsObj asqBnplTabbyOrderDetailsObj = new AsqBnplTabbyOrderDetailsObj();
+		LocalTime time = LocalTime.now();
+		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("HH:mm");
+		String timeString = time.format(formatter);
 		asqBnplTabbyDetailsObj.setPhone(custMobileNumber);
-		asqBnplTabbyDetailsObj.setReference_id(Long.toString(trans.getTransactionSequence()));
+		asqBnplTabbyOrderDetailsObj.setReference_id(Long.toString(trans.getRetailLocationId()).concat("-")
+				.concat(Long.toString(trans.getTransactionSequence())).concat("-").concat(timeString));
 		payment.setAmount(trans.getTotal().toString());
 		payment.setCurrency(trans.getRetailTransactionLineItems().get(0).getCurrencyId());
 		LOG.error("Currency :" + trans.getRetailTransactionLineItems().get(0).getCurrencyId());
 		//payment.setCurrency("SAR");
-		//Need to update item details
+		List<ISaleReturnLineItem> saleItemList = trans.getLineItems(ISaleReturnLineItem.class);
+		ArrayList<AsqBnplTabbyItemsObj> asqBnplTabbyItemsList = new ArrayList<AsqBnplTabbyItemsObj>();
+		for (ISaleReturnLineItem lineItem : saleItemList) {
+			AsqBnplTabbyItemsObj asqBnplTabbyItemsObj = new AsqBnplTabbyItemsObj();
+			AsqBnplTabbyAmountObj itemTotalAmnt = new AsqBnplTabbyAmountObj();
+			asqBnplTabbyItemsObj.setCategory(lineItem.getItem().getItemTypeCode());
+			if (lineItem.getMerchLevel1Id() != null) {
+				MerchandiseHierarchyId id = new MerchandiseHierarchyId();
+				id.setHierarchyId(lineItem.getMerchLevel1Id());
+				MerchandiseHierarchyModel result = DataFactory.getObjectByIdNoThrow(id);
+				if (result != null) {
+					String desc = TranslationHelper.translate(Locale.getDefault(), result.getDescription());
+					asqBnplTabbyItemsObj.setCategory(desc);
+				}
+			}
+			AsqBnplTabbyDisAmtObj itemDiscAmnt = new AsqBnplTabbyDisAmtObj();
+			asqBnplTabbyItemsObj.setItemId(lineItem.getItemId());
+			asqBnplTabbyItemsObj.setTitle(lineItem.getItemDescription());
+			asqBnplTabbyItemsObj.setReference_id(lineItem.getLineItemSequence());
+			asqBnplTabbyItemsObj.setQuantity(lineItem.getQuantity());
+			asqBnplTabbyItemsObj.setUnit_price(lineItem.getUnitPrice().toString());
+			List<IRetailPriceModifier> discountRates = lineItem.getRetailPriceModifiers();
+			BigDecimal discamount = BigDecimal.ZERO;
+			for (IRetailPriceModifier discountRate : discountRates) {
+				if (!discountRate.getVoid() && discountRate.getExtendedAmount() != null) {
+					discamount = discamount.add(discountRate.getExtendedAmount());
+				}
+			}
+			itemDiscAmnt.setAmount(discamount);
+			//itemDiscAmnt.setCurrency("SAR");
+			 itemDiscAmnt.setCurrency(trans.getRetailTransactionLineItems().get(0).getCurrencyId());
+			asqBnplTabbyItemsObj.setDiscount_amount(itemDiscAmnt);
+			itemTotalAmnt.setAmount(lineItem.getGrossAmount());
+			//itemTotalAmnt.setCurrency("SAR");
+			itemTotalAmnt.setCurrency(trans.getRetailTransactionLineItems().get(0).getCurrencyId());
+			asqBnplTabbyItemsObj.setTotal_amount(itemTotalAmnt);
+			asqBnplTabbyItemsList.add(asqBnplTabbyItemsObj);
+		}
+		asqBnplTabbyOrderDetailsObj.setItems(asqBnplTabbyItemsList);
 		payment.setBuyer(asqBnplTabbyDetailsObj);
-		payment.setOrder(asqBnplTabbyDetailsObj);
+		payment.setOrder(asqBnplTabbyOrderDetailsObj);
 		asqSubmitBnplTabbyServiceRequest.setPayment(payment);
-		asqSubmitBnplTabbyServiceRequest.setMerchant_code(AsqZatcaConstant.ASQ_TABBY_MERCHANT_CODE_DEFAULT);
+		asqSubmitBnplTabbyServiceRequest.setMerchant_code(System.getProperty("asq.bnpl.tender.tabby.merchant.code"));
+		asqSubmitBnplTabbyServiceRequest.setLang(System.getProperty("asq.bnpl.tender.language"));
 		LOG.info("Calling CreateSession API");
 		asqSubmitBnplTabbyServiceResponse = createSession(asqSubmitBnplTabbyServiceRequest);
 		// for testing
-		if (null != asqSubmitBnplTabbyServiceResponse) {
-			if (!asqSubmitBnplTabbyServiceResponse.getStatus().equalsIgnoreCase("SSL")) {
-				LOG.info("Tabby Response Payment Link: " + asqSubmitBnplTabbyServiceResponse.getConfiguration()
-						.getAvailable_products().getInstallments().get(0).getWeb_url());
-			}
-		}
+		/*
+		 * if (null != asqSubmitBnplTabbyServiceResponse &&
+		 * !asqSubmitBnplTabbyServiceResponse.getStatus().equalsIgnoreCase("rejected")
+		 * && asqSubmitBnplTabbyServiceResponse.getError()==null) { if
+		 * (!asqSubmitBnplTabbyServiceResponse.getStatus().equalsIgnoreCase("SSL")) {
+		 * LOG.info("Tabby Response Payment Link: " +
+		 * asqSubmitBnplTabbyServiceResponse.getConfiguration()
+		 * .getAvailable_products().getInstallments().get(0).getWeb_url()); } }
+		 */
 		LOG.info("Returned from CreateSession API");
 		return validateSessionResponseAndStoreDataInDB(asqSubmitBnplTabbyServiceResponse);
 	}
 
 	private IOpResponse validateSessionResponseAndStoreDataInDB(AsqSubmitBnplTabbyServiceResponse response) {
-		if (null != response && null != response.getError()) {
+		if (null != response && null != response.getError() && response.getStatus() != null) {
 			return handleServiceError(response);
 		} else if (null == response) {
 			return technicalErrorScreen("TABBY API::::: Service has null response");
+		} else if (response.getStatus().equalsIgnoreCase("rejected")) {
+			return HELPER.getPromptResponse("ASQ_TABBY_PAYMENT_REJECTED");
 		}
 		IRetailTransaction trans = (IRetailTransaction) this._transactionScope.getTransaction();
 		HashMap<String, String> responseList = new HashMap<String, String>();

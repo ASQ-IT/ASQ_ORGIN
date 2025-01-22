@@ -30,6 +30,56 @@
         <?_iterator?>-->
       ]]></xml>
     </section>
- 
+    
+    <!-- Asq TOLA Item Poslog Changes starts -->
+    <section name="sale_return_item">
+      <xml><![CDATA[
+      	<?condition method="getItem.getOptions.getUnitOfMeasureCode" comparison="NOT_EQUAL" value="TOLA"?>
+      	<?condition method="getItem.getOptions.getUnitOfMeasureCode" comparison="NOT_EQUAL" value="HTOLA"?>
+      	<?condition method="getItem.getOptions.getUnitOfMeasureCode" comparison="NOT_EQUAL" value="QTOLA"?>
+		    	<ItemID>#{getItemId.trim}</ItemID>
+	   	 		<Quantity>#{getQuantity}[quantity]</Quantity>  	
+	    <?_condition?>
+        <?_condition?>
+        <?_condition?>
+        
+	    <?condition method="getItem.getOptions.getUnitOfMeasureCode" comparison="EQUAL" value="TOLA"?>
+	    	<?sectionref name="asq_sale_return_item_tola"?> 
+	    <?_condition?>
+	    <?condition method="getItem.getOptions.getUnitOfMeasureCode" comparison="EQUAL" value="HTOLA"?>
+	    	<?sectionref name="asq_sale_return_item_tola"?> 
+	    <?_condition?>
+	    <?condition method="getItem.getOptions.getUnitOfMeasureCode" comparison="EQUAL" value="QTOLA"?> 
+	    	<?sectionref name="asq_sale_return_item_tola"?> 
+	    <?_condition?>   
+	    	
+        <Description>#{getItemDescription}</Description>
+        <dtv:FiscalItemID>#{getItem.getOptions.getFiscalItemId}</dtv:FiscalItemID>
+        <dtv:FiscalItemDescription>#{getItem.getOptions.getFiscalItemDescription}</dtv:FiscalItemDescription>
+        <UnitCostPrice>#{getItem.getOptions.getUnitCost}[money]</UnitCostPrice>
+        <UnitListPrice>#{getItem.getListPrice}[money]</UnitListPrice>
+        <RegularSalesUnitPrice>#{getRegularBasePrice}[money]</RegularSalesUnitPrice>
+        <ActualSalesUnitPrice>#{getUnitPrice}[money]</ActualSalesUnitPrice>
+        <ExtendedAmount>#{getExtendedAmount}[money]</ExtendedAmount>
+        <dtv:UnitOfMeasureCode>#{getItem.getOptions.getUnitOfMeasureCode}</dtv:UnitOfMeasureCode> 
+        <?sectionref name="item_merchandise_hierarchy"?>    
+
+      ]]></xml>
+    </section>
+    
+    <section name="asq_sale_return_item_tola">
+      <xml><![CDATA[
+         <?iterator method="getProperties"?>
+		       <?condition method="getPropertyCode" comparison="EQUAL" value="INVENTORY_TOLA_ITEM"?>
+		            <ItemID>#{getPropertyValue}</ItemID>
+		       <?_condition?>
+		       <?condition method="getPropertyCode" comparison="EQUAL" value="INVENTORY_TOLA_ITEM_WEIGHT"?>
+		       		<Quantity>#{getPropertyValue}</Quantity>
+		       <?_condition?>
+		 <?_iterator?>
+		]]></xml>
+    </section>   
+    <!-- Asq TOLA Item Poslog Changes ends -->
+    
   </sections>
 </LogDefinitions>

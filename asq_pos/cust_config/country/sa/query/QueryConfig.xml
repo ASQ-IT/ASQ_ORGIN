@@ -74,5 +74,40 @@
 				<Parameter name="argOrgWkstnId"/>
 			</SQL>
 		</Query>
+	
+	<!--ASQ - Related items change - start-->		
+		<Query name="ASQ_RELATED_ITEMS" pmType="STORE_STANDARD" >
+		<QueryHandler>dtv.data2.access.query.SqlQueryHandler</QueryHandler>
+		<ResultClass>asq.pos.query.AsqRelatedItemResult</ResultClass>
+		<ResultField name="itemId" type="String" />
+		<ResultField name="itemDescription" type="String" />
+		<SQL>
+		    <Statement><![CDATA[
+     	SELECT DISTINCT
+   		 (ITM.ITEM_ID) id,
+   		 ITM.DESCRIPTION des
+	FROM
+   		 rpt_sale_line RPT,
+   		 itm_item      ITM
+	WHERE
+  		ITM.ITEM_ID=rpt.ITEM_ID AND
+  		RPT.ORGANIZATION_ID = ? AND
+  		RPT.BUSINESS_DATE < ? AND
+  		RPT.RTL_LOC_ID = ? AND
+    	RPT.ITEM_ID IN (
+        SELECT
+            itm_item.ITEM_ID
+        FROM
+            itm_item
+        WHERE
+            itm_item.merch_level_2 = ?)    
+        ]]></Statement>
+			<Parameter name="argOrganizationId" />
+			<Parameter name="argBusinessDate" />
+			<Parameter name="argRetailLocationId" />
+			<Parameter name="argMerchLevel2Id" />
+		</SQL>
+	</Query>
+ <!--ASQ - Related items change - End--> 
  	</Queries>
  </QuerySet>

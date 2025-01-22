@@ -105,7 +105,7 @@ public class AsqSTCTenderOp extends AbstractFormOp<AsqSTCTenderOTPEditModel> {
 						return HELPER.getErrorResponse(
 								_formattables.getSimpleFormattable("_asqSTCEnteredZeroPointValueMessage"));
 					}
-					amount = trxRoundedAmount.intValue();
+					amount = redemptionValueBigDec.intValue();
 				} 
 				String otp = model.getStcOTP();
 				setScopedValue(AsqValueKeys.ASQ_STC_OTP, otp);

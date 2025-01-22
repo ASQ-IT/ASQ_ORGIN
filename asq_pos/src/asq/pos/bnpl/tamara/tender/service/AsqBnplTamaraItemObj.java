@@ -12,7 +12,6 @@ public class AsqBnplTamaraItemObj {
     private String name;
     private String sku;
     private BigDecimal quantity;
-   // private BigDecimal amount;
 
 	private AsqBnplTamaraAmountObj total_amount;
 	private AsqBnplTamaraDisAmtObj discount_amount;
@@ -56,14 +55,6 @@ public class AsqBnplTamaraItemObj {
     public void setQuantity(BigDecimal quantity) {
         this.quantity = quantity;
     }
-
-	
-	/*
-	 * public BigDecimal getAmount() { return amount; }
-	 * 
-	 * public void setAmount(BigDecimal amount) { this.amount = amount; }
-	 */
-	 
 
     public AsqBnplTamaraAmountObj getTotal_amount() {
         return total_amount;

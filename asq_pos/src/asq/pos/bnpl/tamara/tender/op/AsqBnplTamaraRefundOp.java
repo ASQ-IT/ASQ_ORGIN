@@ -96,9 +96,8 @@ public class AsqBnplTamaraRefundOp extends Operation {
 		asqSubmitBnplTamraServiceRequest.setComment(AsqZatcaConstant.ASQ_TAMARA_TRANSACTION_COMMENT);
 		AsqBnplTamaraAmountObj asqBnplTamaraAmountObj = new AsqBnplTamaraAmountObj();
 		asqBnplTamaraAmountObj.setAmount(trans.getAmountTendered());
-		//asqBnplTamaraAmountObj.setCurrency("SAR");
 		asqSubmitBnplTamraServiceRequest.setTotal_amount(asqBnplTamaraAmountObj);
-		//asqBnplTamaraAmountObj.setCurrency(trans.getRetailTransactionLineItems().get(0).getCurrencyId());
+		asqBnplTamaraAmountObj.setCurrency(trans.getRetailTransactionLineItems().get(0).getCurrencyId());
 		return asqSubmitBnplTamraServiceResponse = simplifiedRefunds(asqSubmitBnplTamraServiceRequest);
 	}
 

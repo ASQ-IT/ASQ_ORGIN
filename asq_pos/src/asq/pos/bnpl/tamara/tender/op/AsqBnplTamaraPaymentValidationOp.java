@@ -80,6 +80,10 @@ public class AsqBnplTamaraPaymentValidationOp extends Operation {
 			LOG.info("GETOrderDetails API calling payment expired/timeout prompt");
 			return this.HELPER.getCompletePromptResponse("ASQ_TAMARA_PAYMENT_LINK_EXPIRED");
 		}
+		else if (null != _transactionScope.getValue(AsqValueKeys.ASQ_TAMARA_PAYMENT_DECLINED)) {
+			LOG.info("GETOrderDetails API calling payment declined prompt");
+			return this.HELPER.getCompletePromptResponse("ASQ_TAMARA_PAYMENT_DECLINED");
+		}
 		return HELPER.completeCurrentChainResponse();
 	}
 
@@ -131,6 +135,11 @@ public class AsqBnplTamaraPaymentValidationOp extends Operation {
 						LOG.info("Payment link has expired");
 						success = true;
 						_transactionScope.setValue(AsqValueKeys.ASQ_TAMARA_PAYMENT_EXPIRED, success);
+					}
+					else if (response.getStatus().equalsIgnoreCase("declined")) {
+						LOG.info("Payment has been declined");
+						success = true;
+						_transactionScope.setValue(AsqValueKeys.ASQ_TAMARA_PAYMENT_DECLINED, success);
 					}
 				}
 				if (!success) {

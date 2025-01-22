@@ -126,17 +126,29 @@
 	<MenuOption ref="TENDER_EXCHANGE" />
 	</MenuItem>
   <!-- Post void Visibility End-->
-  <!-- disabled TAX EXEMPTIONS start-->
-   <MenuItem name="RETAIL::CHANGE_LINE" actionRef="RETAIL::MENU.MODIFY_LINE" sticky="false" category="Retail" keywords="universal,register_extended">
-    <MenuOption ref="RETAIL::CHANGE_LINE_QUANTITY" />
-    <MenuOption ref="RETAIL::CHANGE_LINE_PRICE" />
-
-    <!-- <SubMenu ref="RETAIL::MENU.MODIFY_LINE_TAX_OPTIONS"/> -->
-
+  
+	<!-- disabled TAX EXEMPTIONS start-->
+	<MenuItem name="RETAIL::CHANGE_LINE" actionRef="RETAIL::MENU.MODIFY_LINE" sticky="false" category="Retail" keywords="universal,register_extended">
+		<MenuOption ref="RETAIL::CHANGE_LINE_QUANTITY" />
+		<MenuOption ref="RETAIL::CHANGE_LINE_PRICE" />
+		<!-- <SubMenu ref="RETAIL::MENU.MODIFY_LINE_TAX_OPTIONS"/> -->
     <MenuOption ref="RETAIL::VOID_LINE" />
     <MenuOption ref="RETAIL::CHANGE_DISCOUNT" />
     <MenuOption ref="RETAIL::CHANGE_COMMISSIONED_ASSOCIATES" />
     <MenuOption ref="RETAIL::CHANGE_SERAIL_NUMBER" />
   </MenuItem>x
   <!-- disabled TAX EXEMPTIONS end-->
+  
+  <MenuItem name="SHIPPING::OPTIONS" text="_listShippingLabel" displayType="BUTTON" category="Inventory" keywords="shipping">
+    <MenuOption ref="SHIPPING::SAVE" />
+    <MenuOption ref="SHIPPING::PACKING_SLIP" />
+   <!--<MenuOption ref="SHIPPING::PRINT_LABELS"/>-->
+    <MenuOption ref="SHIPPING::EXCEPTIONS" />
+    <MenuOption ref="SHIPPING::CHANGE_QUANTITY" />
+    <MenuOption ref="SHIPPING::VOID_ITEM" />
+    <MenuOption ref="SHIPPING::SEARCH_FOR_ITEM" />
+    <MenuOption ref="SHIPPING::EDIT_DOCUMENT" />
+    <MenuOption ref="SHIPPING::ADD_COMMENT" />
+    <MenuOption ref="SHIPPING::VIEW_COMMENTS" />  
+  </MenuItem>
 </MenuSet>

@@ -130,11 +130,14 @@
 	
 	<!-- Asq employee commission changes start -->
 	<section name="asq_emp_commission">
-	<row>
-        <field style="BOLD">
+	<region>
+		<condition method="getTransactionTypeCode"
+				comparison="EQUAL" value="WORKSTATION_CLOSE" />
+		<condition class="asq.pos.employee.condition.AsqEmpCommissionCondition"  inverted="false"/>
+        <field>
           <aggregate class="asq.pos.store.close.receipt.AsqEmployeeCommissionDocBuilderField" />
         </field>
-        </row>
+        </region>
 	</section> 	
 	<!-- Asq employee commission changes ends -->
 	
@@ -195,6 +198,18 @@
 		<sectionref>invoice_text</sectionref>
 		<sectionref>trans_barcode</sectionref>
 		<!-- <sectionref>transaction_store_location</sectionref> -->
+		<row>
+        <field text="_asqvatnumber"   loc="29" style="BOLD"/>
+        <sp />
+        <field style="BOLD">
+        <aggregate class="asq.pos.docbuilder.AsqVatNumberDocBuilder" />
+        </field>
+      	</row>
+		<row>
+        <field text="_ticket"   loc="33" />
+        <sp />
+        <field method="getTransactionSequence" formatter="Numeric" />
+      	</row>
 		<horizontal_rule />
 	</section>
 
@@ -285,6 +300,72 @@
 		<sectionref>page_break</sectionref>
 	</section>
 	<!--ASQ Commission ends -->
-	   
+	
+	 <section name="headerTop_postLocal">
+      <sectionref>transaction_header_info</sectionref>
+     <!--  <sectionref>SALES_PERSON_INFO</sectionref> -->
+      <!-- <sectionref>transaction_cashier</sectionref> -->
+      <sectionref>transaction_flight_information</sectionref>
+    </section>
+    
+     <section name="transaction_header_info">
+      <row>
+        <field text="_store" />
+        <sp />
+        <field method="getRetailLocationId" formatter="Numeric" />
+        <field text="_registerColon" loc="22" />
+        <sp />
+        <field method="getWorkstationId" formatter="Numeric" />
+      </row>
+      <row>
+        <field text="_date" />
+        <sp />
+        <field method="getTransactionDate" formatter="DateShort" />
+        <field text="_trantime" loc="22" />
+        <sp />
+        <field method="getBeginDateTimestamp" formatter="TimeShort" />
+      </row>
+    <!--   <row>
+        <field text="_ticket" />
+        <sp />
+        <field method="getTransactionSequence" formatter="Numeric" />
+      </row> -->
+    </section>
+     <section name="header">
+      <sectionref>headerTop</sectionref>
+   <!--    <sectionref>CUSTOMER_INFO</sectionref> -->
+      <row />
+      <sectionref>system_mode</sectionref>
+      <sectionref>return_header</sectionref>
+    </section>
+    
+        <section name="item_header">
+      <!-- item header -->
+      <row style="STRONGUNDERLINE">
+        <field text="_item" />
+        <field text="_qty" align="R" loc="19" rtlloc="-9" />
+        <field text="_asqvat" align="R" loc="-25" rtlloc="10" />
+        <field text="_price" align="R" loc="-15" rtlloc="25"/>
+        <field text="_amount" align="R" loc="-3" rtlloc="12"/>
+      </row>
+      <sectionref>item_details</sectionref>
+      <row />
+    </section> 
+     <section name="item_details_listing">
+      <row>
+        <field method="getItem.getItemId" />
+        <field formatter="Quantity" align="R" loc="19" rtlloc="-9">
+          <aggregate class="dtv.pos.register.sale.QuantityDocBuilderField" />
+        </field>
+         <field  formatter="Money" align="R" loc="-25" rtlloc="10" >
+          <aggregate class="asq.pos.docbuilder.AsqTaxDocBuilder" />
+        </field> 
+        <field method="getBaseUnitPrice" formatter="Money" align="R" loc="-15" rtlloc="25" />
+        <field method="getExtendedAmount" formatter="Money" align="R" loc="-3" rtlloc="12" />   
+        <field loc="-1">
+          <aggregate class="dtv.pos.register.tax.TaxFlagDocBuilderField" />
+        </field>
+      </row>
+    </section>  
 </sections>
 </ReceiptDefinitions>

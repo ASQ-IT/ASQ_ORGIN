@@ -28,7 +28,7 @@ DECLARE
     li_rowcnt       int;
 BEGIN
     SELECT count(*) INTO li_rowcnt
-    FROM ALL_TABLES where table_name = 'ASQ_ZATCA_INVOICE_STAGING';
+    FROM ALL_TABLES where table_name = 'ASQ_ZATCA_INVOICE_STAGING' and tablespace_name = UPPER('&dbDataTableSpace');
     IF li_rowcnt = 0 THEN
 dbms_output.put_line('--- CREATING TABLE ASQ_ZATCA_INVOICE_STAGING --- ');
 execute immediate 'CREATE TABLE ASQ_ZATCA_INVOICE_STAGING 

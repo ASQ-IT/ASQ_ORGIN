@@ -385,7 +385,7 @@ public class AsqZatcaInvoiceGenerationHelper {
 		// setting store party PartyIdentification
 		PartyIdentificationType partyIdentificationType = cac.createPartyIdentificationType();
 		IDType idType = cbc.createIDType();
-		idType.setSchemeID(AsqZatcaConstant.ZATCA_CRN_ID_VAL);
+		idType.setSchemeID(AsqZatcaConstant.companyCRNNumberSchemeID);
 		idType.setValue(AsqZatcaConstant.companyCRNNumber);
 		partyIdentificationType.setID(idType);
 		partyType.getPartyIdentification().add(partyIdentificationType);

@@ -12,7 +12,6 @@ public class AsqBnplTabbyPaymentObj {
     private String created_at;
     private String expires_at;
     private String status;
-    private boolean is_test;
     private boolean test;
     private AsqBnplTabbyDetailsObj product;
     private String amount;
@@ -20,16 +19,9 @@ public class AsqBnplTabbyPaymentObj {
     private String description;
     private AsqBnplTabbyDetailsObj buyer;
     private AsqBnplTabbyDetailsObj shipping_address;
-    private AsqBnplTabbyDetailsObj order;
-    ArrayList< AsqBnplTabbyCapturesObj > captures = new ArrayList<>();
-    ArrayList < AsqBnplTabbyRefundsObj > refunds = new ArrayList<>();
+    private AsqBnplTabbyOrderDetailsObj order;
     private AsqBnplTabbyHistoryObj buyer_history;
     ArrayList <AsqBnplTabbyHistoryObj> order_history;
-//    private Meta meta;
-//    private boolean cancelable;
-//    Attachment attachment;
-//    ErrorResponse errorResponse;
-//    private boolean is_expired;
 
     public String getId() {
         return id;
@@ -63,13 +55,6 @@ public class AsqBnplTabbyPaymentObj {
         this.status = status;
     }
 
-    public boolean isIs_test() {
-        return is_test;
-    }
-
-    public void setIs_test(boolean is_test) {
-        this.is_test = is_test;
-    }
 
     public String getAmount() {
         return amount;
@@ -111,29 +96,14 @@ public class AsqBnplTabbyPaymentObj {
         this.shipping_address = shipping_address;
     }
 
-    public AsqBnplTabbyDetailsObj getOrder() {
+    public AsqBnplTabbyOrderDetailsObj getOrder() {
         return order;
     }
 
-    public void setOrder(AsqBnplTabbyDetailsObj order) {
+    public void setOrder(AsqBnplTabbyOrderDetailsObj order) {
         this.order = order;
     }
 
-    public ArrayList<AsqBnplTabbyCapturesObj> getCaptures() {
-        return captures;
-    }
-
-    public void setCaptures(ArrayList<AsqBnplTabbyCapturesObj> captures) {
-        this.captures = captures;
-    }
-
-    public ArrayList<AsqBnplTabbyRefundsObj> getRefunds() {
-        return refunds;
-    }
-
-    public void setRefunds(ArrayList<AsqBnplTabbyRefundsObj> refunds) {
-        this.refunds = refunds;
-    }
 
     public AsqBnplTabbyHistoryObj getBuyer_history() {
         return buyer_history;

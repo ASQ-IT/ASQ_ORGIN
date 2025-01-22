@@ -223,6 +223,8 @@ public class AsqStcHelper {
 			return "ASQ_BNPL_SSL_ERROR";
 		case "too_many_requests":
 			return "ASQ_TABBY_TOO_MANY_REQUEST_ERROR";
+		case "UNKNOWN HOST":
+			return "ASQ_UNKNOWN_HOST";
 		default:
 			return "ASQ_TABBY_TECHNICAL_ERROR";
 		}
@@ -249,6 +251,8 @@ public class AsqStcHelper {
 			return "ASQ_TAMARA_REFUND_ERROR";
 		case "SSL":
 			return "ASQ_BNPL_SSL_ERROR";
+		case "UNKNOWN HOST":
+			return "ASQ_UNKNOWN_HOST";
 		default:
 			return "ASQ_TAMARA_TECHNICAL_ERROR";
 		}

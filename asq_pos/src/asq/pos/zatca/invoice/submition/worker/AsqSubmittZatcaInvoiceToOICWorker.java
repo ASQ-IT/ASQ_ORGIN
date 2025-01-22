@@ -53,7 +53,7 @@ public class AsqSubmittZatcaInvoiceToOICWorker extends AbstractWorker {
 					oicZatcaRequest.setPassword(zatcaProp.getProperty(AsqZatcaConstant.ASQ_ZATCA_SECRET_KEY));
 					oicZatcaRequest.setUsername(zatcaProp.getProperty(AsqZatcaConstant.ASQ_ZATCA_TOKEN_KEY));
 
-					oicZatcaRequest.setVatRegNo(System.getProperty("asq.zatca.company.vat.reg.number"));
+					oicZatcaRequest.setVatRegNo(AsqZatcaConstant.companyVatNumber);
 					oicZatcaRequest.setStoreNumber(System.getProperty("dtv.location.storeNumber"));
 
 					AsqSubmitZatcaCertServiceResponse response = (AsqSubmitZatcaCertServiceResponse) zatcaOicService.get().submitInvoiceToOIC(oicZatcaRequest);

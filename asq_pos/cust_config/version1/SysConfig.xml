@@ -15,4 +15,9 @@
     <Setting name="ItemReturn---MaxDaysAfterPurchase">3</Setting>
     <Setting name="MixedTransactionSettings---AllowSaleItemTypeInMixedTransaction---RETURN">false</Setting>
     <Setting name="ForceItemScan">false</Setting>
+    
+    <!--   Employee Commission condition start -->
+    <Setting name="EmployeeCommision---Enable">true</Setting>
+    <!--   Employee Commission condition end-->
+    
 </SysConfig>

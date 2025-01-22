@@ -2,14 +2,16 @@ package asq.pos.bnpl.tabby.tender.service;
 
 import com.oracle.shaded.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
+import asq.pos.bnpl.tamara.tender.service.AsqBnplTamaraAmountObj;
+import asq.pos.bnpl.tamara.tender.service.AsqBnplTamaraDisAmtObj;
+
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class AsqBnplTabbyItemsObj {
     private String title;
     private String description;
     private Number quantity;
     private String unit_price;
-    private String discount_amount;
-    private String reference_id;
+    private int reference_id;
     private String image_url;
     private String product_url;
     private String gender;
@@ -19,6 +21,10 @@ public class AsqBnplTabbyItemsObj {
     private String size_type;
     private String size;
     private String brand;
+    private String itemId;
+    
+    private AsqBnplTabbyAmountObj total_amount;
+    private AsqBnplTabbyDisAmtObj discount_amount;
 
     public String getTitle() {
         return title;
@@ -44,19 +50,11 @@ public class AsqBnplTabbyItemsObj {
         this.unit_price = unit_price;
     }
 
-    public String getDiscount_amount() {
-        return discount_amount;
-    }
-
-    public void setDiscount_amount(String discount_amount) {
-        this.discount_amount = discount_amount;
-    }
-
-    public String getReference_id() {
+    public int getReference_id() {
         return reference_id;
     }
 
-    public void setReference_id(String reference_id) {
+    public void setReference_id(int reference_id) {
         this.reference_id = reference_id;
     }
 
@@ -138,6 +136,30 @@ public class AsqBnplTabbyItemsObj {
 
 	public void setDescription(String description) {
 		this.description = description;
+	}
+
+	public String getItemId() {
+		return itemId;
+	}
+
+	public void setItemId(String itemId) {
+		this.itemId = itemId;
+	}
+
+	public void setTotal_amount(AsqBnplTabbyAmountObj total_amount) {
+		this.total_amount = total_amount;
+	}
+
+	public AsqBnplTabbyAmountObj getTotal_amount() {
+		return total_amount;
+	}
+
+	public AsqBnplTabbyDisAmtObj getDiscount_amount() {
+		return discount_amount;
+	}
+
+	public void setDiscount_amount(AsqBnplTabbyDisAmtObj discount_amount) {
+		this.discount_amount = discount_amount;
 	}
 
 }

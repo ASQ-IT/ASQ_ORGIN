@@ -1,5 +1,6 @@
 package asq.pos.loyalty.stc.tender.service;
 
+import java.io.IOException;
 import java.net.URI;
 import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
@@ -59,11 +60,10 @@ public class AsqSTCloyaltyServiceHandler extends AbstractJaxRsHandler<IAsqSTCLoy
 					.header("X-Secret-Token", secretToken).header("GlobalId", globalId);
 			builder.uri(URI.create(getEndpointAddress() + getServicePath()));
 			LOG.debug("STC API Posting request starts here:");
-			if(argServiceRequest.getRefRequestId()!=null) {
+			if (argServiceRequest.getRefRequestId() != null) {
 				builder.PUT(HttpRequest.BodyPublishers.ofString(asqStcHelper.convertTojson(argServiceRequest)));
-			}
-			else {
-			builder.POST(HttpRequest.BodyPublishers.ofString(asqStcHelper.convertTojson(argServiceRequest)));
+			} else {
+				builder.POST(HttpRequest.BodyPublishers.ofString(asqStcHelper.convertTojson(argServiceRequest)));
 			}
 			HttpRequest httpRequest = builder.build();
 			rawResponse = httpClient.send(httpRequest, HttpResponse.BodyHandlers.ofString());
@@ -71,17 +71,18 @@ public class AsqSTCloyaltyServiceHandler extends AbstractJaxRsHandler<IAsqSTCLoy
 			// checkForExceptions(rawResponse);
 			return asqStcHelper.convertJSONToPojo(rawResponse.body(), AsqSTCLoyaltyServiceResponse.class);
 		} catch (SSLHandshakeException ex) {
-			LOG.error("WE have recieved a SSL handshake Certificate exception in STC service call ", ex);
-			AsqSTCLoyaltyServiceResponse response = new AsqSTCLoyaltyServiceResponse();
-			AsqSTCErrorDesc errDesc = new AsqSTCErrorDesc();
-			errDesc.setCode("SSLHANDSHAKE");
-			errDesc.setDescription("WE have recieved a SSL handshake Certificate exception in STC service call");
-			response.setErrors(new AsqSTCErrorDesc[] { errDesc });
-			return response;
+			returnSSLErrorResponse(ex);
 
-		} catch (Exception ex) {
+		}
+		/*
+		 * catch (IOException ex) { returnSSLErrorResponse(ex); }
+		 */
+		catch (Exception ex) {
+			if (ex.getCause().getMessage().contains("SunCertPathBuilderException")) {
+				returnSSLErrorResponse(ex);
+			}
 			LOG.error("WE have recieved a exception in STC we service call ", ex);
-			if (200 != rawResponse.statusCode()) {
+			if (null != rawResponse && 200 != rawResponse.statusCode()) {
 				try {
 					return asqStcHelper.convertJSONToPojo(rawResponse.body(), AsqSTCLoyaltyServiceResponse.class);
 				} catch (JsonProcessingException e) {
@@ -95,6 +96,16 @@ public class AsqSTCloyaltyServiceHandler extends AbstractJaxRsHandler<IAsqSTCLoy
 			}
 		}
 		return null;
+	}
+
+	private IServiceResponse returnSSLErrorResponse(Exception ex) {
+		LOG.error("WE have recieved a SSL handshake Certificate exception in STC service call ", ex);
+		AsqSTCLoyaltyServiceResponse response = new AsqSTCLoyaltyServiceResponse();
+		AsqSTCErrorDesc errDesc = new AsqSTCErrorDesc();
+		errDesc.setCode("SSLHANDSHAKE");
+		errDesc.setDescription("WE have recieved a SSL handshake Certificate exception in STC service call");
+		response.setErrors(new AsqSTCErrorDesc[] { errDesc });
+		return response;
 	}
 
 	public IServiceResponse callWebBased(IAsqSTCLoyaltyServiceRequest argServiceRequest,

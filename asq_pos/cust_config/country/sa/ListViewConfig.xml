@@ -147,5 +147,23 @@
       <Column start="51" width="90" method="getRedeemCode"/>
     </Row>
   </Element>
+  
+   <!--ASQ Related Items  -->
+	<RuleSet name="ASQ_RELATED_ITEM">
+		<RuleKey>listViewRule_ASQ_RELATED_ITEM</RuleKey>
+	</RuleSet>
+   <Header name="ASQ_RELATED_ITEM">
+    <Row>
+      <Column start="0" width="24" translatable="_itemId" />
+      <Column start="25" width="74" translatable="_description" />
+    </Row>
+  </Header>
+  <Element name="ASQ_RELATED_ITEM">
+    <Row>
+      <Column start="0" width="24" method="getItemId" />
+      <Column start="25" width="74" method="getItemDescription" />
+    </Row>
+  </Element>
+  
   </ListView>
   

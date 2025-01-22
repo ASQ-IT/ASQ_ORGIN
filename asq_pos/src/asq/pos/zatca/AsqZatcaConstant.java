@@ -42,7 +42,6 @@ public interface AsqZatcaConstant {
 	String ASQ_TAMARA_TRANSACTION_COMMENT = "ASQ_TAMARA_TRANSACTION";
 	String ASQ_TAMARA_STORE_TYPE_DEFAULT = "IN_STORE";
 	String ASQ_TAMARA_STORE_CODE_DEFAULT = "STORE_A";
-	String ASQ_TABBY_MERCHANT_CODE_DEFAULT = "ASQAAB1";
 	String ZATCA_SALE_CODE = "388";
 	String ZATCA_RETURN_CODE = "381";
 	String ZATCA_BUSINESS_TO_CUSTOMER = "0200000";
@@ -73,7 +72,8 @@ public interface AsqZatcaConstant {
 	// These value will remain constant
 	String companyLegalName = System.getProperty("asq.zatca.company.legalenity.name");
 	String companyVatNumber = System.getProperty("asq.zatca.company.vat.reg.number");
-	String companyCRNNumber = System.getProperty("asq.zatca.company.crn.number");
+	String companyCRNNumber = System.getProperty("asq.zatca.company.seller.id.number");
+	String companyCRNNumberSchemeID = System.getProperty("asq.zatca.company.seller.id.type");
 
 	String companyAddStreetName = System.getProperty("asq.zatca.company.street.name");
 	String companyAddBuildingNumber = System.getProperty("asq.zatca.company.building.number");
@@ -104,5 +104,5 @@ public interface AsqZatcaConstant {
 
 	String ASQ_NEQATY_TRX_ID = "ASQ_NEQATY_TRX_ID";
 	String ASQ_MOKAFA_TRX_ID = "ASQ_MOKAFA_TRX_ID";
-	String ASQ_NEQATY_EARN_TRN="ASQ_NEQATY_EARN_TRN";
+	String ASQ_NEQATY_EARN_TRN = "ASQ_NEQATY_EARN_TRN";
 }

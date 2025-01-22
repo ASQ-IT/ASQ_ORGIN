@@ -12,7 +12,7 @@ req_extensions=req_ext
 distinguished_name=dn
 [dn]
 C=SA
-OU=3002953571
+OU=1010270035
 O=Abdul Samad Al Qurashi Stores Company for Oud, Amber and Perfumes 
 CN=11347001
 [v3_req]
@@ -23,7 +23,7 @@ certificateTemplateName=ASN1:PRINTABLESTRING:TSTZATCA-Code-Signing
 subjectAltName=dirName:alt_names
 [alt_names]
 SN=1-ASQ|2-KSA|3-11347001
-UID=300295357110003
+UID=300099496800003
 title=0100
 registeredAddress=ASQ,Al Furqan,6833,4230,19,Makkah Al Mukarramah,24234,Kudy
 businessCategory=Retail Business

@@ -1,13 +1,10 @@
 package asq.pos.loyalty.neqaty.tender.op;
 
 import java.math.BigDecimal;
-
 import javax.inject.Inject;
 import javax.inject.Provider;
-
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-
 import asq.pos.common.AsqConfigurationMgr;
 import asq.pos.common.AsqValueKeys;
 import asq.pos.loyalty.neqaty.tender.service.AsqNeqatyHelper;
@@ -56,8 +53,8 @@ public class AsqNeqatyEarnPointsOp extends Operation {
 	 */
 	@Override
 	public IOpResponse handleOpExec(IXstEvent paramIXstEvent) {
-		if (paramIXstEvent == null) {
-			return neqatyLoyalty();
+		if(paramIXstEvent==null) {
+		return neqatyLoyalty();
 		}
 		return HELPER.completeResponse();
 	}
@@ -175,7 +172,20 @@ public class AsqNeqatyEarnPointsOp extends Operation {
 			// setScopedValue(AsqValueKeys.ASQ_NEQATY_TRANS_REFERENCE,transactionReference);
 			response = confirmEarnPointsTransaction(request, transactionReference);
 		}
-		return validateResponse(response);
+		return validateRefundResponse(response);
+	}
+
+	private IOpResponse validateRefundResponse(AsqNeqatyServiceResponse response) {
+		if (null != response && 0 != response.getResultCode()) {
+			Integer code = response.getResultCode();
+			if(code == -525) {
+				return HELPER.getPromptResponse("ASQ_NEQATY_INVALID_MSISDN_POINTS");
+			}
+		} 
+		if (null == response) {
+			return technicalErrorScreen("Service has null response");
+		}
+		return HELPER.getPromptResponse("ASQ_NEQATY_REDDEM_POINTS_SUCCESS");
 	}
 
 	private AsqNeqatyServiceResponse confirmEarnPointsTransaction(IAsqNeqatyServiceRequest request, String transactionReference) {
@@ -186,11 +196,18 @@ public class AsqNeqatyEarnPointsOp extends Operation {
 	}
 
 	private IOpResponse validateResponse(AsqNeqatyServiceResponse response) {
+		if (null != response && 0 != response.getResultCode()) {
+			Integer code = response.getResultCode();
+			if(code == -525) {
+				return HELPER.getPromptResponse("ASQ_NEQATY_INVALID_MSISDN_POINTS");
+			}
+		} 
 		if (null == response) {
 			return technicalErrorScreen("Service has null response");
 		}
-		return HELPER.completeResponse();
+		return HELPER.getPromptResponse("ASQ_NEQATY_EARN_SUCCESS");
 	}
+	
 
 	private IOpResponse technicalErrorScreen(String message) {
 		IFormattable[] args = new IFormattable[2];
@@ -201,7 +218,15 @@ public class AsqNeqatyEarnPointsOp extends Operation {
 
 	@Override
 	public boolean isOperationApplicable() {
-		return _transactionScope.getValue(AsqValueKeys.ASQ_LOYALTY) && _syConfigurationMgr.getasqNqeatyLoyaltySystem();
+		if (_transactionScope.getValue(AsqValueKeys.ASQ_LOYALTY) != null) {
+			return _transactionScope.getValue(AsqValueKeys.ASQ_LOYALTY)
+					&& _syConfigurationMgr.getasqNqeatyLoyaltySystem();
+		}
+	
+		return isReturnTransaction((IRetailTransaction)_transactionScope.getTransaction());
+			
+		
+		//return false;
 	}
 
 }

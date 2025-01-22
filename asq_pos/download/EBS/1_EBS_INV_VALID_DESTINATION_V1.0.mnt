@@ -1,5 +1,0 @@
-INSERT|INV_VALID_DESTINATIONS|RECEIVING|RETURN_TO_VENDOR|${dtv.location.storeNumber}|PARTY|11399|Main Warehouse - Jeddah|30|||||||||||||||||||||||||||||||||||||
-INSERT|INV_VALID_DESTINATIONS|SHIPPING|RETURN_TO_VENDOR|${dtv.location.storeNumber}|PARTY|11399|Main Warehouse - Jeddah|20|||||||||||||||||||||||||||||||||||||
-INSERT|INV_VALID_DESTINATIONS|SHIPPING|DAMAGED_RETURN|${dtv.location.storeNumber}|PARTY|11397|Damaged Warehouse - Jeddah|20|||||||||||||||||||||||||||||||||||||
-INSERT|INV_VALID_DESTINATIONS|RECEIVING|DAMAGED_RETURN|${dtv.location.storeNumber}|PARTY|11397|Damaged Warehouse - Jeddah|30|||||||||||||||||||||||||||||||||||||
-
