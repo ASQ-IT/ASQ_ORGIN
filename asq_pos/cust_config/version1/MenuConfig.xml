@@ -52,7 +52,7 @@
     	<MenuOption ref="LOCALORDER" />   
     <MenuOption ref="SALE::XCOMMERCE" /> --> 
     <!-- ASQ Disabled layouts ends -->
-    <MenuOption ref="SALE::ASQLOYALITY" />
+    <MenuOption ref="SALE::ASQLOYALTY" />
   </MenuItem>
   <!-- Loyality redeem  end -->
 </MenuSet>

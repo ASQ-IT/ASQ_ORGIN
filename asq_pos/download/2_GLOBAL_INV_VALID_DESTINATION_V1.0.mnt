@@ -462,440 +462,440 @@ INSERT|INV_VALID_DESTINATIONS|RECEIVING|RETURN_TO_VENDOR|11318|PARTY|11399|Main 
 INSERT|INV_VALID_DESTINATIONS|SHIPPING|RETURN_TO_VENDOR|11318|PARTY|11399|Main Warehouse - Jeddah|20|||||||||||||||||||||||||||||||||||||
 INSERT|INV_VALID_DESTINATIONS|SHIPPING|DAMAGED_RETURN|11318|PARTY|11397|Damaged Warehouse - Jeddah|20|||||||||||||||||||||||||||||||||||||
 INSERT|INV_VALID_DESTINATIONS|RECEIVING|DAMAGED_RETURN|11318|PARTY|11397|Damaged Warehouse - Jeddah|30|||||||||||||||||||||||||||||||||||||
-INSERT|INV_VALID_DESTINATIONS|RECEIVING|STORE_TRANSFER|11318|PARTY|011101|Abraj Al-Bait 1 Showroom - Makkah||||||||||||||||||||||||||||||||||||||
-INSERT|INV_VALID_DESTINATIONS|RECEIVING|STORE_TRANSFER|11318|PARTY|011102|Abraj Al-Bait 2 Showroom - Makkah||||||||||||||||||||||||||||||||||||||
-INSERT|INV_VALID_DESTINATIONS|RECEIVING|STORE_TRANSFER|11318|PARTY|011103|Abraj Al-Bait 4 Showroom - Makkah||||||||||||||||||||||||||||||||||||||
-INSERT|INV_VALID_DESTINATIONS|RECEIVING|STORE_TRANSFER|11318|PARTY|014108|Al-Ahsa Mall Showroom - Eastern||||||||||||||||||||||||||||||||||||||
-INSERT|INV_VALID_DESTINATIONS|RECEIVING|STORE_TRANSFER|11318|PARTY|011307|Al-Andalus Mall Showroom - Jeddah||||||||||||||||||||||||||||||||||||||
-INSERT|INV_VALID_DESTINATIONS|RECEIVING|STORE_TRANSFER|11318|PARTY|012119|Al-Badeeah Mall 2 Showroom - Al-Riyadh||||||||||||||||||||||||||||||||||||||
-INSERT|INV_VALID_DESTINATIONS|RECEIVING|STORE_TRANSFER|11318|PARTY|011501|Al-Danah Mall Showroom - Yanbu||||||||||||||||||||||||||||||||||||||
-INSERT|INV_VALID_DESTINATIONS|RECEIVING|STORE_TRANSFER|11318|PARTY|011107|Al-Diyafa Showroom - Makkah||||||||||||||||||||||||||||||||||||||
-INSERT|INV_VALID_DESTINATIONS|RECEIVING|STORE_TRANSFER|11318|PARTY|013401|Al-Baha Showroom - Al-Baha||||||||||||||||||||||||||||||||||||||
-INSERT|INV_VALID_DESTINATIONS|RECEIVING|STORE_TRANSFER|11318|PARTY|014111|Al-Qosaibi Al-Khobar Showroom - Eastern||||||||||||||||||||||||||||||||||||||
-INSERT|INV_VALID_DESTINATIONS|RECEIVING|STORE_TRANSFER|11318|PARTY|011106|Al-Hijaz Mall Showroom - Makkah||||||||||||||||||||||||||||||||||||||
-INSERT|INV_VALID_DESTINATIONS|RECEIVING|STORE_TRANSFER|11318|PARTY|011108|Al-Hijrah Showroom - Makkah||||||||||||||||||||||||||||||||||||||
-INSERT|INV_VALID_DESTINATIONS|RECEIVING|STORE_TRANSFER|11318|PARTY|012201|Al-Hudaithi Mall Showroom - Al-Kharj||||||||||||||||||||||||||||||||||||||
-INSERT|INV_VALID_DESTINATIONS|RECEIVING|STORE_TRANSFER|11318|PARTY|015301|Al-Jouf Plaza Showroom? - Al-Jouf||||||||||||||||||||||||||||||||||||||
-INSERT|INV_VALID_DESTINATIONS|RECEIVING|STORE_TRANSFER|11318|PARTY|014106|Al-Khafji Showroom - Eastern||||||||||||||||||||||||||||||||||||||
-INSERT|INV_VALID_DESTINATIONS|RECEIVING|STORE_TRANSFER|11318|PARTY|011403|Al-Madinah Al-Dowali Showroom - Al-Madinah||||||||||||||||||||||||||||||||||||||
-INSERT|INV_VALID_DESTINATIONS|RECEIVING|STORE_TRANSFER|11318|PARTY|012115|Al-Majmaah Showroom - Al-Qassim||||||||||||||||||||||||||||||||||||||
-INSERT|INV_VALID_DESTINATIONS|RECEIVING|STORE_TRANSFER|11318|PARTY|012118|Al-Naseem Showroom - Al-Riyadh||||||||||||||||||||||||||||||||||||||
-INSERT|INV_VALID_DESTINATIONS|RECEIVING|STORE_TRANSFER|11318|PARTY|012105|Al-Olaya Alaam Showroom - Al-Riyadh||||||||||||||||||||||||||||||||||||||
-INSERT|INV_VALID_DESTINATIONS|RECEIVING|STORE_TRANSFER|11318|PARTY|014109|Al-Othaim Al-Hofuf Showroom - Eastern||||||||||||||||||||||||||||||||||||||
-INSERT|INV_VALID_DESTINATIONS|RECEIVING|STORE_TRANSFER|11318|PARTY|012117|Al-Othaim Al-Rabwa Showroom - Al-Riyadh||||||||||||||||||||||||||||||||||||||
-INSERT|INV_VALID_DESTINATIONS|RECEIVING|STORE_TRANSFER|11318|PARTY|012301|Buraidah Showroom - Al-Qassim||||||||||||||||||||||||||||||||||||||
-INSERT|INV_VALID_DESTINATIONS|RECEIVING|STORE_TRANSFER|11318|PARTY|012110|Al-Othaim Mall Showroom - Al-Riyadh||||||||||||||||||||||||||||||||||||||
-INSERT|INV_VALID_DESTINATIONS|RECEIVING|STORE_TRANSFER|11318|PARTY|012174|Al-Qasr Mall Showroom - Al-Riyadh||||||||||||||||||||||||||||||||||||||
-INSERT|INV_VALID_DESTINATIONS|RECEIVING|STORE_TRANSFER|11318|PARTY|014101|Al-Rashid Mall 1 Showroom - Eastern||||||||||||||||||||||||||||||||||||||
-INSERT|INV_VALID_DESTINATIONS|RECEIVING|STORE_TRANSFER|11318|PARTY|011405|Al-Rashid Mega Mall Showroom - Al-Madinah||||||||||||||||||||||||||||||||||||||
-INSERT|INV_VALID_DESTINATIONS|RECEIVING|STORE_TRANSFER|11318|PARTY|011311|Al-Safaa Showroom - Jeddah||||||||||||||||||||||||||||||||||||||
-INSERT|INV_VALID_DESTINATIONS|RECEIVING|STORE_TRANSFER|11318|PARTY|011114|Al-Sharaya Showroom - Makkah||||||||||||||||||||||||||||||||||||||
-INSERT|INV_VALID_DESTINATIONS|RECEIVING|STORE_TRANSFER|11318|PARTY|012101|Al-Steen Showroom - Al-Riyadh||||||||||||||||||||||||||||||||||||||
-INSERT|INV_VALID_DESTINATIONS|RECEIVING|STORE_TRANSFER|11318|PARTY|011304|Al-Tahlia Almasi Showroom - Jeddah||||||||||||||||||||||||||||||||||||||
-INSERT|INV_VALID_DESTINATIONS|RECEIVING|STORE_TRANSFER|11318|PARTY|011315|Mandarin Avenue Showroom - Jeddah||||||||||||||||||||||||||||||||||||||
-INSERT|INV_VALID_DESTINATIONS|RECEIVING|STORE_TRANSFER|11318|PARTY|011309|Arab Mall Showroom - Jeddah||||||||||||||||||||||||||||||||||||||
-INSERT|INV_VALID_DESTINATIONS|RECEIVING|STORE_TRANSFER|11318|PARTY|013502|Asdaf Mall Showroom - Khamis Mushait||||||||||||||||||||||||||||||||||||||
-INSERT|INV_VALID_DESTINATIONS|RECEIVING|STORE_TRANSFER|11318|PARTY|011314|Aziz Mall Showroom - Jeddah||||||||||||||||||||||||||||||||||||||
-INSERT|INV_VALID_DESTINATIONS|RECEIVING|STORE_TRANSFER|11318|PARTY|013402|Baljorshi Mall Showroom - Baljorshi||||||||||||||||||||||||||||||||||||||
-INSERT|INV_VALID_DESTINATIONS|RECEIVING|STORE_TRANSFER|11318|PARTY|014112|City Mall Al-Qatif Showroom - Eastern||||||||||||||||||||||||||||||||||||||
-INSERT|INV_VALID_DESTINATIONS|RECEIVING|STORE_TRANSFER|11318|PARTY|011110|Dana Center Showroom - Makkah||||||||||||||||||||||||||||||||||||||
-INSERT|INV_VALID_DESTINATIONS|RECEIVING|STORE_TRANSFER|11318|PARTY|011402|Dar Al-Taqwa Showroom - Al-Madinah||||||||||||||||||||||||||||||||||||||
-INSERT|INV_VALID_DESTINATIONS|RECEIVING|STORE_TRANSFER|11318|PARTY|014105|Dareen Mall Showroom - Eastern||||||||||||||||||||||||||||||||||||||
-INSERT|INV_VALID_DESTINATIONS|RECEIVING|STORE_TRANSFER|11318|PARTY|014113|Dhahran Mall 2 Showroom - Eastern||||||||||||||||||||||||||||||||||||||
-INSERT|INV_VALID_DESTINATIONS|RECEIVING|STORE_TRANSFER|11318|PARTY|011404|Diyar Al-Madinah Showroom - Al-Madinah||||||||||||||||||||||||||||||||||||||
-INSERT|INV_VALID_DESTINATIONS|RECEIVING|STORE_TRANSFER|11318|PARTY|014107|Hafir Al-Batin Showroom - Al-Qassim||||||||||||||||||||||||||||||||||||||
-INSERT|INV_VALID_DESTINATIONS|RECEIVING|STORE_TRANSFER|11318|PARTY|011305|Heraa Mall Showroom - Jeddah||||||||||||||||||||||||||||||||||||||
-INSERT|INV_VALID_DESTINATIONS|RECEIVING|STORE_TRANSFER|11318|PARTY|011401|Hilton Al-Madinah Showroom - Al-Madinah||||||||||||||||||||||||||||||||||||||
-INSERT|INV_VALID_DESTINATIONS|RECEIVING|STORE_TRANSFER|11318|PARTY|011112|Jabal Omar 1 Showroom - Makkah||||||||||||||||||||||||||||||||||||||
-INSERT|INV_VALID_DESTINATIONS|RECEIVING|STORE_TRANSFER|11318|PARTY|011113|Jabal Omar 2 Showroom - Makkah||||||||||||||||||||||||||||||||||||||
-INSERT|INV_VALID_DESTINATIONS|RECEIVING|STORE_TRANSFER|11318|PARTY|013503|Khamis Avenue Showroom - Khamis Mushait||||||||||||||||||||||||||||||||||||||
-INSERT|INV_VALID_DESTINATIONS|RECEIVING|STORE_TRANSFER|11318|PARTY|013501|Khamis Mushait Showroom - Khamis Mushait||||||||||||||||||||||||||||||||||||||
-INSERT|INV_VALID_DESTINATIONS|RECEIVING|STORE_TRANSFER|11318|PARTY|012104|Kingdom Center Showroom - Al-Riyadh||||||||||||||||||||||||||||||||||||||
-INSERT|INV_VALID_DESTINATIONS|RECEIVING|STORE_TRANSFER|11318|PARTY|011105|Makkah Anas Showroom - Makkah||||||||||||||||||||||||||||||||||||||
-INSERT|INV_VALID_DESTINATIONS|RECEIVING|STORE_TRANSFER|11318|PARTY|011104|Makkah Ehsan Showroom - Makkah||||||||||||||||||||||||||||||||||||||
-INSERT|INV_VALID_DESTINATIONS|RECEIVING|STORE_TRANSFER|11318|PARTY|011111|Makkah Mall Showroom - Makkah||||||||||||||||||||||||||||||||||||||
-INSERT|INV_VALID_DESTINATIONS|RECEIVING|STORE_TRANSFER|11318|PARTY|012120|Marina Mall Showroom - Al-Riyadh||||||||||||||||||||||||||||||||||||||
-INSERT|INV_VALID_DESTINATIONS|RECEIVING|STORE_TRANSFER|11318|PARTY|013104|Mahayil Aseer Showroom - Abha||||||||||||||||||||||||||||||||||||||
-INSERT|INV_VALID_DESTINATIONS|RECEIVING|STORE_TRANSFER|11318|PARTY|012108|Panorama Mall Showroom - Al-Riyadh||||||||||||||||||||||||||||||||||||||
-INSERT|INV_VALID_DESTINATIONS|RECEIVING|STORE_TRANSFER|11318|PARTY|011306|Red Sea Mall Showroom - Jeddah||||||||||||||||||||||||||||||||||||||
-INSERT|INV_VALID_DESTINATIONS|RECEIVING|STORE_TRANSFER|11318|PARTY|015201|Hail Al-Tamami Showroom - Hail||||||||||||||||||||||||||||||||||||||
-INSERT|INV_VALID_DESTINATIONS|RECEIVING|STORE_TRANSFER|11318|PARTY|011202|Taif 2 Showroom - Taif||||||||||||||||||||||||||||||||||||||
-INSERT|INV_VALID_DESTINATIONS|RECEIVING|STORE_TRANSFER|11318|PARTY|011201|Taif 1 Showroom - Taif||||||||||||||||||||||||||||||||||||||
-INSERT|INV_VALID_DESTINATIONS|RECEIVING|STORE_TRANSFER|11318|PARTY|011203|Taif 3 Showroom - Taif||||||||||||||||||||||||||||||||||||||
-INSERT|INV_VALID_DESTINATIONS|RECEIVING|STORE_TRANSFER|11318|PARTY|012102|Al-Thalatheen Showroom - Al-Riyadh||||||||||||||||||||||||||||||||||||||
-INSERT|INV_VALID_DESTINATIONS|RECEIVING|STORE_TRANSFER|11318|PARTY|014102|Venecia Mall Showroom - Eastern||||||||||||||||||||||||||||||||||||||
-INSERT|INV_VALID_DESTINATIONS|RECEIVING|STORE_TRANSFER|11318|PARTY|011502|Yanbu Mall Showroom - Yanbu||||||||||||||||||||||||||||||||||||||
-INSERT|INV_VALID_DESTINATIONS|RECEIVING|STORE_TRANSFER|11318|PARTY|011312|Al-Salam Mall Showroom - Jeddah||||||||||||||||||||||||||||||||||||||
-INSERT|INV_VALID_DESTINATIONS|RECEIVING|STORE_TRANSFER|11318|PARTY|011406|Al-Noor Mall Showroom - Al-Madinah||||||||||||||||||||||||||||||||||||||
-INSERT|INV_VALID_DESTINATIONS|RECEIVING|STORE_TRANSFER|11318|PARTY|012114|Al-Salam Mall Showroom - Al-Riyadh||||||||||||||||||||||||||||||||||||||
-INSERT|INV_VALID_DESTINATIONS|RECEIVING|STORE_TRANSFER|11318|PARTY|012116|King Abdullah Street Showroom - Al-Riyadh||||||||||||||||||||||||||||||||||||||
-INSERT|INV_VALID_DESTINATIONS|RECEIVING|STORE_TRANSFER|11318|PARTY|012121|Gallery Mall Showroom - Al-Riyadh||||||||||||||||||||||||||||||||||||||
-INSERT|INV_VALID_DESTINATIONS|RECEIVING|STORE_TRANSFER|11318|PARTY|012304|Al-Amry Buraidah Showroom - Al-Qassim||||||||||||||||||||||||||||||||||||||
-INSERT|INV_VALID_DESTINATIONS|RECEIVING|STORE_TRANSFER|11318|PARTY|012305|Deira Mall Rass Showroom - Al-Qassim||||||||||||||||||||||||||||||||||||||
-INSERT|INV_VALID_DESTINATIONS|RECEIVING|STORE_TRANSFER|11318|PARTY|013105|New Abha Showroom - Abha||||||||||||||||||||||||||||||||||||||
-INSERT|INV_VALID_DESTINATIONS|RECEIVING|STORE_TRANSFER|11318|PARTY|014103|Amwaj Mall Showroom - Eastern||||||||||||||||||||||||||||||||||||||
-INSERT|INV_VALID_DESTINATIONS|RECEIVING|STORE_TRANSFER|11318|PARTY|014110|Jubail Royal Authority Showroom - Eastern||||||||||||||||||||||||||||||||||||||
-INSERT|INV_VALID_DESTINATIONS|RECEIVING|STORE_TRANSFER|11318|PARTY|013301|Kadi Mall Showroom - Jazan||||||||||||||||||||||||||||||||||||||
-INSERT|INV_VALID_DESTINATIONS|RECEIVING|STORE_TRANSFER|11318|PARTY|012122|Dove Plaza Showroom - Al-Riyadh||||||||||||||||||||||||||||||||||||||
-INSERT|INV_VALID_DESTINATIONS|RECEIVING|STORE_TRANSFER|11318|PARTY|012123|New Tahlia Showroom - Al-Riyadh||||||||||||||||||||||||||||||||||||||
-INSERT|INV_VALID_DESTINATIONS|RECEIVING|STORE_TRANSFER|11318|PARTY|011317|Al-Tahlia Boutique Showroom - Jeddah||||||||||||||||||||||||||||||||||||||
-INSERT|INV_VALID_DESTINATIONS|RECEIVING|STORE_TRANSFER|11318|PARTY|012124|Al-Nakheel Mall Showroom - Al-Riyadh||||||||||||||||||||||||||||||||||||||
-INSERT|INV_VALID_DESTINATIONS|RECEIVING|STORE_TRANSFER|11318|PARTY|012125|Talaa Mall Showroom - Al-Riyadh||||||||||||||||||||||||||||||||||||||
-INSERT|INV_VALID_DESTINATIONS|RECEIVING|STORE_TRANSFER|11318|PARTY|011320|Al-Samer Showroom – Jeddah||||||||||||||||||||||||||||||||||||||
-INSERT|INV_VALID_DESTINATIONS|RECEIVING|STORE_TRANSFER|11318|PARTY|011116|Souq Al-Qawafel Showroom - Makkah||||||||||||||||||||||||||||||||||||||
-INSERT|INV_VALID_DESTINATIONS|RECEIVING|STORE_TRANSFER|11318|PARTY|011205|Besha Showroom - Taif||||||||||||||||||||||||||||||||||||||
-INSERT|INV_VALID_DESTINATIONS|RECEIVING|STORE_TRANSFER|11318|PARTY|011321|Al-Fayha Showroom – Jeddah||||||||||||||||||||||||||||||||||||||
-INSERT|INV_VALID_DESTINATIONS|RECEIVING|STORE_TRANSFER|11318|PARTY|011319|Haifaa Mall Showroom – Jeddah||||||||||||||||||||||||||||||||||||||
-INSERT|INV_VALID_DESTINATIONS|RECEIVING|STORE_TRANSFER|11318|PARTY|011322|Al-Ajaweed Showroom – Jeddah||||||||||||||||||||||||||||||||||||||
-INSERT|INV_VALID_DESTINATIONS|RECEIVING|STORE_TRANSFER|11318|PARTY|011323|Bandar Mall Showroom – Al-Qunfudhah||||||||||||||||||||||||||||||||||||||
-INSERT|INV_VALID_DESTINATIONS|RECEIVING|STORE_TRANSFER|11318|PARTY|011324|King Faisal Street Showroom – Jeddah||||||||||||||||||||||||||||||||||||||
-INSERT|INV_VALID_DESTINATIONS|RECEIVING|STORE_TRANSFER|11318|PARTY|013106|Namas Mall Showroom - Abha||||||||||||||||||||||||||||||||||||||
-INSERT|INV_VALID_DESTINATIONS|RECEIVING|STORE_TRANSFER|11318|PARTY|014116|Al-Nairyah Showroom - Eastern||||||||||||||||||||||||||||||||||||||
-INSERT|INV_VALID_DESTINATIONS|RECEIVING|STORE_TRANSFER|11318|PARTY|012128|Hayat Mall Showroom -  Al-Riyadh||||||||||||||||||||||||||||||||||||||
-INSERT|INV_VALID_DESTINATIONS|RECEIVING|STORE_TRANSFER|11318|PARTY|011410|Azizia Showroom - Al-Madinah||||||||||||||||||||||||||||||||||||||
-INSERT|INV_VALID_DESTINATIONS|RECEIVING|STORE_TRANSFER|11318|PARTY|012129|Al-Dawadmi Showroom - Al-Riyadh||||||||||||||||||||||||||||||||||||||
-INSERT|INV_VALID_DESTINATIONS|RECEIVING|STORE_TRANSFER|11318|PARTY|011411|Al-Manar Mall Showroom - Al-Madinah||||||||||||||||||||||||||||||||||||||
-INSERT|INV_VALID_DESTINATIONS|RECEIVING|STORE_TRANSFER|11318|PARTY|012130|Al-Muzahmiya Mall Showroom - Al-Riyadh||||||||||||||||||||||||||||||||||||||
-INSERT|INV_VALID_DESTINATIONS|RECEIVING|STORE_TRANSFER|11318|PARTY|014122|Leen Mall Rafha Showroom - Rafha||||||||||||||||||||||||||||||||||||||
-INSERT|INV_VALID_DESTINATIONS|RECEIVING|STORE_TRANSFER|11318|PARTY|013107|Al-Bsateen Mall Showroom - Abha||||||||||||||||||||||||||||||||||||||
-INSERT|INV_VALID_DESTINATIONS|RECEIVING|STORE_TRANSFER|11318|PARTY|011119|Al-Steen Showroom - Makkah||||||||||||||||||||||||||||||||||||||
-INSERT|INV_VALID_DESTINATIONS|RECEIVING|STORE_TRANSFER|11318|PARTY|014115|Hafir Al-Batin 2 Showroom - Al-Qassim||||||||||||||||||||||||||||||||||||||
-INSERT|INV_VALID_DESTINATIONS|RECEIVING|STORE_TRANSFER|11318|PARTY|014118|Al-Jubail Mall Showroom - Eastern||||||||||||||||||||||||||||||||||||||
-INSERT|INV_VALID_DESTINATIONS|RECEIVING|STORE_TRANSFER|11318|PARTY|011207|Joury Mall Showroom - Taif||||||||||||||||||||||||||||||||||||||
-INSERT|INV_VALID_DESTINATIONS|RECEIVING|STORE_TRANSFER|11318|PARTY|012131|Ghornatah Mall Showroom - Al-Riyadh||||||||||||||||||||||||||||||||||||||
-INSERT|INV_VALID_DESTINATIONS|RECEIVING|STORE_TRANSFER|11318|PARTY|012306|Al-Nakheel Mall Showroom - Al-Qassim||||||||||||||||||||||||||||||||||||||
-INSERT|INV_VALID_DESTINATIONS|RECEIVING|STORE_TRANSFER|11318|PARTY|011121|Dar El-Tawheed Showroom - Makkah||||||||||||||||||||||||||||||||||||||
-INSERT|INV_VALID_DESTINATIONS|RECEIVING|STORE_TRANSFER|11318|PARTY|012132|Wadi Laban Showroom - Al-Riyadh||||||||||||||||||||||||||||||||||||||
-INSERT|INV_VALID_DESTINATIONS|RECEIVING|STORE_TRANSFER|11318|PARTY|013506|Al-Shebli Showroom - Khamis Mushait||||||||||||||||||||||||||||||||||||||
-INSERT|INV_VALID_DESTINATIONS|RECEIVING|STORE_TRANSFER|11318|PARTY|015103|Olayaa Showroom - Tabuk||||||||||||||||||||||||||||||||||||||
-INSERT|INV_VALID_DESTINATIONS|RECEIVING|STORE_TRANSFER|11318|PARTY|011209|Al-Majardah  Showroom - Taif||||||||||||||||||||||||||||||||||||||
-INSERT|INV_VALID_DESTINATIONS|RECEIVING|STORE_TRANSFER|11318|PARTY|011413|Al-Hijrah Showroom - Al-Madinah||||||||||||||||||||||||||||||||||||||
-INSERT|INV_VALID_DESTINATIONS|RECEIVING|STORE_TRANSFER|11318|PARTY|011414|Sultana Street Showroom - Al-Madinah||||||||||||||||||||||||||||||||||||||
-INSERT|INV_VALID_DESTINATIONS|RECEIVING|STORE_TRANSFER|11318|PARTY|012139|Al-Zulfi Showroom - Al-Qassim||||||||||||||||||||||||||||||||||||||
-INSERT|INV_VALID_DESTINATIONS|RECEIVING|STORE_TRANSFER|11318|PARTY|014125|Al-Jalaweyah Showroom - Eastern||||||||||||||||||||||||||||||||||||||
-INSERT|INV_VALID_DESTINATIONS|RECEIVING|STORE_TRANSFER|11318|PARTY|012135|Wadi Al-dwaser Showroom - Al-Riyadh||||||||||||||||||||||||||||||||||||||
-INSERT|INV_VALID_DESTINATIONS|RECEIVING|STORE_TRANSFER|11318|PARTY|011210|Sabt Al-Alaya Showroom – Taif||||||||||||||||||||||||||||||||||||||
-INSERT|INV_VALID_DESTINATIONS|RECEIVING|STORE_TRANSFER|11318|PARTY|012308|Al-Mashaghel Street Showroom - Al-Qassim||||||||||||||||||||||||||||||||||||||
-INSERT|INV_VALID_DESTINATIONS|RECEIVING|STORE_TRANSFER|11318|PARTY|013305|Khayalh Mall Showroom - Jazan||||||||||||||||||||||||||||||||||||||
-INSERT|INV_VALID_DESTINATIONS|RECEIVING|STORE_TRANSFER|11318|PARTY|011327|Yasmeen Mall Showroom – Jeddah||||||||||||||||||||||||||||||||||||||
-INSERT|INV_VALID_DESTINATIONS|RECEIVING|STORE_TRANSFER|11318|PARTY|012307|Unaizah Al-Sowyan - Al-Qassim||||||||||||||||||||||||||||||||||||||
-INSERT|INV_VALID_DESTINATIONS|RECEIVING|STORE_TRANSFER|11318|PARTY|015203|Grand Mall Showroom - Hail||||||||||||||||||||||||||||||||||||||
-INSERT|INV_VALID_DESTINATIONS|RECEIVING|STORE_TRANSFER|11318|PARTY|012202|Al-Kharj 2 Showroom - Al-Kharj||||||||||||||||||||||||||||||||||||||
-INSERT|INV_VALID_DESTINATIONS|RECEIVING|STORE_TRANSFER|11318|PARTY|011123|Al-Shawqiyah Showroom - Makkah||||||||||||||||||||||||||||||||||||||
-INSERT|INV_VALID_DESTINATIONS|RECEIVING|STORE_TRANSFER|11318|PARTY|015402|Al-Othaim Mall Showroom -Arar||||||||||||||||||||||||||||||||||||||
-INSERT|INV_VALID_DESTINATIONS|RECEIVING|STORE_TRANSFER|11318|PARTY|012127|Al-Hamra Mall Showroom - Al-Riyadh||||||||||||||||||||||||||||||||||||||
-INSERT|INV_VALID_DESTINATIONS|RECEIVING|STORE_TRANSFER|11318|PARTY|012140|Al-Shifa Plaza Showroom - Al-Riyadh||||||||||||||||||||||||||||||||||||||
-INSERT|INV_VALID_DESTINATIONS|RECEIVING|STORE_TRANSFER|11318|PARTY|012137|Salman Al-Farisi Showroom - Al-Riyadh||||||||||||||||||||||||||||||||||||||
-INSERT|INV_VALID_DESTINATIONS|RECEIVING|STORE_TRANSFER|11318|PARTY|011126|Makkah Mall Boutique Showroom - Makkah||||||||||||||||||||||||||||||||||||||
-INSERT|INV_VALID_DESTINATIONS|RECEIVING|STORE_TRANSFER|11318|PARTY|012141|Al-Nakheel Mall Boutique Showroom - Al-Riyadh||||||||||||||||||||||||||||||||||||||
-INSERT|INV_VALID_DESTINATIONS|RECEIVING|STORE_TRANSFER|11318|PARTY|011328|Al-Mahmal Center Showroom – Jeddah||||||||||||||||||||||||||||||||||||||
-INSERT|INV_VALID_DESTINATIONS|RECEIVING|STORE_TRANSFER|11318|PARTY|011329|Al-Salam Mall Boutique Showroom - Jeddah||||||||||||||||||||||||||||||||||||||
-INSERT|INV_VALID_DESTINATIONS|RECEIVING|STORE_TRANSFER|11318|PARTY|011330|Aziz Mall Boutique Showroom - Jeddah||||||||||||||||||||||||||||||||||||||
-INSERT|INV_VALID_DESTINATIONS|RECEIVING|STORE_TRANSFER|11318|PARTY|011331|Arab Mall Boutique Showroom - Jeddah||||||||||||||||||||||||||||||||||||||
-INSERT|INV_VALID_DESTINATIONS|RECEIVING|STORE_TRANSFER|11318|PARTY|011416|Al-Noor Mall Boutique Showroom - Al-Madinah||||||||||||||||||||||||||||||||||||||
-INSERT|INV_VALID_DESTINATIONS|RECEIVING|STORE_TRANSFER|11318|PARTY|013109|Al-Rashid Mall Showroom - Abha||||||||||||||||||||||||||||||||||||||
-INSERT|INV_VALID_DESTINATIONS|RECEIVING|STORE_TRANSFER|11318|PARTY|013604|Hayat Mall Showroom - Najran||||||||||||||||||||||||||||||||||||||
-INSERT|INV_VALID_DESTINATIONS|RECEIVING|STORE_TRANSFER|11318|PARTY|015104|Tabuk Park Showroom - Tabuk||||||||||||||||||||||||||||||||||||||
-INSERT|INV_VALID_DESTINATIONS|RECEIVING|STORE_TRANSFER|11318|PARTY|014126|Al-Othaim Dammam Showroom - Eastern||||||||||||||||||||||||||||||||||||||
-INSERT|INV_VALID_DESTINATIONS|RECEIVING|STORE_TRANSFER|11318|PARTY|012146|Al-Rawabi Al-Riyadh Showroom - Al-Riyadh||||||||||||||||||||||||||||||||||||||
-INSERT|INV_VALID_DESTINATIONS|RECEIVING|STORE_TRANSFER|11318|PARTY|012142|Wajehat Al-Riyadh Showroom - Al-Riyadh||||||||||||||||||||||||||||||||||||||
-INSERT|INV_VALID_DESTINATIONS|RECEIVING|STORE_TRANSFER|11318|PARTY|014129|Marina Mall Showroom – Eastern||||||||||||||||||||||||||||||||||||||
-INSERT|INV_VALID_DESTINATIONS|RECEIVING|STORE_TRANSFER|11318|PARTY|012309|Emam Bukhari Road Showroom - Al-Qassim||||||||||||||||||||||||||||||||||||||
-INSERT|INV_VALID_DESTINATIONS|RECEIVING|STORE_TRANSFER|11318|PARTY|012148|Arqah Showroom - Al-Riyadh||||||||||||||||||||||||||||||||||||||
-INSERT|INV_VALID_DESTINATIONS|RECEIVING|STORE_TRANSFER|11318|PARTY|011335|Moj Plaza Showroom - Jeddah||||||||||||||||||||||||||||||||||||||
-INSERT|INV_VALID_DESTINATIONS|RECEIVING|STORE_TRANSFER|11318|PARTY|012154|Yarmouk Center Showroom - Al-Riyadh||||||||||||||||||||||||||||||||||||||
-INSERT|INV_VALID_DESTINATIONS|RECEIVING|STORE_TRANSFER|11318|PARTY|012147|Al-Azizia Showroom - Al-Riyadh||||||||||||||||||||||||||||||||||||||
-INSERT|INV_VALID_DESTINATIONS|RECEIVING|STORE_TRANSFER|11318|PARTY|011336|Hamdanya Showroom - Jeddah||||||||||||||||||||||||||||||||||||||
-INSERT|INV_VALID_DESTINATIONS|RECEIVING|STORE_TRANSFER|11318|PARTY|012153|Al-Sahafa Plaza Showroom - Al-Riyadh||||||||||||||||||||||||||||||||||||||
-INSERT|INV_VALID_DESTINATIONS|RECEIVING|STORE_TRANSFER|11318|PARTY|014130|Al-Nakheel Mall Showroom - Eastern||||||||||||||||||||||||||||||||||||||
-INSERT|INV_VALID_DESTINATIONS|RECEIVING|STORE_TRANSFER|11318|PARTY|013306|Yasmeen Aboaresh Showroom - Jazan||||||||||||||||||||||||||||||||||||||
-INSERT|INV_VALID_DESTINATIONS|RECEIVING|STORE_TRANSFER|11318|PARTY|011417|Aswaq Al-Othaim Showroom - Al-Madinah||||||||||||||||||||||||||||||||||||||
-INSERT|INV_VALID_DESTINATIONS|RECEIVING|STORE_TRANSFER|11318|PARTY|011130|Al-Majaz Mall Showroom - Makkah||||||||||||||||||||||||||||||||||||||
-INSERT|INV_VALID_DESTINATIONS|RECEIVING|STORE_TRANSFER|11318|PARTY|012312|Al-Othaim Unaizah Showroom - Al-Qassim||||||||||||||||||||||||||||||||||||||
-INSERT|INV_VALID_DESTINATIONS|RECEIVING|STORE_TRANSFER|11318|PARTY|012157|Telal Al-Masharef Showroom - Al-Riyadh||||||||||||||||||||||||||||||||||||||
-INSERT|INV_VALID_DESTINATIONS|RECEIVING|STORE_TRANSFER|11318|PARTY|011418|Alia Mall Showroom - Al-Madinah||||||||||||||||||||||||||||||||||||||
-INSERT|INV_VALID_DESTINATIONS|RECEIVING|STORE_TRANSFER|11318|PARTY|011129|Dkakeen Bakka Showroom - Makkah||||||||||||||||||||||||||||||||||||||
-INSERT|INV_VALID_DESTINATIONS|RECEIVING|STORE_TRANSFER|11318|PARTY|013606|Al-Fakhriah Plaza Showroom - Najran||||||||||||||||||||||||||||||||||||||
-INSERT|INV_VALID_DESTINATIONS|RECEIVING|STORE_TRANSFER|11318|PARTY|013605|City Center Showroom - Najran||||||||||||||||||||||||||||||||||||||
-INSERT|INV_VALID_DESTINATIONS|RECEIVING|STORE_TRANSFER|11318|PARTY|012158|Park Avenue Showroom - Al-Riyadh||||||||||||||||||||||||||||||||||||||
-INSERT|INV_VALID_DESTINATIONS|RECEIVING|STORE_TRANSFER|11318|PARTY|011338|Jeddah Park Showroom - Jeddah||||||||||||||||||||||||||||||||||||||
-INSERT|INV_VALID_DESTINATIONS|RECEIVING|STORE_TRANSFER|11318|PARTY|013507|Mujan Park Showroom - Khamis Mushait||||||||||||||||||||||||||||||||||||||
-INSERT|INV_VALID_DESTINATIONS|RECEIVING|STORE_TRANSFER|11318|PARTY|011419|Dar Al-Taqwa 2 Showroom - Al-Madinah||||||||||||||||||||||||||||||||||||||
-INSERT|INV_VALID_DESTINATIONS|RECEIVING|STORE_TRANSFER|11318|PARTY|013307|Azzan Plaza Showroom - Jazan||||||||||||||||||||||||||||||||||||||
-INSERT|INV_VALID_DESTINATIONS|RECEIVING|STORE_TRANSFER|11318|PARTY|012163|Al-Rawda Showroom - Al-Riyadh||||||||||||||||||||||||||||||||||||||
-INSERT|INV_VALID_DESTINATIONS|RECEIVING|STORE_TRANSFER|11318|PARTY|011211|The Park Mall Showroom - Taif||||||||||||||||||||||||||||||||||||||
-INSERT|INV_VALID_DESTINATIONS|RECEIVING|STORE_TRANSFER|11318|PARTY|013403|Al-Baha Mall Showroom - Al-Baha||||||||||||||||||||||||||||||||||||||
-INSERT|INV_VALID_DESTINATIONS|RECEIVING|STORE_TRANSFER|11318|PARTY|012169|Executive Terminal 1 Showroom - Al-Riyadh||||||||||||||||||||||||||||||||||||||
-INSERT|INV_VALID_DESTINATIONS|RECEIVING|STORE_TRANSFER|11318|PARTY|012170|Executive Terminal 5 Showroom - Al-Riyadh||||||||||||||||||||||||||||||||||||||
-INSERT|INV_VALID_DESTINATIONS|RECEIVING|STORE_TRANSFER|11318|PARTY|012162|The View Showroom - Al-Riyadh||||||||||||||||||||||||||||||||||||||
-INSERT|INV_VALID_DESTINATIONS|RECEIVING|STORE_TRANSFER|11318|PARTY|011339|Executive Showroom - Jeddah||||||||||||||||||||||||||||||||||||||
-INSERT|INV_VALID_DESTINATIONS|RECEIVING|STORE_TRANSFER|11318|PARTY|012175|Al-Yarmook 2 Showroom - Al-Riyadh||||||||||||||||||||||||||||||||||||||
-INSERT|INV_VALID_DESTINATIONS|RECEIVING|STORE_TRANSFER|11318|PARTY|013308|Al-Borhan Mall Showroom - Jazan||||||||||||||||||||||||||||||||||||||
-INSERT|INV_VALID_DESTINATIONS|RECEIVING|STORE_TRANSFER|11318|PARTY|014127|Al-Othaim Hafir Al-Batin Showroom - Al-Qassim||||||||||||||||||||||||||||||||||||||
-INSERT|INV_VALID_DESTINATIONS|RECEIVING|STORE_TRANSFER|11318|PARTY|012172|Meem Plaza Showroom - Al-Riyadh||||||||||||||||||||||||||||||||||||||
-INSERT|INV_VALID_DESTINATIONS|RECEIVING|STORE_TRANSFER|11318|PARTY|012171|Al-Takhassusi Showroom - Al-Riyadh||||||||||||||||||||||||||||||||||||||
-INSERT|INV_VALID_DESTINATIONS|RECEIVING|STORE_TRANSFER|11318|PARTY|013309|Al-Rashid Mall Showroom - Jazan||||||||||||||||||||||||||||||||||||||
-INSERT|INV_VALID_DESTINATIONS|RECEIVING|STORE_TRANSFER|11318|PARTY|012155|Alia Plaza Showroom - Al-Riyadh||||||||||||||||||||||||||||||||||||||
-INSERT|INV_VALID_DESTINATIONS|RECEIVING|STORE_TRANSFER|11318|PARTY|013508|Boulevard Showroom - Khamis Mushait||||||||||||||||||||||||||||||||||||||
-INSERT|INV_VALID_DESTINATIONS|RECEIVING|STORE_TRANSFER|11318|PARTY|011340|The Village Mall Showroom - Jeddah||||||||||||||||||||||||||||||||||||||
-INSERT|INV_VALID_DESTINATIONS|RECEIVING|STORE_TRANSFER|11318|PARTY|013607|Najran Park Showroom - Najran||||||||||||||||||||||||||||||||||||||
-INSERT|INV_VALID_DESTINATIONS|RECEIVING|STORE_TRANSFER|11318|PARTY|014139|Al Faisaliah Plaza Showroom - Eastern||||||||||||||||||||||||||||||||||||||
-INSERT|INV_VALID_DESTINATIONS|RECEIVING|STORE_TRANSFER|11318|PARTY|011421|Taiba Center Showroom - Al-Madinah||||||||||||||||||||||||||||||||||||||
-INSERT|INV_VALID_DESTINATIONS|RECEIVING|STORE_TRANSFER|11318|PARTY|015106|Tabuk Boulevard Showroom - Tabuk||||||||||||||||||||||||||||||||||||||
-INSERT|INV_VALID_DESTINATIONS|RECEIVING|STORE_TRANSFER|11318|PARTY|014133|Tamimi Plaza Mall Showroom - Eastern||||||||||||||||||||||||||||||||||||||
-INSERT|INV_VALID_DESTINATIONS|RECEIVING|STORE_TRANSFER|11318|PARTY|014132|Riviera Avenue Mall Showroom - Eastern||||||||||||||||||||||||||||||||||||||
-INSERT|INV_VALID_DESTINATIONS|RECEIVING|STORE_TRANSFER|11318|PARTY|014136|Al Hayat Plaza Mall Showroom - Eastern||||||||||||||||||||||||||||||||||||||
-INSERT|INV_VALID_DESTINATIONS|RECEIVING|STORE_TRANSFER|11318|PARTY|014137|Al Shaikh Avenue Mall Showroom - Eastern||||||||||||||||||||||||||||||||||||||
-INSERT|INV_VALID_DESTINATIONS|RECEIVING|STORE_TRANSFER|11318|PARTY|014138|Al Azizia Plaza Showroom - Eastern||||||||||||||||||||||||||||||||||||||
-INSERT|INV_VALID_DESTINATIONS|RECEIVING|STORE_TRANSFER|11318|PARTY|012177|Narsis Hotel Showroom - Al-Riyadh||||||||||||||||||||||||||||||||||||||
-INSERT|INV_VALID_DESTINATIONS|RECEIVING|STORE_TRANSFER|11318|PARTY|012180|Hteen Showroom - Al-Riyadh||||||||||||||||||||||||||||||||||||||
-INSERT|INV_VALID_DESTINATIONS|RECEIVING|STORE_TRANSFER|11318|PARTY|012181|Al Aqeq Showroom - Al-Riyadh||||||||||||||||||||||||||||||||||||||
-INSERT|INV_VALID_DESTINATIONS|RECEIVING|STORE_TRANSFER|11318|PARTY|011344|Al-Zahraa Plaza Showroom - Jeddah||||||||||||||||||||||||||||||||||||||
-INSERT|INV_VALID_DESTINATIONS|RECEIVING|STORE_TRANSFER|11318|PARTY|012178|Al Ghadeer Showroom - Al-Riyadh||||||||||||||||||||||||||||||||||||||
-INSERT|INV_VALID_DESTINATIONS|RECEIVING|STORE_TRANSFER|11318|PARTY|012179|Al Maethar Showroom - Al-Riyadh||||||||||||||||||||||||||||||||||||||
-INSERT|INV_VALID_DESTINATIONS|RECEIVING|STORE_TRANSFER|11318|PARTY|012183|Al Waha Plaza Showroom - Al-Riyadh||||||||||||||||||||||||||||||||||||||
-INSERT|INV_VALID_DESTINATIONS|RECEIVING|STORE_TRANSFER|11318|PARTY|013608|Najran King Saud Road Showroom - Najran||||||||||||||||||||||||||||||||||||||
-INSERT|INV_VALID_DESTINATIONS|RECEIVING|STORE_TRANSFER|11318|PARTY|012184|Al Oroba Showroom - Al-Riyadh||||||||||||||||||||||||||||||||||||||
-INSERT|INV_VALID_DESTINATIONS|RECEIVING|STORE_TRANSFER|11318|PARTY|012203|Al Kharj Plaza Showroom - Al-Kharj||||||||||||||||||||||||||||||||||||||
-INSERT|INV_VALID_DESTINATIONS|RECEIVING|STORE_TRANSFER|11318|PARTY|012187|Rawabi Onaizah Street Showroom - Al-Riyadh||||||||||||||||||||||||||||||||||||||
-INSERT|INV_VALID_DESTINATIONS|RECEIVING|STORE_TRANSFER|11318|PARTY|012182|Garnata 2 Showroom - Al-Riyadh||||||||||||||||||||||||||||||||||||||
-INSERT|INV_VALID_DESTINATIONS|RECEIVING|STORE_TRANSFER|11318|PARTY|012173|Termithi Street Showroom - Al-Riyadh||||||||||||||||||||||||||||||||||||||
-INSERT|INV_VALID_DESTINATIONS|RECEIVING|STORE_TRANSFER|11318|PARTY|012189|Tald Plaza Showroom - Al-Riyadh||||||||||||||||||||||||||||||||||||||
-INSERT|INV_VALID_DESTINATIONS|RECEIVING|STORE_TRANSFER|11318|PARTY|012190|The Gate Showroom - Al-Riyadh||||||||||||||||||||||||||||||||||||||
-INSERT|INV_VALID_DESTINATIONS|RECEIVING|STORE_TRANSFER|11318|PARTY|011132|Al-Shawqiyah 2 Showroom - Makkah||||||||||||||||||||||||||||||||||||||
-INSERT|INV_VALID_DESTINATIONS|RECEIVING|STORE_TRANSFER|11318|PARTY|011345|Cornish Center Showroom - Jeddah||||||||||||||||||||||||||||||||||||||
-INSERT|INV_VALID_DESTINATIONS|RECEIVING|STORE_TRANSFER|11318|PARTY|011213|Shahar Showroom - Taif||||||||||||||||||||||||||||||||||||||
-INSERT|INV_VALID_DESTINATIONS|RECEIVING|STORE_TRANSFER|11318|PARTY|012191|Souq Hijab Showroom - Al-Riyadh||||||||||||||||||||||||||||||||||||||
-INSERT|INV_VALID_DESTINATIONS|RECEIVING|STORE_TRANSFER|11318|PARTY|011346|Hamdanya 2 Showroom - Jeddah||||||||||||||||||||||||||||||||||||||
-INSERT|INV_VALID_DESTINATIONS|RECEIVING|STORE_TRANSFER|11318|PARTY|015204|Barzan Market Showroom – Hail||||||||||||||||||||||||||||||||||||||
-INSERT|INV_VALID_DESTINATIONS|RECEIVING|STORE_TRANSFER|11318|PARTY|013110|Ravala Plaza Showroom – Abha||||||||||||||||||||||||||||||||||||||
-INSERT|INV_VALID_DESTINATIONS|RECEIVING|STORE_TRANSFER|11318|PARTY|011214|Boulevard Besha Showroom – Taif||||||||||||||||||||||||||||||||||||||
-INSERT|INV_VALID_DESTINATIONS|RECEIVING|STORE_TRANSFER|11318|PARTY|011215|Al-Shifa Street Showroom – Taif||||||||||||||||||||||||||||||||||||||
-INSERT|INV_VALID_DESTINATIONS|RECEIVING|STORE_TRANSFER|11318|PARTY|012185|Al Malqa Showroom - Al-Riyadh||||||||||||||||||||||||||||||||||||||
-INSERT|INV_VALID_DESTINATIONS|RECEIVING|STORE_TRANSFER|11318|PARTY|011423|Sari Showroom - Al-Madinah||||||||||||||||||||||||||||||||||||||
-INSERT|INV_VALID_DESTINATIONS|RECEIVING|STORE_TRANSFER|11318|PARTY|012205|Sania Khurais Showroom - Al-Riyadh||||||||||||||||||||||||||||||||||||||
-INSERT|INV_VALID_DESTINATIONS|RECEIVING|STORE_TRANSFER|11318|PARTY|014140|Al Mubarraz Town Center Showroom - Eastern||||||||||||||||||||||||||||||||||||||
-INSERT|INV_VALID_DESTINATIONS|RECEIVING|STORE_TRANSFER|11318|PARTY|011341|U - Walk Showroom - Jeddah||||||||||||||||||||||||||||||||||||||
-INSERT|INV_VALID_DESTINATIONS|RECEIVING|STORE_TRANSFER|11318|PARTY|012204|Al-Jenadriyah Plaza Showroom - Al-Riyadh||||||||||||||||||||||||||||||||||||||
-INSERT|INV_VALID_DESTINATIONS|RECEIVING|STORE_TRANSFER|11318|PARTY|013405|Diamond Avenue Showroom - Al-Baha||||||||||||||||||||||||||||||||||||||
-INSERT|INV_VALID_DESTINATIONS|RECEIVING|STORE_TRANSFER|11318|PARTY|011347|Salama Centre Showroom - Jeddah||||||||||||||||||||||||||||||||||||||
-INSERT|INV_VALID_DESTINATIONS|RECEIVING|STORE_TRANSFER|11318|PARTY|012207|Al-Moursalat Showroom - Al-Riyadh||||||||||||||||||||||||||||||||||||||
-INSERT|INV_VALID_DESTINATIONS|SHIPPING|STORE_TRANSFER|11318|PARTY|011101|Abraj Al-Bait 1 Showroom - Makkah||||||||||||||||||||||||||||||||||||||
-INSERT|INV_VALID_DESTINATIONS|SHIPPING|STORE_TRANSFER|11318|PARTY|011102|Abraj Al-Bait 2 Showroom - Makkah||||||||||||||||||||||||||||||||||||||
-INSERT|INV_VALID_DESTINATIONS|SHIPPING|STORE_TRANSFER|11318|PARTY|011103|Abraj Al-Bait 4 Showroom - Makkah||||||||||||||||||||||||||||||||||||||
-INSERT|INV_VALID_DESTINATIONS|SHIPPING|STORE_TRANSFER|11318|PARTY|014108|Al-Ahsa Mall Showroom - Eastern||||||||||||||||||||||||||||||||||||||
-INSERT|INV_VALID_DESTINATIONS|SHIPPING|STORE_TRANSFER|11318|PARTY|011307|Al-Andalus Mall Showroom - Jeddah||||||||||||||||||||||||||||||||||||||
-INSERT|INV_VALID_DESTINATIONS|SHIPPING|STORE_TRANSFER|11318|PARTY|012119|Al-Badeeah Mall 2 Showroom - Al-Riyadh||||||||||||||||||||||||||||||||||||||
-INSERT|INV_VALID_DESTINATIONS|SHIPPING|STORE_TRANSFER|11318|PARTY|011501|Al-Danah Mall Showroom - Yanbu||||||||||||||||||||||||||||||||||||||
-INSERT|INV_VALID_DESTINATIONS|SHIPPING|STORE_TRANSFER|11318|PARTY|011107|Al-Diyafa Showroom - Makkah||||||||||||||||||||||||||||||||||||||
-INSERT|INV_VALID_DESTINATIONS|SHIPPING|STORE_TRANSFER|11318|PARTY|013401|Al-Baha Showroom - Al-Baha||||||||||||||||||||||||||||||||||||||
-INSERT|INV_VALID_DESTINATIONS|SHIPPING|STORE_TRANSFER|11318|PARTY|014111|Al-Qosaibi Al-Khobar Showroom - Eastern||||||||||||||||||||||||||||||||||||||
-INSERT|INV_VALID_DESTINATIONS|SHIPPING|STORE_TRANSFER|11318|PARTY|011106|Al-Hijaz Mall Showroom - Makkah||||||||||||||||||||||||||||||||||||||
-INSERT|INV_VALID_DESTINATIONS|SHIPPING|STORE_TRANSFER|11318|PARTY|011108|Al-Hijrah Showroom - Makkah||||||||||||||||||||||||||||||||||||||
-INSERT|INV_VALID_DESTINATIONS|SHIPPING|STORE_TRANSFER|11318|PARTY|012201|Al-Hudaithi Mall Showroom - Al-Kharj||||||||||||||||||||||||||||||||||||||
-INSERT|INV_VALID_DESTINATIONS|SHIPPING|STORE_TRANSFER|11318|PARTY|015301|Al-Jouf Plaza Showroom? - Al-Jouf||||||||||||||||||||||||||||||||||||||
-INSERT|INV_VALID_DESTINATIONS|SHIPPING|STORE_TRANSFER|11318|PARTY|014106|Al-Khafji Showroom - Eastern||||||||||||||||||||||||||||||||||||||
-INSERT|INV_VALID_DESTINATIONS|SHIPPING|STORE_TRANSFER|11318|PARTY|011403|Al-Madinah Al-Dowali Showroom - Al-Madinah||||||||||||||||||||||||||||||||||||||
-INSERT|INV_VALID_DESTINATIONS|SHIPPING|STORE_TRANSFER|11318|PARTY|012115|Al-Majmaah Showroom - Al-Qassim||||||||||||||||||||||||||||||||||||||
-INSERT|INV_VALID_DESTINATIONS|SHIPPING|STORE_TRANSFER|11318|PARTY|012118|Al-Naseem Showroom - Al-Riyadh||||||||||||||||||||||||||||||||||||||
-INSERT|INV_VALID_DESTINATIONS|SHIPPING|STORE_TRANSFER|11318|PARTY|012105|Al-Olaya Alaam Showroom - Al-Riyadh||||||||||||||||||||||||||||||||||||||
-INSERT|INV_VALID_DESTINATIONS|SHIPPING|STORE_TRANSFER|11318|PARTY|014109|Al-Othaim Al-Hofuf Showroom - Eastern||||||||||||||||||||||||||||||||||||||
-INSERT|INV_VALID_DESTINATIONS|SHIPPING|STORE_TRANSFER|11318|PARTY|012117|Al-Othaim Al-Rabwa Showroom - Al-Riyadh||||||||||||||||||||||||||||||||||||||
-INSERT|INV_VALID_DESTINATIONS|SHIPPING|STORE_TRANSFER|11318|PARTY|012301|Buraidah Showroom - Al-Qassim||||||||||||||||||||||||||||||||||||||
-INSERT|INV_VALID_DESTINATIONS|SHIPPING|STORE_TRANSFER|11318|PARTY|012110|Al-Othaim Mall Showroom - Al-Riyadh||||||||||||||||||||||||||||||||||||||
-INSERT|INV_VALID_DESTINATIONS|SHIPPING|STORE_TRANSFER|11318|PARTY|012174|Al-Qasr Mall Showroom - Al-Riyadh||||||||||||||||||||||||||||||||||||||
-INSERT|INV_VALID_DESTINATIONS|SHIPPING|STORE_TRANSFER|11318|PARTY|014101|Al-Rashid Mall 1 Showroom - Eastern||||||||||||||||||||||||||||||||||||||
-INSERT|INV_VALID_DESTINATIONS|SHIPPING|STORE_TRANSFER|11318|PARTY|011405|Al-Rashid Mega Mall Showroom - Al-Madinah||||||||||||||||||||||||||||||||||||||
-INSERT|INV_VALID_DESTINATIONS|SHIPPING|STORE_TRANSFER|11318|PARTY|011311|Al-Safaa Showroom - Jeddah||||||||||||||||||||||||||||||||||||||
-INSERT|INV_VALID_DESTINATIONS|SHIPPING|STORE_TRANSFER|11318|PARTY|011114|Al-Sharaya Showroom - Makkah||||||||||||||||||||||||||||||||||||||
-INSERT|INV_VALID_DESTINATIONS|SHIPPING|STORE_TRANSFER|11318|PARTY|012101|Al-Steen Showroom - Al-Riyadh||||||||||||||||||||||||||||||||||||||
-INSERT|INV_VALID_DESTINATIONS|SHIPPING|STORE_TRANSFER|11318|PARTY|011304|Al-Tahlia Almasi Showroom - Jeddah||||||||||||||||||||||||||||||||||||||
-INSERT|INV_VALID_DESTINATIONS|SHIPPING|STORE_TRANSFER|11318|PARTY|011315|Mandarin Avenue Showroom - Jeddah||||||||||||||||||||||||||||||||||||||
-INSERT|INV_VALID_DESTINATIONS|SHIPPING|STORE_TRANSFER|11318|PARTY|011309|Arab Mall Showroom - Jeddah||||||||||||||||||||||||||||||||||||||
-INSERT|INV_VALID_DESTINATIONS|SHIPPING|STORE_TRANSFER|11318|PARTY|013502|Asdaf Mall Showroom - Khamis Mushait||||||||||||||||||||||||||||||||||||||
-INSERT|INV_VALID_DESTINATIONS|SHIPPING|STORE_TRANSFER|11318|PARTY|011314|Aziz Mall Showroom - Jeddah||||||||||||||||||||||||||||||||||||||
-INSERT|INV_VALID_DESTINATIONS|SHIPPING|STORE_TRANSFER|11318|PARTY|013402|Baljorshi Mall Showroom - Baljorshi||||||||||||||||||||||||||||||||||||||
-INSERT|INV_VALID_DESTINATIONS|SHIPPING|STORE_TRANSFER|11318|PARTY|014112|City Mall Al-Qatif Showroom - Eastern||||||||||||||||||||||||||||||||||||||
-INSERT|INV_VALID_DESTINATIONS|SHIPPING|STORE_TRANSFER|11318|PARTY|011110|Dana Center Showroom - Makkah||||||||||||||||||||||||||||||||||||||
-INSERT|INV_VALID_DESTINATIONS|SHIPPING|STORE_TRANSFER|11318|PARTY|011402|Dar Al-Taqwa Showroom - Al-Madinah||||||||||||||||||||||||||||||||||||||
-INSERT|INV_VALID_DESTINATIONS|SHIPPING|STORE_TRANSFER|11318|PARTY|014105|Dareen Mall Showroom - Eastern||||||||||||||||||||||||||||||||||||||
-INSERT|INV_VALID_DESTINATIONS|SHIPPING|STORE_TRANSFER|11318|PARTY|014113|Dhahran Mall 2 Showroom - Eastern||||||||||||||||||||||||||||||||||||||
-INSERT|INV_VALID_DESTINATIONS|SHIPPING|STORE_TRANSFER|11318|PARTY|011404|Diyar Al-Madinah Showroom - Al-Madinah||||||||||||||||||||||||||||||||||||||
-INSERT|INV_VALID_DESTINATIONS|SHIPPING|STORE_TRANSFER|11318|PARTY|014107|Hafir Al-Batin Showroom - Al-Qassim||||||||||||||||||||||||||||||||||||||
-INSERT|INV_VALID_DESTINATIONS|SHIPPING|STORE_TRANSFER|11318|PARTY|011305|Heraa Mall Showroom - Jeddah||||||||||||||||||||||||||||||||||||||
-INSERT|INV_VALID_DESTINATIONS|SHIPPING|STORE_TRANSFER|11318|PARTY|011401|Hilton Al-Madinah Showroom - Al-Madinah||||||||||||||||||||||||||||||||||||||
-INSERT|INV_VALID_DESTINATIONS|SHIPPING|STORE_TRANSFER|11318|PARTY|011112|Jabal Omar 1 Showroom - Makkah||||||||||||||||||||||||||||||||||||||
-INSERT|INV_VALID_DESTINATIONS|SHIPPING|STORE_TRANSFER|11318|PARTY|011113|Jabal Omar 2 Showroom - Makkah||||||||||||||||||||||||||||||||||||||
-INSERT|INV_VALID_DESTINATIONS|SHIPPING|STORE_TRANSFER|11318|PARTY|013503|Khamis Avenue Showroom - Khamis Mushait||||||||||||||||||||||||||||||||||||||
-INSERT|INV_VALID_DESTINATIONS|SHIPPING|STORE_TRANSFER|11318|PARTY|013501|Khamis Mushait Showroom - Khamis Mushait||||||||||||||||||||||||||||||||||||||
-INSERT|INV_VALID_DESTINATIONS|SHIPPING|STORE_TRANSFER|11318|PARTY|012104|Kingdom Center Showroom - Al-Riyadh||||||||||||||||||||||||||||||||||||||
-INSERT|INV_VALID_DESTINATIONS|SHIPPING|STORE_TRANSFER|11318|PARTY|011105|Makkah Anas Showroom - Makkah||||||||||||||||||||||||||||||||||||||
-INSERT|INV_VALID_DESTINATIONS|SHIPPING|STORE_TRANSFER|11318|PARTY|011104|Makkah Ehsan Showroom - Makkah||||||||||||||||||||||||||||||||||||||
-INSERT|INV_VALID_DESTINATIONS|SHIPPING|STORE_TRANSFER|11318|PARTY|011111|Makkah Mall Showroom - Makkah||||||||||||||||||||||||||||||||||||||
-INSERT|INV_VALID_DESTINATIONS|SHIPPING|STORE_TRANSFER|11318|PARTY|012120|Marina Mall Showroom - Al-Riyadh||||||||||||||||||||||||||||||||||||||
-INSERT|INV_VALID_DESTINATIONS|SHIPPING|STORE_TRANSFER|11318|PARTY|013104|Mahayil Aseer Showroom - Abha||||||||||||||||||||||||||||||||||||||
-INSERT|INV_VALID_DESTINATIONS|SHIPPING|STORE_TRANSFER|11318|PARTY|012108|Panorama Mall Showroom - Al-Riyadh||||||||||||||||||||||||||||||||||||||
-INSERT|INV_VALID_DESTINATIONS|SHIPPING|STORE_TRANSFER|11318|PARTY|011306|Red Sea Mall Showroom - Jeddah||||||||||||||||||||||||||||||||||||||
-INSERT|INV_VALID_DESTINATIONS|SHIPPING|STORE_TRANSFER|11318|PARTY|015201|Hail Al-Tamami Showroom - Hail||||||||||||||||||||||||||||||||||||||
-INSERT|INV_VALID_DESTINATIONS|SHIPPING|STORE_TRANSFER|11318|PARTY|011202|Taif 2 Showroom - Taif||||||||||||||||||||||||||||||||||||||
-INSERT|INV_VALID_DESTINATIONS|SHIPPING|STORE_TRANSFER|11318|PARTY|011201|Taif 1 Showroom - Taif||||||||||||||||||||||||||||||||||||||
-INSERT|INV_VALID_DESTINATIONS|SHIPPING|STORE_TRANSFER|11318|PARTY|011203|Taif 3 Showroom - Taif||||||||||||||||||||||||||||||||||||||
-INSERT|INV_VALID_DESTINATIONS|SHIPPING|STORE_TRANSFER|11318|PARTY|012102|Al-Thalatheen Showroom - Al-Riyadh||||||||||||||||||||||||||||||||||||||
-INSERT|INV_VALID_DESTINATIONS|SHIPPING|STORE_TRANSFER|11318|PARTY|014102|Venecia Mall Showroom - Eastern||||||||||||||||||||||||||||||||||||||
-INSERT|INV_VALID_DESTINATIONS|SHIPPING|STORE_TRANSFER|11318|PARTY|011502|Yanbu Mall Showroom - Yanbu||||||||||||||||||||||||||||||||||||||
-INSERT|INV_VALID_DESTINATIONS|SHIPPING|STORE_TRANSFER|11318|PARTY|011312|Al-Salam Mall Showroom - Jeddah||||||||||||||||||||||||||||||||||||||
-INSERT|INV_VALID_DESTINATIONS|SHIPPING|STORE_TRANSFER|11318|PARTY|011406|Al-Noor Mall Showroom - Al-Madinah||||||||||||||||||||||||||||||||||||||
-INSERT|INV_VALID_DESTINATIONS|SHIPPING|STORE_TRANSFER|11318|PARTY|012114|Al-Salam Mall Showroom - Al-Riyadh||||||||||||||||||||||||||||||||||||||
-INSERT|INV_VALID_DESTINATIONS|SHIPPING|STORE_TRANSFER|11318|PARTY|012116|King Abdullah Street Showroom - Al-Riyadh||||||||||||||||||||||||||||||||||||||
-INSERT|INV_VALID_DESTINATIONS|SHIPPING|STORE_TRANSFER|11318|PARTY|012121|Gallery Mall Showroom - Al-Riyadh||||||||||||||||||||||||||||||||||||||
-INSERT|INV_VALID_DESTINATIONS|SHIPPING|STORE_TRANSFER|11318|PARTY|012304|Al-Amry Buraidah Showroom - Al-Qassim||||||||||||||||||||||||||||||||||||||
-INSERT|INV_VALID_DESTINATIONS|SHIPPING|STORE_TRANSFER|11318|PARTY|012305|Deira Mall Rass Showroom - Al-Qassim||||||||||||||||||||||||||||||||||||||
-INSERT|INV_VALID_DESTINATIONS|SHIPPING|STORE_TRANSFER|11318|PARTY|013105|New Abha Showroom - Abha||||||||||||||||||||||||||||||||||||||
-INSERT|INV_VALID_DESTINATIONS|SHIPPING|STORE_TRANSFER|11318|PARTY|014103|Amwaj Mall Showroom - Eastern||||||||||||||||||||||||||||||||||||||
-INSERT|INV_VALID_DESTINATIONS|SHIPPING|STORE_TRANSFER|11318|PARTY|014110|Jubail Royal Authority Showroom - Eastern||||||||||||||||||||||||||||||||||||||
-INSERT|INV_VALID_DESTINATIONS|SHIPPING|STORE_TRANSFER|11318|PARTY|013301|Kadi Mall Showroom - Jazan||||||||||||||||||||||||||||||||||||||
-INSERT|INV_VALID_DESTINATIONS|SHIPPING|STORE_TRANSFER|11318|PARTY|012122|Dove Plaza Showroom - Al-Riyadh||||||||||||||||||||||||||||||||||||||
-INSERT|INV_VALID_DESTINATIONS|SHIPPING|STORE_TRANSFER|11318|PARTY|012123|New Tahlia Showroom - Al-Riyadh||||||||||||||||||||||||||||||||||||||
-INSERT|INV_VALID_DESTINATIONS|SHIPPING|STORE_TRANSFER|11318|PARTY|011317|Al-Tahlia Boutique Showroom - Jeddah||||||||||||||||||||||||||||||||||||||
-INSERT|INV_VALID_DESTINATIONS|SHIPPING|STORE_TRANSFER|11318|PARTY|012124|Al-Nakheel Mall Showroom - Al-Riyadh||||||||||||||||||||||||||||||||||||||
-INSERT|INV_VALID_DESTINATIONS|SHIPPING|STORE_TRANSFER|11318|PARTY|012125|Talaa Mall Showroom - Al-Riyadh||||||||||||||||||||||||||||||||||||||
-INSERT|INV_VALID_DESTINATIONS|SHIPPING|STORE_TRANSFER|11318|PARTY|011320|Al-Samer Showroom – Jeddah||||||||||||||||||||||||||||||||||||||
-INSERT|INV_VALID_DESTINATIONS|SHIPPING|STORE_TRANSFER|11318|PARTY|011116|Souq Al-Qawafel Showroom - Makkah||||||||||||||||||||||||||||||||||||||
-INSERT|INV_VALID_DESTINATIONS|SHIPPING|STORE_TRANSFER|11318|PARTY|011205|Besha Showroom - Taif||||||||||||||||||||||||||||||||||||||
-INSERT|INV_VALID_DESTINATIONS|SHIPPING|STORE_TRANSFER|11318|PARTY|011321|Al-Fayha Showroom – Jeddah||||||||||||||||||||||||||||||||||||||
-INSERT|INV_VALID_DESTINATIONS|SHIPPING|STORE_TRANSFER|11318|PARTY|011319|Haifaa Mall Showroom – Jeddah||||||||||||||||||||||||||||||||||||||
-INSERT|INV_VALID_DESTINATIONS|SHIPPING|STORE_TRANSFER|11318|PARTY|011322|Al-Ajaweed Showroom – Jeddah||||||||||||||||||||||||||||||||||||||
-INSERT|INV_VALID_DESTINATIONS|SHIPPING|STORE_TRANSFER|11318|PARTY|011323|Bandar Mall Showroom – Al-Qunfudhah||||||||||||||||||||||||||||||||||||||
-INSERT|INV_VALID_DESTINATIONS|SHIPPING|STORE_TRANSFER|11318|PARTY|011324|King Faisal Street Showroom – Jeddah||||||||||||||||||||||||||||||||||||||
-INSERT|INV_VALID_DESTINATIONS|SHIPPING|STORE_TRANSFER|11318|PARTY|013106|Namas Mall Showroom - Abha||||||||||||||||||||||||||||||||||||||
-INSERT|INV_VALID_DESTINATIONS|SHIPPING|STORE_TRANSFER|11318|PARTY|014116|Al-Nairyah Showroom - Eastern||||||||||||||||||||||||||||||||||||||
-INSERT|INV_VALID_DESTINATIONS|SHIPPING|STORE_TRANSFER|11318|PARTY|012128|Hayat Mall Showroom -  Al-Riyadh||||||||||||||||||||||||||||||||||||||
-INSERT|INV_VALID_DESTINATIONS|SHIPPING|STORE_TRANSFER|11318|PARTY|011410|Azizia Showroom - Al-Madinah||||||||||||||||||||||||||||||||||||||
-INSERT|INV_VALID_DESTINATIONS|SHIPPING|STORE_TRANSFER|11318|PARTY|012129|Al-Dawadmi Showroom - Al-Riyadh||||||||||||||||||||||||||||||||||||||
-INSERT|INV_VALID_DESTINATIONS|SHIPPING|STORE_TRANSFER|11318|PARTY|011411|Al-Manar Mall Showroom - Al-Madinah||||||||||||||||||||||||||||||||||||||
-INSERT|INV_VALID_DESTINATIONS|SHIPPING|STORE_TRANSFER|11318|PARTY|012130|Al-Muzahmiya Mall Showroom - Al-Riyadh||||||||||||||||||||||||||||||||||||||
-INSERT|INV_VALID_DESTINATIONS|SHIPPING|STORE_TRANSFER|11318|PARTY|014122|Leen Mall Rafha Showroom - Rafha||||||||||||||||||||||||||||||||||||||
-INSERT|INV_VALID_DESTINATIONS|SHIPPING|STORE_TRANSFER|11318|PARTY|013107|Al-Bsateen Mall Showroom - Abha||||||||||||||||||||||||||||||||||||||
-INSERT|INV_VALID_DESTINATIONS|SHIPPING|STORE_TRANSFER|11318|PARTY|011119|Al-Steen Showroom - Makkah||||||||||||||||||||||||||||||||||||||
-INSERT|INV_VALID_DESTINATIONS|SHIPPING|STORE_TRANSFER|11318|PARTY|014115|Hafir Al-Batin 2 Showroom - Al-Qassim||||||||||||||||||||||||||||||||||||||
-INSERT|INV_VALID_DESTINATIONS|SHIPPING|STORE_TRANSFER|11318|PARTY|014118|Al-Jubail Mall Showroom - Eastern||||||||||||||||||||||||||||||||||||||
-INSERT|INV_VALID_DESTINATIONS|SHIPPING|STORE_TRANSFER|11318|PARTY|011207|Joury Mall Showroom - Taif||||||||||||||||||||||||||||||||||||||
-INSERT|INV_VALID_DESTINATIONS|SHIPPING|STORE_TRANSFER|11318|PARTY|012131|Ghornatah Mall Showroom - Al-Riyadh||||||||||||||||||||||||||||||||||||||
-INSERT|INV_VALID_DESTINATIONS|SHIPPING|STORE_TRANSFER|11318|PARTY|012306|Al-Nakheel Mall Showroom - Al-Qassim||||||||||||||||||||||||||||||||||||||
-INSERT|INV_VALID_DESTINATIONS|SHIPPING|STORE_TRANSFER|11318|PARTY|011121|Dar El-Tawheed Showroom - Makkah||||||||||||||||||||||||||||||||||||||
-INSERT|INV_VALID_DESTINATIONS|SHIPPING|STORE_TRANSFER|11318|PARTY|012132|Wadi Laban Showroom - Al-Riyadh||||||||||||||||||||||||||||||||||||||
-INSERT|INV_VALID_DESTINATIONS|SHIPPING|STORE_TRANSFER|11318|PARTY|013506|Al-Shebli Showroom - Khamis Mushait||||||||||||||||||||||||||||||||||||||
-INSERT|INV_VALID_DESTINATIONS|SHIPPING|STORE_TRANSFER|11318|PARTY|015103|Olayaa Showroom - Tabuk||||||||||||||||||||||||||||||||||||||
-INSERT|INV_VALID_DESTINATIONS|SHIPPING|STORE_TRANSFER|11318|PARTY|011209|Al-Majardah  Showroom - Taif||||||||||||||||||||||||||||||||||||||
-INSERT|INV_VALID_DESTINATIONS|SHIPPING|STORE_TRANSFER|11318|PARTY|011413|Al-Hijrah Showroom - Al-Madinah||||||||||||||||||||||||||||||||||||||
-INSERT|INV_VALID_DESTINATIONS|SHIPPING|STORE_TRANSFER|11318|PARTY|011414|Sultana Street Showroom - Al-Madinah||||||||||||||||||||||||||||||||||||||
-INSERT|INV_VALID_DESTINATIONS|SHIPPING|STORE_TRANSFER|11318|PARTY|012139|Al-Zulfi Showroom - Al-Qassim||||||||||||||||||||||||||||||||||||||
-INSERT|INV_VALID_DESTINATIONS|SHIPPING|STORE_TRANSFER|11318|PARTY|014125|Al-Jalaweyah Showroom - Eastern||||||||||||||||||||||||||||||||||||||
-INSERT|INV_VALID_DESTINATIONS|SHIPPING|STORE_TRANSFER|11318|PARTY|012135|Wadi Al-dwaser Showroom - Al-Riyadh||||||||||||||||||||||||||||||||||||||
-INSERT|INV_VALID_DESTINATIONS|SHIPPING|STORE_TRANSFER|11318|PARTY|011210|Sabt Al-Alaya Showroom – Taif||||||||||||||||||||||||||||||||||||||
-INSERT|INV_VALID_DESTINATIONS|SHIPPING|STORE_TRANSFER|11318|PARTY|012308|Al-Mashaghel Street Showroom - Al-Qassim||||||||||||||||||||||||||||||||||||||
-INSERT|INV_VALID_DESTINATIONS|SHIPPING|STORE_TRANSFER|11318|PARTY|013305|Khayalh Mall Showroom - Jazan||||||||||||||||||||||||||||||||||||||
-INSERT|INV_VALID_DESTINATIONS|SHIPPING|STORE_TRANSFER|11318|PARTY|011327|Yasmeen Mall Showroom – Jeddah||||||||||||||||||||||||||||||||||||||
-INSERT|INV_VALID_DESTINATIONS|SHIPPING|STORE_TRANSFER|11318|PARTY|012307|Unaizah Al-Sowyan - Al-Qassim||||||||||||||||||||||||||||||||||||||
-INSERT|INV_VALID_DESTINATIONS|SHIPPING|STORE_TRANSFER|11318|PARTY|015203|Grand Mall Showroom - Hail||||||||||||||||||||||||||||||||||||||
-INSERT|INV_VALID_DESTINATIONS|SHIPPING|STORE_TRANSFER|11318|PARTY|012202|Al-Kharj 2 Showroom - Al-Kharj||||||||||||||||||||||||||||||||||||||
-INSERT|INV_VALID_DESTINATIONS|SHIPPING|STORE_TRANSFER|11318|PARTY|011123|Al-Shawqiyah Showroom - Makkah||||||||||||||||||||||||||||||||||||||
-INSERT|INV_VALID_DESTINATIONS|SHIPPING|STORE_TRANSFER|11318|PARTY|015402|Al-Othaim Mall Showroom -Arar||||||||||||||||||||||||||||||||||||||
-INSERT|INV_VALID_DESTINATIONS|SHIPPING|STORE_TRANSFER|11318|PARTY|012127|Al-Hamra Mall Showroom - Al-Riyadh||||||||||||||||||||||||||||||||||||||
-INSERT|INV_VALID_DESTINATIONS|SHIPPING|STORE_TRANSFER|11318|PARTY|012140|Al-Shifa Plaza Showroom - Al-Riyadh||||||||||||||||||||||||||||||||||||||
-INSERT|INV_VALID_DESTINATIONS|SHIPPING|STORE_TRANSFER|11318|PARTY|012137|Salman Al-Farisi Showroom - Al-Riyadh||||||||||||||||||||||||||||||||||||||
-INSERT|INV_VALID_DESTINATIONS|SHIPPING|STORE_TRANSFER|11318|PARTY|011126|Makkah Mall Boutique Showroom - Makkah||||||||||||||||||||||||||||||||||||||
-INSERT|INV_VALID_DESTINATIONS|SHIPPING|STORE_TRANSFER|11318|PARTY|012141|Al-Nakheel Mall Boutique Showroom - Al-Riyadh||||||||||||||||||||||||||||||||||||||
-INSERT|INV_VALID_DESTINATIONS|SHIPPING|STORE_TRANSFER|11318|PARTY|011328|Al-Mahmal Center Showroom – Jeddah||||||||||||||||||||||||||||||||||||||
-INSERT|INV_VALID_DESTINATIONS|SHIPPING|STORE_TRANSFER|11318|PARTY|011329|Al-Salam Mall Boutique Showroom - Jeddah||||||||||||||||||||||||||||||||||||||
-INSERT|INV_VALID_DESTINATIONS|SHIPPING|STORE_TRANSFER|11318|PARTY|011330|Aziz Mall Boutique Showroom - Jeddah||||||||||||||||||||||||||||||||||||||
-INSERT|INV_VALID_DESTINATIONS|SHIPPING|STORE_TRANSFER|11318|PARTY|011331|Arab Mall Boutique Showroom - Jeddah||||||||||||||||||||||||||||||||||||||
-INSERT|INV_VALID_DESTINATIONS|SHIPPING|STORE_TRANSFER|11318|PARTY|011416|Al-Noor Mall Boutique Showroom - Al-Madinah||||||||||||||||||||||||||||||||||||||
-INSERT|INV_VALID_DESTINATIONS|SHIPPING|STORE_TRANSFER|11318|PARTY|013109|Al-Rashid Mall Showroom - Abha||||||||||||||||||||||||||||||||||||||
-INSERT|INV_VALID_DESTINATIONS|SHIPPING|STORE_TRANSFER|11318|PARTY|013604|Hayat Mall Showroom - Najran||||||||||||||||||||||||||||||||||||||
-INSERT|INV_VALID_DESTINATIONS|SHIPPING|STORE_TRANSFER|11318|PARTY|015104|Tabuk Park Showroom - Tabuk||||||||||||||||||||||||||||||||||||||
-INSERT|INV_VALID_DESTINATIONS|SHIPPING|STORE_TRANSFER|11318|PARTY|014126|Al-Othaim Dammam Showroom - Eastern||||||||||||||||||||||||||||||||||||||
-INSERT|INV_VALID_DESTINATIONS|SHIPPING|STORE_TRANSFER|11318|PARTY|012146|Al-Rawabi Al-Riyadh Showroom - Al-Riyadh||||||||||||||||||||||||||||||||||||||
-INSERT|INV_VALID_DESTINATIONS|SHIPPING|STORE_TRANSFER|11318|PARTY|012142|Wajehat Al-Riyadh Showroom - Al-Riyadh||||||||||||||||||||||||||||||||||||||
-INSERT|INV_VALID_DESTINATIONS|SHIPPING|STORE_TRANSFER|11318|PARTY|014129|Marina Mall Showroom – Eastern||||||||||||||||||||||||||||||||||||||
-INSERT|INV_VALID_DESTINATIONS|SHIPPING|STORE_TRANSFER|11318|PARTY|012309|Emam Bukhari Road Showroom - Al-Qassim||||||||||||||||||||||||||||||||||||||
-INSERT|INV_VALID_DESTINATIONS|SHIPPING|STORE_TRANSFER|11318|PARTY|012148|Arqah Showroom - Al-Riyadh||||||||||||||||||||||||||||||||||||||
-INSERT|INV_VALID_DESTINATIONS|SHIPPING|STORE_TRANSFER|11318|PARTY|011335|Moj Plaza Showroom - Jeddah||||||||||||||||||||||||||||||||||||||
-INSERT|INV_VALID_DESTINATIONS|SHIPPING|STORE_TRANSFER|11318|PARTY|012154|Yarmouk Center Showroom - Al-Riyadh||||||||||||||||||||||||||||||||||||||
-INSERT|INV_VALID_DESTINATIONS|SHIPPING|STORE_TRANSFER|11318|PARTY|012147|Al-Azizia Showroom - Al-Riyadh||||||||||||||||||||||||||||||||||||||
-INSERT|INV_VALID_DESTINATIONS|SHIPPING|STORE_TRANSFER|11318|PARTY|011336|Hamdanya Showroom - Jeddah||||||||||||||||||||||||||||||||||||||
-INSERT|INV_VALID_DESTINATIONS|SHIPPING|STORE_TRANSFER|11318|PARTY|012153|Al-Sahafa Plaza Showroom - Al-Riyadh||||||||||||||||||||||||||||||||||||||
-INSERT|INV_VALID_DESTINATIONS|SHIPPING|STORE_TRANSFER|11318|PARTY|014130|Al-Nakheel Mall Showroom - Eastern||||||||||||||||||||||||||||||||||||||
-INSERT|INV_VALID_DESTINATIONS|SHIPPING|STORE_TRANSFER|11318|PARTY|013306|Yasmeen Aboaresh Showroom - Jazan||||||||||||||||||||||||||||||||||||||
-INSERT|INV_VALID_DESTINATIONS|SHIPPING|STORE_TRANSFER|11318|PARTY|011417|Aswaq Al-Othaim Showroom - Al-Madinah||||||||||||||||||||||||||||||||||||||
-INSERT|INV_VALID_DESTINATIONS|SHIPPING|STORE_TRANSFER|11318|PARTY|011130|Al-Majaz Mall Showroom - Makkah||||||||||||||||||||||||||||||||||||||
-INSERT|INV_VALID_DESTINATIONS|SHIPPING|STORE_TRANSFER|11318|PARTY|012312|Al-Othaim Unaizah Showroom - Al-Qassim||||||||||||||||||||||||||||||||||||||
-INSERT|INV_VALID_DESTINATIONS|SHIPPING|STORE_TRANSFER|11318|PARTY|012157|Telal Al-Masharef Showroom - Al-Riyadh||||||||||||||||||||||||||||||||||||||
-INSERT|INV_VALID_DESTINATIONS|SHIPPING|STORE_TRANSFER|11318|PARTY|011418|Alia Mall Showroom - Al-Madinah||||||||||||||||||||||||||||||||||||||
-INSERT|INV_VALID_DESTINATIONS|SHIPPING|STORE_TRANSFER|11318|PARTY|011129|Dkakeen Bakka Showroom - Makkah||||||||||||||||||||||||||||||||||||||
-INSERT|INV_VALID_DESTINATIONS|SHIPPING|STORE_TRANSFER|11318|PARTY|013606|Al-Fakhriah Plaza Showroom - Najran||||||||||||||||||||||||||||||||||||||
-INSERT|INV_VALID_DESTINATIONS|SHIPPING|STORE_TRANSFER|11318|PARTY|013605|City Center Showroom - Najran||||||||||||||||||||||||||||||||||||||
-INSERT|INV_VALID_DESTINATIONS|SHIPPING|STORE_TRANSFER|11318|PARTY|012158|Park Avenue Showroom - Al-Riyadh||||||||||||||||||||||||||||||||||||||
-INSERT|INV_VALID_DESTINATIONS|SHIPPING|STORE_TRANSFER|11318|PARTY|011338|Jeddah Park Showroom - Jeddah||||||||||||||||||||||||||||||||||||||
-INSERT|INV_VALID_DESTINATIONS|SHIPPING|STORE_TRANSFER|11318|PARTY|013507|Mujan Park Showroom - Khamis Mushait||||||||||||||||||||||||||||||||||||||
-INSERT|INV_VALID_DESTINATIONS|SHIPPING|STORE_TRANSFER|11318|PARTY|011419|Dar Al-Taqwa 2 Showroom - Al-Madinah||||||||||||||||||||||||||||||||||||||
-INSERT|INV_VALID_DESTINATIONS|SHIPPING|STORE_TRANSFER|11318|PARTY|013307|Azzan Plaza Showroom - Jazan||||||||||||||||||||||||||||||||||||||
-INSERT|INV_VALID_DESTINATIONS|SHIPPING|STORE_TRANSFER|11318|PARTY|012163|Al-Rawda Showroom - Al-Riyadh||||||||||||||||||||||||||||||||||||||
-INSERT|INV_VALID_DESTINATIONS|SHIPPING|STORE_TRANSFER|11318|PARTY|011211|The Park Mall Showroom - Taif||||||||||||||||||||||||||||||||||||||
-INSERT|INV_VALID_DESTINATIONS|SHIPPING|STORE_TRANSFER|11318|PARTY|013403|Al-Baha Mall Showroom - Al-Baha||||||||||||||||||||||||||||||||||||||
-INSERT|INV_VALID_DESTINATIONS|SHIPPING|STORE_TRANSFER|11318|PARTY|012169|Executive Terminal 1 Showroom - Al-Riyadh||||||||||||||||||||||||||||||||||||||
-INSERT|INV_VALID_DESTINATIONS|SHIPPING|STORE_TRANSFER|11318|PARTY|012170|Executive Terminal 5 Showroom - Al-Riyadh||||||||||||||||||||||||||||||||||||||
-INSERT|INV_VALID_DESTINATIONS|SHIPPING|STORE_TRANSFER|11318|PARTY|012162|The View Showroom - Al-Riyadh||||||||||||||||||||||||||||||||||||||
-INSERT|INV_VALID_DESTINATIONS|SHIPPING|STORE_TRANSFER|11318|PARTY|011339|Executive Showroom - Jeddah||||||||||||||||||||||||||||||||||||||
-INSERT|INV_VALID_DESTINATIONS|SHIPPING|STORE_TRANSFER|11318|PARTY|012175|Al-Yarmook 2 Showroom - Al-Riyadh||||||||||||||||||||||||||||||||||||||
-INSERT|INV_VALID_DESTINATIONS|SHIPPING|STORE_TRANSFER|11318|PARTY|013308|Al-Borhan Mall Showroom - Jazan||||||||||||||||||||||||||||||||||||||
-INSERT|INV_VALID_DESTINATIONS|SHIPPING|STORE_TRANSFER|11318|PARTY|014127|Al-Othaim Hafir Al-Batin Showroom - Al-Qassim||||||||||||||||||||||||||||||||||||||
-INSERT|INV_VALID_DESTINATIONS|SHIPPING|STORE_TRANSFER|11318|PARTY|012172|Meem Plaza Showroom - Al-Riyadh||||||||||||||||||||||||||||||||||||||
-INSERT|INV_VALID_DESTINATIONS|SHIPPING|STORE_TRANSFER|11318|PARTY|012171|Al-Takhassusi Showroom - Al-Riyadh||||||||||||||||||||||||||||||||||||||
-INSERT|INV_VALID_DESTINATIONS|SHIPPING|STORE_TRANSFER|11318|PARTY|013309|Al-Rashid Mall Showroom - Jazan||||||||||||||||||||||||||||||||||||||
-INSERT|INV_VALID_DESTINATIONS|SHIPPING|STORE_TRANSFER|11318|PARTY|012155|Alia Plaza Showroom - Al-Riyadh||||||||||||||||||||||||||||||||||||||
-INSERT|INV_VALID_DESTINATIONS|SHIPPING|STORE_TRANSFER|11318|PARTY|013508|Boulevard Showroom - Khamis Mushait||||||||||||||||||||||||||||||||||||||
-INSERT|INV_VALID_DESTINATIONS|SHIPPING|STORE_TRANSFER|11318|PARTY|011340|The Village Mall Showroom - Jeddah||||||||||||||||||||||||||||||||||||||
-INSERT|INV_VALID_DESTINATIONS|SHIPPING|STORE_TRANSFER|11318|PARTY|013607|Najran Park Showroom - Najran||||||||||||||||||||||||||||||||||||||
-INSERT|INV_VALID_DESTINATIONS|SHIPPING|STORE_TRANSFER|11318|PARTY|014139|Al Faisaliah Plaza Showroom - Eastern||||||||||||||||||||||||||||||||||||||
-INSERT|INV_VALID_DESTINATIONS|SHIPPING|STORE_TRANSFER|11318|PARTY|011421|Taiba Center Showroom - Al-Madinah||||||||||||||||||||||||||||||||||||||
-INSERT|INV_VALID_DESTINATIONS|SHIPPING|STORE_TRANSFER|11318|PARTY|015106|Tabuk Boulevard Showroom - Tabuk||||||||||||||||||||||||||||||||||||||
-INSERT|INV_VALID_DESTINATIONS|SHIPPING|STORE_TRANSFER|11318|PARTY|014133|Tamimi Plaza Mall Showroom - Eastern||||||||||||||||||||||||||||||||||||||
-INSERT|INV_VALID_DESTINATIONS|SHIPPING|STORE_TRANSFER|11318|PARTY|014132|Riviera Avenue Mall Showroom - Eastern||||||||||||||||||||||||||||||||||||||
-INSERT|INV_VALID_DESTINATIONS|SHIPPING|STORE_TRANSFER|11318|PARTY|014136|Al Hayat Plaza Mall Showroom - Eastern||||||||||||||||||||||||||||||||||||||
-INSERT|INV_VALID_DESTINATIONS|SHIPPING|STORE_TRANSFER|11318|PARTY|014137|Al Shaikh Avenue Mall Showroom - Eastern||||||||||||||||||||||||||||||||||||||
-INSERT|INV_VALID_DESTINATIONS|SHIPPING|STORE_TRANSFER|11318|PARTY|014138|Al Azizia Plaza Showroom - Eastern||||||||||||||||||||||||||||||||||||||
-INSERT|INV_VALID_DESTINATIONS|SHIPPING|STORE_TRANSFER|11318|PARTY|012177|Narsis Hotel Showroom - Al-Riyadh||||||||||||||||||||||||||||||||||||||
-INSERT|INV_VALID_DESTINATIONS|SHIPPING|STORE_TRANSFER|11318|PARTY|012180|Hteen Showroom - Al-Riyadh||||||||||||||||||||||||||||||||||||||
-INSERT|INV_VALID_DESTINATIONS|SHIPPING|STORE_TRANSFER|11318|PARTY|012181|Al Aqeq Showroom - Al-Riyadh||||||||||||||||||||||||||||||||||||||
-INSERT|INV_VALID_DESTINATIONS|SHIPPING|STORE_TRANSFER|11318|PARTY|011344|Al-Zahraa Plaza Showroom - Jeddah||||||||||||||||||||||||||||||||||||||
-INSERT|INV_VALID_DESTINATIONS|SHIPPING|STORE_TRANSFER|11318|PARTY|012178|Al Ghadeer Showroom - Al-Riyadh||||||||||||||||||||||||||||||||||||||
-INSERT|INV_VALID_DESTINATIONS|SHIPPING|STORE_TRANSFER|11318|PARTY|012179|Al Maethar Showroom - Al-Riyadh||||||||||||||||||||||||||||||||||||||
-INSERT|INV_VALID_DESTINATIONS|SHIPPING|STORE_TRANSFER|11318|PARTY|012183|Al Waha Plaza Showroom - Al-Riyadh||||||||||||||||||||||||||||||||||||||
-INSERT|INV_VALID_DESTINATIONS|SHIPPING|STORE_TRANSFER|11318|PARTY|013608|Najran King Saud Road Showroom - Najran||||||||||||||||||||||||||||||||||||||
-INSERT|INV_VALID_DESTINATIONS|SHIPPING|STORE_TRANSFER|11318|PARTY|012184|Al Oroba Showroom - Al-Riyadh||||||||||||||||||||||||||||||||||||||
-INSERT|INV_VALID_DESTINATIONS|SHIPPING|STORE_TRANSFER|11318|PARTY|012203|Al Kharj Plaza Showroom - Al-Kharj||||||||||||||||||||||||||||||||||||||
-INSERT|INV_VALID_DESTINATIONS|SHIPPING|STORE_TRANSFER|11318|PARTY|012187|Rawabi Onaizah Street Showroom - Al-Riyadh||||||||||||||||||||||||||||||||||||||
-INSERT|INV_VALID_DESTINATIONS|SHIPPING|STORE_TRANSFER|11318|PARTY|012182|Garnata 2 Showroom - Al-Riyadh||||||||||||||||||||||||||||||||||||||
-INSERT|INV_VALID_DESTINATIONS|SHIPPING|STORE_TRANSFER|11318|PARTY|012173|Termithi Street Showroom - Al-Riyadh||||||||||||||||||||||||||||||||||||||
-INSERT|INV_VALID_DESTINATIONS|SHIPPING|STORE_TRANSFER|11318|PARTY|012189|Tald Plaza Showroom - Al-Riyadh||||||||||||||||||||||||||||||||||||||
-INSERT|INV_VALID_DESTINATIONS|SHIPPING|STORE_TRANSFER|11318|PARTY|012190|The Gate Showroom - Al-Riyadh||||||||||||||||||||||||||||||||||||||
-INSERT|INV_VALID_DESTINATIONS|SHIPPING|STORE_TRANSFER|11318|PARTY|011132|Al-Shawqiyah 2 Showroom - Makkah||||||||||||||||||||||||||||||||||||||
-INSERT|INV_VALID_DESTINATIONS|SHIPPING|STORE_TRANSFER|11318|PARTY|011345|Cornish Center Showroom - Jeddah||||||||||||||||||||||||||||||||||||||
-INSERT|INV_VALID_DESTINATIONS|SHIPPING|STORE_TRANSFER|11318|PARTY|011213|Shahar Showroom - Taif||||||||||||||||||||||||||||||||||||||
-INSERT|INV_VALID_DESTINATIONS|SHIPPING|STORE_TRANSFER|11318|PARTY|012191|Souq Hijab Showroom - Al-Riyadh||||||||||||||||||||||||||||||||||||||
-INSERT|INV_VALID_DESTINATIONS|SHIPPING|STORE_TRANSFER|11318|PARTY|011346|Hamdanya 2 Showroom - Jeddah||||||||||||||||||||||||||||||||||||||
-INSERT|INV_VALID_DESTINATIONS|SHIPPING|STORE_TRANSFER|11318|PARTY|015204|Barzan Market Showroom – Hail||||||||||||||||||||||||||||||||||||||
-INSERT|INV_VALID_DESTINATIONS|SHIPPING|STORE_TRANSFER|11318|PARTY|013110|Ravala Plaza Showroom – Abha||||||||||||||||||||||||||||||||||||||
-INSERT|INV_VALID_DESTINATIONS|SHIPPING|STORE_TRANSFER|11318|PARTY|011214|Boulevard Besha Showroom – Taif||||||||||||||||||||||||||||||||||||||
-INSERT|INV_VALID_DESTINATIONS|SHIPPING|STORE_TRANSFER|11318|PARTY|011215|Al-Shifa Street Showroom – Taif||||||||||||||||||||||||||||||||||||||
-INSERT|INV_VALID_DESTINATIONS|SHIPPING|STORE_TRANSFER|11318|PARTY|012185|Al Malqa Showroom - Al-Riyadh||||||||||||||||||||||||||||||||||||||
-INSERT|INV_VALID_DESTINATIONS|SHIPPING|STORE_TRANSFER|11318|PARTY|011423|Sari Showroom - Al-Madinah||||||||||||||||||||||||||||||||||||||
-INSERT|INV_VALID_DESTINATIONS|SHIPPING|STORE_TRANSFER|11318|PARTY|012205|Sania Khurais Showroom - Al-Riyadh||||||||||||||||||||||||||||||||||||||
-INSERT|INV_VALID_DESTINATIONS|SHIPPING|STORE_TRANSFER|11318|PARTY|014140|Al Mubarraz Town Center Showroom - Eastern||||||||||||||||||||||||||||||||||||||
-INSERT|INV_VALID_DESTINATIONS|SHIPPING|STORE_TRANSFER|11318|PARTY|011341|U - Walk Showroom - Jeddah||||||||||||||||||||||||||||||||||||||
-INSERT|INV_VALID_DESTINATIONS|SHIPPING|STORE_TRANSFER|11318|PARTY|012204|Al-Jenadriyah Plaza Showroom - Al-Riyadh||||||||||||||||||||||||||||||||||||||
-INSERT|INV_VALID_DESTINATIONS|SHIPPING|STORE_TRANSFER|11318|PARTY|013405|Diamond Avenue Showroom - Al-Baha||||||||||||||||||||||||||||||||||||||
-INSERT|INV_VALID_DESTINATIONS|SHIPPING|STORE_TRANSFER|11318|PARTY|011347|Salama Centre Showroom - Jeddah||||||||||||||||||||||||||||||||||||||
-INSERT|INV_VALID_DESTINATIONS|SHIPPING|STORE_TRANSFER|11318|PARTY|012207|Al-Moursalat Showroom - Al-Riyadh||||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|RECEIVING|STORE_TRANSFER|11318|RETAIL_LOCATION|011101|Abraj Al-Bait 1 Showroom - Makkah|10|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|RECEIVING|STORE_TRANSFER|11318|RETAIL_LOCATION|011102|Abraj Al-Bait 2 Showroom - Makkah|20|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|RECEIVING|STORE_TRANSFER|11318|RETAIL_LOCATION|011103|Abraj Al-Bait 4 Showroom - Makkah|30|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|RECEIVING|STORE_TRANSFER|11318|RETAIL_LOCATION|014108|Al-Ahsa Mall Showroom - Eastern|40|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|RECEIVING|STORE_TRANSFER|11318|RETAIL_LOCATION|011307|Al-Andalus Mall Showroom - Jeddah|50|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|RECEIVING|STORE_TRANSFER|11318|RETAIL_LOCATION|012119|Al-Badeeah Mall 2 Showroom - Al-Riyadh|60|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|RECEIVING|STORE_TRANSFER|11318|RETAIL_LOCATION|011501|Al-Danah Mall Showroom - Yanbu|70|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|RECEIVING|STORE_TRANSFER|11318|RETAIL_LOCATION|011107|Al-Diyafa Showroom - Makkah|80|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|RECEIVING|STORE_TRANSFER|11318|RETAIL_LOCATION|013401|Al-Baha Showroom - Al-Baha|90|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|RECEIVING|STORE_TRANSFER|11318|RETAIL_LOCATION|014111|Al-Qosaibi Al-Khobar Showroom - Eastern|100|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|RECEIVING|STORE_TRANSFER|11318|RETAIL_LOCATION|011106|Al-Hijaz Mall Showroom - Makkah|110|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|RECEIVING|STORE_TRANSFER|11318|RETAIL_LOCATION|011108|Al-Hijrah Showroom - Makkah|120|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|RECEIVING|STORE_TRANSFER|11318|RETAIL_LOCATION|012201|Al-Hudaithi Mall Showroom - Al-Kharj|130|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|RECEIVING|STORE_TRANSFER|11318|RETAIL_LOCATION|015301|Al-Jouf Plaza Showroom? - Al-Jouf|140|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|RECEIVING|STORE_TRANSFER|11318|RETAIL_LOCATION|014106|Al-Khafji Showroom - Eastern|150|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|RECEIVING|STORE_TRANSFER|11318|RETAIL_LOCATION|011403|Al-Madinah Al-Dowali Showroom - Al-Madinah|160|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|RECEIVING|STORE_TRANSFER|11318|RETAIL_LOCATION|012115|Al-Majmaah Showroom - Al-Qassim|170|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|RECEIVING|STORE_TRANSFER|11318|RETAIL_LOCATION|012118|Al-Naseem Showroom - Al-Riyadh|180|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|RECEIVING|STORE_TRANSFER|11318|RETAIL_LOCATION|012105|Al-Olaya Alaam Showroom - Al-Riyadh|190|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|RECEIVING|STORE_TRANSFER|11318|RETAIL_LOCATION|014109|Al-Othaim Al-Hofuf Showroom - Eastern|200|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|RECEIVING|STORE_TRANSFER|11318|RETAIL_LOCATION|012117|Al-Othaim Al-Rabwa Showroom - Al-Riyadh|210|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|RECEIVING|STORE_TRANSFER|11318|RETAIL_LOCATION|012301|Buraidah Showroom - Al-Qassim|220|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|RECEIVING|STORE_TRANSFER|11318|RETAIL_LOCATION|012110|Al-Othaim Mall Showroom - Al-Riyadh|230|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|RECEIVING|STORE_TRANSFER|11318|RETAIL_LOCATION|012174|Al-Qasr Mall Showroom - Al-Riyadh|240|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|RECEIVING|STORE_TRANSFER|11318|RETAIL_LOCATION|014101|Al-Rashid Mall 1 Showroom - Eastern|250|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|RECEIVING|STORE_TRANSFER|11318|RETAIL_LOCATION|011405|Al-Rashid Mega Mall Showroom - Al-Madinah|260|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|RECEIVING|STORE_TRANSFER|11318|RETAIL_LOCATION|011311|Al-Safaa Showroom - Jeddah|270|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|RECEIVING|STORE_TRANSFER|11318|RETAIL_LOCATION|011114|Al-Sharaya Showroom - Makkah|280|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|RECEIVING|STORE_TRANSFER|11318|RETAIL_LOCATION|012101|Al-Steen Showroom - Al-Riyadh|290|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|RECEIVING|STORE_TRANSFER|11318|RETAIL_LOCATION|011304|Al-Tahlia Almasi Showroom - Jeddah|300|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|RECEIVING|STORE_TRANSFER|11318|RETAIL_LOCATION|011315|Mandarin Avenue Showroom - Jeddah|310|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|RECEIVING|STORE_TRANSFER|11318|RETAIL_LOCATION|011309|Arab Mall Showroom - Jeddah|320|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|RECEIVING|STORE_TRANSFER|11318|RETAIL_LOCATION|013502|Asdaf Mall Showroom - Khamis Mushait|330|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|RECEIVING|STORE_TRANSFER|11318|RETAIL_LOCATION|011314|Aziz Mall Showroom - Jeddah|340|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|RECEIVING|STORE_TRANSFER|11318|RETAIL_LOCATION|013402|Baljorshi Mall Showroom - Baljorshi|350|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|RECEIVING|STORE_TRANSFER|11318|RETAIL_LOCATION|014112|City Mall Al-Qatif Showroom - Eastern|360|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|RECEIVING|STORE_TRANSFER|11318|RETAIL_LOCATION|011110|Dana Center Showroom - Makkah|370|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|RECEIVING|STORE_TRANSFER|11318|RETAIL_LOCATION|011402|Dar Al-Taqwa Showroom - Al-Madinah|380|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|RECEIVING|STORE_TRANSFER|11318|RETAIL_LOCATION|014105|Dareen Mall Showroom - Eastern|390|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|RECEIVING|STORE_TRANSFER|11318|RETAIL_LOCATION|014113|Dhahran Mall 2 Showroom - Eastern|400|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|RECEIVING|STORE_TRANSFER|11318|RETAIL_LOCATION|011404|Diyar Al-Madinah Showroom - Al-Madinah|410|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|RECEIVING|STORE_TRANSFER|11318|RETAIL_LOCATION|014107|Hafir Al-Batin Showroom - Al-Qassim|420|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|RECEIVING|STORE_TRANSFER|11318|RETAIL_LOCATION|011305|Heraa Mall Showroom - Jeddah|430|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|RECEIVING|STORE_TRANSFER|11318|RETAIL_LOCATION|011401|Hilton Al-Madinah Showroom - Al-Madinah|440|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|RECEIVING|STORE_TRANSFER|11318|RETAIL_LOCATION|011112|Jabal Omar 1 Showroom - Makkah|450|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|RECEIVING|STORE_TRANSFER|11318|RETAIL_LOCATION|011113|Jabal Omar 2 Showroom - Makkah|460|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|RECEIVING|STORE_TRANSFER|11318|RETAIL_LOCATION|013503|Khamis Avenue Showroom - Khamis Mushait|470|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|RECEIVING|STORE_TRANSFER|11318|RETAIL_LOCATION|013501|Khamis Mushait Showroom - Khamis Mushait|480|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|RECEIVING|STORE_TRANSFER|11318|RETAIL_LOCATION|012104|Kingdom Center Showroom - Al-Riyadh|490|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|RECEIVING|STORE_TRANSFER|11318|RETAIL_LOCATION|011105|Makkah Anas Showroom - Makkah|500|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|RECEIVING|STORE_TRANSFER|11318|RETAIL_LOCATION|011104|Makkah Ehsan Showroom - Makkah|510|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|RECEIVING|STORE_TRANSFER|11318|RETAIL_LOCATION|011111|Makkah Mall Showroom - Makkah|520|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|RECEIVING|STORE_TRANSFER|11318|RETAIL_LOCATION|012120|Marina Mall Showroom - Al-Riyadh|530|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|RECEIVING|STORE_TRANSFER|11318|RETAIL_LOCATION|013104|Mahayil Aseer Showroom - Abha|540|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|RECEIVING|STORE_TRANSFER|11318|RETAIL_LOCATION|012108|Panorama Mall Showroom - Al-Riyadh|550|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|RECEIVING|STORE_TRANSFER|11318|RETAIL_LOCATION|011306|Red Sea Mall Showroom - Jeddah|560|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|RECEIVING|STORE_TRANSFER|11318|RETAIL_LOCATION|015201|Hail Al-Tamami Showroom - Hail|570|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|RECEIVING|STORE_TRANSFER|11318|RETAIL_LOCATION|011202|Taif 2 Showroom - Taif|580|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|RECEIVING|STORE_TRANSFER|11318|RETAIL_LOCATION|011201|Taif 1 Showroom - Taif|590|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|RECEIVING|STORE_TRANSFER|11318|RETAIL_LOCATION|011203|Taif 3 Showroom - Taif|600|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|RECEIVING|STORE_TRANSFER|11318|RETAIL_LOCATION|012102|Al-Thalatheen Showroom - Al-Riyadh|610|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|RECEIVING|STORE_TRANSFER|11318|RETAIL_LOCATION|014102|Venecia Mall Showroom - Eastern|620|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|RECEIVING|STORE_TRANSFER|11318|RETAIL_LOCATION|011502|Yanbu Mall Showroom - Yanbu|630|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|RECEIVING|STORE_TRANSFER|11318|RETAIL_LOCATION|011312|Al-Salam Mall Showroom - Jeddah|640|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|RECEIVING|STORE_TRANSFER|11318|RETAIL_LOCATION|011406|Al-Noor Mall Showroom - Al-Madinah|650|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|RECEIVING|STORE_TRANSFER|11318|RETAIL_LOCATION|012114|Al-Salam Mall Showroom - Al-Riyadh|660|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|RECEIVING|STORE_TRANSFER|11318|RETAIL_LOCATION|012116|King Abdullah Street Showroom - Al-Riyadh|670|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|RECEIVING|STORE_TRANSFER|11318|RETAIL_LOCATION|012121|Gallery Mall Showroom - Al-Riyadh|680|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|RECEIVING|STORE_TRANSFER|11318|RETAIL_LOCATION|012304|Al-Amry Buraidah Showroom - Al-Qassim|690|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|RECEIVING|STORE_TRANSFER|11318|RETAIL_LOCATION|012305|Deira Mall Rass Showroom - Al-Qassim|700|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|RECEIVING|STORE_TRANSFER|11318|RETAIL_LOCATION|013105|New Abha Showroom - Abha|710|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|RECEIVING|STORE_TRANSFER|11318|RETAIL_LOCATION|014103|Amwaj Mall Showroom - Eastern|720|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|RECEIVING|STORE_TRANSFER|11318|RETAIL_LOCATION|014110|Jubail Royal Authority Showroom - Eastern|730|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|RECEIVING|STORE_TRANSFER|11318|RETAIL_LOCATION|013301|Kadi Mall Showroom - Jazan|740|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|RECEIVING|STORE_TRANSFER|11318|RETAIL_LOCATION|012122|Dove Plaza Showroom - Al-Riyadh|750|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|RECEIVING|STORE_TRANSFER|11318|RETAIL_LOCATION|012123|New Tahlia Showroom - Al-Riyadh|760|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|RECEIVING|STORE_TRANSFER|11318|RETAIL_LOCATION|011317|Al-Tahlia Boutique Showroom - Jeddah|770|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|RECEIVING|STORE_TRANSFER|11318|RETAIL_LOCATION|012124|Al-Nakheel Mall Showroom - Al-Riyadh|780|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|RECEIVING|STORE_TRANSFER|11318|RETAIL_LOCATION|012125|Talaa Mall Showroom - Al-Riyadh|790|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|RECEIVING|STORE_TRANSFER|11318|RETAIL_LOCATION|011320|Al-Samer Showroom – Jeddah|800|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|RECEIVING|STORE_TRANSFER|11318|RETAIL_LOCATION|011116|Souq Al-Qawafel Showroom - Makkah|810|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|RECEIVING|STORE_TRANSFER|11318|RETAIL_LOCATION|011205|Besha Showroom - Taif|820|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|RECEIVING|STORE_TRANSFER|11318|RETAIL_LOCATION|011321|Al-Fayha Showroom – Jeddah|830|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|RECEIVING|STORE_TRANSFER|11318|RETAIL_LOCATION|011319|Haifaa Mall Showroom – Jeddah|840|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|RECEIVING|STORE_TRANSFER|11318|RETAIL_LOCATION|011322|Al-Ajaweed Showroom – Jeddah|850|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|RECEIVING|STORE_TRANSFER|11318|RETAIL_LOCATION|011323|Bandar Mall Showroom – Al-Qunfudhah|860|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|RECEIVING|STORE_TRANSFER|11318|RETAIL_LOCATION|011324|King Faisal Street Showroom – Jeddah|870|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|RECEIVING|STORE_TRANSFER|11318|RETAIL_LOCATION|013106|Namas Mall Showroom - Abha|880|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|RECEIVING|STORE_TRANSFER|11318|RETAIL_LOCATION|014116|Al-Nairyah Showroom - Eastern|890|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|RECEIVING|STORE_TRANSFER|11318|RETAIL_LOCATION|012128|Hayat Mall Showroom -  Al-Riyadh|900|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|RECEIVING|STORE_TRANSFER|11318|RETAIL_LOCATION|011410|Azizia Showroom - Al-Madinah|910|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|RECEIVING|STORE_TRANSFER|11318|RETAIL_LOCATION|012129|Al-Dawadmi Showroom - Al-Riyadh|920|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|RECEIVING|STORE_TRANSFER|11318|RETAIL_LOCATION|011411|Al-Manar Mall Showroom - Al-Madinah|930|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|RECEIVING|STORE_TRANSFER|11318|RETAIL_LOCATION|012130|Al-Muzahmiya Mall Showroom - Al-Riyadh|940|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|RECEIVING|STORE_TRANSFER|11318|RETAIL_LOCATION|014122|Leen Mall Rafha Showroom - Rafha|950|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|RECEIVING|STORE_TRANSFER|11318|RETAIL_LOCATION|013107|Al-Bsateen Mall Showroom - Abha|960|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|RECEIVING|STORE_TRANSFER|11318|RETAIL_LOCATION|011119|Al-Steen Showroom - Makkah|970|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|RECEIVING|STORE_TRANSFER|11318|RETAIL_LOCATION|014115|Hafir Al-Batin 2 Showroom - Al-Qassim|980|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|RECEIVING|STORE_TRANSFER|11318|RETAIL_LOCATION|014118|Al-Jubail Mall Showroom - Eastern|990|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|RECEIVING|STORE_TRANSFER|11318|RETAIL_LOCATION|011207|Joury Mall Showroom - Taif|1000|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|RECEIVING|STORE_TRANSFER|11318|RETAIL_LOCATION|012131|Ghornatah Mall Showroom - Al-Riyadh|1010|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|RECEIVING|STORE_TRANSFER|11318|RETAIL_LOCATION|012306|Al-Nakheel Mall Showroom - Al-Qassim|1020|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|RECEIVING|STORE_TRANSFER|11318|RETAIL_LOCATION|011121|Dar El-Tawheed Showroom - Makkah|1030|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|RECEIVING|STORE_TRANSFER|11318|RETAIL_LOCATION|012132|Wadi Laban Showroom - Al-Riyadh|1040|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|RECEIVING|STORE_TRANSFER|11318|RETAIL_LOCATION|013506|Al-Shebli Showroom - Khamis Mushait|1050|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|RECEIVING|STORE_TRANSFER|11318|RETAIL_LOCATION|015103|Olayaa Showroom - Tabuk|1060|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|RECEIVING|STORE_TRANSFER|11318|RETAIL_LOCATION|011209|Al-Majardah  Showroom - Taif|1070|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|RECEIVING|STORE_TRANSFER|11318|RETAIL_LOCATION|011413|Al-Hijrah Showroom - Al-Madinah|1080|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|RECEIVING|STORE_TRANSFER|11318|RETAIL_LOCATION|011414|Sultana Street Showroom - Al-Madinah|1090|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|RECEIVING|STORE_TRANSFER|11318|RETAIL_LOCATION|012139|Al-Zulfi Showroom - Al-Qassim|1100|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|RECEIVING|STORE_TRANSFER|11318|RETAIL_LOCATION|014125|Al-Jalaweyah Showroom - Eastern|1110|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|RECEIVING|STORE_TRANSFER|11318|RETAIL_LOCATION|012135|Wadi Al-dwaser Showroom - Al-Riyadh|1120|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|RECEIVING|STORE_TRANSFER|11318|RETAIL_LOCATION|011210|Sabt Al-Alaya Showroom – Taif|1130|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|RECEIVING|STORE_TRANSFER|11318|RETAIL_LOCATION|012308|Al-Mashaghel Street Showroom - Al-Qassim|1140|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|RECEIVING|STORE_TRANSFER|11318|RETAIL_LOCATION|013305|Khayalh Mall Showroom - Jazan|1150|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|RECEIVING|STORE_TRANSFER|11318|RETAIL_LOCATION|011327|Yasmeen Mall Showroom – Jeddah|1160|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|RECEIVING|STORE_TRANSFER|11318|RETAIL_LOCATION|012307|Unaizah Al-Sowyan - Al-Qassim|1170|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|RECEIVING|STORE_TRANSFER|11318|RETAIL_LOCATION|015203|Grand Mall Showroom - Hail|1180|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|RECEIVING|STORE_TRANSFER|11318|RETAIL_LOCATION|012202|Al-Kharj 2 Showroom - Al-Kharj|1190|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|RECEIVING|STORE_TRANSFER|11318|RETAIL_LOCATION|011123|Al-Shawqiyah Showroom - Makkah|1200|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|RECEIVING|STORE_TRANSFER|11318|RETAIL_LOCATION|015402|Al-Othaim Mall Showroom -Arar|1210|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|RECEIVING|STORE_TRANSFER|11318|RETAIL_LOCATION|012127|Al-Hamra Mall Showroom - Al-Riyadh|1220|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|RECEIVING|STORE_TRANSFER|11318|RETAIL_LOCATION|012140|Al-Shifa Plaza Showroom - Al-Riyadh|1230|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|RECEIVING|STORE_TRANSFER|11318|RETAIL_LOCATION|012137|Salman Al-Farisi Showroom - Al-Riyadh|1240|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|RECEIVING|STORE_TRANSFER|11318|RETAIL_LOCATION|011126|Makkah Mall Boutique Showroom - Makkah|1250|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|RECEIVING|STORE_TRANSFER|11318|RETAIL_LOCATION|012141|Al-Nakheel Mall Boutique Showroom - Al-Riyadh|1260|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|RECEIVING|STORE_TRANSFER|11318|RETAIL_LOCATION|011328|Al-Mahmal Center Showroom – Jeddah|1270|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|RECEIVING|STORE_TRANSFER|11318|RETAIL_LOCATION|011329|Al-Salam Mall Boutique Showroom - Jeddah|1280|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|RECEIVING|STORE_TRANSFER|11318|RETAIL_LOCATION|011330|Aziz Mall Boutique Showroom - Jeddah|1290|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|RECEIVING|STORE_TRANSFER|11318|RETAIL_LOCATION|011331|Arab Mall Boutique Showroom - Jeddah|1300|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|RECEIVING|STORE_TRANSFER|11318|RETAIL_LOCATION|011416|Al-Noor Mall Boutique Showroom - Al-Madinah|1310|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|RECEIVING|STORE_TRANSFER|11318|RETAIL_LOCATION|013109|Al-Rashid Mall Showroom - Abha|1320|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|RECEIVING|STORE_TRANSFER|11318|RETAIL_LOCATION|013604|Hayat Mall Showroom - Najran|1330|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|RECEIVING|STORE_TRANSFER|11318|RETAIL_LOCATION|015104|Tabuk Park Showroom - Tabuk|1340|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|RECEIVING|STORE_TRANSFER|11318|RETAIL_LOCATION|014126|Al-Othaim Dammam Showroom - Eastern|1350|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|RECEIVING|STORE_TRANSFER|11318|RETAIL_LOCATION|012146|Al-Rawabi Al-Riyadh Showroom - Al-Riyadh|1360|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|RECEIVING|STORE_TRANSFER|11318|RETAIL_LOCATION|012142|Wajehat Al-Riyadh Showroom - Al-Riyadh|1370|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|RECEIVING|STORE_TRANSFER|11318|RETAIL_LOCATION|014129|Marina Mall Showroom – Eastern|1380|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|RECEIVING|STORE_TRANSFER|11318|RETAIL_LOCATION|012309|Emam Bukhari Road Showroom - Al-Qassim|1390|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|RECEIVING|STORE_TRANSFER|11318|RETAIL_LOCATION|012148|Arqah Showroom - Al-Riyadh|1400|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|RECEIVING|STORE_TRANSFER|11318|RETAIL_LOCATION|011335|Moj Plaza Showroom - Jeddah|1410|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|RECEIVING|STORE_TRANSFER|11318|RETAIL_LOCATION|012154|Yarmouk Center Showroom - Al-Riyadh|1420|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|RECEIVING|STORE_TRANSFER|11318|RETAIL_LOCATION|012147|Al-Azizia Showroom - Al-Riyadh|1430|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|RECEIVING|STORE_TRANSFER|11318|RETAIL_LOCATION|011336|Hamdanya Showroom - Jeddah|1440|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|RECEIVING|STORE_TRANSFER|11318|RETAIL_LOCATION|012153|Al-Sahafa Plaza Showroom - Al-Riyadh|1450|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|RECEIVING|STORE_TRANSFER|11318|RETAIL_LOCATION|014130|Al-Nakheel Mall Showroom - Eastern|1460|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|RECEIVING|STORE_TRANSFER|11318|RETAIL_LOCATION|013306|Yasmeen Aboaresh Showroom - Jazan|1470|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|RECEIVING|STORE_TRANSFER|11318|RETAIL_LOCATION|011417|Aswaq Al-Othaim Showroom - Al-Madinah|1480|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|RECEIVING|STORE_TRANSFER|11318|RETAIL_LOCATION|011130|Al-Majaz Mall Showroom - Makkah|1490|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|RECEIVING|STORE_TRANSFER|11318|RETAIL_LOCATION|012312|Al-Othaim Unaizah Showroom - Al-Qassim|1500|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|RECEIVING|STORE_TRANSFER|11318|RETAIL_LOCATION|012157|Telal Al-Masharef Showroom - Al-Riyadh|1510|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|RECEIVING|STORE_TRANSFER|11318|RETAIL_LOCATION|011418|Alia Mall Showroom - Al-Madinah|1520|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|RECEIVING|STORE_TRANSFER|11318|RETAIL_LOCATION|011129|Dkakeen Bakka Showroom - Makkah|1530|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|RECEIVING|STORE_TRANSFER|11318|RETAIL_LOCATION|013606|Al-Fakhriah Plaza Showroom - Najran|1540|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|RECEIVING|STORE_TRANSFER|11318|RETAIL_LOCATION|013605|City Center Showroom - Najran|1550|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|RECEIVING|STORE_TRANSFER|11318|RETAIL_LOCATION|012158|Park Avenue Showroom - Al-Riyadh|1560|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|RECEIVING|STORE_TRANSFER|11318|RETAIL_LOCATION|011338|Jeddah Park Showroom - Jeddah|1570|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|RECEIVING|STORE_TRANSFER|11318|RETAIL_LOCATION|013507|Mujan Park Showroom - Khamis Mushait|1580|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|RECEIVING|STORE_TRANSFER|11318|RETAIL_LOCATION|011419|Dar Al-Taqwa 2 Showroom - Al-Madinah|1590|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|RECEIVING|STORE_TRANSFER|11318|RETAIL_LOCATION|013307|Azzan Plaza Showroom - Jazan|1600|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|RECEIVING|STORE_TRANSFER|11318|RETAIL_LOCATION|012163|Al-Rawda Showroom - Al-Riyadh|1610|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|RECEIVING|STORE_TRANSFER|11318|RETAIL_LOCATION|011211|The Park Mall Showroom - Taif|1620|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|RECEIVING|STORE_TRANSFER|11318|RETAIL_LOCATION|013403|Al-Baha Mall Showroom - Al-Baha|1630|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|RECEIVING|STORE_TRANSFER|11318|RETAIL_LOCATION|012169|Executive Terminal 1 Showroom - Al-Riyadh|1640|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|RECEIVING|STORE_TRANSFER|11318|RETAIL_LOCATION|012170|Executive Terminal 5 Showroom - Al-Riyadh|1650|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|RECEIVING|STORE_TRANSFER|11318|RETAIL_LOCATION|012162|The View Showroom - Al-Riyadh|1660|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|RECEIVING|STORE_TRANSFER|11318|RETAIL_LOCATION|011339|Executive Showroom - Jeddah|1670|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|RECEIVING|STORE_TRANSFER|11318|RETAIL_LOCATION|012175|Al-Yarmook 2 Showroom - Al-Riyadh|1680|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|RECEIVING|STORE_TRANSFER|11318|RETAIL_LOCATION|013308|Al-Borhan Mall Showroom - Jazan|1690|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|RECEIVING|STORE_TRANSFER|11318|RETAIL_LOCATION|014127|Al-Othaim Hafir Al-Batin Showroom - Al-Qassim|1700|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|RECEIVING|STORE_TRANSFER|11318|RETAIL_LOCATION|012172|Meem Plaza Showroom - Al-Riyadh|1710|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|RECEIVING|STORE_TRANSFER|11318|RETAIL_LOCATION|012171|Al-Takhassusi Showroom - Al-Riyadh|1720|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|RECEIVING|STORE_TRANSFER|11318|RETAIL_LOCATION|013309|Al-Rashid Mall Showroom - Jazan|1730|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|RECEIVING|STORE_TRANSFER|11318|RETAIL_LOCATION|012155|Alia Plaza Showroom - Al-Riyadh|1740|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|RECEIVING|STORE_TRANSFER|11318|RETAIL_LOCATION|013508|Boulevard Showroom - Khamis Mushait|1750|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|RECEIVING|STORE_TRANSFER|11318|RETAIL_LOCATION|011340|The Village Mall Showroom - Jeddah|1760|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|RECEIVING|STORE_TRANSFER|11318|RETAIL_LOCATION|013607|Najran Park Showroom - Najran|1770|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|RECEIVING|STORE_TRANSFER|11318|RETAIL_LOCATION|014139|Al Faisaliah Plaza Showroom - Eastern|1780|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|RECEIVING|STORE_TRANSFER|11318|RETAIL_LOCATION|011421|Taiba Center Showroom - Al-Madinah|1790|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|RECEIVING|STORE_TRANSFER|11318|RETAIL_LOCATION|015106|Tabuk Boulevard Showroom - Tabuk|1800|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|RECEIVING|STORE_TRANSFER|11318|RETAIL_LOCATION|014133|Tamimi Plaza Mall Showroom - Eastern|1810|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|RECEIVING|STORE_TRANSFER|11318|RETAIL_LOCATION|014132|Riviera Avenue Mall Showroom - Eastern|1820|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|RECEIVING|STORE_TRANSFER|11318|RETAIL_LOCATION|014136|Al Hayat Plaza Mall Showroom - Eastern|1830|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|RECEIVING|STORE_TRANSFER|11318|RETAIL_LOCATION|014137|Al Shaikh Avenue Mall Showroom - Eastern|1840|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|RECEIVING|STORE_TRANSFER|11318|RETAIL_LOCATION|014138|Al Azizia Plaza Showroom - Eastern|1850|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|RECEIVING|STORE_TRANSFER|11318|RETAIL_LOCATION|012177|Narsis Hotel Showroom - Al-Riyadh|1860|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|RECEIVING|STORE_TRANSFER|11318|RETAIL_LOCATION|012180|Hteen Showroom - Al-Riyadh|1870|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|RECEIVING|STORE_TRANSFER|11318|RETAIL_LOCATION|012181|Al Aqeq Showroom - Al-Riyadh|1880|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|RECEIVING|STORE_TRANSFER|11318|RETAIL_LOCATION|011344|Al-Zahraa Plaza Showroom - Jeddah|1890|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|RECEIVING|STORE_TRANSFER|11318|RETAIL_LOCATION|012178|Al Ghadeer Showroom - Al-Riyadh|1900|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|RECEIVING|STORE_TRANSFER|11318|RETAIL_LOCATION|012179|Al Maethar Showroom - Al-Riyadh|1910|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|RECEIVING|STORE_TRANSFER|11318|RETAIL_LOCATION|012183|Al Waha Plaza Showroom - Al-Riyadh|1920|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|RECEIVING|STORE_TRANSFER|11318|RETAIL_LOCATION|013608|Najran King Saud Road Showroom - Najran|1930|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|RECEIVING|STORE_TRANSFER|11318|RETAIL_LOCATION|012184|Al Oroba Showroom - Al-Riyadh|1940|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|RECEIVING|STORE_TRANSFER|11318|RETAIL_LOCATION|012203|Al Kharj Plaza Showroom - Al-Kharj|1950|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|RECEIVING|STORE_TRANSFER|11318|RETAIL_LOCATION|012187|Rawabi Onaizah Street Showroom - Al-Riyadh|1960|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|RECEIVING|STORE_TRANSFER|11318|RETAIL_LOCATION|012182|Garnata 2 Showroom - Al-Riyadh|1970|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|RECEIVING|STORE_TRANSFER|11318|RETAIL_LOCATION|012173|Termithi Street Showroom - Al-Riyadh|1980|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|RECEIVING|STORE_TRANSFER|11318|RETAIL_LOCATION|012189|Tald Plaza Showroom - Al-Riyadh|1990|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|RECEIVING|STORE_TRANSFER|11318|RETAIL_LOCATION|012190|The Gate Showroom - Al-Riyadh|2000|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|RECEIVING|STORE_TRANSFER|11318|RETAIL_LOCATION|011132|Al-Shawqiyah 2 Showroom - Makkah|2010|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|RECEIVING|STORE_TRANSFER|11318|RETAIL_LOCATION|011345|Cornish Center Showroom - Jeddah|2020|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|RECEIVING|STORE_TRANSFER|11318|RETAIL_LOCATION|011213|Shahar Showroom - Taif|2030|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|RECEIVING|STORE_TRANSFER|11318|RETAIL_LOCATION|012191|Souq Hijab Showroom - Al-Riyadh|2040|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|RECEIVING|STORE_TRANSFER|11318|RETAIL_LOCATION|011346|Hamdanya 2 Showroom - Jeddah|2050|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|RECEIVING|STORE_TRANSFER|11318|RETAIL_LOCATION|015204|Barzan Market Showroom – Hail|2060|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|RECEIVING|STORE_TRANSFER|11318|RETAIL_LOCATION|013110|Ravala Plaza Showroom – Abha|2070|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|RECEIVING|STORE_TRANSFER|11318|RETAIL_LOCATION|011214|Boulevard Besha Showroom – Taif|2080|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|RECEIVING|STORE_TRANSFER|11318|RETAIL_LOCATION|011215|Al-Shifa Street Showroom – Taif|2090|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|RECEIVING|STORE_TRANSFER|11318|RETAIL_LOCATION|012185|Al Malqa Showroom - Al-Riyadh|2100|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|RECEIVING|STORE_TRANSFER|11318|RETAIL_LOCATION|011423|Sari Showroom - Al-Madinah|2110|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|RECEIVING|STORE_TRANSFER|11318|RETAIL_LOCATION|012205|Sania Khurais Showroom - Al-Riyadh|2120|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|RECEIVING|STORE_TRANSFER|11318|RETAIL_LOCATION|014140|Al Mubarraz Town Center Showroom - Eastern|2130|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|RECEIVING|STORE_TRANSFER|11318|RETAIL_LOCATION|011341|U - Walk Showroom - Jeddah|2140|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|RECEIVING|STORE_TRANSFER|11318|RETAIL_LOCATION|012204|Al-Jenadriyah Plaza Showroom - Al-Riyadh|2150|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|RECEIVING|STORE_TRANSFER|11318|RETAIL_LOCATION|013405|Diamond Avenue Showroom - Al-Baha|2160|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|RECEIVING|STORE_TRANSFER|11318|RETAIL_LOCATION|011347|Salama Centre Showroom - Jeddah|2170|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|RECEIVING|STORE_TRANSFER|11318|RETAIL_LOCATION|012207|Al-Moursalat Showroom - Al-Riyadh|2180|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|SHIPPING|STORE_TRANSFER|11318|RETAIL_LOCATION|011101|Abraj Al-Bait 1 Showroom - Makkah|2190|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|SHIPPING|STORE_TRANSFER|11318|RETAIL_LOCATION|011102|Abraj Al-Bait 2 Showroom - Makkah|2200|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|SHIPPING|STORE_TRANSFER|11318|RETAIL_LOCATION|011103|Abraj Al-Bait 4 Showroom - Makkah|2210|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|SHIPPING|STORE_TRANSFER|11318|RETAIL_LOCATION|014108|Al-Ahsa Mall Showroom - Eastern|2220|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|SHIPPING|STORE_TRANSFER|11318|RETAIL_LOCATION|011307|Al-Andalus Mall Showroom - Jeddah|2230|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|SHIPPING|STORE_TRANSFER|11318|RETAIL_LOCATION|012119|Al-Badeeah Mall 2 Showroom - Al-Riyadh|2240|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|SHIPPING|STORE_TRANSFER|11318|RETAIL_LOCATION|011501|Al-Danah Mall Showroom - Yanbu|2250|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|SHIPPING|STORE_TRANSFER|11318|RETAIL_LOCATION|011107|Al-Diyafa Showroom - Makkah|2260|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|SHIPPING|STORE_TRANSFER|11318|RETAIL_LOCATION|013401|Al-Baha Showroom - Al-Baha|2270|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|SHIPPING|STORE_TRANSFER|11318|RETAIL_LOCATION|014111|Al-Qosaibi Al-Khobar Showroom - Eastern|2280|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|SHIPPING|STORE_TRANSFER|11318|RETAIL_LOCATION|011106|Al-Hijaz Mall Showroom - Makkah|2290|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|SHIPPING|STORE_TRANSFER|11318|RETAIL_LOCATION|011108|Al-Hijrah Showroom - Makkah|2300|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|SHIPPING|STORE_TRANSFER|11318|RETAIL_LOCATION|012201|Al-Hudaithi Mall Showroom - Al-Kharj|2310|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|SHIPPING|STORE_TRANSFER|11318|RETAIL_LOCATION|015301|Al-Jouf Plaza Showroom? - Al-Jouf|2320|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|SHIPPING|STORE_TRANSFER|11318|RETAIL_LOCATION|014106|Al-Khafji Showroom - Eastern|2330|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|SHIPPING|STORE_TRANSFER|11318|RETAIL_LOCATION|011403|Al-Madinah Al-Dowali Showroom - Al-Madinah|2340|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|SHIPPING|STORE_TRANSFER|11318|RETAIL_LOCATION|012115|Al-Majmaah Showroom - Al-Qassim|2350|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|SHIPPING|STORE_TRANSFER|11318|RETAIL_LOCATION|012118|Al-Naseem Showroom - Al-Riyadh|2360|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|SHIPPING|STORE_TRANSFER|11318|RETAIL_LOCATION|012105|Al-Olaya Alaam Showroom - Al-Riyadh|2370|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|SHIPPING|STORE_TRANSFER|11318|RETAIL_LOCATION|014109|Al-Othaim Al-Hofuf Showroom - Eastern|2380|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|SHIPPING|STORE_TRANSFER|11318|RETAIL_LOCATION|012117|Al-Othaim Al-Rabwa Showroom - Al-Riyadh|2390|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|SHIPPING|STORE_TRANSFER|11318|RETAIL_LOCATION|012301|Buraidah Showroom - Al-Qassim|2400|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|SHIPPING|STORE_TRANSFER|11318|RETAIL_LOCATION|012110|Al-Othaim Mall Showroom - Al-Riyadh|2410|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|SHIPPING|STORE_TRANSFER|11318|RETAIL_LOCATION|012174|Al-Qasr Mall Showroom - Al-Riyadh|2420|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|SHIPPING|STORE_TRANSFER|11318|RETAIL_LOCATION|014101|Al-Rashid Mall 1 Showroom - Eastern|2430|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|SHIPPING|STORE_TRANSFER|11318|RETAIL_LOCATION|011405|Al-Rashid Mega Mall Showroom - Al-Madinah|2440|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|SHIPPING|STORE_TRANSFER|11318|RETAIL_LOCATION|011311|Al-Safaa Showroom - Jeddah|2450|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|SHIPPING|STORE_TRANSFER|11318|RETAIL_LOCATION|011114|Al-Sharaya Showroom - Makkah|2460|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|SHIPPING|STORE_TRANSFER|11318|RETAIL_LOCATION|012101|Al-Steen Showroom - Al-Riyadh|2470|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|SHIPPING|STORE_TRANSFER|11318|RETAIL_LOCATION|011304|Al-Tahlia Almasi Showroom - Jeddah|2480|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|SHIPPING|STORE_TRANSFER|11318|RETAIL_LOCATION|011315|Mandarin Avenue Showroom - Jeddah|2490|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|SHIPPING|STORE_TRANSFER|11318|RETAIL_LOCATION|011309|Arab Mall Showroom - Jeddah|2500|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|SHIPPING|STORE_TRANSFER|11318|RETAIL_LOCATION|013502|Asdaf Mall Showroom - Khamis Mushait|2510|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|SHIPPING|STORE_TRANSFER|11318|RETAIL_LOCATION|011314|Aziz Mall Showroom - Jeddah|2520|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|SHIPPING|STORE_TRANSFER|11318|RETAIL_LOCATION|013402|Baljorshi Mall Showroom - Baljorshi|2530|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|SHIPPING|STORE_TRANSFER|11318|RETAIL_LOCATION|014112|City Mall Al-Qatif Showroom - Eastern|2540|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|SHIPPING|STORE_TRANSFER|11318|RETAIL_LOCATION|011110|Dana Center Showroom - Makkah|2550|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|SHIPPING|STORE_TRANSFER|11318|RETAIL_LOCATION|011402|Dar Al-Taqwa Showroom - Al-Madinah|2560|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|SHIPPING|STORE_TRANSFER|11318|RETAIL_LOCATION|014105|Dareen Mall Showroom - Eastern|2570|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|SHIPPING|STORE_TRANSFER|11318|RETAIL_LOCATION|014113|Dhahran Mall 2 Showroom - Eastern|2580|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|SHIPPING|STORE_TRANSFER|11318|RETAIL_LOCATION|011404|Diyar Al-Madinah Showroom - Al-Madinah|2590|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|SHIPPING|STORE_TRANSFER|11318|RETAIL_LOCATION|014107|Hafir Al-Batin Showroom - Al-Qassim|2600|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|SHIPPING|STORE_TRANSFER|11318|RETAIL_LOCATION|011305|Heraa Mall Showroom - Jeddah|2610|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|SHIPPING|STORE_TRANSFER|11318|RETAIL_LOCATION|011401|Hilton Al-Madinah Showroom - Al-Madinah|2620|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|SHIPPING|STORE_TRANSFER|11318|RETAIL_LOCATION|011112|Jabal Omar 1 Showroom - Makkah|2630|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|SHIPPING|STORE_TRANSFER|11318|RETAIL_LOCATION|011113|Jabal Omar 2 Showroom - Makkah|2640|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|SHIPPING|STORE_TRANSFER|11318|RETAIL_LOCATION|013503|Khamis Avenue Showroom - Khamis Mushait|2650|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|SHIPPING|STORE_TRANSFER|11318|RETAIL_LOCATION|013501|Khamis Mushait Showroom - Khamis Mushait|2660|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|SHIPPING|STORE_TRANSFER|11318|RETAIL_LOCATION|012104|Kingdom Center Showroom - Al-Riyadh|2670|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|SHIPPING|STORE_TRANSFER|11318|RETAIL_LOCATION|011105|Makkah Anas Showroom - Makkah|2680|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|SHIPPING|STORE_TRANSFER|11318|RETAIL_LOCATION|011104|Makkah Ehsan Showroom - Makkah|2690|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|SHIPPING|STORE_TRANSFER|11318|RETAIL_LOCATION|011111|Makkah Mall Showroom - Makkah|2700|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|SHIPPING|STORE_TRANSFER|11318|RETAIL_LOCATION|012120|Marina Mall Showroom - Al-Riyadh|2710|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|SHIPPING|STORE_TRANSFER|11318|RETAIL_LOCATION|013104|Mahayil Aseer Showroom - Abha|2720|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|SHIPPING|STORE_TRANSFER|11318|RETAIL_LOCATION|012108|Panorama Mall Showroom - Al-Riyadh|2730|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|SHIPPING|STORE_TRANSFER|11318|RETAIL_LOCATION|011306|Red Sea Mall Showroom - Jeddah|2740|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|SHIPPING|STORE_TRANSFER|11318|RETAIL_LOCATION|015201|Hail Al-Tamami Showroom - Hail|2750|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|SHIPPING|STORE_TRANSFER|11318|RETAIL_LOCATION|011202|Taif 2 Showroom - Taif|2760|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|SHIPPING|STORE_TRANSFER|11318|RETAIL_LOCATION|011201|Taif 1 Showroom - Taif|2770|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|SHIPPING|STORE_TRANSFER|11318|RETAIL_LOCATION|011203|Taif 3 Showroom - Taif|2780|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|SHIPPING|STORE_TRANSFER|11318|RETAIL_LOCATION|012102|Al-Thalatheen Showroom - Al-Riyadh|2790|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|SHIPPING|STORE_TRANSFER|11318|RETAIL_LOCATION|014102|Venecia Mall Showroom - Eastern|2800|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|SHIPPING|STORE_TRANSFER|11318|RETAIL_LOCATION|011502|Yanbu Mall Showroom - Yanbu|2810|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|SHIPPING|STORE_TRANSFER|11318|RETAIL_LOCATION|011312|Al-Salam Mall Showroom - Jeddah|2820|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|SHIPPING|STORE_TRANSFER|11318|RETAIL_LOCATION|011406|Al-Noor Mall Showroom - Al-Madinah|2830|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|SHIPPING|STORE_TRANSFER|11318|RETAIL_LOCATION|012114|Al-Salam Mall Showroom - Al-Riyadh|2840|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|SHIPPING|STORE_TRANSFER|11318|RETAIL_LOCATION|012116|King Abdullah Street Showroom - Al-Riyadh|2850|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|SHIPPING|STORE_TRANSFER|11318|RETAIL_LOCATION|012121|Gallery Mall Showroom - Al-Riyadh|2860|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|SHIPPING|STORE_TRANSFER|11318|RETAIL_LOCATION|012304|Al-Amry Buraidah Showroom - Al-Qassim|2870|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|SHIPPING|STORE_TRANSFER|11318|RETAIL_LOCATION|012305|Deira Mall Rass Showroom - Al-Qassim|2880|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|SHIPPING|STORE_TRANSFER|11318|RETAIL_LOCATION|013105|New Abha Showroom - Abha|2890|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|SHIPPING|STORE_TRANSFER|11318|RETAIL_LOCATION|014103|Amwaj Mall Showroom - Eastern|2900|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|SHIPPING|STORE_TRANSFER|11318|RETAIL_LOCATION|014110|Jubail Royal Authority Showroom - Eastern|2910|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|SHIPPING|STORE_TRANSFER|11318|RETAIL_LOCATION|013301|Kadi Mall Showroom - Jazan|2920|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|SHIPPING|STORE_TRANSFER|11318|RETAIL_LOCATION|012122|Dove Plaza Showroom - Al-Riyadh|2930|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|SHIPPING|STORE_TRANSFER|11318|RETAIL_LOCATION|012123|New Tahlia Showroom - Al-Riyadh|2940|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|SHIPPING|STORE_TRANSFER|11318|RETAIL_LOCATION|011317|Al-Tahlia Boutique Showroom - Jeddah|2950|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|SHIPPING|STORE_TRANSFER|11318|RETAIL_LOCATION|012124|Al-Nakheel Mall Showroom - Al-Riyadh|2960|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|SHIPPING|STORE_TRANSFER|11318|RETAIL_LOCATION|012125|Talaa Mall Showroom - Al-Riyadh|2970|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|SHIPPING|STORE_TRANSFER|11318|RETAIL_LOCATION|011320|Al-Samer Showroom – Jeddah|2980|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|SHIPPING|STORE_TRANSFER|11318|RETAIL_LOCATION|011116|Souq Al-Qawafel Showroom - Makkah|2990|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|SHIPPING|STORE_TRANSFER|11318|RETAIL_LOCATION|011205|Besha Showroom - Taif|3000|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|SHIPPING|STORE_TRANSFER|11318|RETAIL_LOCATION|011321|Al-Fayha Showroom – Jeddah|3010|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|SHIPPING|STORE_TRANSFER|11318|RETAIL_LOCATION|011319|Haifaa Mall Showroom – Jeddah|3020|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|SHIPPING|STORE_TRANSFER|11318|RETAIL_LOCATION|011322|Al-Ajaweed Showroom – Jeddah|3030|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|SHIPPING|STORE_TRANSFER|11318|RETAIL_LOCATION|011323|Bandar Mall Showroom – Al-Qunfudhah|3040|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|SHIPPING|STORE_TRANSFER|11318|RETAIL_LOCATION|011324|King Faisal Street Showroom – Jeddah|3050|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|SHIPPING|STORE_TRANSFER|11318|RETAIL_LOCATION|013106|Namas Mall Showroom - Abha|3060|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|SHIPPING|STORE_TRANSFER|11318|RETAIL_LOCATION|014116|Al-Nairyah Showroom - Eastern|3070|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|SHIPPING|STORE_TRANSFER|11318|RETAIL_LOCATION|012128|Hayat Mall Showroom -  Al-Riyadh|3080|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|SHIPPING|STORE_TRANSFER|11318|RETAIL_LOCATION|011410|Azizia Showroom - Al-Madinah|3090|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|SHIPPING|STORE_TRANSFER|11318|RETAIL_LOCATION|012129|Al-Dawadmi Showroom - Al-Riyadh|3100|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|SHIPPING|STORE_TRANSFER|11318|RETAIL_LOCATION|011411|Al-Manar Mall Showroom - Al-Madinah|3110|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|SHIPPING|STORE_TRANSFER|11318|RETAIL_LOCATION|012130|Al-Muzahmiya Mall Showroom - Al-Riyadh|3120|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|SHIPPING|STORE_TRANSFER|11318|RETAIL_LOCATION|014122|Leen Mall Rafha Showroom - Rafha|3130|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|SHIPPING|STORE_TRANSFER|11318|RETAIL_LOCATION|013107|Al-Bsateen Mall Showroom - Abha|3140|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|SHIPPING|STORE_TRANSFER|11318|RETAIL_LOCATION|011119|Al-Steen Showroom - Makkah|3150|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|SHIPPING|STORE_TRANSFER|11318|RETAIL_LOCATION|014115|Hafir Al-Batin 2 Showroom - Al-Qassim|3160|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|SHIPPING|STORE_TRANSFER|11318|RETAIL_LOCATION|014118|Al-Jubail Mall Showroom - Eastern|3170|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|SHIPPING|STORE_TRANSFER|11318|RETAIL_LOCATION|011207|Joury Mall Showroom - Taif|3180|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|SHIPPING|STORE_TRANSFER|11318|RETAIL_LOCATION|012131|Ghornatah Mall Showroom - Al-Riyadh|3190|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|SHIPPING|STORE_TRANSFER|11318|RETAIL_LOCATION|012306|Al-Nakheel Mall Showroom - Al-Qassim|3200|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|SHIPPING|STORE_TRANSFER|11318|RETAIL_LOCATION|011121|Dar El-Tawheed Showroom - Makkah|3210|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|SHIPPING|STORE_TRANSFER|11318|RETAIL_LOCATION|012132|Wadi Laban Showroom - Al-Riyadh|3220|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|SHIPPING|STORE_TRANSFER|11318|RETAIL_LOCATION|013506|Al-Shebli Showroom - Khamis Mushait|3230|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|SHIPPING|STORE_TRANSFER|11318|RETAIL_LOCATION|015103|Olayaa Showroom - Tabuk|3240|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|SHIPPING|STORE_TRANSFER|11318|RETAIL_LOCATION|011209|Al-Majardah  Showroom - Taif|3250|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|SHIPPING|STORE_TRANSFER|11318|RETAIL_LOCATION|011413|Al-Hijrah Showroom - Al-Madinah|3260|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|SHIPPING|STORE_TRANSFER|11318|RETAIL_LOCATION|011414|Sultana Street Showroom - Al-Madinah|3270|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|SHIPPING|STORE_TRANSFER|11318|RETAIL_LOCATION|012139|Al-Zulfi Showroom - Al-Qassim|3280|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|SHIPPING|STORE_TRANSFER|11318|RETAIL_LOCATION|014125|Al-Jalaweyah Showroom - Eastern|3290|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|SHIPPING|STORE_TRANSFER|11318|RETAIL_LOCATION|012135|Wadi Al-dwaser Showroom - Al-Riyadh|3300|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|SHIPPING|STORE_TRANSFER|11318|RETAIL_LOCATION|011210|Sabt Al-Alaya Showroom – Taif|3310|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|SHIPPING|STORE_TRANSFER|11318|RETAIL_LOCATION|012308|Al-Mashaghel Street Showroom - Al-Qassim|3320|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|SHIPPING|STORE_TRANSFER|11318|RETAIL_LOCATION|013305|Khayalh Mall Showroom - Jazan|3330|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|SHIPPING|STORE_TRANSFER|11318|RETAIL_LOCATION|011327|Yasmeen Mall Showroom – Jeddah|3340|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|SHIPPING|STORE_TRANSFER|11318|RETAIL_LOCATION|012307|Unaizah Al-Sowyan - Al-Qassim|3350|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|SHIPPING|STORE_TRANSFER|11318|RETAIL_LOCATION|015203|Grand Mall Showroom - Hail|3360|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|SHIPPING|STORE_TRANSFER|11318|RETAIL_LOCATION|012202|Al-Kharj 2 Showroom - Al-Kharj|3370|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|SHIPPING|STORE_TRANSFER|11318|RETAIL_LOCATION|011123|Al-Shawqiyah Showroom - Makkah|3380|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|SHIPPING|STORE_TRANSFER|11318|RETAIL_LOCATION|015402|Al-Othaim Mall Showroom -Arar|3390|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|SHIPPING|STORE_TRANSFER|11318|RETAIL_LOCATION|012127|Al-Hamra Mall Showroom - Al-Riyadh|3400|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|SHIPPING|STORE_TRANSFER|11318|RETAIL_LOCATION|012140|Al-Shifa Plaza Showroom - Al-Riyadh|3410|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|SHIPPING|STORE_TRANSFER|11318|RETAIL_LOCATION|012137|Salman Al-Farisi Showroom - Al-Riyadh|3420|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|SHIPPING|STORE_TRANSFER|11318|RETAIL_LOCATION|011126|Makkah Mall Boutique Showroom - Makkah|3430|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|SHIPPING|STORE_TRANSFER|11318|RETAIL_LOCATION|012141|Al-Nakheel Mall Boutique Showroom - Al-Riyadh|3440|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|SHIPPING|STORE_TRANSFER|11318|RETAIL_LOCATION|011328|Al-Mahmal Center Showroom – Jeddah|3450|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|SHIPPING|STORE_TRANSFER|11318|RETAIL_LOCATION|011329|Al-Salam Mall Boutique Showroom - Jeddah|3460|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|SHIPPING|STORE_TRANSFER|11318|RETAIL_LOCATION|011330|Aziz Mall Boutique Showroom - Jeddah|3470|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|SHIPPING|STORE_TRANSFER|11318|RETAIL_LOCATION|011331|Arab Mall Boutique Showroom - Jeddah|3480|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|SHIPPING|STORE_TRANSFER|11318|RETAIL_LOCATION|011416|Al-Noor Mall Boutique Showroom - Al-Madinah|3490|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|SHIPPING|STORE_TRANSFER|11318|RETAIL_LOCATION|013109|Al-Rashid Mall Showroom - Abha|3500|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|SHIPPING|STORE_TRANSFER|11318|RETAIL_LOCATION|013604|Hayat Mall Showroom - Najran|3510|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|SHIPPING|STORE_TRANSFER|11318|RETAIL_LOCATION|015104|Tabuk Park Showroom - Tabuk|3520|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|SHIPPING|STORE_TRANSFER|11318|RETAIL_LOCATION|014126|Al-Othaim Dammam Showroom - Eastern|3530|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|SHIPPING|STORE_TRANSFER|11318|RETAIL_LOCATION|012146|Al-Rawabi Al-Riyadh Showroom - Al-Riyadh|3540|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|SHIPPING|STORE_TRANSFER|11318|RETAIL_LOCATION|012142|Wajehat Al-Riyadh Showroom - Al-Riyadh|3550|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|SHIPPING|STORE_TRANSFER|11318|RETAIL_LOCATION|014129|Marina Mall Showroom – Eastern|3560|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|SHIPPING|STORE_TRANSFER|11318|RETAIL_LOCATION|012309|Emam Bukhari Road Showroom - Al-Qassim|3570|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|SHIPPING|STORE_TRANSFER|11318|RETAIL_LOCATION|012148|Arqah Showroom - Al-Riyadh|3580|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|SHIPPING|STORE_TRANSFER|11318|RETAIL_LOCATION|011335|Moj Plaza Showroom - Jeddah|3590|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|SHIPPING|STORE_TRANSFER|11318|RETAIL_LOCATION|012154|Yarmouk Center Showroom - Al-Riyadh|3600|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|SHIPPING|STORE_TRANSFER|11318|RETAIL_LOCATION|012147|Al-Azizia Showroom - Al-Riyadh|3610|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|SHIPPING|STORE_TRANSFER|11318|RETAIL_LOCATION|011336|Hamdanya Showroom - Jeddah|3620|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|SHIPPING|STORE_TRANSFER|11318|RETAIL_LOCATION|012153|Al-Sahafa Plaza Showroom - Al-Riyadh|3630|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|SHIPPING|STORE_TRANSFER|11318|RETAIL_LOCATION|014130|Al-Nakheel Mall Showroom - Eastern|3640|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|SHIPPING|STORE_TRANSFER|11318|RETAIL_LOCATION|013306|Yasmeen Aboaresh Showroom - Jazan|3650|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|SHIPPING|STORE_TRANSFER|11318|RETAIL_LOCATION|011417|Aswaq Al-Othaim Showroom - Al-Madinah|3660|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|SHIPPING|STORE_TRANSFER|11318|RETAIL_LOCATION|011130|Al-Majaz Mall Showroom - Makkah|3670|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|SHIPPING|STORE_TRANSFER|11318|RETAIL_LOCATION|012312|Al-Othaim Unaizah Showroom - Al-Qassim|3680|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|SHIPPING|STORE_TRANSFER|11318|RETAIL_LOCATION|012157|Telal Al-Masharef Showroom - Al-Riyadh|3690|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|SHIPPING|STORE_TRANSFER|11318|RETAIL_LOCATION|011418|Alia Mall Showroom - Al-Madinah|3700|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|SHIPPING|STORE_TRANSFER|11318|RETAIL_LOCATION|011129|Dkakeen Bakka Showroom - Makkah|3710|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|SHIPPING|STORE_TRANSFER|11318|RETAIL_LOCATION|013606|Al-Fakhriah Plaza Showroom - Najran|3720|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|SHIPPING|STORE_TRANSFER|11318|RETAIL_LOCATION|013605|City Center Showroom - Najran|3730|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|SHIPPING|STORE_TRANSFER|11318|RETAIL_LOCATION|012158|Park Avenue Showroom - Al-Riyadh|3740|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|SHIPPING|STORE_TRANSFER|11318|RETAIL_LOCATION|011338|Jeddah Park Showroom - Jeddah|3750|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|SHIPPING|STORE_TRANSFER|11318|RETAIL_LOCATION|013507|Mujan Park Showroom - Khamis Mushait|3760|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|SHIPPING|STORE_TRANSFER|11318|RETAIL_LOCATION|011419|Dar Al-Taqwa 2 Showroom - Al-Madinah|3770|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|SHIPPING|STORE_TRANSFER|11318|RETAIL_LOCATION|013307|Azzan Plaza Showroom - Jazan|3780|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|SHIPPING|STORE_TRANSFER|11318|RETAIL_LOCATION|012163|Al-Rawda Showroom - Al-Riyadh|3790|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|SHIPPING|STORE_TRANSFER|11318|RETAIL_LOCATION|011211|The Park Mall Showroom - Taif|3800|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|SHIPPING|STORE_TRANSFER|11318|RETAIL_LOCATION|013403|Al-Baha Mall Showroom - Al-Baha|3810|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|SHIPPING|STORE_TRANSFER|11318|RETAIL_LOCATION|012169|Executive Terminal 1 Showroom - Al-Riyadh|3820|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|SHIPPING|STORE_TRANSFER|11318|RETAIL_LOCATION|012170|Executive Terminal 5 Showroom - Al-Riyadh|3830|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|SHIPPING|STORE_TRANSFER|11318|RETAIL_LOCATION|012162|The View Showroom - Al-Riyadh|3840|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|SHIPPING|STORE_TRANSFER|11318|RETAIL_LOCATION|011339|Executive Showroom - Jeddah|3850|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|SHIPPING|STORE_TRANSFER|11318|RETAIL_LOCATION|012175|Al-Yarmook 2 Showroom - Al-Riyadh|3860|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|SHIPPING|STORE_TRANSFER|11318|RETAIL_LOCATION|013308|Al-Borhan Mall Showroom - Jazan|3870|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|SHIPPING|STORE_TRANSFER|11318|RETAIL_LOCATION|014127|Al-Othaim Hafir Al-Batin Showroom - Al-Qassim|3880|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|SHIPPING|STORE_TRANSFER|11318|RETAIL_LOCATION|012172|Meem Plaza Showroom - Al-Riyadh|3890|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|SHIPPING|STORE_TRANSFER|11318|RETAIL_LOCATION|012171|Al-Takhassusi Showroom - Al-Riyadh|3900|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|SHIPPING|STORE_TRANSFER|11318|RETAIL_LOCATION|013309|Al-Rashid Mall Showroom - Jazan|3910|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|SHIPPING|STORE_TRANSFER|11318|RETAIL_LOCATION|012155|Alia Plaza Showroom - Al-Riyadh|3920|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|SHIPPING|STORE_TRANSFER|11318|RETAIL_LOCATION|013508|Boulevard Showroom - Khamis Mushait|3930|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|SHIPPING|STORE_TRANSFER|11318|RETAIL_LOCATION|011340|The Village Mall Showroom - Jeddah|3940|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|SHIPPING|STORE_TRANSFER|11318|RETAIL_LOCATION|013607|Najran Park Showroom - Najran|3950|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|SHIPPING|STORE_TRANSFER|11318|RETAIL_LOCATION|014139|Al Faisaliah Plaza Showroom - Eastern|3960|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|SHIPPING|STORE_TRANSFER|11318|RETAIL_LOCATION|011421|Taiba Center Showroom - Al-Madinah|3970|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|SHIPPING|STORE_TRANSFER|11318|RETAIL_LOCATION|015106|Tabuk Boulevard Showroom - Tabuk|3980|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|SHIPPING|STORE_TRANSFER|11318|RETAIL_LOCATION|014133|Tamimi Plaza Mall Showroom - Eastern|3990|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|SHIPPING|STORE_TRANSFER|11318|RETAIL_LOCATION|014132|Riviera Avenue Mall Showroom - Eastern|4000|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|SHIPPING|STORE_TRANSFER|11318|RETAIL_LOCATION|014136|Al Hayat Plaza Mall Showroom - Eastern|4010|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|SHIPPING|STORE_TRANSFER|11318|RETAIL_LOCATION|014137|Al Shaikh Avenue Mall Showroom - Eastern|4020|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|SHIPPING|STORE_TRANSFER|11318|RETAIL_LOCATION|014138|Al Azizia Plaza Showroom - Eastern|4030|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|SHIPPING|STORE_TRANSFER|11318|RETAIL_LOCATION|012177|Narsis Hotel Showroom - Al-Riyadh|4040|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|SHIPPING|STORE_TRANSFER|11318|RETAIL_LOCATION|012180|Hteen Showroom - Al-Riyadh|4050|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|SHIPPING|STORE_TRANSFER|11318|RETAIL_LOCATION|012181|Al Aqeq Showroom - Al-Riyadh|4060|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|SHIPPING|STORE_TRANSFER|11318|RETAIL_LOCATION|011344|Al-Zahraa Plaza Showroom - Jeddah|4070|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|SHIPPING|STORE_TRANSFER|11318|RETAIL_LOCATION|012178|Al Ghadeer Showroom - Al-Riyadh|4080|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|SHIPPING|STORE_TRANSFER|11318|RETAIL_LOCATION|012179|Al Maethar Showroom - Al-Riyadh|4090|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|SHIPPING|STORE_TRANSFER|11318|RETAIL_LOCATION|012183|Al Waha Plaza Showroom - Al-Riyadh|4100|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|SHIPPING|STORE_TRANSFER|11318|RETAIL_LOCATION|013608|Najran King Saud Road Showroom - Najran|4110|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|SHIPPING|STORE_TRANSFER|11318|RETAIL_LOCATION|012184|Al Oroba Showroom - Al-Riyadh|4120|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|SHIPPING|STORE_TRANSFER|11318|RETAIL_LOCATION|012203|Al Kharj Plaza Showroom - Al-Kharj|4130|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|SHIPPING|STORE_TRANSFER|11318|RETAIL_LOCATION|012187|Rawabi Onaizah Street Showroom - Al-Riyadh|4140|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|SHIPPING|STORE_TRANSFER|11318|RETAIL_LOCATION|012182|Garnata 2 Showroom - Al-Riyadh|4150|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|SHIPPING|STORE_TRANSFER|11318|RETAIL_LOCATION|012173|Termithi Street Showroom - Al-Riyadh|4160|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|SHIPPING|STORE_TRANSFER|11318|RETAIL_LOCATION|012189|Tald Plaza Showroom - Al-Riyadh|4170|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|SHIPPING|STORE_TRANSFER|11318|RETAIL_LOCATION|012190|The Gate Showroom - Al-Riyadh|4180|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|SHIPPING|STORE_TRANSFER|11318|RETAIL_LOCATION|011132|Al-Shawqiyah 2 Showroom - Makkah|4190|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|SHIPPING|STORE_TRANSFER|11318|RETAIL_LOCATION|011345|Cornish Center Showroom - Jeddah|4200|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|SHIPPING|STORE_TRANSFER|11318|RETAIL_LOCATION|011213|Shahar Showroom - Taif|4210|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|SHIPPING|STORE_TRANSFER|11318|RETAIL_LOCATION|012191|Souq Hijab Showroom - Al-Riyadh|4220|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|SHIPPING|STORE_TRANSFER|11318|RETAIL_LOCATION|011346|Hamdanya 2 Showroom - Jeddah|4230|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|SHIPPING|STORE_TRANSFER|11318|RETAIL_LOCATION|015204|Barzan Market Showroom – Hail|4240|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|SHIPPING|STORE_TRANSFER|11318|RETAIL_LOCATION|013110|Ravala Plaza Showroom – Abha|4250|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|SHIPPING|STORE_TRANSFER|11318|RETAIL_LOCATION|011214|Boulevard Besha Showroom – Taif|4260|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|SHIPPING|STORE_TRANSFER|11318|RETAIL_LOCATION|011215|Al-Shifa Street Showroom – Taif|4270|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|SHIPPING|STORE_TRANSFER|11318|RETAIL_LOCATION|012185|Al Malqa Showroom - Al-Riyadh|4280|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|SHIPPING|STORE_TRANSFER|11318|RETAIL_LOCATION|011423|Sari Showroom - Al-Madinah|4290|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|SHIPPING|STORE_TRANSFER|11318|RETAIL_LOCATION|012205|Sania Khurais Showroom - Al-Riyadh|4300|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|SHIPPING|STORE_TRANSFER|11318|RETAIL_LOCATION|014140|Al Mubarraz Town Center Showroom - Eastern|4310|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|SHIPPING|STORE_TRANSFER|11318|RETAIL_LOCATION|011341|U - Walk Showroom - Jeddah|4320|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|SHIPPING|STORE_TRANSFER|11318|RETAIL_LOCATION|012204|Al-Jenadriyah Plaza Showroom - Al-Riyadh|4330|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|SHIPPING|STORE_TRANSFER|11318|RETAIL_LOCATION|013405|Diamond Avenue Showroom - Al-Baha|4340|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|SHIPPING|STORE_TRANSFER|11318|RETAIL_LOCATION|011347|Salama Centre Showroom - Jeddah|4350|||||||||||||||||||||||||||||||||||||
+INSERT|INV_VALID_DESTINATIONS|SHIPPING|STORE_TRANSFER|11318|RETAIL_LOCATION|012207|Al-Moursalat Showroom - Al-Riyadh|4360|||||||||||||||||||||||||||||||||||||
 

@@ -16,7 +16,7 @@
     <VisibilityRule class="dtv.pos.register.sale.AmountDueVisibilityRule" />
   </Action>
   <!-- Loyality redeem  start -->
-  <Action name="SALE::ASQLOYALITY" category="Register" keywords="sale" text="_menuasqloyality" chainKey="ASQ_LOYALITY">
+  <Action name="SALE::ASQLOYALTY" category="Register" keywords="sale" text="_menuasqloyalty" chainKey="ASQ_LOYALTY">
   </Action>
   <!-- Loyality redeem  end -->
 

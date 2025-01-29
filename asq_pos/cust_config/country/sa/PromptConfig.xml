@@ -42,7 +42,7 @@
 		<Action ref="YES" text="_asqAddNew" />
 		<Action ref="NO" text="_asqContinue" />
 	</Prompt>
-	<Prompt name="ASQ_STC_INVALID_MOBILE_ERROR" type="Notify" title="_asqStcMobileNumberErrorTitle" message="_asqPromptmsgInvalidMobileNumber">
+	<Prompt name="ASQ_STC_INVALID_MOBILE_ERROR" type="Notify" title="_asqStcMobileNumberErrorTitle" message="_asqPromptmsgWrongMobileNumberError">
 		<Action dataKey="CONTINUE" text="_continue" keyStroke="Enter" />
 	</Prompt>
 	<Prompt name="ASQ_STC_WRONG_MOBILE_ERROR" type="NotifyCancel" title="_asqStcMobileNumberErrorTitle" message="_asqPromptmsgWrongMobileNumberError">
@@ -51,7 +51,7 @@
 	<Prompt name="ASQ_STC_NOTALLOWED_MOBILE_ERROR" type="NotifyCancel" title="_asqStcMobileNumberErrorTitle" message="_asqPromptmsgLandlineNumberNotAllowedError">
 		<Action ref="CANCEL_BACK" />
 	</Prompt>
-	<Prompt name="ASQ_STC_NON_STC_CUST_ERROR" type="Text" Notify="_asqStcMobileNumberErrorTitle" message="_asqPromptmsgNonSTCCustomerError">
+	<Prompt name="ASQ_STC_NON_STC_CUST_ERROR" type="Notify" title ="_asqStcMobileNumberErrorTitle" message="_asqPromptmsgNonSTCCustomerError">
 		<Action ref="CANCEL_BACK" />
 	</Prompt>
 	<Prompt name="ASQ_STC_REDEMTION_NOTALLOWED_ERROR" type="Notify" title="_asqStcRedemptionErrorTitle" message="_asqPromptmsgRedemptionNotAllowedError">
@@ -418,7 +418,7 @@
 	</Prompt>
 	<!-- ASQ Bin Transfer chnages - End -->
 	
-	<!-- Loyality redeem  start -->
+	<!-- Loyalty redeem  start -->
 	<Prompt name="PROMPT_ASQ_LOYALTY" type="NotifyYesNo" title="_prompAsqLoyaltyTitle" message="_asqloyaltymsg" >
 	<Action ref="YES" />
 	<Action ref="NO" />

@@ -219,15 +219,16 @@ public class AsqBnplTabbyTenderOp extends AbstractFormOp<AsqBnplTabbyEditModel> 
 		LOG.info("Calling CreateSession API");
 		asqSubmitBnplTabbyServiceResponse = createSession(asqSubmitBnplTabbyServiceRequest);
 		// for testing
-		/*
-		 * if (null != asqSubmitBnplTabbyServiceResponse &&
-		 * !asqSubmitBnplTabbyServiceResponse.getStatus().equalsIgnoreCase("rejected")
-		 * && asqSubmitBnplTabbyServiceResponse.getError()==null) { if
-		 * (!asqSubmitBnplTabbyServiceResponse.getStatus().equalsIgnoreCase("SSL")) {
-		 * LOG.info("Tabby Response Payment Link: " +
-		 * asqSubmitBnplTabbyServiceResponse.getConfiguration()
-		 * .getAvailable_products().getInstallments().get(0).getWeb_url()); } }
-		 */
+
+		if (null != asqSubmitBnplTabbyServiceResponse
+				&& !asqSubmitBnplTabbyServiceResponse.getStatus().equalsIgnoreCase("rejected")
+				&& asqSubmitBnplTabbyServiceResponse.getError() == null) {
+			if (!asqSubmitBnplTabbyServiceResponse.getStatus().equalsIgnoreCase("SSL")) {
+				LOG.info("Tabby Response Payment Link: " + asqSubmitBnplTabbyServiceResponse.getConfiguration()
+						.getAvailable_products().getInstallments().get(0).getWeb_url());
+			}
+		}
+
 		LOG.info("Returned from CreateSession API");
 		return validateSessionResponseAndStoreDataInDB(asqSubmitBnplTabbyServiceResponse);
 	}

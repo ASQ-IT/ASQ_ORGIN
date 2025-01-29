@@ -46,6 +46,9 @@ public class AsqSTCEarnPointsOp extends Operation {
 
 	@Inject
 	AsqStcHelper asqStcHelper;
+	
+	@Inject
+	AsqConfigurationMgr _syConfigurationMgr;
 
 	/**
 	 * This method handles the customer availability parameter check and points
@@ -58,12 +61,12 @@ public class AsqSTCEarnPointsOp extends Operation {
 	@Override
 	public IOpResponse handleOpExec(IXstEvent paramIXstEvent) {
 		if (paramIXstEvent == null) {
-			return stcLoayalityEarn();
+			return stcLoyaltyEarn();
 		}
 		return HELPER.completeResponse();
 	}
 
-	private IOpResponse stcLoayalityEarn() {
+	private IOpResponse stcLoyaltyEarn() {
 		IRetailTransaction txn = _transactionScope.getTransaction(TransactionType.RETAIL_SALE);
 		boolean isCustomerPresent = false;
 		String custMobileNmbr = "";
@@ -228,15 +231,18 @@ public class AsqSTCEarnPointsOp extends Operation {
 		if (null != response && null != response.getErrors()) {
 			return handleServiceError(response);
 		} else if (null == response) {
-			return technicalErrorScreen("TAMARA API::::: Service has null response");
+			return technicalErrorScreen("STC API::::: Service has null response");
 		}
 		LOG.debug("STC refund service Ends here: ");
-
 		return HELPER.completeResponse();
 	}
 
 	@Override
 	public boolean isOperationApplicable() {
-		return _transactionScope.getValue(AsqValueKeys.ASQ_LOYALTY) && AsqConfigurationMgr.getSTCLoyaltyEarnEnable();
+		if (_transactionScope.getValue(AsqValueKeys.ASQ_LOYALTY) != null) {
+			return _transactionScope.getValue(AsqValueKeys.ASQ_LOYALTY)
+					&& _syConfigurationMgr.getSTCLoyaltyEarnEnable();
+		}
+		return isReturnTransaction((IRetailTransaction)_transactionScope.getTransaction());
 	}
 }
