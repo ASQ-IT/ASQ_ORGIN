@@ -80,6 +80,78 @@
 		]]></xml>
     </section>   
     <!-- Asq TOLA Item Poslog Changes ends -->
+	
+	 <!-- Asq CURRENCY as Cash -->
+	<section name="tender_line">
+      <condition class="dtv.pos.docbuilding.conditions.InstanceOfCondition" value="dtv.xst.dao.ttr.ITenderLineItem" />
+      <xml><![CDATA[
+        <Tender TenderType="!{dtv.pos.tender.TenderLineGetTenderDocBuilderField}[tenderTypeFromTender]" 
+                TypeCode="#{getTenderStatusCode}[tenderTypeCode]" 
+                dtv:ChangeFlag="#{getTenderStatusCode}[tenderChangeFlag]">
+        
+          <?condition class="dtv.pos.docbuilding.conditions.HasPropertyCondition" 
+                      value="TR::TYP" inverted="true"?>
+          <TenderID>!{asq.pos.docbuilding.tender.AsqTenderIdDocBuilderField}</TenderID>
+          <?_condition?>
+          
+          <?condition class="dtv.pos.docbuilding.conditions.HasPropertyCondition" 
+                      value="TR::TYP"?>
+          <TenderID>!{dtv.tenderretail.TRTlogTenderIdField}</TenderID>
+          <?_condition?>
+          
+          <?condition class="dtv.pos.docbuilding.conditions.ForeignTenderLineCondition" inverted="true"?>
+          <?condition class="dtv.pos.docbuilding.conditions.DccTenderLineCondition"?>
+          <ForeignCurrency>
+            <DateTime>#{getBeginDateTimestamp}[datetime]</DateTime>
+            <CurrencyCode>#{getDccCurrencyId}</CurrencyCode>
+            <OriginalFaceAmount>#{getForeignAmount}[money]</OriginalFaceAmount>
+            <ExchangeRate>#{getExchangeRate}</ExchangeRate>
+          </ForeignCurrency>
+          <?_condition?>
+          <?call impl="dtv.pos.tender.TenderLookupCall"?>
+            <dtv:FiscalTenderID>#{getTenderOptions.get(0).getFiscalTenderId}</dtv:FiscalTenderID>
+          <?_call?>
+          <Amount Currency="!{dtv.pos.tender.TenderLineCurrencyIdDocBuilderField}">#{getAmount}[money]</Amount>
+          <?_condition?>
+                
+          <?condition class="dtv.pos.docbuilding.conditions.ForeignTenderLineCondition"?>
+          <ForeignCurrency>
+            <DateTime>#{getBeginDateTimestamp}[datetime]</DateTime>
+            <CurrencyCode>!{dtv.pos.tender.TenderLineCurrencyIdDocBuilderField}</CurrencyCode>
+            <OriginalFaceAmount>#{getForeignAmount}[money]</OriginalFaceAmount>
+            <ExchangeRate>#{getExchangeRate}</ExchangeRate>
+          </ForeignCurrency>
+          <Amount Currency="!{dtv.pos.tender.TenderLineCurrencyIdDocBuilderField}" ForeignAmount="#{getForeignAmount}">#{getAmount}[money]</Amount>
+          <?_condition?>
+          
+          <?sectionref name="authorization_tender"?>
+          
+          <?iterator method="getIdentityVerifications"?>
+          <?sectionref name="customer_verification"?>
+          <?_iterator?>
+          
+          <?sectionref name="send_check_tender"?>
+          <?sectionref name="check"?>
+          <?sectionref name="credit_debit_tender"?>
+          <?sectionref name="ewallet_tender"?>
+          <?sectionref name="coupon_tender"?>
+          <?sectionref name="voucher_tender"?>
+          <?sectionref name="account_credit_tender"?>
+          <?sectionref name="line_properties"?>
+          
+          <?condition class="dtv.pos.docbuilding.conditions.InstanceOfCondition" value="dtv.xst.dao.ttr.IAccountReceivableTenderLineItem"?>
+          <StoreAccount>
+            <AccountID>#{getAccountNumber}</AccountID>
+          </StoreAccount>
+          <dtv:UserName>#{getAccountUserName}</dtv:UserName>
+          <dtv:PONumber>#{getPoNumber}</dtv:PONumber>
+          <?_condition?>
+          
+          <dtv:VoidReason>#{getVoidLineItemReasonCode}</dtv:VoidReason>
+          <dtv:SerialNumber>#{getSerialNumber}</dtv:SerialNumber>
+        </Tender>
+      ]]></xml>
+    </section>
     
   </sections>
 </LogDefinitions>

@@ -345,7 +345,9 @@
 	<Prompt name="ASQ_NEQATY_TRANS_DATA_NOT_FOUND" type="Notify" title="_asqNeqatySuccessTitle" message="_asqNeqatyTransDataNotFound">
 		<Action ref="CANCEL_BACK" />
 	</Prompt>
-	<Prompt name="ASQ_NEQATY_INVALID_OTP" type="Notify" title="_asqNeqatySuccessTitle" message="_asqNeqatyinvalidOtp" />
+	<Prompt name="ASQ_NEQATY_INVALID_OTP" type="Notify" title="_asqNeqatySuccessTitle" message="_asqNeqatyinvalidOtp" >
+		<Action ref="CANCEL_BACK" />
+	</Prompt>
 
 	<Prompt name="ASQ_NEQATY_NO_POINTS" type="Notify" title="_asqNeqatySuccessTitle" message="_asqNeqatyNoPoints" />
 	
