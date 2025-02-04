@@ -56,5 +56,6 @@ public final class AsqValueKeys {
 	public static final ValueKey<Boolean> ASQ_LOYALTY = new ValueKey<Boolean>(Boolean.class, "ASQ_LOYALTY");
 
 	public static final ValueKey<Integer> ASQ_STORE_TRANSFER_OTP = new ValueKey<Integer>(Integer.class, "ASQ_STORE_TRANSFER_OTP");
+	public static final ValueKey<Integer> ASQ_BANK_OTP = new ValueKey<>(Integer.class, "ASQ_BANK_OTP");
 
 }

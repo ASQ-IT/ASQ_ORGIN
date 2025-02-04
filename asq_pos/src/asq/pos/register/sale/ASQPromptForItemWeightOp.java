@@ -105,8 +105,8 @@ public class ASQPromptForItemWeightOp extends PromptForItemWeightOp {
 				}
 			}
 			_transactionHelper.addPersistable(ledger);
-			lineItem.setStringProperty("INVENTORY_TOLA_ITEM", superInventoriedItem.getItemId());
-			lineItem.setDecimalProperty("INVENTORY_TOLA_ITEM_WEIGHT", enteredWeight);
+			lineItem.setStringProperty(AsqConstant.ASQ_INVENTORY_TOLA_ITEM, superInventoriedItem.getItemId());
+			lineItem.setDecimalProperty(AsqConstant.ASQ_INVENTORY_TOLA_ITEM_WEIGHT, enteredWeight);
 		} else {
 			lineItem.setQuantity(enteredWeight);
 			lineItem.setQuantityToAllocate(enteredWeight);
@@ -147,6 +147,8 @@ public class ASQPromptForItemWeightOp extends PromptForItemWeightOp {
 		} else if (measureCode.equalsIgnoreCase(AsqConstant.ASQ_QTOLA) && (argEnteredWeight.compareTo(maxUnitCount) == 1 || argEnteredWeight.compareTo(minUnitCount) == -1)) {
 			return this.HELPER.getPromptResponse(AsqConstant.ASQ_TOLA_WEIGHT_RANGE_ERROR, args);
 		} else if (measureCode.equalsIgnoreCase(AsqConstant.ASQ_2TOLA) && (argEnteredWeight.compareTo(maxUnitCount) == 1 || argEnteredWeight.compareTo(minUnitCount) == -1)) {
+			return this.HELPER.getPromptResponse(AsqConstant.ASQ_TOLA_WEIGHT_RANGE_ERROR, args);
+		} else if (measureCode.equalsIgnoreCase(AsqConstant.ASQ_3TOLA) && (argEnteredWeight.compareTo(maxUnitCount) == 1 || argEnteredWeight.compareTo(minUnitCount) == -1)) {
 			return this.HELPER.getPromptResponse(AsqConstant.ASQ_TOLA_WEIGHT_RANGE_ERROR, args);
 		} else if (measureCode.equalsIgnoreCase(AsqConstant.ASQ_5TOLA) && (argEnteredWeight.compareTo(maxUnitCount) == 1 || argEnteredWeight.compareTo(minUnitCount) == -1)) {
 			return this.HELPER.getPromptResponse(AsqConstant.ASQ_TOLA_WEIGHT_RANGE_ERROR, args);

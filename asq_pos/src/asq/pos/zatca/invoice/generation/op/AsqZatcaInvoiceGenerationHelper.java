@@ -41,6 +41,7 @@ import org.w3._2000._09.xmldsig_.DigestMethodType;
 import org.w3._2000._09.xmldsig_.X509IssuerSerialType;
 import org.xml.sax.SAXException;
 
+import asq.pos.register.sale.AsqHelper;
 import asq.pos.zatca.AsqZatcaConstant;
 import asq.pos.zatca.cert.generation.AsqZatcaHelper;
 import asq.pos.zatca.cert.generation.service.AsqSubmitZatcaCertServiceRequest;
@@ -138,6 +139,9 @@ public class AsqZatcaInvoiceGenerationHelper {
 
 	@Inject
 	private AsqZatcaHelper asqZatcaHelper;
+
+	@Inject
+	private AsqHelper asqHelper;
 
 	@Inject
 	ICustomerHelper customerHelper;
@@ -698,7 +702,7 @@ public class AsqZatcaInvoiceGenerationHelper {
 		TaxAmountType taxAmountType = cbc.createTaxAmountType();
 		RoundingAmountType roundingAmountType = cbc.createRoundingAmountType();
 		if (null != taxAmount) {
-			taxAmountType.setValue(taxAmount.setScale(2, asqZatcaHelper.getSystemRoundingMode()));
+			taxAmountType.setValue(taxAmount.setScale(2, asqHelper.getSystemRoundingMode()));
 			taxAmountType.setCurrencyID(currencyID);
 		} else {
 			taxAmountType.setValue(new BigDecimal(0));
@@ -1044,7 +1048,7 @@ public class AsqZatcaInvoiceGenerationHelper {
 		invoiceLineType.setItem(setItemType(AsqZatcaConstant.ZATCA_TAXCATEGORY_ID_VAL, lineItem.getItemDescription(), asqZatcaHelper.getFormatttedBigDecimalValue(argTaxPerc),
 				setTaxSchemeType(argTaxCategoryID, AsqZatcaConstant.ZATCA_SCHEME_AGENCYID, AsqZatcaConstant.ZATCA_TAXSCHEME_SCHEMEID, cbc, cac), cbc, cac));
 		// Unit Price
-		argPriceAmount = argPriceAmount.divide(lineItem.getQuantity(), 3, asqZatcaHelper.getSystemRoundingMode());
+		argPriceAmount = argPriceAmount.divide(lineItem.getQuantity(), 3, asqHelper.getSystemRoundingMode());
 
 		invoiceLineType.setPrice(setPriceType(lineItem.getCurrencyId(), asqZatcaHelper.getAbsoluteValue(argPriceAmount), null, cbc, cac));
 
@@ -1527,7 +1531,7 @@ public class AsqZatcaInvoiceGenerationHelper {
 	}
 
 	public BigDecimal getUnitValue(BigDecimal argGrossValue, BigDecimal argQuantity) {
-		return argGrossValue.divide(argQuantity, 2, asqZatcaHelper.getSystemRoundingMode());
+		return argGrossValue.divide(argQuantity, 2, asqHelper.getSystemRoundingMode());
 	}
 
 }

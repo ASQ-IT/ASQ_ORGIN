@@ -17,6 +17,7 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import asq.pos.common.AsqValueKeys;
+import asq.pos.register.sale.AsqHelper;
 import asq.pos.zatca.AsqZatcaConstant;
 import asq.pos.zatca.cert.generation.AsqZatcaHelper;
 import asq.pos.zatca.database.helper.AsqZatcaDatabaseHelper;
@@ -68,6 +69,9 @@ public class AsqZatcaSaleQrCodeGenerationOp extends Operation {
 
 	@Inject
 	private AsqZatcaInvoiceGenerationHelper asqZatcaInvoiceGenerationHelper;
+
+	@Inject
+	protected AsqHelper asqHelper;
 
 	@Inject
 	private AsqZatcaHelper asqZatcaHelper;
@@ -375,11 +379,11 @@ public class AsqZatcaSaleQrCodeGenerationOp extends Operation {
 							// Zatca discount calculation handling starts
 							// need to check with multiple discount scenario
 							discountPrice = priceModel.getAmount();
-							discountAmount = discountPrice.divide(taxPerc.add(new BigDecimal(1), MathContext.DECIMAL64), 2, asqZatcaHelper.getSystemRoundingMode());
+							discountAmount = discountPrice.divide(taxPerc.add(new BigDecimal(1), MathContext.DECIMAL64), 2, asqHelper.getSystemRoundingMode());
 							discountPercent = String.valueOf(asqZatcaHelper.getDiscountPercentage(priceAmount, discountAmount));
 
 							priceAmount = salelineItem.getPreDealAmount();
-							priceAmount = priceAmount.divide(taxPerc, 2, asqZatcaHelper.getSystemRoundingMode());
+							priceAmount = priceAmount.divide(taxPerc, 2, asqHelper.getSystemRoundingMode());
 							// Zatca discount calculation handling ends
 						}
 						// extra check for rounding

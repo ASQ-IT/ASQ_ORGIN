@@ -1,5 +1,5 @@
-#set ($subject = "Return Approval OTP")
-Please find the return transaction details
+#set ($subject = "Bank Transfer Approval OTP")
+Please find the Bank Transfer transaction details
 <html>
   <head>
   <style>
@@ -18,19 +18,19 @@ Please find the return transaction details
   #if($thisStore)
     Store Name: $thisStore<br>
   #end
+  #if($thisStoreAdress)
+    Store Address: $thisStoreAdress<br>
+  #end
    #if($transactionSeq)
     Transaction Number: $transactionSeq<br>
   #end
    #if($amountDue)
-    Refund Amount: $amountDue<br>
+    Tendered Amount: $amountDue<br>
   #end
   <br>
    #if($otp)
-    <b> Please find the return approval OTP: $otp </b><br>
+    <b> Please find the Bank Transfer approval OTP: $otp </b><br>
   #end
-  <br>
-  <u>Return Approval OTP</u>
-  <br>
   </body>
 </html>
 

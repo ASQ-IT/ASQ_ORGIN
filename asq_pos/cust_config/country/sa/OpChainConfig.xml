@@ -79,6 +79,31 @@
 			chainType="START" />
 	</OpChain>
 	<!-- ASQ Neqaty Integration Service Ends -->
+	
+	<!-- ASQ Bank Transfer services start -->
+	<OpChain name="ASQ_TENDER_BANK_TRANSFER"
+		signal="TransactionModified"
+		contextKey="SALE_TENDER_EMPTY_MENU_OPTION">
+		<Op class="dtv.pos.tender.CreateTenderLineItemOp">
+			<Parameter name="TenderStatus" value="Tender" />
+			<Parameter name="TenderId" value="BANK_TRANSFER" />
+		</Op>
+		<PromptOp class="dtv.pos.tender.cashsuggestion.CashSuggestionPromptTenderAmtOp" validationsBean="tenderAmountRules" />
+		<OpChainRoute chainKey="ASQ_BANK_TRANSFER_OTP" />
+		<Op class="dtv.pos.tender.AddTenderToSaleTranOp" />
+		<Op
+			class="dtv.pos.tender.rounding.UpdateTransactionRoundedAmountOp" />
+		<!--ASQ Neqaty Integration Earn points - Starts -->
+		<OpChainRoute chainKey="CHECK_SALE_COMPLETE"
+			chainType="START" />
+	</OpChain>
+	<!-- ASQ Bank Transfer Integration Service Ends -->
+	
+	<OpChain name="ASQ_BANK_TRANSFER_OTP">
+			<Op	class="asq.pos.tender.AsqBankTransferEmailOp" longRunning="true" />
+		    <Op class="asq.pos.tender.AsqBankTransferEmailFormOp" />
+	</OpChain>
+	
 <!-- ASQ Mokafaa Integration Service Starts-->
 	<OpChain name="ASQ_TENDER_MOKAFAA">
 		<Op class="asq.pos.loyalty.mokafaa.tender.op.AsqMokafaaMobileNumberOp" />
@@ -687,7 +712,7 @@
 		<Op class="asq.pos.inventory.ship.op.AsqStoreTransferOTPFormOp"/>
    </OpChain>
 	
-<!-- Customer Validation Before tender -->	
+   <!-- Customer Validation Before tender -->	
   <OpChain name="PRE_TENDERING.3" >
     <Op class="asq.pos.tender.customer.check.AsqCustomerCheckOp" />
   </OpChain>
@@ -702,18 +727,36 @@
 		<OpChainRoute chainKey="BEFORE_COMPLETE_SALE" />
 	</OpChain>
   
-  <OpChain name="PRE_RETURN_VERIFICATION">
-   <Op class="asq.pos.register.returns.verification.AsqOriginalReturnOp" />
-    <OpChainRoute chainKey="PRE_RETURN_VERIFICATION.local.pre" />
-    <OpChainRoute chainKey="PRE_RETURN_VERIFICATION.local.invoice" />
-    <OpChainRoute chainKey="DISPLAY_RETURN_INFO_TAB_MESSAGE" />
-    <OpChainRoute chainKey="VALIDATE_RETURN_INFO" />
-    <PromptOp class="dtv.pos.register.returns.CheckTransactionMissingDataOp" />
-    <PromptOp class="dtv.pos.register.returns.PromptReturnSecurityOp" />
-    <OpChainRoute chainKey="RETURN_PRORATION_VERIFIED" />
-    <Op class="dtv.pos.register.returns.verification.DisplayReturnOriginalTransOp" />
-    <OpChainRoute chainKey="VERIFIED_RETURN_START.local.invoice" />
-    <OpChainRoute chainKey="VERIFIED_RETURN" chainType="START" />
-  </OpChain>
+	<OpChain name="PRE_RETURN_VERIFICATION">
+	   <Op class="asq.pos.register.returns.verification.AsqOriginalReturnOp" />
+	    <OpChainRoute chainKey="PRE_RETURN_VERIFICATION.local.pre" />
+	    <OpChainRoute chainKey="PRE_RETURN_VERIFICATION.local.invoice" />
+	    <OpChainRoute chainKey="DISPLAY_RETURN_INFO_TAB_MESSAGE" />
+	    <OpChainRoute chainKey="VALIDATE_RETURN_INFO" />
+	    <PromptOp class="dtv.pos.register.returns.CheckTransactionMissingDataOp" />
+	    <PromptOp class="dtv.pos.register.returns.PromptReturnSecurityOp" />
+	    <OpChainRoute chainKey="RETURN_PRORATION_VERIFIED" />
+	    <Op class="dtv.pos.register.returns.verification.DisplayReturnOriginalTransOp" />
+	    <OpChainRoute chainKey="VERIFIED_RETURN_START.local.invoice" />
+	    <OpChainRoute chainKey="VERIFIED_RETURN" chainType="START" />
+	 </OpChain>
+  
+  
+    <!-- ASQ Bank Deposit email Starts-->
+	<OpChain name="BANK_DEPOSIT.local" >
+		<Op	class="asq.pos.till.count.AsqEmailBankDepositOp" longRunning="true" />
+	</OpChain>
+	<!-- ASQ Bank Deposit email Ends-->
+ 
+ 	<!-- ASQ Tax free error at Reg opens Starts-->
+	<OpChain name="WORKSTATION_OPEN_EXT.local">
+		<OpChainRoute chainKey="WORKSTATION_OPEN_EXT.pre" />
+		<!-- <OpChainRoute chainKey="WORKSTATION_OPEN_EXT.local.1" /> -->
+		<OpChainRoute chainKey="WORKSTATION_OPEN_EXT.local.2" />
+		<!-- Fiscal logic goes here -->
+		<OpChainRoute chainKey="WORKSTATION_OPEN_EXT.local.3" />
+		<OpChainRoute chainKey="WORKSTATION_OPEN_EXT.post" />
+	</OpChain>
+	<!-- ASQ Tax free error at Reg opens ends-->
 </OpChainSet>
 

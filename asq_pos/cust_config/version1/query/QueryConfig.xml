@@ -92,5 +92,60 @@
 			</SQL>
 		</Query>
 		<!--Employee Commission Query changes ends-->
+		
+		<!--Employee Item Commission Query changes starts-->
+		<Query name="ASQ_EMPLOYEE_ITEM_COMMISSION_QUERY" pmType="REGISTER_CORE" >
+			<QueryHandler>dtv.data2.access.query.SqlQueryHandler</QueryHandler>
+			<ResultClass>asq.pos.employee.commission.AsqEmpCommissionQueryResult</ResultClass>
+			<ResultField name="employee_id" type="Long" />
+			<ResultField name="employee_name" type="String" />
+			<ResultField name="item_id" type="String" />
+			<ResultField name="item_quantity" type="BigDecimal" />
+			<ResultField name="trans_count" type="BigDecimal" />
+			<ResultField name="net_amt" type="BigDecimal" />
+			<ResultField name="perc_amt" type="BigDecimal" />
+			<SQL>
+				<Statement>
+				<![CDATA[
+				SELECT hre.employee_id,
+				    CASE
+				        WHEN coalesce(upper(hre.first_name),' ') <> ' '
+				             OR coalesce(upper(hre.last_name),' ') <> ' ' 
+				        THEN
+				            concat(hre.first_name, concat('::', hre.last_name))
+				    END AS employee_name,
+				    tsl.item_id,
+				    SUM(tsl.quantity) AS item_quantity,
+				    0 as trans_count,
+				    0 as net_amt,
+				    0 as perc_amt  
+				FROM rpt_sale_line tsl
+				    INNER JOIN trl_commission_mod tcm ON 
+				        tcm.organization_id = tsl.organization_id
+				        AND tcm.rtl_loc_id = tsl.rtl_loc_id
+				        AND tcm.business_date = tsl.business_date
+				        AND tcm.wkstn_id = tsl.wkstn_id
+				        AND tcm.trans_seq = tsl.trans_seq
+				        AND tcm.rtrans_lineitm_seq = tsl.rtrans_lineitm_seq
+				    INNER JOIN crm_party hre ON 
+				        tsl.organization_id = hre.organization_id
+				        AND tcm.employee_party_id = hre.party_id
+				WHERE
+				    tsl.organization_id = ?
+				    AND tsl.rtl_loc_id = ?
+					AND tsl.BUSINESS_DATE = ?
+				    AND upper(tsl.trans_statcode) = 'COMPLETE'
+				    AND ( tsl.exclude_from_net_sales_flag IS NULL OR tsl.exclude_from_net_sales_flag <> '1' )
+				    AND ( upper(hre.employee_id) LIKE '%' )
+				    GROUP BY hre.employee_id,hre.last_name,hre.first_name,tsl.item_id
+				    order by employee_id desc
+		   		]]>
+				</Statement>
+				<Parameter name="argOrganizationId"/>
+				<Parameter name="argRetailLocId"/>
+				<Parameter name="argOrgbusinessDate"/>
+			</SQL>
+		</Query>
+		<!--Employee Item Commission Query changes ends-->
  	</Queries>
  </QuerySet>

@@ -16,7 +16,7 @@ public class Version
 
   private static final String CUSTOMER_VERSION = "1.1.1";
   private static final String PATCH_VERSION = "0.0";
-  private static final String BUILD_DATE = "2025-01-19T10:25:07+0300";
+  private static final String BUILD_DATE = "2025-02-03T17:24:52+0300";
 
   /** {@inheritDoc} */
   @Override

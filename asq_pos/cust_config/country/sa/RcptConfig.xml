@@ -1,371 +1,418 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<ReceiptDefinitions xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="RcptConfig.xsd">
+<ReceiptDefinitions
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:noNamespaceSchemaLocation="RcptConfig.xsd">
 
-  <ReceiptCopyRules>
-    <ReceiptCopyRule name="RETAIL_SALE_AR" document="CUSTOMER_AR">
-      <Rule class="dtv.pos.hardware.rcptbuilding.copyrules.TransactionTypeRule" type="RETAIL_SALE" />
-      <Rule class="dtv.pos.hardware.rcptbuilding.copyrules.CanceledTransactionReceiptEnabledRule" />
-    </ReceiptCopyRule>
-     <ReceiptCopyRule name="RETAIL_SALE_AR" document="STORE">
-      <Rule class="dtv.pos.hardware.rcptbuilding.copyrules.TransactionTypeRule" type="RETAIL_SALE" />
-      <Rule class="dtv.pos.hardware.rcptbuilding.copyrules.CanceledTransactionReceiptEnabledRule" />
-    </ReceiptCopyRule>
-    <!-- PRICE Quotation start-->
-     <ReceiptCopyRule name="RAIN_CHECK2" document="ASQ_STORE_COPY">
-      <Rule class="dtv.pos.hardware.rcptbuilding.copyrules.TransactionTypeRule" type="RAIN_CHECK" />
-         <Rule class="dtv.pos.hardware.rcptbuilding.copyrules.CanceledTransactionReceiptEnabledRule" />
-      <Rule class="asq.pos.hardware.rcptbuilder.copyrule.AsqTransactionTypeRuleForPriceQotation" />
-    </ReceiptCopyRule> 
-     <ReceiptCopyRule name="RAIN_CHECK1" document="ASQ_CUSTOMER_COPY">
-      <Rule class="dtv.pos.hardware.rcptbuilding.copyrules.TransactionTypeRule" type="RAIN_CHECK" />
-      <Rule class="dtv.pos.hardware.rcptbuilding.copyrules.CanceledTransactionReceiptEnabledRule" />
-      <Rule class="asq.pos.hardware.rcptbuilder.copyrule.AsqTransactionTypeRuleForPriceQotation" />
-    </ReceiptCopyRule> 
-     <ReceiptCopyRule name="RAIN_CHECK" document="RAIN_CHECK">
-      <Rule class="dtv.pos.hardware.rcptbuilding.copyrules.TransactionTypeRule" type="RAIN_CHECK" />
-      <Rule class="asq.pos.hardware.rcptbuilder.copyrule.AsqTransactionTypeRuleForPriceQotation" inverted="true" />
-    </ReceiptCopyRule>
-    <!-- PRICE Quotation start-->
-  </ReceiptCopyRules>
-  
-  <!-- PRICE Quotation start-->
-  <receipts>
-     <receipt document="ASQ_CUSTOMER_COPY" sectionref="CustomerCopy" email="true" />
-     <receipt document="ASQ_STORE_COPY" sectionref="StoreCopy" />
-  </receipts>
-  <!-- PRICE Quotation end-->
-<sections>
-	<section name="CustomerCopy">
-		<sectionref>header</sectionref>
-		<sectionref>CUST_COPY_HEADER_DB</sectionref>
-		<sectionref>COUNTRYPACK.SUSPEND_NONFISCAL</sectionref>
-		<sectionref>items</sectionref>
-		<sectionref>totals</sectionref>
-		<sectionref>tax_code_summary</sectionref>
-		<sectionref>tenders</sectionref>
-		<sectionref>change</sectionref>
-		<sectionref>YouSavedMessage</sectionref>
-		<sectionref>TaxExemptInfo</sectionref>
-	    <sectionref>Footer_page_disclaimer</sectionref>
-		<sectionref>footer_cust_copy</sectionref>
-		<sectionref>LOCAL.CUST_COPY_FOOTER_POST</sectionref>
-		<sectionref>system_mode</sectionref>
-        <sectionref>CustomerCopyLabel</sectionref> 
-		<sectionref>LOCAL.CUST_COPY_FOOTER</sectionref>
-		<sectionref>page_break</sectionref>
-	</section>
-	
-	<!-- new tender visibility on receipt start -->
-	 <section name="nonchange_tender">
-      <sectionref>currency_tender</sectionref>
-      <sectionref>creditcard_tender</sectionref>
-      <sectionref>loyality_tender</sectionref>
-      <sectionref>travelers_check_tender</sectionref>
-      <sectionref>check_tender</sectionref>
-      <sectionref>account_credit</sectionref>
-      <sectionref>voucher_tender</sectionref>
-      <sectionref>account_tender</sectionref>
-      <sectionref>homeofficecheck_tender</sectionref>
-      <sectionref>coupon_tender</sectionref>
-      <sectionref>nonvoided_foreign_currency_tender</sectionref>
-      <sectionref>misc_tender</sectionref>
-      <sectionref>roomcharge_tender</sectionref>
-      <sectionref>custcopy_nonchange_tender</sectionref>
-    </section>
-    
-    <section name="storecopy_nonchange_tender">
-      <sectionref>currency_tender</sectionref>
-      <sectionref>storecopy_creditcard_tender</sectionref>
-      <sectionref>loyality_tender</sectionref>
-      <sectionref>travelers_check_tender</sectionref>
-      <sectionref>check_tender</sectionref>
-      <sectionref>account_credit</sectionref>
-      <sectionref>voucher_tender</sectionref>
-      <sectionref>account_tender</sectionref>
-      <sectionref>homeofficecheck_tender</sectionref>
-      <sectionref>coupon_tender</sectionref>
-      <sectionref>nonvoided_foreign_currency_tender</sectionref>
-      <sectionref>misc_tender</sectionref>
-      <sectionref>storecopy_roomcharge_tender</sectionref>
-      <sectionref>nonchange_tender_signature</sectionref>
-    </section>
-    
-     <section name="loyality_tender">
-      <condition class="dtv.pos.docbuilding.conditions.LineTenderTypeCondition" value="LOYALITY" />
-      <row>
-        <field>
-          <aggregate class="dtv.pos.tender.TenderLineDescriptionDocBuilderField" />
-        </field>
-        <field method="getAmount" formatter="Money" loc="-3" rtlloc="12" />
-      </row>
-    </section>
-    <!-- new tender visibility on receipt end -->
-     <section name="header">
-      <sectionref>headerTop</sectionref>
-      <sectionref>CUSTOMER_INFO</sectionref>
-      <sectionref>system_mode</sectionref>
-      <sectionref>return_header</sectionref>
-      </section>
-	<section name="footer_cust_copy">
-		<sectionref>legalWarranty</sectionref>
-		<sectionref>LOCAL.ITEMS_COUNT</sectionref>
-		<sectionref>system_mode</sectionref>
-		<sectionref>asq_planet_id</sectionref>
-		<row style="STRONGUNDERLINE" align="C" />
-		<sectionref>barcode_footer</sectionref>
-		<sectionref>asq_zatca_qrcode</sectionref>
-		<row style="STRONGUNDERLINE" align="C" />
-	</section>
-	
-	<!-- Asq Zatca rcpt changes start -->
-	<section name="asq_zatca_qrcode">
-		<barcode symbology="QR CODE" textposition="NONE" height="250" width="300">
-			<field align="C" formatter="PlainText">
-				<aggregate
-					class="asq.pos.register.sale.zatca.receipt.AsqZatcaTransQrCode" />
-			</field>
-		</barcode>
-	</section> 	
-	<!-- Asq Zatca rcpt changes ends -->
-	
-	<!-- Asq employee commission changes start -->
-	<section name="asq_emp_commission">
-	<region>
-		<condition method="getTransactionTypeCode"
-				comparison="EQUAL" value="WORKSTATION_CLOSE" />
-		<condition class="asq.pos.employee.condition.AsqEmpCommissionCondition"  inverted="false"/>
-        <field>
-          <aggregate class="asq.pos.store.close.receipt.AsqEmployeeCommissionDocBuilderField" />
-        </field>
-        </region>
-	</section> 	
-	<!-- Asq employee commission changes ends -->
-	
-	<!-- Planet integration changes	start -->
-	<section name="asq_planet_id">
-	<condition method="getStringProperty" method_param="ASQ_PLANET_TAX_ID" comparison="NOT_NULL" />
-	<row>  
-	<field text="_asqPlanetReceipt" loc="-25"/>
-	<field text="_asqPlanetReceipt1" loc="10"/>
-	<field text="_asqPlanetReceipt2" loc="10"/> 
-	<field text="_asqPlanetReceipt3" loc="10"/>
-	<field method="getStringProperty" method_param="ASQ_PLANET_TAX_ID" loc="10" style="BOLD" />
-	<field text="-------------------------------------------------------" loc="10"/>
-	<field text="_asqPlanetReceipt4" loc="10"/>
-	</row>
-	</section>
-	<!-- Planet integration changes	end -->
-	
-	<section name="Footer_page_disclaimer">
-	    <condition class="asq.pos.docbuilder.condition.AsqFooterPageCondition" />
-	  	<sectionref>CUST_COPY_FOOTER_DB</sectionref>
-		<sectionref>CUST_COPY_FOOTER1_DB</sectionref>
-		<sectionref>CUST_COPY_FOOTER2_DB</sectionref>
-		<sectionref>CUST_COPY_FOOTER3_DB</sectionref>
-		<sectionref>CUST_COPY_FOOTER4_DB</sectionref>
-		<sectionref>CUST_COPY_FOOTER5_DB</sectionref>
-		<!-- <sectionref>CUST_COPY_FOOTER_DB1</sectionref> -->
-	</section>
-	
-    <section name="CUST_COPY_FOOTER_DB1" dbRef="CUSTOMER_COPY_FOOTER_LAST::DEFAULT::getTransactionDate">
-		<row />
-	</section>
-	<section name="CUST_COPY_FOOTER_DB"
-		dbRef="CUSTOMER_COPY_FOOTER::DEFAULT::getTransactionDate">
-		<row />
-	</section>
-	<section name="CUST_COPY_FOOTER1_DB"
-		dbRef="CUSTOMER_COPY_FOOTER1::DEFAULT::getTransactionDate">
-		<row />
-	</section>
-	<section name="CUST_COPY_FOOTER2_DB"
-		dbRef="CUSTOMER_COPY_FOOTER2::DEFAULT::getTransactionDate">
-		<row />
-	</section>
-	<section name="CUST_COPY_FOOTER3_DB"
-		dbRef="CUSTOMER_COPY_FOOTER3::DEFAULT::getTransactionDate">
-		<row />
-	</section>
-	<section name="CUST_COPY_FOOTER4_DB"
-		dbRef="CUSTOMER_COPY_FOOTER4::DEFAULT::getTransactionDate">
-		<row />
-	</section>
-	<section name="CUST_COPY_FOOTER5_DB"
-		dbRef="CUSTOMER_COPY_FOOTER5::DEFAULT::getTransactionDate">
-	</section>
-	<section name="headerTop_preLocal">
-		<sectionref>logo</sectionref>
-		<sectionref>invoice_text</sectionref>
-		<sectionref>trans_barcode</sectionref>
-		<!-- <sectionref>transaction_store_location</sectionref> -->
-		<row>
-        <field text="_asqvatnumber"   loc="29" style="BOLD"/>
-        <sp />
-        <field style="BOLD">
-        <aggregate class="asq.pos.docbuilder.AsqVatNumberDocBuilder" />
-        </field>
-      	</row>
-		<row>
-        <field text="_ticket"   loc="33" />
-        <sp />
-        <field method="getTransactionSequence" formatter="Numeric" />
-      	</row>
-		<horizontal_rule />
-	</section>
+	<FormatterMap>
+		<Formatter name="DateShort"
+			class="dtv.i18n.formatter.ArabicDateFormatter" ctx="RECEIPT"
+			formatterType="DateShort" />
+		<Formatter name="DateMedium"
+			class="dtv.i18n.formatter.ArabicDateFormatter" ctx="RECEIPT"
+			formatterType="DateMedium" />
+		<Formatter name="DateTimeMedium"
+			class="dtv.i18n.formatter.ArabicDateFormatter" ctx="RECEIPT"
+			formatterType="DateTimeMedium" />
+		<Formatter name="TimeShort"
+			class="dtv.i18n.formatter.ArabicDateFormatter" ctx="RECEIPT"
+			formatterType="TimeShort" />
+		<Formatter name="DayOfWeek"
+			class="dtv.i18n.formatter.ArabicDateFormatter" ctx="RECEIPT"
+			formatterType="DayOfWeekShort" />
+		<Formatter name="DayAndMonth"
+			class="dtv.i18n.formatter.ArabicDateFormatter" ctx="RECEIPT"
+			formatterType="DateMonthNameDay" />
+		<Formatter name="Phone"
+			class="dtv.i18n.formatter.output.ArabicTelephoneFormatter" />
+		<Formatter name="PostalCode"
+			class="dtv.i18n.formatter.ArabicPostalCodeFormatter" />
+		<Formatter name="Money"
+			class="dtv.i18n.formatter.ArabicMoneyFormatter" ctx="RECEIPT" />
+		<Formatter name="Money$"
+			class="dtv.i18n.formatter.ArabicMoneyFormatter" ctx="RECEIPT"
+			includeCurrencySymbol="true" />
+		<Formatter name="Quantity"
+			class="dtv.i18n.formatter.ArabicQuantityFormatter" ctx="RECEIPT" />
+		<Formatter name="Percent"
+			class="dtv.i18n.formatter.ArabicPercentFormatter" ctx="RECEIPT" />
+		<Formatter name="Hours"
+			class="dtv.i18n.formatter.ArabicDecimalFormatter" format="0.00" />
+		<Formatter name="Numeric"
+			class="dtv.i18n.formatter.ArabicNumericFormatter" ctx="RECEIPT" />
+		<Formatter name="BasicAddress"
+			class="dtv.pos.i18n.format.ArabicBasicAddressFormatter" />
+	</FormatterMap>
 
-	<section name="invoice_text">
-		<region alignment="C">
-			<field text="_simplifiedTaxInvoicearabic" style="BOLD" />
-		</region>
-		<region alignment="C">
-			<field text="_simplifiedTaxInvoice" style="BOLD" />
-		</region>
-	</section>
+	<receipts>
+		<receipt document="CUSTOMER" sectionref="CustomerCopy"
+			email="true" locale="ar_SA" />
+	</receipts>
 
-	<section name="logo" >
-		<picture
-			filename="../xstoredata/xstore/res/graphics/receipt/logo.bmp"
-			preload="true" />
-	</section>
-	<section name="barcode_footer">	
-		<picture
-			filename="../xstoredata/xstore/res/graphics/receipt/barcode.bmp"
-			preload="true" />
-	</section>
+	<sections>
+		<section name="CustomerCopy">
+			<sectionref>header</sectionref>
+			<sectionref>CUST_COPY_HEADER_DB</sectionref>
+			<sectionref>COUNTRYPACK.SUSPEND_NONFISCAL</sectionref>
+			<sectionref>items</sectionref>
+			<sectionref>totals</sectionref>
+			<sectionref>tax_code_summary</sectionref>
+			<sectionref>tenders</sectionref>
+			<sectionref>change</sectionref>
+			<sectionref>YouSavedMessage</sectionref>
+			<sectionref>TaxExemptInfo</sectionref>
+			<sectionref>Footer_page_disclaimer</sectionref>
+			<sectionref>footer_cust_copy</sectionref>
+			<sectionref>LOCAL.CUST_COPY_FOOTER_POST</sectionref>
+			<sectionref>system_mode</sectionref>
+			<sectionref>CustomerCopyLabel</sectionref>
+			<sectionref>LOCAL.CUST_COPY_FOOTER</sectionref>
+			<sectionref>page_break</sectionref>
+		</section>
 
-	<!--ASQ Commission starts -->
-	<section name="SYSTEM_CYCLE">
-		<horizontal_rule />
-		<sectionref>training</sectionref>
-		<row>
-			<field text="_store" />
-			<sp />
-			<field method="getRetailLocationId" formatter="Numeric" />
-			<field text="_registerColon" loc="22" />
-			<sp />
-			<field method="getWorkstationId" formatter="Numeric" />
-		</row>
-		<row>
-			<field text="_date" />
-			<sp />
-			<field method="getTransactionDate" formatter="DateShort" />
-			<field text="_trantime" loc="22" />
-			<sp />
-			<field method="getBeginDateTimestamp" formatter="TimeShort" />
-		</row>
-		<row />
-		<row>
-			<field text="_cashier" />
-			<sp />
-			<field method="getOperatorParty.getEmployeeId" />
-		</row>
-		<!-- 24/7 Add the last 4 digit of the session id -->
-		<row>
-			<condition method="getTransactionTypeCode"
-				comparison="EQUAL" value="WORKSTATION_CLOSE" />
-			<field text="_sessionid" />
-			<sp />
-			<field method="getSessionId" formatter="Last4" />
-		</row>
-		<row>
-			<condition method="getTransactionTypeCode"
-				comparison="EQUAL" value="WORKSTATION_COMPLETE_REM_CLOSE" />
-			<field text="_sessionid" />
-			<sp />
-			<field method="getSessionId" formatter="Last4" />
-		</row>
-		<row />
-		<row align="C" charsize="X2HW">
-			<field text="*******************" style="BOLD" />
-		</row>
-		<row align="C" charsize="X2HW">
-			<field style="BOLD">
-				<aggregate
-					class="dtv.pos.systemcycle.common.SystemCycleReceiptBannerDocBuilderField" />
-			</field>
-		</row>
-		<sectionref>asq_emp_commission</sectionref>
-		<row align="C" charsize="X2HW">
-			<condition method="getTransactionTypeCode"
-				comparison="EQUAL" value="WORKSTATION_COMPLETE_REM_CLOSE" />
-			<field text="_registerColon" style="BOLD" />
-			<sp />
-			<field method="getStringProperty"
-				method_param="remoteWorkstationId" style="BOLD" />
-		</row>
-		<row align="C" charsize="X2HW">
-			<field text="*******************" style="BOLD" />
-		</row>
-		<sectionref>training</sectionref>
-		<sectionref>page_break</sectionref>
-	</section>
-	<!--ASQ Commission ends -->
-	
-	 <section name="headerTop_postLocal">
-      <sectionref>transaction_header_info</sectionref>
-     <!--  <sectionref>SALES_PERSON_INFO</sectionref> -->
-      <!-- <sectionref>transaction_cashier</sectionref> -->
-      <sectionref>transaction_flight_information</sectionref>
-    </section>
-    
-     <section name="transaction_header_info">
-      <row>
-        <field text="_store" />
-        <sp />
-        <field method="getRetailLocationId" formatter="Numeric" />
-        <field text="_registerColon" loc="22" />
-        <sp />
-        <field method="getWorkstationId" formatter="Numeric" />
-      </row>
-      <row>
-        <field text="_date" />
-        <sp />
-        <field method="getTransactionDate" formatter="DateShort" />
-        <field text="_trantime" loc="22" />
-        <sp />
-        <field method="getBeginDateTimestamp" formatter="TimeShort" />
-      </row>
-    <!--   <row>
-        <field text="_ticket" />
-        <sp />
-        <field method="getTransactionSequence" formatter="Numeric" />
-      </row> -->
-    </section>
-     <section name="header">
-      <sectionref>headerTop</sectionref>
-   <!--    <sectionref>CUSTOMER_INFO</sectionref> -->
-      <row />
-      <sectionref>system_mode</sectionref>
-      <sectionref>return_header</sectionref>
-    </section>
-    
-        <section name="item_header">
-      <!-- item header -->
-      <row style="STRONGUNDERLINE">
-        <field text="_item" />
-        <field text="_qty" align="R" loc="19" rtlloc="-9" />
-        <field text="_asqvat" align="R" loc="-25" rtlloc="10" />
-        <field text="_price" align="R" loc="-15" rtlloc="25"/>
-        <field text="_amount" align="R" loc="-3" rtlloc="12"/>
-      </row>
-      <sectionref>item_details</sectionref>
-      <row />
-    </section> 
-     <section name="item_details_listing">
-      <row>
-        <field method="getItem.getItemId" />
-        <field formatter="Quantity" align="R" loc="19" rtlloc="-9">
-          <aggregate class="dtv.pos.register.sale.QuantityDocBuilderField" />
-        </field>
-         <field  formatter="Money" align="R" loc="-25" rtlloc="10" >
-          <aggregate class="asq.pos.docbuilder.AsqTaxDocBuilder" />
-        </field> 
-        <field method="getBaseUnitPrice" formatter="Money" align="R" loc="-15" rtlloc="25" />
-        <field method="getExtendedAmount" formatter="Money" align="R" loc="-3" rtlloc="12" />   
-        <field loc="-1">
-          <aggregate class="dtv.pos.register.tax.TaxFlagDocBuilderField" />
-        </field>
-      </row>
-    </section>  
-</sections>
+		<!-- new tender visibility on receipt start -->
+		<section name="nonchange_tender">
+			<sectionref>currency_tender</sectionref>
+			<sectionref>creditcard_tender</sectionref>
+			<sectionref>loyality_tender</sectionref>
+			<sectionref>Bank_Transfer_tender</sectionref>
+			<sectionref>travelers_check_tender</sectionref>
+			<sectionref>check_tender</sectionref>
+			<sectionref>account_credit</sectionref>
+			<sectionref>voucher_tender</sectionref>
+			<sectionref>account_tender</sectionref>
+			<sectionref>homeofficecheck_tender</sectionref>
+			<sectionref>coupon_tender</sectionref>
+			<sectionref>nonvoided_foreign_currency_tender</sectionref>
+			<sectionref>misc_tender</sectionref>
+			<sectionref>roomcharge_tender</sectionref>
+			<sectionref>custcopy_nonchange_tender</sectionref>
+		</section>
+
+		<section name="storecopy_nonchange_tender">
+			<sectionref>currency_tender</sectionref>
+			<sectionref>storecopy_creditcard_tender</sectionref>
+			<sectionref>loyality_tender</sectionref>
+			<sectionref>Bank_Transfer_tender</sectionref>
+			<sectionref>travelers_check_tender</sectionref>
+			<sectionref>check_tender</sectionref>
+			<sectionref>account_credit</sectionref>
+			<sectionref>voucher_tender</sectionref>
+			<sectionref>account_tender</sectionref>
+			<sectionref>homeofficecheck_tender</sectionref>
+			<sectionref>coupon_tender</sectionref>
+			<sectionref>nonvoided_foreign_currency_tender</sectionref>
+			<sectionref>misc_tender</sectionref>
+			<sectionref>storecopy_roomcharge_tender</sectionref>
+			<sectionref>nonchange_tender_signature</sectionref>
+		</section>
+
+		<section name="loyality_tender">
+			<condition
+				class="dtv.pos.docbuilding.conditions.LineTenderTypeCondition"
+				value="LOYALITY" />
+			<row>
+				<field>
+					<aggregate
+						class="dtv.pos.tender.TenderLineDescriptionDocBuilderField" />
+				</field>
+				<field method="getAmount" formatter="Money" loc="-3"
+					rtlloc="12" />
+			</row>
+		</section>
+
+		<!-- Added Bank transfer Tender Type -->
+		<section name="Bank_Transfer_tender">
+			<condition
+				class="dtv.pos.docbuilding.conditions.LineTenderTypeCondition"
+				value="BANK" />
+			<row>
+				<field>
+					<aggregate
+						class="dtv.pos.tender.TenderLineDescriptionDocBuilderField" />
+				</field>
+				<field method="getAmount" formatter="Money" loc="-3"
+					rtlloc="12" />
+			</row>
+		</section>
+		<!-- new tender visibility on receipt end -->
+		<section name="header">
+			<sectionref>headerTop</sectionref>
+			<sectionref>CUSTOMER_INFO</sectionref>
+			<sectionref>system_mode</sectionref>
+			<sectionref>return_header</sectionref>
+		</section>
+		<section name="footer_cust_copy">
+			<sectionref>legalWarranty</sectionref>
+			<sectionref>LOCAL.ITEMS_COUNT</sectionref>
+			<sectionref>system_mode</sectionref>
+			<sectionref>asq_planet_id</sectionref>
+			<row style="STRONGUNDERLINE" align="C" />
+			<sectionref>barcode_footer</sectionref>
+			<sectionref>asq_zatca_qrcode</sectionref>
+			<row style="STRONGUNDERLINE" align="C" />
+		</section>
+
+		<!-- Asq Zatca rcpt changes start -->
+		<section name="asq_zatca_qrcode">
+			<barcode symbology="QR CODE" textposition="NONE" height="250"
+				width="300">
+				<field align="C" formatter="PlainText">
+					<aggregate
+						class="asq.pos.register.sale.zatca.receipt.AsqZatcaTransQrCode" />
+				</field>
+			</barcode>
+		</section>
+		<!-- Asq Zatca rcpt changes ends -->
+
+		<!-- Asq employee commission changes start -->
+		<section name="asq_emp_commission">
+			<region>
+				<condition method="getTransactionTypeCode"
+					comparison="EQUAL" value="WORKSTATION_CLOSE" />
+				<condition
+					class="asq.pos.employee.condition.AsqEmpCommissionCondition"
+					inverted="false" />
+				<field>
+					<aggregate
+						class="asq.pos.store.close.receipt.AsqEmployeeCommissionDocBuilderField" />
+				</field>
+			</region>
+		</section>
+		<!-- Asq employee commission changes ends -->
+
+		<!-- Planet integration changes start -->
+		<section name="asq_planet_id">
+			<condition method="getStringProperty"
+				method_param="ASQ_PLANET_TAX_ID" comparison="NOT_NULL" />
+			<row>
+				<field text="_asqPlanetReceipt" loc="-25" />
+				<field text="_asqPlanetReceipt1" loc="10" />
+				<field text="_asqPlanetReceipt2" loc="10" />
+				<field text="_asqPlanetReceipt3" loc="10" />
+				<field method="getStringProperty"
+					method_param="ASQ_PLANET_TAX_ID" loc="10" style="BOLD" />
+				<field
+					text="-------------------------------------------------------"
+					loc="10" />
+				<field text="_asqPlanetReceipt4" loc="10" />
+			</row>
+		</section>
+		<!-- Planet integration changes end -->
+
+		<section name="Footer_page_disclaimer">
+			<condition
+				class="asq.pos.docbuilder.condition.AsqFooterPageCondition" />
+			<sectionref>CUST_COPY_FOOTER_DB</sectionref>
+			<sectionref>CUST_COPY_FOOTER1_DB</sectionref>
+			<sectionref>CUST_COPY_FOOTER2_DB</sectionref>
+			<sectionref>CUST_COPY_FOOTER3_DB</sectionref>
+			<sectionref>CUST_COPY_FOOTER4_DB</sectionref>
+			<sectionref>CUST_COPY_FOOTER5_DB</sectionref>
+			<!-- <sectionref>CUST_COPY_FOOTER_DB1</sectionref> -->
+		</section>
+
+		<section name="CUST_COPY_FOOTER_DB1"
+			dbRef="CUSTOMER_COPY_FOOTER_LAST::DEFAULT::getTransactionDate">
+			<row />
+		</section>
+		<section name="CUST_COPY_FOOTER_DB"
+			dbRef="CUSTOMER_COPY_FOOTER::DEFAULT::getTransactionDate">
+			<row />
+		</section>
+		<section name="CUST_COPY_FOOTER1_DB"
+			dbRef="CUSTOMER_COPY_FOOTER1::DEFAULT::getTransactionDate">
+			<row />
+		</section>
+		<section name="CUST_COPY_FOOTER2_DB"
+			dbRef="CUSTOMER_COPY_FOOTER2::DEFAULT::getTransactionDate">
+			<row />
+		</section>
+		<section name="CUST_COPY_FOOTER3_DB"
+			dbRef="CUSTOMER_COPY_FOOTER3::DEFAULT::getTransactionDate">
+			<row />
+		</section>
+		<section name="CUST_COPY_FOOTER4_DB"
+			dbRef="CUSTOMER_COPY_FOOTER4::DEFAULT::getTransactionDate">
+			<row />
+		</section>
+		<section name="CUST_COPY_FOOTER5_DB"
+			dbRef="CUSTOMER_COPY_FOOTER5::DEFAULT::getTransactionDate">
+		</section>
+		<section name="headerTop_preLocal">
+			<sectionref>logo</sectionref>
+			<sectionref>invoice_text</sectionref>
+			<sectionref>trans_barcode</sectionref>
+			<!-- <sectionref>transaction_store_location</sectionref> -->
+			<row>
+				<field text="_asqvatnumber" loc="24" style="BOLD" />
+				<sp />
+				<field style="BOLD">
+					<aggregate
+						class="asq.pos.docbuilder.AsqVatNumberDocBuilder" />
+				</field>
+			</row>
+			<row>
+				<field text="_ticket" loc="33" />
+				<sp />
+				<field method="getTransactionSequence" formatter="Numeric" />
+			</row>
+			<horizontal_rule />
+		</section>
+
+		<section name="invoice_text">
+			<region alignment="C">
+				<field text="_simplifiedTaxInvoicearabic" style="BOLD" />
+			</region>
+			<region alignment="C">
+				<field text="_simplifiedTaxInvoice" style="BOLD" />
+			</region>
+		</section>
+
+		<section name="logo">
+			<picture
+				filename="../xstoredata/xstore/res/graphics/receipt/logo.bmp"
+				preload="true" />
+		</section>
+		<section name="barcode_footer">
+			<picture
+				filename="../xstoredata/xstore/res/graphics/receipt/barcode.bmp"
+				preload="true" />
+		</section>
+
+		<!--ASQ Commission starts -->
+		<section name="SYSTEM_CYCLE">
+			<horizontal_rule />
+			<sectionref>training</sectionref>
+			<row>
+				<field text="_store" />
+				<sp />
+				<field method="getRetailLocationId" formatter="Numeric" />
+				<field text="_registerColon" loc="22" />
+				<sp />
+				<field method="getWorkstationId" formatter="Numeric" />
+			</row>
+			<row>
+				<field text="_date" />
+				<sp />
+				<field method="getTransactionDate" formatter="DateShort" />
+				<field text="_trantime" loc="22" />
+				<sp />
+				<field method="getBeginDateTimestamp" formatter="TimeShort" />
+			</row>
+			<row />
+			<row>
+				<field text="_cashier" />
+				<sp />
+				<field method="getOperatorParty.getEmployeeId" />
+			</row>
+			<!-- 24/7 Add the last 4 digit of the session id -->
+			<row>
+				<condition method="getTransactionTypeCode"
+					comparison="EQUAL" value="WORKSTATION_CLOSE" />
+				<field text="_sessionid" />
+				<sp />
+				<field method="getSessionId" formatter="Last4" />
+			</row>
+			<row>
+				<condition method="getTransactionTypeCode"
+					comparison="EQUAL" value="WORKSTATION_COMPLETE_REM_CLOSE" />
+				<field text="_sessionid" />
+				<sp />
+				<field method="getSessionId" formatter="Last4" />
+			</row>
+			<row />
+			<row align="C" charsize="X2HW">
+				<field text="*******************" style="BOLD" />
+			</row>
+			<row align="C" charsize="X2HW">
+				<field style="BOLD">
+					<aggregate
+						class="dtv.pos.systemcycle.common.SystemCycleReceiptBannerDocBuilderField" />
+				</field>
+			</row>
+			<sectionref>asq_emp_commission</sectionref>
+			<row align="C" charsize="X2HW">
+				<condition method="getTransactionTypeCode"
+					comparison="EQUAL" value="WORKSTATION_COMPLETE_REM_CLOSE" />
+				<field text="_registerColon" style="BOLD" />
+				<sp />
+				<field method="getStringProperty"
+					method_param="remoteWorkstationId" style="BOLD" />
+			</row>
+			<row align="C" charsize="X2HW">
+				<field text="*******************" style="BOLD" />
+			</row>
+			<sectionref>training</sectionref>
+			<sectionref>page_break</sectionref>
+		</section>
+		<!--ASQ Commission ends -->
+
+		<section name="headerTop_postLocal">
+			<sectionref>transaction_header_info</sectionref>
+			<!-- <sectionref>SALES_PERSON_INFO</sectionref> -->
+			<!-- <sectionref>transaction_cashier</sectionref> -->
+			<sectionref>transaction_flight_information</sectionref>
+		</section>
+
+		<section name="transaction_header_info">
+			<row>
+				<field text="_store" />
+				<sp />
+				<field method="getRetailLocationId" formatter="Numeric" />
+				<field text="_registerColon" loc="22" />
+				<sp />
+				<field method="getWorkstationId" formatter="Numeric" />
+			</row>
+			<row>
+				<field text="_date" />
+				<sp />
+				<field method="getTransactionDate" formatter="DateShort" />
+				<field text="_trantime" loc="22" />
+				<sp />
+				<field method="getBeginDateTimestamp" formatter="TimeShort" />
+			</row>
+			<!-- <row> <field text="_ticket" /> <sp /> <field method="getTransactionSequence" 
+				formatter="Numeric" /> </row> -->
+		</section>
+		<section name="header">
+			<sectionref>headerTop</sectionref>
+			<!-- <sectionref>CUSTOMER_INFO</sectionref> -->
+			<row />
+			<sectionref>system_mode</sectionref>
+			<sectionref>return_header</sectionref>
+		</section>
+
+		<section name="item_header">
+			<!-- item header -->
+			<row style="STRONGUNDERLINE">
+				<field text="_item" />
+				<field text="_qty" align="R" loc="19" rtlloc="-9" />
+				<field text="_asqvat" align="R" loc="-25" rtlloc="10" />
+				<field text="_price" align="R" loc="-15" rtlloc="25" />
+				<field text="_amount" align="R" loc="-3" rtlloc="12" />
+			</row>
+			<sectionref>item_details</sectionref>
+			<row />
+		</section>
+		<section name="item_details_listing">
+			<row>
+				<field method="getItem.getItemId" />
+				<field formatter="Quantity" align="R" loc="19" rtlloc="-9">
+					<aggregate
+						class="dtv.pos.register.sale.QuantityDocBuilderField" />
+				</field>
+				<field formatter="Money" align="R" loc="-25" rtlloc="10">
+					<aggregate class="asq.pos.docbuilder.AsqTaxDocBuilder" />
+				</field>
+				<field method="getBaseUnitPrice" formatter="Money" align="R"
+					loc="-15" rtlloc="25" />
+				<field method="getExtendedAmount" formatter="Money" align="R"
+					loc="-3" rtlloc="12" />
+				<field loc="-1">
+					<aggregate
+						class="dtv.pos.register.tax.TaxFlagDocBuilderField" />
+				</field>
+			</row>
+		</section>
+	</sections>
 </ReceiptDefinitions>

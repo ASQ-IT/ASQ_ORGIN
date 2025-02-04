@@ -6,6 +6,7 @@
 <!-- ASQ Hardware Config Changes Starts -->
   <Device type="POSPrinter" use="RECEIPT">
     <name dtype="String">ASQPOSPrinter</name>
+    <ArabicClassName dtype="String">jp.co.epson.uposcommon.arabic.ArabicSorter9</ArabicClassName>
   </Device>
   <Device type="POSPrinter" use="RECEIPT_BACKUP">
     <name dtype="String">ASQPOSPrinter</name>

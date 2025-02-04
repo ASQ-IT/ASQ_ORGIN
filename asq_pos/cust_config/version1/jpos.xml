@@ -94,7 +94,7 @@
         <prop name="TransmitRetryTime" type="String" value="100"/>
         <prop name="DirectIOEventTimeout" type="String" value="5000"/>
         <prop name="epson.trace.detail.info" type="String" value="0"/>
-		
+		<prop name="ArabicClassName" type="String" value="jp.co.epson.uposcommon.arabic.ArabicSorter9"/>
 		<!-- Oracle Retail properties -->
 		<prop name="dtvCharacterSet" type="Integer" value="437" />
 		<prop name="dtvFrankingPadLines" type="Integer" value="0" />
@@ -115,9 +115,7 @@
 		<prop name="dtvSignatureScaleWidth" type="Integer" value="450" />
 		<prop name="dtvcert" type="Boolean" value="true" />
 		
-		<prop name="ArabicClassName" type="String" value="jp.co.epson.uposcommon.arabic.ArabicSorter12"/>
-
- 
+		    
     </JposEntry>
 		
 	<JposEntry logicalName="ASQCashDrawer">

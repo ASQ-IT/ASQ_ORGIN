@@ -12,5 +12,15 @@
   <beans profile="xstore">
     <!-- Transaction barcode formats -->
     <bean id="tranBarcodeFormatDefault" class="dtv.hardware.barcode.TranBarcodeFormatV3"/>
+    
+    
+    <bean id="arabicLineTransformer" class="dtv.hardware.posprinting.ArabicICUToCharsetLineTransformer">
+		<property name="converterCharset" value="cp864ext" />
+		<property name="converterClassPath" value="/converters" />
+		<property name="converterOutputCharset" value="cp864" />
+		<property name="converterUseFallback" value="true" />
+		<property name="charsetList" value="cp864,cp1256,cp1098" />
+		<property name="compactWhiteSpaceOrColonFields" value="false" />
+	</bean>
   </beans>
 </beans>

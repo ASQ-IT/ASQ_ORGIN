@@ -30,6 +30,8 @@
 	    <MenuOption ref="SALE::ASQ_TENDER_MOKAFAA" />
 		<!-- Mokafaa Integration Ends -->
 	    <MenuOption ref="SALE::TENDER_CREDIT_CARD" />
+	    	<!-- Bank Transfer -->
+	    <MenuOption ref="SALE::TENDER_BANK_TRANSFER" />
 	    <MenuOption ref="SALE::TENDER_EWALLET" />
 	    <MenuOption ref="SALE::TENDER_PAYMENT_BY_LINK" />
 	    <MenuOption ref="SALE::TENDER_PAYMENT_BY_LINK_CNP" />
@@ -63,7 +65,9 @@
     <MenuOption ref="EMPLOYEE::CHANGE_PASSWORD" />
 
     <SubMenu ref="ADMIN::REPRINT_OPTIONS"/>
-    <SubMenu ref="BALANCE_INQUIRY::REGISTER_OPTIONS" />
+      <!-- ASQ disabled xstore functionality changes start -->
+   <!--  <SubMenu ref="BALANCE_INQUIRY::REGISTER_OPTIONS" /> -->
+     <!-- ASQ disabled xstore functionality changes end -->
     <MenuOption ref="ADMIN::PRINTRECEIPT" />
     <MenuOption>
       <Action ref="ADMIN::TRAINING_MODE_ENTER" />
@@ -82,7 +86,9 @@
     <SubMenu actionRef="RETAIL::MENU.MODIFY_LINE" sticky="false">
       <MenuOptions ref="RETAIL::CHANGE_LINE1" />
     </SubMenu>
-    <SubMenu ref="RETAIL::ADD_DISCOUNT" />
+    <!-- ASQ disabled xstore functionality changes start -->
+    <!-- <SubMenu ref="RETAIL::ADD_DISCOUNT" /> -->
+    <!-- ASQ disabled xstore functionality changes end -->
     <MenuOption ref="REGISTER::PRINT_RECEIPT" />
     <SubMenu ref="RETAIL::CUSTOMER_OPTIONS" sticky="false" />
   </MenuItem>
@@ -108,9 +114,11 @@
       <MenuOption ref="INVENTORY::MOVEMENT_PENDING_RECONCILIATION" />
     </SubMenu>
     <MenuOption ref="BACK_OFFICE::PRICE_INQUIRY" />
-    <MenuOption ref="SHELF_LABEL::PRINT_LABELS" />
+    <!-- ASQ disabled xstore functionality changes start -->
+  <!--   <MenuOption ref="SHELF_LABEL::PRINT_LABELS" /> -->
     <MenuOption ref="RECEIVING" />
-    <MenuOption ref="EXCHANGE::EXCHANGE_SERIAL_NUMBER" />
+    <!-- <MenuOption ref="EXCHANGE::EXCHANGE_SERIAL_NUMBER" /> -->
+    <!-- ASQ disabled xstore functionality changes start -->
     <MenuOption ref="SHIPPING" />
   </MenuItem>
   <!-- INVENTORY_ADJUSTMENT VISIBILITY end-->
@@ -133,7 +141,9 @@
 		<MenuOption ref="RETAIL::CHANGE_LINE_PRICE" />
 		<!-- <SubMenu ref="RETAIL::MENU.MODIFY_LINE_TAX_OPTIONS"/> -->
     <MenuOption ref="RETAIL::VOID_LINE" />
-    <MenuOption ref="RETAIL::CHANGE_DISCOUNT" />
+    <!-- ASQ disabled xstore functionality changes start -->
+   <!--  <MenuOption ref="RETAIL::CHANGE_DISCOUNT" /> -->
+   <!-- ASQ disabled xstore functionality changes start -->
     <MenuOption ref="RETAIL::CHANGE_COMMISSIONED_ASSOCIATES" />
     <MenuOption ref="RETAIL::CHANGE_SERAIL_NUMBER" />
   </MenuItem>x
@@ -151,4 +161,189 @@
     <MenuOption ref="SHIPPING::ADD_COMMENT" />
     <MenuOption ref="SHIPPING::VIEW_COMMENTS" />  
   </MenuItem>
+  
+   <MenuItem name="ADMIN::REPRINT_OPTIONS" text="_menutextRcptPrint">
+     <!-- ASQ disabled xstore functionality changes start -->
+     <!-- <MenuOption ref="ADMIN::PRINT_REBATE_RECEIPT" />
+    <MenuOption ref="ADMIN::REPRINT_GIFT_RECEIPTS" />
+    <MenuOption ref="ADMIN::REPRINT_DOCUMENT" /> -->
+      <!-- ASQ disabled xstore functionality changes End -->
+    <MenuOption ref="ADMIN::REPRINT_LAST_RECEIPT" />
+  </MenuItem>
+  
+  <MenuItem name="BACK_OFFICE::REPRINT_OPTIONS" actionRef="BACK_OFFICE::REPRINT_OPTIONS" displayType="LIST" category="Back Office">
+    <!-- ASQ disabled xstore functionality changes start -->
+    <!--   <MenuOption ref="BACK_OFFICE::PRINT_REBATE_RECEIPT" />
+    <MenuOption ref="BACK_OFFICE::REPRINT_GIFT_RECEIPTS" />
+    <MenuOption ref="BACK_OFFICE::REPRINT_DOCUMENT" /> -->
+      <!-- ASQ disabled xstore functionality changes end -->
+    <MenuOption ref="BACK_OFFICE::REPRINT_LAST_RECEIPT" />
+  </MenuItem>
+  <MenuItem name="BALANCE_INQUIRY::BACK_OFFICE_OPTIONS" actionRef="BALANCE_INQUIRY::BACK_OFFICE_OPTIONS" displayType="LIST" category="Back Office" keywords="universal,back_office,back_office_only">
+    <!-- ASQ disabled xstore functionality changes start -->
+   <!--  <MenuOption ref="BALANCE_INQUIRY::GIFT_CARD.BACK_OFFICE" />
+    <MenuOption ref="BALANCE_INQUIRY::GIFT_CERTIFICATE.BACK_OFFICE" />
+    <MenuOption ref="BALANCE_INQUIRY::GIFT_RECEIPT.BACK_OFFICE" /> 
+    <MenuOption ref="BALANCE_INQUIRY::LOYALTY.BACK_OFFICE" />-->
+      <!-- ASQ disabled xstore functionality changes end -->
+    <MenuOption ref="BALANCE_INQUIRY::STORE_CREDIT.BACK_OFFICE" />
+  </MenuItem>
+    <!-- ASQ disabled xstore functionality changes start -->
+  <MenuItem name="RETURN" text="_menuReturn" displayType="BUTTON" category="Retail" keywords="universal,register_extended,register_all,return">
+    <MenuOption ref="SALE" />
+    <MenuOption ref="RETURN" text="_menutext121" />
+    <SubMenu ref="RETAIL::CHANGE_LINE" />
+   <!--  <SubMenu ref="RETAIL::ADD_DISCOUNT" /> -->
+
+  <!--   <SubMenu actionRef="RETURN::MENU.ADD_NON_PHYSICAL" sticky="false" displayType="LIST">
+      <MenuOption ref="RETURN::ADD_NON_PHYSICAL" />
+      <MenuOption ref="RETURN::ADD_GIFT_CARD" />
+      <MenuOption ref="RETURN::ADD_GIFT_CERTIFICATE" />
+    </SubMenu> -->
+
+    <MenuOption ref="RETURN::SEARCH_FOR_ITEM" />
+    <MenuOption>
+      <Action ref="RETAIL::COMPLETE.TO_TENDERING" />
+      <Action ref="RETAIL::COMPLETE.NO_TENDERING" />
+    </MenuOption>
+    
+    <MenuOption ref="CUSTOMER::EDIT" />
+  </MenuItem>
+  <MenuItem name="SALE" text="_menuSale" category="Retail" keywords="universal,sale,register_extended,register_all">
+    <MenuOption ref="RETURN" />
+
+    <SubMenu actionRef="RETAIL::MENU.MODIFY_LINE" sticky="false">
+      <MenuOptions ref="RETAIL::CHANGE_LINE" />
+      <MenuOption ref="RETAIL::ADD_LINE_COMMENT" />
+      <MenuOption ref="XSTOREM::REMOVE_COMMENT" />
+    </SubMenu>
+
+    <!-- <SubMenu ref="RETAIL::ADD_DISCOUNT" /> -->
+
+   <!--  <SubMenu actionRef="SALE::MENU.ADD_NON_PHYSICAL" sticky="false" displayType="LIST">
+      <MenuOption ref="SALE::ADD_NON_PHYSICAL" />
+      <MenuOption ref="SALE::ADD_GIFT_CARD" />
+      <MenuOption ref="SALE::ADD_GIFT_CERTIFICATE" />
+    </SubMenu> -->
+
+    <MenuOption ref="SALE::SELECT_GIFT_RECEIPTS" />
+
+    <SubMenu ref="RETAIL::EXTENDED_TRANS" />
+
+    <SubMenu ref="RETAIL::REGISTER_OPTIONS" />
+
+    <SubMenu ref="RETAIL::CUSTOMER_OPTIONS" sticky="false" />
+
+    <MenuOption ref="REGISTER::VIEW_ITEM_DETAILS" />
+
+    <SubMenu text="_itemFind" keyStroke="F9" sticky="false">
+      <MenuOption ref="SALE::PRICE_INQUIRY" />
+      <MenuOption ref="SALE::SEARCH_FOR_ITEM" />
+      <MenuOption ref="RETAIL::INVENTORY_LOCATOR" keyStroke="F10" />
+      <MenuOption ref="SALE::GS1.MANUAL_ENTRY" keyStroke="F11" />
+    </SubMenu>
+    
+    <MenuOption>
+      <Action ref="RETAIL::COMPLETE.TO_TENDERING" />
+      <Action ref="RETAIL::COMPLETE.NO_TENDERING" />
+    </MenuOption>
+    
+    <MenuOption>
+      <Action ref="RETAIL::SUSPEND_TRANSACTION" />
+      <Action ref="RETAIL::RESUME_TRANSACTION" />
+    </MenuOption>
+  </MenuItem>
+  
+  <MenuItem name="RETAIL::REGISTER_OPTIONS" text="_registerOptionsMenuText" sticky="false" category="Retail" keywords="universal,sale,register_extended,register_all">
+    <!-- <SubMenu ref="BALANCE_INQUIRY::REGISTER_OPTIONS" /> -->
+
+    <MenuOption ref="ADMIN::REPRINT_GIFT_RECEIPTS" />
+<!--     <MenuOption ref="HOUSE_ACCOUNT::MAKE_PAYMENT" />
+    <MenuOption ref="HOUSE_ACCOUNT::MAKE_REVERSAL" />
+
+    <SubMenu ref="RETAIL::MENU.MODIFY_TRANS_TAX_OPTIONS"/>
+    
+    <MenuOption ref="SALE::ADD_COUPON" />
+    <MenuOption ref="SALE::REDEEM_RAINCHECK" /> -->
+    <MenuOption>
+      <Action ref="GIFT_REGISTRY::ASSIGN" />
+      <Action ref="GIFT_REGISTRY::REMOVE" />
+    </MenuOption>
+    <MenuOption ref="ADMIN::LOCK_REGISTER_RETAIL" />
+  </MenuItem>
+   <MenuItem name="ASSOCIATE::TASKS" actionRef="ASSOCIATE::TASKS" displayType="LIST" category="Back Office" keywords="back_office_only">
+ <!--    <MenuOption ref="ASSOCIATE_TASKS::BLACK_BOOK" /> -->
+    <MenuOption ref="ASSOCIATE_TASKS::MY_TASKS" />
+   <!--  <SubMenu ref="ASSOCIATE::BROWSER" /> -->
+  </MenuItem>
+   <MenuItem name="ASSOCIATE::OPTIONS" actionRef="ASSOCIATE::OPTIONS" keywords="universal">
+    <SubMenu ref="ASSOCIATE::TASKS" />
+    <MenuOption ref="EMPLOYEE::CHANGE_CURRENT_USER_PASSWORD" />
+<!--     <MenuOption ref="EMPLOYEE::VIEW_SCHEDULE" />
+    <MenuOption ref="EMPLOYEE::VIEW_SCHEDULED" /> -->
+    <MenuOption ref="EMPLOYEE::VIEW_TIMECARD" />
+  </MenuItem>
+    <MenuItem name="CUSTOMER::MANAGER_OPTIONS" actionRef="CUSTOMER::MANAGER_OPTIONS" keywords="universal,customer,report_customer">
+    <SubMenu ref="BALANCE_INQUIRY::BACK_OFFICE_OPTIONS" />
+    <MenuOption ref="CUSTOMER::MAINTAIN" />
+    <!-- <MenuOption ref="GIFT_REGISTRY::SEARCH" /> -->
+   <!--  <SubMenu ref="COUNTRYPACK::INVOICE_OPTIONS" / -->
+<!--     <MenuOption ref="LAYAWAY::MAINTAIN" />
+    <MenuOption ref="LOCALORDER::MAINTAIN" />   -->     
+    <MenuOption ref="COUNTRYPACK::BR::ADMIN::NFE_MAINTENANCE" />
+   <!--  <SubMenu ref="ORDER_OPTIONS" /> -->
+    <SubMenu ref="BACK_OFFICE::REPRINT_OPTIONS" />
+<!--     <MenuOption ref="SEND_SALE::SHIPPING" />
+    <MenuOption ref="SPECIAL_ORDER::MAINTAIN" /> 
+    <SubMenu ref="WORK_ORDER::OPTIONS" /> -->
+  </MenuItem>
+   <MenuItem name="EMPLOYEE::MANAGER_OPTIONS" actionRef="EMPLOYEE::MANAGER_OPTIONS" displayType="LIST" category="Employee" keywords="universal">
+    <SubMenu actionRef="EMPLOYEE::MAINT_OPTIONS">
+      <!-- <MenuOption ref="EMPLOYEE::ASSOCIATE_ADVANCE" /> -->
+      <MenuOption ref="EMPLOYEE::BORROW" />
+      <MenuOption ref="EMPLOYEE::MAINTAIN" />
+    </SubMenu>
+    
+    <SubMenu ref="EMPLOYEE::SCHEDULING_MAINTENANCE" />
+    <MenuOption ref="EMPLOYEE::MESSAGE_SEARCH" />
+    <SubMenu ref="EMPLOYEE::TIME_AND_ATTENDANCE" />
+  </MenuItem>
+  
+  <MenuItem name="?HARDWARE_MANAGEMENT::STANDARD_OPTIONS?" keywords="exclude">
+    <MenuOption ref="ADMIN::EFTLINK_ADMIN" />
+    <MenuOption ref="ADMIN::MANAGE_IP_CASH_DRAWER" />
+    <MenuOption ref="ADMIN::CHEETAH_CLIENT_DEVICE_ACCESS" />
+    <MenuOption ref="ADMIN::CHEETAH_CLIENT_DEVICE_QUICK_QR_CONFIG" />
+    <!-- <MenuOption ref="ADMIN::TEMPORARY_STORE_REQUESTS" /> -->
+    <SubMenu ref="COUNTRYPACK::FISCAL_PRINTER_MAIN_MENU" category="Back Office" keywords="back_office_only" text="_countrypack.fiscalPrinter.menutextFiscalPrinter" displayType="LIST" />
+    <MenuOption ref="COUNTRYPACK::AT::ADMIN::DEACTIVATE_REGISTER" />
+    <MenuOption ref="COUNTRYPACK::AT::ADMIN::RE_CONNECT" />
+    <SubMenu ref="COUNTRYPACK::BR::ADMIN::SAT" category="Back Office" keywords="back_office_only" text="_countrypack.br.sat.admin.menuText" displayType="LIST" />
+    <SubMenu ref="COUNTRYPACK::DE::ADMIN::TSE" category="Back Office" keywords="back_office_only" text="_countrypack.de.tse.admin.menuText" displayType="LIST" />
+  </MenuItem>
+  <MenuItem name="TILL::STORE_SAFE_MAINTENANCE" actionRef="TILL::STORE_SAFE_MAINTENANCE" displayType="LIST" text="_storeSafeMaintenanceButtonMenuText" category="Admin" keywords="back_office" sticky="true">
+    <MenuOption ref="TILL::BANK_DEPOSIT" />
+    <MenuOption ref="TILL::OPEN_STORE_SAFE" />
+    <MenuOption ref="TILL::RECONCILE_STORE_SAFE" />
+    <MenuOption ref="SAFE_BAG::MAINTAIN_SAFE_BAGS" />
+    <!-- <MenuOption ref="TILL::STORE_SAFE_AUDIT" /> -->
+    <!-- <MenuOption ref="TILL::STORE_SAFE_CASH_DEPOSIT" /> -->
+  </MenuItem>
+   <MenuItem name="TILL::TILL_MAINTENANCE" actionRef="TILL::TILL_MAINTENANCE" displayType="LIST" text="_tillMaintenanceButtonMenuText" category="Admin" keywords="back_office" sticky="true">
+    <MenuOption ref="TILL::ATTACH_CASHDRAWER_TILL" />
+    <MenuOption ref="TILL::ATTACH_OTHER_TILL" />
+  <!--   <MenuOption ref="TILL::CASH_PICKUP" />
+    <MenuOption ref="TILL::CASH_TRANSFER" /> -->
+    <MenuOption ref="TILL::TILL_COUNT" />
+    <MenuOption ref="TILL::END_COUNT_OTHER_TILL" />
+    <SubMenu ref="COUNTRYPACK::FISCAL_OPTIONS" actionRef="COUNTRYPACK::FISCAL_OPTIONS" text="_countrypack.common.menu.FiscalOptions" category="Admin" keywords="back_office" />
+    <MenuOption ref="TILL::TRANSFER_TILLS" />
+    <MenuOption ref="TILL::MID_DAY_DEPOSIT" />
+    <MenuOption ref="TILL::RECONCILE_TILL" />
+    <MenuOption ref="TILL::REMOVE_CASHDRAWER_TILL" />
+    <MenuOption ref="TILL::REMOVE_OTHER_TILL" />
+    <MenuOption ref="TILL::REMOVE_TILL_FROM_WORKSTATION" />
+    <MenuOption ref="TILL::TILL_AUDIT" />    
+  </MenuItem>
+  <!-- ASQ disabled xstore functionality changes end -->
 </MenuSet>

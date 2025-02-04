@@ -60,6 +60,22 @@
 	</Action>
 	<!-- ASQ Neqaty Integration Ends -->
 	
+		<!-- ASQ Bank Transfer Integration Starts -->
+	<Action name="SALE::TENDER_BANK_TRANSFER" category="Register" keywords="sale_tender" text="_asqMenuTextBankTransfer" chainKey="ASQ_TENDER_BANK_TRANSFER">
+		<IconGroup icon="_imageTenderCash" rollIcon="_imageTenderCashRoll" pressIcon="_imageTenderCashPress" disabledIcon="_imageTenderCashDisabled" />
+		<VisibilityRule class="dtv.pos.shared.visibilityrules.TenderEnabledCheck">
+			<Parameter name="tender" value="LOCAL_CURRENCY" />
+		</VisibilityRule>
+		<VisibilityRule class="dtv.pos.shared.visibilityrules.EffectiveTenderAccCheck">
+			<Parameter name="tender" value="LOCAL_CURRENCY" />
+		</VisibilityRule>
+		<VisibilityRule class="dtv.pos.shared.visibilityrules.AvailableLayawayTenderAccCheck">
+			<Parameter name="tender" value="LOCAL_CURRENCY" />
+		</VisibilityRule>
+		<VisibilityRule class="dtv.pos.register.sale.AmountDueVisibilityRule" />
+	</Action>
+	<!-- ASQ Bank Transfer Integration Ends -->
+	
 	<!-- ASQ Tabby Integration Starts -->
 	<Action name="SALE::ASQ_TENDER_TABBY" category="Register" keywords="sale_tender" text="_asqMenuTextTabby" chainKey="ASQ_TENDER_TABBY">
 		<IconGroup icon="_imageTenderCash" rollIcon="_imageTenderCashRoll" pressIcon="_imageTenderCashPress" disabledIcon="_imageTenderCashDisabled" />

@@ -98,4 +98,12 @@ public class AsqConfigurationMgr extends ConfigurationMgr {
 	public boolean getasqNqeatyLoyaltySystem() {
 		return _settingsFactory.getBoolean(new String[] { "ASQ---NEQATY---LoyaltySystem" });
 	}
+	
+	public String getAsqBankDpositEmail() {
+		return _settingsFactory.getString(new String[] { "ASQ---BankDepositEmailOTP---To"  });
+	}
+
+	public String getBankTransferApprovalEmailOTP() {
+		return _settingsFactory.getString(new String[] { "ASQ---BankTransferEmailOTP---To" });
+	}
 }

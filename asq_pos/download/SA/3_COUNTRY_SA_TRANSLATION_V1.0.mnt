@@ -1,9 +1,9 @@
-INSERT|TRANSLATION|AR|+TAX_TAX_LOC_TL_SA|متجر سعودي|*|*|
+INSERT|TRANSLATION|AR|+TAX_TAX_LOC_TL_SA|سعوديمتجر|*|*|
 INSERT|TRANSLATION|AR|+SAR_CURRENCY|نقدي|*|*|
 INSERT|TRANSLATION|AR|+AMERICAN_EXPRESS|بطاقة ائتمان أمريكان اكسبريس|*|*|
 INSERT|TRANSLATION|AR|+DEBIT_CARD|بطاقة الخصم|*|*|
 INSERT|TRANSLATION|AR|+MASTERCARD|بطاقة ائتمان ماستر كارد|*|*|
-INSERT|TRANSLATION|AR|+VISA|بطاقة ائتمان فيزا|*|*|
+INSERT|TRANSLATION|AR|+VISA| فيزا|*|*|
 INSERT|TRANSLATION|AR|+CREDIT_CARD|بطاقة الائتمان|*|*|
 INSERT|TRANSLATION|AR|+COUPON|كوبون|*|*|
 INSERT|TRANSLATION|AR|+GIFT_CERTIFICATE|قسيمة الهدية|*|*|
@@ -12,7 +12,7 @@ INSERT|TRANSLATION|AR|+ISSUE_MERCHANDISE_CREDIT_CARD|إصدار قسيمة هد�
 INSERT|TRANSLATION|AR|+ISSUE_STORE_CREDIT|إصدار بطاقة رصيد للمتجر|*|*|
 INSERT|TRANSLATION|AR|+MALL_CERTIFICATE|قسيمة المركز التجاري|*|*|
 INSERT|TRANSLATION|AR|+MERCHANDISE_CREDIT_CARD|بطاقة ائتمان السلع|*|*|
-INSERT|TRANSLATION|AR|+STORE_CREDIT|بطاقة الرصيد للمتجر|*|*|
+INSERT|TRANSLATION|AR|+STORE_CREDIT|مرتجع|*|*|
 INSERT|TRANSLATION|AR|+PAY_BY_LINK|الدفع عن طريق الارتباط|*|*|
 INSERT|TRANSLATION|AR|+TND_TNDR_TYPCODE_TABBY|تابي|*|*|
 INSERT|TRANSLATION|AR|+TND_TNDR_TYPCODE_TAMARA|تمارا|*|*|
@@ -21,10 +21,10 @@ INSERT|TRANSLATION|AR|+ISSUE_EFTLINK_BILLING|دفع الفاتورة|*|*|
 INSERT|TRANSLATION|AR|+MANUFACTURER_COUPON|كوبون المُصنِّع|*|*|
 INSERT|TRANSLATION|AR|+TND_TNDR_CREDITCARD|بطاقة ائتمان غير متكاملة|*|*|
 INSERT|TRANSLATION|AR|+TND_TNDR_DEBITCARD|بطاقة خصم غير متكاملة|*|*|
-INSERT|TRANSLATION|AR|+TND_TNDR_LOYALITY|الولاء|*|*|
-INSERT|TRANSLATION|AR|+TND_TNDR_MOKAFAT|موكافات|*|*|
-INSERT|TRANSLATION|AR|+TND_TNDR_NEQATI|سلبي|*|*|
-INSERT|TRANSLATION|AR|+TND_TNDR_STC|إس تي سي|*|*|
+INSERT|TRANSLATION|AR|+TND_TNDR_LOYALITY|نقاط الولاء|*|*|
+INSERT|TRANSLATION|AR|+TND_TNDR_MOKAFAT|الراجحي - مكافأة|*|*|
+INSERT|TRANSLATION|AR|+TND_TNDR_NEQATI|موبايلي - نقاطي|*|*|
+INSERT|TRANSLATION|AR|+TND_TNDR_STC|قطاف|*|*|
 INSERT|TRANSLATION|AR|+ITM_MERCH_HIERARCHY_10001|زيوت العود الملكية|*|*|
 INSERT|TRANSLATION|AR|+ITM_MERCH_HIERARCHY_20001|زيت عطري|*|*|
 INSERT|TRANSLATION|AR|+ITM_MERCH_HIERARCHY_30001|زيت العود|*|*|
@@ -288,7 +288,7 @@ INSERT|TRANSLATION|AR|+ASQ_300021_HIER_LV3|اصنع عطرك الخاص|*|*
 INSERT|TRANSLATION|AR|+ASQ_300022_HIER_LV3|مواد التعبئة والتغليف|*|*
 INSERT|TRANSLATION|AR|+ASQ_300023_HIER_LV3|بيع الحقائب|*|*
 INSERT|TRANSLATION|AR|+ASQ_300024_HIER_LV3|زيت العود|*|*
-INSERT|TRANSLATION|AR|+ASQ_300024_HIER_LV3|زيت العود |*|*
+INSERT|TRANSLATION|AR|+ASQ_300024_HIER_LV3|زيت العود|*|*
 INSERT|TRANSLATION|AR|+ASQ_300025_HIER_LV3|العنبر|*|*
 INSERT|TRANSLATION|AR|+ASQ_300025_HIER_LV3|العنبر|*|*
 INSERT|TRANSLATION|AR|+ASQ_300026_HIER_LV3|يمزج|*|*
@@ -310,3 +310,14 @@ INSERT|TRANSLATION|AR|+ASQ_300035_HIER_LV3|بخور القديم|*|*
 INSERT|TRANSLATION|AR|+ASQ_300035_HIER_LV3|بخور القديم|*|*
 INSERT|TRANSLATION|AR|+ASQ_300036_HIER_LV3|العود المعطر|*|*
 INSERT|TRANSLATION|AR|+ASQ_300036_HIER_LV3|العود المعطر|*|*
+INSERT|TRANSLATION|AR|+ASQ_QTOLA_DESC|ربع تولة|*|*
+INSERT|TRANSLATION|AR|+ASQ_HTOLA_DESC|نص تولة|*|*
+INSERT|TRANSLATION|AR|+ASQ_1TOLA_DESC|تولة|*|*
+INSERT|TRANSLATION|AR|+MERCHLEVEL1|مستوى البضائع 1|*|*
+INSERT|TRANSLATION|AR|+MERCHLEVEL2|مستوى البضائع2|*|*
+INSERT|TRANSLATION|AR|+MERCHLEVEL3|مستوى البضائع3|*|*
+INSERT|TRANSLATION|AR|+MERCHLEVEL4|مستوى البضائع4|*|*
+INSERT|TRANSLATION|AR|+ASQ_2TOLA_DESC|اثنين تولة|*|*
+INSERT|TRANSLATION|AR|+ASQ_3TOLA_DESC|ثلاثة تولة|*|*
+INSERT|TRANSLATION|AR|+ASQ_5TOLA_DESC|خمسة تولة|*|*
+INSERT|TRANSLATION|AR|+ASQ_10TOLA_DESC|عشرة تولة|*|*

@@ -11,6 +11,8 @@ public class AsqEmpCommissionQueryResult extends AbstractQueryResult {
 
 	private long employee_id;
 	private String employee_name;
+	private String item_id;
+	private BigDecimal item_quantity;
 	private BigDecimal trans_count;
 	private BigDecimal net_amt;
 	private BigDecimal perc_amt;
@@ -26,6 +28,14 @@ public class AsqEmpCommissionQueryResult extends AbstractQueryResult {
 
 	public String getEmployee_name() {
 		return employee_name;
+	}
+
+	public String getItem_id() {
+		return item_id;
+	}
+
+	public BigDecimal getItem_quantity() {
+		return item_quantity;
 	}
 
 	public BigDecimal getTrans_count() {
@@ -48,6 +58,14 @@ public class AsqEmpCommissionQueryResult extends AbstractQueryResult {
 		this.employee_name = employee_name;
 	}
 
+	public void setItem_id(String item_id) {
+		this.item_id = item_id;
+	}
+
+	public void setItem_quantity(BigDecimal item_quantity) {
+		this.item_quantity = item_quantity;
+	}
+
 	public void setTrans_count(BigDecimal trans_count) {
 		this.trans_count = trans_count;
 	}
@@ -59,5 +77,4 @@ public class AsqEmpCommissionQueryResult extends AbstractQueryResult {
 	public void setPerc_amt(BigDecimal perc_amt) {
 		this.perc_amt = perc_amt;
 	}
-
 }

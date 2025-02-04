@@ -32,10 +32,12 @@
   <!-- Loyality redeem  start -->
   <MenuItem name="RETAIL::EXTENDED_TRANS" text="_accountOptionsMenuText" sticky="false" category="Retail" keywords="universal,sale,register_extended,register_all">
     <SubMenu ref="ORDER::MENU" />
-    <SubMenu actionRef="SEND_SALE::MENU.OPTIONS">
+    <!-- ASQ disabled xstore functionality changes start -->
+  <!--   <SubMenu actionRef="SEND_SALE::MENU.OPTIONS">
       <MenuOption ref="SEND_SALE" />
       <MenuOption ref="SEND_SALE::EDIT" />
-    </SubMenu>
+    </SubMenu> -->
+    <!-- ASQ disabled xstore functionality changes end -->
     <!-- ASQ Disabled layouts starts -->
     <!-- <MenuOption ref="LAYAWAY" /> 
   			<MenuOption>

@@ -14,8 +14,15 @@
   <MapEntry key="Default" value="en_US" />
   <MapEntry key="Document" value="en_US" />
   <MapEntry key="PoleDisplay" value="en_US" />
-  <MapEntry key="Receipt" value="en_US" />
-  <MapEntry key="View" value="en_US" />
+  <MapEntry key="Receipt" value="ar_SA" />
+  <MapEntry key="View" value="ar_SA" />
   <MapEntry key="Error" value="en_US" />
   <MapEntry key="Log" value="en_US" />
+  
+  <MapEntry key="OC_Store" value="ar_SA" />
+  <MapEntry key="OC_Operator" value="ar_SA" />
+  <MapEntry key="OC_Customer" value="ar_SA" />
+  <MapEntry key="OC_Keyboard" value="ar_SA" />
+  <MapEntry key="OC_Log" value="ar_SA" />
+  <MapEntry key="OC_Code" value="ar_SA" />
 </Root>

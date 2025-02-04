@@ -10,7 +10,6 @@ import java.io.InputStreamReader;
 import java.io.StringWriter;
 import java.math.BigDecimal;
 import java.math.MathContext;
-import java.math.RoundingMode;
 import java.net.URISyntaxException;
 import java.util.Base64;
 import java.util.Calendar;
@@ -38,11 +37,10 @@ import com.oracle.shaded.fasterxml.jackson.databind.JsonMappingException;
 import com.oracle.shaded.fasterxml.jackson.databind.MapperFeature;
 import com.oracle.shaded.fasterxml.jackson.databind.ObjectMapper;
 
+import asq.pos.register.sale.AsqHelper;
 import asq.pos.zatca.AsqZatcaConstant;
 import asq.pos.zatca.cert.generation.service.AsqSubmitZatcaCertServiceResponse;
 import asq.pos.zatca.integration.zatca.util.POSUtil;
-import dtv.pos.common.SysConfigSettingFactory;
-import dtv.util.NumberUtils;
 import dtv.xst.dao.trn.IPosTransaction;
 import oasis.names.specification.ubl.schema.xsd.invoice_2.InvoiceType;
 
@@ -51,7 +49,7 @@ public class AsqZatcaHelper {
 	private static final Logger LOG = LogManager.getLogger(AsqZatcaHelper.class);
 
 	@Inject
-	protected SysConfigSettingFactory sysConfig;
+	protected AsqHelper asqHelper;
 
 	public String generateInvoiceXML(InvoiceType in) throws JAXBException {
 		JAXBContext jaxbContext = JAXBContext.newInstance(InvoiceType.class);
@@ -287,16 +285,8 @@ public class AsqZatcaHelper {
 		return Base64.getEncoder().encodeToString(stringTobBeEncoded);
 	}
 
-	public RoundingMode getSystemRoundingMode() {
-		RoundingMode mode = NumberUtils.getRoundingModeForName(sysConfig.getString(new String[] { "CurrencyRounding---RoundingMode" }));
-		if (mode == null) {
-			return RoundingMode.HALF_DOWN;
-		}
-		return mode;
-	}
-
 	public int getDiscountPercentage(BigDecimal netAmount, BigDecimal discountAmount) {
-		return discountAmount.divide(netAmount, 2, getSystemRoundingMode()).scaleByPowerOfTen(2).intValue();
+		return discountAmount.divide(netAmount, 2, asqHelper.getSystemRoundingMode()).scaleByPowerOfTen(2).intValue();
 	}
 
 	public BigDecimal getAbsoluteValue(BigDecimal argValue) {
