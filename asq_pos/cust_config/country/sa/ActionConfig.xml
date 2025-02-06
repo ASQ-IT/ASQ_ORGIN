@@ -128,4 +128,18 @@
    <Action name="EMAIL_ONLY_PDF" category="Register" keywords="login" text="Email Invoice pdf" chainKey="ASQ_PRICEQT_PRINT_EMAIL_RECEIPTS">
   </Action>
  <!-- PRICE Quotation end-->
+ 
+ <Action name="INVENTORY_REPLENISHMENT::ITEM_LOOKUP" category="Inventory Replenishment" keywords="inventoryReplenishment" chainKey="ASQ_GENERIC_ITEM_LOOKUP" text="_itemLookupKey" keyStroke="F12" >
+        <Parameter name="AddItemChainKey" value="REPLENISHMENT_ITEM_ENTRY_POST" />
+        <VisibilityRule class="dtv.pos.inventory.replenishment.visibilityrules.AnyLineItemStatusVisibilityRule" inverted="true">
+          <Parameter name="LineItemStatus" value="CLOSED" />
+          <Parameter name="LineItemStatus" value="SUBMITTED" />
+          <Parameter name="LineItemStatus" value="IN_PROCESS" />
+          <Parameter name="LineItemStatus" value="VOID" />
+          <Parameter name="LineItemStatus" value="CANCELLED" />
+        </VisibilityRule>
+        <VisibilityRule class="dtv.pos.inventory.replenishment.visibilityrules.InventoryDocumentStatusVisibilityRule">
+          <Parameter name="DocumentStatus" value="OPEN" />
+        </VisibilityRule>
+  </Action>
 </ActionSet>

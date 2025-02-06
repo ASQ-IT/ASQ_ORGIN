@@ -64,9 +64,6 @@
    <Field name="mokafaaRedeemPointsLabel" type="Label" text="_asqPromptmsgEnterRedeemPoints" />
   <!-- ASQ Mokafaa Integration Ends -->
   
-   <Field name="lastName" type="ComboBox" resource="lastName" />
-   <Field name="lastNameLabel" type="Label" text="_lastNameLabel" />
-   <Field name="asqlastName" type="Text" resource="lastName" />
   
   </FieldSet>
   

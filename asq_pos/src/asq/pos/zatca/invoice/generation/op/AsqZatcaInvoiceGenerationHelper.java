@@ -1,19 +1,27 @@
 package asq.pos.zatca.invoice.generation.op;
 
+import java.io.ByteArrayOutputStream;
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.FilenameFilter;
 import java.io.IOException;
+import java.io.StringReader;
 import java.math.BigDecimal;
 import java.math.BigInteger;
 import java.nio.charset.StandardCharsets;
 import java.security.KeyStore;
+import java.security.KeyStoreException;
+import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
+import java.security.cert.CertificateException;
 import java.security.cert.X509Certificate;
 import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.GregorianCalendar;
 import java.util.List;
+import java.util.logging.Level;
 
 import javax.inject.Inject;
 import javax.xml.bind.JAXBContext;
@@ -23,13 +31,19 @@ import javax.xml.bind.Unmarshaller;
 import javax.xml.datatype.DatatypeConfigurationException;
 import javax.xml.datatype.XMLGregorianCalendar;
 import javax.xml.parsers.ParserConfigurationException;
+import javax.xml.transform.Transformer;
+import javax.xml.transform.TransformerConfigurationException;
 import javax.xml.transform.TransformerException;
+import javax.xml.transform.TransformerFactory;
+import javax.xml.transform.stream.StreamResult;
 import javax.xml.transform.stream.StreamSource;
 
 import org.apache.commons.codec.binary.Base64;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.apache.xml.security.Init;
 import org.apache.xml.security.c14n.CanonicalizationException;
+import org.apache.xml.security.c14n.Canonicalizer;
 import org.apache.xml.security.c14n.InvalidCanonicalizerException;
 import org.etsi.uri._01903.v1_3.CertIDListType;
 import org.etsi.uri._01903.v1_3.CertIDType;
@@ -47,7 +61,6 @@ import asq.pos.zatca.cert.generation.AsqZatcaHelper;
 import asq.pos.zatca.cert.generation.service.AsqSubmitZatcaCertServiceRequest;
 import asq.pos.zatca.cert.generation.service.AsqSubmitZatcaCertServiceResponse;
 import asq.pos.zatca.invoice.generation.utils.ASQException;
-import asq.pos.zatca.invoice.generation.utils.InvoiceHash;
 import asq.pos.zatca.invoice.models.AdditionalDocumentReference;
 import asq.pos.zatca.invoice.models.HashQRData;
 import asq.pos.zatca.invoice.models.InvoiceData;
@@ -246,11 +259,11 @@ public class AsqZatcaInvoiceGenerationHelper {
 		GregorianCalendar gregorianCalendarIssueDate = new GregorianCalendar();
 		gregorianCalendarIssueDate.setTime(argTransactionDate);
 
-		// invoiceData.getInvoiceIssueTime()
+		// invoiceData.getInvoiceIssueDate()
 		XMLGregorianCalendar invoiceIssueDate = asqZatcaHelper.getZatcaIssueDate(gregorianCalendarIssueDate);
 
-		// invoiceData.getInvoiceIssueDate()
-		XMLGregorianCalendar invoiceIssueTime = asqZatcaHelper.getZatcaIssueTime(gregorianCalendarIssueDate);
+		// invoiceData.getInvoiceIssueTime()
+		XMLGregorianCalendar invoiceIssueTimeStamp = asqZatcaHelper.getZatcaIssueTime(gregorianCalendarIssueDate);
 
 		// invoiceData.getPayableAmount
 		String payableAmount = invoiceData.getNote().get(0).getValue();
@@ -266,51 +279,60 @@ public class AsqZatcaInvoiceGenerationHelper {
 
 		Long nextICV = SequenceFactory.getNextLongValue("ASQ_ZATCA_SEQ");
 
-		SignatureData signatureData = new SignatureData();
+		X509Certificate certificate = getZatcaCertificate();
 
-		logger.debug(" ---------------------------Generate QR Starts---------------------- ");
-		HashQRData data = getHashAndQR(sellerName, sellerVATRegNumber, invoiceIssueTime, invoiceIssueDate, payableAmount, vatTotal, invoiceXmlString, AsqZatcaConstant.keySecret, AsqZatcaConstant.keyAlg, addDocQR,
-				xmlUUID, xmlIrnValue, signatureData, nextICV, argTransactionDate);
+		String intialTransInvoice = asqZatcaHelper.generateInvoiceXML(invoiceData);
 
-		if (data.isCertificateExpired()) {
-			logger.error("*******Certificate Expired************");
-			logger.error("*******Certificate Valid Up to: {} ************", data.getExpirationDate());
-			return SmartHubUtil.generateCertificateExpiredErrorResponse(data.getExpirationDate());
-		}
-		logger.debug(" ---------------------------Generate QR End---------------------- ");
-		logger.debug("*******QRCode Generated: {} ************", data.getQR());
-		if (null == data || null == data.getQR() || data.getQR().isEmpty()) {
-			logger.error("QR Code Generation Failed: QR Code is null or empty");
-			throw new ASQException("QR Code Generation Failed: QR Code is null or empty");
-		} else if (null == data || null == data.getCertificate() || data.getCertificate().isEmpty()) {
-			logger.error("Certificate Fetching Failed: Issue with Certificate Reading");
-			throw new ASQException("Certificate Fetching Failed: Issue with Certificate Reading");
-		}
 		oasis.names.specification.ubl.schema.xsd.commonaggregatecomponents_2.ObjectFactory cac = asqZatcaHelper
 				.getZatcaOjectFactory(oasis.names.specification.ubl.schema.xsd.commonaggregatecomponents_2.ObjectFactory.class);
 		oasis.names.specification.ubl.schema.xsd.commonbasiccomponents_2.ObjectFactory cbc = asqZatcaHelper.getZatcaOjectFactory(oasis.names.specification.ubl.schema.xsd.commonbasiccomponents_2.ObjectFactory.class);
+		invoiceData.getAdditionalDocumentReference().add(setDocumentReferenceType(AsqZatcaConstant.ASQ_QR_CODE, StringUtils.EMPTY, cbc, cac, AsqZatcaConstant.ASQ_ZATCA_QR_CODE_VALUE));
 
-		invoiceData.getAdditionalDocumentReference().add(setDocumentReferenceType(QR, EmptyString, cbc, cac, data.getQR()));
-		invoiceData.getSignature().add(setSignatureType(System.getProperty("asq.pos.invoice.referencedSignatureID"), System.getProperty("asq.pos.invoice.extensionURI"), cbc, cac));
+		// Getting the first hash for signature
+		intialTransInvoice = SmartHubUtil.removeNewlineAndWhiteSpaces(intialTransInvoice);
+		logger.debug("**********Initial XML Generated : " + intialTransInvoice);
+		String hashedXML = getInvoiceHash(intialTransInvoice);// generating hash
+		logger.debug("**********Initial Invoice Hash : " + hashedXML);
 
+		// Generating Signed Hash
+		logger.debug("**********KeyStore Fetching from Properties - Path -{} -- Key- {} : ", AsqZatcaConstant.certificateFilePath, AsqZatcaConstant.keySecret);
+		KeyStore ks = SmartHubUtil.getKeyStore(AsqZatcaConstant.certificateFilePath, AsqZatcaConstant.keySecret);
+		byte[] signatureECDA = SmartHubUtil.sigData(ks, AsqZatcaConstant.keyAlg, AsqZatcaConstant.keySecret, AsqZatcaConstant.sigAlg, hashedXML);
+		Base64 base64 = new Base64();
+		String signedHash = base64.encodeBase64String(signatureECDA);
+
+		SignatureData signatureData = getSignatureData(intialTransInvoice, nextICV, new Date(), certificate, signatureECDA);
 		UBLExtensionsType ublExtensionsType = asqZatcaHelper.getZatcaOjectFactory(oasis.names.specification.ubl.schema.xsd.commonextensioncomponents_2.ObjectFactory.class).createUBLExtensionsType();
 		ublExtensionsType.getUBLExtension()
-				.add(getUBLExtension(System.getProperty("asq.pos.invoice.extensionURI"), System.getProperty("asq.pos.invoice.signatureInformationID"), System.getProperty("asq.pos.invoice.referencedSignatureID"),
-						new String[] { System.getProperty("asq.pos.invoice.transformsAlgorithm"), System.getProperty("asq.pos.invoice.transformsAlgorithm"), System.getProperty("asq.pos.invoice.transformsAlgorithm"),
-								System.getProperty("asq.pos.invoice.transformsAlgorithm") },
-						// createTransformTypeXPath
-						new String[] { System.getProperty("asq.pos.invoice.xpathTagUBLExtensions"), System.getProperty("asq.pos.invoice.xpathTagSignature"), System.getProperty("asq.pos.invoice.xpathTagAdditionalDocRef"),
-								EmptyString },
-						cbc, signatureData));
-
+				.add(getUBLExtension(AsqZatcaConstant.zatcaXMLExtenUri, AsqZatcaConstant.zatcaXMLSignInfoId, AsqZatcaConstant.zatcaXMLRefSignID,
+						new String[] { AsqZatcaConstant.zatcaXMLTransAlgo, AsqZatcaConstant.zatcaXMLTransAlgo, AsqZatcaConstant.zatcaXMLTransAlgo, AsqZatcaConstant.zatcaXMLTransAlgo },
+						new String[] { AsqZatcaConstant.zatcaXMLTagUBL, AsqZatcaConstant.zatcaXMLTagSignature, AsqZatcaConstant.zatcaXMLAddDoc, StringUtils.EMPTY }, cbc, signatureData));
+		invoiceData.getSignature().add(setSignatureType(AsqZatcaConstant.zatcaXMLRefSignID, AsqZatcaConstant.zatcaXMLExtenUri, cbc, cac));
 		invoiceData.setUBLExtensions(ublExtensionsType);
-		String invoiceXML = generateFinalXML(invoiceData, data.getQR(), signatureData);
+
+		String invoiceXML = SmartHubUtil.generateCompleteSignedInvoiceXML(invoiceData);
+		invoiceXML = generateFinalXML(invoiceXML, signatureData);
+
+		// Generating final hash Value
+		hashedXML = getInvoiceHash(invoiceXML);
+
+		logger.debug(" ---------------------------Generate QR Starts---------------------- ");
+		String qrCode = SmartHubUtil.generateQRCode(AsqZatcaConstant.companyLegalName, AsqZatcaConstant.companyVatNumber, invoiceIssueTimeStamp, invoiceIssueDate, payableAmount, vatTotal, hashedXML, signedHash,
+				certificate.getPublicKey().getEncoded(), certificate.getSignature());
+
+		logger.debug("*******QRCode Generated: {} ************", qrCode);
+		if (null == qrCode) {
+			logger.error("QR Code Generation Failed: QR Code is null or empty");
+			throw new ASQException("QR Code Generation Failed: QR Code is null or empty");
+		}
+		invoiceXML = invoiceXML.replace(AsqZatcaConstant.ASQ_ZATCA_QR_CODE_VALUE, qrCode);
+		logger.debug(" ---------------------------Generate QR End---------------------- ");
 
 		AsqSubmitZatcaCertServiceRequest oi = new AsqSubmitZatcaCertServiceRequest();
-		oi.setInvoiceHash(data.getInvoiceHash());
+		oi.setInvoiceHash(hashedXML);
 		oi.setUuid(xmlUUID);
 		oi.setInvoice(asqZatcaHelper.encodeBase64(invoiceXML.getBytes()));
-		SmartHubUtil.writeInvoiceJSON(invoiceData.getID().getValue(), invoiceIssueDate, invoiceIssueTime, oi);
+		SmartHubUtil.writeInvoiceJSON(invoiceData.getID().getValue(), invoiceIssueDate, invoiceIssueTimeStamp, oi);
 		return new AsqSubmitZatcaCertServiceResponse();
 	}
 
@@ -342,8 +364,8 @@ public class AsqZatcaInvoiceGenerationHelper {
 			embeddedDocumentBinaryObject.setMimeCode("text/plain");
 			if (id.equalsIgnoreCase("PIH")) {
 				embeddedDocumentBinaryObject.setValue(base64.decode(attachment));
-			} else if (id.equalsIgnoreCase("QR")) {
-				embeddedDocumentBinaryObject.setValue("QR".getBytes());
+			} else if (AsqZatcaConstant.ASQ_QR_CODE.equalsIgnoreCase(id)) {
+				embeddedDocumentBinaryObject.setValue(AsqZatcaConstant.ASQ_ZATCA_QR_CODE_VALUE.getBytes());
 			} else {
 				embeddedDocumentBinaryObject.setValue(attachment.getBytes());
 			}
@@ -1178,52 +1200,54 @@ public class AsqZatcaInvoiceGenerationHelper {
 	public HashQRData getHashAndQR(String sellerName, String vatNumber, XMLGregorianCalendar invoiceIssueDate, XMLGregorianCalendar invoiceIssueTimeStamp, String invoiceTotal, String vatTotal, String xmlData,
 			String keySecret, String keyAlias, AdditionalDocumentReference addDocQR, String xmlUUID, String xmlIrnValue, SignatureData signatureData, Long nextICV, Date transactionDate) throws ASQException, Exception {
 
-		String xml = SmartHubUtil.removeNewlineAndWhiteSpaces(xmlData);
-		logger.debug("**********Initial XML Generated : " + xml);
-		String hashedXML = new InvoiceHash().getInvoiceHash(xml);// generating hash
-		logger.debug("**********Invoice Hash : " + hashedXML);
-		logger.debug("**********KeyStore Fetching from Properties - Path -{} -- Key- {} : ", AsqZatcaConstant.certificateFilePath, keySecret);
-		KeyStore ks = SmartHubUtil.getKeyStore(AsqZatcaConstant.certificateFilePath, keySecret);
+		/*
+		 * byte[] signatureECDA = SmartHubUtil.sigData(ks, AsqZatcaConstant.keyAlg,
+		 * keySecret, AsqZatcaConstant.sigAlg, hashedXML); String signedHash =
+		 * base64.encodeBase64String(signatureECDA);
+		 *
+		 * byte[] csidSignature = x509.getSignature(); byte[] publicKeyString =
+		 * x509.getPublicKey().getEncoded();
+		 *
+		 * String qrCode = SmartHubUtil.generateQRCode(sellerName, vatNumber,
+		 * invoiceIssueTimeStamp, invoiceIssueDate, invoiceTotal, vatTotal, hashedXML,
+		 * signedHash, publicKeyString, csidSignature);
+		 * addDocQR.setEmbeddedDocumentBinaryObject(qrCode);
+		 */
 
+		HashQRData data = new HashQRData();
+		// data.setQR(qrCode);
+		// data.setInvoiceHash(hashedXML);
+		// data.setCertificate(csidCertificate);
+		return data;
+	}
+
+	public X509Certificate getZatcaCertificate() throws KeyStoreException, NoSuchAlgorithmException, CertificateException, FileNotFoundException, IOException, ASQException, ParseException {
 		X509Certificate x509 = SmartHubUtil.readCSIDFile(AsqZatcaConstant.csidCertificateFilePath);
 		if (isCertificateExpired(x509)) {
-			HashQRData data = new HashQRData();
-			data.setCertificateExpired(true);
-			data.setExpirationDate(x509.getNotAfter().toString());
-			return data;
+			logger.error("*******Certificate Expired************");
+			logger.error("*******Certificate Valid Up to: {} ************", x509.getNotAfter().toString());
+			SmartHubUtil.generateCertificateExpiredErrorResponse(x509.getNotAfter().toString());
 		}
-		Base64 base64 = new Base64();
-		byte[] xmlHashingBytes = base64.decode(hashedXML.getBytes(StandardCharsets.UTF_8));
+		return x509;
+	}
 
-		byte[] signatureECDA = SmartHubUtil.sigData(ks, AsqZatcaConstant.keyAlg, keySecret, AsqZatcaConstant.sigAlg, hashedXML);
-
-		String signedHash = base64.encodeBase64String(signatureECDA);
-
-		byte[] csidSignature = x509.getSignature();
-		byte[] publicKeyString = x509.getPublicKey().getEncoded();
-
+	public SignatureData getSignatureData(String hashedXML, Long nextICV, Date transactionDate, X509Certificate x509, byte[] signatureECDA) throws IOException, ParseException, DatatypeConfigurationException {
+		SignatureData signatureData = new SignatureData();
 		String csidCertificate = SmartHubUtil.getReadCSIDCertificateString(AsqZatcaConstant.csidCertificateFilePath);
 		csidCertificate = SmartHubUtil.removeHeaderAndFooter(csidCertificate);
+		signatureData.setX509Certificate(csidCertificate);
 
 		XMLGregorianCalendar signingTime = SmartHubUtil.signingTimeConversion(transactionDate);
-
-		String qrCode = SmartHubUtil.generateQRCode(sellerName, vatNumber, invoiceIssueTimeStamp, invoiceIssueDate, invoiceTotal, vatTotal, hashedXML, signedHash, publicKeyString, csidSignature);
-		addDocQR.setEmbeddedDocumentBinaryObject(qrCode);
+		signatureData.setCsidCertSigningTime(signingTime);// take from invoice json
 
 		signatureData.setICV(nextICV.intValue());
 		signatureData.setSignatureValue(signatureECDA);
 		signatureData.setDigestValueInvoiceSignedData(hashedXML.getBytes());
-		signatureData.setX509Certificate(csidCertificate);
-		signatureData.setCsidCertSigningTime(signingTime);// take from invoice json
 		String issuername = x509.getIssuerX500Principal().getName().replaceAll(",", ", ");
 		signatureData.setCsidCertIssuerName(issuername);
 		signatureData.setCsidCertSerialNumber(x509.getSerialNumber().toString());
 
-		HashQRData data = new HashQRData();
-		data.setQR(qrCode);
-		data.setInvoiceHash(hashedXML);
-		data.setCertificate(csidCertificate);
-		return data;
+		return signatureData;
 	}
 
 	private boolean isCertificateExpired(X509Certificate x509) throws ParseException {
@@ -1449,7 +1473,6 @@ public class AsqZatcaInvoiceGenerationHelper {
 	/**
 	 *
 	 * @param in
-	 * @param argQRCode
 	 * @param signatureData
 	 * @throws NoSuchAlgorithmException
 	 * @throws IOException
@@ -1457,13 +1480,11 @@ public class AsqZatcaInvoiceGenerationHelper {
 	 * @return invoiceXML
 	 */
 
-	public String generateFinalXML(InvoiceType in, String argQRCode, SignatureData signatureData) throws NoSuchAlgorithmException, IOException, JAXBException {
-		String invoiceXML = SmartHubUtil.generateCompleteSignedInvoiceXML(in);
+	public String generateFinalXML(String invoiceXML, SignatureData signatureData) throws NoSuchAlgorithmException, IOException, JAXBException {
 		logger.debug("Before Invoice Generated: " + invoiceXML);
 		invoiceXML = invoiceXML.replace(AsqZatcaConstant.UBLDocumentSignaturesTag, AsqZatcaConstant.UBLDocumentSignaturesWithNamespace);
 		invoiceXML = invoiceXML.replace(AsqZatcaConstant.SignatureTag, AsqZatcaConstant.SignatureWithNamespace);
 		invoiceXML = invoiceXML.replace(AsqZatcaConstant.QualifyingPropertiesTag, AsqZatcaConstant.QualifyingPropertiesWithNamespace);
-		invoiceXML = invoiceXML.replace("UVI=", argQRCode);
 		invoiceXML = invoiceXML.replace("Q0VSVA==", signatureData.getX509Certificate());
 		invoiceXML = invoiceXML.replace("SEFTSENFUlQ=", SmartHubUtil.hashCertificate(AsqZatcaConstant.csidCertificateFilePath));
 		invoiceXML = invoiceXML.replace("UmVwbGFjZVNpZ25hdHVyZQ==", SmartHubUtil.hashSignatureProperties(getSignaturePropertyHashingString(signatureData)));
@@ -1534,4 +1555,53 @@ public class AsqZatcaInvoiceGenerationHelper {
 		return argGrossValue.divide(argQuantity, 2, asqHelper.getSystemRoundingMode());
 	}
 
+	public String getInvoiceHash(String xmlDocument) throws ParserConfigurationException, TransformerException, IOException, SAXException, InvalidCanonicalizerException, CanonicalizationException {
+		Transformer transformer = getTransformer();
+		ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
+		StreamResult xmlOutput = new StreamResult(byteArrayOutputStream);
+		transformer.transform(new StreamSource(new StringReader(xmlDocument)), xmlOutput);
+		if (hashStringToBytes(canonicalizeXml(byteArrayOutputStream.toByteArray())) != null) {
+			return java.util.Base64.getEncoder().encodeToString(hashStringToBytes(canonicalizeXml(byteArrayOutputStream.toByteArray())));
+		}
+		return null;
+	}
+
+	/**
+	 *
+	 * @return
+	 * @throws TransformerConfigurationException
+	 * @throws IOException
+	 */
+	private Transformer getTransformer() throws TransformerConfigurationException, IOException {
+		TransformerFactory transformerFactory = TransformerFactory.newInstance();
+		transformerFactory.setAttribute("http://javax.xml.XMLConstants/property/accessExternalDTD", "");
+		transformerFactory.setAttribute("http://javax.xml.XMLConstants/property/accessExternalStylesheet", "");
+
+		// Transformer transformer = transformerFactory.newTransformer(new StreamSource(
+		// (new ClassPathResource("invoice.xsl")).getInputStream()));
+		Transformer transformer = transformerFactory.newTransformer(new StreamSource(new FileInputStream(System.getProperty("asq.pos.invoice.xls.path"))));
+		transformer.setOutputProperty("encoding", "UTF-8");
+		transformer.setOutputProperty("indent", "no");
+		transformer.setOutputProperty("omit-xml-declaration", "yes");
+		return transformer;
+	}
+
+	private String canonicalizeXml(byte[] xmlDocument) throws InvalidCanonicalizerException, CanonicalizationException, ParserConfigurationException, IOException, SAXException {
+		Init.init();
+		Canonicalizer canon = Canonicalizer.getInstance(Canonicalizer.ALGO_ID_C14N11_OMIT_COMMENTS);
+		return new String(canon.canonicalize(xmlDocument));
+	}
+
+	private byte[] hashStringToBytes(String input) {
+		MessageDigest digest = null;
+		try {
+			digest = MessageDigest.getInstance("SHA-256");
+		} catch (NoSuchAlgorithmException e) {
+			logger.error(Level.SEVERE + " {}", e.getMessage());
+		}
+		if (digest != null) {
+			return digest.digest(input.getBytes(StandardCharsets.UTF_8));
+		}
+		return new byte[0];
+	}
 }

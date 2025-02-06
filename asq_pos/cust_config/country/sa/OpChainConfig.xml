@@ -671,19 +671,6 @@
 		<Op class="asq.pos.inventory.AsqBinTransferEmailFormOp" longRunning="true"/>
 		<Op class="asq.pos.inventory.AsqBinTransferOTPFormOp"/>
    </OpChain>
-   <OpChain name="INVENTORY_ITEM_TRANSFER" rollbackChainKey="PROMPT_ROLLBACK_ITEM_TRANSFER" rollbackLevel="60" contextKey="ITEM_TRANSFER">
-    <PromptOp class="dtv.pos.inventory.movement.PromptTransferItemScanOp" contextKey="ITEM_TRANSFER" validationsBean="itemTransferItemRules" breakpoint="true" />
-    <PromptOp class="dtv.pos.inventory.movement.PromptTransferItemSerialNumberOp" validationsBean="serialNumberInvDocRules" />
-    <Op class="dtv.pos.inventory.movement.MatchItemAgainstSourceLocationOp" />
-    <PromptOp class="dtv.pos.inventory.movement.PromptTransferItemQtyOp" validationsBean="itemTransferQtyRules" />
-    <ValidationOp class="asq.pos.inventory.movement.AsqValidateTransferItemQtyOp" validationsBean="itemTransferQtyRules" />
-  </OpChain>
-  <OpChain name="ITEM_TRANSFER_CHANGE_QUANTITY">
-    <Op class="dtv.pos.inventory.movement.GetSelectedTransferItemOp">
-      <Parameter name="serializedItemNotAllow" value="true" />
-    </Op>
-    <PromptOp class="asq.pos.inventory.movement.AsqPromptTransferItemChangeQtyOp" validationsBean="itemTransferChangeQtyRules" />
-  </OpChain>
    <!-- ASQ Bin Transfer Ends-->
    
    <!-- Loyalty redeem  start -->
@@ -758,5 +745,13 @@
 		<OpChainRoute chainKey="WORKSTATION_OPEN_EXT.post" />
 	</OpChain>
 	<!-- ASQ Tax free error at Reg opens ends-->
+	
+	<!-- ASQ - Style item is not required during item lookup - Start -->
+	   <OpChain name="ASQ_GENERIC_ITEM_LOOKUP">
+	    <Op class="asq.pos.inventory.lookup.AsqItemSearchOp" breakpoint="true" />
+	    <Op class="dtv.pos.inventory.lookup.DisplayFoundItemOp" breakpoint="true" />
+	  </OpChain> 
+  	 <!-- ASQ - Style item is not required during item lookup - Ends--> 
+	
 </OpChainSet>
 

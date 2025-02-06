@@ -21,6 +21,7 @@
 	<bean id="asqPlanetVatClaimServices" class=" asq.pos.planet.vat.claim.service.AsqPlanetVatClaimServicesImpl" primary="true"/>
    <bean id="asqMokafaaHelper" class="asq.pos.loyalty.mokafaa.tender.service.AsqMokafaaHelper"/>
   <bean id="asqMokafaaLoyalityTenderService" class="asq.pos.loyalty.mokafaa.tender.service.AsqMokafaaTenderServiceImpl"/>
+  <bean id="asqStyleItmRestrictModule" class="asq.pos.inventory.lookup.AsqStyleItmRestrictModule"/>
   
   
   <bean abstract="true" id="AbstractZatcaRestServiceBean">

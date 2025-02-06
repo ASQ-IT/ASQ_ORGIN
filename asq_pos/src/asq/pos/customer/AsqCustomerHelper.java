@@ -17,7 +17,11 @@ public class AsqCustomerHelper extends CustomerHelper {
 				if ("telephone".equals(fieldKey)) {
 					asqModified.setTelephone3((String) value);
 					asqModified.setTelephone1(null);
+				} else if ("lastName".equals(fieldKey)) {
+					asqModified.setLastName(value.toString());
+					break;
 				}
+			asqModified.setLastName("GUEST");
 		}
 		return asqModified;
 	}

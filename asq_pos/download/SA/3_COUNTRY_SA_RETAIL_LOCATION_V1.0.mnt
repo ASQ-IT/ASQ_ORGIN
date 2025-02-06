@@ -1,0 +1,3 @@
+INSERT|RETAIL_LOCATION|${dtv.location.storeNumber}|0${dtv.location.storeNumber}|Salama Centre Showroom - Jeddah|Salama Centre Showroom|30500 Bruce Industrial Pkwy|||Jeddah|||SA||||||Store Manager 0${dtv.location.storeNumber}|15|||0|0|0|||||ar_SA|SAR|||0${dtv.location.storeNumber}||||||0||||SA|||
+INSERT|RETAIL_LOCATION|11104|11104|Makkah Ehsan Showroom - Makkah|Makkah Ehsan Showroom |Makkah|||Jeddah|||SA||||||Store Manager 11104|15|||0|0|0|||||ar_SA|SAR|||011104||||||0||||SA|||
+INSERT|RETAIL_LOCATION|11106|11106|Al-Hijaz Mall Showroom - Makkah|Makkah Ehsan Showroom |Makkah|||Jeddah|||SA||||||Store Manager 11106|15|||0|0|0|||||ar_SA|SAR|||11106||||||0||||SA|||

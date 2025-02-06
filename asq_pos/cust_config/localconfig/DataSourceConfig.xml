@@ -13,20 +13,20 @@
   </DataSource>
 
   <DataSource NetworkScope="WAN" name="Xcenter">
-    <Enabled dtype="Boolean">false</Enabled>
+    <Enabled dtype="Boolean">true</Enabled>
     <Strategy dtype="String">servletPersistenceStrategy</Strategy>
-    <Property key="ConnectionURL" value="https://asqxcenter:8004"/>
+    <Property key="ConnectionURL" value="https://localhost:9074"/>
     <Property key="GetObjectByIdPath" value="/xcenter/dtx/GetById"/>
     <Property key="GetObjectByQueryPath" value="/xcenter/dtx/GetByQuery"/>
     <Property key="MakePersistentPath" value="/xcenter/dtx/MakePersistent"/>
     <Property key="GetConfigPathPath" value="/xcenter/configpath/GetConfigPath"/>
     <Property key="GetSystemDateTimePath" value="/xcenter/misc/GetSystemDateTime"/>
     <Property key="Timeout" value="30"/>
-    <Property key="ConnectionUserName" value=""/>
-    <Property key="ConnectionPassword" value=""/>
+    <Property key="ConnectionUserName" value="${xcenter.db.user}"/>
+    <Property key="ConnectionPassword" value="${xcenter.db.pwd}"/>
     <Property key="keystore" value="${dtv.util.net.ssl.keyStore}"/>
     <Property key="keystorePassword" value="${dtv.keystore.password}"/>
-    <Property key="keyalias" value="xcenter-20240625"/>
+    <Property key="keyalias" value="xcenter-20240412"/>
     <Property key="truststore" value="${dtv.util.net.ssl.trustStore}"/>
     <Property key="truststorePassword" value="${dtv.keystore.password}"/>
     <Ping>
@@ -84,7 +84,7 @@
   </DataSource>
 
   <DataSource HighAvailability="true" NetworkScope="LAN" name="Local">
-    <Enabled dtype="Boolean">false</Enabled>
+    <Enabled dtype="Boolean">true</Enabled>
     <Strategy dtype="String">jdbcPersistenceStrategy</Strategy>
     <Property key="ConnectionFactoryClassName" value="${dtv.datasource.connectionfactory}"/>
     <Property key="ConnectionUserName" value="${local.db.user}"/>

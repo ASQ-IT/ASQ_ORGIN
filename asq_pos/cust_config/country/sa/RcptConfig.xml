@@ -383,32 +383,32 @@
 		</section>
 
 		<section name="item_header">
-			<!-- item header -->
-			<row style="STRONGUNDERLINE">
-				<field text="_item" />
-				<field text="_qty" align="R" loc="19" rtlloc="-9" />
-				<field text="_asqvat" align="R" loc="-25" rtlloc="10" />
-				<field text="_price" align="R" loc="-15" rtlloc="25" />
-				<field text="_amount" align="R" loc="-3" rtlloc="12" />
-			</row>
-			<sectionref>item_details</sectionref>
-			<row />
+		<!-- item header -->
+		<row style="STRONGUNDERLINE">
+		<field text="_item" /> 
+		<field text="_qty" align="R" loc="15" rtlloc="-10" />
+		<field text="_asqvat" align="R" loc="22" rtlloc="-18" /> 
+		<field text="_price" align="R" loc="30" rtlloc="-26" />
+		<field text="_amount" align="R" loc="37" rtlloc="-35" /> 
+		</row>
+		<sectionref>item_details</sectionref>
+		<row />
 		</section>
 		<section name="item_details_listing">
 			<row>
 				<field method="getItem.getItemId" />
-				<field formatter="Quantity" align="R" loc="19" rtlloc="-9">
+				<field formatter="Quantity" align="R" loc="15" rtlloc="-10">
 					<aggregate
 						class="dtv.pos.register.sale.QuantityDocBuilderField" />
 				</field>
-				<field formatter="Money" align="R" loc="-25" rtlloc="10">
+				<field formatter="Money" align="R" loc="22" rtlloc="-18">
 					<aggregate class="asq.pos.docbuilder.AsqTaxDocBuilder" />
 				</field>
 				<field method="getBaseUnitPrice" formatter="Money" align="R"
-					loc="-15" rtlloc="25" />
+					loc="30" rtlloc="-26" />
 				<field method="getExtendedAmount" formatter="Money" align="R"
-					loc="-3" rtlloc="12" />
-				<field loc="-1">
+					loc="37" rtlloc="-35" />
+				<field loc="-20" rtlloc="5" >
 					<aggregate
 						class="dtv.pos.register.tax.TaxFlagDocBuilderField" />
 				</field>

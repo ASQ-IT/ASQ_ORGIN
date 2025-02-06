@@ -3,6 +3,8 @@ package asq.pos.register.sale.zatca;
 import java.math.BigDecimal;
 import java.math.MathContext;
 import java.math.RoundingMode;
+import java.security.KeyStore;
+import java.security.cert.X509Certificate;
 import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.GregorianCalendar;
@@ -26,7 +28,6 @@ import asq.pos.zatca.invoice.generation.op.AsqZatcaInvoiceGenerationHelper;
 import asq.pos.zatca.invoice.generation.op.SmartHubUtil;
 import asq.pos.zatca.invoice.generation.utils.ASQException;
 import asq.pos.zatca.invoice.models.AdditionalDocumentReference;
-import asq.pos.zatca.invoice.models.HashQRData;
 import asq.pos.zatca.invoice.models.ItemAllowanceCharges;
 import asq.pos.zatca.invoice.models.SignatureData;
 import dtv.i18n.FormattableFactory;
@@ -107,16 +108,14 @@ public class AsqZatcaSaleQrCodeGenerationOp extends Operation {
 
 		InvoiceType zatcaInvoiceObj = new InvoiceType();
 
-		AdditionalDocumentReference addDocQR = new AdditionalDocumentReference(AsqZatcaConstant.ASQ_QR_CODE, StringUtils.EMPTY, StringUtils.EMPTY);
-
 		GregorianCalendar gregorianCalendarIssueDate = new GregorianCalendar();
 		gregorianCalendarIssueDate.setTime(currentSaleTrans.getCreateDate());
 
-		// invoiceData.getInvoiceIssueTime()
+		// invoiceData.getInvoiceIssueDate()
 		XMLGregorianCalendar invoiceIssueDate = asqZatcaHelper.getZatcaIssueDate(gregorianCalendarIssueDate);
 
-		// invoiceData.getInvoiceIssueDate()
-		XMLGregorianCalendar invoiceIssueTime = asqZatcaHelper.getZatcaIssueTime(gregorianCalendarIssueDate);
+		// invoiceData.getInvoiceIssueTime()
+		XMLGregorianCalendar invoiceIssueTimeStamp = asqZatcaHelper.getZatcaIssueTime(gregorianCalendarIssueDate);
 
 		// invoiceData.getPayableAmount
 		String payableAmount = String.valueOf(asqZatcaHelper.getAbsoluteValue(currentSaleTrans.getAmountTendered()));
@@ -131,67 +130,71 @@ public class AsqZatcaSaleQrCodeGenerationOp extends Operation {
 		// vatTotal
 		String vatTotal = String.valueOf(asqZatcaHelper.getAbsoluteValue(currentSaleTrans.getTaxAmount()));
 
-		SignatureData signatureData = new SignatureData();
-
 		Long nextICV = SequenceFactory.getNextLongValue(AsqZatcaConstant.ASQ_ZATCA_SEQ);
 
 		oasis.names.specification.ubl.schema.xsd.commonaggregatecomponents_2.ObjectFactory cac = asqZatcaHelper
 				.getZatcaOjectFactory(oasis.names.specification.ubl.schema.xsd.commonaggregatecomponents_2.ObjectFactory.class);
 		oasis.names.specification.ubl.schema.xsd.commonbasiccomponents_2.ObjectFactory cbc = asqZatcaHelper.getZatcaOjectFactory(oasis.names.specification.ubl.schema.xsd.commonbasiccomponents_2.ObjectFactory.class);
 
-		poulateXMLInvoiceType(currentSaleTrans, zatcaInvoiceObj, cbc, cac, addDocQR, xmlIrnValue, xmlUUID, invoiceIssueDate, invoiceIssueTime, nextICV);
+		poulateXMLInvoiceType(currentSaleTrans, zatcaInvoiceObj, cbc, cac, xmlIrnValue, xmlUUID, invoiceIssueDate, invoiceIssueTimeStamp, nextICV);
 
 		String intialTransInvoice = asqZatcaHelper.generateInvoiceXML(zatcaInvoiceObj);
 
-		logger.debug(" ---------------------------Generate QR Starts---------------------- ");
-		HashQRData data = asqZatcaInvoiceGenerationHelper.getHashAndQR(AsqZatcaConstant.companyLegalName, AsqZatcaConstant.companyVatNumber, invoiceIssueDate, invoiceIssueTime, payableAmount, vatTotal,
-				intialTransInvoice, AsqZatcaConstant.keySecret, AsqZatcaConstant.keyAlg, addDocQR, xmlUUID, xmlIrnValue, signatureData, nextICV, currentSaleTrans.getCreateDate());
+		// Getting the first hash for signature
+		intialTransInvoice = SmartHubUtil.removeNewlineAndWhiteSpaces(intialTransInvoice);
+		logger.debug("**********Initial XML Generated : " + intialTransInvoice);
+		String hashedXML = asqZatcaInvoiceGenerationHelper.getInvoiceHash(intialTransInvoice);// generating hash
+		logger.debug("**********Initial Invoice Hash : " + hashedXML);
 
-		if (data.isCertificateExpired()) {
-			logger.error("*******Certificate Expired************");
-			logger.error("*******Certificate Valid Up to: {} ************", data.getExpirationDate());
-			SmartHubUtil.generateCertificateExpiredErrorResponse(data.getExpirationDate());
-		}
-		logger.debug(" ---------------------------Generate QR End---------------------- ");
-		logger.debug("*******QRCode Generated: {} ************", data.getQR());
-		if (null == data || null == data.getQR() || data.getQR().isEmpty()) {
-			logger.error("QR Code Generation Failed: QR Code is null or empty");
-			throw new ASQException("QR Code Generation Failed: QR Code is null or empty");
-		} else if (null == data || null == data.getCertificate() || data.getCertificate().isEmpty()) {
-			logger.error("Certificate Fetching Failed: Issue with Certificate Reading");
-			throw new ASQException("Certificate Fetching Failed: Issue with Certificate Reading");
-		}
+		// Generating Signed Hash
+		logger.debug("**********KeyStore Fetching from Properties - Path -{} -- Key- {} : ", AsqZatcaConstant.certificateFilePath, AsqZatcaConstant.keySecret);
+		KeyStore ks = SmartHubUtil.getKeyStore(AsqZatcaConstant.certificateFilePath, AsqZatcaConstant.keySecret);
+		byte[] signatureECDA = SmartHubUtil.sigData(ks, AsqZatcaConstant.keyAlg, AsqZatcaConstant.keySecret, AsqZatcaConstant.sigAlg, hashedXML);
 
-		zatcaInvoiceObj.getAdditionalDocumentReference().add(asqZatcaInvoiceGenerationHelper.setDocumentReferenceType("QR", StringUtils.EMPTY, cbc, cac, data.getQR()));
-		zatcaInvoiceObj.getSignature().add(asqZatcaInvoiceGenerationHelper.setSignatureType(System.getProperty("asq.pos.invoice.referencedSignatureID"), System.getProperty("asq.pos.invoice.extensionURI"), cbc, cac));
+		X509Certificate certificate = asqZatcaInvoiceGenerationHelper.getZatcaCertificate();
 
+		SignatureData signatureData = asqZatcaInvoiceGenerationHelper.getSignatureData(intialTransInvoice, nextICV, currentSaleTrans.getCreateDate(), certificate, signatureECDA);
 		UBLExtensionsType ublExtensionsType = asqZatcaHelper.getZatcaOjectFactory(oasis.names.specification.ubl.schema.xsd.commonextensioncomponents_2.ObjectFactory.class).createUBLExtensionsType();
 		ublExtensionsType.getUBLExtension()
-				.add(asqZatcaInvoiceGenerationHelper.getUBLExtension(System.getProperty("asq.pos.invoice.extensionURI"), System.getProperty("asq.pos.invoice.signatureInformationID"),
-						System.getProperty("asq.pos.invoice.referencedSignatureID"),
-						new String[] { System.getProperty("asq.pos.invoice.transformsAlgorithm"), System.getProperty("asq.pos.invoice.transformsAlgorithm"), System.getProperty("asq.pos.invoice.transformsAlgorithm"),
-								System.getProperty("asq.pos.invoice.transformsAlgorithm") },
-						// createTransformTypeXPath
-						new String[] { System.getProperty("asq.pos.invoice.xpathTagUBLExtensions"), System.getProperty("asq.pos.invoice.xpathTagSignature"), System.getProperty("asq.pos.invoice.xpathTagAdditionalDocRef"),
-								StringUtils.EMPTY },
-						cbc, signatureData));
-
+				.add(asqZatcaInvoiceGenerationHelper.getUBLExtension(AsqZatcaConstant.zatcaXMLExtenUri, AsqZatcaConstant.zatcaXMLSignInfoId, AsqZatcaConstant.zatcaXMLRefSignID,
+						new String[] { AsqZatcaConstant.zatcaXMLTransAlgo, AsqZatcaConstant.zatcaXMLTransAlgo, AsqZatcaConstant.zatcaXMLTransAlgo, AsqZatcaConstant.zatcaXMLTransAlgo },
+						new String[] { AsqZatcaConstant.zatcaXMLTagUBL, AsqZatcaConstant.zatcaXMLTagSignature, AsqZatcaConstant.zatcaXMLAddDoc, StringUtils.EMPTY }, cbc, signatureData));
+		zatcaInvoiceObj.getSignature().add(asqZatcaInvoiceGenerationHelper.setSignatureType(AsqZatcaConstant.zatcaXMLRefSignID, AsqZatcaConstant.zatcaXMLExtenUri, cbc, cac));
 		zatcaInvoiceObj.setUBLExtensions(ublExtensionsType);
-		String invoiceXML = asqZatcaInvoiceGenerationHelper.generateFinalXML(zatcaInvoiceObj, data.getQR(), signatureData);
+
+		logger.debug(" ---------------------------Generate QR Starts---------------------- ");
+		zatcaInvoiceObj.getAdditionalDocumentReference().add(asqZatcaInvoiceGenerationHelper.setDocumentReferenceType(AsqZatcaConstant.ASQ_QR_CODE, StringUtils.EMPTY, cbc, cac, AsqZatcaConstant.ASQ_ZATCA_QR_CODE_VALUE));
+
+		String invoiceXML = SmartHubUtil.generateCompleteSignedInvoiceXML(zatcaInvoiceObj);
+		invoiceXML = asqZatcaInvoiceGenerationHelper.generateFinalXML(invoiceXML, signatureData);
+		// Generating final hash Value
+		hashedXML = asqZatcaInvoiceGenerationHelper.getInvoiceHash(invoiceXML);
 
 		Base64 base64 = new Base64();
+		String signedHash = base64.encodeBase64String(signatureECDA);
+
+		String qrCode = SmartHubUtil.generateQRCode(AsqZatcaConstant.companyLegalName, AsqZatcaConstant.companyVatNumber, invoiceIssueTimeStamp, invoiceIssueDate, payableAmount, vatTotal, hashedXML, signedHash,
+				certificate.getPublicKey().getEncoded(), certificate.getSignature());
+
+		logger.debug("*******QRCode Generated: {} ************", qrCode);
+		if (null == qrCode) {
+			logger.error("QR Code Generation Failed: QR Code is null or empty");
+			throw new ASQException("QR Code Generation Failed: QR Code is null or empty");
+		}
+		invoiceXML = invoiceXML.replace(AsqZatcaConstant.ASQ_ZATCA_QR_CODE_VALUE_BYTE, qrCode);
+		logger.debug(" ---------------------------Generate QR End---------------------- ");
 
 		// saving the invoice into staging table
 		asqZatcaDatabaseHelper.saveInvoiceInStaging(xmlIrnValue, _stationState.getCurrentBusinessDate(), Long.valueOf(_stationState.getWorkstationId()), currentSaleTrans.getTransactionSequence(),
-				base64.encodeToString(invoiceXML.getBytes()), data.getQR(), xmlUUID, data.getInvoiceHash(), nextICV);
+				base64.encodeToString(invoiceXML.getBytes()), qrCode, xmlUUID, hashedXML, nextICV);
 
 		// return the receipt QRcode
-		return data.getQR();
+		return qrCode;
 	}
 
 	private void poulateXMLInvoiceType(IRetailTransaction currentSaleTrans, InvoiceType argZatcaInvoiceObj, oasis.names.specification.ubl.schema.xsd.commonbasiccomponents_2.ObjectFactory cbc,
-			oasis.names.specification.ubl.schema.xsd.commonaggregatecomponents_2.ObjectFactory cac, AdditionalDocumentReference addDocQR, String xmlIrnValue, String xmlUUID, XMLGregorianCalendar invoiceIssueDate,
-			XMLGregorianCalendar invoiceIssueTime, Long nextICV) throws ParseException, DatatypeConfigurationException {
+			oasis.names.specification.ubl.schema.xsd.commonaggregatecomponents_2.ObjectFactory cac, String xmlIrnValue, String xmlUUID, XMLGregorianCalendar invoiceIssueDate, XMLGregorianCalendar invoiceIssueTime,
+			Long nextICV) throws ParseException, DatatypeConfigurationException {
 
 		// setting Profile ID
 		ProfileIDType profileID = cbc.createProfileIDType();
@@ -284,7 +287,6 @@ public class AsqZatcaSaleQrCodeGenerationOp extends Operation {
 					docList.add(addDocPIH);
 
 					docList.add(new AdditionalDocumentReference("ICV", String.valueOf(nextICV), StringUtils.EMPTY));
-					docList.add(addDocQR);
 				}
 			} else {
 				logger.debug("PreviousHashFromDb is empty:" + invoiceHashQryResult.toString());
@@ -341,7 +343,7 @@ public class AsqZatcaSaleQrCodeGenerationOp extends Operation {
 				if (!taxLineModel.getVoid()) {
 					// get Taxable Amount
 					taxableValue = (taxLineModel.getTaxableAmount().subtract(asqZatcaHelper.getAbsoluteValue(taxLineModel.getTaxAmount())));
-					taxPerc = taxLineModel.getTaxPercentage();
+					taxPerc = taxLineModel.getTaxPercentage().setScale(2, asqHelper.getSystemRoundingMode());
 					taxCategory = taxLineModel.getTaxGroupId();
 					taxSubtotalTypes.add(asqZatcaInvoiceGenerationHelper.setTaxSubtotalType(taxLineModel.getCurrencyId(), asqZatcaHelper.getAbsoluteValue(taxLineModel.getTaxAmount()), taxableValue,
 							asqZatcaInvoiceGenerationHelper.setTaxCategoryType(new String[] { AsqZatcaConstant.ZATCA_TAXCATEGORY_SCHEMEID }, new String[] { AsqZatcaConstant.ZATCA_SCHEME_AGENCYID },

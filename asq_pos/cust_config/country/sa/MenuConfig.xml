@@ -30,7 +30,7 @@
 	    <MenuOption ref="SALE::ASQ_TENDER_MOKAFAA" />
 		<!-- Mokafaa Integration Ends -->
 	    <MenuOption ref="SALE::TENDER_CREDIT_CARD" />
-	    	<!-- Bank Transfer -->
+	    <!-- Bank Transfer -->
 	    <MenuOption ref="SALE::TENDER_BANK_TRANSFER" />
 	    <MenuOption ref="SALE::TENDER_EWALLET" />
 	    <MenuOption ref="SALE::TENDER_PAYMENT_BY_LINK" />

@@ -135,7 +135,7 @@
       <Column fieldRef="telephoneSearch" accessibilityText="_formPhoneNumberLabel" required="true" labeledBy="telephoneLabel" />
     </Row>
     <Row>
-      <Column fieldRef="asqlastName" labeledBy="lastNameLabel" />
+      <Column fieldRef="lastName" labeledBy="lastNameLabel" />
     </Row>
     <Row>
       <Column fieldRef="firstName" labeledBy="firstNameLabel" />

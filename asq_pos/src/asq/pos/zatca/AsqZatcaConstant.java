@@ -85,6 +85,14 @@ public interface AsqZatcaConstant {
 	String companyAddCountrySubentity = System.getProperty("asq.zatca.company.country.subentity");
 	String companyAddCountry = System.getProperty("asq.zatca.company.country");
 
+	String zatcaXMLExtenUri = System.getProperty("asq.pos.invoice.extensionURI");
+	String zatcaXMLSignInfoId = System.getProperty("asq.pos.invoice.signatureInformationID");
+	String zatcaXMLRefSignID = System.getProperty("asq.pos.invoice.referencedSignatureID");
+	String zatcaXMLTransAlgo = System.getProperty("asq.pos.invoice.transformsAlgorithm");
+	String zatcaXMLTagUBL = System.getProperty("asq.pos.invoice.xpathTagUBLExtensions");
+	String zatcaXMLTagSignature = System.getProperty("asq.pos.invoice.xpathTagSignature");
+	String zatcaXMLAddDoc = System.getProperty("asq.pos.invoice.xpathTagAdditionalDocRef");
+
 	String ASQ_ZATCA_SECRET_KEY = "secret";
 	String ASQ_ZATCA_TOKEN_KEY = "binarySecurityToken";
 	String ASQ_ZATCA_OIC_DUP_STATUS = "DUPLICATE";
@@ -92,6 +100,8 @@ public interface AsqZatcaConstant {
 	String ASQ_ZATCA_OIC_WAR_STATUS = "WARNING";
 
 	String ASQ_QR_CODE = "QR";
+	String ASQ_ZATCA_QR_CODE_VALUE = "ASQ_ZATCA_QR_CODE_VALUE";
+	String ASQ_ZATCA_QR_CODE_VALUE_BYTE = "QVNRX1pBVENBX1FSX0NPREVfVkFMVUU=";
 	String ASQ_UIID_CHAR_TOREP = "::";
 	String ASQ_UIID_CHAR_BEREP = "-";
 
@@ -106,4 +116,5 @@ public interface AsqZatcaConstant {
 	String ASQ_NEQATY_TRX_ID = "ASQ_NEQATY_TRX_ID";
 	String ASQ_MOKAFA_TRX_ID = "ASQ_MOKAFA_TRX_ID";
 	String ASQ_NEQATY_EARN_TRN = "ASQ_NEQATY_EARN_TRN";
+
 }

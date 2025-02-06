@@ -24,3 +24,5 @@ INSERT|TENDER|GCCNET|CREDIT_CARD||||||*||||||+GCCNET||||||||||||||||||||||||||||
 INSERT|TENDER|DISCOVER|CREDIT_CARD||||||*||||||+DISCOVER||||||||||||||||||||||||||||||2|0|400||
 INSERT|TENDER|JCB|CREDIT_CARD||||||*||||||+JCB||||||||||||||||||||||||||||||2|0|500||
 INSERT|TENDER|DINNER|CREDIT_CARD||||||*||||||+DINNER||||||||||||||||||||||||||||||2|0|500||
+INSERT|TENDER|BANK_TRANSFER|BANK||||||*||||||+TND_TNDR_BANK_TRANSFER||||||||||||||||||||||||||||||2|0|540||
+

@@ -28,6 +28,9 @@
 	<Setting name="ASQ---BinTransfer---EmailApproval">true</Setting>
 	<Setting name="ASQ---BinTransferApprovalEmailOTP---To">atul.sharma28@wipro.com</Setting>
     <Setting name="ASQ---BinTransferOfflineOTP---To">628387</Setting>
+    <Setting name="Inventory---PromptForQuantityOnItemKey">true</Setting>
+	<Setting name="Inventory---PromptForQuantityOnItemScan">true</Setting>
+	<Setting name="LocationBasedInventory---ItemNotInSourceTransferAllowed">false</Setting>
 	<!-- ASQ Bin Transfer Email & OTP - Ends -->	
 
     <Setting name="ItemReturn---CrossBorderReturnsEnabled">false</Setting>

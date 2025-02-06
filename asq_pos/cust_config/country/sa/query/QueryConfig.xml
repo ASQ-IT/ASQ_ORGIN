@@ -109,5 +109,103 @@
 		</SQL>
 	</Query>
  <!--ASQ - Related items change - End--> 
+ <Query name="ASQ_ITEM_LOOKUP" pmType="ITEM">
+    <QueryHandler>dtv.data2.access.query.SqlQueryHandler</QueryHandler>
+    <ResultClass>dtv.xst.query.results.BasicItemQueryResult</ResultClass>
+    <ResultField name="ItemId" type="String" />
+    <ResultField name="Description" type="String" />
+    <ResultField name="Dimension1" type="String" />
+    <ResultField name="Dimension2" type="String" />
+    <ResultField name="Dimension3" type="String" />
+    <ResultField name="ItemMatrixColor" type="String" />
+    <ResultField name="SerializedItem"  type="Boolean" />
+    <ResultField name="ItemTypeCode"  type="String" />
+    <ResultField name="ImageUrl" type="String" />
+    <ResultField name="UnitCount" type="BigDecimal" />
+    <SQL>
+      <Statement><![CDATA[
+        SELECT i.item_id,
+               i.description,
+               i.dimension1,
+               i.dimension2,
+               i.dimension3,
+               i.item_matrix_color,
+               i.serialized_item_flag,
+               i.item_typcode,
+               img.image_url,
+               stc.unitcount
+          FROM itm_item i
+            LEFT JOIN itm_item p
+              ON i.organization_id = p.organization_id
+              AND /*UPPER*/ i.parent_item_id = p.item_id
+            LEFT JOIN itm_item_images img 
+              ON i.organization_id = img.organization_id
+              AND i.item_id = img.item_id
+              AND img.feature_id = 'DEFAULT'   
+            LEFT JOIN  inv_stock_ledger_acct stc
+              ON i.organization_id = stc.organization_id
+              AND i.item_id = stc.item_id
+              AND stc.rtl_loc_id=?
+              AND stc.inv_location_id=?
+              AND stc.bucket_id=?
+           WHERE i.organization_id = ?
+           AND i.item_lvlcode <> 'STYLE'
+    	   AND i.parent_item_id IS NULL
+    	   AND i.dimension_system like '%TOLA'
+    		]]></Statement>
+      <Parameter name="argRetailLocationId" />
+      <Parameter name="argInventoryLocationId" />
+      <Parameter name="argBucketId" />
+      <Parameter name="argOrganizationId" />
+      <Expression trigger="argItemIdFast"><![CDATA[i.item_id = ?]]></Expression>
+      <Expression parameters="argItemId%" trigger="argItemId"><![CDATA[i.item_id LIKE ?]]></Expression>
+      <Expression trigger="@argItemList"> <![CDATA[i.item_id IN ?]]></Expression>
+      <Expression trigger="argItemTypeCode"><![CDATA[/*UPPER*/ i.item_typcode = ?]]></Expression>
+      <Expression trigger="argItemLvlCode"><![CDATA[/*UPPER*/ i.item_lvlcode = ?]]></Expression>
+      <Expression parameters="argStyleId%" trigger="argStyleId"><![CDATA[/*UPPER*/ i.parent_item_id LIKE ?]]></Expression>
+      <Expression trigger="argStyleIdFast"><![CDATA[/*UPPER*/ i.parent_item_id = ?]]></Expression>
+      <Expression parameters="argMerchlevel1Id, argMerchlevel1Id" trigger="argMerchlevel1Id"><![CDATA[/*UPPER*/ i.merch_level_1 = ? OR (i.merch_level_1 is null AND /*UPPER*/ p.merch_level_1 = ?)]]></Expression>
+      <Expression parameters="argMerchlevel2Id, argMerchlevel2Id" trigger="argMerchlevel2Id"><![CDATA[/*UPPER*/ i.merch_level_2 = ? OR (i.merch_level_2 is null AND /*UPPER*/ p.merch_level_2 = ?)]]></Expression>
+      <Expression parameters="argMerchlevel3Id, argMerchlevel3Id" trigger="argMerchlevel3Id"><![CDATA[/*UPPER*/ i.merch_level_3 = ? OR (i.merch_level_3 is null AND /*UPPER*/ p.merch_level_3 = ?)]]></Expression>
+      <Expression parameters="argMerchlevel4Id, argMerchlevel4Id" trigger="argMerchlevel4Id"><![CDATA[/*UPPER*/ i.merch_level_4 = ? OR (i.merch_level_4 is null AND /*UPPER*/ p.merch_level_4 = ?)]]></Expression>
+      <Expression trigger="@argMerchlevel1IdIsNot"><![CDATA[i.merch_level_1 IS NULL OR /*UPPER*/ i.merch_level_1 NOT IN ?]]></Expression>
+      <Expression trigger="@argMerchlevel2IdIsNot"><![CDATA[i.merch_level_2 IS NULL OR /*UPPER*/ i.merch_level_2 NOT IN ?]]></Expression>
+      <Expression trigger="@argMerchlevel3IdIsNot"><![CDATA[i.merch_level_3 IS NULL OR /*UPPER*/ i.merch_level_3 NOT IN ?]]></Expression>
+      <Expression trigger="@argMerchlevel4IdIsNot"><![CDATA[i.merch_level_4 IS NULL OR /*UPPER*/ i.merch_level_4 NOT IN ?]]></Expression>
+      <Expression parameters="argHasNoMerchlevel1Id, argHasNoMerchlevel1Id" trigger="argHasNoMerchlevel1Id"><![CDATA[i.merch_level_1 is null AND ? = ?]]></Expression>
+      <Expression parameters="argHasNoMerchlevel2Id, argHasNoMerchlevel2Id" trigger="argHasNoMerchlevel2Id"><![CDATA[i.merch_level_1 is null AND ? = ?]]></Expression>
+      <Expression parameters="argHasNoMerchlevel3Id, argHasNoMerchlevel3Id" trigger="argHasNoMerchlevel3Id"><![CDATA[i.merch_level_1 is null AND ? = ?]]></Expression>
+      <Expression parameters="argHasNoMerchlevel4Id, argHasNoMerchlevel4Id" trigger="argHasNoMerchlevel4Id"><![CDATA[i.merch_level_1 is null AND ? = ?]]></Expression>
+      <Expression parameters="%argDescription%, %argDescription%" trigger="argDescription"><![CDATA[/*UPPER*/ i.description LIKE ? OR (/*UPPER*/ i.description like '+%' AND /*UPPER*/ i.description IN (SELECT ct.translation_key FROM com_translations ct WHERE ct.organization_id = i.organization_id AND /*UPPER*/ ct.translation LIKE ?))]]></Expression>
+
+      <Expression parameters="argIncludeItemPropCode1, argIncludeItemPropValue1" trigger="argIncludeItemPropCode1"><![CDATA[EXISTS (Select i.item_id from itm_item_deal_prop prop where i.item_id = prop.item_id AND i.organization_id = prop.organization_id AND (prop.itm_deal_property_code = ? AND /*UPPER*/ prop.string_value = ?))]]></Expression>
+      <Expression parameters="argIncludeItemPropCode2, argIncludeItemPropValue2" trigger="argIncludeItemPropCode2"><![CDATA[EXISTS (Select i.item_id from itm_item_deal_prop prop where i.item_id = prop.item_id AND i.organization_id = prop.organization_id AND (prop.itm_deal_property_code = ? AND /*UPPER*/ prop.string_value = ?))]]></Expression>
+      <Expression parameters="argIncludeItemPropCode3, argIncludeItemPropValue3" trigger="argIncludeItemPropCode3"><![CDATA[EXISTS (Select i.item_id from itm_item_deal_prop prop where i.item_id = prop.item_id AND i.organization_id = prop.organization_id AND (prop.itm_deal_property_code = ? AND /*UPPER*/ prop.string_value = ?))]]></Expression>
+      <Expression parameters="argIncludeItemPropCode4, argIncludeItemPropValue4" trigger="argIncludeItemPropCode4"><![CDATA[EXISTS (Select i.item_id from itm_item_deal_prop prop where i.item_id = prop.item_id AND i.organization_id = prop.organization_id AND (prop.itm_deal_property_code = ? AND /*UPPER*/ prop.string_value = ?))]]></Expression>
+      <Expression parameters="argIncludeItemPropCode5, argIncludeItemPropValue5" trigger="argIncludeItemPropCode5"><![CDATA[EXISTS (Select i.item_id from itm_item_deal_prop prop where i.item_id = prop.item_id AND i.organization_id = prop.organization_id AND (prop.itm_deal_property_code = ? AND /*UPPER*/ prop.string_value = ?))]]></Expression>
+      <Expression parameters="argIncludeItemPropCode6, argIncludeItemPropValue6" trigger="argIncludeItemPropCode6"><![CDATA[EXISTS (Select i.item_id from itm_item_deal_prop prop where i.item_id = prop.item_id AND i.organization_id = prop.organization_id AND (prop.itm_deal_property_code = ? AND /*UPPER*/ prop.string_value = ?))]]></Expression>
+      <Expression parameters="argIncludeItemPropCode7, argIncludeItemPropValue7" trigger="argIncludeItemPropCode7"><![CDATA[EXISTS (Select i.item_id from itm_item_deal_prop prop where i.item_id = prop.item_id AND i.organization_id = prop.organization_id AND (prop.itm_deal_property_code = ? AND /*UPPER*/ prop.string_value = ?))]]></Expression>
+      <Expression parameters="argIncludeItemPropCode8, argIncludeItemPropValue8" trigger="argIncludeItemPropCode8"><![CDATA[EXISTS (Select i.item_id from itm_item_deal_prop prop where i.item_id = prop.item_id AND i.organization_id = prop.organization_id AND (prop.itm_deal_property_code = ? AND /*UPPER*/ prop.string_value = ?))]]></Expression>
+      <Expression parameters="argIncludeItemPropCode9, argIncludeItemPropValue9" trigger="argIncludeItemPropCode9"><![CDATA[EXISTS (Select i.item_id from itm_item_deal_prop prop where i.item_id = prop.item_id AND i.organization_id = prop.organization_id AND (prop.itm_deal_property_code = ? AND /*UPPER*/ prop.string_value = ?))]]></Expression>
+      <Expression parameters="argIncludeItemPropCode10, argIncludeItemPropValue10" trigger="argIncludeItemPropCode10"><![CDATA[EXISTS (Select i.item_id from itm_item_deal_prop prop where i.item_id = prop.item_id AND i.organization_id = prop.organization_id AND (prop.itm_deal_property_code = ? AND /*UPPER*/ prop.string_value = ?))]]></Expression>
+
+      <Expression parameters="argExcludeItemPropCode1, argExcludeItemPropValue1" trigger="argExcludeItemPropCode1"><![CDATA[NOT EXISTS (Select i.item_id from itm_item_deal_prop prop where i.item_id = prop.item_id AND i.organization_id = prop.organization_id AND (prop.itm_deal_property_code = ? AND /*UPPER*/ prop.string_value = ?))]]></Expression>
+      <Expression parameters="argExcludeItemPropCode2, argExcludeItemPropValue2" trigger="argExcludeItemPropCode2"><![CDATA[NOT EXISTS (Select i.item_id from itm_item_deal_prop prop where i.item_id = prop.item_id AND i.organization_id = prop.organization_id AND (prop.itm_deal_property_code = ? AND /*UPPER*/ prop.string_value = ?))]]></Expression>
+      <Expression parameters="argExcludeItemPropCode3, argExcludeItemPropValue3" trigger="argExcludeItemPropCode3"><![CDATA[NOT EXISTS (Select i.item_id from itm_item_deal_prop prop where i.item_id = prop.item_id AND i.organization_id = prop.organization_id AND (prop.itm_deal_property_code = ? AND /*UPPER*/ prop.string_value = ?))]]></Expression>
+      <Expression parameters="argExcludeItemPropCode4, argExcludeItemPropValue4" trigger="argExcludeItemPropCode4"><![CDATA[NOT EXISTS (Select i.item_id from itm_item_deal_prop prop where i.item_id = prop.item_id AND i.organization_id = prop.organization_id AND (prop.itm_deal_property_code = ? AND /*UPPER*/ prop.string_value = ?))]]></Expression>
+      <Expression parameters="argExcludeItemPropCode5, argExcludeItemPropValue5" trigger="argExcludeItemPropCode5"><![CDATA[NOT EXISTS (Select i.item_id from itm_item_deal_prop prop where i.item_id = prop.item_id AND i.organization_id = prop.organization_id AND (prop.itm_deal_property_code = ? AND /*UPPER*/ prop.string_value = ?))]]></Expression>
+      <Expression parameters="argExcludeItemPropCode6, argExcludeItemPropValue6" trigger="argExcludeItemPropCode6"><![CDATA[NOT EXISTS (Select i.item_id from itm_item_deal_prop prop where i.item_id = prop.item_id AND i.organization_id = prop.organization_id AND (prop.itm_deal_property_code = ? AND /*UPPER*/ prop.string_value = ?))]]></Expression>
+      <Expression parameters="argExcludeItemPropCode7, argExcludeItemPropValue7" trigger="argExcludeItemPropCode7"><![CDATA[NOT EXISTS (Select i.item_id from itm_item_deal_prop prop where i.item_id = prop.item_id AND i.organization_id = prop.organization_id AND (prop.itm_deal_property_code = ? AND /*UPPER*/ prop.string_value = ?))]]></Expression>
+      <Expression parameters="argExcludeItemPropCode8, argExcludeItemPropValue8" trigger="argExcludeItemPropCode8"><![CDATA[NOT EXISTS (Select i.item_id from itm_item_deal_prop prop where i.item_id = prop.item_id AND i.organization_id = prop.organization_id AND (prop.itm_deal_property_code = ? AND /*UPPER*/ prop.string_value = ?))]]></Expression>
+      <Expression parameters="argExcludeItemPropCode9, argExcludeItemPropValue9" trigger="argExcludeItemPropCode9"><![CDATA[NOT EXISTS (Select i.item_id from itm_item_deal_prop prop where i.item_id = prop.item_id AND i.organization_id = prop.organization_id AND (prop.itm_deal_property_code = ? AND /*UPPER*/ prop.string_value = ?))]]></Expression>
+      <Expression parameters="argExcludeItemPropCode10, argExcludeItemPropValue10" trigger="argExcludeItemPropCode10"><![CDATA[NOT EXISTS (Select i.item_id from itm_item_deal_prop prop where i.item_id = prop.item_id AND i.organization_id = prop.organization_id AND (prop.itm_deal_property_code = ? AND /*UPPER*/ prop.string_value = ?))]]></Expression>
+    </SQL>
+    <Property>
+      <Key>MaxRows</Key>
+      <Value><![CDATA[50]]></Value>
+    </Property>
+    <Suffix><![CDATA[ORDER BY 1 ASC]]></Suffix>
+  </Query>
+ <!--ASQ - Style items not required - End-->
  	</Queries>
  </QuerySet>
