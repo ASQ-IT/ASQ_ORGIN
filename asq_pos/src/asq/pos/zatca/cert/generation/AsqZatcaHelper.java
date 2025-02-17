@@ -291,7 +291,7 @@ public class AsqZatcaHelper {
 
 	public BigDecimal getAbsoluteValue(BigDecimal argValue) {
 		if (argValue != null) {
-			argValue.abs();
+			argValue = argValue.abs();
 		}
 		return argValue;
 	}

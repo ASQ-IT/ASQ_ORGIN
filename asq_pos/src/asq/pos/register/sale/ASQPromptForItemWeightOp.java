@@ -7,7 +7,6 @@ import javax.inject.Inject;
 
 import asq.pos.common.AsqConstant;
 import asq.pos.common.AsqValueKeys;
-import dtv.data2.access.IPersistable;
 import dtv.i18n.FormatterType;
 import dtv.i18n.IFormattable;
 import dtv.pos.common.ValueKeys;
@@ -19,7 +18,6 @@ import dtv.pos.item.barcode.ItemWeightEntryMethodCode;
 import dtv.pos.register.sale.PromptForItemWeightOp;
 import dtv.util.ArrayUtils;
 import dtv.xst.dao.inv.IStockLedger;
-import dtv.xst.dao.inv.impl.StockLedgerModel;
 import dtv.xst.dao.itm.IItem;
 import dtv.xst.dao.itm.IItemOptions;
 import dtv.xst.dao.trl.ISaleReturnLineItem;
@@ -33,14 +31,17 @@ public class ASQPromptForItemWeightOp extends PromptForItemWeightOp {
 	@Inject
 	InventoryStockAdjuster stockAdjuster;
 
+	@Inject
+	AsqHelper asqHelper;
+
 	@Override
 	public boolean isOperationApplicable() {
 		IItem item = getScopedValue(ValueKeys.CURRENT_ITEM);
-		IItem superInventoriedItem = getSuperParentItem(item);
-		if (null != superInventoriedItem) {
-			return superInventoriedItem.getMeasurementRequired();
+		String tolaItem = item.getDimension1();
+		if (null != tolaItem && tolaItem.contains(AsqConstant.ASQ_TOLA)) {
+			return true;
 		}
-		return (getScopedValue(ValueKeys.ENTERED_ITEM_WEIGHT) != null) ? false : getScopedValue(ValueKeys.CURRENT_ITEM).getMeasurementRequired();
+		return super.isOperationApplicable();
 	}
 
 	@Override
@@ -48,12 +49,13 @@ public class ASQPromptForItemWeightOp extends PromptForItemWeightOp {
 		IItem item = getScopedValue(ValueKeys.CURRENT_ITEM);
 
 		PromptOverrideProperties overrides = new PromptOverrideProperties();
-		IItem superInventoriedItem = getSuperParentItem(item);
+		IItem superInventoriedItem = asqHelper.getSuperParentItem(item);
 		if (null != superInventoriedItem) {
 			overrides.setMaxFractionalDigits(Integer.valueOf(superInventoriedItem.getOptions().getQtyScale()));
 		} else {
 			overrides.setMaxFractionalDigits(Integer.valueOf(item.getOptions().getQtyScale()));
 		}
+
 		overrides.setDefaultValue(BigDecimal.ZERO);
 		return this.HELPER.getPromptResponse(argPromptKey, overrides, argPromptArgs);
 	}
@@ -62,7 +64,7 @@ public class ASQPromptForItemWeightOp extends PromptForItemWeightOp {
 	protected IFormattable[] getPromptArgs(IXstEvent argEvent) {
 		IFormattable[] args = super.getPromptArgs(argEvent);
 		IItem item = getScopedValue(ValueKeys.CURRENT_ITEM);
-		IItem superInventoriedItem = getSuperParentItem(item);
+		IItem superInventoriedItem = asqHelper.getSuperParentItem(item);
 		if (null != superInventoriedItem) {
 			return (IFormattable[]) ArrayUtils.insert((Object[]) args, this._formattables.getSimpleFormattable(superInventoriedItem.getOptions().getUnitOfMeasureCode(), FormatterType.UNIT_OF_MEASURE_NAME), 0);
 		} else {
@@ -74,7 +76,7 @@ public class ASQPromptForItemWeightOp extends PromptForItemWeightOp {
 	public IOpResponse handlePromptResponse(IXstEvent argEvent) {
 		ISaleReturnLineItem lineItem = getScopedValue(ValueKeys.CURRENT_SALE_LINE);
 		BigDecimal enteredWeight = getScopedValue(ValueKeys.ENTERED_ITEM_WEIGHT);
-		IItem superInventoriedItem = getSuperParentItem(lineItem.getItem());
+		IItem superInventoriedItem = asqHelper.getSuperParentItem(lineItem.getItem());
 		if (null != superInventoriedItem) {
 			IStockLedger ledger = stockAdjuster.getStockLedger(superInventoriedItem.getItemId(), AsqConstant.ASQ_DEFAULT, AsqConstant.ASQ_ON_HAND, _stationState.getRetailLocationId());
 			HashMap<String, BigDecimal> tolaWeight = _transactionScope.getValue(AsqValueKeys.ASQ_TOLA_WEIGHT);
@@ -88,23 +90,12 @@ public class ASQPromptForItemWeightOp extends PromptForItemWeightOp {
 			}
 
 			BigDecimal qty = ledger.getUnitcount();
-			qty = qty.subtract(tolaWeight.get(superInventoriedItem.getItemId()));
+			qty = qty.subtract(tolaWeight.get(ledger.getItemId()));
 			ledger.setUnitcount(qty);
-			ledger.setStringProperty(AsqConstant.ASQ_LAST_TOLA_WEIGHT_ENT, String.valueOf(qty));
 
 			// remove the existing Persistables
-			if (null != _transactionHelper.getPersistables()) {
-				IPersistable[] transPersist = _transactionHelper.getPersistables().getObjects();
-				for (IPersistable ledgerPers : transPersist) {
-					if (ledgerPers instanceof StockLedgerModel) {
-						StockLedgerModel led = (StockLedgerModel) ledgerPers;
-						if (led.getItemId().equalsIgnoreCase(superInventoriedItem.getItemId())) {
-							_transactionHelper.getPersistables().removeObject(led);
-						}
-					}
-				}
-			}
-			_transactionHelper.addPersistable(ledger);
+			asqHelper.removeAndAddStockLedger(_transactionHelper, ledger);
+
 			lineItem.setStringProperty(AsqConstant.ASQ_INVENTORY_TOLA_ITEM, superInventoriedItem.getItemId());
 			lineItem.setDecimalProperty(AsqConstant.ASQ_INVENTORY_TOLA_ITEM_WEIGHT, enteredWeight);
 		} else {
@@ -116,23 +107,10 @@ public class ASQPromptForItemWeightOp extends PromptForItemWeightOp {
 		return this.HELPER.completeResponse();
 	}
 
-	public IItem getSuperParentItem(IItem item) {
-		IItem itemTola = null;
-		if (null != item.getItemOptions() && item.getItemOptions().size() > 0) {
-			String measureCode = item.getItemOptions().get(0).getUnitOfMeasureCode();
-			if (measureCode != null && measureCode.contains(AsqConstant.ASQ_TOLA)) {
-				if (null != item.getParentItem() && null != item.getParentItem().getParentItem()) {
-					itemTola = item.getParentItem().getParentItem();
-				}
-			}
-		}
-		return itemTola;
-	}
-
 	public IOpResponse validateTolaQuantitySOH(IStockLedger ledger, BigDecimal argEnteredWeight, ISaleReturnLineItem lineItem, HashMap<String, BigDecimal> tolaWeight) {
 
-		IItemOptions itemToMaeasure = lineItem.getItem().getItemOptions().get(0);
-		String measureCode = itemToMaeasure.getUnitOfMeasureCode();
+		IItemOptions itemToMeasure = lineItem.getItem().getItemOptions().get(0);
+		String measureCode = itemToMeasure.getUnitOfMeasureCode();
 		BigDecimal maxUnitCount = new BigDecimal(lineItem.getItem().getStringProperty(AsqConstant.ASQ_TOLA_MAX_WEIGHT, "0"));
 		BigDecimal minUnitCount = new BigDecimal(lineItem.getItem().getStringProperty(AsqConstant.ASQ_TOLA_MIN_WEIGHT, "0"));
 

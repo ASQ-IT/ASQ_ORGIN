@@ -70,11 +70,8 @@ public class AsqSTCMobileNumberOp extends AbstractFormOp<AsqSTCMobileNumberEditM
 	 */
 	@Override
 	protected IOpResponse handleInitialState() {
-		/*
-		 * LOG.info("################################################");
-		 * LOG.info(asqCommissionCal.calculateStoreSaleCommission());
-		 * LOG.info("################################################");
-		 */
+		// Call For Commission cal
+		asqCommissionCal.calculateComm();
 
 		AsqSTCMobileNumberEditModel editModel = getModel();
 		try {

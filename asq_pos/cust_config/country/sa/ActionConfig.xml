@@ -142,4 +142,11 @@
           <Parameter name="DocumentStatus" value="OPEN" />
         </VisibilityRule>
   </Action>
+  <!-- changes for ASQ employee commission -->
+   <Action name="EMPLOYEE::EMPLOYEE_COMMMSION_DAILY_REPORT"  keywords="exclude" relevance="ListItem" text="Daily Employee Commission" chainKey="EMPLOYEE::EMPLOYEE_COMMMSION_DAILY_REPORT">
+    <IconGroup icon="_imageMenuReport" />
+  </Action>
+   <Action name="EMPLOYEE::EMPLOYEE_COMMMSION_MONTHLY_REPORT"  keywords="exclude" relevance="ListItem" text="Monthly Employee Commission"  chainKey="EMPLOYEE::EMPLOYEE_COMMMSION_MONTHLY_REPORT">
+    <IconGroup icon="_imageMenuReport" />
+  </Action>
 </ActionSet>

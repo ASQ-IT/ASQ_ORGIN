@@ -21,9 +21,7 @@
 	<bean id="customerHelper" class="asq.pos.customer.AsqCustomerHelper">
 		<property name="DefaultCustomerGroup" value="DEFAULT" />
 		<property name="EmployeeCustomerGroup" value="EMPLOYEE" />
-	</bean>
-	<bean id="asqCommissionCal" class="asq.pos.employee.commission.AsqEmployeeCommissionCalculator"/>
-	
+	</bean>	
 </beans>
 <!-- ASQ Customer search screen Phone number to map with customer maintenance screen Mobile number - Ends -->
 </beans>

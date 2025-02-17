@@ -63,4 +63,8 @@
   </bean>
   <bean id="asqInvoiceemailRcptsWorker" class="asq.pos.customer.email.AsqEmailRcptWorker" scope="prototype" />
   <!-- PRICE Quotation End-->
+  
+  <!-- ASQ - Email Invoice changes - Start -->
+  <bean id="emailRcptsWorker" class="asq.pos.customer.email.AsqCustomerEmailRcptWorker" scope="prototype" />
+   <!-- ASQ - Email Invoice changes - End -->
 </beans>

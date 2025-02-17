@@ -3,7 +3,9 @@
 
 	<!-- ASQ Zatca Integration Starts -->
 	<OpChain name="ZATCA_CERTIFICATE_GENERATION">
-		<Op	class="asq.pos.zatca.cert.generation.op.AsqZatcaCertRegistrationOp"	longRunning="true">
+		<Op
+			class="asq.pos.zatca.cert.generation.op.AsqZatcaCertRegistrationOp"
+			longRunning="true">
 			<Parameter name="LongRunningMessage" value="Please wait.." />
 		</Op>
 		<OpChainRoute chainKey="ASQ_ZATCA_INVOICE_GENERATION" />
@@ -33,24 +35,29 @@
 	</OpChain>
 	<!-- ASQ Zatca Integration Ends -->
 
-	<!-- ASQ STC Integratin Service Starts-->
-	<OpChain name="ASQ_TENDER_STC" >
-		<Op class="asq.pos.loyalty.stc.tender.op.AsqSTCMobileNumberOp" longRunning="true"/>
+	<!-- ASQ STC Integratin Service Starts -->
+	<OpChain name="ASQ_TENDER_STC">
+		<Op class="asq.pos.loyalty.stc.tender.op.AsqSTCMobileNumberOp"
+			longRunning="true" />
 	</OpChain>
 	<OpChain name="ASQ_STC_OTP">
-		<Op class="asq.pos.loyalty.stc.tender.op.AsqSTCTenderOp" longRunning="true"/>
+		<Op class="asq.pos.loyalty.stc.tender.op.AsqSTCTenderOp"
+			longRunning="true" />
 	</OpChain>
-	<OpChain name="ASQ_TENDER_LOY_STC" signal="TransactionModified" contextKey="SALE_TENDER_EMPTY_MENU_OPTION">
+	<OpChain name="ASQ_TENDER_LOY_STC" signal="TransactionModified"
+		contextKey="SALE_TENDER_EMPTY_MENU_OPTION">
 		<Op class="dtv.pos.tender.CreateTenderLineItemOp">
 			<Parameter name="TenderStatus" value="Tender" />
 			<Parameter name="TenderId" value="STC" />
 		</Op>
-		 <OpChainRoute chainKey="ASQ_TENDER_STC" />
+		<OpChainRoute chainKey="ASQ_TENDER_STC" />
 		<Op class="asq.pos.loyalty.AsqAddLoyaltyTenderOp" />
-		<Op class="dtv.pos.tender.rounding.UpdateTransactionRoundedAmountOp" />
-		<OpChainRoute chainKey="CHECK_SALE_COMPLETE" chainType="START" />
+		<Op
+			class="dtv.pos.tender.rounding.UpdateTransactionRoundedAmountOp" />
+		<OpChainRoute chainKey="CHECK_SALE_COMPLETE"
+			chainType="START" />
 	</OpChain>
-	<!-- ASQ STC Integration Service Ends-->
+	<!-- ASQ STC Integration Service Ends -->
 
 	<!-- ASQ Neqaty Integration Service Starts -->
 	<OpChain name="ASQ_TENDER_NEQATY">
@@ -79,7 +86,7 @@
 			chainType="START" />
 	</OpChain>
 	<!-- ASQ Neqaty Integration Service Ends -->
-	
+
 	<!-- ASQ Bank Transfer services start -->
 	<OpChain name="ASQ_TENDER_BANK_TRANSFER"
 		signal="TransactionModified"
@@ -88,7 +95,9 @@
 			<Parameter name="TenderStatus" value="Tender" />
 			<Parameter name="TenderId" value="BANK_TRANSFER" />
 		</Op>
-		<PromptOp class="dtv.pos.tender.cashsuggestion.CashSuggestionPromptTenderAmtOp" validationsBean="tenderAmountRules" />
+		<PromptOp
+			class="dtv.pos.tender.cashsuggestion.CashSuggestionPromptTenderAmtOp"
+			validationsBean="tenderAmountRules" />
 		<OpChainRoute chainKey="ASQ_BANK_TRANSFER_OTP" />
 		<Op class="dtv.pos.tender.AddTenderToSaleTranOp" />
 		<Op
@@ -98,21 +107,24 @@
 			chainType="START" />
 	</OpChain>
 	<!-- ASQ Bank Transfer Integration Service Ends -->
-	
+
 	<OpChain name="ASQ_BANK_TRANSFER_OTP">
-			<Op	class="asq.pos.tender.AsqBankTransferEmailOp" longRunning="true" />
-		    <Op class="asq.pos.tender.AsqBankTransferEmailFormOp" />
+		<Op class="asq.pos.tender.AsqBankTransferEmailOp"
+			longRunning="true" />
+		<Op class="asq.pos.tender.AsqBankTransferEmailFormOp" />
 	</OpChain>
-	
-<!-- ASQ Mokafaa Integration Service Starts-->
+
+	<!-- ASQ Mokafaa Integration Service Starts -->
 	<OpChain name="ASQ_TENDER_MOKAFAA">
-		<Op class="asq.pos.loyalty.mokafaa.tender.op.AsqMokafaaMobileNumberOp" />
+		<Op
+			class="asq.pos.loyalty.mokafaa.tender.op.AsqMokafaaMobileNumberOp" />
 	</OpChain>
-	
+
 	<OpChain name="ASQ_MOKAFAA_OTP">
-		<Op class="asq.pos.loyalty.mokafaa.tender.op.AsqMokafaaOTPOp" longRunning="true" />
+		<Op class="asq.pos.loyalty.mokafaa.tender.op.AsqMokafaaOTPOp"
+			longRunning="true" />
 	</OpChain>
-	
+
 	<OpChain name="ASQ_TENDER_LOY_MOKAFAA"
 		signal="TransactionModified"
 		contextKey="SALE_TENDER_EMPTY_MENU_OPTION">
@@ -127,7 +139,7 @@
 		<OpChainRoute chainKey="CHECK_SALE_COMPLETE"
 			chainType="START" />
 	</OpChain>
-	<!-- ASQ Mokafaa Integration Service Ends-->
+	<!-- ASQ Mokafaa Integration Service Ends -->
 
 	<OpChain name="SALE_ITEM_AFTER_LOOKUP">
 		<OpChainRoute
@@ -197,31 +209,42 @@
 	</OpChain>
 
 	<!--ASQ BNPL TAMARA Service Starts -->
-	<OpChain name="ASQ_TAMARA_MOBILE" >
-		<Op class="asq.pos.bnpl.tamara.tender.op.AsqBnplTamaraTenderOp" longRunning="true">
-		<Parameter name="LongRunningMessage" value= "_asqPaymentInitiateMessage" />
+	<OpChain name="ASQ_TAMARA_MOBILE">
+		<Op class="asq.pos.bnpl.tamara.tender.op.AsqBnplTamaraTenderOp"
+			longRunning="true">
+			<Parameter name="LongRunningMessage"
+				value="_asqPaymentInitiateMessage" />
 		</Op>
 	</OpChain>
 	<OpChain name="ASQ_TAMARA_PAYMENT">
-		<Op class="asq.pos.bnpl.tamara.tender.op.AsqBnplTamaraPaymentValidationOp" longRunning="true">
-		<Parameter name="LongRunningMessage" value= "_asqPaymentProcessingMessage" />
+		<Op
+			class="asq.pos.bnpl.tamara.tender.op.AsqBnplTamaraPaymentValidationOp"
+			longRunning="true">
+			<Parameter name="LongRunningMessage"
+				value="_asqPaymentProcessingMessage" />
 		</Op>
 	</OpChain>
 	<OpChain name="ASQ_TAMARA_PAYMENT_CANCEL">
-		<Op class="asq.pos.bnpl.tamara.tender.op.AsqBnplTamaraPaymentCancelOp" longRunning="true">
-		<Parameter name="LongRunningMessage" value= "_asqPaymentCancellingMessage" />
+		<Op
+			class="asq.pos.bnpl.tamara.tender.op.AsqBnplTamaraPaymentCancelOp"
+			longRunning="true">
+			<Parameter name="LongRunningMessage"
+				value="_asqPaymentCancellingMessage" />
 		</Op>
 	</OpChain>
-	
-	<OpChain name="ASQ_TENDER_TAMARA" signal="TransactionModified" contextKey="SALE_TENDER_EMPTY_MENU_OPTION">
+
+	<OpChain name="ASQ_TENDER_TAMARA" signal="TransactionModified"
+		contextKey="SALE_TENDER_EMPTY_MENU_OPTION">
 		<Op class="dtv.pos.tender.CreateTenderLineItemOp">
 			<Parameter name="TenderStatus" value="Tender" />
 			<Parameter name="TenderId" value="TAMARA" />
 		</Op>
-	 	<OpChainRoute chainKey="ASQ_TAMARA_MOBILE"/>
+		<OpChainRoute chainKey="ASQ_TAMARA_MOBILE" />
 		<Op class="asq.pos.loyalty.AsqAddLoyaltyTenderOp" />
-		<Op class="dtv.pos.tender.rounding.UpdateTransactionRoundedAmountOp" />
-		<OpChainRoute chainKey="CHECK_SALE_COMPLETE" chainType="START" />
+		<Op
+			class="dtv.pos.tender.rounding.UpdateTransactionRoundedAmountOp" />
+		<OpChainRoute chainKey="CHECK_SALE_COMPLETE"
+			chainType="START" />
 	</OpChain>
 	<OpChain name="VOID_TENDER" signal="TransactionModified"
 		contextKey="SALE_TENDER_EMPTY_MENU_OPTION">
@@ -273,31 +296,42 @@
 
 	<!--ASQ BNPL TABBY Service Starts -->
 	<OpChain name="ASQ_TABBY_MOBILE">
-		<Op class="asq.pos.bnpl.tabby.tender.op.AsqBnplTabbyTenderOp" longRunning="true">
-		<Parameter name="LongRunningMessage" value= "_asqPaymentInitiateMessage" />
+		<Op class="asq.pos.bnpl.tabby.tender.op.AsqBnplTabbyTenderOp"
+			longRunning="true">
+			<Parameter name="LongRunningMessage"
+				value="_asqPaymentInitiateMessage" />
 		</Op>
 	</OpChain>
 	<OpChain name="ASQ_TABBY_PAYMENT">
-		<Op class="asq.pos.bnpl.tabby.tender.op.AsqBnplTabbyPaymentValidationOp" longRunning="true">
-		<Parameter name="LongRunningMessage" value= "_asqPaymentProcessingMessage" />
+		<Op
+			class="asq.pos.bnpl.tabby.tender.op.AsqBnplTabbyPaymentValidationOp"
+			longRunning="true">
+			<Parameter name="LongRunningMessage"
+				value="_asqPaymentProcessingMessage" />
 		</Op>
 	</OpChain>
 	<OpChain name="ASQ_TABBY_PAYMENT_CANCEL">
-		<Op class="asq.pos.bnpl.tabby.tender.op.AsqBnplTabbyPaymentCancelOp" longRunning="true">
-		<Parameter name="LongRunningMessage" value= "_asqPaymentCancellingMessage" />
+		<Op
+			class="asq.pos.bnpl.tabby.tender.op.AsqBnplTabbyPaymentCancelOp"
+			longRunning="true">
+			<Parameter name="LongRunningMessage"
+				value="_asqPaymentCancellingMessage" />
 		</Op>
 	</OpChain>
-	<OpChain name="ASQ_TENDER_TABBY" signal="TransactionModified" contextKey="SALE_TENDER_EMPTY_MENU_OPTION">
+	<OpChain name="ASQ_TENDER_TABBY" signal="TransactionModified"
+		contextKey="SALE_TENDER_EMPTY_MENU_OPTION">
 		<Op class="dtv.pos.tender.CreateTenderLineItemOp">
 			<Parameter name="TenderStatus" value="Tender" />
 			<Parameter name="TenderId" value="TABBY" />
 		</Op>
-		<OpChainRoute chainKey="ASQ_TABBY_MOBILE"/>
+		<OpChainRoute chainKey="ASQ_TABBY_MOBILE" />
 		<Op class="asq.pos.loyalty.AsqAddLoyaltyTenderOp" />
-		<Op class="dtv.pos.tender.rounding.UpdateTransactionRoundedAmountOp" />
-		<OpChainRoute chainKey="CHECK_SALE_COMPLETE" chainType="START" />
+		<Op
+			class="dtv.pos.tender.rounding.UpdateTransactionRoundedAmountOp" />
+		<OpChainRoute chainKey="CHECK_SALE_COMPLETE"
+			chainType="START" />
 	</OpChain>
-	<!--ASQ BNPL TABBY Service Ends-->
+	<!--ASQ BNPL TABBY Service Ends -->
 
 	<!--ASQ Planet Tax Service Starts -->
 	<OpChain name="COUNTRYPACK.TAXFREE_CUSTOMER_DATA">
@@ -316,36 +350,43 @@
 			longRunning="true" />
 		<OpChainRoute chainKey="COUNTRYPACK.TAXFREE_UPDATE_TRANS" />
 	</OpChain>
-	
+
 	<!-- Cancel the Planet Reverse -->
 	<OpChain name="ROLLBACK_TRANS_START_IMPL">
-	    <PromptOp class="dtv.pos.register.PromptTransactionCancelReasonCodeOp" required="true" />
-	    <Op class="asq.retail.xstore.countrypack.common.taxfree.fintrax.op.AsqPlanetCancelAuthOp" />
-	    <OpChainRoute chainKey="ROLLBACK_TRANS_START_IMPL.local" />
-	    <Op class="dtv.tenderauth.storedvalue.RouteReverseSVAuthOp" />
+		<PromptOp
+			class="dtv.pos.register.PromptTransactionCancelReasonCodeOp"
+			required="true" />
+		<Op
+			class="asq.retail.xstore.countrypack.common.taxfree.fintrax.op.AsqPlanetCancelAuthOp" />
+		<OpChainRoute chainKey="ROLLBACK_TRANS_START_IMPL.local" />
+		<Op class="dtv.tenderauth.storedvalue.RouteReverseSVAuthOp" />
 	</OpChain>
-  
-  	<!-- Post Void the Planet Transaction -->
-    <OpChain name="POST_VOID_MAIN.2" >
-    	<Op class="asq.retail.xstore.countrypack.common.taxfree.fintrax.op.AsqPlanetVoidAuthOp" />
-    </OpChain>
-    <!--ASQ Planet Tax Service Ends -->
-     
-    <!--  Email Configuration for Blind Return Starts-->
-    <OpChain name="PRE_TENDERING.pre.order" >
-      	<OpChainRoute chainKey="ASQ_BLIND_RETURN_APPROVAL" condition="asq.pos.register.returns.AsqIsBlindEmailRunCondition" />
-    </OpChain>
+
+	<!-- Post Void the Planet Transaction -->
+	<OpChain name="POST_VOID_MAIN.2">
+		<Op
+			class="asq.retail.xstore.countrypack.common.taxfree.fintrax.op.AsqPlanetVoidAuthOp" />
+	</OpChain>
+	<!--ASQ Planet Tax Service Ends -->
+
+	<!-- Email Configuration for Blind Return Starts -->
+	<OpChain name="PRE_TENDERING.pre.order">
+		<OpChainRoute chainKey="ASQ_BLIND_RETURN_APPROVAL"
+			condition="asq.pos.register.returns.AsqIsBlindEmailRunCondition" />
+	</OpChain>
 
 	<OpChain name="ASQ_BLIND_RETURN_APPROVAL">
-		<Op	class="asq.pos.register.returns.AsqBlindReturnEmailOp" longRunning="true" />
+		<Op class="asq.pos.register.returns.AsqBlindReturnEmailOp"
+			longRunning="true" />
 		<Op class="asq.pos.register.returns.AsqBlindReturnEmailFormOp" />
 	</OpChain>
-	<!--  Email Configuration for Blind Ends-->
-  <!-- ZeroPriceVlidation start -->
+	<!-- Email Configuration for Blind Ends -->
+	<!-- ZeroPriceVlidation start -->
 	<OpChain name="SALE_ITEM_ADD">
 		<Op
 			class="oracle.retail.xstore.countrypack.common.register.mrp.AddMrpPriceToLineItemOp" />
-		<ValidationOp validationsBean="AsqsaleItemPriceValidation" />
+		<ValidationOp
+			validationsBean="AsqsaleItemPriceValidation" />
 		<Op class="dtv.pos.register.AddItemToSaleTranOp" />
 		<WorkerOp
 			workersBean="addPriceChangeModifierToLineItemWorkers" />
@@ -369,7 +410,8 @@
 		<ValidationOp
 			class="dtv.pos.register.returns.ValidateTotalReturnPriceExistingItemOp"
 			validationsBean="totalReturnItemAmountRules" />
-		 <ValidationOp validationsBean="AsqsaleItemPriceValidation" />
+		<ValidationOp
+			validationsBean="AsqsaleItemPriceValidation" />
 		<PromptOp
 			class="dtv.pos.register.modifyitem.PromptPriceChangeReasonCodeOp" />
 		<Op class="dtv.pos.register.VoidAllDiscountsOp" />
@@ -378,364 +420,491 @@
 			workersBean="addPriceChangeModifierToLineItemWorkers" />
 		<OpChainRoute chainKey="POST_CHANGE_ITEM_PRICE" />
 	</OpChain>
-   <!-- ZeroPriceVlidation End -->
-   
-   <!-- PRICE Quotation start-->
-    <OpChain name="SALE_ITEM_START1" contextKey="SALE" rollbackChainKey="ROLLBACK_TRANS_PROMPT1"
-    rollbackLevel="10" >
-    <PromptOp class="dtv.pos.register.selfcheckout.nextgen.PromptSelfCheckoutPausedOp" validationsBean="UnpauseSCORegisterRules" />
-    <Op class="dtv.pos.framework.security.op.StartAutoLogoutTimerOp" />
-<!--     <OpChainRoute chainKey="START_PLAYSOUND_TIMER" />
-    <OpChainRoute chainKey="DISPLAY_INFO_TAB_MESSAGE" />
-    <Op class="dtv.pos.hardware.op.ItemCustDisplayOp" /> -->
-    <PromptOp class="asq.pos.registery.sale.AsqPromptItemScanOp" contextKey="SALE1" validationsBean="itemIdRules" breakpoint="true" />
-    <OpChainRoute chainKey="VALIDATE_EXT_TAX_INTEGRATION" />
-    <ValidationOp validationsBean="gs1ItemRestrictionRules" />
-    <ValidationOp class="dtv.pos.coupon.LookupCouponFromItemIdOp" validationsBean="couponVerificationRules" />
-    <Op class="dtv.pos.document.bounceback.op.LookupBounceBackCouponOp" />
-    <Op class="dtv.pos.item.barcode.LookupBarcodeFromItemIdOp"/>
-    <ValidationOp class="dtv.pos.register.sale.CheckItemNotOnFileOp" validationsBean="itemNotOnFileRules" />
-    <ValidationOp class="dtv.pos.item.barcode.ValidateItemEmbeddedBarcodeOp" validationsBean="saleBarcodePropertyRules" />
-    <ValidationOp class="dtv.pos.register.ValidateSellingGroupOp" validationsBean="sellingIdGroupRules" />
-    <OpChainRoute chainKey="SALE_ITEM_AFTER_LOOKUP" />
-  </OpChain>
-  
-  <OpChain name="CHECK_SALE_COMPLETE1" contextKey="TEXT_PROMPT_ONLY">
-    <Op class="asq.pos.registery.AsqCheckSaleCompleteOp" />
-  </OpChain>
-  
-    <OpChain name="ROLLBACK_TRANS_PROMPT1">
-    <OpChainRoute chainKey="VALIDATE_ALLOW_ROLLBACK_TRANS" condition="dtv.pos.register.condition.HasTransRunCondition" />
-    <OpChainRoute chainKey="STOP_PLAYSOUND_TIMER" />
-    <Op class="asq.pos.registery.AsqPromptRollbackTransOp" />
-  </OpChain>
-  
-   <OpChain name="ROLLBACK_TRANS_START1">
-    <!-- A command needs to be used here to make sure we can load the current
-         transaction.  This fixes a bug where you can cancel a just created
-         transaction and get a null pointer exception because the running
-         command doesn't have visibility on that transaction.  -->
-    <OpChainRoute chainKey="ROLLBACK_TRANS_START_IMPL" />
-    <OpChainRoute chainKey="ROLLBACK_TRANS_FINISH1" chainType="START" />
-  </OpChain>
-  
-  <OpChain name="ROLLBACK_TRANS_FINISH1" signal="TransactionCancelled">
-    <OpChainRoute chainKey="ROLLBACK_TRANS_FINISH_IMPL" />
-    <OpChainRoute chainKey="ROLLBACK_TRANS_FINISH.local" />
-    <OpChainRoute chainKey="RESET_REGISTER" />
-    <OpChainRoute chainKey="RESET_AFTER_TRANS1" chainType="START" />
-  </OpChain>
-  
-   <OpChain name="RESET_AFTER_TRANS1">
-    <OpChainRoute chainKey="RESET_AFTER_TRANS.local" />
-    <Op class="dtv.pos.framework.op.OpChainRollbackToTopOp">
-      <Parameter name="ProcessTopChain" value="false" />
-    </Op>
-    <OpChainRoute chainKey="UPDATE_PROMPTS_ROLLBACK" condition="dtv.pos.register.condition.RegisterNotInTrainingModeRunCondition" />
-    <WorkerOp workersBean="registerWorkstationActiveWorkers" />
-    <WorkerOp workersBean="saveSystemTimeWorkers" />
-    <PromptOp class="dtv.pos.register.StoreCloseWarningOp" key="WORKSTATION_WARNING" />
-    <PromptOp class="dtv.pos.register.StoreCloseGraceOp" key="WORKSTATION_GRACE" />
-    <Op class="dtv.pos.systemcycle.access.EndOfDayTimeCheckOp" />
-    <PromptOp class="dtv.pos.register.StoreCloseGraceExpiredOp" key="WORKSTATION_GRACE_EXPIRED" />
-    <!-- <Op class="dtv.pos.register.ResetAfterTransactionOp" /> -->
-  </OpChain>
-  
-    <OpChain name="PRE_SALE_TRANSACTION1" contextKey="PRE_SALE">
-    <OpChainRoute chainKey="PRE_SALE_TRANS_WITHOUT_CUSTOMER" />
-   <!--  <Op class="dtv.pos.customer.RunCustAssociationChainOp" /> -->
-  <!--   <Op class="dtv.pos.common.TransactionPropertyCreateTransactionOp" /> -->
-<!--     <Op class="dtv.pos.register.HideCustomerInformationPanelOp" /> -->
-    <Op class="dtv.pos.register.RouteSalesChainFromConfigOp" contextKey="SALE" />
-  </OpChain>
-  
-   <OpChain name="SALE_COMPLETE1">
-    <PromptOp class="dtv.pos.register.selfcheckout.nextgen.PromptSelfCheckoutPausedOp" validationsBean="UnpauseSCORegisterRules" />
-    <OpChainRoute chainKey="VALIDATE_EXT_TAX_INTEGRATION" />
-    <OpChainRoute chainKey="COUNTRYPACK.ASSIGN_FISCAL_SEQUENCE" />
-    <OpChainRoute chainKey="SALE_COMPLETE_BEFORE_START.local.pre" />
-    <OpChainRoute chainKey="SALE_COMPLETE_BEFORE_START.local.1" />
-    <OpChainRoute chainKey="SALE_COMPLETE_BEFORE_START.invoice.1" />
-    <OpChainRoute chainKey="SALE_COMPLETE_BEFORE_START.selfCheckout.giftReceipt" />
-    <OpChainRoute chainKey="SALE_COMPLETE_START1 " />
-    <OpChainRoute chainKey="SALE_COMPLETE_AFTER_START.local.1" />
-    <OpChainRoute chainKey="SALE_COMPLETE_AFTER_START.local.2" />
-    <OpChainRoute chainKey="SALE_COMPLETE_AFTER_START" />
-    <OpChainRoute chainKey="SALE_COMPLETE_BEFORE_FINISH" />
-    <OpChainRoute chainKey="SALE_COMPLETE_BEFORE_FINISH.1" />
-    <OpChainRoute chainKey="VOUCHER_TRANSFORMATION" />
-    <OpChainRoute chainKey="SALE_COMPLETE_VALIDATE.local" />
-    <OpChainRoute chainKey="VALIDATE_EXT_TAX_INTEGRATION" />
-   <!-- <OpChainRoute chainKey="SALE_COMPLETE_BEFORE_FINISH.ERECEIPT" />-->
-    <OpChainRoute chainKey="SALE_COMPLETE_BEFORE_FINISH.local" />
-    <!-- <OpChainRoute chainKey="SALE_COMPLETE_ISSUE_DOCUMENT" /> -->
-    <OpChainRoute chainKey="SALE_COMPLETE_FINISH1" chainType="START" />
-  </OpChain>
-  
-    <OpChain name="SALE_COMPLETE_FINISH1" signal="TransactionComplete">
-    <OpChainRoute chainKey="SALE_COMPLETE_FINISH.pre" />
-    <PromptOp class="dtv.pos.coupon.PromptReturnUnusedCouponsToCustomerOp" />
-    <OpChainRoute chainKey="SALE_COMPLETE_FINISH.pre.1" />
-    <OpChainRoute chainKey="SALE_COMPLETE_FINISH.local" />
-    <!-- Inventory must be processed before the transaction is persisted!! -->
-   <!--  <WorkerOp workersBean="saleCompleteInventoryWorkers" />-->
-    <WorkerOp workersBean="completeSaleTransWorkers" /> 
-    <Op class="dtv.pos.tender.creditcard.PrepareImprintCreditCardOp" />
-    <Op class="dtv.pos.customer.account.op.AddCustomerAccountRcptSourcesOp" />
-    <Op class="dtv.pos.register.giftreceipt.GroupGiftReceiptsOp" />
-    <Op class="dtv.pos.register.giftreceipt.AddMultipleGiftReceiptsOp" />
-    <Op class="dtv.pos.register.giftreceipt.AddGiftRcptSourcesOp" />
-    <PromptOp class="dtv.pos.register.giftreceipt.PromptForShowPriceInClearOp" key="PROMPT_FOR_SHOW_PRICE_ON_GIFT_RECEIPTS" />
-    <WorkerOp workersBean="calculateTlogSequenceWorkers" />
-    <OpChainRoute chainKey="SALE_COMPLETE_FINISH.1" />
-    <OpChainRoute chainKey="SALE_COMPLETE_FINISH.local.1" />
-    <OpChainRoute chainKey="SALE_COMPLETE_FINISH.order.1" />
-    <OpChainRoute chainKey="SALE_COMPLETE_FINISH.registry.1" />
-    <OpChainRoute chainKey="SALE_COMPLETE_FINISH.digitalCart.1" />
-    <OpChainRoute chainKey="SALE_COMPLETE_FINISH.entitlement.1" />
-    <Op class="dtv.pos.customer.wishlist.op.SellWishListItemsOp" />
-    <WorkerOp workersBean="saleCompleteCustomerAccountWorkers" />
-    <Op class="dtv.pos.hardware.op.BuildSaleRcptsOp" />
-    <OpChainRoute chainKey="LUXURY_RECEIPTS_PREPARE" />
-    <OpChainRoute chainKey="ENHANCED_EMAIL_RECEIPTS_PREPARE" />
-    <OpChainRoute chainKey="SALE_COMPLETE_FINISH.2" />
-    <OpChainRoute chainKey="SALE_COMPLETE_FINISH.order.2" />
-    <WorkerOp workersBean="crossChannelReturnWorkers" />
-    <OpChainRoute chainKey="SALE_COMPLETE_FINISH.3" />
-    <OpChainRoute chainKey="SALE_COMPLETE_FINISH.ERECEIPT" />
-    <OpChainRoute chainKey="SALE_COMPLETE_FINISH.invoice" />
-    <WorkerOp workersBean="calculateCreditTenderPropertiesWorkers" />
-    <WorkerOp workersBean="buildReturnedItemJournalWorkers" />
-    <OpChainRoute chainKey="CREATE_WARRANTY_ACTIVITY" />
-    <WorkerOp workersBean="updateRainCheckRedemptionStatusWorkers" />
-    <Op class="dtv.pos.hardware.op.OpenCashDrawerOp" />
-    <WorkerOp workersBean="updateCashDrawerIdWorkers" />
-    <WorkerOp workersBean="persistRetailTransWorkers">
-      <Parameter name="Cancelable" value="false" />
-      <Parameter name="AfterCancelResetChain" value="RESET_AFTER_TRANS" />
-    </WorkerOp>
-    <WorkerOp workersBean="persistSystemTotalWorkers" />
-    <OpChainRoute chainKey="COUNTRYPACK.SAVE_FISCAL_SEQUENCE" />
-    <OpChainRoute chainKey="SALE_COMPLETE_FINISH.FISCAL.AFTER_TRAN_SAVE" />
-    <Op class="dtv.pos.customer.view.ClearCustomerMessageViewOp" />
-    <WorkerOp workersBean="persistVoucherHistoryWorkers" />
-    <!-- Flash sales update sales -->
-    <WorkerOp workersBean="populateFlashSalesTablesWorkers" />
-    <WorkerOp workersBean="refreshSalesGoalStatusWorkers" />
-    <!-- Generate documents -->
-    <Op class="dtv.pos.hardware.op.BuildTenderFrankingsOp" />
-    <Op class="dtv.pos.hardware.op.FrankTendersOp" />
-    <OpChainRoute chainKey="COUNTRYPACK.EINVOICE.PREPARE_EMAIL_INVOICE" />
-    <OpChainRoute chainKey="SALE_COMPLETE_FINISH.EMAIL_RECEIPTS_ASQINVOICE" />
-    <OpChainRoute chainKey="SALE_COMPLETE_FINISH.selfcheckout" />
-   <!--  <Op class="dtv.pos.hardware.op.PrintRcptsOp" breakpoint="true" /> -->
-   <!--  <OpChainRoute chainKey="PRINT_DOCUMENTS" /> -->
-    <OpChainRoute chainKey="PRINT_WARRANTIES" />
-    <WorkerOp workersBean="saveRcptsWorkers" />
-    <Op class="dtv.pos.hardware.op.WaitForRcptPrintOp" required="false" />
-    <Op class="dtv.pos.hardware.op.ReleaseFiscalExclusiveWorkstationUseOp" />
-    <OpChainRoute chainKey="PRINT_FISCAL_RECEIPTS.local" />
-    <OpChainRoute chainKey="LUXURY_RECEIPTS_PRINT" condition="oracle.retail.xstore.countrypack.common.luxuryreceipt.HasLuxuryReceipts" />
-    <!-- This operation intercepts Backup Response returned by DisplayChangeDueOp -->
-    <Op class="dtv.pos.framework.op.DoNothingOp" breakpoint="true" > 
-      <Parameter name="RESPONSE" value="COMPLETE" />
-    </Op>
-    <PromptOp class="dtv.pos.hardware.op.DisplayChangeDueOp" validationsBean="cashDrawerCloseRules" breakpoint="true" />
-    <!-- No need to run these notify ops if no tenders exist on transaction. Moved to new chain -->
-    <!-- This is specially important now that Networked Cashdrawers can be involved as well -->
-    <OpChainRoute chainKey="NOTIFY_TENDER_VALUE_IN_TILL" condition="dtv.pos.till.NotifyTenderValueCondition" />
-    <OpChainRoute chainKey="RESET_REGISTER" />
-    <PromptOp class="dtv.pos.tender.creditcard.PromptImprintCreditCardOp" />
-    <OpChainRoute chainKey="CAPTURE_RECEIPT_SIGNATURE" />
-    <OpChainRoute chainKey="SALE_COMPLETE_FINISH.FISCAL.END" />
-    <WorkerOp workersBean="updateSAFQueueWorkers" />
-    <OpChainRoute chainKey="SALE_COMPLETE_MESSAGING" />
-    <OpChainRoute chainKey="RESET_AFTER_TRANS1" chainType="START" />
-  </OpChain>
-    <OpChain name="SALE_COMPLETE_START1">
-    <OpChainRoute chainKey="CHECK_FOR_REFUND" />
-    <OpChainRoute chainKey="CHECK_FOR_CHANGE" />
-    <OpChainRoute chainKey="SALE_COMPLETE_POST_TENDER" />
-    <OpChainRoute chainKey="BEFORE_COMPLETE_SALE1" />
-  </OpChain>
-   <OpChain name="BEFORE_COMPLETE_SALE1">
-    <PromptOp class="dtv.pos.hardware.op.IpCashDrawerScanOp" validationsBean="scanIpCashDrawerRules" breakpoint="true" />
-    <ValidationOp validationsBean="sessionTenderAmountRules" />
-  <!--   <PromptOp class="dtv.pos.register.returns.PromptCreditVoucherOp" />    --> 
-  </OpChain>
-    
- <OpChain name="EMAIL_RECEIPTS1" contextKey="EMAIL_RECEIPT_MENU">
-    <OpChainRoute chainKey="COUNTRYPACK.CREATE_INVOICE.PRINT_INVOICE_EMAIL_PRICE_QUOTATION" />
-    <Op class="oracle.retail.xstore.countrypack.common.op.EmailAddressWithDeliveryMethodsPromptOp" />
-    <Op class="dtv.pos.customer.email.PromptUpdateCustAcctWithEmailOp" />
-    <OpChainRoute chainKey="SALE_COMPLETE1" />
-  </OpChain>
-   <OpChain name="ASQ_PRICEQT_PRINT_EMAIL_RECEIPTS" contextKey="EMAIL_RECEIPT_MENU">
-    <OpChainRoute chainKey="COUNTRYPACK.CREATE_INVOICE.PRINT_INVOICE_EMAIL_PRICE_QUOTATION" />
-    <Op class="dtv.pos.customer.email.EmailAddressPromptOp" />
-    <Op class="dtv.pos.customer.email.PromptUpdateCustAcctWithEmailOp" /> 
-    <OpChainRoute chainKey="SALE_COMPLETE1" />
-    </OpChain>
-    
-     <OpChain name="COUNTRYPACK.CREATE_INVOICE.PRINT_INVOICE">
-    <WorkerOp workersBean="invoiceStoreOpenSequenceResetWorker" />
-    <WorkerOp workersBean="invoiceWorkstationOpenSequenceWorker" />
-     <ValidationOp validationsBean="countryPack.validateInvoiceItems" />
-    <Op class="oracle.retail.xstore.countrypack.common.invoice.op.ClearInvoiceCustomerOp" />
-    <PromptOp class="oracle.retail.xstore.countrypack.common.invoice.op.InvoiceCheckMixedSaleReturnItemsTransOp" />
-    <ValidationOp validationsBean="countryPack.validateReturnsOnInvoiceRequest" />
-    <Op class="oracle.retail.xstore.countrypack.common.invoice.op.InvoiceSetCreditNoteCustomerOp" />
-     <Op class="oracle.retail.xstore.countrypack.common.invoice.op.InvoiceEnsureCustomerAssignedOp">
-      <Parameter name="CHAIN_KEY" value="COUNTRYPACK.INVOICE_CUST_ASSOCIATION" />
-    </Op> 
-    <Op class="oracle.retail.xstore.countrypack.common.invoice.op.InvoiceCustomerSummaryOp" breakpoint="true" >
-      <Parameter name="CHAIN_KEY" value="COUNTRYPACK.INVOICE_CUST_ASSOCIATION" />
-    </Op>
-    <Op class="oracle.retail.xstore.countrypack.common.invoice.op.InvoiceIssueSetValueOp" >
-      <Parameter name="Value" value="true" />
-    </Op>
-   <Op class="oracle.retail.xstore.countrypack.common.invoice.op.CreateInvoiceBeanOp" longRunning="true" />
-    <Op class="dtv.pos.reporting.LoadReportOp">
-      <Parameter name="reportName" value="COUNTRYPACK.INVOICE" />
-    </Op>
-    <Op class="oracle.retail.xstore.countrypack.common.invoice.op.SetInvoiceBeanAsReportDataSourceOp" />
-    <OpChainRoute chainKey="COUNTRYPACK.CREATE_INVOICE.PRINT_INVOICE.local" />
-    <Op class="oracle.retail.xstore.countrypack.common.invoice.op.InvoiceFillReportNoUiOp" />
-    <OpChainRoute chainKey="COUNTRYPACK.SELECT_PRINTER" condition="oracle.retail.xstore.countrypack.common.invoice.einvoice.condition.InvoicePrintRunCondition" />
-    <OpChainRoute chainKey="COUNTRYPACK.INVOICE_PRINT_IMPL" condition="oracle.retail.xstore.countrypack.common.invoice.einvoice.condition.InvoicePrintRunCondition" />
-     <Op class="asq.retail.xstore.countrypack.common.invoice.op.AsqCreateInvoiceOp" /> 
-    <OpChainRoute chainKey="SALE_COMPLETE1" /> 
-  </OpChain>
-  
-    <OpChain name="COUNTRYPACK.INVOICE_CUST_ASSOCIATION">
-    <Op class="oracle.retail.xstore.countrypack.common.invoice.op.InvoiceCustomerSearchOp" required="true" breakpoint="true">
-      <Parameter name="RESULTS_PROMPT" value="CUSTOMER_LIST_REGISTER" />
-      <Parameter name="PrimaryOnly" value="true" />
-      <Parameter name="AddCustomerChain" value="ADD_NEW_CUST_ASSOC" />
-      <Parameter name="EditCustomerChain" value="CUST_ASSOCIATION_EDIT" />
-    </Op>
-    <OpChainRoute chainKey="COUNTRYPACK.INVOICE_CUST_ASSOCIATION.pre" />
-    <Op class="oracle.retail.xstore.countrypack.common.invoice.op.InvoiceCheckTransTaxExemptionPromptOp" />
-    <Op class="oracle.retail.xstore.countrypack.common.invoice.op.InvoiceSetCustomerOp" />
-    <OpChainRoute chainKey="COUNTRYPACK.INVOICE_CUST_ASSOCIATION.post" />
-  </OpChain>
-    <OpChain name="COUNTRYPACK.CREATE_INVOICE.PRINT_INVOICE_EMAIL_PRICE_QUOTATION">
-    <WorkerOp workersBean="invoiceStoreOpenSequenceResetWorker" />
-    <WorkerOp workersBean="invoiceWorkstationOpenSequenceWorker" />
-     <ValidationOp validationsBean="countryPack.validateInvoiceItems" />
-    <Op class="oracle.retail.xstore.countrypack.common.invoice.op.ClearInvoiceCustomerOp" />
-    <PromptOp class="oracle.retail.xstore.countrypack.common.invoice.op.InvoiceCheckMixedSaleReturnItemsTransOp" />
-    <ValidationOp validationsBean="countryPack.validateReturnsOnInvoiceRequest" />
-    <Op class="oracle.retail.xstore.countrypack.common.invoice.op.InvoiceSetCreditNoteCustomerOp" />
-     <Op class="oracle.retail.xstore.countrypack.common.invoice.op.InvoiceEnsureCustomerAssignedOp">
-      <Parameter name="CHAIN_KEY" value="COUNTRYPACK.INVOICE_CUST_ASSOCIATION" />
-    </Op> 
-    <Op class="oracle.retail.xstore.countrypack.common.invoice.op.InvoiceCustomerSummaryOp" breakpoint="true" >
-      <Parameter name="CHAIN_KEY" value="COUNTRYPACK.INVOICE_CUST_ASSOCIATION" />
-    </Op>
-    <Op class="oracle.retail.xstore.countrypack.common.invoice.op.InvoiceIssueSetValueOp" >
-      <Parameter name="Value" value="true" />
-    </Op>
-   <Op class="oracle.retail.xstore.countrypack.common.invoice.op.CreateInvoiceBeanOp" longRunning="true" />
-    <Op class="dtv.pos.reporting.LoadReportOp">
-      <Parameter name="reportName" value="COUNTRYPACK.INVOICE" />
-    </Op>
-    <Op class="oracle.retail.xstore.countrypack.common.invoice.op.SetInvoiceBeanAsReportDataSourceOp" />
-    <OpChainRoute chainKey="COUNTRYPACK.CREATE_INVOICE.PRINT_INVOICE.local" />
-    <Op class="oracle.retail.xstore.countrypack.common.invoice.op.InvoiceFillReportNoUiOp" />
-    <Op class="asq.retail.xstore.countrypack.common.invoice.op.AsqCreateInvoiceOp" /> 
-  </OpChain>  
-  <OpChain name="COUNTRYPACK.EINVOICE.PREPARE_EMAIL_INVOICE">
-    <Op class="oracle.retail.xstore.countrypack.common.invoice.einvoice.op.EInvoiceEmailPrepareOp" >
-      <Parameter name="emailableReportId" value="INVOICE" />
-      <Parameter name="emailableReportId" value="CREDIT_NOTE" />
-      <Parameter name="emailableReportId" value="EINVOICE_PDF_RESPONSE" />
-    </Op>
-  </OpChain>
-  
-  <OpChain name="SALE_COMPLETE_FINISH.EMAIL_RECEIPTS_ASQINVOICE" >
-      <WorkerOp workersBean="asqInvoiceemailRcptsWorkers" />
-  </OpChain>
-  <!-- PRICE Quotation end-->
-  
-  <!-- ASQ Bin Transfer Starts-->
-  <OpChain name="ITEM_TRANSFER_SAVE" signal="InventoryOperationsComplete,TransactionComplete">
-		<PromptOp class="dtv.pos.inventory.CheckPromptYesNo" key="ITEM_TRANSFER_SAVE" />
+	<!-- ZeroPriceVlidation End -->
+
+	<!-- PRICE Quotation start -->
+	<OpChain name="SALE_ITEM_START1" contextKey="SALE"
+		rollbackChainKey="ROLLBACK_TRANS_PROMPT1" rollbackLevel="10">
+		<PromptOp
+			class="dtv.pos.register.selfcheckout.nextgen.PromptSelfCheckoutPausedOp"
+			validationsBean="UnpauseSCORegisterRules" />
+		<Op class="dtv.pos.framework.security.op.StartAutoLogoutTimerOp" />
+		<!-- <OpChainRoute chainKey="START_PLAYSOUND_TIMER" /> <OpChainRoute chainKey="DISPLAY_INFO_TAB_MESSAGE" 
+			/> <Op class="dtv.pos.hardware.op.ItemCustDisplayOp" /> -->
+		<PromptOp class="asq.pos.registery.sale.AsqPromptItemScanOp"
+			contextKey="SALE1" validationsBean="itemIdRules" breakpoint="true" />
+		<OpChainRoute chainKey="VALIDATE_EXT_TAX_INTEGRATION" />
+		<ValidationOp validationsBean="gs1ItemRestrictionRules" />
+		<ValidationOp
+			class="dtv.pos.coupon.LookupCouponFromItemIdOp"
+			validationsBean="couponVerificationRules" />
+		<Op class="dtv.pos.document.bounceback.op.LookupBounceBackCouponOp" />
+		<Op class="dtv.pos.item.barcode.LookupBarcodeFromItemIdOp" />
+		<ValidationOp
+			class="dtv.pos.register.sale.CheckItemNotOnFileOp"
+			validationsBean="itemNotOnFileRules" />
+		<ValidationOp
+			class="dtv.pos.item.barcode.ValidateItemEmbeddedBarcodeOp"
+			validationsBean="saleBarcodePropertyRules" />
+		<ValidationOp
+			class="dtv.pos.register.ValidateSellingGroupOp"
+			validationsBean="sellingIdGroupRules" />
+		<OpChainRoute chainKey="SALE_ITEM_AFTER_LOOKUP" />
+	</OpChain>
+
+	<OpChain name="CHECK_SALE_COMPLETE1"
+		contextKey="TEXT_PROMPT_ONLY">
+		<Op class="asq.pos.registery.AsqCheckSaleCompleteOp" />
+	</OpChain>
+
+	<OpChain name="ROLLBACK_TRANS_PROMPT1">
+		<OpChainRoute chainKey="VALIDATE_ALLOW_ROLLBACK_TRANS"
+			condition="dtv.pos.register.condition.HasTransRunCondition" />
+		<OpChainRoute chainKey="STOP_PLAYSOUND_TIMER" />
+		<Op class="asq.pos.registery.AsqPromptRollbackTransOp" />
+	</OpChain>
+
+	<OpChain name="ROLLBACK_TRANS_START1">
+		<!-- A command needs to be used here to make sure we can load the current 
+			transaction. This fixes a bug where you can cancel a just created transaction 
+			and get a null pointer exception because the running command doesn't have 
+			visibility on that transaction. -->
+		<OpChainRoute chainKey="ROLLBACK_TRANS_START_IMPL" />
+		<OpChainRoute chainKey="ROLLBACK_TRANS_FINISH1"
+			chainType="START" />
+	</OpChain>
+
+	<OpChain name="ROLLBACK_TRANS_FINISH1"
+		signal="TransactionCancelled">
+		<OpChainRoute chainKey="ROLLBACK_TRANS_FINISH_IMPL" />
+		<OpChainRoute chainKey="ROLLBACK_TRANS_FINISH.local" />
+		<OpChainRoute chainKey="RESET_REGISTER" />
+		<OpChainRoute chainKey="RESET_AFTER_TRANS1"
+			chainType="START" />
+	</OpChain>
+
+	<OpChain name="RESET_AFTER_TRANS1">
+		<OpChainRoute chainKey="RESET_AFTER_TRANS.local" />
+		<Op class="dtv.pos.framework.op.OpChainRollbackToTopOp">
+			<Parameter name="ProcessTopChain" value="false" />
+		</Op>
+		<OpChainRoute chainKey="UPDATE_PROMPTS_ROLLBACK"
+			condition="dtv.pos.register.condition.RegisterNotInTrainingModeRunCondition" />
+		<WorkerOp workersBean="registerWorkstationActiveWorkers" />
+		<WorkerOp workersBean="saveSystemTimeWorkers" />
+		<PromptOp class="dtv.pos.register.StoreCloseWarningOp"
+			key="WORKSTATION_WARNING" />
+		<PromptOp class="dtv.pos.register.StoreCloseGraceOp"
+			key="WORKSTATION_GRACE" />
+		<Op class="dtv.pos.systemcycle.access.EndOfDayTimeCheckOp" />
+		<PromptOp class="dtv.pos.register.StoreCloseGraceExpiredOp"
+			key="WORKSTATION_GRACE_EXPIRED" />
+		<!-- <Op class="dtv.pos.register.ResetAfterTransactionOp" /> -->
+	</OpChain>
+
+	<OpChain name="PRE_SALE_TRANSACTION1" contextKey="PRE_SALE">
+		<OpChainRoute chainKey="PRE_SALE_TRANS_WITHOUT_CUSTOMER" />
+		<!-- <Op class="dtv.pos.customer.RunCustAssociationChainOp" /> -->
+		<!-- <Op class="dtv.pos.common.TransactionPropertyCreateTransactionOp" 
+			/> -->
+		<!-- <Op class="dtv.pos.register.HideCustomerInformationPanelOp" /> -->
+		<Op class="dtv.pos.register.RouteSalesChainFromConfigOp"
+			contextKey="SALE" />
+	</OpChain>
+
+	<OpChain name="SALE_COMPLETE1">
+		<PromptOp
+			class="dtv.pos.register.selfcheckout.nextgen.PromptSelfCheckoutPausedOp"
+			validationsBean="UnpauseSCORegisterRules" />
+		<OpChainRoute chainKey="VALIDATE_EXT_TAX_INTEGRATION" />
+		<OpChainRoute
+			chainKey="COUNTRYPACK.ASSIGN_FISCAL_SEQUENCE" />
+		<OpChainRoute
+			chainKey="SALE_COMPLETE_BEFORE_START.local.pre" />
+		<OpChainRoute
+			chainKey="SALE_COMPLETE_BEFORE_START.local.1" />
+		<OpChainRoute
+			chainKey="SALE_COMPLETE_BEFORE_START.invoice.1" />
+		<OpChainRoute
+			chainKey="SALE_COMPLETE_BEFORE_START.selfCheckout.giftReceipt" />
+		<OpChainRoute chainKey="SALE_COMPLETE_START1 " />
+		<OpChainRoute
+			chainKey="SALE_COMPLETE_AFTER_START.local.1" />
+		<OpChainRoute
+			chainKey="SALE_COMPLETE_AFTER_START.local.2" />
+		<OpChainRoute chainKey="SALE_COMPLETE_AFTER_START" />
+		<OpChainRoute chainKey="SALE_COMPLETE_BEFORE_FINISH" />
+		<OpChainRoute chainKey="SALE_COMPLETE_BEFORE_FINISH.1" />
+		<OpChainRoute chainKey="VOUCHER_TRANSFORMATION" />
+		<OpChainRoute chainKey="SALE_COMPLETE_VALIDATE.local" />
+		<OpChainRoute chainKey="VALIDATE_EXT_TAX_INTEGRATION" />
+		<!-- <OpChainRoute chainKey="SALE_COMPLETE_BEFORE_FINISH.ERECEIPT" /> -->
+		<OpChainRoute
+			chainKey="SALE_COMPLETE_BEFORE_FINISH.local" />
+		<!-- <OpChainRoute chainKey="SALE_COMPLETE_ISSUE_DOCUMENT" /> -->
+		<OpChainRoute chainKey="SALE_COMPLETE_FINISH1"
+			chainType="START" />
+	</OpChain>
+
+	<OpChain name="SALE_COMPLETE_FINISH1"
+		signal="TransactionComplete">
+		<OpChainRoute chainKey="SALE_COMPLETE_FINISH.pre" />
+		<PromptOp
+			class="dtv.pos.coupon.PromptReturnUnusedCouponsToCustomerOp" />
+		<OpChainRoute chainKey="SALE_COMPLETE_FINISH.pre.1" />
+		<OpChainRoute chainKey="SALE_COMPLETE_FINISH.local" />
+		<!-- Inventory must be processed before the transaction is persisted!! -->
+		<!-- <WorkerOp workersBean="saleCompleteInventoryWorkers" /> -->
+		<WorkerOp workersBean="completeSaleTransWorkers" />
+		<Op class="dtv.pos.tender.creditcard.PrepareImprintCreditCardOp" />
+		<Op
+			class="dtv.pos.customer.account.op.AddCustomerAccountRcptSourcesOp" />
+		<Op class="dtv.pos.register.giftreceipt.GroupGiftReceiptsOp" />
+		<Op class="dtv.pos.register.giftreceipt.AddMultipleGiftReceiptsOp" />
+		<Op class="dtv.pos.register.giftreceipt.AddGiftRcptSourcesOp" />
+		<PromptOp
+			class="dtv.pos.register.giftreceipt.PromptForShowPriceInClearOp"
+			key="PROMPT_FOR_SHOW_PRICE_ON_GIFT_RECEIPTS" />
+		<WorkerOp workersBean="calculateTlogSequenceWorkers" />
+		<OpChainRoute chainKey="SALE_COMPLETE_FINISH.1" />
+		<OpChainRoute chainKey="SALE_COMPLETE_FINISH.local.1" />
+		<OpChainRoute chainKey="SALE_COMPLETE_FINISH.order.1" />
+		<OpChainRoute chainKey="SALE_COMPLETE_FINISH.registry.1" />
+		<OpChainRoute
+			chainKey="SALE_COMPLETE_FINISH.digitalCart.1" />
+		<OpChainRoute
+			chainKey="SALE_COMPLETE_FINISH.entitlement.1" />
+		<Op class="dtv.pos.customer.wishlist.op.SellWishListItemsOp" />
+		<WorkerOp workersBean="saleCompleteCustomerAccountWorkers" />
+		<Op class="dtv.pos.hardware.op.BuildSaleRcptsOp" />
+		<OpChainRoute chainKey="LUXURY_RECEIPTS_PREPARE" />
+		<OpChainRoute chainKey="ENHANCED_EMAIL_RECEIPTS_PREPARE" />
+		<OpChainRoute chainKey="SALE_COMPLETE_FINISH.2" />
+		<OpChainRoute chainKey="SALE_COMPLETE_FINISH.order.2" />
+		<WorkerOp workersBean="crossChannelReturnWorkers" />
+		<OpChainRoute chainKey="SALE_COMPLETE_FINISH.3" />
+		<OpChainRoute chainKey="SALE_COMPLETE_FINISH.ERECEIPT" />
+		<OpChainRoute chainKey="SALE_COMPLETE_FINISH.invoice" />
+		<WorkerOp
+			workersBean="calculateCreditTenderPropertiesWorkers" />
+		<WorkerOp workersBean="buildReturnedItemJournalWorkers" />
+		<OpChainRoute chainKey="CREATE_WARRANTY_ACTIVITY" />
+		<WorkerOp
+			workersBean="updateRainCheckRedemptionStatusWorkers" />
+		<Op class="dtv.pos.hardware.op.OpenCashDrawerOp" />
+		<WorkerOp workersBean="updateCashDrawerIdWorkers" />
+		<WorkerOp workersBean="persistRetailTransWorkers">
+			<Parameter name="Cancelable" value="false" />
+			<Parameter name="AfterCancelResetChain"
+				value="RESET_AFTER_TRANS" />
+		</WorkerOp>
+		<WorkerOp workersBean="persistSystemTotalWorkers" />
+		<OpChainRoute chainKey="COUNTRYPACK.SAVE_FISCAL_SEQUENCE" />
+		<OpChainRoute
+			chainKey="SALE_COMPLETE_FINISH.FISCAL.AFTER_TRAN_SAVE" />
+		<Op class="dtv.pos.customer.view.ClearCustomerMessageViewOp" />
+		<WorkerOp workersBean="persistVoucherHistoryWorkers" />
+		<!-- Flash sales update sales -->
+		<WorkerOp workersBean="populateFlashSalesTablesWorkers" />
+		<WorkerOp workersBean="refreshSalesGoalStatusWorkers" />
+		<!-- Generate documents -->
+		<Op class="dtv.pos.hardware.op.BuildTenderFrankingsOp" />
+		<Op class="dtv.pos.hardware.op.FrankTendersOp" />
+		<OpChainRoute
+			chainKey="COUNTRYPACK.EINVOICE.PREPARE_EMAIL_INVOICE" />
+		<OpChainRoute
+			chainKey="SALE_COMPLETE_FINISH.EMAIL_RECEIPTS_ASQINVOICE" />
+		<OpChainRoute
+			chainKey="SALE_COMPLETE_FINISH.selfcheckout" />
+		<!-- <Op class="dtv.pos.hardware.op.PrintRcptsOp" breakpoint="true" /> -->
+		<!-- <OpChainRoute chainKey="PRINT_DOCUMENTS" /> -->
+		<OpChainRoute chainKey="PRINT_WARRANTIES" />
+		<WorkerOp workersBean="saveRcptsWorkers" />
+		<Op class="dtv.pos.hardware.op.WaitForRcptPrintOp" required="false" />
+		<Op
+			class="dtv.pos.hardware.op.ReleaseFiscalExclusiveWorkstationUseOp" />
+		<OpChainRoute chainKey="PRINT_FISCAL_RECEIPTS.local" />
+		<OpChainRoute chainKey="LUXURY_RECEIPTS_PRINT"
+			condition="oracle.retail.xstore.countrypack.common.luxuryreceipt.HasLuxuryReceipts" />
+		<!-- This operation intercepts Backup Response returned by DisplayChangeDueOp -->
+		<Op class="dtv.pos.framework.op.DoNothingOp" breakpoint="true">
+			<Parameter name="RESPONSE" value="COMPLETE" />
+		</Op>
+		<PromptOp class="dtv.pos.hardware.op.DisplayChangeDueOp"
+			validationsBean="cashDrawerCloseRules" breakpoint="true" />
+		<!-- No need to run these notify ops if no tenders exist on transaction. 
+			Moved to new chain -->
+		<!-- This is specially important now that Networked Cashdrawers can be 
+			involved as well -->
+		<OpChainRoute chainKey="NOTIFY_TENDER_VALUE_IN_TILL"
+			condition="dtv.pos.till.NotifyTenderValueCondition" />
+		<OpChainRoute chainKey="RESET_REGISTER" />
+		<PromptOp
+			class="dtv.pos.tender.creditcard.PromptImprintCreditCardOp" />
+		<OpChainRoute chainKey="CAPTURE_RECEIPT_SIGNATURE" />
+		<OpChainRoute chainKey="SALE_COMPLETE_FINISH.FISCAL.END" />
+		<WorkerOp workersBean="updateSAFQueueWorkers" />
+		<OpChainRoute chainKey="SALE_COMPLETE_MESSAGING" />
+		<OpChainRoute chainKey="RESET_AFTER_TRANS1"
+			chainType="START" />
+	</OpChain>
+	<OpChain name="SALE_COMPLETE_START1">
+		<OpChainRoute chainKey="CHECK_FOR_REFUND" />
+		<OpChainRoute chainKey="CHECK_FOR_CHANGE" />
+		<OpChainRoute chainKey="SALE_COMPLETE_POST_TENDER" />
+		<OpChainRoute chainKey="BEFORE_COMPLETE_SALE1" />
+	</OpChain>
+	<OpChain name="BEFORE_COMPLETE_SALE1">
+		<PromptOp class="dtv.pos.hardware.op.IpCashDrawerScanOp"
+			validationsBean="scanIpCashDrawerRules" breakpoint="true" />
+		<ValidationOp validationsBean="sessionTenderAmountRules" />
+		<!-- <PromptOp class="dtv.pos.register.returns.PromptCreditVoucherOp" /> -->
+	</OpChain>
+
+	<OpChain name="EMAIL_RECEIPTS1" contextKey="EMAIL_RECEIPT_MENU">
+		<OpChainRoute
+			chainKey="COUNTRYPACK.CREATE_INVOICE.PRINT_INVOICE_EMAIL_PRICE_QUOTATION" />
+		<Op
+			class="oracle.retail.xstore.countrypack.common.op.EmailAddressWithDeliveryMethodsPromptOp" />
+		<Op class="dtv.pos.customer.email.PromptUpdateCustAcctWithEmailOp" />
+		<OpChainRoute chainKey="SALE_COMPLETE1" />
+	</OpChain>
+	<OpChain name="ASQ_PRICEQT_PRINT_EMAIL_RECEIPTS"
+		contextKey="EMAIL_RECEIPT_MENU">
+		<OpChainRoute
+			chainKey="COUNTRYPACK.CREATE_INVOICE.PRINT_INVOICE_EMAIL_PRICE_QUOTATION" />
+		<Op class="dtv.pos.customer.email.EmailAddressPromptOp" />
+		<Op class="dtv.pos.customer.email.PromptUpdateCustAcctWithEmailOp" />
+		<OpChainRoute chainKey="SALE_COMPLETE1" />
+	</OpChain>
+
+	<OpChain name="COUNTRYPACK.CREATE_INVOICE.PRINT_INVOICE">
+		<WorkerOp workersBean="invoiceStoreOpenSequenceResetWorker" />
+		<WorkerOp workersBean="invoiceWorkstationOpenSequenceWorker" />
+		<ValidationOp
+			validationsBean="countryPack.validateInvoiceItems" />
+		<Op
+			class="oracle.retail.xstore.countrypack.common.invoice.op.ClearInvoiceCustomerOp" />
+		<PromptOp
+			class="oracle.retail.xstore.countrypack.common.invoice.op.InvoiceCheckMixedSaleReturnItemsTransOp" />
+		<ValidationOp
+			validationsBean="countryPack.validateReturnsOnInvoiceRequest" />
+		<Op
+			class="oracle.retail.xstore.countrypack.common.invoice.op.InvoiceSetCreditNoteCustomerOp" />
+		<Op
+			class="oracle.retail.xstore.countrypack.common.invoice.op.InvoiceEnsureCustomerAssignedOp">
+			<Parameter name="CHAIN_KEY"
+				value="COUNTRYPACK.INVOICE_CUST_ASSOCIATION" />
+		</Op>
+		<Op
+			class="oracle.retail.xstore.countrypack.common.invoice.op.InvoiceCustomerSummaryOp"
+			breakpoint="true">
+			<Parameter name="CHAIN_KEY"
+				value="COUNTRYPACK.INVOICE_CUST_ASSOCIATION" />
+		</Op>
+		<Op
+			class="oracle.retail.xstore.countrypack.common.invoice.op.InvoiceIssueSetValueOp">
+			<Parameter name="Value" value="true" />
+		</Op>
+		<Op
+			class="oracle.retail.xstore.countrypack.common.invoice.op.CreateInvoiceBeanOp"
+			longRunning="true" />
+		<Op class="dtv.pos.reporting.LoadReportOp">
+			<Parameter name="reportName" value="COUNTRYPACK.INVOICE" />
+		</Op>
+		<Op
+			class="oracle.retail.xstore.countrypack.common.invoice.op.SetInvoiceBeanAsReportDataSourceOp" />
+		<OpChainRoute
+			chainKey="COUNTRYPACK.CREATE_INVOICE.PRINT_INVOICE.local" />
+		<Op
+			class="oracle.retail.xstore.countrypack.common.invoice.op.InvoiceFillReportNoUiOp" />
+		<OpChainRoute chainKey="COUNTRYPACK.SELECT_PRINTER"
+			condition="oracle.retail.xstore.countrypack.common.invoice.einvoice.condition.InvoicePrintRunCondition" />
+		<OpChainRoute chainKey="COUNTRYPACK.INVOICE_PRINT_IMPL"
+			condition="oracle.retail.xstore.countrypack.common.invoice.einvoice.condition.InvoicePrintRunCondition" />
+		<Op
+			class="asq.retail.xstore.countrypack.common.invoice.op.AsqCreateInvoiceOp" />
+		<OpChainRoute chainKey="SALE_COMPLETE1" />
+	</OpChain>
+
+	<OpChain name="COUNTRYPACK.INVOICE_CUST_ASSOCIATION">
+		<Op
+			class="oracle.retail.xstore.countrypack.common.invoice.op.InvoiceCustomerSearchOp"
+			required="true" breakpoint="true">
+			<Parameter name="RESULTS_PROMPT"
+				value="CUSTOMER_LIST_REGISTER" />
+			<Parameter name="PrimaryOnly" value="true" />
+			<Parameter name="AddCustomerChain"
+				value="ADD_NEW_CUST_ASSOC" />
+			<Parameter name="EditCustomerChain"
+				value="CUST_ASSOCIATION_EDIT" />
+		</Op>
+		<OpChainRoute
+			chainKey="COUNTRYPACK.INVOICE_CUST_ASSOCIATION.pre" />
+		<Op
+			class="oracle.retail.xstore.countrypack.common.invoice.op.InvoiceCheckTransTaxExemptionPromptOp" />
+		<Op
+			class="oracle.retail.xstore.countrypack.common.invoice.op.InvoiceSetCustomerOp" />
+		<OpChainRoute
+			chainKey="COUNTRYPACK.INVOICE_CUST_ASSOCIATION.post" />
+	</OpChain>
+	<OpChain
+		name="COUNTRYPACK.CREATE_INVOICE.PRINT_INVOICE_EMAIL_PRICE_QUOTATION">
+		<WorkerOp workersBean="invoiceStoreOpenSequenceResetWorker" />
+		<WorkerOp workersBean="invoiceWorkstationOpenSequenceWorker" />
+		<ValidationOp
+			validationsBean="countryPack.validateInvoiceItems" />
+		<Op
+			class="oracle.retail.xstore.countrypack.common.invoice.op.ClearInvoiceCustomerOp" />
+		<PromptOp
+			class="oracle.retail.xstore.countrypack.common.invoice.op.InvoiceCheckMixedSaleReturnItemsTransOp" />
+		<ValidationOp
+			validationsBean="countryPack.validateReturnsOnInvoiceRequest" />
+		<Op
+			class="oracle.retail.xstore.countrypack.common.invoice.op.InvoiceSetCreditNoteCustomerOp" />
+		<Op
+			class="oracle.retail.xstore.countrypack.common.invoice.op.InvoiceEnsureCustomerAssignedOp">
+			<Parameter name="CHAIN_KEY"
+				value="COUNTRYPACK.INVOICE_CUST_ASSOCIATION" />
+		</Op>
+		<Op
+			class="oracle.retail.xstore.countrypack.common.invoice.op.InvoiceCustomerSummaryOp"
+			breakpoint="true">
+			<Parameter name="CHAIN_KEY"
+				value="COUNTRYPACK.INVOICE_CUST_ASSOCIATION" />
+		</Op>
+		<Op
+			class="oracle.retail.xstore.countrypack.common.invoice.op.InvoiceIssueSetValueOp">
+			<Parameter name="Value" value="true" />
+		</Op>
+		<Op
+			class="oracle.retail.xstore.countrypack.common.invoice.op.CreateInvoiceBeanOp"
+			longRunning="true" />
+		<Op class="dtv.pos.reporting.LoadReportOp">
+			<Parameter name="reportName" value="COUNTRYPACK.INVOICE" />
+		</Op>
+		<Op
+			class="oracle.retail.xstore.countrypack.common.invoice.op.SetInvoiceBeanAsReportDataSourceOp" />
+		<OpChainRoute
+			chainKey="COUNTRYPACK.CREATE_INVOICE.PRINT_INVOICE.local" />
+		<Op
+			class="oracle.retail.xstore.countrypack.common.invoice.op.InvoiceFillReportNoUiOp" />
+		<Op
+			class="asq.retail.xstore.countrypack.common.invoice.op.AsqCreateInvoiceOp" />
+	</OpChain>
+	<OpChain name="COUNTRYPACK.EINVOICE.PREPARE_EMAIL_INVOICE">
+		<Op
+			class="oracle.retail.xstore.countrypack.common.invoice.einvoice.op.EInvoiceEmailPrepareOp">
+			<Parameter name="emailableReportId" value="INVOICE" />
+			<Parameter name="emailableReportId" value="CREDIT_NOTE" />
+			<Parameter name="emailableReportId"
+				value="EINVOICE_PDF_RESPONSE" />
+		</Op>
+	</OpChain>
+
+	<OpChain name="SALE_COMPLETE_FINISH.EMAIL_RECEIPTS_ASQINVOICE">
+		<WorkerOp workersBean="asqInvoiceemailRcptsWorkers" />
+	</OpChain>
+	<!-- PRICE Quotation end -->
+
+	<!-- ASQ Bin Transfer Starts -->
+	<OpChain name="ITEM_TRANSFER_SAVE"
+		signal="InventoryOperationsComplete,TransactionComplete">
+		<PromptOp class="dtv.pos.inventory.CheckPromptYesNo"
+			key="ITEM_TRANSFER_SAVE" />
 		<Op class="dtv.pos.inventory.movement.CreateItemTransferDocumentOp" />
-		<OpChainRoute chainKey="ASQ_BIN_TRANSFER_OTP" condition="asq.pos.inventory.AsqBinTransferAllowedCheck"/>
+		<OpChainRoute chainKey="ASQ_BIN_TRANSFER_OTP"
+			condition="asq.pos.inventory.AsqBinTransferAllowedCheck" />
 		<WorkerOp workersBean="saveItemTransferWorkers" />
 		<Op class="dtv.pos.inventory.movement.PrintItemTransferReportOp" />
 		<Op class="dtv.pos.framework.op.OpChainRollbackOp" />
-   </OpChain>
-   <OpChain name="ASQ_BIN_TRANSFER_OTP">
-		<Op class="asq.pos.inventory.AsqBinTransferEmailFormOp" longRunning="true"/>
-		<Op class="asq.pos.inventory.AsqBinTransferOTPFormOp"/>
-   </OpChain>
-   <!-- ASQ Bin Transfer Ends-->
-   
-   <!-- Loyalty redeem  start -->
-   <OpChain name="ASQ_LOYALTY">
+	</OpChain>
+	<OpChain name="ASQ_BIN_TRANSFER_OTP">
+		<Op class="asq.pos.inventory.AsqBinTransferEmailFormOp"
+			longRunning="true" />
+		<Op class="asq.pos.inventory.AsqBinTransferOTPFormOp" />
+	</OpChain>
+	<!-- ASQ Bin Transfer Ends -->
+
+	<!-- Loyalty redeem start -->
+	<OpChain name="ASQ_LOYALTY">
 		<PromptOp class="asq.pos.loyalty.AsqPromptLoyalty" />
-   </OpChain>
-   <!-- Loyalty redeem  end -->
-  
-  <!-- ASQ Disable Label Printing - Start -->
-  <OpChain name="SHIPPING_PROCESS_SHIPMENT">
-    <Op class="dtv.pos.inventory.ship.label.PromptTrackingNumberOp" />
-  </OpChain>
-  <!-- ASQ Disable Label Printing - End -->
-  <OpChain name="SAVE_EXIT_SHIPPING" signal="InventoryOperationsComplete,TransactionComplete">
-    <PromptOp class="dtv.pos.inventory.ship.op.PromptForShipNowOp" />
-    <OpChainRoute chainKey="ASQ_SHIP_TRANSFER_OTP" condition="asq.pos.inventory.ship.op.AsqShipTransferAllowedCheck"/>
-    <PromptOp class="dtv.pos.inventory.ship.op.PromptForCloseShippingDocumentOp" />
-    <OpChainRoute chainKey="SHIPPING_PROCESS_SHIPMENT" condition="dtv.pos.inventory.ship.op.HaveItemsShipped" />
-    <WorkerOp workersBean="saveShippingWorkers" />
-    <OpChainRoute chainKey="PRINT_PACKING_SLIP" condition="dtv.pos.inventory.ship.op.HaveItemsShipped" />
-    <OpChainRoute chainKey="SHIPPING" chainType="START" />
-  </OpChain>
-	
-   <OpChain name="ASQ_SHIP_TRANSFER_OTP">
-		<Op class="asq.pos.inventory.ship.op.AsqStoreTransferEmailFormOp" longRunning="true"/>
-		<Op class="asq.pos.inventory.ship.op.AsqStoreTransferOTPFormOp"/>
-   </OpChain>
-	
-   <!-- Customer Validation Before tender -->	
-  <OpChain name="PRE_TENDERING.3" >
-    <Op class="asq.pos.tender.customer.check.AsqCustomerCheckOp" />
-  </OpChain>
-  
-   <!--Earn Points to Neqaty & STC for all tenders  -->
-   <OpChain name="SALE_COMPLETE_START">
-   	<Op class="asq.pos.loyalty.neqaty.tender.op.AsqNeqatyEarnPointsOp" />
-	<Op class="asq.pos.loyalty.stc.earn.op.AsqSTCEarnPointsOp" />
+	</OpChain>
+	<!-- Loyalty redeem end -->
+
+	<!-- ASQ Disable Label Printing - Start -->
+	<OpChain name="SHIPPING_PROCESS_SHIPMENT">
+		<Op class="dtv.pos.inventory.ship.label.PromptTrackingNumberOp" />
+	</OpChain>
+	<!-- ASQ Disable Label Printing - End -->
+	<OpChain name="SAVE_EXIT_SHIPPING"
+		signal="InventoryOperationsComplete,TransactionComplete">
+		<PromptOp
+			class="dtv.pos.inventory.ship.op.PromptForShipNowOp" />
+		<OpChainRoute chainKey="ASQ_SHIP_TRANSFER_OTP"
+			condition="asq.pos.inventory.ship.op.AsqShipTransferAllowedCheck" />
+		<PromptOp
+			class="dtv.pos.inventory.ship.op.PromptForCloseShippingDocumentOp" />
+		<OpChainRoute chainKey="SHIPPING_PROCESS_SHIPMENT"
+			condition="dtv.pos.inventory.ship.op.HaveItemsShipped" />
+		<WorkerOp workersBean="saveShippingWorkers" />
+		<OpChainRoute chainKey="PRINT_PACKING_SLIP"
+			condition="dtv.pos.inventory.ship.op.HaveItemsShipped" />
+		<OpChainRoute chainKey="SHIPPING" chainType="START" />
+	</OpChain>
+
+	<OpChain name="ASQ_SHIP_TRANSFER_OTP">
+		<Op class="asq.pos.inventory.ship.op.AsqStoreTransferEmailFormOp"
+			longRunning="true" />
+		<Op class="asq.pos.inventory.ship.op.AsqStoreTransferOTPFormOp" />
+	</OpChain>
+
+	<!-- Customer Validation Before tender -->
+	<OpChain name="PRE_TENDERING.3">
+		<Op class="asq.pos.tender.customer.check.AsqCustomerCheckOp" />
+	</OpChain>
+
+	<!--Earn Points to Neqaty & STC for all tenders -->
+	<OpChain name="SALE_COMPLETE_START">
+		<Op class="asq.pos.loyalty.neqaty.tender.op.AsqNeqatyEarnPointsOp" />
+		<Op class="asq.pos.loyalty.stc.earn.op.AsqSTCEarnPointsOp" />
 		<OpChainRoute chainKey="CHECK_FOR_REFUND" />
 		<OpChainRoute chainKey="CHECK_FOR_CHANGE" />
 		<OpChainRoute chainKey="SALE_COMPLETE_POST_TENDER" />
 		<OpChainRoute chainKey="BEFORE_COMPLETE_SALE" />
 	</OpChain>
-  
+
 	<OpChain name="PRE_RETURN_VERIFICATION">
-	   <Op class="asq.pos.register.returns.verification.AsqOriginalReturnOp" />
-	    <OpChainRoute chainKey="PRE_RETURN_VERIFICATION.local.pre" />
-	    <OpChainRoute chainKey="PRE_RETURN_VERIFICATION.local.invoice" />
-	    <OpChainRoute chainKey="DISPLAY_RETURN_INFO_TAB_MESSAGE" />
-	    <OpChainRoute chainKey="VALIDATE_RETURN_INFO" />
-	    <PromptOp class="dtv.pos.register.returns.CheckTransactionMissingDataOp" />
-	    <PromptOp class="dtv.pos.register.returns.PromptReturnSecurityOp" />
-	    <OpChainRoute chainKey="RETURN_PRORATION_VERIFIED" />
-	    <Op class="dtv.pos.register.returns.verification.DisplayReturnOriginalTransOp" />
-	    <OpChainRoute chainKey="VERIFIED_RETURN_START.local.invoice" />
-	    <OpChainRoute chainKey="VERIFIED_RETURN" chainType="START" />
-	 </OpChain>
-  
-  
-    <!-- ASQ Bank Deposit email Starts-->
-	<OpChain name="BANK_DEPOSIT.local" >
-		<Op	class="asq.pos.till.count.AsqEmailBankDepositOp" longRunning="true" />
+		<Op
+			class="asq.pos.register.returns.verification.AsqOriginalReturnOp" />
+		<OpChainRoute
+			chainKey="PRE_RETURN_VERIFICATION.local.pre" />
+		<OpChainRoute
+			chainKey="PRE_RETURN_VERIFICATION.local.invoice" />
+		<OpChainRoute chainKey="DISPLAY_RETURN_INFO_TAB_MESSAGE" />
+		<OpChainRoute chainKey="VALIDATE_RETURN_INFO" />
+		<PromptOp
+			class="dtv.pos.register.returns.CheckTransactionMissingDataOp" />
+		<PromptOp
+			class="dtv.pos.register.returns.PromptReturnSecurityOp" />
+		<OpChainRoute chainKey="RETURN_PRORATION_VERIFIED" />
+		<Op
+			class="dtv.pos.register.returns.verification.DisplayReturnOriginalTransOp" />
+		<OpChainRoute
+			chainKey="VERIFIED_RETURN_START.local.invoice" />
+		<OpChainRoute chainKey="VERIFIED_RETURN"
+			chainType="START" />
 	</OpChain>
-	<!-- ASQ Bank Deposit email Ends-->
- 
- 	<!-- ASQ Tax free error at Reg opens Starts-->
+
+
+	<!-- ASQ Bank Deposit email Starts -->
+	<OpChain name="BANK_DEPOSIT.local">
+		<Op class="asq.pos.till.count.AsqEmailBankDepositOp"
+			longRunning="true" />
+	</OpChain>
+	<!-- ASQ Bank Deposit email Ends -->
+
+	<!-- ASQ Tax free error at Reg opens Starts -->
 	<OpChain name="WORKSTATION_OPEN_EXT.local">
 		<OpChainRoute chainKey="WORKSTATION_OPEN_EXT.pre" />
 		<!-- <OpChainRoute chainKey="WORKSTATION_OPEN_EXT.local.1" /> -->
@@ -744,14 +913,88 @@
 		<OpChainRoute chainKey="WORKSTATION_OPEN_EXT.local.3" />
 		<OpChainRoute chainKey="WORKSTATION_OPEN_EXT.post" />
 	</OpChain>
-	<!-- ASQ Tax free error at Reg opens ends-->
-	
+	<!-- ASQ Tax free error at Reg opens ends -->
+
 	<!-- ASQ - Style item is not required during item lookup - Start -->
-	   <OpChain name="ASQ_GENERIC_ITEM_LOOKUP">
-	    <Op class="asq.pos.inventory.lookup.AsqItemSearchOp" breakpoint="true" />
-	    <Op class="dtv.pos.inventory.lookup.DisplayFoundItemOp" breakpoint="true" />
-	  </OpChain> 
-  	 <!-- ASQ - Style item is not required during item lookup - Ends--> 
-	
+	<OpChain name="ASQ_GENERIC_ITEM_LOOKUP">
+		<Op class="asq.pos.inventory.lookup.AsqItemSearchOp"
+			breakpoint="true" />
+		<Op class="dtv.pos.inventory.lookup.DisplayFoundItemOp"
+			breakpoint="true" />
+	</OpChain>
+	<!-- ASQ - Style item is not required during item lookup - Ends -->
+
+	<!-- ASQ - TOLA parent item quantity changes - starts -->
+	<OpChain name="CHANGE_ITEM_QUANTITY">
+	    <PromptOp class="asq.pos.register.modifyitem.ASQPromptItemQuantityChangeOp" validationsBean="saleItemQuantityRules" />
+	    <PromptOp class="dtv.pos.register.modifyitem.PromptForItemChangeWeightOp" validationsBean="itemWeightRules" />
+	    <Op class="dtv.pos.kits.UpdateKitComponentModifiersQtyOp" />
+	    <Op class="dtv.pos.kits.inventory.HandleKitComponentInventoryOp" />
+	    <Op class="dtv.pos.inventory.op.InventoryLocationChangeWhileOp">
+	      <Parameter name="ChainKey" value="SALE_ALLOCATE_QUANTITY_CHANGE" />
+	    </Op>
+	    <Op class="asq.pos.register.modifyitem.ASQUpdateChangedQuantityOp" />
+	    <Op class="dtv.pos.register.modifyitem.UpdateLineItemAsscModifierQtyOp" />
+	    <Op class="dtv.pos.customer.award.AutoVoidAwardDiscountsOp" />
+	    <OpChainRoute chainKey="POST_CHANGE_ITEM_QUANTITY" chainType="START" />
+    </OpChain>
+    
+    
+    <OpChain name="VERIFIED_RETURN_ITEM_IMPL">
+	    <ValidationOp validationsBean="allowItemVerifiedReturnRules" />
+	    <PromptOp class="dtv.pos.item.restriction.PromptForCashierAgeVerificationOp">
+	      <Parameter name="SaleItemType" value="RETURN" />
+	    </PromptOp>
+	    <ValidationOp class="dtv.pos.register.returns.ValidateReturnItemPriceOp" validationsBean="returnOrigPriceRules" />
+	    <PromptOp class="dtv.pos.register.returns.PromptReturnItemSerialNumberOp" validationsBean="returnSerialNumberRules" />
+	    <Op class="dtv.pos.register.KitComponentIteratingOp">
+	      <Parameter name="ChainKey" value="VERIFIED_RETURN_KIT_COMPONENT_SERIAL_NUMBER" />
+	    </Op>
+	    <ValidationOp class="dtv.pos.register.returns.verification.ValidateVoucherAlreadyOnTransOp" validationsBean="returnVoucherOnTransRules" />
+	    <Op class="dtv.pos.register.returns.MatchSerializedReturnItemOp" />
+	    <Op class="dtv.pos.register.returns.verification.ValidateReturnItemOp" />
+	    <PromptOp class="dtv.pos.register.PromptItemDescriptionOp" validationsBean="itemDescriptionRules" />
+	    <PromptOp class="asq.pos.register.returns.verification.ASQPromptReturnVerificationItemQuantityOp" validationsBean="allowVerifiedReturnInputQtyRules" />
+	    <PromptOp class="dtv.pos.register.returns.verification.PromptReturnVerificationItemWeightOp" validationsBean="positiveItemWeightRules" />
+	    <PromptOp class="dtv.pos.warranty.returns.PromptReturnWarrantiesOp" validationsBean="returnVerifiedWarrantyRules" />
+	    <ValidationOp class="dtv.pos.register.returns.verification.ValidateTotalReturnPriceNewVerifiedItemOp" validationsBean="returnNewItemPriceRules" />
+	    <PromptOp class="dtv.pos.register.returns.PromptReturnCommAssocOp" />
+	    <Op class="asq.pos.register.returns.verification.ASQUpdateVerifiedReturnLineOp" />
+	    <Op class="dtv.pos.register.returns.verification.UpdateVerifiedReturnVoucherOp" />
+	    <Op class="dtv.pos.register.returns.verification.RouteReturnVerificationOp" />
+	    <Op class="dtv.pos.kits.returns.UpdateReturnKitComponentsQtyOp" />
+	    <Op class="dtv.pos.kits.inventory.HandleKitComponentInventoryOp" />
+	    <Op class="dtv.pos.register.returns.verification.CompleteReturnVerificationOp" />
+  	</OpChain>
+    
+    <OpChain name="RETURN_BLIND_ITEM">
+	    <OpChainRoute chainKey="RETURN_ITEM_ID_VALIDATE" />
+	    <PromptOp class="dtv.pos.register.returns.PromptReturnCommAssocOp" />
+	    <PromptOp class="dtv.pos.register.returns.customerhistory.PromptReturnTransByHistoryOp" />
+	    <Op class="dtv.pos.register.returns.verification.CompleteUnverifiedBlindReturnOp" />
+	    <Op class="dtv.pos.kits.CreateKitOp" />
+	     <Op class="dtv.pos.register.KitComponentIteratingOp">
+	      <Parameter name="ChainKey" value="UNVERIFIED_RETURN_KIT_COMPONENT_SERIAL_NUMBER" />
+	    </Op>
+	    <OpChainRoute chainKey="RETURN_INFORMATION_CHAIN" />
+	    <Op class="dtv.pos.kits.inventory.HandleKitComponentInventoryOp" />
+	    <Op class="asq.pos.register.returns.verification.ASQCompleteUnverifiedBlindReturnOp" />
+	    <OpChainRoute chainKey="ADD_RETURN_ITEM_TO_TRAN" />
+	    <OpChainRoute chainKey="ATTACHED_ITEMS_PRE" />
+	    <Op class="dtv.pos.register.attacheditems.AttachedItemsIteratingOp">
+	      <Parameter name="chainKey" value="RETURN_BLIND_ITEM" />
+	    </Op>
+	    <OpChainRoute chainKey="NOTIFY_ATTACHED_ITEMS" />
+	    <OpChainRoute chainKey="RETURN_ATTACHED_WARRANTY" />
+    </OpChain>
+  	
+    <!-- ASQ - TOLA parent item quantity changes - ends -->
+  <!-- changes for ASQ employee commission -->
+   <OpChain name="EMPLOYEE::EMPLOYEE_COMMMSION_DAILY_REPORT">
+    <PromptOp class="asq.pos.employee.commission.AsqEmployeeDailyCommissionOp"  />
+  </OpChain>
+  <OpChain name="EMPLOYEE::EMPLOYEE_COMMMSION_MONTHLY_REPORT">
+    <PromptOp class="asq.pos.employee.commission.AsqEmployeeMonthlyCommissionOp" />
+  </OpChain>
 </OpChainSet>
 

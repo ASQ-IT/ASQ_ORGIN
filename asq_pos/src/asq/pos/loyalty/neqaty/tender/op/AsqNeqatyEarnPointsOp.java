@@ -16,6 +16,8 @@ import asq.pos.loyalty.neqaty.tender.service.AsqNeqatyServiceResponse;
 import asq.pos.loyalty.neqaty.tender.service.IAsqNeqatyService;
 import asq.pos.loyalty.neqaty.tender.service.IAsqNeqatyServiceRequest;
 import asq.pos.loyalty.neqaty.tender.service.NeqatyMethod;
+import asq.pos.loyalty.stc.tender.service.AsqSTCErrorDesc;
+import asq.pos.loyalty.stc.tender.service.AsqSTCLoyaltyServiceResponse;
 import asq.pos.zatca.AsqZatcaConstant;
 import dtv.i18n.IFormattable;
 import dtv.pos.common.TransactionType;
@@ -56,8 +58,8 @@ public class AsqNeqatyEarnPointsOp extends Operation {
 	 */
 	@Override
 	public IOpResponse handleOpExec(IXstEvent paramIXstEvent) {
-		if (paramIXstEvent == null) {
-			return neqatyLoyalty();
+		if(paramIXstEvent==null) {
+		return neqatyLoyalty();
 		}
 		return HELPER.completeResponse();
 	}
@@ -67,7 +69,7 @@ public class AsqNeqatyEarnPointsOp extends Operation {
 		boolean isCustomerPresent = false;
 		String custMobileNmbr = "";
 		boolean isCustomerRequired = AsqConfigurationMgr.getSTCCustomerAvailable();
-		LOG.debug("Neqaty Earn API customer availability parameter : " + isCustomerRequired);
+		LOG.info("Neqaty Earn API customer availability parameter : " + isCustomerRequired);
 
 		BigDecimal earnAmount = BigDecimal.ZERO;
 		if (txn.getAmountTendered() != null && txn.getAmountTendered().compareTo(BigDecimal.ZERO) > 0) {
@@ -84,13 +86,18 @@ public class AsqNeqatyEarnPointsOp extends Operation {
 		}
 
 		if (isCustomerPresent && isCustomerRequired && !isReturnTransaction(txn) && earnAmount.compareTo(BigDecimal.ZERO) > 0) {
-			LOG.debug("Neqaty Points calculated Earn Service API call Starts here : ");
+			LOG.info("Neqaty Points calculated Earn Service API call Starts here : ");
 			if (_transactionScope.getValue(AsqValueKeys.ASQ_NEQATY_MOBILE) != null) {
 				custMobileNmbr = _transactionScope.getValue(AsqValueKeys.ASQ_NEQATY_MOBILE);
 			}
 			if (custMobileNmbr != null) {
-				return earnPoints(custMobileNmbr, earnAmount.doubleValue(), txn);
+				return inquire(custMobileNmbr, earnAmount.doubleValue(), txn);
+				
 			}
+			/*
+			 * if (custMobileNmbr != null) { return earnPoints(custMobileNmbr,
+			 * earnAmount.doubleValue(), txn); }
+			 */
 		} else if (isCustomerPresent && isCustomerRequired && isReturnTransaction(txn) && earnAmount.compareTo(BigDecimal.ZERO) <= 0) {
 			earnAmount = txn.getSubtotal().abs();
 			IRetailTransaction rtrans = _transactionScope.getValue(ValueKeys.CURRENT_ORIGINAL_TRANSACTION);
@@ -101,15 +108,40 @@ public class AsqNeqatyEarnPointsOp extends Operation {
 					}
 				}
 				if (txn.getSubtotal().abs().compareTo(earnAmount) > 0) {
-					LOG.debug("Neqaty Points calculated Earn Service API call Starts here : ");
+					LOG.info("Neqaty Points calculated Earn Service API call Starts here : ");
 					return refundEarnPoints(custMobileNmbr, rtrans.getStringProperty(AsqZatcaConstant.ASQ_NEQATY_EARN_TRN), earnAmount.abs().doubleValue());
 				} else {
-					LOG.debug("Neqaty Points calculated Earn Service API call Starts here : ");
+					LOG.info("Neqaty Points calculated Earn Service API call Starts here : ");
 					return refundEarnPoints(custMobileNmbr, rtrans.getStringProperty(AsqZatcaConstant.ASQ_NEQATY_EARN_TRN), txn.getSubtotal().abs().doubleValue());
 				}
 			}
 		}
 		return this.HELPER.completeResponse();
+	}
+	
+	private IOpResponse inquire(String custMobileNmbr, double d, IRetailTransaction txn) {
+		LOG.debug("Neqaty Inquire OTP Operation service call starts here: ");
+		IAsqNeqatyServiceRequest request = new AsqNeqatyServiceRequest();
+		request.setAuthenticationKey(System.getProperty("asq.neqaty.auth.key"));
+		request.setOperationType("Inquire");
+		request.setMsisdn(custMobileNmbr);
+		request.setTid(0);
+		request.setMethod(NeqatyMethod.AUTHORIZE);
+		AsqNeqatyServiceResponse response = (AsqNeqatyServiceResponse) asqNeqatyService.get()
+				.callNeqatyService(request);
+		LOG.debug("Neqaty Inquire OTP Operation service response here: ");
+		return validateResponseInquire(response, custMobileNmbr, d, txn);
+		
+	}
+	
+	private IOpResponse validateResponseInquire(AsqNeqatyServiceResponse response, String custMobileNmbr, double d, IRetailTransaction txn) {
+		if (null != response && 0 != response.getResultCode()) {
+			return validateResponse(response);
+		} else if (null == response) {
+			return technicalErrorScreen("Service has null response");
+		}
+		 return earnPoints(custMobileNmbr, d, txn);
+		//return HELPER.completeResponse();
 	}
 
 	/**
@@ -181,10 +213,10 @@ public class AsqNeqatyEarnPointsOp extends Operation {
 	private IOpResponse validateRefundResponse(AsqNeqatyServiceResponse response) {
 		if (null != response && 0 != response.getResultCode()) {
 			Integer code = response.getResultCode();
-			if (code == -525) {
+			if(code == -525) {
 				return HELPER.getPromptResponse("ASQ_NEQATY_INVALID_MSISDN_POINTS");
 			}
-		}
+		} 
 		if (null == response) {
 			return technicalErrorScreen("Service has null response");
 		}
@@ -201,15 +233,17 @@ public class AsqNeqatyEarnPointsOp extends Operation {
 	private IOpResponse validateResponse(AsqNeqatyServiceResponse response) {
 		if (null != response && 0 != response.getResultCode()) {
 			Integer code = response.getResultCode();
-			if (code == -525) {
-				return HELPER.getPromptResponse("ASQ_NEQATY_INVALID_MSISDN_POINTS");
+			if(code == -525 || code == -329 || code == -506) {
+				//return this.HELPER.getPromptResponse("ASQ_NEQATY_INVALID_MSISDN_POINTS");
+				return handleServiceError(response);
 			}
-		}
+		} 
 		if (null == response) {
 			return technicalErrorScreen("Service has null response");
 		}
 		return HELPER.getPromptResponse("ASQ_NEQATY_EARN_SUCCESS");
 	}
+	
 
 	private IOpResponse technicalErrorScreen(String message) {
 		IFormattable[] args = new IFormattable[2];
@@ -221,9 +255,18 @@ public class AsqNeqatyEarnPointsOp extends Operation {
 	@Override
 	public boolean isOperationApplicable() {
 		if (_transactionScope.getValue(AsqValueKeys.ASQ_LOYALTY) != null) {
-			return _transactionScope.getValue(AsqValueKeys.ASQ_LOYALTY) && _syConfigurationMgr.getasqNqeatyLoyaltySystem();
+			return _transactionScope.getValue(AsqValueKeys.ASQ_LOYALTY)
+					&& _syConfigurationMgr.getasqNqeatyLoyaltySystem();
 		}
-		return isReturnTransaction((IRetailTransaction) _transactionScope.getTransaction());
+	
+		return isReturnTransaction((IRetailTransaction)_transactionScope.getTransaction());
+	}
+	
+	public IOpResponse handleServiceError(AsqNeqatyServiceResponse asqServiceResponse) {
+		IFormattable[] args = new IFormattable[2];
+		Integer code = asqServiceResponse.getResultCode();
+		LOG.info("Error From Neqaty REDEEM API::::: " + code + " - " + asqServiceResponse.getResultDescription());
+		return HELPER.getPromptResponse("ASQ_NEQATY_INVALID_MSISDN_POINTS");
 	}
 
 }

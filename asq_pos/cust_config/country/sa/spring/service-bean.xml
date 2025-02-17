@@ -6,7 +6,7 @@
         http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util.xsd"
   profile="xstore">
   
-  <bean id="asqHelper" class="asq.pos.register.sale.AsqHelper"/>
+ 
   <bean id="asqZatcaHelper" class="asq.pos.zatca.cert.generation.AsqZatcaHelper"/>
   <bean id="asqStcHelper" class="asq.pos.loyalty.stc.tender.AsqStcHelper"/>
   <bean id="asqZatcaDatabaseHelper" class="asq.pos.zatca.database.helper.AsqZatcaDatabaseHelper"/>
@@ -226,5 +226,5 @@
   
   <bean id="ASQ_MOKFAA_TENDER_REFUND_REDEEM_SERVICE" class="asq.pos.loyalty.mokafaa.tender.service.AsqMokafaaloyaltyServiceHandler" parent="AbstractMokafaaRestServiceBean">
     <property name="servicePath" value="/blu-loyalty/1.0.0/redemption-transaction-reversal" />
-  </bean>
+  </bean>  
 </beans>

@@ -46,7 +46,7 @@ public class AsqSTCEarnPointsOp extends Operation {
 
 	@Inject
 	AsqStcHelper asqStcHelper;
-	
+
 	@Inject
 	AsqConfigurationMgr _syConfigurationMgr;
 
@@ -205,7 +205,6 @@ public class AsqSTCEarnPointsOp extends Operation {
 	 * @return refund redeem submission to STC Service Handler
 	 */
 
-	@SuppressWarnings("unused")
 	private IOpResponse stcRefundRedeem(String custMobileNumber, String transEarnReference, int amount) {
 
 		IAsqSTCLoyaltyServiceRequest request = new AsqSTCLoyaltyServiceRequest();
@@ -225,14 +224,17 @@ public class AsqSTCEarnPointsOp extends Operation {
 		request.setGlobalId(globalID);
 		LOG.info("STC API trigger OTP request is prepared :" + request);
 		AsqSTCLoyaltyServiceResponse response = (AsqSTCLoyaltyServiceResponse) _asqSTCLoyalityTenderService.get().refundRedeem(request);
-		if (response.getDescription().equalsIgnoreCase("Success")) {
-			return this.HELPER.getCompletePromptResponse("ASQ_VOID_SUCCESSFULL");
+		if (null != response) {
+			if ("Success".equalsIgnoreCase(response.getDescription())) {
+				return this.HELPER.getCompletePromptResponse("ASQ_VOID_SUCCESSFULL");
+			}
+			if (null != response.getErrors()) {
+				return handleServiceError(response);
+			} else {
+				return technicalErrorScreen("STC API::::: Service has null response");
+			}
 		}
-		if (null != response && null != response.getErrors()) {
-			return handleServiceError(response);
-		} else if (null == response) {
-			return technicalErrorScreen("STC API::::: Service has null response");
-		}
+
 		LOG.debug("STC refund service Ends here: ");
 		return HELPER.completeResponse();
 	}
@@ -240,9 +242,8 @@ public class AsqSTCEarnPointsOp extends Operation {
 	@Override
 	public boolean isOperationApplicable() {
 		if (_transactionScope.getValue(AsqValueKeys.ASQ_LOYALTY) != null) {
-			return _transactionScope.getValue(AsqValueKeys.ASQ_LOYALTY)
-					&& _syConfigurationMgr.getSTCLoyaltyEarnEnable();
+			return _transactionScope.getValue(AsqValueKeys.ASQ_LOYALTY) && _syConfigurationMgr.getSTCLoyaltyEarnEnable();
 		}
-		return isReturnTransaction((IRetailTransaction)_transactionScope.getTransaction());
+		return isReturnTransaction((IRetailTransaction) _transactionScope.getTransaction());
 	}
 }

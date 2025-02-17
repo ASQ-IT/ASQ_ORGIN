@@ -2,6 +2,7 @@ package asq.pos.bnpl.tabby.tender.op;
 
 import javax.inject.Inject;
 import javax.inject.Provider;
+
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -11,14 +12,7 @@ import asq.pos.bnpl.tabby.tender.service.AsqSubmitBnplTabbyServiceRequest;
 import asq.pos.bnpl.tabby.tender.service.AsqSubmitBnplTabbyServiceResponse;
 import asq.pos.bnpl.tabby.tender.service.IAsqBnplTabbyServices;
 import asq.pos.bnpl.tabby.tender.service.IAsqSubmitBnplTabbyServiceRequest;
-import asq.pos.bnpl.tamara.tender.service.AsqSubmitBnplTamraServiceResponse;
-import asq.pos.bnpl.tamara.tender.service.AsqTamaraErrorDesc;
 import asq.pos.common.AsqValueKeys;
-import asq.pos.loyalty.neqaty.tender.service.AsqNeqatyServiceRequest;
-import asq.pos.loyalty.neqaty.tender.service.AsqNeqatyServiceResponse;
-import asq.pos.loyalty.neqaty.tender.service.IAsqNeqatyService;
-import asq.pos.loyalty.neqaty.tender.service.IAsqNeqatyServiceRequest;
-import asq.pos.loyalty.neqaty.tender.service.NeqatyMethod;
 import asq.pos.loyalty.stc.tender.AsqStcHelper;
 import dtv.i18n.IFormattable;
 import dtv.pos.common.ValueKeys;
@@ -37,7 +31,7 @@ public class AsqBnplTabbyRefundOp extends Operation {
 	private static final Logger LOG = LogManager.getLogger(AsqBnplTabbyRefundOp.class);
 
 	private String tenderType;
-	
+
 	@Inject
 	AsqStcHelper asqStcHelper;
 
@@ -46,7 +40,7 @@ public class AsqBnplTabbyRefundOp extends Operation {
 
 	@Override
 	public IOpResponse handleOpExec(IXstEvent paramIXstEvent) {
-		IPosTransaction trans = (IPosTransaction) this._transactionScope.getTransaction();
+		IPosTransaction trans = this._transactionScope.getTransaction();
 		return tabbyVoidRefundTrx(trans);
 	}
 
@@ -55,25 +49,25 @@ public class AsqBnplTabbyRefundOp extends Operation {
 		IAsqSubmitBnplTabbyServiceRequest asqSubmitBnplTabbyServiceRequest = new AsqSubmitBnplTabbyServiceRequest();
 		AsqSubmitBnplTabbyServiceResponse response;
 		AsqBnplTabbyPaymentObj payment = new AsqBnplTabbyPaymentObj();
-		
-		 Boolean paymentStatus = _transactionScope.getValue(AsqValueKeys.ASQ_TABBY_PAYMENT_SUCCESS);
+
+		Boolean paymentStatus = _transactionScope.getValue(AsqValueKeys.ASQ_TABBY_PAYMENT_SUCCESS);
 		if (paymentStatus) {
 			LOG.debug("Tabby refund service call starts here: ");
 			payment.setId(orgTranx.getProperty("ASQ_TABBY_PAYMENT_ID").getStringValue());
 			asqSubmitBnplTabbyServiceRequest.setPayment(payment);
 			asqSubmitBnplTabbyServiceRequest.setAmount(orgTranx.getAmountTendered().toString());
 			response = refundPayment(asqSubmitBnplTabbyServiceRequest);
-			if(response.getStatus().equalsIgnoreCase("CLOSED")) {
-				return this.HELPER.getCompletePromptResponse("ASQ_VOID_SUCCESSFULL");
-			}
-			else if (null != response && null != response.getError()) {
-				return handleServiceError(response);
-			} else if (null == response) {
-				return technicalErrorScreen("TABBY API::::: Service has null response");
+			if (null != response) {
+				if ("CLOSED".equalsIgnoreCase(response.getStatus())) {
+					return this.HELPER.getCompletePromptResponse("ASQ_VOID_SUCCESSFULL");
+				} else if (null != response.getError()) {
+					return handleServiceError(response);
+				} else {
+					return technicalErrorScreen("TABBY API::::: Service has null response");
+				}
 			}
 			LOG.debug("Tabby refund service Ends here: ");
-		} 
-		 else {
+		} else {
 			LOG.debug("Tabby cancel session service Ends here: ");
 			asqSubmitBnplTabbyServiceRequest.setId(orgTranx.getProperty("ASQ_TABBY_PAYMENT_ID").getStringValue());
 			response = cancelSession(asqSubmitBnplTabbyServiceRequest);
@@ -97,22 +91,20 @@ public class AsqBnplTabbyRefundOp extends Operation {
 		return (!tenderLine.getVoid() && tenderLine.getTenderId().equalsIgnoreCase(tenderType));
 	}
 
-	public AsqSubmitBnplTabbyServiceResponse refundPayment(
-			IAsqSubmitBnplTabbyServiceRequest asqSubmitBnplTabbyServiceRequest) {
+	public AsqSubmitBnplTabbyServiceResponse refundPayment(IAsqSubmitBnplTabbyServiceRequest asqSubmitBnplTabbyServiceRequest) {
 		AsqSubmitBnplTabbyServiceResponse response = new AsqSubmitBnplTabbyServiceResponse();
 		try {
-			response = (AsqSubmitBnplTabbyServiceResponse) asqBnplTabbyServices.get()
-					.refundPayment(asqSubmitBnplTabbyServiceRequest);
+			response = (AsqSubmitBnplTabbyServiceResponse) asqBnplTabbyServices.get().refundPayment(asqSubmitBnplTabbyServiceRequest);
 
 		} catch (Exception ex) {
 			ex.printStackTrace();
 		}
 		return response;
 	}
-	
+
 	/**
 	 * This method return Technical Error
-	 * 
+	 *
 	 * @param argModel
 	 * @return Error
 	 */
@@ -126,7 +118,7 @@ public class AsqBnplTabbyRefundOp extends Operation {
 
 	/**
 	 * This method handles the TAMARA service errors
-	 * 
+	 *
 	 * @param asqServiceResponse
 	 * @return Error Prompts
 	 */
@@ -141,13 +133,12 @@ public class AsqBnplTabbyRefundOp extends Operation {
 		return HELPER.getPromptResponse(errorConstant, args);
 	}
 
-	
 	public AsqSubmitBnplTabbyServiceResponse cancelSession(IAsqSubmitBnplTabbyServiceRequest asqSubmitBnplTabbyServiceRequest) {
 		AsqSubmitBnplTabbyServiceResponse response = new AsqSubmitBnplTabbyServiceResponse();
 		try {
-			 response = (AsqSubmitBnplTabbyServiceResponse) asqBnplTabbyServices.get().cancelSession(asqSubmitBnplTabbyServiceRequest);
-			
-		}catch(Exception ex) {
+			response = (AsqSubmitBnplTabbyServiceResponse) asqBnplTabbyServices.get().cancelSession(asqSubmitBnplTabbyServiceRequest);
+
+		} catch (Exception ex) {
 			ex.printStackTrace();
 		}
 		return response;

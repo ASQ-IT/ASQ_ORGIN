@@ -32,23 +32,16 @@
 	    <MenuOption ref="SALE::TENDER_CREDIT_CARD" />
 	    <!-- Bank Transfer -->
 	    <MenuOption ref="SALE::TENDER_BANK_TRANSFER" />
-	    <MenuOption ref="SALE::TENDER_EWALLET" />
 	    <MenuOption ref="SALE::TENDER_PAYMENT_BY_LINK" />
 	    <MenuOption ref="SALE::TENDER_PAYMENT_BY_LINK_CNP" />
 	    <MenuOption ref="SALE::TENDER_CUSTOMER_NOT_PRESENT_CREDIT_CARD" />
-	    <MenuOption ref="SALE::TENDER_CUSTOMER_SAVED_PAYMENT_CARD" />
 	    <MenuOption ref="SALE::TENDER_MANUAL_CREDIT" />
 	    <MenuOption ref="SALE::TENDER_MANUAL_DEBIT" />
-	    <MenuOption ref="SALE::TENDER_CHECK" />
 	    <MenuOption ref="SALE::TENDER_GIFT_CARD" />
-	    <MenuOption ref="SALE::TENDER_GIFT_CERTIFICATE" />
 	    <MenuOption ref="SALE::TENDER_MALL_CERTIFICATE" />
 	    <MenuOption ref="SALE::TENDER_STORE_CREDIT" />
-	    <MenuOption ref="SALE::TENDER_STORE_CREDIT_CARD" />
-	    <MenuOption ref="SALE::TENDER_TRAVELERS_CHECK" />
 	    <MenuOption ref="SALE::TENDER_FOREIGN_CURRENCY" />
 	    <MenuOption ref="SALE::TENDER_MISCELLANEOUS" />
-	    <MenuOption ref="SALE::TENDER_HOUSE_ACCOUNT" />
 	    <MenuOption ref="SALE::TENDER_COUPON" />
 	    <MenuOption ref="SALE::TENDER_ROOM_CHARGE" />
 	    <MenuOption ref="SALE::VOID_TENDER" />
@@ -346,4 +339,17 @@
     <MenuOption ref="TILL::TILL_AUDIT" />    
   </MenuItem>
   <!-- ASQ disabled xstore functionality changes end -->
+  <!-- changes for ASQ employee commission -->
+  <MenuItem name="EMPLOYEE::MANAGER_OPTIONS" actionRef="EMPLOYEE::MANAGER_OPTIONS" displayType="LIST" category="Employee" keywords="universal">
+    <SubMenu actionRef="EMPLOYEE::MAINT_OPTIONS">
+      <MenuOption ref="EMPLOYEE::ASSOCIATE_ADVANCE" />
+      <MenuOption ref="EMPLOYEE::BORROW" />
+      <MenuOption ref="EMPLOYEE::MAINTAIN" />
+    </SubMenu>
+    <SubMenu ref="EMPLOYEE::SCHEDULING_MAINTENANCE" />
+    <MenuOption ref="EMPLOYEE::MESSAGE_SEARCH" />
+    <SubMenu ref="EMPLOYEE::TIME_AND_ATTENDANCE" />
+    <MenuOption ref="EMPLOYEE::EMPLOYEE_COMMMSION_DAILY_REPORT" />
+    <MenuOption ref="EMPLOYEE::EMPLOYEE_COMMMSION_MONTHLY_REPORT" />
+  </MenuItem>
 </MenuSet>

@@ -432,4 +432,13 @@
 		 <Action dataKey="BACK" text="_back" keyStroke="Escape" />
 	</Prompt>
 	
+	<!-- changes for ASQ employee commission -->
+	<Prompt name="DAILY_EMPLOYEE_COMMSSION" type="List" title="Daily Employee Commission" message="Commission Details">
+    <ListViewType dtype="String">DAILY_EMPLOYEE_COMMSSION</ListViewType>
+    <Action ref="ACCEPT_BACK" dataKey="DONE" />
+  </Prompt>
+  <Prompt name="MONTHLY_EMPLOYEE_COMMSSION" type="List" title="Monthly Employee Commission" message="Commission Details">
+    <ListViewType dtype="String">MONTHLY_EMPLOYEE_COMMSSION</ListViewType>
+    <Action ref="ACCEPT_BACK" dataKey="DONE" />
+  </Prompt>
 </PromptSet>

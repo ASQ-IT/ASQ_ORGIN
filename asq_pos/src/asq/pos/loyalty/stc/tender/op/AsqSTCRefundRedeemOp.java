@@ -1,25 +1,18 @@
 /**
- * 
+ *
  */
 package asq.pos.loyalty.stc.tender.op;
 
-import java.math.BigDecimal;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.time.ZoneId;
-import java.time.ZonedDateTime;
-import java.time.format.DateTimeFormatter;
 import java.util.Date;
-import java.util.TimeZone;
 
 import javax.inject.Inject;
 import javax.inject.Provider;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import org.joda.time.DateTime;
-import org.joda.time.DateTimeZone;
 
 import asq.pos.common.AsqValueKeys;
 import asq.pos.loyalty.stc.tender.AsqStcHelper;
@@ -31,20 +24,10 @@ import asq.pos.loyalty.stc.tender.service.IAsqSTCLoyaltyTenderService;
 import asq.pos.zatca.AsqZatcaConstant;
 import dtv.data2.access.DataFactory;
 import dtv.i18n.IFormattable;
-import dtv.pos.common.OpChainKey;
 import dtv.pos.common.ValueKeys;
-import dtv.pos.framework.action.type.XstDataActionKey;
-import dtv.pos.framework.op.AbstractFormOp;
 import dtv.pos.framework.op.Operation;
-import dtv.pos.framework.validation.ValidationResultList;
-import dtv.pos.iframework.action.IXstDataAction;
 import dtv.pos.iframework.event.IXstEvent;
 import dtv.pos.iframework.op.IOpResponse;
-import dtv.pos.iframework.validation.IValidationResult;
-import dtv.pos.iframework.validation.IValidationResultList;
-import dtv.pos.iframework.validation.SimpleValidationResult;
-import dtv.util.StringUtils;
-import dtv.xst.dao.crm.IParty;
 import dtv.xst.dao.trl.IRetailTransaction;
 import dtv.xst.dao.trn.IPosTransactionProperty;
 import dtv.xst.dao.ttr.ITenderLineItem;
@@ -54,10 +37,9 @@ import dtv.xst.dao.ttr.ITenderLineItem;
  *
  */
 
-public class AsqSTCRefundRedeemOp extends Operation{
+public class AsqSTCRefundRedeemOp extends Operation {
 
 	private static final Logger LOG = LogManager.getLogger(AsqSTCRefundRedeemOp.class);
-	
 
 	/**
 	 * This class extends the Xstore Standard form class to handle all actions
@@ -73,10 +55,9 @@ public class AsqSTCRefundRedeemOp extends Operation{
 	private String tenderType;
 	Boolean isRefundRedeem = false;
 
-
 	/**
 	 * This method handles the data operation after submitting the mobile number
-	 * 
+	 *
 	 * @param
 	 * @return
 	 */
@@ -88,11 +69,10 @@ public class AsqSTCRefundRedeemOp extends Operation{
 		return stcVoidRefundRedeem(custMobileNumber);
 	}
 
-	
 	/**
-	 * This method implements the refund service API call by preparing the
-	 * request attributes
-	 * 
+	 * This method implements the refund service API call by preparing the request
+	 * attributes
+	 *
 	 * @param trans
 	 * @return refund redeem submission to STC Service Handler
 	 */
@@ -101,9 +81,9 @@ public class AsqSTCRefundRedeemOp extends Operation{
 	private IOpResponse stcVoidRefundRedeem(String custMobileNumber) {
 
 		IAsqSTCLoyaltyServiceRequest request = new AsqSTCLoyaltyServiceRequest();
-        String requestDate = asqStcHelper.getCurrentDateTime();
-        LOG.info("Request Date :" +requestDate);
-        request.setRequestDate(requestDate);
+		String requestDate = asqStcHelper.getCurrentDateTime();
+		LOG.info("Request Date :" + requestDate);
+		request.setRequestDate(requestDate);
 		request.setMsisdn(Long.parseLong(custMobileNumber.trim()));
 		request.setBranchId(System.getProperty("asq.stc.branchid"));
 		request.setTerminalId(System.getProperty("asq.stc.terminalid"));
@@ -116,27 +96,28 @@ public class AsqSTCRefundRedeemOp extends Operation{
 		LOG.info("STC API Generate GlobalID generated:" + globalID);
 		request.setGlobalId(globalID);
 		LOG.info("STC API trigger OTP request is prepared :" + request);
-		AsqSTCLoyaltyServiceResponse response = (AsqSTCLoyaltyServiceResponse) _asqSTCLoyalityTenderService.get()
-				.refundRedeem(request);
-		  if(response.getDescription().equalsIgnoreCase("Success")) { 
-			  return this.HELPER.getCompletePromptResponse("ASQ_VOID_SUCCESSFULL"); 
-			  }
-		 if (null != response && null != response.getErrors()) {
-			return handleServiceError(response);
-		} else if (null == response) {
-			return technicalErrorScreen("TAMARA API::::: Service has null response");
+		AsqSTCLoyaltyServiceResponse response = (AsqSTCLoyaltyServiceResponse) _asqSTCLoyalityTenderService.get().refundRedeem(request);
+		if (null != response) {
+			if ("Success".equalsIgnoreCase(response.getDescription())) {
+				return this.HELPER.getCompletePromptResponse("ASQ_VOID_SUCCESSFULL");
+			}
+			if (null != response.getErrors()) {
+				return handleServiceError(response);
+			} else {
+				return technicalErrorScreen("TAMARA API::::: Service has null response");
+			}
 		}
 		LOG.debug("STC refund service Ends here: ");
-		
+
 		return HELPER.completeResponse();
 	}
 
 	/**
 	 * This method handles the OTP API response
-	 * 
+	 *
 	 * @param request
 	 * @param requestDate
-	 * 
+	 *
 	 * @param asqServiceResponse
 	 * @return Error Prompts
 	 */
@@ -145,20 +126,19 @@ public class AsqSTCRefundRedeemOp extends Operation{
 		IRetailTransaction trans = (IRetailTransaction) this._transactionScope.getTransaction();
 		if (null != response && null != response.getErrors() && 0 != response.getErrors().length) {
 			return handleServiceError(response);
-		} 
-		else if (null == response) {
+		} else if (null == response) {
 			return technicalErrorScreen("Service has null response");
 		}
-		 if(response.getDescription().equalsIgnoreCase("SUCCESS")) {
-			 isRefundRedeem = true;
-			 return this.HELPER.getCompletePromptResponse("ASQ_STC_SUCCESSFULL_REDEEM_REFUND");
+		if (response.getDescription().equalsIgnoreCase("SUCCESS")) {
+			isRefundRedeem = true;
+			return this.HELPER.getCompletePromptResponse("ASQ_STC_SUCCESSFULL_REDEEM_REFUND");
 		}
 		return HELPER.completeResponse();
 	}
 
 	/**
 	 * This method handles the Trigger OTP API call service errors
-	 * 
+	 *
 	 * @param asqServiceResponse
 	 * @return Error Prompts
 	 */
@@ -176,7 +156,7 @@ public class AsqSTCRefundRedeemOp extends Operation{
 
 	/**
 	 * This method return technical error screen
-	 * 
+	 *
 	 * @param asqServiceResponse
 	 * @return Error Prompts
 	 */
@@ -195,14 +175,14 @@ public class AsqSTCRefundRedeemOp extends Operation{
 		}
 		super.setParameter(argName, argValue);
 	}
-	
+
 	@Override
 	public boolean isOperationApplicable() {
-		
+
 		ITenderLineItem tenderLine = getScopedValue(ValueKeys.CURRENT_TENDER_LINE);
 		return (!tenderLine.getVoid() && tenderLine.getTenderId().equalsIgnoreCase(tenderType));
 	}
-	
+
 	public void saveSTCRedeemResponseToDB(String globalID, String date) {
 		IPosTransactionProperty newTrxProps = DataFactory.createObject(IPosTransactionProperty.class);
 		IRetailTransaction originalPosTrx = (IRetailTransaction) this._transactionScope.getTransaction();

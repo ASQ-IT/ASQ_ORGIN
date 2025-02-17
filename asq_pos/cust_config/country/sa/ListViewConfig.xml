@@ -164,6 +164,41 @@
       <Column start="25" width="74" method="getItemDescription" />
     </Row>
   </Element>
+  <!-- changes for ASQ employee commission -->
+   <Header name="DAILY_EMPLOYEE_COMMSSION">
+    <Row>
+      <Column start="0" width="30" translatable="EmpName" />
+      <Column start="30" width="50" translatable="commission Calc." />
+      <Column start="50" width="80" translatable="Business date" />
+    </Row>
+  </Header>
+  <Element name="DAILY_EMPLOYEE_COMMSSION">
+    <Row>
+      <Column start="0" width="30" method="getEmployeeName"  />
+      <Column start="30" width="50" method="getCommissionCalclauted" />
+      <Column start="50" width="80" method="getCommissionBusinessDate" />
+    </Row>
+  </Element>
   
+  <Header name="MONTHLY_EMPLOYEE_COMMSSION">
+    <Row>
+      <Column start="0" width="20" translatable="EmpName" />
+      <Column start="20" width="40" translatable="commission Calc." />
+      <Column start="40" width="60" translatable="Business date" />
+      <Column start="60" width="70" translatable="Month" />
+      <Column start="70" width="85" translatable="Target Achived" />
+      <Column start="85" width="100" translatable="Target Diff." />
+    </Row>
+  </Header>
+  <Element name="MONTHLY_EMPLOYEE_COMMSSION">
+    <Row>
+      <Column start="0" width="20" method="getEmployeeName"  />
+      <Column start="20" width="40" method="getCommissionCalclauted" />
+      <Column start="40" width="60" method="getCommissionBusinessDate" />
+      <Column start="60" width="70" method="getCommissionMonth" />
+      <Column start="70" width="805" method="getCommissionTargetAchived" />
+      <Column start="85" width="100" method="getCommissionTargetDiff" />
+    </Row>
+  </Element>
   </ListView>
   

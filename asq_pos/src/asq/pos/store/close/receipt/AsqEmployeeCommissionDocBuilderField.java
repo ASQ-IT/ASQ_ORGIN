@@ -21,7 +21,7 @@ public class AsqEmployeeCommissionDocBuilderField extends AbstractDocBuilderFiel
 
 	@Override
 	public String getContents(Object arg0, IDocElementFactory arg1, Locale arg2) {
-		return asqCommissionCal.calculateNetSaleCommission();
+		return "";
 	}
 
 }

@@ -4,9 +4,29 @@
   <DataField name="ASQ_OTP" editFormat="Numeric">
     <Parameter name="maximumIntegerDigits" value="6" />
   </DataField>
-<DataField name="Phone" editFormat="PhoneEntry">
+  <DataField name="Phone" editFormat="PhoneEntry">
     <EditPattern dtype="String"><![CDATA[############]]></EditPattern>
     <Parameter name="maxCharacters" value="12" />
      <Parameter name="regexPolicy" value="^[9-12*#]$"/>
   </DataField>
+  
+  <!-- Arabic Support Starts-->
+  <DataField name="Name" editFormat="CaseProperName">
+    <Parameter name="maxCharacters" value="20" />
+    <Parameter name="regexPolicy">
+      <param_value><![CDATA[[\w\s\'\&\-\u00C0-\u00FF\u0621-\u064A]*]]></param_value>
+    </Parameter>
+  </DataField>
+  
+  <DataField name="Address" editFormat="CaseProperName">
+    <Parameter name="maxCharacters" value="60" />
+    <Parameter name="regexPolicy" value="[\w\s\-\u0621-\u064A]*" />
+  </DataField>
+  
+  <DataField name="AddressShort" editFormat="CaseProperName">
+    <Parameter name="maxCharacters" value="30" />
+    <Parameter name="regexPolicy" value="[\w\s\-\u0621-\u064A]*" />
+  </DataField>
+  <!-- Arabic Support Ends-->
+  
 </DataFields>

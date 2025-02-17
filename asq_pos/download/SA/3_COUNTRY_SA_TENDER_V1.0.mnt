@@ -25,4 +25,5 @@ INSERT|TENDER|DISCOVER|CREDIT_CARD||||||*||||||+DISCOVER||||||||||||||||||||||||
 INSERT|TENDER|JCB|CREDIT_CARD||||||*||||||+JCB||||||||||||||||||||||||||||||2|0|500||
 INSERT|TENDER|DINNER|CREDIT_CARD||||||*||||||+DINNER||||||||||||||||||||||||||||||2|0|500||
 INSERT|TENDER|BANK_TRANSFER|BANK||||||*||||||+TND_TNDR_BANK_TRANSFER||||||||||||||||||||||||||||||2|0|540||
+INSERT|TENDER|XPAY_GIFT_CARD|VOUCHER||||||*||||||+XPAY_GIFT_CARD||||||||||||||||||||||||||||||2|0|550||
 
