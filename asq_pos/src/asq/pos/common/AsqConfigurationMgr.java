@@ -106,4 +106,8 @@ public class AsqConfigurationMgr extends ConfigurationMgr {
 	public String getBankTransferApprovalEmailOTP() {
 		return _settingsFactory.getString(new String[] { "ASQ---BankTransferEmailOTP---To" });
 	}
+
+	public String getAsqBOGODealName() {
+		return _settingsFactory.getString(new String[] { "ASQ---BOGODeal---DealName" });
+	}
 }

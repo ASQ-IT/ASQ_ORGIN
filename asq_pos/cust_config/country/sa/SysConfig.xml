@@ -52,10 +52,13 @@
     <Setting name="TillAccountability---StoreSafeEndCountAtStoreCloseRequired">false</Setting>
    
     <!-- ASQ UAT change - Restrict Negetive Quantity everywhere in Xstore -->
-   <Setting name="LocationBasedInventory---QuantityUnavailableAction">PROHIBIT</Setting>
+    <Setting name="LocationBasedInventory---QuantityUnavailableAction">PROHIBIT</Setting>
    
-   <Setting name="ASQ---BankDepositEmailOTP---To">sandeepreddy.gagireddy@wipro.com,sonal.thankachan@wipro.com,atul.sharma28@wipro.com</Setting>
-   <Setting name="ASQ---BankTransferEmailOTP---To">sandeepreddy.gagireddy@wipro.com,sonal.thankachan@wipro.com,atul.sharma28@wipro.com</Setting>
+    <Setting name="ASQ---BankDepositEmailOTP---To">sandeepreddy.gagireddy@wipro.com,sonal.thankachan@wipro.com,atul.sharma28@wipro.com</Setting>
+    <Setting name="ASQ---BankTransferEmailOTP---To">sandeepreddy.gagireddy@wipro.com,sonal.thankachan@wipro.com,atul.sharma28@wipro.com</Setting>
 	
 	<Setting name="Deals---DisplayProportionDealAmt">true</Setting>
+	
+	<Setting name="ASQ---BOGODeal---DealName">ASQ_BUY</Setting>
+	
 </SysConfig>

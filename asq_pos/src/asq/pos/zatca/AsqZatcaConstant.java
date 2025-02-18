@@ -98,6 +98,11 @@ public interface AsqZatcaConstant {
 	String zatcaXMLTagSignature = System.getProperty("asq.pos.invoice.xpathTagSignature");
 	String zatcaXMLAddDoc = System.getProperty("asq.pos.invoice.xpathTagAdditionalDocRef");
 
+	String zatcaCurrencyID = System.getProperty("dtv.location.CurrencyId");
+	String zatcaPreviousInvoiceHash = "PIH";
+	String zatcaICV = "ICV";
+	String zatcaInvoiceHash = "InvoiceHash";
+
 	String ASQ_ZATCA_SECRET_KEY = "secret";
 	String ASQ_ZATCA_TOKEN_KEY = "binarySecurityToken";
 	String ASQ_ZATCA_OIC_DUP_STATUS = "DUPLICATE";
